@@ -1,0 +1,131 @@
+/* ============================================================================
+   Résumé
+   ----------------------------------------------------------------------------
+   Same editorial language as the main page: serif for what you read, mono for
+   what you scan, structure from rules rather than boxes. Classes are cv-
+   prefixed so they can't collide with the .entry rules in styles.css.
+
+   On screen it's a wider reading column. In print it becomes the document and
+   nothing else, tightened to land on one page. The print sizes are measured,
+   not guessed — see the note above the print block.
+   ========================================================================== */
+
+.resume-page .wrap { max-width: 50rem; }
+
+.cv { padding-block: clamp(2.5rem, 7vw, 4rem) clamp(3rem, 8vw, 5rem); }
+
+.cv-head { margin-bottom: 2.25rem; }
+.cv-head h1 { font-size: 1.6rem; margin-bottom: .55rem; }
+
+.cv-contact {
+  display: flex; flex-wrap: wrap; gap: .3rem 1.35rem;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .72rem; letter-spacing: .03em;
+  color: var(--muted);
+}
+.cv-contact a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.cv-contact a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* -------------------------------------------------------------- Sections -- */
+.cv-section > h2 {
+  font-family: var(--mono);
+  font-size: .68rem; font-weight: 400;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 1.9rem; padding-bottom: 1.1rem;
+  border-top: 1px solid var(--rule);
+}
+.cv-section:first-of-type > h2 { padding-top: 0; border-top: none; }
+
+/* --------------------------------------------------------------- Entries -- */
+.cv-entry {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr);
+  gap: 0 2rem;
+  padding-bottom: 1.15rem;
+}
+.cv-entry:last-child { padding-bottom: 0; }
+
+.cv-when {
+  display: flex; flex-direction: column; gap: .12rem;
+  margin: 0; padding-top: .3rem;
+  font-family: var(--mono);
+  font-size: .68rem; letter-spacing: .03em; line-height: 1.5;
+  color: var(--muted);
+}
+.cv-when span { opacity: .72; }
+
+.cv-entry h3 { font-size: 1.06rem; margin-bottom: .08rem; }
+.cv-role { font-size: .92rem; font-style: italic; color: var(--muted); margin-bottom: .5rem; }
+
+.cv-entry ul { display: grid; gap: .38rem; }
+.cv-entry li {
+  font-size: .93rem; color: var(--muted);
+  padding-left: 1rem; text-indent: -1rem;
+}
+.cv-entry li::before { content: "· "; color: var(--accent); }
+
+.cv-plain { font-size: .93rem; color: var(--muted); margin: 0; padding-top: .1rem; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 40rem) {
+  .cv-entry { grid-template-columns: 1fr; gap: .25rem; }
+  .cv-when { flex-direction: row; gap: .9rem; padding-top: 0; margin-bottom: .3rem; }
+}
+
+/* ==========================================================================
+   PRINT
+   Measured, not guessed. US Letter at 0.5in margins gives a 7.5 x 10in
+   printable area (720 x 960px at 96dpi). At the sizes below the document
+   renders at 898px, leaving about 62px (0.65in) spare. A4 is taller, so it
+   fits there too.
+
+   Note the serif sets taller than a sans at the same point size, so these
+   values are meaningfully tighter than they look.
+
+   If you add another role, print-preview and confirm it's still one page. The
+   cheapest space to reclaim is `.cv-entry` padding-bottom and the `li`
+   line-height.
+   ========================================================================== */
+@media print {
+  @page { margin: 0.5in; }
+
+  /* Force paper-and-ink regardless of the on-screen theme. Printing the dark
+     palette would put a near-black rectangle on the page, and most printers
+     drop the background anyway, leaving pale text on white. */
+  :root, :root[data-theme="dark"], :root[data-theme="light"] {
+    --paper: #ffffff;
+    --ink: #000000;
+    --muted: #2e2e2e;
+    --rule: #9a9a9a;
+    --accent: #000000;
+  }
+
+  .masthead, .skip-link { display: none !important; }
+
+  .resume-page .wrap { max-width: none; padding-inline: 0; }
+  .cv { padding: 0; }
+
+  .cv-head { margin-bottom: 5pt; }
+  .cv-head h1 { font-size: 14.5pt; margin-bottom: 2pt; }
+  .cv-contact { font-size: 7.8pt; gap: .12rem .75rem; }
+  .cv-contact a { border-bottom: none; }
+
+  .cv-section > h2 {
+    font-size: 8pt; letter-spacing: .1em;
+    padding-top: 5pt; padding-bottom: 3pt;
+  }
+
+  .cv-entry { grid-template-columns: 8.6rem minmax(0, 1fr); gap: 0 1.1rem; padding-bottom: 3pt; }
+  .cv-when { font-size: 7.7pt; line-height: 1.25; padding-top: 1pt; }
+  .cv-entry h3 { font-size: 9.1pt; }
+  .cv-role { font-size: 8.2pt; margin-bottom: 1pt; }
+  .cv-entry ul { gap: .8pt; }
+  .cv-entry li, .cv-plain { font-size: 8.35pt; line-height: 1.22; }
+
+  .cv-section, .cv-entry { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}

@@ -1,0 +1,358 @@
+/* ============================================================================
+   Isaac Lee
+   ----------------------------------------------------------------------------
+   An editorial page, not a product landing page. The rules it follows:
+
+     · Type carries the design. One serif for everything you read, one mono for
+       everything you scan (dates, labels). No display-size hero.
+     · Structure comes from hairline rules and whitespace. There are no cards,
+       no rounded boxes, no drop shadows, no hover lifts.
+     · Colour is paper, ink, and one warm accent used sparingly. Blue was the
+       obvious choice, which is exactly why it isn't here.
+     · Motion: none, apart from links changing colour. The page is meant to be
+       read, and nothing on it needs to move to earn attention.
+
+   Adjustables are in :root.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Warm paper rather than pure white. #fff reads as a blank template; a page
+     with a little warmth in it reads as something someone chose. */
+  --paper:  #fbfaf7;
+  --ink:    #1a1a17;
+  --muted:  #6a665d;
+  --rule:   #ddd8cc;
+  --accent: #9c4221;   /* burnt sienna, used only for links and small marks */
+  --accent-soft: #f0e7e1;
+
+  /* Georgia is on effectively every Windows and Mac, and it is a genuinely
+     good text face. The others ahead of it are nicer where they exist. */
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+           "Times New Roman", serif;
+  --mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "SF Mono",
+          Menlo, Consolas, monospace;
+
+  --measure: 34rem;   /* the reading column */
+  --wrap: 46rem;
+  --pad: clamp(1.5rem, 6vw, 3rem);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:  #16150f;
+  --ink:    #eae6da;
+  --muted:  #9b9587;
+  --rule:   #322f26;
+  --accent: #d98a5f;
+  --accent-soft: #2a2119;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Must declare exactly the same variables as the block above. See the note
+     in the README: a token missing here silently falls back to the light
+     value. */
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper:  #16150f;
+    --ink:    #eae6da;
+    --muted:  #9b9587;
+    --rule:   #322f26;
+    --accent: #d98a5f;
+    --accent-soft: #2a2119;
+  }
+}
+
+/* ---------------------------------------------------------------- Reset -- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Without this an image renders at its intrinsic pixel width and drags the
+   whole page into horizontal scroll. It is the single most important line in
+   the reset. */
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { margin: 0; font-weight: 400; line-height: 1.2; }
+p { margin: 0 0 1.05em; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+dl, dd { margin: 0; }
+
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 20;
+  background: var(--ink); color: var(--paper);
+  padding: .7rem 1.1rem; text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+
+.wrap {
+  width: 100%; max-width: var(--wrap);
+  margin-inline: auto; padding-inline: var(--pad);
+}
+
+/* Small, letterspaced mono. Used for anything you scan rather than read:
+   section titles, dates, field labels, the nav. */
+.section-title, .entry-when, .details dt, .nav, .wordmark,
+.theme-toggle, .copy, .footer {
+  font-family: var(--mono);
+}
+
+/* -------------------------------------------------------------- Masthead --
+   Not sticky. A sticky bar on a document this short is a product habit, and
+   it costs you the top of every section. */
+.masthead { border-bottom: 1px solid var(--rule); }
+.masthead-row {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding-block: 1.4rem;
+}
+.wordmark { margin: 0; margin-right: auto; font-size: .8125rem; letter-spacing: .06em; }
+.wordmark a { text-decoration: none; }
+
+.nav { display: flex; gap: 1.35rem; }
+.nav a {
+  font-size: .75rem; letter-spacing: .05em;
+  color: var(--muted); text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+.theme-toggle {
+  font-size: .7rem; letter-spacing: .05em;
+  color: var(--muted); background: none;
+  border: none; border-bottom: 1px solid var(--rule);
+  padding: 0 0 2px; cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ------------------------------------------------------------------ Lead -- */
+.lead { padding-block: clamp(3rem, 9vw, 5.5rem) clamp(2.5rem, 6vw, 4rem); }
+
+/* The name is set at reading scale, not billboard scale. It's a byline. */
+.lead h1 {
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  margin-bottom: .9rem;
+}
+
+/* The standfirst is the largest type on the page, which puts the emphasis on
+   what he does rather than on his name. */
+.standfirst {
+  font-size: clamp(1.35rem, 3.4vw, 1.72rem);
+  line-height: 1.36;
+  max-width: 28ch;
+  margin-bottom: 2rem;
+  text-wrap: balance;
+}
+
+.lead-body { max-width: var(--measure); }
+.lead-body p + p { margin-top: 0; }
+
+/* ------------------------------------------------------------- Figures --
+   Two kinds, both restrained. Images here are evidence attached to a claim,
+   not decoration, so they get a hairline, a mono caption, and nothing else:
+   no rounded corners, no shadow, no hover state, no lightbox. */
+figure { margin: 0; }
+figcaption {
+  font-family: var(--mono);
+  font-size: .66rem; letter-spacing: .04em;
+  color: var(--muted);
+  margin-top: .5rem;
+}
+
+/* The lead portrait. On a wide screen it moves into the right margin beside
+   the opening paragraphs, which is why .lead gets a wider container than the
+   rest of the page. Below that it just stacks. */
+.portrait img { width: 100%; border: 1px solid var(--rule); }
+
+@media (min-width: 60rem) {
+  /* The lead is the one section allowed to run wider than the rest of the
+     page, because it has to hold a text column and a picture side by side.
+     Explicit row placement keeps the portrait beside the prose no matter how
+     the paragraphs reflow. */
+  .lead {
+    max-width: 62rem;
+    display: grid;
+    grid-template-columns: var(--measure) 1fr;
+    gap: 0 3rem;
+    align-items: start;
+  }
+  .lead h1         { grid-column: 1; grid-row: 1; }
+  .lead .standfirst{ grid-column: 1; grid-row: 2; }
+  .lead-body       { grid-column: 1; grid-row: 3; }
+  .lead-contact    { grid-column: 1 / -1; grid-row: 4; }
+  .portrait        { grid-column: 2; grid-row: 1 / span 3; align-self: start; }
+}
+@media (max-width: 59.99rem) {
+  .portrait { margin-block: 2rem; max-width: 26rem; }
+}
+
+/* An inline plate inside an entry: full reading measure, nothing fancy. */
+.plate { margin-top: 1.1rem; max-width: var(--measure); }
+.plate img { width: 100%; border: 1px solid var(--rule); }
+
+.lead-contact {
+  display: flex; flex-wrap: wrap; gap: .4rem 1.5rem;
+  margin-top: 2.25rem; padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: .75rem; letter-spacing: .03em;
+  color: var(--muted);
+}
+.lead-contact a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.lead-contact a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* -------------------------------------------------------------- Sections -- */
+.section-title {
+  font-size: .7rem; font-weight: 400;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+  padding-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding-bottom: 1.5rem;
+  border-top: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------- Entries --
+   A two-column list: mono metadata on the left, the record on the right. It
+   is the layout of a well-set CV or a exhibition checklist, and it needs no
+   box around each row to hold it together. */
+.entry {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0 2rem;
+  padding-block: 1.6rem;
+  border-top: 1px solid var(--rule);
+}
+.entry:first-of-type { border-top: none; padding-top: 0; }
+
+.entry-when {
+  display: flex; flex-direction: column; gap: .15rem;
+  margin: 0;
+  font-size: .7rem; letter-spacing: .03em; line-height: 1.5;
+  color: var(--muted);
+  padding-top: .35rem;
+}
+.entry-when span { color: var(--muted); opacity: .72; }
+
+.entry-body h3 { font-size: 1.135rem; margin-bottom: .1rem; }
+.entry-body h3 a { text-decoration: none; border-bottom: 1px solid var(--accent); }
+.entry-body h3 a:hover { color: var(--accent); }
+
+.entry-role {
+  font-size: .95rem; font-style: italic;
+  color: var(--muted);
+  margin-bottom: .65rem;
+}
+
+.entry-body ul { display: grid; gap: .5rem; max-width: var(--measure); }
+.entry-body li { font-size: .97rem; color: var(--muted); }
+/* A hanging indent rather than a bullet glyph. Quieter, and it keeps the left
+   edge of the text column true. */
+.entry-body li { padding-left: 1rem; text-indent: -1rem; }
+.entry-body li::before { content: "· "; color: var(--accent); }
+
+/* --------------------------------------------------------------- Details -- */
+.details { display: grid; gap: 0; }
+.details > div {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0 2rem;
+  padding-block: 1.15rem;
+  border-top: 1px solid var(--rule);
+}
+.details > div:first-child { border-top: none; padding-top: 0; }
+.details dt {
+  font-size: .7rem; letter-spacing: .03em;
+  color: var(--muted);
+  padding-top: .28rem;
+}
+.details dd { font-size: .97rem; max-width: var(--measure); }
+
+/* --------------------------------------------------------------- Closing -- */
+.closing { padding-bottom: clamp(3rem, 7vw, 4.5rem); }
+.closing > p { max-width: var(--measure); }
+
+.closing-address {
+  margin-top: 1.5rem;
+  font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+}
+.closing-address a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+}
+.closing-address a:hover { color: var(--accent); }
+
+.copy {
+  margin-left: .75rem;
+  font-size: .68rem; letter-spacing: .06em;
+  color: var(--muted); background: none;
+  border: 1px solid var(--rule); border-radius: 2px;
+  padding: .18rem .45rem;
+  cursor: pointer; vertical-align: middle;
+}
+.copy:hover { color: var(--ink); border-color: var(--muted); }
+
+/* ---------------------------------------------------------------- Footer -- */
+.footer {
+  border-top: 1px solid var(--rule);
+  font-size: .7rem; letter-spacing: .03em;
+  color: var(--muted);
+}
+.footer-row {
+  display: flex; flex-wrap: wrap; gap: .5rem 2rem; align-items: baseline;
+  padding-block: 1.5rem 2.5rem;
+}
+.footer-row p { margin: 0; }
+.footer-row p:nth-child(2) { display: flex; gap: 1.25rem; margin-right: auto; }
+.footer-row p:first-child { margin-right: auto; }
+.footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.footer-year { opacity: .7; }
+
+/* ==========================================================================
+   RESPONSIVE
+   The two-column entry collapses to stacked, with the date above the record.
+   ========================================================================== */
+@media (max-width: 40rem) {
+  .entry, .details > div { grid-template-columns: 1fr; gap: .3rem; }
+  .entry-when {
+    flex-direction: row; gap: .9rem; padding-top: 0; margin-bottom: .35rem;
+  }
+  .details dt { padding-top: 0; margin-bottom: .2rem; }
+
+  .masthead-row { flex-wrap: wrap; gap: .9rem 1.25rem; }
+  .wordmark { width: 100%; margin-right: 0; }
+  .nav { flex-wrap: wrap; gap: .9rem 1.1rem; margin-right: auto; }
+
+  .footer-row p:first-child, .footer-row p:nth-child(2) { margin-right: 0; }
+  .footer-row { gap: .9rem 1.5rem; }
+}
+
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+@media print {
+  @page { margin: 0.75in; }
+  :root { --paper: #fff; --ink: #000; --muted: #333; --rule: #bbb; --accent: #000; }
+  .masthead, .theme-toggle, .copy, .skip-link { display: none !important; }
+  .entry, .details > div { break-inside: avoid; }
+  a { text-decoration: none; border: none !important; }
+}

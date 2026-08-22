@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
+      {
+        "//": "HTML, CSS and JS always revalidate, so your edits show up as soon as you deploy.",
+        "source": "**/*.@(html|css|js)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+      },
+      {
+        "//": "Images and the resume PDF rarely change, so let browsers keep them for 30 days.",
+        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|pdf)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000" }]
+      }
+    ]
+  }
+}

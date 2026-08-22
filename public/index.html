@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Replace isaaclee.com with the real domain once it's connected. It also
+       appears in robots.txt and sitemap.xml. -->
+  <title>Isaac Lee</title>
+  <meta name="description"
+        content="Isaac Lee, economics student at Irvine Valley College and go-to-market specialist at ZEP. Outbound, partnerships and market research." />
+  <link rel="canonical" href="https://isaaclee.com/" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Isaac Lee" />
+  <meta property="og:description"
+        content="Economics student at Irvine Valley College. Go-to-market work at ZEP: outbound, partnerships and market research across Korea, Estonia, Finland and the US." />
+  <meta property="og:url" content="https://isaaclee.com/" />
+  <meta name="twitter:card" content="summary" />
+
+  <meta name="theme-color" content="#fbfaf7" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Applies the saved theme before first paint so there's no flash. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) { /* private mode falls back to the system setting */ }
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Isaac Lee",
+    "url": "https://isaaclee.com/",
+    "email": "21euisungisaac@gmail.com",
+    "telephone": "+1-224-813-2883",
+    "jobTitle": "Go-to-Market Specialist & Business Analyst",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Irvine Valley College" },
+    "worksFor": { "@type": "Organization", "name": "ZEP" },
+    "knowsLanguage": ["English", "Korean", "Spanish"],
+    "sameAs": ["https://www.linkedin.com/in/isaac-lee-2a5755293"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <div class="wrap masthead-row">
+      <p class="wordmark"><a href="#top">Isaac Lee</a></p>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#details">Details</a></li>
+          <li><a href="resume/index.html">Résumé</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch theme">
+        <span class="theme-toggle-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- ============================== LEAD ==============================
+         No display-size name, no stat row, no photo. The first thing on the
+         page is a person telling you what they do, at a size you can read.
+         ==================================================================== -->
+    <section class="lead wrap">
+      <h1>Isaac Lee</h1>
+      <p class="standfirst">
+        Economics student at Irvine Valley College. I do go-to-market work
+        at ZEP, an EdTech company.
+      </p>
+
+      <!-- One photograph, in the margin beside the opening paragraphs. It
+           earns its place by being of me rather than of a concept. -->
+      <figure class="portrait">
+        <picture>
+          <source type="image/webp"
+                  srcset="images/isaac-serve-800.webp 800w, images/isaac-serve-1600.webp 1600w"
+                  sizes="(max-width: 60rem) 100vw, 20rem" />
+          <img src="images/isaac-serve-800.jpg"
+               srcset="images/isaac-serve-800.jpg 800w, images/isaac-serve-1600.jpg 1600w"
+               sizes="(max-width: 60rem) 100vw, 20rem"
+               width="3614" height="5418" loading="lazy" decoding="async"
+               alt="Isaac Lee serving during a night match under floodlights" />
+        </picture>
+        <figcaption>Serving, night match</figcaption>
+      </figure>
+
+      <div class="lead-body">
+        <p>
+          Most of my job is outbound. I find schools and organizations that
+          might actually want the product, work out who makes the decision,
+          write the first email, and run the demo if they reply. So far that
+          has meant about 4,000 messages across South Korea, Estonia, Finland
+          and the United States, and roughly 50 meetings. Three Estonian
+          schools are now running pilots, and we've signed partnerships with
+          EdTech organizations in Estonia and Finland.
+        </p>
+        <p>
+          The part I did not expect to matter most is the follow-up. Almost
+          none of those meetings came from a first email. They came from the
+          second or third.
+        </p>
+        <p>
+          I also coach tennis, and have for three years, most recently at
+          Newport Beach Tennis Club. I'm looking for a summer 2027 internship
+          in business development, partnerships or research.
+        </p>
+      </div>
+
+      <ul class="lead-contact">
+        <li><a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a></li>
+        <li><a href="tel:+12248132883">(224) 813-2883</a></li>
+        <li>
+          <a href="https://www.linkedin.com/in/isaac-lee-2a5755293"
+             target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        <li>Irvine, California</li>
+      </ul>
+    </section>
+
+    <!-- ============================ EXPERIENCE ============================ -->
+    <section class="wrap" id="experience">
+      <h2 class="section-title">Experience</h2>
+
+      <article class="entry">
+        <p class="entry-when">Jun 2026 &ndash; present</p>
+        <div class="entry-body">
+          <h3>ZEP</h3>
+          <p class="entry-role">Go-to-Market Specialist &amp; Business Analyst</p>
+          <ul>
+            <li>Executed 4,000+ prospecting emails and messages across South Korea, Estonia, Finland and the United States, building and advancing an international customer pipeline.</li>
+            <li>Secured 50+ meetings with educators, administrators and organizational partners, and presented ZEP QUIZ demonstrations tailored to each client's needs.</li>
+            <li>Helped launch three pilot programs with Estonian schools, and secured partnerships with EdTech organizations in Estonia and Finland.</li>
+            <li>Conduct market and customer research, analyze expansion opportunities, and manage outreach records and pipeline progress in Notion.</li>
+          </ul>
+
+          <!-- The product behind the words "presented ZEP QUIZ demonstrations".
+               A reader can see what the demo actually is. -->
+          <figure class="plate">
+            <picture>
+              <source type="image/webp"
+                      srcset="images/zep-quiz-700.webp 700w, images/zep-quiz-1400.webp 1400w"
+                      sizes="(max-width: 40rem) 100vw, 34rem" />
+              <img src="images/zep-quiz-700.jpg"
+                   srcset="images/zep-quiz-700.jpg 700w, images/zep-quiz-1400.jpg 1400w"
+                   sizes="(max-width: 40rem) 100vw, 34rem"
+                   width="1688" height="932" loading="lazy" decoding="async"
+                   alt="The ZEP QUIZ authoring screen, generating calculus questions on u-substitution" />
+            </picture>
+            <figcaption>ZEP QUIZ, building a calculus set for a demo</figcaption>
+          </figure>
+
+          <figure class="plate">
+            <img src="images/zep-team.jpg" width="480" height="360" loading="lazy" decoding="async"
+                 alt="Isaac Lee with the ZEP team in front of the ZEP office sign" />
+            <figcaption>The ZEP team, Irvine</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Oct 2025 &ndash; present<span>Newport Beach, CA</span></p>
+        <div class="entry-body">
+          <h3>Newport Beach Tennis Club</h3>
+          <p class="entry-role">Tennis Coach</p>
+          <ul>
+            <li>Coach beginner and intermediate players in group clinics and private lessons, with individual feedback on technique, footwork and match strategy.</li>
+          </ul>
+
+          <figure class="plate">
+            <img src="images/newport-beach-team.jpg" width="480" height="360" loading="lazy" decoding="async"
+                 alt="The Grip N' Rip coaching staff at Newport Beach Tennis Club" />
+            <figcaption>Grip N' Rip coaching staff, Newport Beach Tennis Club</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Sep 2024 &ndash; Aug 2025<span>Libertyville, IL</span></p>
+        <div class="entry-body">
+          <h3>Lifesport Athletic Club</h3>
+          <p class="entry-role">Tennis Coach</p>
+          <ul>
+            <li>Led 75+ junior classes, wrote lesson plans and training games, and supported more than 80 students, including 30+ competitive successes.</li>
+          </ul>
+
+          <figure class="plate">
+            <img src="images/lifesport-coaching.jpg" width="780" height="419" loading="lazy" decoding="async"
+                 alt="Isaac Lee running a junior clinic at Lifesport Athletic Club" />
+            <figcaption>Running a junior clinic at Lifesport</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Sep 2024 &ndash; Mar 2025<span>Vernon Hills, IL</span></p>
+        <div class="entry-body">
+          <h3>Starbucks</h3>
+          <p class="entry-role">Barista</p>
+          <ul>
+            <li>High-volume customer service and cash handling, and mentored new team members.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Aug 2019 &ndash; Nov 2023<span>Vernon Hills, IL</span></p>
+        <div class="entry-body">
+          <h3>MilkCow Cafe</h3>
+          <p class="entry-role">Manager / Barista</p>
+          <ul>
+            <li>Supported five employee interviews, and tracked tips, cash, inventory and daily operations.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================= PROJECTS =============================
+         ⚠ Before publishing, check the tennis link below.
+         As of 7 Aug 2026, tennis-b3bce.web.app serves a bundled React/Vite
+         app ("Elegant Tennis Coach Landing Page", deployed 8 Mar 2026), not
+         the hand-written site in C:\Users\21eui\tennis-site. The description
+         here is deliberately written to be true of whatever is live at that
+         URL. If you deploy the hand-written folder there, you can say more.
+         ==================================================================== -->
+    <section class="wrap" id="projects">
+      <h2 class="section-title">Projects and leadership</h2>
+
+      <article class="entry">
+        <p class="entry-when">2026</p>
+        <div class="entry-body">
+          <h3>
+            <a href="https://tennis-b3bce.web.app" target="_blank" rel="noopener noreferrer">
+              Isaac Lee Tennis
+            </a>
+          </h3>
+          <p class="entry-role">Built and shipped it myself</p>
+          <ul>
+            <li>My coaching business needed a site, so I built and deployed one on Firebase Hosting: lessons, rates, photographs and a booking form.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Sep &ndash; Nov 2025<span>Irvine, CA</span></p>
+        <div class="entry-body">
+          <h3>AI's economic impact on entry-level jobs in the U.S.</h3>
+          <p class="entry-role">Independent research</p>
+          <ul>
+            <li>Analyzed Bureau of Labor Statistics data on the entry-level roles most exposed to automation, and presented the findings as an academic poster covering employment, policy and education.</li>
+          </ul>
+
+          <figure class="plate">
+            <img src="images/ai-research-poster.jpg" width="480" height="640" loading="lazy" decoding="async"
+                 alt="Isaac Lee presenting his research poster, AI's Economic Impact on Entry-Level Jobs in the U.S." />
+            <figcaption>Presenting the research poster</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Sep 2024 &ndash; Apr 2025<span>Vernon Hills, IL</span></p>
+        <div class="entry-body">
+          <h3>Vernon Hills High School Ping Pong Club</h3>
+          <p class="entry-role">President</p>
+          <ul>
+            <li>Ran 10 mixers and tournaments with neighbouring schools, and recruited members through direct campus outreach.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <p class="entry-when">Aug 2024 &ndash; Jun 2025<span>Des Plaines, IL</span></p>
+        <div class="entry-body">
+          <h3>Saint Paul Chong Hasang Youth Group</h3>
+          <p class="entry-role">Secretary</p>
+          <ul>
+            <li>Organized studies, retreats and fundraisers for a community of 60+, raising over $8,000 and collecting more than 1,000 donated items of clothing.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============================== DETAILS ============================== -->
+    <section class="wrap" id="details">
+      <h2 class="section-title">Details</h2>
+
+      <dl class="details">
+        <div>
+          <dt>Education</dt>
+          <dd>
+            Irvine Valley College, Associate of Arts in Economics, expected
+            May 2027. 4.0 GPA. IVC Honors Society and Economics Club.
+          </dd>
+        </div>
+        <div>
+          <dt>Work</dt>
+          <dd>
+            Prospecting, pipeline management, product demonstrations,
+            partnerships, market and customer research, opportunity sizing.
+          </dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Notion, Google Sheets, HTML, CSS and JavaScript, some Python.</dd>
+        </div>
+        <div>
+          <dt>Languages</dt>
+          <dd>English (native), Korean (proficient), Spanish (beginner).</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ============================== CONTACT ============================== -->
+    <section class="wrap closing" id="contact">
+      <h2 class="section-title">Get in touch</h2>
+      <p>
+        If you're hiring for a summer 2027 internship, or you just want to
+        compare notes on outbound, email is the fastest way to reach me. I
+        reply to everything.
+      </p>
+      <p class="closing-address">
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
+        <button class="copy" type="button" id="copyEmail"
+                data-email="21euisungisaac@gmail.com">copy</button>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>Isaac Lee, Irvine, California</p>
+      <p>
+        <a href="resume/index.html">Résumé</a>
+        <a href="https://tennis-b3bce.web.app" target="_blank" rel="noopener noreferrer">Tennis</a>
+        <a href="https://www.linkedin.com/in/isaac-lee-2a5755293"
+           target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+      <p class="footer-year">&copy; <span id="year">2026</span></p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
