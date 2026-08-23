@@ -43,20 +43,6 @@ ready, ask your assistant to help you set up free hosting (through Google's
 Firebase service) and publish it — it only takes a few minutes and most of
 it is automatic.
 
-## Something worth checking before you send this to anyone
-
-This portfolio has a whole section describing your tennis website as
-"hand-written, no framework, no template." Right now, though, the tennis
-website address that's actually public (`tennis-b3bce.web.app`) shows a
-**different, older site** — not the one that claim is about. So a recruiter
-who clicks through would see something that doesn't match what your résumé
-says.
-
-Before sending this portfolio anywhere, ask your assistant to help sort that
-out — either publish the real tennis site to that address, or update what
-this portfolio says about it. It's a quick fix, it just needs a decision from
-you first.
-
 ---
 
 ## For your assistant (technical details)
@@ -74,9 +60,15 @@ portfolio-site/
 │   ├── robots.txt
 │   ├── sitemap.xml
 │   ├── images/
-│   └── resume/
-│       ├── index.html       the résumé, as a web page
-│       └── resume.css       screen + print styling for it
+│   ├── resume/
+│   │   ├── index.html       the résumé, as a web page
+│   │   └── resume.css       screen + print styling for it
+│   └── tennis/               the tennis coaching site, linked from Projects
+│       ├── index.html
+│       ├── styles.css
+│       ├── main.js
+│       ├── favicon.svg
+│       └── images/
 ├── firebase.json          hosting config
 └── README.md
 ```
