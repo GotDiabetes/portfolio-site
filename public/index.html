@@ -6,7 +6,7 @@
 
   <!-- Replace isaaclee.com with the real domain once it's connected. It also
        appears in robots.txt and sitemap.xml. -->
-  <title>Isaac Lee</title>
+  <title>Isaac Lee — Business Development &amp; Go-to-Market</title>
   <meta name="description"
         content="Isaac Lee, economics student at Irvine Valley College and go-to-market specialist at ZEP. Outbound, partnerships and market research." />
   <link rel="canonical" href="https://isaaclee.com/" />
@@ -17,7 +17,11 @@
   <meta property="og:description"
         content="Economics student at Irvine Valley College. Go-to-market work at ZEP: outbound, partnerships and market research across Korea, Estonia, Finland and the US." />
   <meta property="og:url" content="https://isaaclee.com/" />
+  <meta property="og:site_name" content="Isaac Lee" />
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Isaac Lee — Business Development &amp; Go-to-Market" />
+  <meta name="twitter:description"
+        content="Economics student and go-to-market specialist working across outbound, partnerships and market research." />
 
   <meta name="theme-color" content="#fbfaf7" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -102,7 +106,7 @@
           <img src="images/isaac-serve-800.jpg"
                srcset="images/isaac-serve-800.jpg 800w, images/isaac-serve-1600.jpg 1600w"
                sizes="(max-width: 60rem) 100vw, 20rem"
-               width="3614" height="5418" loading="lazy" decoding="async"
+               width="3614" height="5418" loading="eager" fetchpriority="high" decoding="async"
                alt="Isaac Lee serving during a night match under floodlights" />
         </picture>
         <figcaption>Serving, night match</figcaption>
@@ -346,6 +350,7 @@
         <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <button class="copy" type="button" id="copyEmail"
                 data-email="21euisungisaac@gmail.com">copy</button>
+        <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
       </p>
     </section>
   </main>

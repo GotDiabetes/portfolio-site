@@ -59,6 +59,7 @@
 
   /* ----------------------------------------------------- 2. Copy email -- */
   var copyBtn = document.getElementById("copyEmail");
+  var copyStatus = document.getElementById("copyStatus");
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
       var email = copyBtn.getAttribute("data-email") || "";
@@ -66,6 +67,7 @@
 
       function done() {
         copyBtn.textContent = "copied";
+        if (copyStatus) copyStatus.textContent = "Email address copied to clipboard.";
         window.setTimeout(function () { copyBtn.textContent = original; }, 1600);
       }
 
