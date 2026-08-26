@@ -260,8 +260,33 @@ figcaption {
 .entry-body h3 a:hover { color: var(--accent); }
 
 /* A small identifying mark beside the org name — not a badge, no border or
-   background, just tall enough to read at a glance. */
-.entry-logo { height: 1.25rem; width: auto; flex-shrink: 0; }
+   background, just tall enough to read at a glance. The white backgrounds have
+   been stripped out of the files themselves so they sit on the paper rather
+   than in a box. max-width stops the wide wordmarks from running away with the
+   line. */
+.entry-logo {
+  height: 1.25rem;
+  width: auto;
+  max-width: 5.5rem;
+  object-fit: contain;
+  object-position: left center;
+  flex-shrink: 0;
+}
+
+/* Three of the marks are essentially black artwork, so on the dark theme they
+   sink into the page. Inverting flips their lightness and the hue-rotate puts
+   the colour back where it started — the Newport Beach tree stays green and
+   only gains a readable name under it. Applied by hand rather than to every
+   logo, because the light ones (the IVC seal, the Vernon Hills crest) go muddy
+   under the same treatment. */
+:root[data-theme="dark"] .entry-logo--invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .entry-logo--invert {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
 
 .entry-role {
   font-size: .95rem; font-style: italic;
