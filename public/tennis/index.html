@@ -30,6 +30,14 @@
        leaves a fully visible page rather than a blank one. -->
   <script>document.documentElement.classList.add("js");</script>
 
+  <!-- Cal.com booking widget. Buttons with data-cal-link open this as a
+       popup instead of navigating; see https://cal.com/isaac-lee-hlkghj -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "lesson", { origin: "https://cal.com" });
+    Cal.ns.lesson("ui", { "styles": { "branding": { "brandColor": "#000000" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,7 +74,9 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <a class="btn btn-primary btn-sm header-cta" href="#contact">Book a lesson</a>
+      <button class="btn btn-primary btn-sm header-cta" type="button"
+              data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+              data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
         <span></span><span></span>
@@ -91,7 +101,9 @@
           </p>
 
           <div class="actions fade" style="--d:.18s">
-            <a class="btn btn-primary btn-lg" href="#contact">Book a lesson</a>
+            <button class="btn btn-primary btn-lg" type="button"
+                    data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                    data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
             <a class="btn btn-quiet btn-lg" href="tel:+12248132883">Text (224) 813-2883</a>
           </div>
 
@@ -276,7 +288,10 @@
               with availability and what a first session would look like.
             </p>
             <div class="actions fade" style="--d:.12s">
-              <a class="btn btn-invert btn-lg" href="tel:+12248132883">Text (224) 813-2883</a>
+              <button class="btn btn-invert btn-lg" type="button"
+                      data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                      data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
+              <a class="btn btn-quiet btn-lg" href="tel:+12248132883">Text (224) 813-2883</a>
               <button class="btn btn-outline btn-lg" type="button" data-open="bookingModal">Other ways to reach me</button>
             </div>
           </div>
@@ -349,7 +364,10 @@
         <li>Video review on request</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="tel:+12248132883">Text to book</a>
+        <button class="btn btn-primary" type="button"
+                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                data-cal-config='{"layout":"month_view"}'>Book online</button>
+        <a class="btn btn-quiet" href="tel:+12248132883">Text to book</a>
       </div>
     </div>
   </dialog>
@@ -366,7 +384,10 @@
         <li>Progress notes for parents</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="tel:+12248132883">Text to book</a>
+        <button class="btn btn-primary" type="button"
+                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                data-cal-config='{"layout":"month_view"}'>Book online</button>
+        <a class="btn btn-quiet" href="tel:+12248132883">Text to book</a>
       </div>
     </div>
   </dialog>
@@ -383,7 +404,10 @@
         <li>Small groups welcome</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="tel:+12248132883">Text to book</a>
+        <button class="btn btn-primary" type="button"
+                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                data-cal-config='{"layout":"month_view"}'>Book online</button>
+        <a class="btn btn-quiet" href="tel:+12248132883">Text to book</a>
       </div>
     </div>
   </dialog>
