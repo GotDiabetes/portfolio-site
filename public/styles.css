@@ -244,7 +244,7 @@ figcaption {
 .entry:first-of-type { border-top: none; padding-top: 0; }
 
 .entry-when {
-  display: flex; flex-direction: column; gap: .15rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .15rem;
   margin: 0;
   font-size: .7rem; letter-spacing: .03em; line-height: 1.5;
   color: var(--muted);
@@ -252,25 +252,27 @@ figcaption {
 }
 .entry-when span { color: var(--muted); opacity: .72; }
 
-.entry-body h3 {
-  display: flex; align-items: center; gap: .5rem;
-  font-size: 1.135rem; margin-bottom: .1rem;
-}
+.entry-body h3 { font-size: 1.135rem; margin-bottom: .1rem; }
 .entry-body h3 a { text-decoration: none; border-bottom: 1px solid var(--accent); }
 .entry-body h3 a:hover { color: var(--accent); }
 
-/* A small identifying mark beside the org name — not a badge, no border or
-   background, just tall enough to read at a glance. The white backgrounds have
-   been stripped out of the files themselves so they sit on the paper rather
-   than in a box. max-width stops the wide wordmarks from running away with the
-   line. */
+/* The mark hangs in the margin column beneath the date, the way a plate sits
+   in the margin of a printed page — the date still lines up with the heading,
+   and the mark gets room to be read instead of being crushed against the
+   title. The white backgrounds are stripped out of the files themselves, so
+   these sit on the paper with no box around them.
+
+   Capping height and column width together is what keeps a square badge and a
+   long wordmark carrying roughly equal weight: the squares reach the height
+   limit, the wordmarks reach the width limit. */
 .entry-logo {
-  height: 1.25rem;
+  max-width: 100%;
+  max-height: 2.75rem;
   width: auto;
-  max-width: 5.5rem;
+  height: auto;
+  margin-top: .9rem;
   object-fit: contain;
-  object-position: left center;
-  flex-shrink: 0;
+  object-position: left top;
 }
 
 /* Three of the marks are essentially black artwork, so on the dark theme they
@@ -312,6 +314,7 @@ figcaption {
 }
 .details > div:first-child { border-top: none; padding-top: 0; }
 .details dt {
+  display: flex; flex-direction: column; align-items: flex-start;
   font-size: .7rem; letter-spacing: .03em;
   color: var(--muted);
   padding-top: .28rem;
@@ -376,10 +379,21 @@ figcaption {
    ========================================================================== */
 @media (max-width: 40rem) {
   .entry, .details > div { grid-template-columns: 1fr; gap: .3rem; }
+  /* Stacked, the margin column becomes a single meta line, so the mark sits
+     inline with the date rather than below it, and comes down in size to
+     match. */
   .entry-when {
-    flex-direction: row; gap: .9rem; padding-top: 0; margin-bottom: .35rem;
+    flex-direction: row; align-items: center; flex-wrap: wrap; gap: .45rem .9rem;
+    padding-top: 0; margin-bottom: .35rem;
   }
-  .details dt { padding-top: 0; margin-bottom: .2rem; }
+  .details dt {
+    flex-direction: row; align-items: center; flex-wrap: wrap; gap: .45rem .9rem;
+    padding-top: 0; margin-bottom: .2rem;
+  }
+  /* Holding its size and wrapping is the point: a 6:1 wordmark like the Saint
+     Paul one would otherwise squeeze the place name down to a couple of
+     characters and wrap it. It takes its own line instead. */
+  .entry-logo { max-height: 1.9rem; margin-top: 0; flex-shrink: 0; }
 
   .masthead-row { flex-wrap: wrap; gap: .9rem 1.25rem; }
   .wordmark { width: 100%; margin-right: 0; }
