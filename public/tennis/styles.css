@@ -280,6 +280,9 @@ dl, dd { margin: 0; }
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
+/* Two frames rather than three. Left on the three-column grid a pair reads as
+   a missing photo rather than a deliberate pair. */
+.photo-strip--two { grid-template-columns: repeat(2, 1fr); }
 .photo {
   position: relative;
   display: block; padding: 0;
@@ -523,6 +526,10 @@ body.modal-open { overflow: hidden; }
 
   .photo-strip { grid-template-columns: 1fr 1fr; }
   .photo-strip .photo:first-child { grid-column: 1 / -1; }
+  /* The three-up strip leads with one full-width frame. A pair doing that
+     would leave the second stranded at half width, so it stacks instead. */
+  .photo-strip--two { grid-template-columns: 1fr; }
+  .photo-strip--two .photo:first-child { grid-column: auto; }
   .photo-tag { opacity: 1; transform: none; }   /* no hover on touch */
   .actions .btn { width: 100%; }
   .hero-facts, .facts { gap: 1.5rem 2.25rem; }

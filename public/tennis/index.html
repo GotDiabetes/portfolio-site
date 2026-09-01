@@ -9,14 +9,14 @@
        ============================================================ -->
   <title>Isaac Lee — Private Tennis Coaching in Irvine, CA</title>
   <meta name="description"
-        content="Private tennis lessons in Irvine, California. $80/hour one-on-one coaching, junior development, and adult clinics with Isaac Lee." />
+        content="Private tennis lessons in Irvine, California. $80/hour one-on-one coaching, $45/hour hitting partner sessions, and small adult clinics with Isaac Lee." />
   <link rel="canonical" href="https://leetennisco.com/tennis/" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Isaac Lee — Private Tennis Coaching in Irvine, CA" />
   <meta property="og:description"
-        content="Private tennis lessons in Irvine, California. One-on-one coaching, junior development, and adult clinics." />
+        content="Private tennis lessons in Irvine, California. One-on-one coaching, hitting partner sessions, and small adult clinics." />
   <meta property="og:url" content="https://leetennisco.com/tennis/" />
   <meta property="og:image" content="https://leetennisco.com/tennis/images/serve.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -46,7 +46,7 @@
     "url": "https://leetennisco.com/tennis/",
     "email": "isaacleetennis@gmail.com",
     "telephone": "+1-224-813-2883",
-    "priceRange": "$35-$80",
+    "priceRange": "$45-$80",
     "areaServed": { "@type": "City", "name": "Irvine, California" },
     "address": {
       "@type": "PostalAddress",
@@ -108,13 +108,13 @@
 
           <dl class="hero-facts fade" style="--d:.24s">
             <div><dt>Private lesson</dt><dd>$80<span>/hr</span></dd></div>
-            <div><dt>Group clinic</dt><dd>$35<span>/person</span></dd></div>
+            <div><dt>Hitting partner</dt><dd>$45<span>/hr</span></dd></div>
             <div><dt>Coaching since</dt><dd>2023</dd></div>
           </dl>
         </div>
 
         <figure class="hero-photo fade-img">
-          <img src="images/pointing.jpg" width="480" height="640" fetchpriority="high"
+          <img src="images/pointing.jpg" width="960" height="1280" fetchpriority="high"
                alt="Isaac Lee calling out a drill during a lesson" />
         </figure>
       </div>
@@ -170,7 +170,7 @@
         <h2 class="fade" style="--d:.06s">In action</h2>
       </header>
 
-      <div class="photo-strip fade">
+      <div class="photo-strip photo-strip--two fade">
         <button class="photo" type="button"
                 data-lightbox="images/serve.jpg" data-caption="Serving during a match">
           <img src="images/serve.jpg" width="1200" height="1800" loading="lazy"
@@ -183,13 +183,6 @@
           <img src="images/ready.jpg" width="1200" height="1600" loading="lazy"
                alt="Isaac Lee in ready position behind the baseline" />
           <span class="photo-tag">Ready position</span>
-        </button>
-
-        <button class="photo" type="button"
-                data-lightbox="images/backhand.jpg" data-caption="Backhand, side on">
-          <img src="images/backhand.jpg" width="1200" height="1600" loading="lazy"
-               alt="Isaac Lee hitting a two-handed backhand" />
-          <span class="photo-tag">Backhand</span>
         </button>
       </div>
 
@@ -220,7 +213,7 @@
     <section class="wrap section" id="lessons">
       <header class="section-head">
         <p class="eyebrow fade">Lessons</p>
-        <h2 class="fade" style="--d:.06s">Two ways to work together</h2>
+        <h2 class="fade" style="--d:.06s">Three ways to work together</h2>
         <p class="section-sub fade" style="--d:.12s">
           Every player starts somewhere different. Sessions are shaped around your level and
           how often you can get on court.
@@ -240,11 +233,21 @@
         </article>
 
         <article class="lesson fade">
-          <h3>Adult clinics &amp; match play</h3>
-          <p class="price">$35<span>/person in a group</span></p>
+          <h3>Hitting partner sessions</h3>
+          <p class="price">$45<span>/hour</span></p>
           <p>
-            Rally tolerance, singles and doubles strategy, and live-ball situations you'll
-            actually meet in a match. $80/hour one-on-one.
+            Straight hitting rather than instruction, for players who just want a reliable
+            ball to work against. Sessions run 60 minutes or longer.
+          </p>
+          <button class="link-btn" type="button" data-open="modalHitting">What's covered</button>
+        </article>
+
+        <article class="lesson fade">
+          <h3>Adult clinics</h3>
+          <p class="price">Group rate<span>depends on numbers</span></p>
+          <p>
+            Small groups on one court, working through drills and live-ball games with enough
+            rotation that everyone keeps hitting. Cost depends on how many of you there are.
           </p>
           <button class="link-btn" type="button" data-open="modalAdult">What's covered</button>
         </article>
@@ -397,16 +400,37 @@
     </div>
   </dialog>
 
+  <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
+      <h3 id="hittingTitle">Hitting partner sessions</h3>
+      <p class="price">$45<span>/hour</span></p>
+      <p>Hitting, not coaching — I feed and rally at your level so you get reps rather than instruction.</p>
+      <ul>
+        <li>60 minutes or longer</li>
+        <li>Consistent cross-court and down-the-line rallies</li>
+        <li>Serve and return practice with a live returner</li>
+        <li>Tie-breaks and sets on request</li>
+      </ul>
+      <div class="actions">
+        <button class="btn btn-primary" type="button"
+                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
+                data-cal-config='{"layout":"month_view"}'>Book online</button>
+        <a class="btn btn-quiet" href="tel:+12248132883">Text to book</a>
+      </div>
+    </div>
+  </dialog>
+
   <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="adultTitle">Adult clinics &amp; match play</h3>
-      <p class="price">$35<span>/person in a group · $80/hour one-on-one</span></p>
+      <h3 id="adultTitle">Adult clinics</h3>
+      <p class="price">Group rate<span>depends on how many of you there are</span></p>
       <ul>
-        <li>Rally tolerance and consistency</li>
-        <li>Singles and doubles strategy</li>
-        <li>Live-ball match situations</li>
-        <li>Small groups welcome</li>
+        <li>Small groups on a single court</li>
+        <li>Drills and live-ball games, with rotation so nobody stands around</li>
+        <li>Rally tolerance and consistency under pressure</li>
+        <li>Bring your own group, or ask me to place you in one</li>
       </ul>
       <div class="actions">
         <button class="btn btn-primary" type="button"

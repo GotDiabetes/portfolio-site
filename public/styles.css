@@ -180,7 +180,26 @@ figcaption {
 /* The lead portrait. On a wide screen it moves into the right margin beside
    the opening paragraphs, which is why .lead gets a wider container than the
    rest of the page. Below that it just stacks. */
-.portrait img { width: 100%; border: 1px solid var(--rule); }
+/* Photographs are mounted rather than pasted in: a hairline frame with a
+   margin of paper inside it and a second hairline around the image, the way a
+   print sits in a mat. Two rules separated by a gap read as a considered
+   mount; one rule flush to the edge reads as a screenshot with a box on it.
+   Still no shadows, no rounded corners, no hover — the restraint holds. */
+.portrait, .plate {
+  padding: clamp(.4rem, .9vw, .7rem);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.portrait img, .plate img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--rule);
+}
+/* The caption sits inside the mount, like the label on a gallery plate. */
+.portrait figcaption, .plate figcaption { margin: .55rem .15rem .1rem; }
+
+/* The lead portrait is never dimmed, tinted or desaturated. */
+.portrait img { filter: none; opacity: 1; }
 
 @media (min-width: 60rem) {
   /* The lead is the one section allowed to run wider than the rest of the
@@ -204,9 +223,9 @@ figcaption {
   .portrait { margin-block: 2rem; max-width: 26rem; }
 }
 
-/* An inline plate inside an entry: full reading measure, nothing fancy. */
+/* An inline plate inside an entry: full reading measure. Frame and mat are
+   defined with .portrait above. */
 .plate { margin-top: 1.1rem; max-width: var(--measure); }
-.plate img { width: 100%; border: 1px solid var(--rule); }
 
 .lead-contact {
   display: flex; flex-wrap: wrap; gap: .4rem 1.5rem;
