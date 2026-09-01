@@ -114,8 +114,8 @@
         </div>
 
         <figure class="hero-photo fade-img">
-          <img src="images/serve.jpg" width="1200" height="1800" fetchpriority="high"
-               alt="Isaac Lee serving during a match" />
+          <img src="images/pointing.jpg" width="480" height="640" fetchpriority="high"
+               alt="Isaac Lee calling out a drill during a lesson" />
         </figure>
       </div>
     </section>
@@ -159,9 +159,41 @@
       </div>
     </section>
 
-    <!-- ============================ IN ACTION ============================ -->
-    <section class="wrap section" id="in-action">
-      <figure class="about-photo fade-img" style="max-width: 32rem; margin-inline: auto;">
+    <!-- ============================ IN ACTION ============================
+         The .photo-strip rules were already in the stylesheet, along with the
+         lightbox wiring in main.js — three portrait frames, edge to edge, that
+         open full size on click.
+         ================================================================= -->
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">On court</p>
+        <h2 class="fade" style="--d:.06s">In action</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="images/serve.jpg" data-caption="Serving during a match">
+          <img src="images/serve.jpg" width="1200" height="1800" loading="lazy"
+               alt="Isaac Lee serving during a match" />
+          <span class="photo-tag">Serve</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="images/ready.jpg" data-caption="Ready position, waiting on the return">
+          <img src="images/ready.jpg" width="1200" height="1600" loading="lazy"
+               alt="Isaac Lee in ready position behind the baseline" />
+          <span class="photo-tag">Ready position</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="images/backhand.jpg" data-caption="Backhand, side on">
+          <img src="images/backhand.jpg" width="1200" height="1600" loading="lazy"
+               alt="Isaac Lee hitting a two-handed backhand" />
+          <span class="photo-tag">Backhand</span>
+        </button>
+      </div>
+
+      <figure class="about-photo fade-img" style="max-width: 32rem; margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;">
         <img src="images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
              style="aspect-ratio: 780/419;"
              alt="Isaac Lee coaching a junior clinic" />
