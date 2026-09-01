@@ -238,9 +238,10 @@ figcaption {
   border: 1px solid var(--rule);
   background: var(--ink);
 }
-/* Phone video is portrait; at the full reading measure it would run close to
-   a thousand pixels tall, so it gets a narrower cap. */
-.plate--video { max-width: 20rem; }
+/* Phone video is portrait, so width drives height: every 1rem of width costs
+   about 1.8rem of height. Capped narrow, and additionally capped against the
+   viewport so the clip can never fill a phone screen on its own. */
+.plate--video { max-width: min(13rem, 45vw); }
 /* Landscape photographs can run a little wider than the reading measure,
    since there is no text beside them to align to. */
 .plate--wide { max-width: 40rem; }
