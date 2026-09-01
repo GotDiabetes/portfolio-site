@@ -227,6 +227,24 @@ figcaption {
    defined with .portrait above. */
 .plate { margin-top: 1.1rem; max-width: var(--measure); }
 
+/* Video gets the same mount as a photograph. height:auto is load-bearing: the
+   <video> carries width/height attributes so the browser can reserve space
+   before the file loads, and without it that height wins over the scaled
+   width and a portrait clip renders as a tall ribbon. */
+.plate video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  background: var(--ink);
+}
+/* Phone video is portrait; at the full reading measure it would run close to
+   a thousand pixels tall, so it gets a narrower cap. */
+.plate--video { max-width: 20rem; }
+/* Landscape photographs can run a little wider than the reading measure,
+   since there is no text beside them to align to. */
+.plate--wide { max-width: 40rem; }
+
 .lead-contact {
   display: flex; flex-wrap: wrap; gap: .4rem 1.5rem;
   margin-top: 2.25rem; padding-top: 1.1rem;
@@ -247,6 +265,14 @@ figcaption {
   padding-bottom: 1.5rem;
   border-top: 1px solid var(--rule);
   margin-bottom: 0;
+}
+
+/* A standfirst under a section title, for the one section that needs a line
+   of framing before the entries start. */
+.section-intro {
+  max-width: var(--measure);
+  margin: -.4rem 0 2rem;
+  color: var(--muted);
 }
 
 /* --------------------------------------------------------------- Entries --
