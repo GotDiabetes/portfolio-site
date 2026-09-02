@@ -243,7 +243,7 @@ dl, dd { margin: 0; }
 
 /* -------------------------------------------------------------- Lessons -- */
 .lesson-list {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: clamp(1rem, 2vw, 1.5rem);
 }
 .lesson {
@@ -409,6 +409,7 @@ dl, dd { margin: 0; }
 /* Cascade grouped items. */
 .lesson-list .lesson:nth-child(2)  { --d: .09s; }
 .lesson-list .lesson:nth-child(3)  { --d: .18s; }
+.lesson-list .lesson:nth-child(4)  { --d: .27s; }
 .photo-strip .photo:nth-child(2)   { --d: .09s; }
 .photo-strip .photo:nth-child(3)   { --d: .18s; }
 .review-list .review:nth-child(2)  { --d: .09s; }
