@@ -306,21 +306,13 @@ dl, dd { margin: 0; }
 }
 .photo:hover .photo-tag, .photo:focus-visible .photo-tag { opacity: 1; transform: none; }
 
-/* ------------------------------------------------- Black-and-white photos --
-   Every photograph on the page is desaturated and returns to colour on hover.
-   On a monochrome layout this is what keeps the images part of the design
-   instead of three colour rectangles dropped into it. The lightbox is
-   deliberately left in full colour, so opening a photo is the reward. */
+/* -------------------------------------------------------------- Photos --
+   Photographs run in their own colour. The zoom and fade transitions stay,
+   so the hover and reveal motion is unchanged. */
 .hero-photo img,
 .about-photo img,
 .photo img {
-  filter: grayscale(100%) contrast(1.05);
-  transition: filter .55s var(--ease), transform .6s var(--ease), opacity .5s var(--ease);
-}
-.hero-photo:hover img,
-.about-photo:hover img,
-.photo:hover img {
-  filter: grayscale(0%) contrast(1.02);
+  transition: transform .6s var(--ease), opacity .5s var(--ease);
 }
 
 /* -------------------------------------------------------------- Reviews -- */
