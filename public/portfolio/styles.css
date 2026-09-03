@@ -455,7 +455,56 @@ figcaption {
 @media print {
   @page { margin: 0.75in; }
   :root { --paper: #fff; --ink: #000; --muted: #333; --rule: #bbb; --accent: #000; }
-  .masthead, .theme-toggle, .copy, .skip-link { display: none !important; }
+  .masthead, .theme-toggle, .copy, .skip-link, .cta-row { display: none !important; }
   .entry, .details > div { break-inside: avoid; }
   a { text-decoration: none; border: none !important; }
+}
+
+/* ---------------------------------------------------------------- Pills --
+   The one place the page uses a filled control. Everything else here is a
+   hairline rule or a coloured link, so these are deliberately confined to the
+   closing call to action rather than repeated up the page. Colours come from
+   the ink/paper tokens so both themes resolve without a second definition. */
+.cta-row {
+  display: flex; flex-wrap: wrap; gap: .7rem;
+  margin-top: 1.75rem;
+}
+.pill {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .3rem .32rem .3rem 1.15rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: .95rem;
+  text-decoration: none;
+  transition: gap .28s ease, background-color .28s ease,
+              color .28s ease, border-color .28s ease;
+}
+.pill:hover { gap: .85rem; }
+.pill-arrow {
+  display: grid; place-items: center;
+  width: 1.9rem; height: 1.9rem;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  transition: transform .28s ease, background-color .28s ease, color .28s ease;
+}
+.pill:hover .pill-arrow { transform: scale(1.08); }
+.pill-arrow svg { width: 14px; height: 14px; display: block; }
+
+/* Secondary: the résumé sits one step down from the email. */
+.pill-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+.pill-quiet:hover { border-color: var(--muted); }
+.pill-quiet .pill-arrow { background: var(--ink); color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pill, .pill-arrow { transition: none; }
+  .pill:hover { gap: .55rem; }
+  .pill:hover .pill-arrow { transform: none; }
 }
