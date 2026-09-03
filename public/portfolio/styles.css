@@ -469,6 +469,9 @@ figcaption {
   display: flex; flex-wrap: wrap; gap: .7rem;
   margin-top: 1.75rem;
 }
+/* The lead already sits tight to the contact list, so it needs less air above
+   than the closing row does. */
+.cta-row--lead { margin-top: 1.25rem; }
 .pill {
   display: inline-flex; align-items: center; gap: .55rem;
   padding: .3rem .32rem .3rem 1.15rem;
