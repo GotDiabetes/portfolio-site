@@ -402,6 +402,26 @@ dl, dd { margin: 0; }
 }
 .fade.is-in { opacity: 1; transform: none; }
 
+/* The hero headline drops line by line instead of lifting as one block. Each
+   line clips its own word, so the word arrives from behind the line above.
+   The padding/margin pair keeps that clip off the letterforms — at
+   line-height 1 a plain overflow:hidden shaves the bottom of the glyphs. */
+.drop-line {
+  display: block; overflow: hidden;
+  padding-block: .16em; margin-block: -.16em;
+}
+.js .hero-drop .drop-word {
+  display: inline-block;
+  transform: translateY(125%);
+  opacity: 0;
+  transition: transform var(--dur-fade) var(--ease),
+              opacity calc(var(--dur-fade) * .7) var(--ease);
+  transition-delay: var(--d, 0s);
+}
+/* Carries the .js prefix so it outranks the hidden state above rather than
+   relying on source order to break a specificity tie. */
+.js .hero-drop.is-in .drop-word { transform: none; opacity: 1; }
+
 /* Photos fade in while easing back from a slight zoom. */
 .fade-img { border-radius: var(--radius); overflow: hidden; }
 .js .fade-img img {
@@ -557,6 +577,9 @@ body.modal-open { overflow: hidden; }
 
   /* Movement off. */
   .js .fade { transform: none; transition: opacity .55s var(--ease); }
+  .js .hero-drop .drop-word { transform: none; transition: opacity .55s var(--ease); }
+  .hero-drop.is-in .drop-word { transform: none; }
+  .drop-line { overflow: visible; }
   .js .fade-img img { transform: none; transition: opacity .55s var(--ease); }
   .fade.is-in { transform: none; }
   .fade-img.is-in img { transform: none; }
@@ -570,5 +593,6 @@ body.modal-open { overflow: hidden; }
 @media print {
   .header, .nav-toggle, .actions { display: none; }
   .fade, .fade-img img { opacity: 1 !important; transform: none !important; }
+  .hero-drop .drop-word { opacity: 1 !important; transform: none !important; }
   .contact, .footer { background: #fff; color: #000; }
 }

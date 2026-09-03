@@ -91,8 +91,12 @@
       <div class="hero-grid">
         <div class="hero-text">
           <p class="eyebrow fade">Private coaching · Irvine, California</p>
-          <h1 class="fade" style="--d:.06s">
-            Private<br />tennis<br />lessons
+          <!-- Each line is its own mask, so the word drops in from behind the
+               line above rather than sliding over it. -->
+          <h1 class="hero-drop">
+            <span class="drop-line"><span class="drop-word">Private</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.09s">tennis</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">lessons</span></span>
           </h1>
           <p class="hero-sub fade" style="--d:.12s">
             I'm Isaac Lee. I coach juniors and adults across Orange County — one-on-one

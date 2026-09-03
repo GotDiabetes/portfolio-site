@@ -17,7 +17,7 @@
   // We deliberately do NOT skip this when the visitor prefers reduced motion.
   // The stylesheet handles that case by removing the movement and keeping a
   // plain cross-fade, which stays within the accessibility guidance.
-  var fadeEls = document.querySelectorAll(".fade, .fade-img");
+  var fadeEls = document.querySelectorAll(".fade, .fade-img, .hero-drop");
 
   function revealAll() {
     fadeEls.forEach(function (el) { el.classList.add("is-in"); });
@@ -46,7 +46,7 @@
        revealed shortly after load, assume the observer is dead and show
        everything. A partial reveal means it's working, so we leave it alone. */
     window.setTimeout(function () {
-      var revealed = document.querySelectorAll(".fade.is-in, .fade-img.is-in").length;
+      var revealed = document.querySelectorAll(".fade.is-in, .fade-img.is-in, .hero-drop.is-in").length;
       if (revealed === 0 && fadeEls.length > 0) {
         observer.disconnect();   // so it can't later toggle anything back off
         revealAll();
