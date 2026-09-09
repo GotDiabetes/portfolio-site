@@ -1,14 +1,9 @@
 /* ============================================================================
-   Isaac Lee — the only three things this page needs JavaScript for.
+   Isaac Lee — the theme toggle, copy email, footer year and a quiet reveal.
 
-     1. The theme toggle
-     2. The copy-email button
-     3. The footer year
-
-   Everything else that used to live here (scroll reveals, a command palette,
-   counting statistics, cursor tilt, a progress bar) has been removed. None of
-   it was doing anything for a reader, and collectively it made a written page
-   behave like a product demo.
+   The reveal returns by request: each block settles once as it comes into
+   view. The command palette, cursor tilt and progress bar remain removed;
+   the motion gives a little rhythm to a page that is still meant to be read.
    ========================================================================== */
 
 (function () {
@@ -93,4 +88,62 @@
   /* ----------------------------------------------------- 3. Footer year -- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
+
+  /* --------------------------------------------------------- 4. Reveal --
+     The markup is visible by default. Only this running script arms hidden
+     blocks, so a missing main.js cannot strand the text or portrait. */
+  var fades = document.querySelectorAll(".fade");
+  var motion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+
+  if (fades.length && !(motion && motion.matches)
+      && "IntersectionObserver" in window) {
+    function reveal(el) {
+      el.classList.remove("is-pending");
+      el.classList.add("is-in");
+      observer.unobserve(el);
+    }
+
+    function revealAll() {
+      observer.disconnect();
+      fades.forEach(function (el) {
+        el.classList.remove("is-pending", "is-in");
+      });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) reveal(entry.target);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -6% 0px" });
+
+    /* If an embedded browser never delivers observations, release the page.
+       Register the fallback before arming any hidden states. */
+    window.setTimeout(function () {
+      if (!document.querySelector(".fade.is-in")) revealAll();
+    }, 1500);
+
+    document.querySelectorAll("section").forEach(function (section) {
+      section.querySelectorAll(".fade").forEach(function (el, index) {
+        el.style.setProperty("--d", Math.min(index, 4) * 0.06 + "s");
+        el.classList.add("is-pending");
+        observer.observe(el);
+      });
+    });
+
+    /* Keyboard navigation must never focus a link inside an invisible block. */
+    document.addEventListener("focusin", function (event) {
+      var block = event.target.closest(".fade.is-pending");
+      if (block) {
+        reveal(block);
+        block.classList.remove("is-in");
+      }
+    });
+
+    if (motion && motion.addEventListener) {
+      motion.addEventListener("change", function (event) {
+        if (event.matches) revealAll();
+      });
+    }
+  }
 })();

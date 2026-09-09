@@ -6,6 +6,7 @@
      3. Copy-email button
      4. Mobile menu
      5. Footer year
+     6. Counting the figures up as they arrive
    ========================================================================== */
 
 (function () {
@@ -197,4 +198,50 @@
   /* ----------------------------------------------------- 5. Footer year -- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
+
+  /* ------------------------------------------------------ 6. Count up --
+     Any [data-count] span counts from zero to its target the first time it
+     scrolls into view. The markup already holds the final number, so with
+     JS off, or reduced motion on, the figure simply sits there — the
+     animation is decoration over content that is already correct.
+
+     The easing is a decelerating cubic rather than a spring: a spring
+     overshoots, and a figure that reads 5 before settling on 4 is a lie,
+     however briefly. */
+  var counters = document.querySelectorAll("[data-count]");
+  var noMotion = window.matchMedia
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (counters.length && !noMotion && "IntersectionObserver" in window) {
+    var DURATION = 900;
+
+    function countUp(el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      if (!isFinite(target)) return;
+
+      /* Nothing is zeroed until the first frame actually arrives. In a
+         context where rAF never fires the figure keeps its markup value
+         instead of being stranded at 0. */
+      var started = null;
+
+      window.requestAnimationFrame(function step(now) {
+        if (started === null) started = now;
+        var t = Math.min((now - started) / DURATION, 1);
+        var eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(target * eased));
+        if (t < 1) window.requestAnimationFrame(step);
+        else el.textContent = String(target);
+      });
+    }
+
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        countUp(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    counters.forEach(function (el) { countObserver.observe(el); });
+  }
 })();

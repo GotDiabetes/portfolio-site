@@ -34,6 +34,7 @@
 
   <!-- Applies the saved theme before first paint so there's no flash. -->
   <script>
+    document.documentElement.classList.add("js");
     (function () {
       try {
         var saved = localStorage.getItem("theme");
@@ -96,15 +97,15 @@
          page is a person telling you what they do, at a size you can read.
          ==================================================================== -->
     <section class="lead wrap">
-      <h1>Isaac Lee</h1>
-      <p class="standfirst">
+      <h1 class="fade">Isaac Lee</h1>
+      <p class="standfirst fade">
         Economics student at Irvine Valley College. I spent summer 2026 doing
         go-to-market work at ZEP, an EdTech company.
       </p>
 
       <!-- One photograph, in the margin beside the opening paragraphs. It
            earns its place by being of me rather than of a concept. -->
-      <figure class="portrait">
+      <figure class="portrait fade">
         <picture>
           <source type="image/webp"
                   srcset="images/isaac-newport-800.webp 800w, images/isaac-newport-1600.webp 1600w"
@@ -118,7 +119,7 @@
         <figcaption>Inspiration Point, Newport Beach</figcaption>
       </figure>
 
-      <div class="lead-body">
+      <div class="lead-body fade">
         <p>
           Most of the job was outbound. I found schools and organizations that
           might actually want the product, worked out who made the decision,
@@ -140,7 +141,7 @@
         </p>
       </div>
 
-      <ul class="lead-contact">
+      <ul class="lead-contact fade">
         <li><a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a></li>
         <li><a href="tel:+12248132883">(224) 813-2883</a></li>
         <li>
@@ -150,7 +151,7 @@
         <li>Irvine, California</li>
       </ul>
 
-      <div class="cta-row cta-row--lead">
+      <div class="cta-row cta-row--lead fade">
         <a class="pill" href="mailto:21euisungisaac@gmail.com">
           Email me
           <span class="pill-arrow" aria-hidden="true">
@@ -163,9 +164,9 @@
 
     <!-- ============================ EXPERIENCE ============================ -->
     <section class="wrap" id="experience">
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title fade">Experience</h2>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Jun &ndash; Aug 2026<span>Seoul, South Korea</span>
           <img class="entry-logo" src="images/logo-zep.png" alt="" />
         </p>
@@ -203,7 +204,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Oct 2025 &ndash; present<span>Newport Beach, CA</span>
           <img class="entry-logo entry-logo--invert" src="images/logo-nbtc.png" alt="" />
         </p>
@@ -228,7 +229,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Sep 2024 &ndash; Aug 2025<span>Libertyville, IL</span>
           <img class="entry-logo" src="images/logo-lifesport.png" alt="" />
         </p>
@@ -241,7 +242,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Sep 2024 &ndash; Mar 2025<span>Vernon Hills, IL</span>
           <img class="entry-logo" src="images/logo-starbucks.png" alt="" />
         </p>
@@ -254,7 +255,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Aug 2019 &ndash; Nov 2023<span>Vernon Hills, IL</span>
           <img class="entry-logo entry-logo--invert" src="images/logo-milkcow.png" alt="" />
         </p>
@@ -270,9 +271,9 @@
 
     <!-- ============================= PROJECTS ============================= -->
     <section class="wrap" id="projects">
-      <h2 class="section-title">Projects and leadership</h2>
+      <h2 class="section-title fade">Projects and leadership</h2>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">2026</p>
         <div class="entry-body">
           <h3>
@@ -287,7 +288,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Aug 2026 &ndash; present</p>
         <div class="entry-body">
           <h3>Camino Fidei</h3>
@@ -308,7 +309,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Sep &ndash; Nov 2025<span>Irvine, CA</span></p>
         <div class="entry-body">
           <h3>AI's economic impact on entry-level jobs in the U.S.</h3>
@@ -325,7 +326,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Sep 2024 &ndash; Apr 2025<span>Vernon Hills, IL</span>
           <img class="entry-logo" src="images/logo-vhhs.png" alt="" />
         </p>
@@ -338,7 +339,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Aug 2024 &ndash; Jun 2025<span>Des Plaines, IL</span>
           <img class="entry-logo entry-logo--invert" src="images/logo-stpaulch.png" alt="" />
         </p>
@@ -354,9 +355,9 @@
 
     <!-- ============================== DETAILS ============================== -->
     <section class="wrap" id="details">
-      <h2 class="section-title">Details</h2>
+      <h2 class="section-title fade">Details</h2>
 
-      <dl class="details">
+      <dl class="details fade">
         <div>
           <dt>Education
             <img class="entry-logo" src="images/logo-ivc.png" alt="" />
@@ -391,16 +392,16 @@
          of repeating the photograph.
          ==================================================================== -->
     <section class="wrap" id="outside">
-      <h2 class="section-title">Outside work</h2>
+      <h2 class="section-title fade">Outside work</h2>
 
-      <p class="section-intro">
+      <p class="section-intro fade">
         None of this is on my résumé, but it is where most of my week goes once
         the laptop shuts. It is also where I learned the most about getting
         people to show up for something regularly, which turns out to be the
         same problem in a running club and in a sales pipeline.
       </p>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Running<span>Camino Fidei</span></p>
         <div class="entry-body">
           <h3>Running</h3>
@@ -411,7 +412,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Bouldering<span>Aliso Viejo</span></p>
         <div class="entry-body">
           <h3>Rock climbing</h3>
@@ -428,7 +429,7 @@
         </div>
       </article>
 
-      <article class="entry">
+      <article class="entry fade">
         <p class="entry-when">Snowboarding<span>Winter</span></p>
         <div class="entry-body">
           <h3>Snowboarding</h3>
@@ -451,20 +452,20 @@
 
     <!-- ============================== CONTACT ============================== -->
     <section class="wrap closing" id="contact">
-      <h2 class="section-title">Get in touch</h2>
+      <h2 class="section-title fade">Get in touch</h2>
       <p>
         If you're hiring for a summer 2027 internship, or you just want to
         compare notes on outbound, email is the fastest way to reach me. I
         reply to everything.
       </p>
-      <p class="closing-address">
+      <p class="closing-address fade">
         <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <button class="copy" type="button" id="copyEmail"
                 data-email="21euisungisaac@gmail.com">copy</button>
         <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
       </p>
 
-      <div class="cta-row">
+      <div class="cta-row fade">
         <a class="pill" href="mailto:21euisungisaac@gmail.com">
           Email me
           <span class="pill-arrow" aria-hidden="true">

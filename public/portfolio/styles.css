@@ -9,8 +9,8 @@
        no rounded boxes, no drop shadows, no hover lifts.
      · Colour is paper, ink, and one warm accent used sparingly. Blue was the
        obvious choice, which is exactly why it isn't here.
-     · Motion: none, apart from links changing colour. The page is meant to be
-       read, and nothing on it needs to move to earn attention.
+     · Motion: a block settles once as it enters the page. Nothing loops or
+       interrupts the reading, and reduced motion keeps the page still.
 
    Adjustables are in :root.
    ========================================================================== */
@@ -168,7 +168,7 @@ a { color: inherit; }
 /* ------------------------------------------------------------- Figures --
    Two kinds, both restrained. Images here are evidence attached to a claim,
    not decoration, so they get a hairline, a mono caption, and nothing else:
-   no rounded corners, no shadow, no hover state, no lightbox. */
+   no rounded corners, no shadow, no lightbox; the frame warms on hover. */
 figure { margin: 0; }
 figcaption {
   font-family: var(--mono);
@@ -184,7 +184,7 @@ figcaption {
    margin of paper inside it and a second hairline around the image, the way a
    print sits in a mat. Two rules separated by a gap read as a considered
    mount; one rule flush to the edge reads as a screenshot with a box on it.
-   Still no shadows, no rounded corners, no hover — the restraint holds. */
+   Still no shadows or rounded corners — the restraint holds. */
 .portrait, .plate {
   padding: clamp(.4rem, .9vw, .7rem);
   border: 1px solid var(--rule);
@@ -510,4 +510,36 @@ figcaption {
   .pill, .pill-arrow { transition: none; }
   .pill:hover { gap: .55rem; }
   .pill:hover .pill-arrow { transform: none; }
+}
+
+/* --------------------------------------------------------------- Motion --
+   Recovered from the transition study: fourteen pixels of rise, a short
+   stagger and a warming frame. No persistent compositor layers are needed;
+   after the animation the photograph and text return to normal painting. */
+:root { --ease-out: cubic-bezier(.22, .61, .36, 1); }
+.js .fade.is-pending { opacity: 0; }
+.js .fade.is-in {
+  animation: settle-in .62s var(--ease-out) var(--d, 0s) backwards;
+}
+@keyframes settle-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.portrait, .plate {
+  transition: border-color .45s var(--ease-out), transform .45s var(--ease-out);
+}
+.portrait:hover { border-color: var(--accent); }
+.plate:hover { border-color: var(--accent); transform: translateY(-2px); }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .fade.is-pending { opacity: 1; }
+  .js .fade.is-in { animation: none; }
+  .portrait, .plate { transition: none; }
+  .plate:hover { transform: none; }
+}
+@media print {
+  .js .fade.is-pending { opacity: 1; }
+  .js .fade.is-in { animation: none; }
 }
