@@ -5,8 +5,10 @@
      2. Popups (booking, lesson details, photo lightbox)
      3. Copy-email button
      4. Mobile menu
-     5. Footer year
-     6. Counting the figures up as they arrive
+     5. The clip in "In action"
+     6. Email buttons open Gmail
+     7. Footer year
+     8. Counting the figures up as they arrive
    ========================================================================== */
 
 (function () {
@@ -195,11 +197,65 @@
     });
   }
 
-  /* ----------------------------------------------------- 5. Footer year -- */
+  /* ------------------------------------------------------- 5. The clip --
+     The poster is ours and the player is not fetched until someone asks for
+     it. Swapping in the iframe on click keeps YouTube — its script, its
+     cookies and its red chrome — off the page for everyone who only reads. */
+  var play = document.querySelector(".video-play");
+  if (play) {
+    play.addEventListener("click", function () {
+      var id = play.getAttribute("data-video");
+      if (!id || play.classList.contains("is-playing")) return;
+
+      var frame = document.createElement("iframe");
+      /* autoplay because the click *was* the request to play; without it the
+         viewer has to press a second button inside the player. */
+      frame.src = "https://www.youtube-nocookie.com/embed/" + id +
+                  "?autoplay=1&rel=0&playsinline=1";
+      frame.title = play.getAttribute("aria-label") || "Video";
+      frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; " +
+                    "gyroscope; picture-in-picture; web-share";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.allowFullscreen = true;
+
+      play.innerHTML = "";
+      play.appendChild(frame);
+      play.classList.add("is-playing");
+      play.removeAttribute("aria-label");
+    });
+  }
+
+  /* -------------------------------------------------- 6. Email buttons --
+     The href stays a real mailto:, so the link still works with no JS, still
+     offers "copy email address" on right-click, and still reads as an email
+     link to a screen reader. This only intercepts the plain left-click and
+     sends it to Gmail's compose window instead, because a bare mailto: hands
+     the visitor over to whatever desktop client their machine happens to have
+     registered — on Windows that is usually Outlook, even for people who have
+     never opened it. Modified clicks are left alone so ctrl/cmd-click, middle
+     click and "open in new tab" keep doing what the browser normally does. */
+  var MAIL_TO = "isaacleetennis@gmail.com";
+
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest && e.target.closest("[data-mail]");
+    if (!link) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    var subject = link.getAttribute("data-mail") || "";
+    var url = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+              encodeURIComponent(MAIL_TO) + (subject ? "&su=" + subject : "");
+
+    /* If the popup is blocked, window.open returns null and we fall through to
+       the mailto: default rather than leaving the click doing nothing. */
+    var opened = window.open(url, "_blank", "noopener");
+    if (opened) e.preventDefault();
+  });
+
+  /* ----------------------------------------------------- 7. Footer year -- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* ------------------------------------------------------ 6. Count up --
+  /* ------------------------------------------------------ 8. Count up --
      Any [data-count] span counts from zero to its target the first time it
      scrolls into view. The markup already holds the final number, so with
      JS off, or reduced motion on, the figure simply sits there — the

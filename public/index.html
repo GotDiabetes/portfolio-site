@@ -107,7 +107,7 @@
             <button class="btn btn-primary btn-lg" type="button"
                     data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
                     data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
-            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com">Email me</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
           </div>
 
           <dl class="hero-facts fade" style="--d:.24s">
@@ -149,14 +149,15 @@
                 want more consistency and a clearer plan once points actually start.
               </p>
               <p>
-                I played four years of high school varsity, and still play regularly for fun.
+                I played four years of high school varsity. Coaching is a part-time job for
+                me, fitted around school, so the schedule stays small and deliberate.
               </p>
             </div>
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>Coaching</dt><dd><span data-count="3">3</span> years</dd></div>
               <div><dt>Varsity</dt><dd><span data-count="4">4</span> years</dd></div>
-              <div><dt>Now playing</dt><dd>For fun</dd></div>
+              <div><dt>Schedule</dt><dd>Part time</dd></div>
             </dl>
           </div>
         </div>
@@ -172,6 +173,10 @@
       <header class="section-head">
         <p class="eyebrow fade">On court</p>
         <h2 class="fade" style="--d:.06s">In action</h2>
+        <p class="section-sub fade" style="--d:.12s">
+          A still shows shape; a point shows timing. The clip below is from my own
+          playing days in high school &mdash; a hit against my former coach.
+        </p>
       </header>
 
       <div class="photo-strip photo-strip--two fade">
@@ -189,6 +194,22 @@
           <span class="photo-tag">Ready position</span>
         </button>
       </div>
+
+      <!-- The clip runs as a third frame under the strip: our own poster, our
+           own play control, no YouTube chrome. The player is only fetched when
+           someone presses play, so the page costs nothing extra to the many who
+           never watch, and YouTube sets no cookies until they choose to. -->
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="Play the clip: Isaac Lee against his former coach at LifeSport Libertyville, November 2024">
+          <img src="images/lifesport-2024.jpg" width="1280" height="720" loading="lazy" alt="" />
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">Watch the point</span>
+        </button>
+        <figcaption>
+          Against my former coach at LifeSport Libertyville &mdash; 21 November 2024.
+        </figcaption>
+      </figure>
 
       <figure class="about-photo fade-img" style="max-width: 32rem; margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;">
         <img src="images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
@@ -331,7 +352,7 @@
               <button class="btn btn-invert btn-lg" type="button"
                       data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
                       data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
-              <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com">Email me</a>
+              <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
               <button class="btn btn-outline btn-lg" type="button" data-open="bookingModal">Other ways to reach me</button>
             </div>
           </div>
@@ -404,7 +425,7 @@
         <button class="btn btn-primary" type="button" data-close
                 data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson"
                 data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com">Email to book</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons" data-mail="Private%20lessons">Email to book</a>
       </div>
     </div>
   </dialog>
@@ -427,7 +448,7 @@
         <button class="btn btn-primary" type="button" data-close
                 data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson"
                 data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com">Email to book</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons" data-mail="Semi-private%20lessons">Email to book</a>
       </div>
     </div>
   </dialog>
@@ -448,7 +469,7 @@
         <button class="btn btn-primary" type="button" data-close
                 data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session"
                 data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com">Email to book</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions" data-mail="Hitting%20partner%20sessions">Email to book</a>
       </div>
     </div>
   </dialog>
@@ -469,7 +490,7 @@
         <button class="btn btn-primary" type="button" data-close
                 data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
                 data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com">Email to book</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email to book</a>
       </div>
     </div>
   </dialog>

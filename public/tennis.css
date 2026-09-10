@@ -424,6 +424,60 @@ dl, dd { margin: 0; }
 
 /* Photos fade in while easing back from a slight zoom. */
 .fade-img { border-radius: var(--radius); overflow: hidden; }
+
+/* ---------------------------------------------------------- The clip --
+   Styled as another frame in the strip rather than as an embed: flush with
+   the two photographs above, same 2px seam, same hover zoom and same tag.
+   The 16/9 box holds its height from first paint, so the caption below it
+   never jumps when the poster or the player arrives. */
+.video-frame { margin: 2px 0 0; }
+.video-play {
+  position: relative;
+  display: block; width: 100%; padding: 0;
+  border: 0; cursor: pointer;
+  overflow: hidden;
+  background: var(--ink);
+}
+.video-play img {
+  display: block; width: 100%;
+  aspect-ratio: 16/9; object-fit: cover;
+  transition: transform .6s var(--ease), opacity .5s var(--ease);
+}
+.video-play:hover img { transform: scale(1.04); }
+
+/* The play control. A white disc with a black triangle keeps the page black
+   and white; YouTube's red button was the one thing on the page not in the
+   scheme. clip-path rather than a border triangle so it stays crisp when
+   the disc scales on hover. */
+.video-cue {
+  position: absolute; top: 50%; left: 50%;
+  width: 4.5rem; height: 4.5rem;
+  margin: -2.25rem 0 0 -2.25rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  transition: transform var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease);
+}
+.video-cue::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  width: 1.35rem; height: 1.5rem;
+  margin: -.75rem 0 0 -.5rem;
+  background: var(--ink);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.video-play:hover .video-cue,
+.video-play:focus-visible .video-cue { transform: scale(1.08); background: #fff; }
+
+/* Once pressed, the iframe takes the same box the poster held. */
+.video-play.is-playing { cursor: default; }
+.video-play iframe {
+  display: block; width: 100%; aspect-ratio: 16/9; border: 0;
+}
+
+.video-frame figcaption {
+  margin-top: .9rem;
+  color: var(--muted);
+  font-size: .9375rem;
+}
 .js .fade-img img {
   opacity: 0;
   transform: scale(1.06);
