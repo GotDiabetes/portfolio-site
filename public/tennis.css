@@ -87,9 +87,10 @@ dl, dd { margin: 0; }
 }
 .header-row { display: flex; align-items: center; gap: 1.5rem; min-height: 66px; }
 .brand {
-  font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.02em;
-  text-decoration: none; margin-right: auto;
+  display: inline-flex; align-items: center; flex-shrink: 0;
+  text-decoration: none; margin-right: auto; padding-block: .25rem;
 }
+.brand-logo { width: 168px; height: 56px; }
 .nav { display: flex; gap: 1.7rem; }
 .nav a {
   font-size: .9375rem; color: var(--muted); text-decoration: none;
@@ -583,7 +584,8 @@ body.modal-open { overflow: hidden; }
   .contact-details { margin-top: 1rem; }
 }
 
-@media (max-width: 680px) {
+/* The wordmark needs enough room to stay legible beside the booking action. */
+@media (max-width: 940px) {
   .nav-toggle { display: flex; }
   .header-cta { display: none; }
   .nav {
@@ -599,7 +601,9 @@ body.modal-open { overflow: hidden; }
   .nav a:last-child { border-bottom: none; }
   /* The desktop divider would read as a stray indent in the stacked menu. */
   .nav-portfolio { padding-left: 0; border-left: none; }
+}
 
+@media (max-width: 680px) {
   .photo-strip { grid-template-columns: 1fr 1fr; }
   .photo-strip .photo:first-child { grid-column: 1 / -1; }
   /* The three-up strip leads with one full-width frame. A pair doing that

@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#0d0d0d"/>
-  <path d="M8 14a30 30 0 0 1 0 36" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-  <path d="M56 14a30 30 0 0 0 0 36" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 94"><style>.mark{fill:#171916}@media(prefers-color-scheme:dark){.mark{fill:#fff}}</style><g class="mark" transform="translate(0 8)"><path d="M24 11H38L26 53H58L54 66H11Z"/><path d="M44 11H83L79 24H66L58 49H44L52 24H40Z"/></g></svg>
