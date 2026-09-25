@@ -7,8 +7,8 @@
      4. Mobile menu
      5. The clip in "In action"
      6. Email buttons open Gmail
-     7. Footer year
-     8. Counting the figures up as they arrive
+     7. Booking before the calendar script has arrived
+     8. Footer year
    ========================================================================== */
 
 (function () {
@@ -29,17 +29,24 @@
   if (!("IntersectionObserver" in window)) {
     revealAll();
   } else {
-    /* The reveal runs in both directions: blocks fade up as they come into
-       view and fade back out as they leave, so scrolling up reverses the
-       animation instead of leaving everything stuck on. That means we keep
-       observing rather than unobserving after the first hit. */
+    /* Reveal once. It used to run in both directions, fading blocks back out
+       as they left the viewport, and scrolling up to re-read a price replayed
+       the whole entrance. A reading page should not animate again because
+       the reader went back. The observer lets go of each block after its
+       first arrival.
+
+       The margin is zero rather than the -5% it was: on a short laptop
+       viewport that strip held back the last few lines of whatever section
+       the reader was in, so the page looked like it was withholding. */
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          entry.target.classList.toggle("is-in", entry.isIntersecting);
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0.05, rootMargin: "0px" }
     );
     fadeEls.forEach(function (el) { observer.observe(el); });
 
@@ -192,6 +199,14 @@
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
+    /* A tap anywhere outside the menu and its toggle closes it, the way every
+       other overlay on the page closes. Without this the open menu sat over
+       the hero until the visitor found the toggle again. */
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("is-open")) return;
+      if (e.target.closest("#nav") || e.target.closest("#navToggle")) return;
+      closeMenu();
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) { closeMenu(); toggle.focus(); }
     });
@@ -251,53 +266,57 @@
     if (opened) e.preventDefault();
   });
 
-  /* ----------------------------------------------------- 7. Footer year -- */
+  /* ------------------------------------------- 7. Booking before ready --
+     The calendar script is deferred (see the loader in <head>). Every Book
+     control is a real link to the event on cal.com, so with no script at all
+     the click still lands on a booking page. This handles the narrower case:
+     the script is on its way and the click beats it. Rather than navigate
+     away from the page, hold the click, say so on the control, and replay it
+     the moment the embed reports ready. If nothing arrives within a few
+     seconds, let the link do what links do. */
+  var calReady = document.documentElement.classList.contains("cal-ready");
+  window.addEventListener("cal:ready", function () { calReady = true; });
+
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("[data-cal-link]");
+    if (!el) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    /* The embed opens its popup on this click but leaves the link's own
+       navigation alone, so a plain click would open the calendar and then
+       leave the page for cal.com. Cancel the navigation; the popup is the
+       point of the link, the href is only the fallback. */
+    e.preventDefault();
+    if (calReady) return;
+
+    if (window.__loadCal) window.__loadCal();
+
+    var label = el.querySelector(".cta-full") || el;
+    var original = label.textContent;
+    label.textContent = "Loading calendar…";
+    el.setAttribute("aria-busy", "true");
+
+    var fallback = window.setTimeout(function () {
+      window.location.href = el.getAttribute("href") || "https://cal.com/isaac-lee-hlkghj";
+    }, 6000);
+
+    function replay() {
+      window.clearTimeout(fallback);
+      label.textContent = original;
+      el.removeAttribute("aria-busy");
+      /* A macrotask, not a frame: the embed binds its listeners synchronously
+         on load, and rAF is paused in a background tab, which is exactly
+         where a slow-loading visitor may have gone while waiting. */
+      window.setTimeout(function () { el.click(); }, 0);
+    }
+    window.addEventListener("cal:ready", replay, { once: true });
+    window.addEventListener("cal:error", function () {
+      window.clearTimeout(fallback);
+      window.location.href = el.getAttribute("href") || "https://cal.com/isaac-lee-hlkghj";
+    }, { once: true });
+  });
+
+  /* ----------------------------------------------------- 8. Footer year -- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
-
-  /* ------------------------------------------------------ 8. Count up --
-     Any [data-count] span counts from zero to its target the first time it
-     scrolls into view. The markup already holds the final number, so with
-     JS off, or reduced motion on, the figure simply sits there — the
-     animation is decoration over content that is already correct.
-
-     The easing is a decelerating cubic rather than a spring: a spring
-     overshoots, and a figure that reads 5 before settling on 4 is a lie,
-     however briefly. */
-  var counters = document.querySelectorAll("[data-count]");
-  var noMotion = window.matchMedia
-    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (counters.length && !noMotion && "IntersectionObserver" in window) {
-    var DURATION = 900;
-
-    function countUp(el) {
-      var target = parseFloat(el.getAttribute("data-count"));
-      if (!isFinite(target)) return;
-
-      /* Nothing is zeroed until the first frame actually arrives. In a
-         context where rAF never fires the figure keeps its markup value
-         instead of being stranded at 0. */
-      var started = null;
-
-      window.requestAnimationFrame(function step(now) {
-        if (started === null) started = now;
-        var t = Math.min((now - started) / DURATION, 1);
-        var eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (t < 1) window.requestAnimationFrame(step);
-        else el.textContent = String(target);
-      });
-    }
-
-    var countObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        countObserver.unobserve(entry.target);
-        countUp(entry.target);
-      });
-    }, { threshold: 0.6 });
-
-    counters.forEach(function (el) { countObserver.observe(el); });
-  }
 })();

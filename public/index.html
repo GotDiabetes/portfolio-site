@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- ============================================================
        SEO — this page is served at leetennisco.com (the front page).
        ============================================================ -->
-  <title>Isaac Lee — Private Tennis Coaching in Irvine, CA</title>
+  <title>Lee Tennis Co. — Private Tennis Coaching in Irvine, CA</title>
   <meta name="description"
         content="Private tennis lessons in Irvine, California. $80/hour one-on-one coaching, $110/hour semi-private for two, $45/hour hitting partner sessions, and small adult clinics with Isaac Lee." />
   <link rel="canonical" href="https://leetennisco.com/" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Isaac Lee — Private Tennis Coaching in Irvine, CA" />
+  <meta property="og:title" content="Lee Tennis Co. — Private Tennis Coaching in Irvine, CA" />
   <meta property="og:description"
         content="Private tennis lessons in Irvine, California. One-on-one coaching, hitting partner sessions, and small adult clinics." />
   <meta property="og:url" content="https://leetennisco.com/" />
@@ -23,25 +23,63 @@
 
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="tennis.css?v=lt-restored-1" />
+  <!-- The query is a cache key, not a route. Bump it when either file changes. -->
+  <link rel="stylesheet" href="tennis.css?v=20260921b" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
        leaves a fully visible page rather than a blank one. -->
   <script>document.documentElement.classList.add("js");</script>
 
-  <!-- Cal.com booking widget. Buttons with data-cal-link open this as a
-       popup instead of navigating; see https://cal.com/isaac-lee-hlkghj -->
-  <script type="text/javascript">
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", "lesson", { origin: "https://cal.com" });
-    Cal.ns.lesson("ui", { "styles": { "branding": { "brandColor": "#000000" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+  <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
+       popup; every one of them is also a real link to the same event on
+       cal.com, so a blocked or slow script still lands somewhere.
+
+       The embed is not fetched on load. It was 1.5s of a 1.6s load for a
+       script most visitors never use. It loads on the first sign of intent
+       — a pointer moving over a Book control, focus landing on one, any
+       scroll or tap — or three seconds in, whichever comes first.
+       tennis.js handles a click that arrives before it is ready. -->
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      document.addEventListener("pointerover", function (e) {
+        if (e.target.closest && e.target.closest("[data-cal-link]")) arm();
+      }, { passive: true });
+      document.addEventListener("focusin", function (e) {
+        if (e.target.closest && e.target.closest("[data-cal-link]")) arm();
+      });
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
   </script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SportsActivityLocation",
-    "name": "Isaac Lee Tennis",
+    "name": "Lee Tennis Co.",
+    "alternateName": "Isaac Lee Tennis",
     "description": "Private tennis coaching in Irvine, California.",
     "url": "https://leetennisco.com/",
     "email": "isaacleetennis@gmail.com",
@@ -68,16 +106,26 @@
       </a>
 
       <nav class="nav" id="nav" aria-label="Main">
-        <a href="#about">About</a>
+        <!-- Only rendered in the stacked mobile menu; on desktop the header
+             button beside it is the same action. -->
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
         <a href="#lessons">Lessons</a>
+        <a href="#about">About</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
-        <a class="nav-portfolio" href="/portfolio/">Career portfolio</a>
+        <!-- The one link that leaves the page. The arrow is drawn on hover and
+             the label slides up into its black copy; both are CSS only. -->
+        <a class="nav-portfolio" href="/portfolio/">
+          <span class="np-label"><span class="np-text" data-text="Career portfolio">Career portfolio</span></span>
+          <svg class="np-arrow" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+            <path pathLength="1" d="M1.5 7h10.5M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
       </nav>
 
-      <button class="btn btn-primary btn-sm header-cta" type="button"
-              data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
-              data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Book a lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>
+        <span class="cta-full">Book a lesson</span><span class="cta-short" aria-hidden="true">Book</span>
+      </a>
 
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
         <span></span><span></span>
@@ -92,7 +140,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">Private coaching · Irvine, California</p>
+          <p class="eyebrow fade">Private coaching · Toscana courts, Irvine</p>
           <!-- Each line is its own mask, so the word drops in from behind the
                line above rather than sliding over it. -->
           <h1 class="hero-drop">
@@ -101,14 +149,12 @@
             <span class="drop-line"><span class="drop-word" style="--d:.18s">lessons</span></span>
           </h1>
           <p class="hero-sub fade" style="--d:.12s">
-            I'm Isaac Lee. I coach juniors and adults across Orange County — one-on-one
-            sessions built on solid fundamentals and steady, deliberate practice.
+            I'm Isaac Lee. I coach juniors and adults at my home court in Irvine —
+            one-on-one sessions built on solid fundamentals and steady, deliberate practice.
           </p>
 
           <div class="actions fade" style="--d:.18s">
-            <button class="btn btn-primary btn-lg" type="button"
-                    data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
-                    data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
           </div>
 
@@ -120,107 +166,16 @@
         </div>
 
         <figure class="hero-photo fade-img">
-          <img src="images/pointing.jpg" width="960" height="1280" fetchpriority="high"
-               alt="Isaac Lee calling out a drill during a lesson" />
+          <picture>
+            <source type="image/webp" srcset="images/pointing-480.webp 480w, images/pointing.webp 960w"
+                    sizes="(max-width: 940px) 100vw, 46vw" />
+            <img src="images/pointing.jpg" srcset="images/pointing-480.jpg 480w, images/pointing.jpg 960w"
+                 sizes="(max-width: 940px) 100vw, 46vw"
+                 width="960" height="1280" fetchpriority="high"
+                 alt="Isaac Lee calling out a drill during a lesson" />
+          </picture>
         </figure>
       </div>
-    </section>
-
-    <!-- ============================ ABOUT ============================ -->
-    <section class="band" id="about">
-      <div class="wrap section">
-        <div class="two-col">
-          <figure class="about-photo fade-img">
-            <img src="images/forehand.jpg" width="1200" height="1800" loading="lazy"
-                 alt="Isaac Lee hitting a forehand" />
-          </figure>
-
-          <div class="about-text">
-            <p class="eyebrow fade">About</p>
-            <h2 class="fade" style="--d:.06s">Fundamentals first, then everything else</h2>
-
-            <div class="fade" style="--d:.12s">
-              <p>
-                I've been coaching for three years. I started as a Junior Pro at LifeSport
-                Libertyville, then joined the Pro Staff of Grip N Rip, the junior program at
-                Newport Beach Tennis Club.
-              </p>
-              <p>
-                Most of my work is with developing juniors — getting the fundamentals right
-                early so progress keeps compounding. I also run adult clinics for players who
-                want more consistency and a clearer plan once points actually start.
-              </p>
-              <p>
-                I played four years of high school varsity. Coaching is a part-time job for
-                me, fitted around school, so the schedule stays small and deliberate.
-              </p>
-            </div>
-
-            <dl class="facts fade" style="--d:.18s">
-              <div><dt>Coaching</dt><dd><span data-count="3">3</span> years</dd></div>
-              <div><dt>Varsity</dt><dd><span data-count="4">4</span> years</dd></div>
-              <div><dt>Schedule</dt><dd>Part time</dd></div>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ IN ACTION ============================
-         The .photo-strip rules were already in the stylesheet, along with the
-         lightbox wiring in main.js — three portrait frames, edge to edge, that
-         open full size on click.
-         ================================================================= -->
-    <section class="photos wrap" id="in-action">
-      <header class="section-head">
-        <p class="eyebrow fade">On court</p>
-        <h2 class="fade" style="--d:.06s">In action</h2>
-        <p class="section-sub fade" style="--d:.12s">
-          A still shows shape; a point shows timing. The clip below is from my own
-          playing days in high school &mdash; a hit against my former coach.
-        </p>
-      </header>
-
-      <div class="photo-strip photo-strip--two fade">
-        <button class="photo" type="button"
-                data-lightbox="images/serve.jpg" data-caption="Serving during a match">
-          <img src="images/serve.jpg" width="1200" height="1800" loading="lazy"
-               alt="Isaac Lee serving during a match" />
-          <span class="photo-tag">Serve</span>
-        </button>
-
-        <button class="photo" type="button"
-                data-lightbox="images/ready.jpg" data-caption="Ready position, waiting on the return">
-          <img src="images/ready.jpg" width="1200" height="1600" loading="lazy"
-               alt="Isaac Lee in ready position behind the baseline" />
-          <span class="photo-tag">Ready position</span>
-        </button>
-      </div>
-
-      <!-- The clip runs as a third frame under the strip: our own poster, our
-           own play control, no YouTube chrome. The player is only fetched when
-           someone presses play, so the page costs nothing extra to the many who
-           never watch, and YouTube sets no cookies until they choose to. -->
-      <figure class="video-frame fade">
-        <button class="video-play" type="button" data-video="4oZhhesVV2E"
-                aria-label="Play the clip: Isaac Lee against his former coach at LifeSport Libertyville, November 2024">
-          <img src="images/lifesport-2024.jpg" width="1280" height="720" loading="lazy" alt="" />
-          <span class="video-cue" aria-hidden="true"></span>
-          <span class="photo-tag">Watch the point</span>
-        </button>
-        <figcaption>
-          Against my former coach at LifeSport Libertyville &mdash; 21 November 2024.
-        </figcaption>
-      </figure>
-
-      <figure class="about-photo fade-img" style="max-width: 32rem; margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;">
-        <img src="images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
-             style="aspect-ratio: 780/419;"
-             alt="Isaac Lee coaching a junior clinic" />
-        <figcaption style="text-align: center; margin-top: .75rem; color: var(--muted); font-size: .9375rem;">
-          Coaching a junior clinic
-        </figcaption>
-      </figure>
     </section>
 
     <!-- ====================== STATEMENT BAND ======================
@@ -256,7 +211,10 @@
             ball-progression fundamentals for younger players, and a practice plan you can
             actually work on between sessions.
           </p>
-          <button class="link-btn" type="button" data-open="modalPrivate">What's covered</button>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a private lesson</a>
+            <button class="link-btn" type="button" data-open="modalPrivate" aria-label="What's covered in a private lesson">What's covered</button>
+          </div>
         </article>
 
         <article class="lesson fade">
@@ -267,7 +225,10 @@
             than a private, and the pairing gives you live rallies and points to work through
             rather than feeding alone. Bring a friend, a sibling, or a doubles partner.
           </p>
-          <button class="link-btn" type="button" data-open="modalSemi">What's covered</button>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a semi-private lesson</a>
+            <button class="link-btn" type="button" data-open="modalSemi" aria-label="What's covered in a semi-private lesson">What's covered</button>
+          </div>
         </article>
 
         <article class="lesson fade">
@@ -277,7 +238,10 @@
             Straight hitting rather than instruction, for players who just want a reliable
             ball to work against. Sessions run 60 minutes or longer.
           </p>
-          <button class="link-btn" type="button" data-open="modalHitting">What's covered</button>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view"}'>Book a hitting session</a>
+            <button class="link-btn" type="button" data-open="modalHitting" aria-label="What's covered in a hitting session">What's covered</button>
+          </div>
         </article>
 
         <article class="lesson fade">
@@ -287,8 +251,107 @@
             Small groups on one court, working through drills and live-ball games with enough
             rotation that everyone keeps hitting. Cost depends on how many of you there are.
           </p>
-          <button class="link-btn" type="button" data-open="modalAdult">What's covered</button>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email for a quote</a>
+            <button class="link-btn" type="button" data-open="modalAdult" aria-label="What's covered in an adult clinic">What's covered</button>
+          </div>
         </article>
+      </div>
+    </section>
+
+    <!-- ============================ ABOUT ============================ -->
+    <section class="band" id="about">
+      <div class="wrap section">
+        <div class="two-col">
+          <figure class="about-photo fade-img">
+            <picture>
+              <source type="image/webp" srcset="images/coaching-clinic.webp" />
+              <img src="images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
+                   alt="Isaac Lee coaching a junior clinic at the net" />
+            </picture>
+          </figure>
+
+          <div class="about-text">
+            <p class="eyebrow fade">About</p>
+            <h2 class="fade" style="--d:.06s">Fundamentals first, then everything else</h2>
+
+            <div class="fade" style="--d:.12s">
+              <p>
+                I've been coaching for three years. I started as a Junior Pro at LifeSport
+                Libertyville, then joined the Pro Staff of Grip N Rip, the junior program at
+                Newport Beach Tennis Club.
+              </p>
+              <p>
+                Most of my work is with developing juniors — getting the fundamentals right
+                early so progress keeps compounding. I also run adult clinics for players who
+                want more consistency and a clearer plan once points actually start.
+              </p>
+              <p>
+                I played four years of high school varsity. Coaching is a part-time job for
+                me, fitted around school, so the schedule stays small and deliberate.
+              </p>
+            </div>
+
+            <dl class="facts fade" style="--d:.18s">
+              <div><dt>Home court</dt><dd>Toscana, Irvine</dd></div>
+              <div><dt>Varsity</dt><dd>4 years</dd></div>
+              <div><dt>Schedule</dt><dd>Part time</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ IN ACTION ============================
+         The .photo-strip rules were already in the stylesheet, along with the
+         lightbox wiring in main.js — three portrait frames, edge to edge, that
+         open full size on click.
+         ================================================================= -->
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">On court</p>
+        <h2 class="fade" style="--d:.06s">In action</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="images/forehand.jpg" data-caption="Forehand, indoor practice">
+          <picture>
+            <source type="image/webp" srcset="images/forehand-600.webp 600w, images/forehand.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="images/forehand.jpg" srcset="images/forehand-600.jpg 600w, images/forehand.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee hitting a forehand" />
+          </picture>
+          <span class="photo-tag">Forehand</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="images/serve.jpg" data-caption="Serving during a match">
+          <picture>
+            <source type="image/webp" srcset="images/serve-600.webp 600w, images/serve.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="images/serve.jpg" srcset="images/serve-600.jpg 600w, images/serve.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee serving during a match" />
+          </picture>
+          <span class="photo-tag">Serve</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="images/ready.jpg" data-caption="Ready position, waiting on the return">
+          <picture>
+            <source type="image/webp" srcset="images/ready-600.webp 600w, images/ready.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="images/ready.jpg" srcset="images/ready-600.jpg 600w, images/ready.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1600" loading="lazy"
+                 alt="Isaac Lee in ready position behind the baseline" />
+          </picture>
+          <span class="photo-tag">Ready position</span>
+        </button>
       </div>
     </section>
 
@@ -335,10 +398,58 @@
           </figcaption>
         </figure>
       </div>
+
+      <!-- The one clip of Isaac playing rather than coaching, and it sits after
+           the reviews on purpose: supporting evidence, not the offer. Our own
+           poster and play control, no YouTube chrome; the player is only
+           fetched when someone presses play, so the page costs nothing extra
+           to the many who never watch, and YouTube sets no cookies until they do. -->
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="Play the clip: Isaac Lee against his former coach at LifeSport Libertyville, November 2024">
+          <picture>
+            <source type="image/webp" srcset="images/lifesport-2024-640.webp 640w, images/lifesport-2024.webp 1280w"
+                    sizes="(max-width: 940px) 100vw, 1140px" />
+            <img src="images/lifesport-2024.jpg" srcset="images/lifesport-2024-640.jpg 640w, images/lifesport-2024.jpg 1280w"
+                 sizes="(max-width: 940px) 100vw, 1140px"
+                 width="1280" height="720" loading="lazy" alt="" />
+          </picture>
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">Watch the point</span>
+        </button>
+        <figcaption>
+          Not coaching, for once: a hit against my former coach at LifeSport Libertyville, November 2024, from my high school playing days.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ========================= BEFORE YOU BOOK =========================
+         The things a parent emails to ask before booking, answered in one
+         place so the Book button below is not a leap. -->
+    <section class="wrap section notes-section" id="before-you-book">
+      <h2 class="fade">Before you book</h2>
+      <dl class="notes fade" style="--d:.06s">
+        <div>
+          <dt>Where</dt>
+          <dd>Toscana Apartments tennis courts, Irvine. Lessons are at my home court &mdash; players come to me.</dd>
+        </div>
+        <div>
+          <dt>Who</dt>
+          <dd>Juniors from red-ball beginners up, and adults at any level.</dd>
+        </div>
+        <div>
+          <dt>Paying</dt>
+          <dd>In person. Booking online holds the time &mdash; no card, no deposit.</dd>
+        </div>
+        <div>
+          <dt>First session</dt>
+          <dd>Tell me your level and what you're working on when you book, and I'll come with a plan.</dd>
+        </div>
+      </dl>
     </section>
 
     <!-- ============================ CONTACT ============================
-         Full-bleed green block. This is the visual full stop — the page
+         Full-bleed black block. This is the visual full stop — the page
          has been building toward it.
          ================================================================= -->
     <section class="contact" id="contact">
@@ -351,9 +462,7 @@
               with availability and what a first session would look like.
             </p>
             <div class="actions fade" style="--d:.12s">
-              <button class="btn btn-invert btn-lg" type="button"
-                      data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
-                      data-cal-config='{"layout":"month_view"}'>Book a lesson</button>
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
               <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
               <button class="btn btn-outline btn-lg" type="button" data-open="bookingModal">Other ways to reach me</button>
             </div>
@@ -368,10 +477,6 @@
               <dt>Home court</dt>
               <dd>Toscana Apartments tennis courts, Irvine</dd>
             </div>
-            <div>
-              <dt>Location</dt>
-              <dd>Lessons are held at my home court &mdash; players come to me</dd>
-            </div>
           </dl>
         </div>
       </div>
@@ -380,10 +485,9 @@
 
   <footer class="footer">
     <div class="wrap footer-row">
-      <p>&copy; <span id="year">2026</span> Isaac Lee · Irvine, California</p>
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
       <p class="footer-links">
-        <!-- Update this once the portfolio site has its own domain. -->
-        <a href="/portfolio/">Portfolio</a>
+        <a href="/portfolio/">Career portfolio</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
     </div>
@@ -393,7 +497,7 @@
   <dialog class="modal" id="bookingModal" aria-labelledby="bookingTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="bookingTitle">Get in touch</h3>
+      <h3 id="bookingTitle" tabindex="-1" autofocus>Get in touch</h3>
       <p>
         Email is quickest. If you'd rather write it all out, the form asks for your level,
         goals and availability.
@@ -413,21 +517,19 @@
   <dialog class="modal" id="modalPrivate" aria-labelledby="privateTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="privateTitle">Private lessons</h3>
+      <h3 id="privateTitle" tabindex="-1" autofocus>Private lessons</h3>
       <p class="price">$80<span>/hour</span></p>
       <p>For juniors and adults &mdash; same one-on-one format, tailored to your level.</p>
       <ul>
         <li>Stroke and serve mechanics</li>
         <li>Footwork and court movement</li>
-        <li>Red, orange and green ball progression for younger players</li>
+        <li>Red, orange and green ball progression for younger players &mdash; the slower, lower-bouncing balls beginners learn on</li>
         <li>A practice plan for between sessions</li>
         <li>Match-readiness for tournament play</li>
       </ul>
       <div class="actions">
-        <button class="btn btn-primary" type="button" data-close
-                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson"
-                data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons" data-mail="Private%20lessons">Email to book</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a private lesson</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons" data-mail="Private%20lessons">Email me</a>
       </div>
     </div>
   </dialog>
@@ -435,7 +537,7 @@
   <dialog class="modal" id="modalSemi" aria-labelledby="semiTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="semiTitle">Semi-private lessons</h3>
+      <h3 id="semiTitle" tabindex="-1" autofocus>Semi-private lessons</h3>
       <p class="price">$110<span>/hour for two &mdash; $55 each</span></p>
       <p>Two players of a similar level on one court, sharing the hour and the cost.</p>
       <ul>
@@ -447,10 +549,8 @@
         <li>Bring your own partner, or ask me to match you with one</li>
       </ul>
       <div class="actions">
-        <button class="btn btn-primary" type="button" data-close
-                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson"
-                data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons" data-mail="Semi-private%20lessons">Email to book</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a semi-private lesson</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons" data-mail="Semi-private%20lessons">Email me</a>
       </div>
     </div>
   </dialog>
@@ -458,7 +558,7 @@
   <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="hittingTitle">Hitting partner sessions</h3>
+      <h3 id="hittingTitle" tabindex="-1" autofocus>Hitting partner sessions</h3>
       <p class="price">$45<span>/hour</span></p>
       <p>Hitting, not coaching — I feed and rally at your level so you get reps rather than instruction.</p>
       <ul>
@@ -468,10 +568,8 @@
         <li>Tie-breaks and sets on request</li>
       </ul>
       <div class="actions">
-        <button class="btn btn-primary" type="button" data-close
-                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session"
-                data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions" data-mail="Hitting%20partner%20sessions">Email to book</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view"}'>Book a hitting session</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions" data-mail="Hitting%20partner%20sessions">Email me</a>
       </div>
     </div>
   </dialog>
@@ -479,7 +577,7 @@
   <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
-      <h3 id="adultTitle">Adult clinics</h3>
+      <h3 id="adultTitle" tabindex="-1" autofocus>Adult clinics</h3>
       <p class="price">Group rate</p>
       <p>Priced per group, so the cost per player falls the more of you there are. Tell me how many and I'll quote it.</p>
       <ul>
@@ -489,10 +587,7 @@
         <li>Bring your own group, or ask me to place you in one</li>
       </ul>
       <div class="actions">
-        <button class="btn btn-primary" type="button" data-close
-                data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj"
-                data-cal-config='{"layout":"month_view"}'>Book online</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email to book</a>
+        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email for a quote</a>
       </div>
     </div>
   </dialog>
@@ -505,6 +600,6 @@
     </figure>
   </dialog>
 
-  <script src="tennis.js" defer></script>
+  <script src="tennis.js?v=20260920" defer></script>
 </body>
 </html>

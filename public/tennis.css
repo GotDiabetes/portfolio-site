@@ -1,5 +1,5 @@
 /* ============================================================================
-   Isaac Lee Tennis
+   Lee Tennis Co.
    ----------------------------------------------------------------------------
    Presence comes from scale, colour and photography — not from decoration.
    One motion idea (fade + lift), applied consistently with a stagger.
@@ -66,6 +66,11 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 dl, dd { margin: 0; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* The accent is black, so the ring vanishes on the black bands. */
+.contact :focus-visible, .footer :focus-visible, .statement :focus-visible,
+.lightbox :focus-visible { outline-color: #fff; }
+::selection { background: var(--ink); color: #fff; }
+.contact ::selection, .footer ::selection, .statement ::selection { background: #fff; color: var(--ink); }
 
 .skip-link {
   position: absolute; left: -9999px; top: 0; z-index: 100;
@@ -92,6 +97,8 @@ dl, dd { margin: 0; }
 }
 .brand-logo { width: 168px; height: 56px; }
 .nav { display: flex; gap: 1.7rem; }
+/* The stacked mobile menu's first row; the desktop header has its own button. */
+.nav-book { display: none; }
 .nav a {
   font-size: .9375rem; color: var(--muted); text-decoration: none;
   transition: color var(--dur-ui) var(--ease);
@@ -101,14 +108,37 @@ dl, dd { margin: 0; }
 /* The only nav item that leaves the page, so it gets a divider to sit
    apart from the in-page anchors beside it. */
 .nav-portfolio {
+  display: inline-flex; align-items: center; gap: .45rem;
   padding-left: 1.7rem;
   border-left: 1px solid var(--line);
 }
+/* Hover: the muted label slides up and its black twin slides in beneath it,
+   while the arrow draws itself left to right. The arrow keeps its width at
+   rest so nothing beside it moves; only its stroke is withheld. */
+.np-label { display: block; overflow: hidden; line-height: 1.3; }
+.np-text {
+  display: block; position: relative;
+  transition: transform .45s var(--ease);
+}
+.np-text::after {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 100%;
+  color: var(--text); white-space: nowrap;   /* same weight: a heavier twin is wider and wraps */
+}
+.np-arrow { flex: 0 0 auto; color: var(--text); }
+.np-arrow path {
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset .45s var(--ease) .05s;
+}
+.nav-portfolio:hover .np-text,
+.nav-portfolio:focus-visible .np-text { transform: translateY(-100%); }
+.nav-portfolio:hover .np-arrow path,
+.nav-portfolio:focus-visible .np-arrow path { stroke-dashoffset: 0; }
 
 .nav-toggle {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
-  width: 38px; height: 38px;
+  width: 44px; height: 44px;
   border: 1px solid var(--line); border-radius: var(--radius);
 }
 .nav-toggle span {
@@ -139,7 +169,7 @@ dl, dd { margin: 0; }
 .btn-quiet { border-color: var(--line); color: var(--text); background: var(--bg); }
 .btn-quiet:hover { border-color: var(--text); }
 
-/* For use on the dark green block */
+/* For use on the black blocks (contact, statement) */
 .btn-invert { background: #fff; color: var(--ink); }
 .btn-invert:hover { background: #f0efe9; }
 .btn-outline { border-color: rgba(255, 255, 255, .38); color: #fff; }
@@ -147,10 +177,12 @@ dl, dd { margin: 0; }
 
 .btn-lg { padding: .95rem 1.8rem; font-size: 1rem; }
 .btn-sm { padding: .55rem 1.1rem; font-size: .875rem; }
+.header-cta .cta-short { display: none; }
 
 .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
 
 .link-btn {
+  display: inline-flex; align-items: center; min-height: 2.75rem;   /* 44px hit area */
   padding: 0; font-size: .9375rem; font-weight: 500;
   color: var(--text);
   text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
@@ -158,7 +190,7 @@ dl, dd { margin: 0; }
 }
 .link-btn:hover { color: var(--muted); }
 
-/* Small label above each heading. A short green rule instead of the
+/* Small label above each heading. A short black rule instead of the
    wide-tracked uppercase that every template reaches for. */
 .eyebrow {
   display: flex; align-items: center; gap: .6rem;
@@ -215,7 +247,8 @@ dl, dd { margin: 0; }
 }
 .statement blockquote {
   margin: 0;
-  max-width: 22ch;                /* forces a dramatic line break */
+  max-width: 36ch;                /* three lines, breaking at the full stop */
+  text-wrap: pretty;
   font-size: clamp(1.85rem, 5.2vw, 3.75rem);
   font-weight: 600;
   letter-spacing: -0.045em;
@@ -237,7 +270,12 @@ dl, dd { margin: 0; }
 
 /* ---------------------------------------------------------------- About -- */
 .about-photo { margin: 0; border-radius: var(--radius); overflow: hidden; }
-.about-photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.about-photo img { width: 100%; aspect-ratio: 3/2; object-fit: cover; }
+/* The clinic frame is wider than 3/2, so a fifth of it is cropped. The crop
+   comes off the right: the coach is at the left edge of the photograph and
+   is the point of putting it here; the right edge only held a court sign
+   and half of a bystander. */
+.about-photo img { object-position: 0% 50%; }
 .about-text h2 { margin-bottom: 1.4rem; }
 .about-text p { color: var(--muted); max-width: 60ch; }
 
@@ -270,8 +308,18 @@ dl, dd { margin: 0; }
 }
 .lesson h3 { font-size: 1.125rem; }
 .lesson p { color: var(--muted); font-size: 1rem; }
+.lesson-actions {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .5rem 1.25rem; margin-top: 1.25rem;
+}
 
-.price {
+/* One treatment for every figure on the page: the hero facts, the card
+   prices and the modal prices. Selectors carry a class ahead of .price so
+   the card and modal paragraph rules (.lesson p, .modal-card > p), which
+   mute and shrink body copy, cannot outrank it — that is how every price
+   on the page ended up 16px grey. */
+.price, .lesson .price, .modal-card .price {
+  color: var(--text);
   font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em;
   margin: .5rem 0 .9rem; line-height: 1.2;
 }
@@ -288,9 +336,6 @@ dl, dd { margin: 0; }
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
-/* Two frames rather than three. Left on the three-column grid a pair reads as
-   a missing photo rather than a deliberate pair. */
-.photo-strip--two { grid-template-columns: repeat(2, 1fr); }
 .photo {
   position: relative;
   display: block; padding: 0;
@@ -322,6 +367,16 @@ dl, dd { margin: 0; }
 .photo img {
   transition: transform .6s var(--ease), opacity .5s var(--ease);
 }
+
+/* ------------------------------------------------------- Before you book -- */
+.notes-section { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line); }
+.notes-section h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.notes {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem 2rem; margin: 0;
+}
+.notes dt { font-size: .8125rem; color: var(--muted); margin-bottom: .3rem; }
+.notes dd { margin: 0; font-size: 1rem; line-height: 1.55; }
 
 /* -------------------------------------------------------------- Reviews -- */
 .review-list {
@@ -365,10 +420,17 @@ dl, dd { margin: 0; }
 .contact-details dt { font-size: .8125rem; color: rgba(255, 255, 255, .58); margin-bottom: .2rem; }
 .contact-details dd { font-weight: 500; }
 .contact-details a {
+  position: relative;
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, .3);
   transition: border-color var(--dur-ui) var(--ease);
 }
+/* Inline links stay inline; the tap target grows through a pseudo-element
+   so nothing in the text reflows. */
+.contact-details a::before, .footer-row a::before {
+  content: ""; position: absolute; inset: -.7rem 0;   /* 23px text + 22px = a 45px target */
+}
+.footer-row a { position: relative; }
 .contact-details a:hover { border-bottom-color: #fff; }
 
 /* Inside the popups the details sit on white, so recolour them back. */
@@ -431,7 +493,7 @@ dl, dd { margin: 0; }
    the two photographs above, same 2px seam, same hover zoom and same tag.
    The 16/9 box holds its height from first paint, so the caption below it
    never jumps when the poster or the player arrives. */
-.video-frame { margin: 2px 0 0; }
+.video-frame { margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; }
 .video-play {
   position: relative;
   display: block; width: 100%; padding: 0;
@@ -543,6 +605,7 @@ dl, dd { margin: 0; }
 @starting-style { .modal[open] .modal-card { transform: translateY(10px) scale(.985); } }
 
 .modal-card h3 { font-size: 1.3rem; margin-bottom: .7rem; }
+.modal-card h3:focus { outline: none; }   /* programmatic focus for the reader; no ring on the title */
 .modal-card > p { color: var(--muted); }
 .modal-card ul { margin: 1.25rem 0 0; }
 .modal-card li {
@@ -556,8 +619,8 @@ dl, dd { margin: 0; }
 .modal-card .contact-details { margin: 1.4rem 0; }
 
 .modal-close {
-  position: absolute; top: .65rem; right: .8rem;
-  width: 2rem; height: 2rem; font-size: 1.5rem; line-height: 1;
+  position: absolute; top: .5rem; right: .5rem;
+  width: 2.75rem; height: 2.75rem; font-size: 1.5rem; line-height: 1;
   color: var(--muted); border-radius: var(--radius);
   transition: color var(--dur-ui) var(--ease), background-color var(--dur-ui) var(--ease);
 }
@@ -565,7 +628,12 @@ dl, dd { margin: 0; }
 
 .lightbox figure { margin: 0; display: grid; justify-items: center; gap: .75rem; padding: 1.5rem; }
 .lightbox img { max-width: min(92vw, 640px); max-height: 82vh; width: auto; border-radius: var(--radius); }
-.lightbox figcaption { font-size: .875rem; color: #fff; }
+/* On a plate: the backdrop is 50% over whatever the page has behind it,
+   which over the white photo section put white text at 3.5:1. */
+.lightbox figcaption {
+  font-size: .875rem; color: #fff;
+  background: rgba(13, 13, 13, .88); padding: .45rem .9rem; border-radius: var(--radius);
+}
 .lightbox-close { position: fixed; top: 1rem; right: 1rem; color: #fff; }
 .lightbox-close:hover { color: #fff; background: rgba(255, 255, 255, .16); }
 
@@ -587,7 +655,9 @@ body.modal-open { overflow: hidden; }
 /* The wordmark needs enough room to stay legible beside the booking action. */
 @media (max-width: 940px) {
   .nav-toggle { display: flex; }
-  .header-cta { display: none; }
+  .header-row { gap: .75rem; }
+  .header-cta, .lesson-actions .btn { min-height: 44px; }
+  .notes { grid-template-columns: 1fr 1fr; }
   .nav {
     display: none;
     position: absolute; top: 100%; left: 0; right: 0;
@@ -599,6 +669,9 @@ body.modal-open { overflow: hidden; }
   @keyframes navIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
   .nav a { padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: 1rem; }
   .nav a:last-child { border-bottom: none; }
+  .nav-book { display: block; font-weight: 600; color: var(--text); }
+  .nav-portfolio { gap: .55rem; }
+  .np-arrow path { stroke-dashoffset: 0; }
   /* The desktop divider would read as a stray indent in the stacked menu. */
   .nav-portfolio { padding-left: 0; border-left: none; }
 }
@@ -606,13 +679,19 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 680px) {
   .photo-strip { grid-template-columns: 1fr 1fr; }
   .photo-strip .photo:first-child { grid-column: 1 / -1; }
-  /* The three-up strip leads with one full-width frame. A pair doing that
-     would leave the second stranded at half width, so it stacks instead. */
-  .photo-strip--two { grid-template-columns: 1fr; }
-  .photo-strip--two .photo:first-child { grid-column: auto; }
   .photo-tag { opacity: 1; transform: none; }   /* no hover on touch */
   .actions .btn { width: 100%; }
   .hero-facts, .facts { gap: 1.5rem 2.25rem; }
+  .lesson-actions .btn { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  /* The wordmark, the button and the toggle have to share ~335px. */
+  .brand-logo { width: 126px; height: 42px; }
+  .header-row { gap: .6rem; }
+  .header-cta .cta-full { display: none; }
+  .header-cta .cta-short { display: inline; }
+  .notes { grid-template-columns: 1fr; }
 }
 
 /* ==========================================================================
@@ -635,6 +714,9 @@ body.modal-open { overflow: hidden; }
 
   /* Movement off. */
   .js .fade { transform: none; transition: opacity .55s var(--ease); }
+  .np-text { transition: none; }
+  .nav-portfolio:hover .np-text, .nav-portfolio:focus-visible .np-text { transform: none; color: var(--text); }
+  .np-arrow path { transition: none; }
   .js .hero-drop .drop-word { transform: none; transition: opacity .55s var(--ease); }
   .hero-drop.is-in .drop-word { transform: none; }
   .drop-line { overflow: visible; }
