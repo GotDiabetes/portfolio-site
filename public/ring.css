@@ -1,0 +1,268 @@
+/* ============================================================================
+   Photo ring — styles for ring.js.
+
+   Every colour and face is a custom property so the ring can sit on the
+   white tennis page, the warm-paper portfolio, or a black stage without a
+   second stylesheet. Defaults are for a dark stage.
+
+   The contract a host page may set on .ring (defaults in brackets):
+
+     Materials
+       --ring-paper          the print border and the back of each card (#f3f1ec)
+       --ring-muted          hint and pause text, no-JS captions (#8d8a82)
+       --ring-focus          the focus ring on the card in front, and on the
+                             pause button (#fff)
+       --ring-mono           the monospace stack for hint, pause and captions
+       --ring-radius         corner of card faces, the lightbox image and the
+                             no-JS grid; the photograph inside a card takes a
+                             concentric, smaller corner (3px)
+       --ring-shade-color    what a card fades toward as it turns away or
+                             recedes: black darkens it, a paper colour pales it
+                             into the page instead (#000)
+
+     Lightbox (dark in both themes unless the host says otherwise)
+       --ring-lb-backdrop    the veil over the page (rgba(8, 8, 9, .94))
+       --ring-lb-ink         the caption (#e9e6de)
+       --ring-lb-muted       the "3 / 14" count (#a9a59c)
+       --ring-lb-btn-border  button rings, at least 3:1 on the backdrop (#8a877f)
+       --ring-lb-btn-fg      button icons, and the button ring on hover (#fff)
+       --ring-lb-focus       the focus ring inside the lightbox, at least 3:1
+                             on the backdrop (#fff)
+
+   The stage itself carries no focus ring: the one indicator is the outline
+   on the card in front, so a host's global :focus-visible outline is
+   switched off on the stage here, with enough weight to win.
+   ========================================================================== */
+
+.ring {
+  --ring-bg: #0b0b0c;
+  --ring-paper: #f3f1ec;
+  --ring-ink: #1a1a17;
+  --ring-muted: #8d8a82;
+  --ring-focus: #ffffff;
+  --ring-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "SF Mono", Menlo, Consolas, monospace;
+  --ring-radius: 3px;
+  --ring-shade-color: #000;
+  --ring-lb-backdrop: rgba(8, 8, 9, .94);
+  --ring-lb-ink: #e9e6de;
+  --ring-lb-muted: #a9a59c;
+  --ring-lb-btn-border: #8a877f;
+  --ring-lb-btn-fg: #fff;
+  --ring-lb-focus: #fff;
+  --ring-ease: cubic-bezier(.22, 1, .36, 1);
+  position: relative;
+}
+
+/* ---------------------------------------------------------------- Stage --
+   The stage carries the perspective; the cards do not share a 3D context,
+   so the browser never tries to resolve their overlap. ring.js sets each
+   card's z-index from its depth instead, and sizes the wheel to the stage:
+   it reads the perspective and its origin from here. */
+.ring-stage {
+  position: relative;
+  height: clamp(17rem, 58vw, 34rem);
+  perspective: 2000px;
+  perspective-origin: 50% 30%;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;          /* a vertical swipe still scrolls the page */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.ring-stage.is-dragging { cursor: grabbing; }
+.ring .ring-stage:focus-visible { outline: none; box-shadow: none; }
+
+/* ----------------------------------------------------------------- Card --
+   Each card is a small print: a paper edge around the photograph, on both
+   faces, so the wheel reads as pictures all the way round. Cards share a
+   height (--ch, on the stage) and take their own photograph's width (--cw,
+   on each card). */
+.ring-card {
+  position: absolute;
+  left: 50%; top: var(--cy, 44%);
+  width: var(--cw, 140px);
+  height: var(--ch, 187px);
+  margin: calc(var(--ch, 187px) / -2) 0 0 calc(var(--cw, 140px) / -2);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.ring-face {
+  position: absolute; inset: 0;
+  border-radius: var(--ring-radius);
+  overflow: hidden;
+  background: var(--ring-paper);
+  /* The border is a share of the height, not the width, so a landscape
+     print has the same edge as a portrait one. */
+  padding: calc(var(--ch, 187px) * .03);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.ring-back { transform: rotateY(180deg); }
+.ring-front img, .ring-back img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: max(min(1px, var(--ring-radius)), calc(var(--ring-radius) - 4px));
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.ring-play {
+  position: absolute; left: 50%; top: 50%;
+  width: clamp(1.5rem, calc(var(--ch, 187px) * .2), 2.75rem);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  pointer-events: none;
+}
+/* Light falls from the front: ring.js sets --shade per card each frame. */
+.ring-face::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--ring-shade-color);
+  opacity: var(--shade, 0);
+  pointer-events: none;
+}
+.ring .ring-stage:focus-visible .ring-card.is-featured .ring-front {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------ Hint, pause, status -- */
+.ring-controls {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  column-gap: .5rem;
+  margin-top: .35rem;
+}
+.ring-hint {
+  margin: 0;
+  text-align: center;
+  font-family: var(--ring-mono);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--ring-muted);
+}
+.ring-pause {
+  min-width: 2.75rem; min-height: 2.75rem;    /* 44px */
+  padding: 0 .6rem;
+  border: 0;
+  background: none;
+  font-family: var(--ring-mono);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--ring-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .3em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  cursor: pointer;
+  transition: text-decoration-color .2s var(--ring-ease);
+}
+.ring-pause:hover { text-decoration-color: currentColor; }
+.ring .ring-pause:focus-visible { outline: 2px solid var(--ring-focus); outline-offset: -.35rem; border-radius: 2px; }
+.ring-pause[hidden] { display: none; }
+.ring-status {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ------------------------------------------------------------- Lightbox --
+   Close sits in the bar with prev and next, not floated above the dialog,
+   where a short window cut it off. The image leaves room for its caption
+   and the bar within the window's height. */
+.ring-lightbox {
+  width: min(92vw, 44rem);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ring-lb-ink);
+  overflow: visible;
+}
+.ring-lightbox::backdrop { background: var(--ring-lb-backdrop, rgba(8, 8, 9, .94)); }
+.ring-lightbox[open] { animation: ring-in .35s var(--ring-ease); }
+@keyframes ring-in { from { opacity: .4; transform: translateY(8px) scale(.985); } }
+
+.ring-lightbox-figure { margin: 0; display: grid; justify-items: center; gap: .7rem; }
+.ring-lightbox-figure > img,
+.ring-lightbox-figure > video {
+  display: block;
+  max-width: 100%;
+  max-height: calc(92vh - 8rem);
+  max-height: calc(92dvh - 8rem);
+  width: auto; height: auto;
+  border: 6px solid var(--ring-paper);
+  border-radius: var(--ring-radius);
+  background: var(--ring-paper);
+}
+.ring-lightbox-figure > [hidden] { display: none; }
+.ring-lightbox-caption {
+  font-family: var(--ring-mono);
+  font-size: .8125rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--ring-lb-ink);
+  text-align: center;
+  max-width: 36rem;
+}
+.ring-lightbox-bar {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  margin-top: .6rem;
+}
+.ring-lightbox-count {
+  font-family: var(--ring-mono);
+  font-size: .75rem;
+  color: var(--ring-lb-muted);
+  min-width: 3.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.ring-lightbox-btn {
+  display: grid; place-items: center;
+  width: 2.75rem; height: 2.75rem;      /* 44px */
+  padding: 0;
+  border: 1px solid var(--ring-lb-btn-border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ring-lb-btn-fg);
+  cursor: pointer;
+  transition: border-color .25s var(--ring-ease), background-color .25s var(--ring-ease);
+}
+.ring-lightbox-btn:hover {
+  border-color: var(--ring-lb-btn-fg);
+  background: rgba(255, 255, 255, .1);
+  background: color-mix(in srgb, var(--ring-lb-btn-fg) 10%, transparent);
+}
+.ring-lightbox-btn svg { width: 18px; height: 18px; display: block; }
+/* Close is a different kind of act from turning a page, so it stands a
+   little apart from the pair it follows. */
+.ring-lightbox-close { margin-left: .75rem; }
+.ring .ring-lightbox :focus-visible { outline: 2px solid var(--ring-lb-focus); outline-offset: 3px; }
+
+/* ------------------------------------------------------- No-JS fallback --
+   Without the script the source list is a plain captioned grid. */
+.ring-source {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 1rem;
+}
+.ring-source figure { margin: 0; }
+.ring-source img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 3 / 4; object-fit: cover;
+  border-radius: var(--ring-radius);
+}
+.ring-source figcaption {
+  margin-top: .4rem;
+  font-family: var(--ring-mono);
+  font-size: .75rem;
+  color: var(--ring-muted);
+}
+.ring.is-live .ring-source { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-lightbox[open] { animation: none; }
+  .ring-lightbox-btn, .ring-pause { transition: none; }
+}

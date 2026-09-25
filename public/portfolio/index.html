@@ -8,7 +8,7 @@
        appears in robots.txt and sitemap.xml. -->
   <title>Isaac Lee — Business Development &amp; Go-to-Market</title>
   <meta name="description"
-        content="Isaac Lee, economics student at Irvine Valley College. Go-to-market work at ZEP over summer 2026: outbound, partnerships and market research." />
+        content="Isaac Lee, economics student at Irvine Valley College. Go-to-market work at ZEP over summer 2026: outbound, partnerships and market research across Korea, Estonia, Finland and the US. Looking for a summer 2027 internship." />
   <link rel="canonical" href="https://leetennisco.com/portfolio/" />
   <meta name="robots" content="index, follow" />
 
@@ -28,9 +28,13 @@
   <meta name="twitter:description"
         content="Economics student. Go-to-market work across outbound, partnerships and market research." />
 
-  <meta name="theme-color" content="#fbfaf7" />
+  <!-- Two theme-color metas cover the system preference; main.js rewrites
+       the first when the toggle overrides it, so the browser chrome follows. -->
+  <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16150f" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/ring.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=20260924d" />
 
   <!-- Applies the saved theme before first paint so there's no flash. -->
   <script>
@@ -53,7 +57,7 @@
     "url": "https://leetennisco.com/",
     "email": "21euisungisaac@gmail.com",
     "jobTitle": "Economics student",
-    "description": "Go-to-market and business development: outbound, partnerships and market research.",
+    "description": "Go-to-market and business development: outbound, partnerships and market research. Seeking a summer 2027 internship.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Irvine",
@@ -72,7 +76,6 @@
 
   <header class="masthead">
     <div class="wrap masthead-row">
-      <p class="wordmark"><a href="#top">Isaac Lee</a></p>
       <nav aria-label="Main">
         <ul class="nav">
           <li><a href="#experience">Experience</a></li>
@@ -82,15 +85,15 @@
           <li><a href="/resume/">Résumé</a></li>
         </ul>
       </nav>
+      <!-- Reads as state, not destination: "Theme: Light" while the page is
+           light. The aria-label still names the action. -->
       <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch theme">
-        <span class="theme-toggle-label">Dark</span>
+        Theme: <span class="theme-toggle-label">Light</span>
       </button>
     </div>
   </header>
 
   <main id="main">
-    <span id="top"></span>
-
     <!-- ============================== LEAD ==============================
          No display-size name, no stat row, no photo. The first thing on the
          page is a person telling you what they do, at a size you can read.
@@ -101,6 +104,23 @@
         Economics student at Irvine Valley College. I spent summer 2026 doing
         go-to-market work at ZEP, an EdTech company.
       </p>
+      <!-- The ask, where a recruiter with thirty seconds will actually read
+           it. It used to be the last sentence of the third paragraph. -->
+      <p class="standfirst standfirst--ask fade">
+        Looking for a summer 2027 internship in business development or
+        partnerships.
+      </p>
+
+      <div class="cta-row cta-row--lead fade">
+        <a class="pill" href="mailto:21euisungisaac@gmail.com">
+          Email me
+          <span class="pill-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+        <p class="cta-note">I reply to everything.</p>
+      </div>
 
       <!-- One photograph, in the margin beside the opening paragraphs. It
            earns its place by being of me rather than of a concept. -->
@@ -135,8 +155,7 @@
         </p>
         <p>
           I also coach tennis, and have for three years, most recently at
-          Newport Beach Tennis Club. I'm looking for a summer 2027 internship
-          in business development, partnerships or research.
+          Newport Beach Tennis Club.
         </p>
       </div>
 
@@ -148,16 +167,6 @@
         </li>
         <li>Irvine, California</li>
       </ul>
-
-      <div class="cta-row cta-row--lead fade">
-        <a class="pill" href="mailto:21euisungisaac@gmail.com">
-          Email me
-          <span class="pill-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-      </div>
     </section>
 
     <!-- ============================ EXPERIENCE ============================ -->
@@ -166,60 +175,54 @@
 
       <article class="entry fade">
         <p class="entry-when">Jun &ndash; Aug 2026<span>Seoul, South Korea</span>
-          <img class="entry-logo" src="images/logo-zep.png" alt="" />
+          <img class="entry-logo" src="images/logo-zep.png" width="84" height="30" alt="" />
         </p>
         <div class="entry-body">
-          <h3><a href="https://zep.us" target="_blank" rel="noopener noreferrer">ZEP</a></h3>
+          <h3><a href="https://zep.us" target="_blank" rel="noopener noreferrer external">ZEP<span class="ext" aria-hidden="true">&#8599;</span></a></h3>
           <p class="entry-role">Go-to-Market Specialist &amp; Business Analyst</p>
+          <!-- The numbers are in the lead. These are the two things it does not
+               say: what the pipeline was, and what a demo actually involved. -->
           <ul>
-            <li>Executed 4,000+ prospecting emails and messages across South Korea, Estonia, Finland and the United States, building and advancing an international customer pipeline.</li>
-            <li>Secured 50+ meetings with educators, administrators and organizational partners, and presented ZEP QUIZ demonstrations tailored to each client's needs.</li>
-            <li>Helped launch three pilot programs with Estonian schools, and secured partnerships with EdTech organizations in Estonia and Finland.</li>
-            <li>Conducted market and customer research, analyzed expansion opportunities, and managed outreach records and pipeline progress in Notion.</li>
+            <li>Kept the whole pipeline in Notion &mdash; every school, contact and follow-up &mdash; so the second and third emails went out on time, which is where the meetings came from.</li>
+            <li>Ran ZEP QUIZ demos built around each school's own curriculum rather than a stock deck; the calculus set below was one of them.</li>
           </ul>
 
-          <!-- The product behind the words "presented ZEP QUIZ demonstrations".
-               A reader can see what the demo actually is. -->
-          <figure class="plate">
-            <picture>
-              <source type="image/webp"
-                      srcset="images/zep-quiz-700.webp 700w, images/zep-quiz-1400.webp 1400w"
-                      sizes="(max-width: 40rem) 100vw, 34rem" />
-              <img src="images/zep-quiz-700.jpg"
-                   srcset="images/zep-quiz-700.jpg 700w, images/zep-quiz-1400.jpg 1400w"
-                   sizes="(max-width: 40rem) 100vw, 34rem"
-                   width="1688" height="932" loading="lazy" decoding="async"
-                   alt="The ZEP QUIZ authoring screen, generating calculus questions on u-substitution" />
-            </picture>
-            <figcaption>ZEP QUIZ, building a calculus set for a demo</figcaption>
-          </figure>
-
-          <figure class="plate">
-            <img src="images/zep-team.jpg" width="480" height="360" loading="lazy" decoding="async"
-                 alt="Isaac Lee with the ZEP team in front of the ZEP office sign" />
-            <figcaption>The ZEP team, Gangnam, Seoul</figcaption>
-          </figure>
         </div>
+
+        <!-- The product behind "ran ZEP QUIZ demos". A screenshot is only
+             evidence if you can read it, and at half the record column it
+             could not be read, so it is the one plate that runs under the
+             margin column as well, across the full text width. The team
+             photograph moved to the ring in Outside work. -->
+        <figure class="plate plate--wide">
+          <picture>
+            <source type="image/webp"
+                    srcset="images/zep-quiz-700.webp 700w, images/zep-quiz-1400.webp 1400w"
+                    sizes="(max-width: 46rem) 100vw, 40rem" />
+            <img src="images/zep-quiz-700.jpg"
+                 srcset="images/zep-quiz-700.jpg 700w, images/zep-quiz-1400.jpg 1400w"
+                 sizes="(max-width: 46rem) 100vw, 40rem"
+                 width="1400" height="773" loading="lazy" decoding="async"
+                 alt="The ZEP QUIZ authoring screen, generating calculus questions on u-substitution" />
+          </picture>
+          <figcaption>ZEP QUIZ, building a calculus set for a demo</figcaption>
+        </figure>
       </article>
 
       <article class="entry fade">
         <p class="entry-when">Oct 2025 &ndash; present<span>Newport Beach, CA</span>
-          <img class="entry-logo entry-logo--invert" src="images/logo-nbtc.png" alt="" />
+          <img class="entry-logo entry-logo--invert" src="images/logo-nbtc.png" width="182" height="96" alt="" />
         </p>
         <div class="entry-body">
-          <h3><a href="https://newportbeachtennisclub.com" target="_blank" rel="noopener noreferrer">Newport Beach Tennis Club</a></h3>
+          <h3>Newport Beach Tennis Club</h3>
           <p class="entry-role">Tennis Coach</p>
           <ul>
             <li>Coach beginner and intermediate players in group clinics and private lessons, with individual feedback on technique, footwork and match strategy.</li>
           </ul>
 
-          <figure class="plate">
-            <img src="images/newport-beach-team.jpg" width="480" height="360" loading="lazy" decoding="async"
-                 alt="The Grip N' Rip coaching staff at Newport Beach Tennis Club" />
-            <figcaption>Grip N' Rip coaching staff, Newport Beach Tennis Club</figcaption>
-          </figure>
-
-          <figure class="plate">
+          <!-- One plate, the coaching one. The staff photo said "tennis" a
+               second time on a page whose reader is not here for tennis. -->
+          <figure class="plate plate--medium">
             <img src="images/lifesport-coaching.jpg" width="780" height="419" loading="lazy" decoding="async"
                  alt="Isaac Lee coaching a junior clinic at Newport Beach Tennis Club" />
             <figcaption>Coaching a junior clinic</figcaption>
@@ -229,10 +232,10 @@
 
       <article class="entry fade">
         <p class="entry-when">Sep 2024 &ndash; Aug 2025<span>Libertyville, IL</span>
-          <img class="entry-logo" src="images/logo-lifesport.png" alt="" />
+          <img class="entry-logo" src="images/logo-lifesport.png" width="210" height="96" alt="" />
         </p>
         <div class="entry-body">
-          <h3><a href="https://lifesport.com" target="_blank" rel="noopener noreferrer">Lifesport Athletic Club</a></h3>
+          <h3>Lifesport Athletic Club</h3>
           <p class="entry-role">Tennis Coach</p>
           <ul>
             <li>Led 75+ junior classes, wrote lesson plans and training games, and supported more than 80 students, including 30+ competitive successes.</li>
@@ -240,29 +243,13 @@
         </div>
       </article>
 
-      <article class="entry fade">
-        <p class="entry-when">Sep 2024 &ndash; Mar 2025<span>Vernon Hills, IL</span>
-          <img class="entry-logo" src="images/logo-starbucks.png" alt="" />
-        </p>
+      <!-- Two earlier jobs, one line. Real history, but not what a BD recruiter
+           is here to read, so no logos and no bullets. -->
+      <article class="entry entry--earlier fade">
+        <p class="entry-when">2019 &ndash; 2025<span>Vernon Hills, IL</span></p>
         <div class="entry-body">
-          <h3><a href="https://www.starbucks.com" target="_blank" rel="noopener noreferrer">Starbucks</a></h3>
-          <p class="entry-role">Barista</p>
-          <ul>
-            <li>High-volume customer service and cash handling, and mentored new team members.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="entry fade">
-        <p class="entry-when">Aug 2019 &ndash; Nov 2023<span>Vernon Hills, IL</span>
-          <img class="entry-logo entry-logo--invert" src="images/logo-milkcow.png" alt="" />
-        </p>
-        <div class="entry-body">
-          <h3>MilkCow Cafe</h3>
-          <p class="entry-role">Manager / Barista</p>
-          <ul>
-            <li>Supported five employee interviews, and tracked tips, cash, inventory and daily operations.</li>
-          </ul>
+          <h3>Earlier</h3>
+          <p class="entry-role">Barista at Starbucks (2024&ndash;25); manager and barista at MilkCow Cafe (2019&ndash;23).</p>
         </div>
       </article>
     </section>
@@ -274,14 +261,10 @@
       <article class="entry fade">
         <p class="entry-when">2026</p>
         <div class="entry-body">
-          <h3>
-            <a href="/">
-              Isaac Lee Tennis
-            </a>
-          </h3>
+          <h3><a href="/">Lee Tennis Co.</a></h3>
           <p class="entry-role">Built and shipped it myself</p>
           <ul>
-            <li>My coaching business needed a site, so I built and deployed one on Firebase Hosting: lessons, rates, photographs and a booking form.</li>
+            <li>My coaching business needed a site, so I built one and put it on GitHub Pages at leetennisco.com: lessons, rates, photographs and online booking.</li>
           </ul>
         </div>
       </article>
@@ -294,21 +277,15 @@
           <ul>
             <li>Analyzed Bureau of Labor Statistics data on the entry-level roles most exposed to automation, and presented the findings as an academic poster covering employment, policy and education.</li>
           </ul>
-
-          <figure class="plate">
-            <img src="images/ai-research-poster.jpg" width="480" height="640" loading="lazy" decoding="async"
-                 alt="Isaac Lee presenting his research poster, AI's Economic Impact on Entry-Level Jobs in the U.S." />
-            <figcaption>Presenting the research poster</figcaption>
-          </figure>
         </div>
       </article>
 
       <article class="entry fade">
         <p class="entry-when">Sep 2024 &ndash; Apr 2025<span>Vernon Hills, IL</span>
-          <img class="entry-logo" src="images/logo-vhhs.png" alt="" />
+          <img class="entry-logo" src="images/logo-vhhs.png" width="62" height="96" alt="" />
         </p>
         <div class="entry-body">
-          <h3><a href="https://www.d128.org/schools/vernon-hills-high-school" target="_blank" rel="noopener noreferrer">Vernon Hills High School Ping Pong Club</a></h3>
+          <h3>Vernon Hills High School Ping Pong Club</h3>
           <p class="entry-role">President</p>
           <ul>
             <li>Ran 10 mixers and tournaments with neighbouring schools, and recruited members through direct campus outreach.</li>
@@ -318,10 +295,10 @@
 
       <article class="entry fade">
         <p class="entry-when">Aug 2024 &ndash; Jun 2025<span>Des Plaines, IL</span>
-          <img class="entry-logo entry-logo--invert" src="images/logo-stpaulch.png" alt="" />
+          <img class="entry-logo entry-logo--invert" src="images/logo-stpaulch.png" width="258" height="42" alt="" />
         </p>
         <div class="entry-body">
-          <h3><a href="https://stpaulchong.org" target="_blank" rel="noopener noreferrer">Saint Paul Chong Hasang Youth Group</a></h3>
+          <h3>Saint Paul Chong Hasang Youth Group</h3>
           <p class="entry-role">Secretary</p>
           <ul>
             <li>Organized studies, retreats and fundraisers for a community of 60+, raising over $8,000 and collecting more than 1,000 donated items of clothing.</li>
@@ -337,7 +314,7 @@
       <dl class="details fade">
         <div>
           <dt>Education
-            <img class="entry-logo" src="images/logo-ivc.png" alt="" />
+            <img class="entry-logo" src="images/logo-ivc.png" width="94" height="96" alt="" />
           </dt>
           <dd>
             <a href="https://www.ivc.edu" target="_blank" rel="noopener noreferrer">Irvine Valley College</a>, Associate of Arts in Economics, expected
@@ -345,7 +322,7 @@
           </dd>
         </div>
         <div>
-          <dt>Work</dt>
+          <dt>Skills</dt>
           <dd>
             Prospecting, pipeline management, product demonstrations,
             partnerships, market and customer research, opportunity sizing.
@@ -368,80 +345,85 @@
          here — which left the second one pointing at the first. It is one
          entry now, and it sits here because this section already argues that
          getting people to show up is the thing worth reading about.
+
+         The section ends on the page's one moving thing, a wheel of
+         photographs you can spin. It sits here, near the end, on purpose:
+         the top of the page is for the recruiter with thirty seconds, and
+         this is for the one who stayed. Each photograph on the wheel appears
+         nowhere else on the page, so the wheel is where they live rather
+         than a second showing of pictures already seen. The text keeps the
+         page's column; the wheel takes the lead's wider one so it has room
+         to turn. Without JavaScript the same list is a captioned grid.
          ==================================================================== -->
-    <section class="wrap" id="outside">
-      <h2 class="section-title fade">Outside work</h2>
+    <section id="outside">
+      <div class="wrap">
+        <h2 class="section-title fade">Outside work</h2>
 
-      <p class="section-intro fade">
-        None of this is on my résumé, but it is where most of my week goes once
-        the laptop shuts. It is also where I learned the most about getting
-        people to show up for something regularly, which turns out to be the
-        same problem in a running club and in a sales pipeline.
-      </p>
+        <p class="section-intro fade">
+          None of this is on my résumé, but it is where most of my week goes once
+          the laptop shuts. It is also where I learned the most about getting
+          people to show up for something regularly, which turns out to be the
+          same problem in a running club and in a sales pipeline.
+        </p>
 
-      <article class="entry fade">
-        <p class="entry-when">Aug 2026 &ndash; present<span>Camino Fidei</span></p>
-        <div class="entry-body">
-          <h3>Running</h3>
-          <p class="entry-role">Founder &mdash; Camino Fidei, &ldquo;the way of faith&rdquo;</p>
-          <ul>
-            <li>Founded the first running club my church has had, after noticing several of us were already running separately.</li>
-            <li>Organize the night runs, set the route, and keep the pace to whoever turns up slowest, so nobody is dropped and people come back the following week.</li>
-          </ul>
+        <article class="entry fade">
+          <p class="entry-when">Aug 2026 &ndash; present<span>Camino Fidei</span></p>
+          <div class="entry-body">
+            <h3>Running</h3>
+            <p class="entry-role">Founder &mdash; Camino Fidei, &ldquo;the way of faith&rdquo;</p>
+            <ul>
+              <li>Founded the first running club my church has had, after noticing several of us were already running separately.</li>
+              <li>Organize the night runs, set the route, and keep the pace to whoever turns up slowest, so nobody is dropped and people come back the following week.</li>
+            </ul>
+          </div>
+        </article>
 
-          <figure class="plate">
-            <picture>
-              <source type="image/webp" srcset="images/run-camino.webp" />
-              <img src="images/run-camino.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-                   alt="Darren, Matt, Jom and Isaac after the first Camino Fidei night run" />
-            </picture>
-            <figcaption>The first Camino Fidei night run</figcaption>
-          </figure>
-        </div>
-      </article>
+        <article class="entry fade">
+          <p class="entry-when">Bouldering<span>Aliso Viejo</span></p>
+          <div class="entry-body">
+            <h3>Rock climbing</h3>
+            <p class="entry-role">Indoors, mostly</p>
+            <ul>
+              <li>The one thing here where progress is measurable to the move. A problem either goes or it doesn't, which is probably why it stuck.</li>
+            </ul>
+          </div>
+        </article>
 
-      <article class="entry fade">
-        <p class="entry-when">Bouldering<span>Aliso Viejo</span></p>
-        <div class="entry-body">
-          <h3>Rock climbing</h3>
-          <p class="entry-role">Indoors, mostly</p>
-          <ul>
-            <li>The one thing here where progress is measurable to the move. A problem either goes or it doesn't, which is probably why it stuck.</li>
-          </ul>
+        <article class="entry fade">
+          <p class="entry-when">Winters<span>Southern California</span></p>
+          <div class="entry-body">
+            <h3>Snowboarding</h3>
+            <ul>
+              <li>A few trips a season, usually with the same group. Southern California snow is not good snow, but it is a two-hour drive, which counts for a lot.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
 
-          <figure class="plate plate--video">
-            <video src="images/climb.mp4" poster="images/climb-poster.jpg"
-                   width="720" height="1280" controls playsinline preload="none"></video>
-            <figcaption>Sneaky, a V5 &mdash; Aliso Viejo</figcaption>
-          </figure>
-        </div>
-      </article>
-
-      <article class="entry fade">
-        <p class="entry-when">Snowboarding<span>Winter</span></p>
-        <div class="entry-body">
-          <h3>Snowboarding</h3>
-          <ul>
-            <li>A few trips a season, usually with the same group. Southern California snow is not good snow, but it is a two-hour drive, which counts for a lot.</li>
-          </ul>
-
-          <figure class="plate">
-            <picture>
-              <source type="image/webp" srcset="images/snowboard.webp" />
-              <img src="images/snowboard.jpg" width="1000" height="1333" loading="lazy" decoding="async"
-                   alt="Isaac Lee strapping on a helmet at the top of a run" />
-            </picture>
-            <figcaption>Helmet on, about to drop in</figcaption>
-          </figure>
-        </div>
-      </article>
-
+      <!-- Seven cards, each photograph once. The section's own three (the
+           run, the climb, the snowboard), the ZEP team and the research
+           poster, which used to sit as side plates in their entries, and two
+           tennis frames. The climb is a clip, so its card opens the video.
+           The two tennis cards are kept apart so the wheel reads as a life
+           with tennis in it, not a tennis reel. width and height are the
+           thumbnails' real pixels: the ring sizes each card from them. -->
+      <div class="ring ring--portfolio fade" data-ring data-ring-min="7">
+        <ul class="ring-source">
+          <li><figure><img src="/images/ring/camino.webp" data-full="/portfolio/images/run-camino.webp" alt="Darren, Matt, Jom and Isaac after the first Camino Fidei night run" width="420" height="316" loading="lazy" decoding="async" /><figcaption>The first Camino Fidei night run</figcaption></figure></li>
+          <li><figure><img src="/images/ring/climb.webp" data-video="/portfolio/images/climb.mp4" data-full="/portfolio/images/climb-poster.jpg" alt="Isaac climbing Sneaky, a V5 boulder problem, in Aliso Viejo" width="420" height="746" loading="lazy" decoding="async" /><figcaption>Sneaky, a V5 &mdash; Aliso Viejo</figcaption></figure></li>
+          <li><figure><img src="/images/ring/snowboard.webp" data-full="/portfolio/images/snowboard.webp" alt="Isaac Lee strapping on a helmet at the top of a run" width="420" height="560" loading="lazy" decoding="async" /><figcaption>Helmet on, about to drop in</figcaption></figure></li>
+          <li><figure><img src="/images/ring/zep-team.webp" data-full="/portfolio/images/zep-team.jpg" alt="Isaac Lee with the ZEP team in front of the ZEP office sign" width="420" height="316" loading="lazy" decoding="async" /><figcaption>The ZEP team, Gangnam, Seoul</figcaption></figure></li>
+          <li><figure><img src="/images/ring/serve.webp" data-full="/images/serve.webp" alt="Isaac Lee serving during a match" width="420" height="630" loading="lazy" decoding="async" /><figcaption>Serve</figcaption></figure></li>
+          <li><figure><img src="/images/ring/poster.webp" data-full="/portfolio/images/ai-research-poster.jpg" alt="Isaac Lee presenting his research poster, AI's Economic Impact on Entry-Level Jobs in the U.S." width="420" height="560" loading="lazy" decoding="async" /><figcaption>Presenting the research poster</figcaption></figure></li>
+          <li><figure><img src="/images/ring/forehand.webp" data-full="/images/forehand.webp" alt="Isaac Lee hitting a forehand" width="420" height="630" loading="lazy" decoding="async" /><figcaption>Forehand, indoor practice</figcaption></figure></li>
+        </ul>
+      </div>
     </section>
 
     <!-- ============================== CONTACT ============================== -->
     <section class="wrap closing" id="contact">
       <h2 class="section-title fade">Get in touch</h2>
-      <p>
+      <p class="fade">
         If you're hiring for a summer 2027 internship, or you just want to
         compare notes on outbound, email is the fastest way to reach me. I
         reply to everything.
@@ -486,6 +468,7 @@
     </div>
   </footer>
 
-  <script src="main.js" defer></script>
+  <script src="main.js?v=20260921d" defer></script>
+  <script src="/ring.js?v=6" defer></script>
 </body>
 </html>

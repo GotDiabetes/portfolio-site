@@ -6,11 +6,15 @@
      · Type carries the design. One serif for everything you read, one mono for
        everything you scan (dates, labels). No display-size hero.
      · Structure comes from hairline rules and whitespace. There are no cards,
-       no rounded boxes, no drop shadows, no hover lifts.
+       no drop shadows. The two filled controls (the pills) and the 2px hover
+       rise on a plate are the whole exception list.
      · Colour is paper, ink, and one warm accent used sparingly. Blue was the
        obvious choice, which is exactly why it isn't here.
-     · Motion: a block settles once as it enters the page. Nothing loops or
-       interrupts the reading, and reduced motion keeps the page still.
+     · Motion: a block settles once as it enters the page. The one thing that
+       keeps moving is the photo ring at the end of Outside work, placed
+       after everything a recruiter needs so it never interrupts the
+       reading; it is also the one place a photograph opens large. Reduced
+       motion keeps the page still.
 
    Adjustables are in :root.
    ========================================================================== */
@@ -26,6 +30,10 @@
   --rule:   #ddd8cc;
   --accent: #9c4221;   /* burnt sienna, used only for links and small marks */
   --accent-soft: #f0e7e1;
+  /* The paper again, at .94, for the ring's lightbox backdrop: the page
+     stays faintly visible behind an opened photograph, the way a print
+     lifted off the desk still has the desk under it. */
+  --paper-veil: rgba(251, 250, 247, .975);
 
   /* Georgia is on effectively every Windows and Mac, and it is a genuinely
      good text face. The others ahead of it are nicer where they exist. */
@@ -47,6 +55,7 @@
   --rule:   #322f26;
   --accent: #d98a5f;
   --accent-soft: #2a2119;
+  --paper-veil: rgba(22, 21, 15, .975);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,6 +70,7 @@
     --rule:   #322f26;
     --accent: #d98a5f;
     --accent-soft: #2a2119;
+    --paper-veil: rgba(22, 21, 15, .975);
   }
 }
 
@@ -118,28 +128,35 @@ a { color: inherit; }
    Not sticky. A sticky bar on a document this short is a product habit, and
    it costs you the top of every section. */
 .masthead { border-bottom: 1px solid var(--rule); }
+/* The masthead shares the lead's wider container so the nav's left edge and
+   the h1's left edge are the same line. */
+.masthead .wrap { max-width: 62rem; }
 .masthead-row {
-  display: flex; align-items: baseline; gap: 1.5rem;
-  padding-block: 1.4rem;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding-block: .6rem;
 }
-.wordmark { margin: 0; margin-right: auto; font-size: .8125rem; letter-spacing: .06em; }
-.wordmark a { text-decoration: none; }
 
 .nav { display: flex; gap: 1.35rem; }
+/* Links and the toggle are text, but their hit areas are not: the padding
+   brings each to a 44px row without changing how the row reads. */
 .nav a {
+  display: inline-block;
   font-size: .75rem; letter-spacing: .05em;
   color: var(--muted); text-decoration: none;
-  padding-bottom: 2px;
+  padding-block: .85rem;
   border-bottom: 1px solid transparent;
 }
 .nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
 .theme-toggle {
-  font-size: .7rem; letter-spacing: .05em;
+  margin-left: auto;
+  min-height: 2.75rem;
+  font-size: .75rem; letter-spacing: .05em; line-height: 1.5;
   color: var(--muted); background: none;
   border: none; border-bottom: 1px solid var(--rule);
-  padding: 0 0 2px; cursor: pointer;
+  padding: 0; cursor: pointer;
 }
+.theme-toggle-label { color: var(--ink); }
 .theme-toggle:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
 /* ------------------------------------------------------------------ Lead -- */
@@ -161,18 +178,33 @@ a { color: inherit; }
   margin-bottom: 2rem;
   text-wrap: balance;
 }
+/* The second standfirst is the ask. Same size, one step quieter, and it sits
+   tight to the first so the two read as one thought. */
+.standfirst--ask {
+  color: var(--muted);
+  margin-top: -1.1rem;
+  margin-bottom: 1.4rem;
+}
+.cta-note {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .75rem; letter-spacing: .03em;
+  color: var(--muted);
+}
 
 .lead-body { max-width: var(--measure); }
 .lead-body p + p { margin-top: 0; }
 
 /* ------------------------------------------------------------- Figures --
-   Two kinds, both restrained. Images here are evidence attached to a claim,
-   not decoration, so they get a hairline, a mono caption, and nothing else:
-   no rounded corners, no shadow, no lightbox; the frame warms on hover. */
+   Two kinds, both restrained. Images in the entries are evidence attached
+   to a claim, not decoration, so they get a hairline, a mono caption, and
+   nothing else: no rounded corners, no shadow, no lightbox; the frame warms
+   on hover. The photo ring in Outside work is the exception, and it is
+   dressed in the same mount (see "Outside work: the ring" below). */
 figure { margin: 0; }
 figcaption {
   font-family: var(--mono);
-  font-size: .66rem; letter-spacing: .04em;
+  font-size: .75rem; letter-spacing: .04em;
   color: var(--muted);
   margin-top: .5rem;
 }
@@ -213,38 +245,45 @@ figcaption {
     gap: 0 3rem;
     align-items: start;
   }
-  .lead h1         { grid-column: 1; grid-row: 1; }
-  .lead .standfirst{ grid-column: 1; grid-row: 2; }
-  .lead-body       { grid-column: 1; grid-row: 3; }
-  .lead-contact    { grid-column: 1 / -1; grid-row: 4; }
-  .portrait        { grid-column: 2; grid-row: 1 / span 3; align-self: start; }
+  .lead h1              { grid-column: 1; grid-row: 1; }
+  .lead .standfirst     { grid-column: 1; grid-row: 2; }
+  .lead .standfirst--ask{ grid-column: 1; grid-row: 3; }
+  .cta-row--lead        { grid-column: 1; grid-row: 4; }
+  .lead-body            { grid-column: 1; grid-row: 5; }
+  .lead-contact         { grid-column: 1 / -1; grid-row: 6; }
+  .portrait             { grid-column: 2; grid-row: 1 / span 5; align-self: start; }
 }
 @media (max-width: 59.99rem) {
-  .portrait { margin-block: 2rem; max-width: 26rem; }
+  /* Stacked, the order is the reading order a recruiter needs: who, what
+     they want, how to reach them, then the photograph, then the rest. The
+     portrait is capped so it cannot spend a whole phone screen. */
+  .lead { display: flex; flex-direction: column; }
+  .lead h1               { order: 1; }
+  .lead .standfirst      { order: 2; }
+  .lead .standfirst--ask { order: 3; }
+  .cta-row--lead         { order: 4; }
+  .portrait              { order: 5; margin-block: 2rem 1.5rem; max-width: 16rem; }
+  .lead-body             { order: 6; }
+  .lead-contact          { order: 7; }
 }
 
 /* An inline plate inside an entry: full reading measure. Frame and mat are
    defined with .portrait above. */
 .plate { margin-top: 1.1rem; max-width: var(--measure); }
 
-/* Video gets the same mount as a photograph. height:auto is load-bearing: the
-   <video> carries width/height attributes so the browser can reserve space
-   before the file loads, and without it that height wins over the scaled
-   width and a portrait clip renders as a tall ribbon. */
-.plate video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--rule);
-  background: var(--ink);
+/* A screenshot has to be read, not just seen, so the ZEP QUIZ plate is the
+   one that leaves the record column: it is a direct child of the entry and
+   spans both of its columns, the margin column included, to the full 40rem
+   of text width. Nothing sits beside it, so there is no edge to hold. */
+.entry > .plate--wide {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin-top: 1.4rem;
 }
-/* Phone video is portrait, so width drives height: every 1rem of width costs
-   about 1.8rem of height. Capped narrow, and additionally capped against the
-   viewport so the clip can never fill a phone screen on its own. */
-.plate--video { max-width: min(13rem, 45vw); }
-/* Landscape photographs can run a little wider than the reading measure,
-   since there is no text beside them to align to. */
-.plate--wide { max-width: 40rem; }
+
+/* A size below the full measure, for evidence that supports rather than
+   leads: the single coaching photograph. */
+.plate--medium { max-width: 20rem; }
 
 .lead-contact {
   display: flex; flex-wrap: wrap; gap: .4rem 1.5rem;
@@ -254,12 +293,17 @@ figcaption {
   font-size: .75rem; letter-spacing: .03em;
   color: var(--muted);
 }
-.lead-contact a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.lead-contact a { position: relative; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.lead-contact a::before, .footer a::before,
+.entry-body h3 a::before, .details dd a::before, .closing-address a::before {
+  content: ""; position: absolute; inset: -.95rem 0;   /* 15px text + 30px = a 45px target */
+}
+.entry-body h3 a, .details dd a, .closing-address a { position: relative; }
 .lead-contact a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* -------------------------------------------------------------- Sections -- */
 .section-title {
-  font-size: .7rem; font-weight: 400;
+  font-size: .75rem; font-weight: 400;
   letter-spacing: .12em; text-transform: uppercase;
   color: var(--muted);
   padding-top: clamp(2.5rem, 6vw, 3.5rem);
@@ -272,7 +316,7 @@ figcaption {
    of framing before the entries start. */
 .section-intro {
   max-width: var(--measure);
-  margin: -.4rem 0 2rem;
+  margin: 0 0 2rem;
   color: var(--muted);
 }
 
@@ -292,11 +336,11 @@ figcaption {
 .entry-when {
   display: flex; flex-direction: column; align-items: flex-start; gap: .15rem;
   margin: 0;
-  font-size: .7rem; letter-spacing: .03em; line-height: 1.5;
+  font-size: .75rem; letter-spacing: .03em; line-height: 1.5;
   color: var(--muted);
   padding-top: .35rem;
 }
-.entry-when span { color: var(--muted); opacity: .72; }
+.entry-when span { color: var(--muted); }
 
 .entry-body h3 { font-size: 1.135rem; margin-bottom: .1rem; }
 .entry-body h3 a { text-decoration: none; border-bottom: 1px solid var(--accent); }
@@ -321,7 +365,7 @@ figcaption {
   object-position: left top;
 }
 
-/* Three of the marks are essentially black artwork, so on the dark theme they
+/* Two of the marks are essentially black artwork, so on the dark theme they
    sink into the page. Inverting flips their lightness and the hue-rotate puts
    the colour back where it started — the Newport Beach tree stays green and
    only gains a readable name under it. Applied by hand rather than to every
@@ -341,6 +385,9 @@ figcaption {
   color: var(--muted);
   margin-bottom: .65rem;
 }
+.entry--earlier .entry-role { margin-bottom: 0; }
+/* The one outbound org link keeps a mark that says so. */
+.entry-body h3 .ext { font-size: .7em; margin-left: .3em; color: var(--muted); }
 
 .entry-body ul { display: grid; gap: .5rem; max-width: var(--measure); }
 .entry-body li { font-size: .97rem; color: var(--muted); }
@@ -361,7 +408,7 @@ figcaption {
 .details > div:first-child { border-top: none; padding-top: 0; }
 .details dt {
   display: flex; flex-direction: column; align-items: flex-start;
-  font-size: .7rem; letter-spacing: .03em;
+  font-size: .75rem; letter-spacing: .03em;
   color: var(--muted);
   padding-top: .28rem;
 }
@@ -383,13 +430,17 @@ figcaption {
 
 .copy {
   margin-left: .75rem;
-  font-size: .68rem; letter-spacing: .06em;
+  min-height: 2.75rem; min-width: 2.75rem;
+  font-size: .75rem; letter-spacing: .06em; line-height: 1.5;
   color: var(--muted); background: none;
-  border: 1px solid var(--rule); border-radius: 2px;
-  padding: .18rem .45rem;
+  border: 1px solid var(--muted); border-radius: 2px;
+  padding: .18rem .6rem;
   cursor: pointer; vertical-align: middle;
 }
-.copy:hover { color: var(--ink); border-color: var(--muted); }
+/* Hover firms the whole control up to ink, the way the nav and the quiet
+   pill do: the label and the edge change together, so it reads as one
+   object answering the pointer. */
+.copy:hover { color: var(--ink); border-color: var(--ink); }
 .copy-status {
   position: absolute;
   width: 1px;
@@ -405,7 +456,7 @@ figcaption {
 /* ---------------------------------------------------------------- Footer -- */
 .footer {
   border-top: 1px solid var(--rule);
-  font-size: .7rem; letter-spacing: .03em;
+  font-size: .75rem; letter-spacing: .03em;
   color: var(--muted);
 }
 .footer-row {
@@ -415,9 +466,77 @@ figcaption {
 .footer-row p { margin: 0; }
 .footer-row p:nth-child(2) { display: flex; gap: 1.25rem; margin-right: auto; }
 .footer-row p:first-child { margin-right: auto; }
-.footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.footer a { position: relative; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
 .footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-.footer-year { opacity: .7; }
+
+/* ------------------------------------------------ Outside work: the ring --
+   The shared photo ring (/ring.css, /ring.js) closes the Outside work
+   section, dressed in this page's materials through the component's
+   custom properties: square corners (the Square Rule), cards that fall
+   away into the page's own paper rather than into grey, labels in the
+   mono, focus in sienna. The lightbox is this page too — a veil of paper,
+   ink caption, muted count and button edges — so opening a photograph does
+   not drop you onto somebody else's dark stage. Every value is a page
+   token, and the one new token (--paper-veil) is declared in all three
+   palette blocks, so both themes resolve without a second rule here.
+
+   The wheel runs at the lead's 62rem width so it has room to turn; the
+   section's text stays on the 46rem column above it. */
+.ring--portfolio {
+  --ring-radius: 0;
+  --ring-shade-color: var(--paper);
+  --ring-paper: var(--paper);
+  --ring-muted: var(--muted);
+  --ring-focus: var(--accent);
+  --ring-mono: var(--mono);
+  --ring-lb-backdrop: var(--paper-veil);
+  --ring-lb-ink: var(--ink);
+  --ring-lb-muted: var(--muted);
+  --ring-lb-btn-border: var(--muted);   /* ≥4.8:1 light, ≥5.3:1 dark on the veil, whatever is under it */
+  --ring-lb-btn-fg: var(--ink);
+  --ring-lb-focus: var(--accent);
+  max-width: 62rem;
+  margin: .5rem auto 0;
+  padding-inline: var(--pad);
+}
+#outside { padding-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+
+/* The Mat Rule on every card: a hairline round the print and a second one
+   round the photograph, with the paper border between them as the mat. */
+.ring--portfolio .ring-face { box-shadow: inset 0 0 0 1px var(--rule); }
+.ring--portfolio .ring-front img, .ring--portfolio .ring-back img { outline: 1px solid var(--rule); }
+/* Keyboard focus is marked once, by the component, as a sienna outline on
+   the card in front; ring.css already switches the page's global
+   :focus-visible outline off on the stage, so nothing here adds a second.
+
+   The lightbox buttons are the one part the contract does not reach: the
+   component draws them as circles, and on this page only the pills and the
+   copy button are allowed a curve (the Square Rule). */
+.ring--portfolio .ring-lightbox-btn { border-radius: 0; }
+/* The enlarged photograph keeps the mount: its paper edge from ring.css,
+   and a hairline outside it, like every other figure on the page. */
+.ring--portfolio .ring-lightbox-figure img { outline: 1px solid var(--rule); }
+
+/* Without JavaScript the list is a grid of plates. It sits on the same
+   46rem text column as the section's heading and entries rather than on
+   the wheel's wider one, and each photograph is mounted and shown whole,
+   the same as every other figure on the page. */
+.ring--portfolio .ring-source {
+  max-width: calc(var(--wrap) - 2 * var(--pad));
+  margin-inline: auto;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));   /* four across on the 40rem column */
+  align-items: start;
+}
+.ring--portfolio .ring-source figure {
+  padding: clamp(.4rem, .9vw, .7rem);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.ring--portfolio .ring-source img {
+  aspect-ratio: auto;
+  border: 1px solid var(--rule);
+}
+.ring--portfolio .ring-source figcaption { margin: .55rem .15rem .1rem; }
 
 /* ==========================================================================
    RESPONSIVE
@@ -441,9 +560,12 @@ figcaption {
      characters and wrap it. It takes its own line instead. */
   .entry-logo { max-height: 1.9rem; margin-top: 0; flex-shrink: 0; }
 
-  .masthead-row { flex-wrap: wrap; gap: .9rem 1.25rem; }
-  .wordmark { width: 100%; margin-right: 0; }
-  .nav { flex-wrap: wrap; gap: .9rem 1.1rem; margin-right: auto; }
+  /* The links and the toggle share one wrapping row: nav and list give up
+     their boxes, so the browser packs five links and the toggle into two
+     44px rows instead of stranding the toggle beside a three-row nav. */
+  .masthead-row { display: flex; flex-wrap: wrap; gap: 0 1.1rem; align-items: center; }
+  .masthead nav, .nav { display: contents; }
+  .theme-toggle { margin-left: auto; }
 
   .footer-row p:first-child, .footer-row p:nth-child(2) { margin-right: 0; }
   .footer-row { gap: .9rem 1.5rem; }
@@ -471,9 +593,10 @@ figcaption {
 }
 /* The lead already sits tight to the contact list, so it needs less air above
    than the closing row does. */
-.cta-row--lead { margin-top: 1.25rem; }
+.cta-row--lead { margin-top: 0; margin-bottom: 2rem; align-items: center; gap: .7rem 1.1rem; }
 .pill {
   display: inline-flex; align-items: center; gap: .55rem;
+  min-height: 2.75rem;
   padding: .3rem .32rem .3rem 1.15rem;
   border: 1px solid var(--ink);
   border-radius: 999px;
@@ -501,9 +624,9 @@ figcaption {
 .pill-quiet {
   background: transparent;
   color: var(--ink);
-  border-color: var(--rule);
+  border-color: var(--muted);
 }
-.pill-quiet:hover { border-color: var(--muted); }
+.pill-quiet:hover { border-color: var(--ink); }
 .pill-quiet .pill-arrow { background: var(--ink); color: var(--paper); }
 
 @media (prefers-reduced-motion: reduce) {

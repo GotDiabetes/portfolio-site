@@ -26,12 +26,25 @@
     return systemDark.matches ? "dark" : "light";
   }
 
+  /* The visible label is the current state ("Theme: Light"); the
+     accessible name is the action. The browser's own chrome follows the
+     theme too, through the theme-color meta — without this a dark page
+     sits under a cream address bar on a phone. */
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
   function labelToggle() {
     if (!toggle) return;
-    var next = currentTheme() === "dark" ? "light" : "dark";
+    var current = currentTheme();
+    var next = current === "dark" ? "light" : "dark";
     var label = toggle.querySelector(".theme-toggle-label");
-    if (label) label.textContent = next === "dark" ? "Dark" : "Light";
-    toggle.setAttribute("aria-label", "Switch to " + next + " theme");
+    if (label) label.textContent = current === "dark" ? "Dark" : "Light";
+    /* The accessible name starts with the visible text so voice control
+       ("click Theme") resolves, then names the action. */
+    toggle.setAttribute("aria-label", "Theme: " + (current === "dark" ? "Dark" : "Light") + ". Switch to " + next + " theme");
+    if (themeMeta) {
+      themeMeta.setAttribute("content", current === "dark" ? "#16150f" : "#fbfaf7");
+      themeMeta.removeAttribute("media");
+    }
   }
 
   if (toggle) {
@@ -73,7 +86,10 @@
         ta.style.cssText = "position:absolute;left:-9999px";
         document.body.appendChild(ta);
         ta.select();
-        try { document.execCommand("copy"); done(); } catch (err) { /* no-op */ }
+        try { document.execCommand("copy"); done(); }
+        catch (err) {
+          if (copyStatus) copyStatus.textContent = "Copy is blocked here. Select the address to copy it.";
+        }
         document.body.removeChild(ta);
       }
 
