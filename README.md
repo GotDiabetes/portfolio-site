@@ -1,96 +1,72 @@
-# Isaac Lee — portfolio website
+# Lee Tennis Co. — leetennisco.com
 
-This is your personal portfolio site — the page you'd put on a résumé, a
-LinkedIn profile, or a job application. It shows your experience, your
-projects, and links to your résumé and your tennis site.
+One repository, one site, two faces:
 
-It's simple by design — no logins, no monthly software fees. Just a handful
-of files that make up the page a recruiter would see.
+- **leetennisco.com/** — the tennis coaching page. This is the front door.
+- **leetennisco.com/portfolio/** — Isaac's personal portfolio, with a printable résumé at **/resume**.
 
-## Seeing the site
-
-Open the `public` folder and double-click `index.html`. It opens right in
-your browser and looks basically like the real thing — every photo and link
-works straight off your computer, no internet connection needed except for
-the small preview of the tennis site.
+It's live. Every push to `main` deploys within about a minute.
 
 ## Making changes
 
-You don't need to know any code. Just tell your AI assistant what you want in
-plain English — "add my new internship," "swap this photo," "fix this typo"
-— and it'll make the edit for you.
+Tell your assistant what you want in plain English — "change the price,"
+"swap this photo," "fix this typo." Edits are made locally first and shown to
+you; nothing goes to GitHub until you say it's good. A push is a publish.
 
-Your contact info on the site right now:
+## Seeing it locally
 
-| What | Current |
-|---|---|
-| Email | 21euisungisaac@gmail.com |
-| Phone | (224) 813-2883 |
-| LinkedIn | isaac-lee-2a5755293 |
+From the repo folder:
 
-## Your résumé page
+```bash
+python -m http.server 5595 --directory public
+```
 
-There's a copy of your résumé built right into the site (`public/resume/`),
-not just a PDF file. It's a real webpage version that always shows your
-current résumé, and anyone can turn it into a clean PDF using the browser's
-Print option — no separate file to keep updating.
-
-## Publishing so people can actually see it
-
-This site isn't live on the internet yet — there's no public web address
-connected to it. It only exists on this computer for now. Whenever you're
-ready, ask your assistant to help you set up free hosting (through Google's
-Firebase service) and publish it — it only takes a few minutes and most of
-it is automatic.
+then open http://localhost:5595/ (tennis) or http://localhost:5595/portfolio/.
+Hard-refresh (`Ctrl+Shift+R`) after a change if something looks stale.
 
 ---
 
 ## For your assistant (technical details)
 
 <details>
-<summary>File structure and publishing commands</summary>
+<summary>Structure, deploy, and conventions</summary>
 
 ```
 portfolio-site/
-├── public/                ← everything here goes live
-│   ├── index.html           the whole main page
-│   ├── styles.css           all styling (adjustables at the top, under :root)
-│   ├── main.js              fade-in, popups, nav highlight, mobile menu
-│   ├── favicon.svg
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   ├── images/
-│   ├── resume/
-│   │   ├── index.html       the résumé, as a web page
-│   │   └── resume.css       screen + print styling for it
-│   └── tennis/               the tennis coaching site, linked from Projects
-│       ├── index.html
-│       ├── styles.css
-│       ├── main.js
-│       ├── favicon.svg
-│       └── images/
-├── firebase.json          hosting config
-└── README.md
+├── public/                    ← everything here is what GitHub Pages serves
+│   ├── index.html               the tennis page (front page)
+│   ├── tennis.css / tennis.js
+│   ├── ring.css / ring.js       the shared photo ring (used by the portfolio)
+│   ├── images/                  tennis photographs, WebP + JPEG, 2-step srcset;
+│   │                            images/ring/ holds the ring's card thumbnails
+│   ├── portfolio/               the portfolio: index.html, styles.css, main.js,
+│   │                            images/, and its own DESIGN.md
+│   ├── resume/                  the résumé as a web page, print-styled
+│   ├── CNAME  robots.txt  sitemap.xml
+├── DESIGN.md                  the tennis page's visual system
+├── .impeccable/               design sidecar, detector config, critique snapshots
+└── .github/workflows/pages.yml
 ```
 
-No build step, no dependencies, no webfonts. Edit a file, save, refresh.
+**The pages are hand-written HTML/CSS/vanilla JS with no build step.** There
+are no dependencies and nothing to install.
 
-There is no `.firebaserc` yet — deliberate, so an accidental `firebase
-deploy` can't overwrite the tennis site's project.
+**Deploy:** GitHub Actions uploads `public/` as-is to GitHub Pages. Custom domain is `leetennisco.com` (Namecheap DNS → Pages
+IPs, `www` CNAME, HTTPS enforced). The domain is set in Settings → Pages by
+hand; the `CNAME` file alone is not enough with Actions deploys.
 
-**Publish (one-time setup, then deploy):**
-
-```bash
-npm install -g firebase-tools
-firebase login
-firebase projects:create isaac-lee-portfolio
-cd C:\Users\21eui\portfolio-site; firebase use --add
-cd C:\Users\21eui\portfolio-site; firebase deploy --only hosting
-```
-
-**Custom domain:** buy one (Cloudflare or Porkbun, ~$11/yr), connect it via
-Firebase Console → Hosting → Add custom domain, then update the placeholder
-domain (`isaaclee.com`) in `index.html`, `resume/index.html`, `robots.txt`,
-and `sitemap.xml`.
+**Conventions that matter:**
+- Two visual worlds, each with its own `DESIGN.md`: the tennis page is black
+  and white (root `DESIGN.md` — the Figure Rule and the Two Blacks Rule are the
+  two that get broken by accident); the portfolio is warm paper, serif,
+  hairlines and a real dark mode (`public/portfolio/DESIGN.md`). Don't score
+  one against the other.
+- Every Book control is a real `<a href>` to the event on cal.com with
+  `data-cal-link`; the Cal embed loads on first interaction, not on load.
+- `tennis.css?v=…` and `tennis.js?v=…` are cache keys. Bump them when the
+  file changes.
+- The `.js` class on `<html>` gates every hidden-until-revealed style, so a
+  failed script leaves a readable page.
+- `MilkCow Cafe` on the portfolio stays unlinked (site was compromised 2026-08).
 
 </details>

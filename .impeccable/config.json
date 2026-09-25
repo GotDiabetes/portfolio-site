@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "cascadia mono",
+        "files": [
+          "public/lab/ring/index.html"
+        ],
+        "createdAt": "2026-09-24T18:56:32.408Z",
+        "reason": "assistant: the ring's label face is the portfolio's declared mono stack (public/portfolio/DESIGN.md); this lab preview sits under the root DESIGN.md, which documents the tennis page only"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "public/portfolio/index.html"
+        ],
+        "createdAt": "2026-09-24T19:44:49.141Z",
+        "reason": "assistant: three critique evidence passes measured the flagged standfirsts at line-height 1.36; the detector's 1.28 comes from resolving the clamp() minimum"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "public/portfolio/index.html"
+        ],
+        "createdAt": "2026-09-24T19:44:49.378Z",
+        "reason": "assistant: flagged elements are .details > div, computed padding-top 18.4px; the detector does not read the padding-block shorthand (verified by probe)"
+      }
+    ]
+  }
+}

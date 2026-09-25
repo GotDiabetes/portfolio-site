@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-20T19:40:00Z",
+  "title": "Design System: Lee Tennis Co.",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#ffffff"] },
+      "paper-soft": { "role": "neutral", "displayName": "Paper, soft", "canonical": "#f4f4f2", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#f4f4f2"] },
+      "card": { "role": "neutral", "displayName": "Card", "canonical": "#fafafa", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#fafafa"] },
+      "ink": { "role": "primary", "displayName": "Ink", "canonical": "#0d0d0d", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#ffffff"] },
+      "text": { "role": "primary", "displayName": "Text black", "canonical": "#111111", "tonalRamp": ["#111111", "#262626", "#383838", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#ffffff"] },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#5e5e5e", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#ffffff"] },
+      "rule": { "role": "neutral", "displayName": "Rule", "canonical": "#e5e5e3", "tonalRamp": ["#0d0d0d", "#262626", "#404040", "#5e5e5e", "#8a8a8a", "#b8b8b8", "#e5e5e3", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The hero headline only; three words on three masked lines." },
+      "statement": { "displayName": "Statement", "purpose": "One sentence, white on the ink band, max 36ch." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s." },
+      "figure": { "displayName": "Figure", "purpose": "Prices and hero facts; one treatment in hero, cards and modals." },
+      "title": { "displayName": "Title", "purpose": "Card and modal h3s." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy at 1.65 leading." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, fact and contact labels; sentence case, never tracked." }
+    },
+    "shadows": [
+      { "name": "card-hover", "value": "0 12px 30px rgba(0, 0, 0, .06)", "purpose": "Ambient lift on a lesson card at hover only; nothing casts a shadow at rest." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Every transition; moves most of the distance early and settles slowly." },
+      { "name": "dur-fade", "value": ".8s", "purpose": "Text and blocks arriving." },
+      { "name": "dur-img", "value": "1.15s", "purpose": "Photographs settling out of a 6% zoom." },
+      { "name": "dur-ui", "value": ".3s", "purpose": "Hovers and menu." },
+      { "name": "reveal", "value": "IntersectionObserver, threshold .05, rootMargin 0, reveal once", "purpose": "Blocks lift into place on first arrival and are never re-animated." },
+      { "name": "reduced-motion", "value": "translate/scale removed, .55s opacity fade kept", "purpose": "Reduced motion means no movement, not no life." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "940px" },
+      { "name": "single", "value": "680px" },
+      { "name": "narrow", "value": "480px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The booking action on white. Black fill, white label, 1px lift and a lighter black on hover.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Book a lesson</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; padding: .8rem 1.5rem; font: 500 .9375rem/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border-radius: 6px; border: 1px solid transparent; text-decoration: none; transition: background-color .3s cubic-bezier(.22,1,.36,1), border-color .3s cubic-bezier(.22,1,.36,1), color .3s cubic-bezier(.22,1,.36,1), transform .3s cubic-bezier(.22,1,.36,1); } .ds-btn:hover { transform: translateY(-1px); } .ds-btn:focus-visible { outline: 2px solid #111111; outline-offset: 3px; } .ds-btn-primary { background: #111111; color: #ffffff; } .ds-btn-primary:hover { background: #383838; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "The secondary action beside a primary: white fill, hairline border that darkens to black on hover.",
+      "html": "<a class=\"ds-btn ds-btn-quiet\" href=\"#\">Email me</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; padding: .8rem 1.5rem; font: 500 .9375rem/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border-radius: 6px; border: 1px solid transparent; text-decoration: none; transition: border-color .3s cubic-bezier(.22,1,.36,1), transform .3s cubic-bezier(.22,1,.36,1); } .ds-btn:hover { transform: translateY(-1px); } .ds-btn:focus-visible { outline: 2px solid #111111; outline-offset: 3px; } .ds-btn-quiet { background: #ffffff; color: #111111; border-color: #e5e5e3; } .ds-btn-quiet:hover { border-color: #111111; }"
+    },
+    {
+      "name": "Invert Button",
+      "kind": "button",
+      "refersTo": "button-invert",
+      "description": "The primary action on a black band: white fill, ink label, white focus ring.",
+      "html": "<div class=\"ds-band\"><a class=\"ds-btn ds-btn-invert\" href=\"#\">Book a lesson</a> <a class=\"ds-btn ds-btn-outline\" href=\"#\">Other ways to reach me</a></div>",
+      "css": ".ds-band { background: #0d0d0d; padding: 1.5rem; display: flex; gap: .7rem; flex-wrap: wrap; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; padding: .95rem 1.8rem; font: 500 1rem/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border-radius: 6px; border: 1px solid transparent; text-decoration: none; transition: background-color .3s cubic-bezier(.22,1,.36,1), border-color .3s cubic-bezier(.22,1,.36,1), transform .3s cubic-bezier(.22,1,.36,1); } .ds-btn:hover { transform: translateY(-1px); } .ds-band .ds-btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; } .ds-btn-invert { background: #ffffff; color: #0d0d0d; } .ds-btn-invert:hover { background: #f0efe9; } .ds-btn-outline { border-color: rgba(255,255,255,.38); color: #ffffff; } .ds-btn-outline:hover { border-color: #ffffff; background: rgba(255,255,255,.08); }"
+    },
+    {
+      "name": "Lesson Card",
+      "kind": "card",
+      "refersTo": "card-lesson",
+      "description": "A tier: title, figure-size price with muted unit, muted body, then a small primary button naming the tier and a What's covered link.",
+      "html": "<article class=\"ds-lesson\"><h3>Private lessons</h3><p class=\"ds-price\">$80<span>/hour</span></p><p>One-on-one for juniors and adults alike. Stroke and serve mechanics, footwork, and a practice plan you can actually work on between sessions.</p><div class=\"ds-lesson-actions\"><a class=\"ds-btn ds-btn-primary ds-btn-sm\" href=\"#\">Book a private lesson</a><button class=\"ds-link-btn\" type=\"button\">What's covered</button></div></article>",
+      "css": ".ds-lesson { background: #fafafa; border: 1px solid #e5e5e3; border-radius: 6px; padding: 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111111; max-width: 34rem; transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s cubic-bezier(.22,1,.36,1), box-shadow .3s cubic-bezier(.22,1,.36,1); } .ds-lesson:hover { transform: translateY(-3px); border-color: #d6d3cb; box-shadow: 0 12px 30px rgba(0,0,0,.06); } .ds-lesson h3 { margin: 0; font-size: 1.125rem; font-weight: 600; letter-spacing: -.03em; } .ds-lesson p { color: #5e5e5e; font-size: 1rem; line-height: 1.65; margin: 0 0 1rem; } .ds-lesson .ds-price { color: #111111; font-size: 1.6rem; font-weight: 600; letter-spacing: -.03em; margin: .5rem 0 .9rem; line-height: 1.2; } .ds-price span { font-size: .875rem; font-weight: 400; color: #5e5e5e; letter-spacing: 0; } .ds-lesson-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-top: 1.25rem; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid transparent; text-decoration: none; font-weight: 500; } .ds-btn-sm { padding: .55rem 1.1rem; font-size: .875rem; } .ds-btn-primary { background: #111111; color: #ffffff; } .ds-btn-primary:hover { background: #383838; } .ds-link-btn { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0; background: none; border: 0; cursor: pointer; font: 500 .9375rem/1.2 inherit; color: #111111; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; } .ds-link-btn:hover { color: #5e5e5e; }"
+    },
+    {
+      "name": "Statement Band",
+      "kind": "custom",
+      "refersTo": "band-statement",
+      "description": "A full-bleed ink block with one sentence in statement type. In a monochrome system this hard cut does what colour would otherwise do.",
+      "html": "<section class=\"ds-statement\"><blockquote>Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.</blockquote></section>",
+      "css": ".ds-statement { background: #0d0d0d; color: #ffffff; padding: 3.5rem 2rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } .ds-statement blockquote { margin: 0; max-width: 36ch; font-size: clamp(1.85rem, 5.2vw, 3.75rem); font-weight: 600; letter-spacing: -.045em; line-height: 1.06; text-wrap: pretty; } .ds-statement ::selection { background: #ffffff; color: #0d0d0d; }"
+    },
+    {
+      "name": "Eyebrow",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "The section label: a 22×2px black dash and muted label text. The page's only graphic mark apart from the monogram.",
+      "html": "<p class=\"ds-eyebrow\">Lessons</p>",
+      "css": ".ds-eyebrow { display: flex; align-items: center; gap: .6rem; margin: 0; font: 400 .875rem/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #5e5e5e; } .ds-eyebrow::before { content: ''; width: 22px; height: 2px; background: #111111; flex: 0 0 auto; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "Sticky translucent header: wordmark, five muted links with a divider before the off-page one, and a small primary Book button.",
+      "html": "<header class=\"ds-header\"><span class=\"ds-brand\">Lee Tennis Co.</span><nav class=\"ds-nav\"><a href=\"#\">Lessons</a><a href=\"#\">About</a><a href=\"#\">Reviews</a><a href=\"#\">Contact</a><a class=\"ds-nav-off\" href=\"#\">Career portfolio</a></nav><a class=\"ds-btn ds-btn-primary ds-btn-sm\" href=\"#\">Book a lesson</a></header>",
+      "css": ".ds-header { display: flex; align-items: center; gap: 1.5rem; min-height: 66px; padding: 0 1.5rem; background: rgba(255,255,255,.88); border-bottom: 1px solid #e5e5e3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } .ds-brand { font-weight: 600; letter-spacing: -.02em; margin-right: auto; color: #111111; } .ds-nav { display: flex; gap: 1.7rem; } .ds-nav a { font-size: .9375rem; color: #5e5e5e; text-decoration: none; transition: color .3s cubic-bezier(.22,1,.36,1); } .ds-nav a:hover { color: #111111; } .ds-nav-off { padding-left: 1.7rem; border-left: 1px solid #e5e5e3; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid transparent; text-decoration: none; font-weight: 500; } .ds-btn-sm { padding: .55rem 1.1rem; font-size: .875rem; } .ds-btn-primary { background: #111111; color: #ffffff; } .ds-btn-primary:hover { background: #383838; } .ds-btn:focus-visible { outline: 2px solid #111111; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Broadsheet Court",
+    "overview": "A coaching page set like a newspaper sports section: one enormous headline, photographs run to the edge, black bands that stop the eye, and body copy that reads rather than sells. There is no colour. Presence comes from scale, from the photographs' own colour against a white ground, and from one motion idea — a block lifting into place as you reach it — applied everywhere with a short stagger. Everything that would decorate has been left out so the person in the photographs is the only ornament.\n\nThe page is a Persuade surface with a Read-page temperament. It puts the price in the first viewport, repeats it at every step, and treats the Book control as the one saturated thing on screen: black on white, or white on black, never softened. The tone is a coach who is confident enough to be quiet.\n\nSingle theme. There is no dark mode and no toggle; the black bands are the dark, placed deliberately. A dark-OS visitor sees the same white page, and the one embedded third party (the Cal.com calendar) is pinned to light so it cannot break the world.",
+    "keyCharacteristics": [
+      "Strictly black and white; the only decisions are how far down from white the greys sit",
+      "System UI face at every size — zero font requests, native rendering",
+      "Display type set tight (line-height .92, tracking -0.055em) and dropped in line by line",
+      "Full-bleed black bands as punctuation, not as sections",
+      "Photographs in their own colour, edge to edge, on a 2px seam",
+      "One motion: fade + lift, exponential ease-out, reveal once",
+      "Every control readable with JavaScript off; every third party loaded on intent, not on load"
+    ],
+    "rules": [
+      { "name": "The No-Colour Rule", "body": "Nothing on the page carries hue except a photograph. If an element needs emphasis it gets weight, size, or black — never a colour.", "section": "colors" },
+      { "name": "The Two Blacks Rule", "body": "Bands are ink (#0d0d0d); text and buttons are text-black (#111111). Do not collapse them; the 4-point gap is what keeps a black button on a black band legible.", "section": "colors" },
+      { "name": "The White-on-Black Focus Rule", "body": "The focus ring is text-black everywhere except inside the black bands, the footer, and the lightbox, where it is white.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "There is no second typeface. Emphasis is weight 600 or size; never italic, never a display face, never colour.", "section": "typography" },
+      { "name": "The Figure Rule", "body": "Every price on the page renders in text-black at figure size. A price is never muted and never body-sized; the selector that sets it always carries a class ahead of .price so a paragraph rule cannot outrank it.", "section": "typography" },
+      { "name": "The Rest-Is-Flat Rule", "body": "A shadow is a hover state, never a resting state. If a resting element seems to need depth, it needs a different ground.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep every price in text-black at 1.6rem/600 — the Figure Rule — and give the unit its own muted span.",
+      "Do make every booking control a real <a href> to the event on cal.com; the embed intercepts the click, the href is the fallback.",
+      "Do load third-party scripts on intent (pointer over a control, focus, scroll, tap) or on a timer, never in the critical path.",
+      "Do reveal each block once and let the observer go; a page that re-animates on scroll-up is telling the reader to stop reading.",
+      "Do ship <picture> with WebP and a 2-step srcset for every photograph over 100KB.",
+      "Do hold the 44px touch floor under 940px, using padding or a pseudo-element hit area rather than enlarging the visible control.",
+      "Do switch the focus ring to white inside .contact, .footer, .statement, and .lightbox."
+    ],
+    "donts": [
+      "Don't introduce a hue. Not for a CTA, not for a link, not for a chart.",
+      "Don't add a second typeface or an icon set; the page has one dash and one monogram, and that is the graphic vocabulary.",
+      "Don't add a theme toggle or prefers-color-scheme rules; the black bands are the dark, placed on purpose.",
+      "Don't put a shadow on anything at rest.",
+      "Don't let a paragraph rule (.lesson p, .modal-card > p) style a price; that is how every price on the page once rendered 16px grey.",
+      "Don't describe the bands as green anywhere — comments, tokens, or copy. The palette was black before this file existed.",
+      "Don't put the offer below the proof. Lessons stay in the second screen."
+    ]
+  }
+}
