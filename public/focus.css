@@ -1,0 +1,53 @@
+/* ============================================================================
+   Focus reveal — styles for focus.js. Custom properties are documented at
+   the top of focus.js; a host page sets them on its [data-focus-reveal]
+   element.
+   ========================================================================== */
+
+.fr-live { position: relative; }
+
+.fr-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* inline-block, because a filter does not paint on a plain inline box. The
+   spaces between words stay as text, so the line wraps exactly as before. */
+.fr-word {
+  display: inline-block;
+  transition: filter .45s cubic-bezier(.22, 1, .36, 1),
+              opacity .45s cubic-bezier(.22, 1, .36, 1);
+}
+.fr-live.is-focusing .fr-word {
+  filter: blur(var(--fr-blur, .06em));
+  opacity: var(--fr-dim, .4);
+}
+.fr-live.is-focusing .fr-word.is-focus { filter: none; opacity: 1; }
+
+/* The frame: four corner brackets, the viewfinder in a camera. */
+.fr-frame {
+  position: absolute; left: 0; top: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s cubic-bezier(.22, 1, .36, 1);
+}
+.fr-live.is-focusing .fr-frame { opacity: 1; }
+.fr-frame i {
+  position: absolute;
+  width: var(--fr-corner, .26em); height: var(--fr-corner, .26em);
+  border: 0 solid var(--fr-color, currentColor);
+}
+.fr-frame i:nth-child(1) { left: 0;  top: 0;    border-left-width: var(--fr-stroke, 2px);  border-top-width: var(--fr-stroke, 2px); }
+.fr-frame i:nth-child(2) { right: 0; top: 0;    border-right-width: var(--fr-stroke, 2px); border-top-width: var(--fr-stroke, 2px); }
+.fr-frame i:nth-child(3) { left: 0;  bottom: 0; border-left-width: var(--fr-stroke, 2px);  border-bottom-width: var(--fr-stroke, 2px); }
+.fr-frame i:nth-child(4) { right: 0; bottom: 0; border-right-width: var(--fr-stroke, 2px); border-bottom-width: var(--fr-stroke, 2px); }
+
+/* Reduced motion, from the start or switched on mid-visit: sharp text, no
+   frame. */
+.fr-still .fr-frame { display: none; }
+.fr-still .fr-word { filter: none !important; opacity: 1 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .fr-frame { display: none; }
+  .fr-word { filter: none !important; opacity: 1 !important; transition: none; }
+}

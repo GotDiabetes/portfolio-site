@@ -219,6 +219,11 @@ A full-bleed `{colors.ink}` block carrying one sentence in statement type. In a 
 ### The Photo Strip (signature)
 Three portrait photographs on a 2px seam, each a button that opens the lightbox, each with a tag that slides up on hover (always visible on touch). Photographs zoom 4% on hover. Responsive sources: 600w and 1200w, WebP with JPEG fallback.
 
+### Focus reveal (the statement band)
+The statement sentence on the black band carries the focus reveal: white brackets (`--fr-color: #fff`), unfocused words at .38 opacity and a .055em blur. It is the page's one display sentence and purely decorative, so it is the only place the effect goes — never on the hero headline, a price, or a Book control.
+
+- **Shared code:** `/focus.js` and `/focus.css` at the site root. The line reads sharp at rest: when it first comes into view a camera-style frame (four corner brackets) sweeps it once word by word and settles; a mouse over the line brings the frame back to follow the word under the pointer, stretching across both words on the way (leading edge faster than trailing); on touch, tapping a word focuses it for a moment. Unfocused words soften (`--fr-blur`, `--fr-dim`) but stay legible. Screen readers get the sentence as one string; reduced motion and no-JS show plain sharp text.
+
 ## Do's and Don'ts
 
 ### Do:

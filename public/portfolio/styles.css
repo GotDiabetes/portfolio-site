@@ -418,6 +418,19 @@ figcaption {
 .closing { padding-bottom: clamp(3rem, 7vw, 4.5rem); }
 .closing > p { max-width: var(--measure); }
 
+/* The closing promise: standfirst size, so it reads as the page's last
+   sentence rather than a slogan, with sienna focus brackets (the One Warm
+   Thing Rule: sienna on strokes only). */
+.closing-promise {
+  font-size: clamp(1.35rem, 3.4vw, 1.72rem);
+  line-height: 1.36;
+  margin: 1.4rem 0 0;
+  --fr-color: var(--accent);
+  --fr-dim: .35;
+  --fr-blur: .06em;
+  --fr-stroke: 1.5px;
+}
+
 .closing-address {
   margin-top: 1.5rem;
   font-size: clamp(1.15rem, 2.6vw, 1.4rem);

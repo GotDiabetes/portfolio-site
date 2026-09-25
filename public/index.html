@@ -24,7 +24,8 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20260921b" />
+  <link rel="stylesheet" href="tennis.css?v=20260925" />
+  <link rel="stylesheet" href="focus.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
        leaves a fully visible page rather than a blank one. -->
@@ -184,7 +185,10 @@
          ============================================================= -->
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade">
+        <!-- The one display sentence on the page, so the one place for the
+             focus reveal: a lens pulling focus across a line about
+             deliberate practice. It reads sharp at rest (focus.js). -->
+        <blockquote class="fade" data-focus-reveal>
           Tennis is for everyone. Almost every player improves faster than they
           expect once the practice is deliberate.
         </blockquote>
@@ -601,5 +605,6 @@
   </dialog>
 
   <script src="tennis.js?v=20260920" defer></script>
+  <script src="focus.js?v=1" defer></script>
 </body>
 </html>

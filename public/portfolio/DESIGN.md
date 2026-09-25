@@ -210,6 +210,11 @@ It drifts at about 6° a second, follows a drag, and coasts after a flick, never
 - **Cost:** thumbnails are not requested until the ring is within about 800px of the viewport; full images and the video only when opened.
 - **Access:** reduced motion stops the drift and the coast and hides Pause; without JavaScript the same list is a captioned grid of mounted plates on the 46rem column.
 
+### Focus reveal (the closing promise)
+"I reply to everything." sits on its own line in Get in touch at standfirst size, the page's last impression, with the focus reveal in sienna brackets (1.5px — the One Warm Thing Rule: sienna on strokes only). It never goes on the lead: blurring the standfirst would hide the ask from the reader with thirty seconds.
+
+- **Shared code:** `/focus.js` and `/focus.css` at the site root. The line reads sharp at rest: when it first comes into view a camera-style frame (four corner brackets) sweeps it once word by word and settles; a mouse over the line brings the frame back to follow the word under the pointer, stretching across both words on the way (leading edge faster than trailing); on touch, tapping a word focuses it for a moment. Unfocused words soften (`--fr-blur`, `--fr-dim`) but stay legible. Screen readers get the sentence as one string; reduced motion and no-JS show plain sharp text.
+
 ## Do's and Don'ts
 
 ### Do:

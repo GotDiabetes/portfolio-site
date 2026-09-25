@@ -34,7 +34,8 @@
   <meta name="theme-color" content="#16150f" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/ring.css?v=5" />
-  <link rel="stylesheet" href="styles.css?v=20260924d" />
+  <link rel="stylesheet" href="/focus.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=20260925" />
 
   <!-- Applies the saved theme before first paint so there's no flash. -->
   <script>
@@ -425,9 +426,12 @@
       <h2 class="section-title fade">Get in touch</h2>
       <p class="fade">
         If you're hiring for a summer 2027 internship, or you just want to
-        compare notes on outbound, email is the fastest way to reach me. I
-        reply to everything.
+        compare notes on outbound, email is the fastest way to reach me.
       </p>
+      <!-- The promise, on its own line as the page's last impression, with
+           the focus reveal: sienna brackets pull focus across it once, then
+           it reads sharp (focus.js). -->
+      <p class="closing-promise fade" data-focus-reveal>I reply to everything.</p>
       <p class="closing-address fade">
         <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <button class="copy" type="button" id="copyEmail"
@@ -470,5 +474,6 @@
 
   <script src="main.js?v=20260921d" defer></script>
   <script src="/ring.js?v=6" defer></script>
+  <script src="/focus.js?v=1" defer></script>
 </body>
 </html>

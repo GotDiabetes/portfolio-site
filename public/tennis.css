@@ -255,6 +255,10 @@ dl, dd { margin: 0; }
   line-height: 1.06;
 }
 
+/* White brackets on the black band; the unfocused words go soft but stay
+   legible, so the sentence never becomes a grey smear. */
+.statement [data-focus-reveal] { --fr-color: #fff; --fr-dim: .38; --fr-blur: .055em; --fr-stroke: 2px; }
+
 /* --------------------------------------------------------- Shared blocks -- */
 .two-col {
   display: grid;
