@@ -206,6 +206,13 @@ Confident and quiet: solid fills, hairline outlines, no icons, and a 1px lift on
 - **Border:** 1px `{colors.rule}`, warming to `#d6d3cb` on hover
 - **Internal Padding:** `clamp(1.5rem, 2.5vw, 2rem)`
 - **Lesson card anatomy:** title, figure-size price with muted unit, muted body, then an actions row — a small primary button naming the tier ("Book a private lesson") and a "What's covered" link button with a per-tier accessible name.
+- **Matched card:** when the lesson matcher picks a card it gets a black 1px edge plus a 1px black ring and a muted "Your match" label after the title. The other three cards are left exactly as they are, never dimmed.
+
+### Lesson matcher
+One bold label, one plain input (1px `#c9c9c6` border, softened radius, darkening to text-black on focus) and the page's primary button, above the lesson cards and no wider than the section head. The answer is one sentence in Isaac's voice ("Sounds like **a semi-private lesson.** …"), a muted line if the visitor asked him to travel, then a clone of the matched card's own action, so booking behaves identically. A 13px muted note says the sentence goes to Jev. Hidden with no JS or no endpoint; stacks full width under 680px.
+
+### Ask Isaac (chat)
+A black launcher bottom-right ("Ask Isaac" with a speech-bubble icon), styled like the Book button, opening a white panel with the card border, the softened radius and the page's only floating shadow (it is the only thing above the content). Header: "Ask Isaac" and a muted line saying the answers are Isaac's own, picked by AI — the chat never pretends to be him typing. Isaac's messages sit on `{colors.paper-soft}` grey, the visitor's on black; each answer can carry buttons, and a Book button is a clone of the lesson card's own. Four suggestion chips on open, and up to three follow-up chips after every answer (each topic's `next` in `ask.json`, minus anything already asked). Replies feel live without faking it: typing dots for at least 650ms, then the answer types out word by word (words are laid out from the start and only fade in, so nothing jumps), then its buttons and chips rise in. Sound is two tiny Web Audio cues, no files: a high tick on send and a tennis-ball "pok" (a falling sine over a 12ms string click) when the answer lands; a speaker button in the header mutes them and the choice is remembered. Reduced motion skips the typing-out; screen readers get each answer once, whole. Non-modal: the page stays usable, Escape closes and returns focus to the launcher. Under 560px the panel is a bottom sheet, and the launcher shrinks to a 48px icon square that stays hidden while the hero's Book button is on screen, so it never covers the page's main action.
 
 ### Navigation
 Sticky, translucent white, hairline bottom rule. Desktop: brand mark left, five muted 15px links (Lessons, About, Reviews, Contact, and a divider before the one off-page link), and a small primary Book button. Hover darkens a link to text-black. Under 940px the links become a stacked menu behind a 44px toggle; the menu's first row is Book in 600 weight. Escape closes it and returns focus to the toggle.
@@ -218,6 +225,12 @@ A full-bleed `{colors.ink}` block carrying one sentence in statement type. In a 
 
 ### The Photo Strip (signature)
 Three portrait photographs on a 2px seam, each a button that opens the lightbox, each with a tag that slides up on hover (always visible on touch). Photographs zoom 4% on hover. Responsive sources: 600w and 1200w, WebP with JPEG fallback.
+
+### The living hero
+The hero photograph is never quite still: the `<picture>` runs a 28-second push-in and pan (scale 1.02→1.09, a 1–2% drift), alternating, so the frame breathes like a camera on a tripod. A muted looping clip made from the same photograph (`images/hero-loop.mp4`, generated in Higgsfield: Isaac nearly still, the windscreen and leaf shadows moving behind him) can sit over it: `hero.js` loads it only when the `<video class="hero-loop">` has a `data-src`, fades it in once it is actually playing, pauses it off screen, and skips it for reduced motion and Save-Data. Reduced motion also stops the drift.
+
+### Reviews as morph pill cards
+The reviews are a row of pills (round photo, name, role) with one opened out into its card. Hovering a pill (with a 90ms intent delay), tapping it or pressing Enter grows it into its card while the open one folds back: width and height animate between measured sizes, the corner relaxes from half-height round to the softened radius, and the round avatar swells into a 9×11rem portrait; the quote rises in after. One review is always open, and the row reserves its tallest arrangement so the page never moves. Under 680px the pills stack full width and the open card puts a 4.5rem portrait beside the name with the quote below. No JS shows every review as a full card; reduced motion swaps without the morph.
 
 ### Focus reveal (the statement band)
 The statement sentence on the black band carries the focus reveal: white brackets (`--fr-color: #fff`), unfocused words at .38 opacity and a .055em blur. It is the page's one display sentence and purely decorative, so it is the only place the effect goes — never on the hero headline, a price, or a Book control.

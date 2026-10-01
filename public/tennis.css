@@ -236,8 +236,34 @@ dl, dd { margin: 0; }
 .hero-facts dd span { font-size: .875rem; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 
 /* No rounded corner on the bleeding side — it has to meet the edge cleanly. */
-.hero-photo { margin: 0; overflow: hidden; }
+.hero-photo { margin: 0; overflow: hidden; position: relative; }
 .hero-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+
+/* The hero is alive, not static: the photograph drifts very slowly, a
+   long, barely-there push-in and pan, the way a camera on a tripod still
+   breathes. It runs on the <picture> so it never fights the image's own
+   reveal (which animates the <img>). */
+.hero-photo picture {
+  display: block;
+  transform-origin: 60% 40%;
+  animation: heroDrift 28s ease-in-out infinite alternate;
+}
+@keyframes heroDrift {
+  from { transform: scale(1.02) translate3d(0, 0, 0); }
+  to   { transform: scale(1.09) translate3d(-1.6%, -1.2%, 0); }
+}
+
+/* The looping clip (hero.js), when there is one: it sits over the photo
+   and fades in only once it is actually playing, so a slow connection
+   just keeps seeing the photograph. */
+.hero-loop {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.2s var(--ease);
+  pointer-events: none;
+}
+.hero-photo.has-loop .hero-loop { opacity: 1; }
+.hero-photo.has-loop picture { animation-play-state: paused; }
 
 /* ------------------------------------------------------------ Statement -- */
 .statement {
@@ -315,6 +341,220 @@ dl, dd { margin: 0; }
 .lesson-actions {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: .5rem 1.25rem; margin-top: 1.25rem;
+}
+
+/* Lesson matcher (match.js). One plain field and the page's own button; the
+   answer is a sentence and the matched card's real Book control. The card it
+   picks gets a black edge and a label, the same weight as a hover, so the
+   other three stay readable rather than being greyed out. */
+.matcher {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.matcher[hidden] { display: none; }
+.matcher-label { display: block; font-weight: 600; margin-bottom: .6rem; }
+.matcher-row { display: flex; gap: .6rem; }
+.matcher-input {
+  flex: 1 1 auto; min-width: 0;
+  padding: .8rem 1rem;
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: var(--bg);
+  border: 1px solid #c9c9c6;
+  border-radius: var(--radius);
+  transition: border-color var(--dur-ui) var(--ease);
+}
+.matcher-input::placeholder { color: var(--muted); opacity: 1; }
+.matcher-input:hover { border-color: var(--muted); }
+.matcher-input:focus { border-color: var(--text); }
+.matcher-row .btn { flex: 0 0 auto; }
+.matcher-row .btn:disabled { cursor: progress; background: #383838; transform: none; }
+.matcher-result:not(:empty) { margin-top: 1.1rem; }
+.matcher-result p { margin-bottom: .5rem; }
+.matcher-result p + p { color: var(--muted); }
+.matcher-actions { margin-top: .9rem; }
+.matcher-note { margin-top: .9rem; font-size: .8125rem; color: var(--muted); }
+
+/* --------------------------------------------------------- Ask Isaac -- */
+/* The chat in the corner (ask.js). A black launcher that reads like the
+   page's own Book button, and a white panel with the card border and the
+   one floating shadow on the page: it is the only thing that sits above
+   the content, so it is the only thing that casts one. Isaac's messages
+   sit on the soft band grey, the visitor's on black. */
+.ask {
+  position: fixed; z-index: 60;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; align-items: flex-end; gap: .75rem;
+}
+.ask[hidden], .ask-panel[hidden] { display: none; }
+
+.ask-launch {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 2.75rem; padding: .7rem 1.15rem;
+  font-size: .9375rem; font-weight: 500;
+  background: var(--text); color: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+  transition: background-color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease);
+}
+.ask-launch:hover { background: #383838; transform: translateY(-1px); }
+.ask.is-open .ask-launch { background: #383838; }
+
+.ask-panel {
+  display: flex; flex-direction: column;
+  width: min(23.5rem, calc(100vw - 2rem));
+  height: min(38rem, calc(100dvh - 6.5rem));
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .14);
+  overflow: hidden;
+  animation: askIn .28s var(--ease);
+}
+@keyframes askIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.ask-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1rem .9rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.ask-head h2 { font-size: 1.0625rem; letter-spacing: -0.02em; }
+.ask-head p { margin: .15rem 0 0; font-size: .8125rem; color: var(--muted); }
+.ask-tools { display: flex; flex: 0 0 auto; margin: -.5rem -.5rem 0 0; }
+.ask-close, .ask-sound {
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  font-size: 1.5rem; line-height: 1; color: var(--muted); border-radius: var(--radius);
+  transition: color var(--dur-ui) var(--ease), background-color var(--dur-ui) var(--ease);
+}
+.ask-close:hover, .ask-sound:hover { color: var(--text); background: var(--bg-soft); }
+.ask-sound .ask-sound-off { display: none; }
+.ask-sound.is-off .ask-sound-on { display: none; }
+.ask-sound.is-off .ask-sound-off { display: inline; }
+
+.ask-log {
+  position: relative;   /* offsetTop of a message is measured from here */
+  flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
+  padding: 1.1rem 1.25rem;
+  display: flex; flex-direction: column; gap: .8rem;
+}
+.ask-log:focus { outline: none; }
+
+.ask-msg {
+  max-width: 88%;
+  padding: .7rem .9rem;
+  border-radius: var(--radius);
+  font-size: .9375rem; line-height: 1.55;
+}
+.ask-msg p { margin: 0; }
+.ask-msg p + p { margin-top: .6rem; }
+.ask-msg--isaac { align-self: flex-start; background: var(--bg-soft); color: var(--text); }
+.ask-msg--visitor { align-self: flex-end; background: var(--text); color: #fff; }
+/* The whole message for screen readers, speaker first; the visible copy
+   types itself out and is hidden from them. */
+.ask-sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap;
+}
+/* Typing out: every word is laid out from the start and only fades in, so
+   the bubble is full size at once and nothing below it jumps. */
+.ask-w { opacity: 0; transition: opacity .18s var(--ease); }
+.ask-w.is-in { opacity: 1; }
+/* Buttons and follow-up chips arrive once the text has finished. */
+.ask-arrive { animation: askArrive .32s var(--ease) both; }
+@keyframes askArrive { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.ask-msg--visitor { animation: askArrive .22s var(--ease) both; }
+.ask-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.ask-actions .btn { min-height: 2.5rem; }
+
+.ask-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.ask-chip {
+  padding: .5rem .8rem; min-height: 2.5rem;
+  font-size: .875rem; color: var(--text);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color var(--dur-ui) var(--ease);
+}
+.ask-chip:hover { border-color: var(--text); }
+.ask-chip:active { background: var(--bg-soft); }
+/* Follow-ups sit on Isaac's side, under the answer they belong to. */
+.ask-chips { max-width: 92%; }
+
+.ask-typing { display: flex; gap: .3rem; padding: .95rem .9rem; }
+.ask-dot {
+  width: .4rem; height: .4rem; border-radius: 50%; background: var(--muted);
+  animation: askDot 1s var(--ease) infinite;
+}
+.ask-dot:nth-child(2) { animation-delay: .15s; }
+.ask-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes askDot { 0%, 60%, 100% { opacity: .35; } 30% { opacity: 1; } }
+
+.ask-form {
+  display: flex; gap: .5rem;
+  padding: .75rem;
+  border-top: 1px solid var(--line);
+}
+.ask-input {
+  flex: 1 1 auto; min-width: 0;
+  padding: .7rem .85rem;
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: var(--bg);
+  border: 1px solid #c9c9c6; border-radius: var(--radius);
+  transition: border-color var(--dur-ui) var(--ease);
+}
+.ask-input::placeholder { color: var(--muted); opacity: 1; }
+/* The chat puts focus back in the field after every answer, so the page's
+   2px outline would sit round it permanently; a black border doubled with
+   an inset ring marks focus as clearly and quieter. */
+.ask-input:focus { border-color: var(--text); }
+.ask-input:focus-visible { outline: none; box-shadow: inset 0 0 0 1px var(--text); }
+.ask-send {
+  flex: 0 0 auto; width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  background: var(--text); color: #fff; border-radius: var(--radius);
+  transition: background-color var(--dur-ui) var(--ease);
+}
+.ask-send:hover { background: #383838; }
+.ask-send:disabled { background: #383838; cursor: progress; }
+
+/* Phones: the panel becomes a sheet across the bottom of the screen, and
+   the launcher steps aside while it is open (the sheet has its own close). */
+@media (max-width: 560px) {
+  .ask { left: 0; right: 0; bottom: 0; align-items: stretch; gap: 0; pointer-events: none; }
+  .ask > * { pointer-events: auto; }
+  .ask-launch {
+    align-self: flex-end;
+    margin: 0 max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) 0;
+  }
+  .ask.is-open .ask-launch { display: none; }
+  /* A compact square, so it covers as little as possible of the full-width
+     buttons it floats over; the label stays for screen readers. While the
+     hero's own Book button is on screen the launcher steps out entirely. */
+  .ask-launch { width: 3rem; height: 3rem; padding: 0; justify-content: center; }
+  .ask-launch span {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap;
+  }
+  .ask-launch svg { width: 20px; height: 20px; }
+  .ask.is-tucked .ask-launch { opacity: 0; transform: translateY(8px); pointer-events: none; visibility: hidden; }
+  .ask-launch { transition: opacity var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), visibility 0s linear 0s; }
+  .ask.is-tucked .ask-launch { transition: opacity var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), visibility 0s linear var(--dur-ui); }
+  .ask-panel {
+    width: 100%; height: min(78dvh, 36rem);
+    border-radius: var(--radius) var(--radius) 0 0;
+    border-bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media print { .ask { display: none; } }
+
+.lesson.is-match { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
+.lesson.is-match h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .75rem; }
+.lesson.is-match h3::after {
+  content: "Your match";
+  font-size: .8125rem; font-weight: 500; letter-spacing: 0;
+  color: var(--muted);
 }
 
 /* One treatment for every figure on the page: the hero facts, the card
@@ -401,6 +641,78 @@ dl, dd { margin: 0; }
   padding-top: 1.25rem; border-top: 1px solid var(--line);
 }
 .review figcaption strong { display: block; color: var(--text); font-weight: 600; }
+
+/* Morph pill cards (morph.js). The row becomes pills with one card open;
+   a pill grows into its card while the open one folds back. Width and
+   height are animated by the script between measured sizes; everything
+   else (padding, corners, the photo) transitions here. The pill's corner
+   is its half-height, so the corner change reads as one shape relaxing
+   into another rather than a jump. */
+.review-list.morph-stage {
+  display: flex; align-items: center; gap: 1rem;
+}
+.morph-stage .review {
+  --morph: .56s var(--ease);
+  position: relative;
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 2.75rem auto;
+  grid-template-areas: "photo cap";
+  align-items: center; column-gap: .8rem;
+  padding: .45rem 1.3rem .45rem .45rem;
+  border-radius: 1.85rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width var(--morph), height var(--morph), padding var(--morph),
+              border-radius var(--morph), border-color var(--dur-ui) var(--ease),
+              box-shadow var(--dur-ui) var(--ease),
+              opacity var(--dur-fade) var(--ease), transform var(--dur-fade) var(--ease);
+}
+.morph-stage .review:hover { border-color: #c9c9c6; }
+.morph-stage .review figcaption { display: contents; }
+.morph-stage .review blockquote { grid-area: quote; display: none; margin: 0; }
+.morph-stage .review .avatar {
+  grid-area: photo;
+  width: 2.75rem; height: 2.75rem;
+  border-radius: 50%;
+  transition: width var(--morph), height var(--morph), border-radius var(--morph);
+}
+.morph-stage .review figcaption > span:last-child {
+  grid-area: cap;
+  font-size: .8125rem; line-height: 1.3; white-space: nowrap;
+}
+.morph-stage .review figcaption strong { font-size: .9375rem; }
+
+.morph-stage .review.is-open {
+  width: min(44rem, 100%);
+  grid-template-columns: 9rem minmax(0, 1fr);
+  grid-template-areas: "photo quote" "photo cap";
+  align-items: start; column-gap: 1.6rem; row-gap: 1.1rem;
+  padding: 1.25rem 1.75rem 1.4rem 1.25rem;
+  border-radius: var(--radius);
+  border-color: var(--line);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .06);
+  cursor: default;
+}
+.morph-stage .review.is-open blockquote { display: block; animation: morphIn .42s var(--ease) .2s both; }
+.morph-stage .review.is-open figcaption > span:last-child { white-space: normal; animation: morphIn .42s var(--ease) .26s both; }
+.morph-stage .review.is-open .avatar {
+  width: 9rem; height: 11rem;
+  border-radius: calc(var(--radius) - 2px);
+}
+@keyframes morphIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* The pill's button covers the pill; on the open card it shrinks to nothing
+   but keeps focus and its "expanded" state for keyboard and screen-reader
+   users. */
+.morph-hit { position: absolute; inset: 0; border-radius: inherit; }
+.morph-hit:focus-visible { outline-offset: -3px; }
+.morph-stage .review.is-open .morph-hit {
+  inset: auto; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap;
+}
+/* A 1px button can't show a focus ring, so the card shows it instead. */
+.morph-stage .review.is-open:has(.morph-hit:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .avatar {
   flex: 0 0 auto; display: grid; place-items: center;
@@ -687,6 +999,19 @@ body.modal-open { overflow: hidden; }
   .actions .btn { width: 100%; }
   .hero-facts, .facts { gap: 1.5rem 2.25rem; }
   .lesson-actions .btn { width: 100%; }
+  /* Reviews stack: the pills sit full width under each other, and the open
+     card puts a smaller portrait beside the name, with the quote below. */
+  .review-list.morph-stage { flex-direction: column; align-items: stretch; justify-content: center; }
+  .morph-stage .review.is-open {
+    width: auto;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    grid-template-areas: "photo cap" "quote quote";
+    align-items: center;
+    padding: 1rem 1.25rem 1.25rem 1rem;
+  }
+  .morph-stage .review.is-open .avatar { width: 4.5rem; height: 4.5rem; }
+  .matcher-row { flex-direction: column; }
+  .matcher-row .btn, .matcher-actions .btn { width: 100%; min-height: 44px; }
 }
 
 @media (max-width: 480px) {
@@ -730,6 +1055,8 @@ body.modal-open { overflow: hidden; }
 
   /* Hover lifts and zooms off too — colour changes are harmless and stay. */
   .btn:hover, .lesson:hover { transform: none; }
+  .morph-stage .review, .morph-stage .review .avatar { transition: opacity .55s var(--ease); }
+  .hero-photo picture { animation: none; }
   .photo:hover img { transform: none; }
   .modal-card, .modal[open] .modal-card { transform: none; }
 }

@@ -1,0 +1,24 @@
+# Cloudflare Worker behind the tennis page's lesson matcher and Ask Isaac
+# chat. Deploy steps are in the repo README ("Jev features").
+name = "lee-tennis-jev"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+# 6 matches a minute per visitor.
+[[ratelimits]]
+name = "PER_VISITOR"
+namespace_id = "2001"
+
+  [ratelimits.simple]
+  limit = 6
+  period = 60
+
+# 60 a minute across the whole site.
+[[ratelimits]]
+name = "SITE_WIDE"
+namespace_id = "2002"
+
+  [ratelimits.simple]
+  limit = 60
+  period = 60

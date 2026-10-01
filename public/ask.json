@@ -1,0 +1,312 @@
+{
+  "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | semi | hitting), email (subject), link (href), scroll (#section). Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'.",
+  "greeting": "Hi! I'm Isaac. Ask me anything about lessons — prices, where I coach, who I teach, or how booking works.",
+  "fallback": "I don't have that written down here. Email me and I'll answer you directly.",
+  "unavailable": "The chat isn't answering right now. Email me and I'll get back to you.",
+  "topics": [
+    {
+      "id": "hello",
+      "covers": "A greeting or small talk with no real question, such as hi, hello, hey, or asking whether anyone is there.",
+      "answer": "Hi! Ask me about lessons, prices, where I coach, or how to book.",
+      "next": [
+        "How much are lessons?",
+        "Where are lessons?",
+        "Which lesson fits me?"
+      ]
+    },
+    {
+      "id": "thanks",
+      "covers": "The visitor says thank you, goodbye, or that they have what they need.",
+      "answer": "Anytime. Hope to see you on court.",
+      "next": [
+        "How do I book?",
+        "What's your email?"
+      ]
+    },
+    {
+      "id": "prices",
+      "covers": "How much lessons or sessions cost, rates, pricing, fees, or comparing prices.",
+      "answer": "Private lessons are $80 an hour. Semi-private is $110 an hour for two players, so $55 each. A hitting partner session is $45 an hour. Adult clinics are priced per group, so the cost per player falls the more of you there are — tell me how many and I'll quote it.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Which lesson fits me?",
+        "Do I pay upfront?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "private",
+      "covers": "What a private (one-on-one) lesson is, what it covers, or who it is for.",
+      "answer": "A private lesson is one-on-one, $80 an hour, for juniors and adults, tailored to your level. We work on stroke and serve mechanics, footwork and court movement, red, orange and green ball progression for younger players, match-readiness for tournaments, and you leave with a practice plan for between sessions.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "What's the first lesson like?",
+        "How long is a lesson?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "semi",
+      "covers": "Semi-private lessons: two players sharing a lesson, bringing a friend, sibling or partner, doubles lessons for two, or being matched with a partner.",
+      "answer": "Semi-private is two players of a similar level on one court, sharing the hour and the cost: $110 for the hour, $55 each. Same stroke and serve work as a private, plus live rallies and points against each other, and doubles positioning if that's what you're training for. Each player still gets individual feedback. Bring your own partner, or ask me to match you with one.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        }
+      ],
+      "next": [
+        "Can you find me a partner?",
+        "How much is a private lesson?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "hitting",
+      "covers": "Hitting partner sessions: someone to rally, practise or play sets with, without coaching or instruction.",
+      "answer": "A hitting session is hitting, not coaching — $45 an hour, 60 minutes or longer. I feed and rally at your level so you get reps: cross-court and down-the-line rallies, serve and return practice with a live returner, and tie-breaks or sets on request.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "How long is a session?",
+        "Can we play sets?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "clinics",
+      "covers": "Adult clinics, group lessons, or lessons for three or more people together.",
+      "answer": "Adult clinics are small groups on a single court: drills and live-ball games with enough rotation that nobody stands around, working on rally tolerance and consistency under pressure. They're priced per group — email me how many of you there are and I'll quote it. Bring your own group, or ask me to place you in one.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "Adult clinics",
+          "label": "Email for a quote"
+        }
+      ],
+      "next": [
+        "How much are private lessons?",
+        "Where are lessons?",
+        "What's your email?"
+      ]
+    },
+    {
+      "id": "which_lesson",
+      "covers": "The visitor asks which lesson or option they should choose, or describes themselves and wants a recommendation.",
+      "answer": "Quick guide: one player who wants coaching — a private lesson. Two of you at a similar level — semi-private. You just want someone reliable to hit with, no instruction — a hitting session. Three or more — an adult clinic. The box above the lesson cards can also match you from a sentence.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#lessons",
+          "label": "See the lessons"
+        }
+      ],
+      "next": [
+        "How much are lessons?",
+        "Do you teach beginners?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "location",
+      "covers": "Where lessons happen, the address or courts, or whether Isaac can travel to the visitor's home, club, school or another court.",
+      "answer": "Lessons are at my home court: the Toscana Apartments tennis courts in Irvine. Players come to me — I can't travel to other courts, clubs or homes.",
+      "next": [
+        "When are you free?",
+        "How much are lessons?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "who",
+      "covers": "Who Isaac teaches: ages, levels, kids, juniors, adults, complete beginners, or advanced players.",
+      "answer": "Juniors from red-ball beginners up, and adults at any level. Most of my work is with developing juniors, and I run adult clinics for players who want more consistency and a clearer plan once points start.",
+      "next": [
+        "What's your coaching style?",
+        "Which lesson fits me?",
+        "How much are lessons?"
+      ]
+    },
+    {
+      "id": "booking",
+      "covers": "How to book or schedule a lesson, sign up, or reserve a time.",
+      "answer": "Hit any Book button on this page and pick a time on the calendar. Booking online just holds the time — no card, no deposit. When you book, tell me your level and what you're working on, and I'll come with a plan.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Do I pay upfront?",
+        "When are you free?",
+        "What's the first lesson like?"
+      ]
+    },
+    {
+      "id": "availability",
+      "covers": "When Isaac is available: days, times, weekends, evenings, how often, or how soon a lesson can happen.",
+      "answer": "Coaching is a part-time job for me, fitted around school, so my schedule stays small. The booking calendar shows every open time. If nothing there works, email me when you're free and I'll reply with availability.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "email",
+          "subject": "Availability",
+          "label": "Email me"
+        }
+      ],
+      "next": [
+        "How do I book?",
+        "Where are lessons?",
+        "What's your email?"
+      ]
+    },
+    {
+      "id": "payment",
+      "covers": "How or when to pay, payment methods, deposits, or whether a card is needed to book.",
+      "answer": "You pay in person. Booking online holds the time — no card, no deposit.",
+      "next": [
+        "How much are lessons?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "first_session",
+      "covers": "What the first lesson is like, what to expect, or how to prepare for it.",
+      "answer": "When you book, tell me your level and what you're working on, and I'll come to the first session with a plan built around it.",
+      "next": [
+        "What's your coaching style?",
+        "How long is a lesson?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "length",
+      "covers": "How long lessons or sessions last.",
+      "answer": "Lessons are 60 minutes. Hitting sessions run 60 minutes or longer.",
+      "next": [
+        "How much are lessons?",
+        "When are you free?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "experience",
+      "covers": "Isaac's background, experience, qualifications, how long he has coached, where he coached before, or his playing history.",
+      "answer": "I've been coaching since 2023. I started as a Junior Pro at LifeSport Libertyville, then joined the Pro Staff of Grip N Rip, the junior program at Newport Beach Tennis Club. I played four years of high school varsity.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "More about me"
+        }
+      ],
+      "next": [
+        "What's your coaching style?",
+        "What do people say about you?",
+        "Who do you teach?"
+      ]
+    },
+    {
+      "id": "approach",
+      "covers": "Isaac's coaching style, philosophy, or how he teaches.",
+      "answer": "Fundamentals first, then everything else. Getting the basics right early means progress keeps compounding, and almost every player improves faster than they expect once the practice is deliberate. You leave each lesson with a practice plan for between sessions.",
+      "next": [
+        "How long have you been coaching?",
+        "Who do you teach?",
+        "Which lesson fits me?"
+      ]
+    },
+    {
+      "id": "matchplay",
+      "covers": "Preparing for tournaments, matches, high school tennis, competitive play, or playing sets.",
+      "answer": "Private lessons include match-readiness for tournament play, and in a hitting session we can play tie-breaks and sets on request.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "How much is a private lesson?",
+        "Can we play sets?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "reviews",
+      "covers": "Reviews, testimonials, references, or what other people say about Isaac.",
+      "answer": "Brice Krizman, who mentored me at LifeSport Libertyville, writes about the work ethic that took me from student to Junior Professional, coaching Red Ball, Orange Ball and high school match play. Albert Kim calls me a methodical teacher with real attention to detail. Both reviews are on this page.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#reviews",
+          "label": "Read the reviews"
+        }
+      ],
+      "next": [
+        "How long have you been coaching?",
+        "What's your coaching style?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "contact",
+      "covers": "How to contact Isaac, his email address, or asking a question directly.",
+      "answer": "Email is quickest: isaacleetennis@gmail.com. Tell me your level, what you're working on and when you're free.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "Tennis lessons",
+          "label": "Email me"
+        }
+      ],
+      "next": [
+        "When are you free?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "covers": "Isaac's career, résumé, work experience outside tennis, internships, or hiring him for a job.",
+      "answer": "Yes — I'm looking for a summer 2027 internship in business development or partnerships. My career portfolio has my experience and résumé.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/portfolio/",
+          "label": "Career portfolio"
+        }
+      ],
+      "next": [
+        "How long have you been coaching?",
+        "What's your email?"
+      ]
+    }
+  ],
+  "fallback_next": [
+    "How much are lessons?",
+    "Where are lessons?",
+    "How do I book?"
+  ]
+}
