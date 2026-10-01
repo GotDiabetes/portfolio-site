@@ -56,14 +56,27 @@
 
   root.hidden = false;
 
-  /* On a phone the launcher floats over full-width buttons, so it stays out
-     of the way while the hero's own Book button is on screen (the CSS only
-     acts on this class under 560px). */
-  var heroActions = document.querySelector(".hero .actions");
-  if (heroActions && "IntersectionObserver" in window) {
+  /* On a phone the launcher floats over the hero's headline, intro and Book
+     button, so it waits until the hero has scrolled away (the CSS only acts
+     on this class under 560px). */
+  var hero = document.querySelector(".hero");
+  if (hero && "IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
       root.classList.toggle("is-tucked", entries[0].isIntersecting);
-    }).observe(heroActions);
+    }).observe(hero);
+  }
+
+  /* The launcher is black, so over the page's black bands (statement,
+     contact, footer) it would vanish: while one of them is behind it —
+     the bottom tenth of the screen — it turns white. */
+  var darkBands = document.querySelectorAll(".statement, .contact, .footer");
+  if (darkBands.length && "IntersectionObserver" in window) {
+    var behind = new Set();
+    var darkWatch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) behind.add(e.target); else behind.delete(e.target); });
+      root.classList.toggle("on-dark", behind.size > 0);
+    }, { rootMargin: "-90% 0px 0px 0px" });
+    darkBands.forEach(function (el) { darkWatch.observe(el); });
   }
 
   /* ------------------------------------------------------ Open / close -- */

@@ -24,7 +24,9 @@
           "Helvetica Neue", Arial, sans-serif;
 
   --wrap: 1140px;
-  --pad: clamp(1.25rem, 5vw, 2.5rem);
+  /* At least the safe area, so on an iPhone held sideways (viewport-fit=cover)
+     no text sits under the notch or the rounded corner. */
+  --pad: max(clamp(1.25rem, 5vw, 2.5rem), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   --section-y: clamp(4rem, 9vw, 7rem);
 
   --radius: 6px;
@@ -399,6 +401,9 @@ dl, dd { margin: 0; }
 }
 .ask-launch:hover { background: #383838; transform: translateY(-1px); }
 .ask.is-open .ask-launch { background: #383838; }
+/* Over the black bands it inverts, like the page's own buttons do there. */
+.ask.on-dark .ask-launch { background: #fff; color: var(--ink); box-shadow: 0 8px 24px rgba(0, 0, 0, .45); }
+.ask.on-dark .ask-launch:hover { background: #f0efe9; }
 
 .ask-panel {
   display: flex; flex-direction: column;
@@ -527,6 +532,9 @@ dl, dd { margin: 0; }
     margin: 0 max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) 0;
   }
   .ask.is-open .ask-launch { display: none; }
+  /* Room at the very bottom of the page, so the last line of the footer can
+     scroll clear of the launcher instead of ending underneath it. */
+  .footer { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
   /* A compact square, so it covers as little as possible of the full-width
      buttons it floats over; the label stays for screen readers. While the
      hero's own Book button is on screen the launcher steps out entirely. */
@@ -963,6 +971,11 @@ body.modal-open { overflow: hidden; }
   .hero { padding-block: 2.5rem 1rem; }
   .hero-photo { order: -1; }
   .hero-photo img, .about-photo img { aspect-ratio: 3/2; }
+  /* A phone on its side is short and wide: a 3:2 photo there is taller than
+     the screen, and the headline starts below the fold. Cap it. */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .hero-photo img { aspect-ratio: auto; height: 62vh; object-position: 50% 30%; }
+  }
   .about-photo { order: -1; }
   .lesson-list, .review-list { grid-template-columns: 1fr; }
   .contact-details { margin-top: 1rem; }
