@@ -4,6 +4,8 @@ name = "lee-tennis-jev"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
+# Only the one workers.dev address; no extra per-version preview URLs.
+preview_urls = false
 
 # 6 matches a minute per visitor.
 [[ratelimits]]
