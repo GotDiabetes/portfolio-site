@@ -228,6 +228,21 @@ dl, dd { margin: 0; }
 }
 .hero-sub { font-size: 1.1875rem; color: var(--muted); max-width: 42ch; }
 
+/* Isaac's emoji, right after his name in the intro (images/isaac-emoji.svg,
+   drawn from the hero photo). It sits like a glyph: em-sized, on the text's
+   baseline, never splitting from the name across a line break, and it gives
+   a small wave of a tilt on hover. Decorative: the name is already text. */
+.me { white-space: nowrap; color: var(--text); }
+.me-emoji {
+  display: inline-block;
+  width: 1.45em; height: 1.45em;
+  margin-left: .22em;
+  vertical-align: -.36em;
+  transform-origin: 50% 85%;
+  transition: transform .45s var(--ease);
+}
+.me:hover .me-emoji { transform: rotate(-10deg) scale(1.12); }
+
 .hero-facts {
   display: flex; flex-wrap: wrap; gap: 2.5rem;
   margin-top: 2.75rem; padding-top: 1.75rem;
@@ -375,6 +390,34 @@ dl, dd { margin: 0; }
 .matcher-result p + p { color: var(--muted); }
 .matcher-actions { margin-top: .9rem; }
 .matcher-note { margin-top: .9rem; font-size: .8125rem; color: var(--muted); }
+
+/* ----------------------------------------------------------- Book FX -- */
+/* The ball that comes off a Book button (bookfx.js). One fixed layer above
+   everything, the calendar's popup included, that never takes a click; the
+   pieces are positioned by the script and animated with Web Animations.
+   The optic yellow is the page's one deliberate colour, and only for the
+   second the ball is in the air. */
+.bookfx {
+  position: fixed; inset: 0; z-index: 2147483647;
+  pointer-events: none; overflow: hidden;
+}
+.bookfx > span { position: absolute; display: block; will-change: transform, opacity; }
+.bookfx-ring {
+  width: 120px; height: 120px;
+  border: 2px solid; border-radius: 50%;
+}
+.bookfx-fuzz {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #d9ef3f;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08);
+}
+.bookfx-fuzz:nth-child(3n) { background: #fff; }
+.bookfx-ball { width: 30px; height: 30px; }
+.bookfx-ball svg { display: block; width: 30px; height: 30px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
+.bookfx-shadow {
+  width: 22px; height: 6px; border-radius: 50%;
+  background: rgba(0, 0, 0, .45); filter: blur(1.5px);
+}
 
 /* --------------------------------------------------------- Ask Isaac -- */
 /* The chat in the corner (ask.js). A black launcher that reads like the
@@ -809,6 +852,24 @@ dl, dd { margin: 0; }
    relying on source order to break a specificity tie. */
 .js .hero-drop.is-in .drop-word { transform: none; opacity: 1; }
 
+/* The "o" of "lessons" is a tennis ball (ballo.js). The letter stays in
+   the text, transparent, holding its exact width; the ball is drawn over
+   it, sized and placed by the script from the font's own metrics. The
+   ball is the page's one colour, the same one that comes off a Book
+   button. Once it has dropped in, the line's clip is lifted so a hop can
+   clear the line above. */
+.ball-o { position: relative; display: inline-block; }
+.ball-o.is-ball { color: transparent; }
+.ball-o-probe { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+.ball-o-ball {
+  position: absolute;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  cursor: pointer;
+  filter: drop-shadow(0 .02em .02em rgba(0, 0, 0, .18));
+}
+.hero-drop.is-settled .drop-line { overflow: visible; }
+
 /* Photos fade in while easing back from a slight zoom. */
 .fade-img { border-radius: var(--radius); overflow: hidden; }
 
@@ -1070,6 +1131,7 @@ body.modal-open { overflow: hidden; }
   .btn:hover, .lesson:hover { transform: none; }
   .morph-stage .review, .morph-stage .review .avatar { transition: opacity .55s var(--ease); }
   .hero-photo picture { animation: none; }
+  .me:hover .me-emoji { transform: none; }
   .photo:hover img { transform: none; }
   .modal-card, .modal[open] .modal-card { transform: none; }
 }

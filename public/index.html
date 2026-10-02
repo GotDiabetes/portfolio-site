@@ -29,7 +29,7 @@
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261001b" />
+  <link rel="stylesheet" href="tennis.css?v=20261002d" />
   <link rel="stylesheet" href="focus.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
@@ -152,10 +152,12 @@
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">Private</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">tennis</span></span>
-            <span class="drop-line"><span class="drop-word" style="--d:.18s">lessons</span></span>
+            <!-- The "o" becomes a tennis ball (ballo.js); the letter stays in
+                 the text, so the heading still reads "lessons". -->
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">less<span class="ball-o">o</span>ns</span></span>
           </h1>
           <p class="hero-sub fade" style="--d:.12s">
-            I'm Isaac Lee. I coach juniors and adults at my home court in Irvine —
+            I'm <span class="me">Isaac Lee<img class="me-emoji" src="images/isaac-emoji.svg" width="28" height="28" alt="" /></span>. I coach juniors and adults at my home court in Irvine —
             one-on-one sessions built on solid fundamentals and steady, deliberate practice.
           </p>
 
@@ -677,5 +679,7 @@
   <script src="ask.js?v=4" defer></script>
   <script src="morph.js?v=2" defer></script>
   <script src="hero.js?v=1" defer></script>
+  <script src="bookfx.js?v=3" defer></script>
+  <script src="ballo.js?v=1" defer></script>
 </body>
 </html>
