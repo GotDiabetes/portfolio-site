@@ -9,10 +9,16 @@
      6. Email buttons open Gmail
      7. Booking before the calendar script has arrived
      8. Footer year
+     9. Language menu
+
+   Words this file writes into the page come from window.I18N on the
+   translated pages (tools/i18n/), and fall back to English here.
    ========================================================================== */
 
 (function () {
   "use strict";
+
+  var T = window.I18N || {};
 
   /* ------------------------------------------------------- 1. Fade in -- */
   // .fade lifts text and blocks; .fade-img eases photos out of a slight zoom.
@@ -158,7 +164,7 @@
       var email = copyBtn.getAttribute("data-email") || "";
       var original = copyBtn.textContent;
       var done = function () {
-        copyBtn.textContent = "Copied";
+        copyBtn.textContent = T.copied || "Copied";
         window.setTimeout(function () { copyBtn.textContent = original; }, 1600);
       };
 
@@ -189,14 +195,14 @@
     if (!nav) return;
     nav.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "Open menu");
+    toggle.setAttribute("aria-label", T.menuOpen || "Open menu");
   }
 
   if (nav && toggle) {
     toggle.addEventListener("click", function () {
       var open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      toggle.setAttribute("aria-label", open ? (T.menuClose || "Close menu") : (T.menuOpen || "Open menu"));
     });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
     /* A tap anywhere outside the menu and its toggle closes it, the way every
@@ -293,7 +299,7 @@
 
     var label = el.querySelector(".cta-full") || el;
     var original = label.textContent;
-    label.textContent = "Loading calendar…";
+    label.textContent = T.loadingCal || "Loading calendar…";
     el.setAttribute("aria-busy", "true");
 
     var fallback = window.setTimeout(function () {
@@ -319,4 +325,20 @@
   /* ----------------------------------------------------- 8. Footer year -- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
+
+  /* --------------------------------------------------- 9. Language menu --
+     A <details> in the header, so it opens and its links work with no
+     script at all. This only adds the closing every other overlay on the
+     page has: a tap outside, Escape, or opening the mobile menu. */
+  var lang = document.querySelector(".lang");
+  if (lang) {
+    var closeLang = function () { lang.removeAttribute("open"); };
+    document.addEventListener("click", function (e) {
+      if (lang.open && !lang.contains(e.target)) closeLang();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && lang.open) { closeLang(); lang.querySelector("summary").focus(); }
+    });
+    lang.addEventListener("toggle", function () { if (lang.open && nav) closeMenu(); });
+  }
 })();

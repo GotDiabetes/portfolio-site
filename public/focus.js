@@ -51,9 +51,22 @@
     line.className = "fr-line";
     line.setAttribute("aria-hidden", "true");
 
+    /* Chinese and Japanese don't put spaces between words, so on those
+       pages the browser's own word breaker finds them; punctuation stays
+       with the word before it, as the full stop does in English. */
     var words = [];
-    text.split(" ").forEach(function (w, i) {
-      if (i) line.appendChild(document.createTextNode(" "));
+    var pieces = text.split(" ");
+    var lang = document.documentElement.lang;
+    var segmented = /^(zh|ja)/i.test(lang) && window.Intl && Intl.Segmenter;
+    if (segmented) {
+      pieces = [];
+      Array.from(new Intl.Segmenter(lang, { granularity: "word" }).segment(text)).forEach(function (s) {
+        if (s.isWordLike || !pieces.length) pieces.push(s.segment);
+        else pieces[pieces.length - 1] += s.segment;
+      });
+    }
+    pieces.forEach(function (w, i) {
+      if (i && !segmented) line.appendChild(document.createTextNode(" "));
       var s = document.createElement("span");
       s.className = "fr-word";
       s.textContent = w;

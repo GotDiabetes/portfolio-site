@@ -1,0 +1,291 @@
+{
+  "_readme": "Built by tools/i18n/build.mjs from ask.json and tools/i18n/es.mjs; edit those, not this. The Worker still picks topics from the English file.",
+  "greeting": "¡Hola! Estas son mis respuestas a lo que más me preguntan. Prueba con precios, dónde entreno, a quién enseño o cómo reservar.",
+  "fallback": "Eso no lo tengo escrito aquí. Escríbeme por correo y te respondo directamente.",
+  "unavailable": "El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.",
+  "topics": [
+    {
+      "id": "hello",
+      "answer": "¡Hola! Pregúntame por las clases, los precios, dónde entreno o cómo reservar.",
+      "next": [
+        "¿Cuánto cuestan las clases?",
+        "¿Dónde son las clases?",
+        "¿Qué clase me conviene?"
+      ]
+    },
+    {
+      "id": "thanks",
+      "answer": "Cuando quieras. Nos vemos en la cancha.",
+      "next": [
+        "¿Cómo reservo?",
+        "¿Cuál es tu correo?"
+      ]
+    },
+    {
+      "id": "prices",
+      "answer": "Las clases particulares cuestan $80 la hora. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean: dime cuántos son y te paso el precio.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Qué clase me conviene?",
+        "¿Se paga por adelantado?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "private",
+      "answer": "Una clase particular es uno a uno, a $80 la hora, para juveniles y adultos, adaptada a tu nivel. Trabajamos la técnica de golpes y saque, el juego de pies y el desplazamiento, las pelotas más lentas y suaves con las que aprenden los más pequeños y la preparación para torneos, y te llevas un plan de práctica para entre sesiones.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Cómo es la primera clase?",
+        "¿Cuánto dura una clase?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "semi",
+      "answer": "La semiprivada es para dos jugadores de nivel parecido en una cancha, que comparten la hora y el costo: $110 la hora, $55 cada uno. El mismo trabajo de golpes y saque que en una particular, más peloteos y puntos reales entre ustedes, y colocación de dobles si es para lo que entrenan. Cada jugador recibe correcciones individuales. Trae a tu compañero o pídeme que te busque uno.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        }
+      ],
+      "next": [
+        "¿Me puedes buscar un compañero?",
+        "¿Cuánto cuesta una clase particular?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "hitting",
+      "answer": "Una sesión de peloteo es para pelotear, no para entrenar: $45 la hora, de 60 minutos o más. Te lanzo bolas y peloteo a tu nivel para que acumules repeticiones: peloteos cruzados y paralelos, práctica de saque y devolución con alguien que de verdad devuelve, y tie-breaks o sets si los pides.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "¿Cuánto dura una sesión?",
+        "¿Podemos jugar sets?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "clinics",
+      "answer": "Las clínicas para adultos son grupos pequeños en una sola cancha: ejercicios y juegos con bola viva con suficiente rotación para que nadie se quede parado, trabajando el aguante en el peloteo y la consistencia bajo presión. El precio es por grupo: escríbeme cuántos son y te paso el precio. Trae a tu propio grupo o pídeme que te incluya en uno.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "Adult clinics (Spanish page)",
+          "label": "Pedir precio por correo"
+        }
+      ],
+      "next": [
+        "¿Cuánto cuestan las clases particulares?",
+        "¿Dónde son las clases?",
+        "¿Cuál es tu correo?"
+      ]
+    },
+    {
+      "id": "which_lesson",
+      "answer": "Guía rápida: un jugador que quiere instrucción, clase particular. Dos de nivel parecido, semiprivada. Si solo quieres a alguien fiable con quien pelotear, sin instrucción, sesión de peloteo. Tres o más, clínica para adultos. El cuadro debajo de las tarjetas de clases también te puede recomendar una a partir de una frase.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#lessons",
+          "label": "Ver las clases"
+        }
+      ],
+      "next": [
+        "¿Cuánto cuestan las clases?",
+        "¿Enseñas a principiantes?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "location",
+      "answer": "Las clases son en mi cancha: las canchas de tenis de Toscana Apartments, en Irvine. Los jugadores vienen a mí; no puedo ir a otras canchas, clubes ni casas.",
+      "next": [
+        "¿Cuándo tienes disponibilidad?",
+        "¿Cuánto cuestan las clases?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "who",
+      "answer": "Juveniles desde principiantes absolutos (los más pequeños empiezan con una pelota más lenta y suave, así que los que nunca han jugado son bienvenidos) y adultos de cualquier nivel. La mayor parte de mi trabajo es con juveniles en desarrollo, y dirijo clínicas para adultos que quieren más consistencia y un plan más claro cuando empiezan los puntos.",
+      "next": [
+        "¿Cómo es tu estilo de enseñanza?",
+        "¿Qué clase me conviene?",
+        "¿Cuánto cuestan las clases?"
+      ]
+    },
+    {
+      "id": "booking",
+      "answer": "Pulsa cualquier botón de Reservar en esta página y elige un horario en el calendario. Reservar en línea solo aparta el horario: sin tarjeta ni depósito. Al reservar, cuéntame tu nivel y en qué estás trabajando, y llegaré con un plan.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Se paga por adelantado?",
+        "¿Cuándo tienes disponibilidad?",
+        "¿Cómo es la primera clase?"
+      ]
+    },
+    {
+      "id": "availability",
+      "answer": "Entrenar es un trabajo de medio tiempo para mí, que acomodo alrededor de mis estudios, así que mi horario es reducido. El calendario de reservas muestra todos los horarios libres. Si ninguno te sirve, escríbeme cuándo puedes y te respondo con mi disponibilidad.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "email",
+          "subject": "Availability (Spanish page)",
+          "label": "Escríbeme"
+        }
+      ],
+      "next": [
+        "¿Cómo reservo?",
+        "¿Dónde son las clases?",
+        "¿Cuál es tu correo?"
+      ]
+    },
+    {
+      "id": "payment",
+      "answer": "Pagas en persona. Reservar en línea aparta el horario: sin tarjeta ni depósito.",
+      "next": [
+        "¿Cuánto cuestan las clases?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "first_session",
+      "answer": "Cuando reserves, cuéntame tu nivel y en qué estás trabajando, y llegaré a la primera sesión con un plan hecho para ti.",
+      "next": [
+        "¿Cómo es tu estilo de enseñanza?",
+        "¿Cuánto dura una clase?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "length",
+      "answer": "Las clases duran 60 minutos. Las sesiones de peloteo duran 60 minutos o más.",
+      "next": [
+        "¿Cuánto cuestan las clases?",
+        "¿Cuándo tienes disponibilidad?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "experience",
+      "answer": "Entreno desde 2023. Empecé como Junior Pro en LifeSport Libertyville y después me uní al Pro Staff de Grip N Rip, el programa juvenil del Newport Beach Tennis Club. Jugué cuatro años en el equipo varsity de mi preparatoria.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "Más sobre mí"
+        }
+      ],
+      "next": [
+        "¿Cómo es tu estilo de enseñanza?",
+        "¿Qué dice la gente de ti?",
+        "¿A quién enseñas?"
+      ]
+    },
+    {
+      "id": "approach",
+      "answer": "Primero los fundamentos, después todo lo demás. Asentar bien lo básico desde temprano hace que el progreso se siga acumulando, y casi todos los jugadores mejoran más rápido de lo que esperan cuando la práctica es deliberada. Sales de cada clase con un plan de práctica para entre sesiones.",
+      "next": [
+        "¿Cuánto tiempo llevas entrenando?",
+        "¿A quién enseñas?",
+        "¿Qué clase me conviene?"
+      ]
+    },
+    {
+      "id": "matchplay",
+      "answer": "Las clases particulares incluyen preparación para competir en torneos, y en una sesión de peloteo podemos jugar tie-breaks y sets si los pides.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "¿Cuánto cuesta una clase particular?",
+        "¿Podemos jugar sets?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "reviews",
+      "answer": "Brice Krizman, mi mentor en LifeSport Libertyville, escribe sobre la ética de trabajo que me llevó de alumno a Junior Professional, entrenando Red Ball, Orange Ball y partidos de preparatoria. Albert Kim dice que soy un profesor metódico y muy atento al detalle. Las dos opiniones están en esta página.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#reviews",
+          "label": "Leer las opiniones"
+        }
+      ],
+      "next": [
+        "¿Cuánto tiempo llevas entrenando?",
+        "¿Cómo es tu estilo de enseñanza?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "contact",
+      "answer": "El correo es lo más rápido: isaacleetennis@gmail.com. Cuéntame tu nivel, en qué estás trabajando y cuándo puedes.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "Tennis lessons (Spanish page)",
+          "label": "Escríbeme"
+        }
+      ],
+      "next": [
+        "¿Cuándo tienes disponibilidad?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "answer": "Sí: busco una pasantía para el verano de 2027 en desarrollo de negocios o alianzas. Mi portafolio profesional tiene mi experiencia y mi currículum.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/portfolio/",
+          "label": "Portafolio profesional"
+        }
+      ],
+      "next": [
+        "¿Cuánto tiempo llevas entrenando?",
+        "¿Cuál es tu correo?"
+      ]
+    }
+  ],
+  "fallback_next": [
+    "¿Cuánto cuestan las clases?",
+    "¿Dónde son las clases?",
+    "¿Cómo reservo?"
+  ]
+}

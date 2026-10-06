@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from index.html and tools/i18n/ko.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Lee Tennis Co. — 캘리포니아 어바인 개인 테니스 레슨</title>
+  <meta name="description"
+        content="캘리포니아 어바인의 개인 테니스 레슨. Isaac Lee와 함께하는 1:1 코칭 시간당 $80, 2인 레슨 시간당 $110, 히팅 파트너 세션 시간당 $45, 소규모 성인 클리닉." />
+  <link rel="canonical" href="https://leetennisco.com/ko/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lee Tennis Co. — 캘리포니아 어바인 개인 테니스 레슨" />
+  <meta property="og:description"
+        content="캘리포니아 어바인의 개인 테니스 레슨. 1:1 코칭, 히팅 파트너 세션, 소규모 성인 클리닉." />
+  <meta property="og:url" content="https://leetennisco.com/ko/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/focus.css?v=1" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Lee Tennis Co.",
+    "alternateName": "Isaac Lee Tennis",
+    "description": "Private tennis coaching in Irvine, California.",
+    "url": "https://leetennisco.com/",
+    "email": "isaacleetennis@gmail.com",
+    "priceRange": "$45-$110",
+    "areaServed": { "@type": "City", "name": "Irvine, California" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="Lee Tennis Co. — 홈">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 모노그램" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>레슨 예약</a>
+        <a href="#lessons">레슨</a>
+        <a href="#about">소개</a>
+        <a href="#reviews">후기</a>
+        <a href="#contact">문의</a>
+        <a class="nav-portfolio" href="/portfolio/">
+          <span class="np-label"><span class="np-text" data-text="커리어 포트폴리오">커리어 포트폴리오</span></span>
+          <svg class="np-arrow" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+            <path pathLength="1" d="M1.5 7h10.5M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </nav>
+
+      <details class="lang">
+        <summary aria-label="언어 (Language): 한국어">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">KO</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/" hreflang="en" lang="en">English</a>
+          <a href="/es/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/" hreflang="ko" lang="ko" aria-current="page">한국어</a>
+          <a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="레슨 예약" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
+        <span class="cta-full">레슨 예약</span><span class="cta-short" aria-hidden="true">예약</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="메뉴 열기">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow fade">개인 코칭 · 어바인 Toscana 코트</p>
+          <h1 class="hero-drop">
+            <span class="drop-line"><span class="drop-word">개인</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.09s">테니스</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">레슨<span class="ball-o ball-stop" aria-hidden="true"></span></span></span>
+          </h1>
+          <p class="hero-sub fade" style="--d:.12s">
+            저는 <span class="me">Isaac Lee<img class="me-emoji" src="/images/isaac-emoji.svg" width="28" height="28" alt="" /></span>예요. 어바인의 제 홈 코트에서 주니어와 성인을 가르쳐요. 탄탄한 기본기와 꾸준하고 의식적인 연습을 바탕으로 한 1:1 수업이에요.
+          </p>
+
+          <dl class="hero-facts fade" style="--d:.16s">
+            <div><dt>개인 레슨</dt><dd>$80<span>/시간</span></dd></div>
+            <div><dt>히팅 파트너</dt><dd>$45<span>/시간</span></dd></div>
+            <div><dt>레슨은 제 홈 코트에서</dt><dd>어바인 Toscana</dd></div>
+          </dl>
+
+          <div class="actions fade" style="--d:.2s">
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>레슨 예약</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Korean%20page)" data-mail="Tennis%20lessons%20(Korean%20page)">이메일 보내기</a>
+          </div>
+          <p class="book-note hero-note fade" style="--d:.24s">카드도 보증금도 필요 없어요. 예약은 시간만 잡아 둬요.</p>
+        </div>
+
+        <figure class="hero-photo fade-img">
+          <picture>
+            <source type="image/webp" srcset="/images/pointing-480.webp 480w, /images/pointing.webp 960w"
+                    sizes="(max-width: 940px) 100vw, 46vw" />
+            <img src="/images/pointing.jpg" srcset="/images/pointing-480.jpg 480w, /images/pointing.jpg 960w"
+                 sizes="(max-width: 940px) 100vw, 46vw"
+                 width="960" height="1280" fetchpriority="high"
+                 alt="레슨 중 드릴을 지시하는 Isaac Lee" />
+          </picture>
+          <video class="hero-loop" data-src="" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="wrap">
+        <blockquote class="fade" data-focus-reveal="hover">
+          테니스는 모두를 위한 운동이에요. 의식적으로 연습하기 시작하면 거의 모든 선수가 생각보다 빨리 늘어요.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="wrap section" id="lessons">
+      <header class="section-head">
+        <p class="eyebrow fade">레슨</p>
+        <h2 class="fade" style="--d:.06s">함께하는 네 가지 방법</h2>
+        <p class="section-sub fade" style="--d:.12s">
+          선수마다 출발점이 달라요. 수업은 실력과 코트에 나올 수 있는 횟수에 맞춰 짜요.
+        </p>
+      </header>
+
+      <div class="lesson-list">
+        <article class="lesson fade" data-lesson="private">
+          <h3>개인 레슨</h3>
+          <p class="price">$80<span>/시간</span></p>
+          <p>
+            주니어와 성인 모두를 위한 1:1 수업이에요. 스트로크와 서브 기술, 풋워크, 어린 초보자들이 배우는 느리고 부드러운 공, 그리고 레슨 사이에 실제로 해 볼 수 있는 연습 계획까지 다뤄요.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>개인 레슨 예약</a>
+            <button class="link-btn" type="button" data-open="modalPrivate" aria-label="개인 레슨에서 다루는 내용">다루는 내용</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="semi">
+          <h3>2인 레슨</h3>
+          <p class="price">$110<span>/시간 (2인) &mdash; 1인당 $55</span></p>
+          <p>
+            같은 레슨을 비슷한 실력의 두 사람이 함께 받아요. 개인 레슨보다 1인 비용이 적고, 혼자 공을 받는 대신 실제 랠리와 포인트로 연습할 수 있어요. 친구, 형제자매, 복식 파트너와 함께 오세요.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>2인 레슨 예약</a>
+            <button class="link-btn" type="button" data-open="modalSemi" aria-label="2인 레슨에서 다루는 내용">다루는 내용</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="hitting">
+          <h3>히팅 파트너 세션</h3>
+          <p class="price">$45<span>/시간</span></p>
+          <p>
+            지도 없이 공만 치는 시간이에요. 믿을 만한 상대와 공을 주고받고 싶은 선수를 위한 세션으로, 60분 이상 진행해요.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>히팅 세션 예약</a>
+            <button class="link-btn" type="button" data-open="modalHitting" aria-label="히팅 세션에서 다루는 내용">다루는 내용</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="group">
+          <h3>성인 클리닉</h3>
+          <p class="price">그룹 단위<span>, 인원에 따라 견적</span></p>
+          <p>
+            한 코트에서 소규모 그룹으로 드릴과 라이브 볼 게임을 해요. 로테이션이 충분해서 모두가 계속 공을 쳐요. 비용은 인원에 따라 달라요.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Korean%20page)" data-mail="Adult%20clinics%20(Korean%20page)">이메일로 견적 받기</a>
+            <button class="link-btn" type="button" data-open="modalAdult" aria-label="성인 클리닉에서 다루는 내용">다루는 내용</button>
+          </div>
+        </article>
+      </div>
+
+      <form class="matcher" id="matcher" hidden>
+        <label class="matcher-label" for="matchText">어떤 레슨이 맞을지 모르겠다면? 한 문장으로 자신을 소개해 주세요.</label>
+        <div class="matcher-row">
+          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
+                 placeholder="예: 중급자인데 서브를 고치고 싶어요" required>
+          <button class="btn btn-primary" type="submit">맞는 레슨 찾기</button>
+        </div>
+        <div class="matcher-result" role="status" aria-live="polite"></div>
+        <p class="matcher-note">AI가 문장을 읽고 레슨을 골라요. 이 사이트에는 아무것도 저장되지 않아요.</p>
+      </form>
+    </section>
+
+    <section class="band" id="about">
+      <div class="wrap section">
+        <div class="two-col">
+          <figure class="about-photo fade-img">
+            <picture>
+              <source type="image/webp" srcset="/images/coaching-clinic.webp" />
+              <img src="/images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
+                   alt="네트 앞에서 주니어 클리닉을 지도하는 Isaac Lee" />
+            </picture>
+          </figure>
+
+          <div class="about-text">
+            <p class="eyebrow fade">소개</p>
+            <h2 class="fade" style="--d:.06s">기본기가 먼저, 나머지는 그다음</h2>
+
+            <div class="fade" style="--d:.12s">
+              <p>
+                코치 생활은 3년째예요. LifeSport Libertyville에서 주니어 프로로 시작했고, 이후 Newport Beach Tennis Club의 주니어 프로그램인 Grip N Rip의 프로 스태프가 되었어요.
+              </p>
+              <p>
+                주로 성장 중인 주니어 선수들을 가르쳐요. 기본기를 일찍 제대로 잡아야 실력이 계속 쌓이거든요. 더 안정적인 플레이와, 실제 포인트가 시작됐을 때의 분명한 계획을 원하는 성인을 위한 클리닉도 운영해요.
+              </p>
+              <p>
+                고등학교 대표팀(varsity)에서 4년 동안 뛰었어요. 코칭은 학업과 병행하는 파트타임 일이라, 일정은 적게, 신중하게 잡아요.
+              </p>
+            </div>
+
+            <dl class="facts fade" style="--d:.18s">
+              <div><dt>홈 코트</dt><dd>어바인 Toscana</dd></div>
+              <div><dt>고교 대표팀</dt><dd>4년</dd></div>
+              <div><dt>일정</dt><dd>파트타임</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">코트에서</p>
+        <h2 class="fade" style="--d:.06s">실전 모습</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="/images/forehand.jpg" data-caption="포핸드, 실내 연습">
+          <picture>
+            <source type="image/webp" srcset="/images/forehand-600.webp 600w, /images/forehand.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/forehand.jpg" srcset="/images/forehand-600.jpg 600w, /images/forehand.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="포핸드를 치는 Isaac Lee" />
+          </picture>
+          <span class="photo-tag">포핸드</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/serve.jpg" data-caption="경기 중 서브">
+          <picture>
+            <source type="image/webp" srcset="/images/serve-600.webp 600w, /images/serve.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/serve.jpg" srcset="/images/serve-600.jpg 600w, /images/serve.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="경기 중 서브하는 Isaac Lee" />
+          </picture>
+          <span class="photo-tag">서브</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/ready.jpg" data-caption="준비 자세, 리턴을 기다리며">
+          <picture>
+            <source type="image/webp" srcset="/images/ready-600.webp 600w, /images/ready.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/ready.jpg" srcset="/images/ready-600.jpg 600w, /images/ready.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1600" loading="lazy"
+                 alt="베이스라인 뒤에서 준비 자세를 취한 Isaac Lee" />
+          </picture>
+          <span class="photo-tag">준비 자세</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="wrap section" id="reviews">
+      <header class="section-head">
+        <p class="eyebrow fade">후기</p>
+        <h2 class="fade" style="--d:.06s">제 코칭을 직접 본 분들의 이야기</h2>
+        <p class="section-sub fade" style="--d:.12s">영어로 쓰인 후기를 번역했어요.</p>
+      </header>
+
+      <div class="review-list">
+        <figure class="review fade">
+          <blockquote>
+            저는 LifeSport Libertyville에서 Isaac의 멘토로서 그의 성장을 가까이에서 지켜보았습니다. 그는 성실함과 자기 관리, 끊임없이 발전하려는 의지로 학생에서 주니어 프로가 되었고, 레드볼과 오렌지볼, 고등학교 경기 코칭에서 뛰어난 리더십과 모든 선수의 성장에 대한 애정을 보여 주었습니다.
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+            </span>
+            <span>
+              <strong>Brice Krizman</strong>
+              테니스 코치, LifeSport Libertyville
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="review fade">
+          <blockquote>
+            Isaac Lee는 어린 시절부터 테니스에 헌신해 온 훌륭한 선수입니다. 뛰어난 선수일 뿐 아니라, 체계적인 지도 방식과 세심함을 갖춘 더 훌륭한 멘토이기도 합니다.
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+            </span>
+            <span>
+              <strong>Albert Kim</strong>
+              노스웨스턴 대학교 학생
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="영상 재생: 2024년 11월, LifeSport Libertyville에서 전 코치와 경기하는 Isaac Lee">
+          <picture>
+            <source type="image/webp" srcset="/images/lifesport-2024-640.webp 640w, /images/lifesport-2024.webp 1280w"
+                    sizes="(max-width: 940px) 100vw, 1140px" />
+            <img src="/images/lifesport-2024.jpg" srcset="/images/lifesport-2024-640.jpg 640w, /images/lifesport-2024.jpg 1280w"
+                 sizes="(max-width: 940px) 100vw, 1140px"
+                 width="1280" height="720" loading="lazy" alt="" />
+          </picture>
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">포인트 보기</span>
+        </button>
+        <figcaption>
+          이번만은 코칭이 아니에요. 고등학교 선수 시절이던 2024년 11월, LifeSport Libertyville에서 전 코치와 랠리한 영상이에요.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section notes-section" id="before-you-book">
+      <h2 class="fade">예약 전에 알아 두세요</h2>
+      <dl class="notes fade" style="--d:.06s">
+        <div>
+          <dt>장소</dt>
+          <dd>어바인 Toscana Apartments 테니스 코트. 레슨은 제 홈 코트에서 해요 &mdash; 출장 레슨은 하지 않아요.</dd>
+        </div>
+        <div>
+          <dt>대상</dt>
+          <dd>완전 초보부터 시작하는 주니어(가장 어린 선수들은 느리고 부드러운 공으로 시작해요)와 모든 수준의 성인.</dd>
+        </div>
+        <div>
+          <dt>결제</dt>
+          <dd>현장에서 직접 해요. 온라인 예약은 시간만 잡아 둬요 &mdash; 카드도 보증금도 필요 없어요.</dd>
+        </div>
+        <div>
+          <dt>첫 수업</dt>
+          <dd>예약할 때 실력과 연습하고 싶은 부분을 알려 주시면, 계획을 준비해 둘게요.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap section">
+        <div class="contact-grid">
+          <div class="contact-text">
+            <h2 class="fade">이제 코트로 나가 볼까요</h2>
+            <p class="fade" style="--d:.06s">
+              달력에서 시간을 고르고, 예약할 때 실력과 연습하고 싶은 부분을 알려 주세요. 첫 수업에 맞춤 계획을 준비해 둘게요.
+            </p>
+            <div class="actions fade" style="--d:.12s">
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>레슨 예약</a>
+              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Korean%20page)" data-mail="Tennis%20lessons%20(Korean%20page)">먼저 이메일 보내기</a>
+            </div>
+            <p class="book-note fade" style="--d:.16s">예약은 시간만 잡아 둬요. 카드도 보증금도 필요 없고, 결제는 현장에서 해요.
+              <button class="link-btn" type="button" data-open="bookingModal">다른 연락 방법</button></p>
+          </div>
+
+          <dl class="contact-details fade" style="--d:.18s">
+            <div>
+              <dt>이메일</dt>
+              <dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>홈 코트</dt>
+              <dd>어바인 Toscana Apartments 테니스 코트</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 캘리포니아 어바인</p>
+      <p class="footer-links">
+        <a href="/portfolio/">커리어 포트폴리오</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="bookingModal" aria-labelledby="bookingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="bookingTitle" tabindex="-1" autofocus>연락하기</h3>
+      <p>
+        이메일이 가장 빨라요. 자세히 적고 싶다면, 신청서에서 실력과 목표, 가능한 시간을 물어봐요.
+      </p>
+      <dl class="contact-details modal-details">
+        <div><dt>이메일</dt><dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSdlKDW_YhhF3B93UG77lXCi8AlWbZAEvEwlXJ3_dHlmn4HmRQ/viewform"
+           target="_blank" rel="noopener noreferrer">신청서 열기</a>
+        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="isaacleetennis@gmail.com">이메일 복사</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalPrivate" aria-labelledby="privateTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="privateTitle" tabindex="-1" autofocus>개인 레슨</h3>
+      <p class="price">$80<span>/시간</span></p>
+      <p>주니어와 성인 모두 &mdash; 같은 1:1 형식으로, 실력에 맞춰 진행해요.</p>
+      <ul>
+        <li>스트로크와 서브 기술</li>
+        <li>풋워크와 코트 움직임</li>
+        <li>어린 선수를 위한 레드, 오렌지, 그린 볼 단계 &mdash; 초보자가 배우는 느리고 덜 튀는 공</li>
+        <li>레슨 사이에 할 연습 계획</li>
+        <li>토너먼트 경기를 위한 실전 준비</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>개인 레슨 예약</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons%20(Korean%20page)" data-mail="Private%20lessons%20(Korean%20page)">이메일 보내기</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalSemi" aria-labelledby="semiTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="semiTitle" tabindex="-1" autofocus>2인 레슨</h3>
+      <p class="price">$110<span>/시간 (2인) &mdash; 1인당 $55</span></p>
+      <p>비슷한 실력의 두 선수가 한 코트에서 시간과 비용을 나눠요.</p>
+      <ul>
+        <li>개인 레슨과 같은 스트로크와 서브 기술</li>
+        <li>혼자 공을 받는 대신 파트너와 하는 실제 랠리와 포인트</li>
+        <li>복식을 준비한다면 복식 포지션과 커뮤니케이션</li>
+        <li>함께 하는 지도만이 아니라 선수마다 개별 피드백</li>
+        <li>두 선수의 실력이 비슷할 때 가장 좋아요. 누구도 기다리지 않도록요</li>
+        <li>파트너와 함께 오거나, 파트너를 찾아 달라고 요청하세요</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>2인 레슨 예약</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons%20(Korean%20page)" data-mail="Semi-private%20lessons%20(Korean%20page)">이메일 보내기</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="hittingTitle" tabindex="-1" autofocus>히팅 파트너 세션</h3>
+      <p class="price">$45<span>/시간</span></p>
+      <p>코칭이 아니라 히팅이에요. 실력에 맞춰 공을 넣어 주고 랠리해서, 지도 대신 반복 연습을 충분히 할 수 있어요.</p>
+      <ul>
+        <li>60분 이상</li>
+        <li>안정적인 크로스코트와 다운더라인 랠리</li>
+        <li>실제로 리턴하는 상대와 서브·리턴 연습</li>
+        <li>요청하면 타이브레이크와 세트 경기</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>히팅 세션 예약</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions%20(Korean%20page)" data-mail="Hitting%20partner%20sessions%20(Korean%20page)">이메일 보내기</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="adultTitle" tabindex="-1" autofocus>성인 클리닉</h3>
+      <p class="price">그룹 단위<span>, 인원에 따라 견적</span></p>
+      <p>그룹 단위로 가격을 정하기 때문에, 인원이 많을수록 1인당 비용이 줄어요. 몇 명인지 알려 주시면 견적을 드릴게요.</p>
+      <ul>
+        <li>한 코트에서 소규모 그룹</li>
+        <li>아무도 서 있지 않도록 로테이션하는 드릴과 라이브 볼 게임</li>
+        <li>랠리 지구력과 압박 속 안정감</li>
+        <li>그룹을 직접 꾸려 오거나, 기존 그룹에 넣어 달라고 요청하세요</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Korean%20page)" data-mail="Adult%20clinics%20(Korean%20page)">이메일로 견적 받기</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="사진 보기">
+    <button class="modal-close lightbox-close" data-close type="button" aria-label="닫기">&times;</button>
+    <figure>
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </dialog>
+
+  <div class="ask" id="ask" hidden>
+    <section class="ask-panel" id="askPanel" role="dialog" aria-labelledby="askTitle" hidden>
+      <header class="ask-head">
+        <div>
+          <h2 id="askTitle">Isaac에게 묻기</h2>
+          <p>답변은 제가 직접 썼고, AI가 골라 드려요.</p>
+        </div>
+        <div class="ask-tools">
+          <button class="ask-sound" type="button" aria-label="소리 끄기" title="소리 끄기">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path class="ask-sound-on" d="M13.5 7.2a4 4 0 0 1 0 5.6M15.6 5.2a7 7 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="ask-sound-off" d="M13.5 7.5l4 5M17.5 7.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="ask-close" type="button" aria-label="채팅 닫기">&times;</button>
+        </div>
+      </header>
+      <div class="ask-log" role="log" aria-live="polite" aria-relevant="additions" tabindex="-1"></div>
+      <form class="ask-form">
+        <input class="ask-input" id="askInput" name="question" type="text" maxlength="300" autocomplete="off"
+               aria-label="질문" placeholder="레슨, 가격, 시간 등을 물어보세요…" required>
+        <button class="ask-send" type="submit" aria-label="보내기">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </section>
+    <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Isaac에게 묻기</span>
+    </button>
+  </div>
+
+  <script>window.I18N = {"copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","어떤 레슨이 저에게 맞을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 몇 명인지 이메일로 알려 주시면 견적을 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script src="/tennis.js?v=20261006" defer></script>
+  <script src="/focus.js?v=3" defer></script>
+  <script src="/match.js?v=4" defer></script>
+  <script src="/ask.js?v=7" defer></script>
+  <script src="/hero.js?v=1" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/ballo.js?v=3" defer></script>
+</body>
+</html>

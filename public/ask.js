@@ -20,10 +20,17 @@
 
    Hidden unless there is a Worker to call: on localhost the local Worker on
    :8787, on the live site the jev-endpoint meta tag.
+
+   On a translated page (tools/i18n/), window.I18N supplies this file's
+   words and points it at that language's answers (/ko/ask.json and so
+   on). Jev reads questions in any of the languages; it still picks from
+   the English topics, and the page shows the translated answer.
    ========================================================================== */
 
 (function () {
   "use strict";
+
+  var T = window.I18N || {};
 
   var root = document.getElementById("ask");
   if (!root || !window.fetch) return;
@@ -41,7 +48,9 @@
   var send = root.querySelector(".ask-send");
 
   var MAIL_TO = "isaacleetennis@gmail.com";
-  var SUGGESTIONS = ["How much are lessons?", "Where are lessons?", "How do I book?", "Which lesson fits me?"];
+  var SUGGESTIONS = T.askSuggestions || ["How much are lessons?", "Where are lessons?", "How do I book?", "Which lesson fits me?"];
+  var DOWN = T.askDown || "The chat isn't answering right now. Email me and I'll get back to you.";
+  var EMAIL = { type: "email", subject: T.mailSubject || "Tennis lessons", label: T.emailMe || "Email me" };
   var MIN_THINK_MS = 650;     // the dots show at least this long
   var WORD_MS = 28;           // typing-out pace
 
@@ -53,6 +62,7 @@
   var lastTopics = [];     // what the last answer covered
   var asked = {};          // questions already asked, so chips don't repeat them
   var busy = false;
+  var latest = 0;          // numbers each message, so only the newest offers chips
 
   root.hidden = false;
 
@@ -95,8 +105,7 @@
       if (!log.childElementCount) greet();
     }, function () {
       if (!log.childElementCount) {
-        addMessage("isaac", "The chat isn't answering right now. Email me and I'll get back to you.",
-          [{ type: "email", subject: "Tennis lessons", label: "Email me" }], null, true);
+        addMessage("isaac", DOWN, [EMAIL], null, true);
       }
     });
     input.focus();
@@ -112,7 +121,7 @@
   function loadFaq() {
     if (faq) return Promise.resolve(faq);
     if (!faqLoading) {
-      faqLoading = fetch("/ask.json", { cache: "no-cache" })
+      faqLoading = fetch(T.askUrl || "/ask.json", { cache: "no-cache" })
         .then(function (r) { if (!r.ok) throw new Error("faq"); return r.json(); })
         .then(function (data) {
           faq = { data: data, byId: {} };
@@ -169,9 +178,9 @@
       .catch(function (err) {
         typing.remove();
         var text = err && err.message === "busy"
-          ? "That's a lot of questions at once. Give it a minute, or email me."
-          : (faq && faq.data.unavailable) || "The chat isn't answering right now. Email me and I'll get back to you.";
-        return addMessage("isaac", text, [{ type: "email", subject: "Tennis lessons", label: "Email me" }]);
+          ? T.askBusy || "That's a lot of questions at once. Give it a minute, or email me."
+          : (faq && faq.data.unavailable) || DOWN;
+        return addMessage("isaac", text, [EMAIL]);
       })
       .then(function () {
         window.clearTimeout(timer);
@@ -199,7 +208,7 @@
     var topics = ids.map(function (id) { return faq.byId[id]; }).filter(Boolean);
     if (!topics.length) {
       return addMessage("isaac", faq.data.fallback,
-        [{ type: "email", subject: "Question about lessons", label: "Email me" }],
+        [{ type: "email", subject: T.mailSubjectQuestion || "Question about lessons", label: EMAIL.label }],
         faq.data.fallback_next || SUGGESTIONS);
     }
     /* Two topics become one message, with each topic's buttons and
@@ -224,12 +233,13 @@
      growing copy is hidden from them so it isn't read word by word.
      Returns a promise that settles when the message is fully shown. */
   function addMessage(who, text, actions, next, quiet) {
+    var seq = ++latest;
     var msg = document.createElement("div");
     msg.className = "ask-msg ask-msg--" + who;
 
     var label = document.createElement("span");
     label.className = "ask-sr";
-    label.textContent = (who === "visitor" ? "You: " : "Isaac: ") + text.replace(/\n\n/g, " ");
+    label.textContent = (who === "visitor" ? T.askYou || "You: " : T.askIsaac || "Isaac: ") + text.replace(/\n\n/g, " ");
     msg.appendChild(label);
 
     var body = document.createElement("div");
@@ -248,7 +258,9 @@
     return typed.then(function () {
       var row = actionRow(actions);
       if (row) { row.classList.add("ask-arrive"); msg.appendChild(row); }
-      if (who === "isaac") chipsFor(next);
+      /* A visitor who asks while the greeting is still typing has moved
+         on; its suggestions would land under their question. */
+      if (who === "isaac" && seq === latest) chipsFor(next);
       scrollToAnswer(msg, who);
     });
   }
@@ -263,13 +275,16 @@
 
   /* Word by word, a paragraph at a time. The text is laid out in full from
      the start (the unrevealed words are transparent), so the bubble is its
-     final size at once and nothing below it jumps while it types. */
+     final size at once and nothing below it jumps while it types. Chinese
+     and Japanese have no spaces between words, so those pages type
+     character by character (I18N.typeBy). */
   function typeOut(body, paras) {
     var spans = [];
+    var byChar = T.typeBy === "char";
     paras.forEach(function (para) {
       var p = document.createElement("p");
-      para.split(" ").forEach(function (w, i) {
-        if (i) p.appendChild(document.createTextNode(" "));
+      (byChar ? Array.from(para) : para.split(" ")).forEach(function (w, i) {
+        if (i && !byChar) p.appendChild(document.createTextNode(" "));
         var s = document.createElement("span");
         s.className = "ask-w";
         s.textContent = w;
@@ -312,7 +327,7 @@
     var chips = document.createElement("div");
     chips.className = "ask-chips ask-arrive";
     chips.setAttribute("role", "group");
-    chips.setAttribute("aria-label", "Suggested questions");
+    chips.setAttribute("aria-label", T.askSuggested || "Suggested questions");
     list.forEach(function (q) {
       var b = document.createElement("button");
       b.type = "button";
@@ -345,20 +360,20 @@
       el = src.cloneNode(true);
     } else if (a.type === "email") {
       el = document.createElement("a");
-      var subject = encodeURIComponent(a.subject || "Tennis lessons");
+      var subject = encodeURIComponent(a.subject || EMAIL.subject);
       el.href = "mailto:" + MAIL_TO + "?subject=" + subject;
       el.setAttribute("data-mail", subject);
-      el.textContent = a.label || "Email me";
+      el.textContent = a.label || EMAIL.label;
     } else if (a.type === "link" && /^\/[^/]/.test(a.href || "")) {
       el = document.createElement("a");
       el.href = a.href;
-      el.textContent = a.label || "Open";
+      el.textContent = a.label || T.open || "Open";
     } else if (a.type === "scroll" && /^#[\w-]+$/.test(a.target || "")) {
       var target = document.querySelector(a.target);
       if (!target) return null;
       el = document.createElement("button");
       el.type = "button";
-      el.textContent = a.label || "Show me";
+      el.textContent = a.label || T.showMe || "Show me";
       el.addEventListener("click", function () {
         /* On a phone the panel covers the page, so get out of the way. */
         if (window.matchMedia("(max-width: 560px)").matches) close();
@@ -375,7 +390,7 @@
     var t = document.createElement("div");
     t.className = "ask-msg ask-msg--isaac ask-typing";
     t.setAttribute("role", "status");
-    t.setAttribute("aria-label", "Finding an answer");
+    t.setAttribute("aria-label", T.askFinding || "Finding an answer");
     t.innerHTML = '<span class="ask-dot"></span><span class="ask-dot"></span><span class="ask-dot"></span>';
     log.appendChild(t);
     log.scrollTop = log.scrollHeight;
@@ -420,8 +435,9 @@
     function render() {
       if (!soundBtn) return;
       soundBtn.classList.toggle("is-off", !on);
-      soundBtn.setAttribute("aria-label", on ? "Mute sounds" : "Turn sounds on");
-      soundBtn.title = on ? "Mute sounds" : "Turn sounds on";
+      var label = on ? T.soundMute || "Mute sounds" : T.soundOn || "Turn sounds on";
+      soundBtn.setAttribute("aria-label", label);
+      soundBtn.title = label;
     }
 
     function wake() {

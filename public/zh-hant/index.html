@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from index.html and tools/i18n/zh-hant.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Lee Tennis Co. — 加州爾灣網球私人課程</title>
+  <meta name="description"
+        content="加州爾灣的網球私人課程。跟 Isaac Lee 上課：一對一私人課每小時 $80，雙人課每小時 $110，陪打課每小時 $45，另有小型成人團體班。" />
+  <link rel="canonical" href="https://leetennisco.com/zh-hant/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lee Tennis Co. — 加州爾灣網球私人課程" />
+  <meta property="og:description"
+        content="加州爾灣的網球私人課程。一對一教學、陪打課和小型成人團體班。" />
+  <meta property="og:url" content="https://leetennisco.com/zh-hant/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/focus.css?v=1" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Lee Tennis Co.",
+    "alternateName": "Isaac Lee Tennis",
+    "description": "Private tennis coaching in Irvine, California.",
+    "url": "https://leetennisco.com/",
+    "email": "isaacleetennis@gmail.com",
+    "priceRange": "$45-$110",
+    "areaServed": { "@type": "City", "name": "Irvine, California" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="Lee Tennis Co. — 首頁">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 標誌" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="主選單">
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約課程</a>
+        <a href="#lessons">課程</a>
+        <a href="#about">關於我</a>
+        <a href="#reviews">評價</a>
+        <a href="#contact">聯絡</a>
+        <a class="nav-portfolio" href="/portfolio/">
+          <span class="np-label"><span class="np-text" data-text="職涯作品集">職涯作品集</span></span>
+          <svg class="np-arrow" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+            <path pathLength="1" d="M1.5 7h10.5M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </nav>
+
+      <details class="lang">
+        <summary aria-label="語言 (Language)：繁體中文">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">繁</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/" hreflang="en" lang="en">English</a>
+          <a href="/es/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/" hreflang="zh-Hant" lang="zh-Hant" aria-current="page">繁體中文</a>
+          <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="預約課程" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
+        <span class="cta-full">預約課程</span><span class="cta-short" aria-hidden="true">預約</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="開啟選單">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow fade">私人教學 · 爾灣 Toscana 球場</p>
+          <h1 class="hero-drop">
+            <span class="drop-line"><span class="drop-word">網球</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.09s">私人</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">課程<span class="ball-o ball-stop" aria-hidden="true"></span></span></span>
+          </h1>
+          <p class="hero-sub fade" style="--d:.12s">
+            我是 <span class="me">Isaac Lee<img class="me-emoji" src="/images/isaac-emoji.svg" width="28" height="28" alt="" /></span>。我在爾灣的主場教青少年和成人：一對一的課程，建立在扎實的基本功和穩定、有目標的練習上。
+          </p>
+
+          <dl class="hero-facts fade" style="--d:.16s">
+            <div><dt>私人課</dt><dd>$80<span>/小時</span></dd></div>
+            <div><dt>陪打</dt><dd>$45<span>/小時</span></dd></div>
+            <div><dt>上課地點：我的主場</dt><dd>爾灣 Toscana</dd></div>
+          </dl>
+
+          <div class="actions fade" style="--d:.2s">
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約課程</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Traditional%20Chinese%20page)" data-mail="Tennis%20lessons%20(Traditional%20Chinese%20page)">寄信給我</a>
+          </div>
+          <p class="book-note hero-note fade" style="--d:.24s">不需要信用卡，也不用訂金：預約只是幫你保留時間。</p>
+        </div>
+
+        <figure class="hero-photo fade-img">
+          <picture>
+            <source type="image/webp" srcset="/images/pointing-480.webp 480w, /images/pointing.webp 960w"
+                    sizes="(max-width: 940px) 100vw, 46vw" />
+            <img src="/images/pointing.jpg" srcset="/images/pointing-480.jpg 480w, /images/pointing.jpg 960w"
+                 sizes="(max-width: 940px) 100vw, 46vw"
+                 width="960" height="1280" fetchpriority="high"
+                 alt="Isaac Lee 在課堂上說明訓練內容" />
+          </picture>
+          <video class="hero-loop" data-src="" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="wrap">
+        <blockquote class="fade" data-focus-reveal="hover">
+          網球屬於每一個人。只要練習有目標，幾乎每位球員都會比自己預期的進步更快。
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="wrap section" id="lessons">
+      <header class="section-head">
+        <p class="eyebrow fade">課程</p>
+        <h2 class="fade" style="--d:.06s">四種上課方式</h2>
+        <p class="section-sub fade" style="--d:.12s">
+          每位球員的起點都不一樣。課程會依照你的程度和你能來球場的頻率安排。
+        </p>
+      </header>
+
+      <div class="lesson-list">
+        <article class="lesson fade" data-lesson="private">
+          <h3>一對一私人課</h3>
+          <p class="price">$80<span>/小時</span></p>
+          <p>
+            青少年和成人都適合的一對一課程。擊球與發球技術、步法、小朋友入門用的較慢較軟的球，以及一份兩次課之間你真的練得起來的練習計畫。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約私人課</a>
+            <button class="link-btn" type="button" data-open="modalPrivate" aria-label="私人課的內容">課程內容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="semi">
+          <h3>雙人課</h3>
+          <p class="price">$110<span>/小時（兩人）&mdash; 每人 $55</span></p>
+          <p>
+            同一堂課，由兩位程度相近的球員一起上。每人花得比私人課少，兩個人一起還能實際對打、打分數，而不是一個人接餵球。可以帶朋友、兄弟姊妹或雙打搭檔一起來。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約雙人課</a>
+            <button class="link-btn" type="button" data-open="modalSemi" aria-label="雙人課的內容">課程內容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="hitting">
+          <h3>陪打課</h3>
+          <p class="price">$45<span>/小時</span></p>
+          <p>
+            單純對打、不教學，適合只想找穩定對手練球的球員。每次 60 分鐘或更久。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>預約陪打課</a>
+            <button class="link-btn" type="button" data-open="modalHitting" aria-label="陪打課的內容">課程內容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="group">
+          <h3>成人團體班</h3>
+          <p class="price">以團體計價<span>，依人數報價</span></p>
+          <p>
+            一個場地的小團體，做專項訓練和實戰對打，輪替充足，每個人都能一直有球打。費用依你們的人數而定。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Traditional%20Chinese%20page)" data-mail="Adult%20clinics%20(Traditional%20Chinese%20page)">寄信詢價</a>
+            <button class="link-btn" type="button" data-open="modalAdult" aria-label="成人團體班的內容">課程內容</button>
+          </div>
+        </article>
+      </div>
+
+      <form class="matcher" id="matcher" hidden>
+        <label class="matcher-label" for="matchText">不確定哪種適合？用一句話介紹一下自己。</label>
+        <div class="matcher-row">
+          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
+                 placeholder="例如：中級程度，想改善發球" required>
+          <button class="btn btn-primary" type="submit">幫我找課程</button>
+        </div>
+        <div class="matcher-result" role="status" aria-live="polite"></div>
+        <p class="matcher-note">AI 會讀你的這句話來推薦課程。本網站不會儲存任何內容。</p>
+      </form>
+    </section>
+
+    <section class="band" id="about">
+      <div class="wrap section">
+        <div class="two-col">
+          <figure class="about-photo fade-img">
+            <picture>
+              <source type="image/webp" srcset="/images/coaching-clinic.webp" />
+              <img src="/images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
+                   alt="Isaac Lee 在網前指導青少年團體班" />
+            </picture>
+          </figure>
+
+          <div class="about-text">
+            <p class="eyebrow fade">關於我</p>
+            <h2 class="fade" style="--d:.06s">先打好基本功，其他的之後再說</h2>
+
+            <div class="fade" style="--d:.12s">
+              <p>
+                我已經教球三年。最早在 LifeSport Libertyville 擔任 Junior Pro，之後加入 Grip N Rip 的教練團（Pro Staff），那是 Newport Beach Tennis Club 的青少年計畫。
+              </p>
+              <p>
+                我大部分的工作是帶正在成長的青少年球員：及早把基本功打扎實，進步才會不斷累積。我也為成人開設團體班，幫助想打得更穩定、比分真正開始後策略更清楚的人。
+              </p>
+              <p>
+                我在高中校隊打了四年。教球是我配合學業的兼職工作，所以課表不多，每一堂都用心安排。
+              </p>
+            </div>
+
+            <dl class="facts fade" style="--d:.18s">
+              <div><dt>主場</dt><dd>爾灣 Toscana</dd></div>
+              <div><dt>高中校隊</dt><dd>4 年</dd></div>
+              <div><dt>時間安排</dt><dd>兼職</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">球場上</p>
+        <h2 class="fade" style="--d:.06s">實戰片刻</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="/images/forehand.jpg" data-caption="正手，室內練習">
+          <picture>
+            <source type="image/webp" srcset="/images/forehand-600.webp 600w, /images/forehand.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/forehand.jpg" srcset="/images/forehand-600.jpg 600w, /images/forehand.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee 打正手" />
+          </picture>
+          <span class="photo-tag">正手</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/serve.jpg" data-caption="比賽中發球">
+          <picture>
+            <source type="image/webp" srcset="/images/serve-600.webp 600w, /images/serve.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/serve.jpg" srcset="/images/serve-600.jpg 600w, /images/serve.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee 在比賽中發球" />
+          </picture>
+          <span class="photo-tag">發球</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/ready.jpg" data-caption="準備姿勢，等待回球">
+          <picture>
+            <source type="image/webp" srcset="/images/ready-600.webp 600w, /images/ready.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/ready.jpg" srcset="/images/ready-600.jpg 600w, /images/ready.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1600" loading="lazy"
+                 alt="Isaac Lee 在底線後做準備姿勢" />
+          </picture>
+          <span class="photo-tag">準備姿勢</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="wrap section" id="reviews">
+      <header class="section-head">
+        <p class="eyebrow fade">評價</p>
+        <h2 class="fade" style="--d:.06s">看過我教球的人怎麼說</h2>
+        <p class="section-sub fade" style="--d:.12s">評價譯自英文原文。</p>
+      </header>
+
+      <div class="review-list">
+        <figure class="review fade">
+          <blockquote>
+            我在 LifeSport Libertyville 指導過 Isaac，親眼見證了他的成長。他的敬業態度、自律和不斷進步的決心，讓他從學員成長為 Junior Professional，在指導紅球、橘球和高中比賽時展現出優秀的領導力，並真心關注每位球員的成長。
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+            </span>
+            <span>
+              <strong>Brice Krizman</strong>
+              網球教練，LifeSport Libertyville
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="review fade">
+          <blockquote>
+            Isaac Lee 是一位非常出色的網球選手，從小就全心投入這項運動。他不只是優秀的球員，更是一位更出色的導師：教學有條理，注重細節。
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+            </span>
+            <span>
+              <strong>Albert Kim</strong>
+              西北大學學生
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="播放影片：2024 年 11 月，Isaac Lee 在 LifeSport Libertyville 對上他以前的教練">
+          <picture>
+            <source type="image/webp" srcset="/images/lifesport-2024-640.webp 640w, /images/lifesport-2024.webp 1280w"
+                    sizes="(max-width: 940px) 100vw, 1140px" />
+            <img src="/images/lifesport-2024.jpg" srcset="/images/lifesport-2024-640.jpg 640w, /images/lifesport-2024.jpg 1280w"
+                 sizes="(max-width: 940px) 100vw, 1140px"
+                 width="1280" height="720" loading="lazy" alt="" />
+          </picture>
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">觀看這一分</span>
+        </button>
+        <figcaption>
+          難得這次不是在教球：2024 年 11 月，我在 LifeSport Libertyville 和以前的教練對打，那時我還在打高中比賽。
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section notes-section" id="before-you-book">
+      <h2 class="fade">預約前須知</h2>
+      <dl class="notes fade" style="--d:.06s">
+        <div>
+          <dt>地點</dt>
+          <dd>爾灣 Toscana Apartments 網球場。課程在我的主場進行 &mdash; 請球員到我這裡來。</dd>
+        </div>
+        <div>
+          <dt>對象</dt>
+          <dd>從零基礎開始的青少年（年紀最小的孩子從較慢較軟的球開始），以及任何程度的成人。</dd>
+        </div>
+        <div>
+          <dt>付款</dt>
+          <dd>當面付款。線上預約只是幫你保留時間 &mdash; 不需要信用卡，也不用訂金。</dd>
+        </div>
+        <div>
+          <dt>第一堂課</dt>
+          <dd>預約時告訴我你的程度和正在練的內容，我會帶著計畫來上課。</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap section">
+        <div class="contact-grid">
+          <div class="contact-text">
+            <h2 class="fade">一起上場吧</h2>
+            <p class="fade" style="--d:.06s">
+              在日曆上選個時間，預約時告訴我你的程度和正在練的內容。第一堂課我會帶著計畫來。
+            </p>
+            <div class="actions fade" style="--d:.12s">
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約課程</a>
+              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Traditional%20Chinese%20page)" data-mail="Tennis%20lessons%20(Traditional%20Chinese%20page)">先寄信給我</a>
+            </div>
+            <p class="book-note fade" style="--d:.16s">預約只是幫你保留時間：不需要信用卡，也不用訂金。當面付款。
+              <button class="link-btn" type="button" data-open="bookingModal">其他聯絡方式</button></p>
+          </div>
+
+          <dl class="contact-details fade" style="--d:.18s">
+            <div>
+              <dt>電子郵件</dt>
+              <dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>主場</dt>
+              <dd>爾灣 Toscana Apartments 網球場</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 加州爾灣</p>
+      <p class="footer-links">
+        <a href="/portfolio/">職涯作品集</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="bookingModal" aria-labelledby="bookingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="bookingTitle" tabindex="-1" autofocus>聯絡我</h3>
+      <p>
+        寄信最快。如果你想詳細寫下來，表單會問你的程度、目標和有空的時間。
+      </p>
+      <dl class="contact-details modal-details">
+        <div><dt>電子郵件</dt><dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSdlKDW_YhhF3B93UG77lXCi8AlWbZAEvEwlXJ3_dHlmn4HmRQ/viewform"
+           target="_blank" rel="noopener noreferrer">開啟表單</a>
+        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="isaacleetennis@gmail.com">複製電子郵件</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalPrivate" aria-labelledby="privateTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="privateTitle" tabindex="-1" autofocus>一對一私人課</h3>
+      <p class="price">$80<span>/小時</span></p>
+      <p>青少年和成人都適合 &mdash; 同樣的一對一形式，依你的程度安排。</p>
+      <ul>
+        <li>擊球與發球技術</li>
+        <li>步法與場上移動</li>
+        <li>為小朋友準備的紅球、橘球、綠球進階 &mdash; 初學者用的較慢、彈得較低的球</li>
+        <li>兩次課之間的練習計畫</li>
+        <li>為參加比賽做準備</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約私人課</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons%20(Traditional%20Chinese%20page)" data-mail="Private%20lessons%20(Traditional%20Chinese%20page)">寄信給我</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalSemi" aria-labelledby="semiTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="semiTitle" tabindex="-1" autofocus>雙人課</h3>
+      <p class="price">$110<span>/小時（兩人）&mdash; 每人 $55</span></p>
+      <p>兩位程度相近的球員在同一個場地，共用一小時和費用。</p>
+      <ul>
+        <li>擊球與發球技術，和私人課一樣</li>
+        <li>和搭檔實際對打、打分數，而不是一個人接餵球</li>
+        <li>如果你在準備雙打，會練雙打站位與溝通</li>
+        <li>每位球員都有個別的回饋，不只是團體指導</li>
+        <li>兩位球員程度接近時效果最好，誰都不用等</li>
+        <li>可以自己帶搭檔，也可以請我幫你配對</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>預約雙人課</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons%20(Traditional%20Chinese%20page)" data-mail="Semi-private%20lessons%20(Traditional%20Chinese%20page)">寄信給我</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="hittingTitle" tabindex="-1" autofocus>陪打課</h3>
+      <p class="price">$45<span>/小時</span></p>
+      <p>只陪打，不教學：我依你的程度餵球、對打，讓你多打多練，而不是聽講解。</p>
+      <ul>
+        <li>60 分鐘或更久</li>
+        <li>穩定的斜線和直線對打</li>
+        <li>和真的會回球的對手練發球與接發球</li>
+        <li>可應要求打搶七和整盤</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>預約陪打課</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions%20(Traditional%20Chinese%20page)" data-mail="Hitting%20partner%20sessions%20(Traditional%20Chinese%20page)">寄信給我</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="adultTitle" tabindex="-1" autofocus>成人團體班</h3>
+      <p class="price">以團體計價<span>，依人數報價</span></p>
+      <p>以團體計價，所以人越多，每人的費用越低。告訴我有幾個人，我再報價。</p>
+      <ul>
+        <li>一個場地的小團體</li>
+        <li>專項訓練和實戰對打，輪替進行，沒有人在旁邊乾等</li>
+        <li>對打的耐心和壓力下的穩定度</li>
+        <li>可以自己組團，也可以請我把你安排進一個團體</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Traditional%20Chinese%20page)" data-mail="Adult%20clinics%20(Traditional%20Chinese%20page)">寄信詢價</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="相片檢視器">
+    <button class="modal-close lightbox-close" data-close type="button" aria-label="關閉">&times;</button>
+    <figure>
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </dialog>
+
+  <div class="ask" id="ask" hidden>
+    <section class="ask-panel" id="askPanel" role="dialog" aria-labelledby="askTitle" hidden>
+      <header class="ask-head">
+        <div>
+          <h2 id="askTitle">問問 Isaac</h2>
+          <p>答案都是我親自寫的，由 AI 挑選。</p>
+        </div>
+        <div class="ask-tools">
+          <button class="ask-sound" type="button" aria-label="關閉聲音" title="關閉聲音">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path class="ask-sound-on" d="M13.5 7.2a4 4 0 0 1 0 5.6M15.6 5.2a7 7 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="ask-sound-off" d="M13.5 7.5l4 5M17.5 7.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="ask-close" type="button" aria-label="關閉聊天">&times;</button>
+        </div>
+      </header>
+      <div class="ask-log" role="log" aria-live="polite" aria-relevant="additions" tabindex="-1"></div>
+      <form class="ask-form">
+        <input class="ask-input" id="askInput" name="question" type="text" maxlength="300" autocomplete="off"
+               aria-label="你的問題" placeholder="問問課程、價格、時間…" required>
+        <button class="ask-send" type="submit" aria-label="送出">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </section>
+    <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>問問 Isaac</span>
+    </button>
+  </div>
+
+  <script>window.I18N = {"copied":"已複製","menuOpen":"開啟選單","menuClose":"關閉選單","loadingCal":"正在載入日曆…","askSuggestions":["課程多少錢？","在哪裡上課？","怎麼預約？","哪種課適合我？"],"askDown":"聊天目前無法回覆。請寄信給我，我會盡快回覆。","askBusy":"一次問了好多問題。請稍等一分鐘，或寄信給我。","emailMe":"寄信給我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"建議問題","askFinding":"正在尋找答案","open":"開啟","showMe":"查看","soundMute":"關閉聲音","soundOn":"開啟聲音","typeBy":"char","matchCopy":{"private":{"name":"一對一私人課","line":"一對一，針對你想改進的地方安排。"},"semi":{"name":"雙人課","line":"兩人共用一小時，每人 $55。"},"hitting":{"name":"陪打課","line":"單純對打，不教學，每小時 $45。"},"group":{"name":"成人團體班","line":"一個場地的小團體。寄信告訴我有幾個人，我再報價。"}},"matchAnswer":"看起來最適合你的是{name}。{line}","matchTravel":"提醒一下：課程都在我的主場，爾灣的 Toscana 球場。我沒辦法到你那裡，但很歡迎你過來。","matchUnsure":"從這句話我判斷不出來。試著寫寫你的程度和誰要來打球，或從上面四種課裡選一個。","matchDown":"課程配對目前無法回覆。四種課程就在上面，也可以寄信給我。","matchBusy":"配對的請求有點多。請稍等一分鐘，或從上面四種課裡選一個。","matchSeeCard":"查看課程卡片 ↑","matchLabel":"為你推薦","matchBusyButton":"配對中…","soundsOn":"網球音效已開啟","soundsTurnOff":"關閉","soundsOff":"音效已關閉","askUrl":"/zh-hant/ask.json","mailSubject":"Tennis lessons (Traditional Chinese page)","mailSubjectQuestion":"Question about lessons (Traditional Chinese page)"};</script>
+  <script src="/tennis.js?v=20261006" defer></script>
+  <script src="/focus.js?v=3" defer></script>
+  <script src="/match.js?v=4" defer></script>
+  <script src="/ask.js?v=7" defer></script>
+  <script src="/hero.js?v=1" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/ballo.js?v=3" defer></script>
+</body>
+</html>

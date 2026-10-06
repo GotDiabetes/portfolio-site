@@ -28,17 +28,22 @@
   var buttonText = button.textContent;
 
   /* What the page says for each match. The name is what the card is
-     called; the line is the one reason it fits. */
-  var COPY = {
+     called; the line is the one reason it fits. A translated page brings
+     its own (window.I18N, from tools/i18n/); Jev reads the visitor's
+     sentence in any of those languages. */
+  var T = window.I18N || {};
+  var COPY = T.matchCopy || {
     private: { name: "a private lesson", line: "One-on-one, built around what you want to fix." },
     semi:    { name: "a semi-private lesson", line: "Two of you share the hour — $55 each." },
     hitting: { name: "a hitting partner session", line: "Straight rallying, no instruction, $45 an hour." },
     group:   { name: "an adult clinic", line: "Small group on one court. Email me with how many of you there are and I'll quote it." },
   };
-  var TRAVEL = "One thing: lessons are at my home court, Toscana in Irvine. I can't travel to you, but you're welcome to come to me.";
-  var UNSURE = "I couldn't tell from that. Try your level and who's playing, or pick from the four above.";
-  var DOWN = "The matcher isn't answering right now. The four options are just above, or email me.";
-  var BUSY = "That's a lot of matching. Give it a minute, or pick from the four above.";
+  /* {name} is set in bold; the sentence around it is the language's own. */
+  var ANSWER = T.matchAnswer || "Sounds like {name}. {line}";
+  var TRAVEL = T.matchTravel || "One thing: lessons are at my home court, Toscana in Irvine. I can't travel to you, but you're welcome to come to me.";
+  var UNSURE = T.matchUnsure || "I couldn't tell from that. Try your level and who's playing, or pick from the four above.";
+  var DOWN = T.matchDown || "The matcher isn't answering right now. The four options are just above, or email me.";
+  var BUSY = T.matchBusy || "That's a lot of matching. Give it a minute, or pick from the four above.";
 
   form.hidden = false;
 
@@ -78,11 +83,12 @@
 
     var p = document.createElement("p");
     p.className = "matcher-answer";
-    p.appendChild(document.createTextNode("Sounds like "));
+    var parts = ANSWER.replace("{line}", copy.line).split("{name}");
+    p.appendChild(document.createTextNode(parts[0]));
     var strong = document.createElement("strong");
-    strong.textContent = copy.name + ".";
+    strong.textContent = copy.name;
     p.appendChild(strong);
-    p.appendChild(document.createTextNode(" " + copy.line));
+    p.appendChild(document.createTextNode(parts.slice(1).join("")));
     result.appendChild(p);
 
     if (data.travel) result.appendChild(note(TRAVEL));
@@ -101,7 +107,7 @@
       var see = document.createElement("button");
       see.type = "button";
       see.className = "link-btn";
-      see.textContent = "See the card ↑";
+      see.textContent = T.matchSeeCard || "See the card ↑";
       see.addEventListener("click", function () {
         card.scrollIntoView({ behavior: "smooth", block: "center" });
       });
@@ -109,6 +115,8 @@
       result.appendChild(wrap);
     }
 
+    /* The card's label ("Your match") is drawn by CSS from this attribute. */
+    card.setAttribute("data-match", T.matchLabel || "Your match");
     card.classList.add("is-match");
   }
 
@@ -132,7 +140,7 @@
 
   function setBusy(on) {
     button.disabled = on;
-    button.textContent = on ? "Matching…" : buttonText;
+    button.textContent = on ? T.matchBusyButton || "Matching…" : buttonText;
     form.setAttribute("aria-busy", on ? "true" : "false");
   }
 

@@ -340,10 +340,17 @@
   function noteSound() {
     if (muted()) return;
     try { if (localStorage.getItem("isaacSoundNoted")) return; localStorage.setItem("isaacSoundNoted", "1"); } catch (e) { return; }
+    var T = window.I18N || {};   // the translated pages' words (tools/i18n/)
     var bar = document.createElement("div");
     bar.className = "sound-note";
     bar.setAttribute("role", "status");
-    bar.innerHTML = '<span>Tennis sounds on</span><button type="button">Turn off</button>';
+    var said = document.createElement("span");
+    said.textContent = T.soundsOn || "Tennis sounds on";
+    var off = document.createElement("button");
+    off.type = "button";
+    off.textContent = T.soundsTurnOff || "Turn off";
+    bar.appendChild(said);
+    bar.appendChild(off);
     document.body.appendChild(bar);
     keepOnTop();
     var gone = false;
@@ -352,11 +359,11 @@
       bar.classList.add("is-out");
       window.setTimeout(function () { bar.remove(); }, 400);
     }
-    bar.querySelector("button").addEventListener("click", function () {
+    off.addEventListener("click", function () {
       try { localStorage.setItem("askIsaacSound", "off"); } catch (e) {}
       window.dispatchEvent(new CustomEvent("isaac:sound", { detail: { on: false } }));
-      bar.querySelector("span").textContent = "Sounds off";
-      bar.querySelector("button").remove();
+      said.textContent = T.soundsOff || "Sounds off";
+      off.remove();
       window.setTimeout(hide, 1200);
     });
     window.setTimeout(hide, 6000);

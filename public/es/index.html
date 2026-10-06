@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from index.html and tools/i18n/es.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Lee Tennis Co. — Clases particulares de tenis en Irvine, CA</title>
+  <meta name="description"
+        content="Clases particulares de tenis en Irvine, California. Clases uno a uno a $80 la hora, semiprivadas para dos a $110 la hora, sesiones de peloteo a $45 la hora y clínicas pequeñas para adultos con Isaac Lee." />
+  <link rel="canonical" href="https://leetennisco.com/es/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lee Tennis Co. — Clases particulares de tenis en Irvine, CA" />
+  <meta property="og:description"
+        content="Clases particulares de tenis en Irvine, California. Clases uno a uno, sesiones de peloteo y clínicas pequeñas para adultos." />
+  <meta property="og:url" content="https://leetennisco.com/es/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/focus.css?v=1" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Lee Tennis Co.",
+    "alternateName": "Isaac Lee Tennis",
+    "description": "Private tennis coaching in Irvine, California.",
+    "url": "https://leetennisco.com/",
+    "email": "isaacleetennis@gmail.com",
+    "priceRange": "$45-$110",
+    "areaServed": { "@type": "City", "name": "Irvine, California" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="Lee Tennis Co. — inicio">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — monograma LT" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
+        <a href="#lessons">Clases</a>
+        <a href="#about">Sobre mí</a>
+        <a href="#reviews">Opiniones</a>
+        <a href="#contact">Contacto</a>
+        <a class="nav-portfolio" href="/portfolio/">
+          <span class="np-label"><span class="np-text" data-text="Portafolio profesional">Portafolio profesional</span></span>
+          <svg class="np-arrow" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+            <path pathLength="1" d="M1.5 7h10.5M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </nav>
+
+      <details class="lang">
+        <summary aria-label="Idioma (Language): Español">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">ES</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/" hreflang="en" lang="en">English</a>
+          <a href="/es/" hreflang="es" lang="es" aria-current="page">Español</a>
+          <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Reservar una clase" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
+        <span class="cta-full">Reservar una clase</span><span class="cta-short" aria-hidden="true">Reservar</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow fade">Clases particulares · Canchas Toscana, Irvine</p>
+          <h1 class="hero-drop">
+            <span class="drop-line"><span class="drop-word">Clases</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.09s">de tenis</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">particulares<span class="ball-o ball-stop" aria-hidden="true"></span></span></span>
+          </h1>
+          <p class="hero-sub fade" style="--d:.12s">
+            Soy <span class="me">Isaac Lee<img class="me-emoji" src="/images/isaac-emoji.svg" width="28" height="28" alt="" /></span>. Entreno a juveniles y adultos en mi cancha de Irvine: sesiones uno a uno basadas en fundamentos sólidos y una práctica constante y deliberada.
+          </p>
+
+          <dl class="hero-facts fade" style="--d:.16s">
+            <div><dt>Clase particular</dt><dd>$80<span>/hora</span></dd></div>
+            <div><dt>Compañero de peloteo</dt><dd>$45<span>/hora</span></dd></div>
+            <div><dt>Clases en mi cancha</dt><dd>Toscana, Irvine</dd></div>
+          </dl>
+
+          <div class="actions fade" style="--d:.2s">
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme</a>
+          </div>
+          <p class="book-note hero-note fade" style="--d:.24s">Sin tarjeta ni depósito: reservar solo aparta el horario.</p>
+        </div>
+
+        <figure class="hero-photo fade-img">
+          <picture>
+            <source type="image/webp" srcset="/images/pointing-480.webp 480w, /images/pointing.webp 960w"
+                    sizes="(max-width: 940px) 100vw, 46vw" />
+            <img src="/images/pointing.jpg" srcset="/images/pointing-480.jpg 480w, /images/pointing.jpg 960w"
+                 sizes="(max-width: 940px) 100vw, 46vw"
+                 width="960" height="1280" fetchpriority="high"
+                 alt="Isaac Lee indicando un ejercicio durante una clase" />
+          </picture>
+          <video class="hero-loop" data-src="" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="wrap">
+        <blockquote class="fade" data-focus-reveal="hover">
+          El tenis es para todos. Casi todos los jugadores mejoran más rápido de lo que esperan cuando la práctica es deliberada.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="wrap section" id="lessons">
+      <header class="section-head">
+        <p class="eyebrow fade">Clases</p>
+        <h2 class="fade" style="--d:.06s">Cuatro formas de trabajar juntos</h2>
+        <p class="section-sub fade" style="--d:.12s">
+          Cada jugador parte de un punto distinto. Las sesiones se adaptan a tu nivel y a lo seguido que puedes venir a la cancha.
+        </p>
+      </header>
+
+      <div class="lesson-list">
+        <article class="lesson fade" data-lesson="private">
+          <h3>Clases particulares</h3>
+          <p class="price">$80<span>/hora</span></p>
+          <p>
+            Uno a uno, para juveniles y adultos por igual. Técnica de golpes y saque, juego de pies, las pelotas más lentas y suaves con las que aprenden los principiantes más pequeños, y un plan de práctica que de verdad puedes seguir entre sesiones.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase particular</a>
+            <button class="link-btn" type="button" data-open="modalPrivate" aria-label="Qué incluye una clase particular">Qué incluye</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="semi">
+          <h3>Clases semiprivadas</h3>
+          <p class="price">$110<span>/hora para dos &mdash; $55 cada uno</span></p>
+          <p>
+            La misma clase, compartida entre dos jugadores de nivel parecido. Cada uno paga menos que en una particular, y en pareja tienen peloteos y puntos reales para trabajar en lugar de recibir bolas a solas. Trae a un amigo, a un hermano o a tu pareja de dobles.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase semiprivada</a>
+            <button class="link-btn" type="button" data-open="modalSemi" aria-label="Qué incluye una clase semiprivada">Qué incluye</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="hitting">
+          <h3>Sesiones de peloteo</h3>
+          <p class="price">$45<span>/hora</span></p>
+          <p>
+            Pelotear en vez de recibir instrucción, para jugadores que solo quieren a alguien fiable contra quien trabajar. Las sesiones duran 60 minutos o más.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una sesión de peloteo</a>
+            <button class="link-btn" type="button" data-open="modalHitting" aria-label="Qué incluye una sesión de peloteo">Qué incluye</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="group">
+          <h3>Clínicas para adultos</h3>
+          <p class="price">Por grupo<span>, según cuántos sean</span></p>
+          <p>
+            Grupos pequeños en una sola cancha, con ejercicios y juegos con bola viva y suficiente rotación para que todos sigan pegándole. El costo depende de cuántos sean.
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Pedir precio por correo</a>
+            <button class="link-btn" type="button" data-open="modalAdult" aria-label="Qué incluye una clínica para adultos">Qué incluye</button>
+          </div>
+        </article>
+      </div>
+
+      <form class="matcher" id="matcher" hidden>
+        <label class="matcher-label" for="matchText">¿No sabes cuál te conviene? Descríbete en una frase.</label>
+        <div class="matcher-row">
+          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
+                 placeholder="p. ej.: nivel intermedio, quiero mejorar mi saque" required>
+          <button class="btn btn-primary" type="submit">Buscar mi clase</button>
+        </div>
+        <div class="matcher-result" role="status" aria-live="polite"></div>
+        <p class="matcher-note">Una IA lee tu frase para elegir una clase. Este sitio no guarda nada.</p>
+      </form>
+    </section>
+
+    <section class="band" id="about">
+      <div class="wrap section">
+        <div class="two-col">
+          <figure class="about-photo fade-img">
+            <picture>
+              <source type="image/webp" srcset="/images/coaching-clinic.webp" />
+              <img src="/images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
+                   alt="Isaac Lee entrenando una clínica juvenil en la red" />
+            </picture>
+          </figure>
+
+          <div class="about-text">
+            <p class="eyebrow fade">Sobre mí</p>
+            <h2 class="fade" style="--d:.06s">Primero los fundamentos, después todo lo demás</h2>
+
+            <div class="fade" style="--d:.12s">
+              <p>
+                Llevo tres años entrenando. Empecé como Junior Pro en LifeSport Libertyville y después me uní al Pro Staff de Grip N Rip, el programa juvenil del Newport Beach Tennis Club.
+              </p>
+              <p>
+                La mayor parte de mi trabajo es con juveniles en desarrollo: asentar bien los fundamentos desde temprano para que el progreso se siga acumulando. También dirijo clínicas para adultos que quieren más consistencia y un plan más claro cuando empiezan los puntos de verdad.
+              </p>
+              <p>
+                Jugué cuatro años en el equipo varsity de mi preparatoria. Entrenar es un trabajo de medio tiempo para mí, que acomodo alrededor de mis estudios, así que el horario es reducido y bien pensado.
+              </p>
+            </div>
+
+            <dl class="facts fade" style="--d:.18s">
+              <div><dt>Mi cancha</dt><dd>Toscana, Irvine</dd></div>
+              <div><dt>Equipo escolar</dt><dd>4 años</dd></div>
+              <div><dt>Horario</dt><dd>Medio tiempo</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">En la cancha</p>
+        <h2 class="fade" style="--d:.06s">En acción</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="/images/forehand.jpg" data-caption="Derecha, práctica bajo techo">
+          <picture>
+            <source type="image/webp" srcset="/images/forehand-600.webp 600w, /images/forehand.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/forehand.jpg" srcset="/images/forehand-600.jpg 600w, /images/forehand.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee pegando una derecha" />
+          </picture>
+          <span class="photo-tag">Derecha</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/serve.jpg" data-caption="Sacando durante un partido">
+          <picture>
+            <source type="image/webp" srcset="/images/serve-600.webp 600w, /images/serve.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/serve.jpg" srcset="/images/serve-600.jpg 600w, /images/serve.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="Isaac Lee sacando durante un partido" />
+          </picture>
+          <span class="photo-tag">Saque</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/ready.jpg" data-caption="Posición de espera, esperando la devolución">
+          <picture>
+            <source type="image/webp" srcset="/images/ready-600.webp 600w, /images/ready.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/ready.jpg" srcset="/images/ready-600.jpg 600w, /images/ready.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1600" loading="lazy"
+                 alt="Isaac Lee en posición de espera detrás de la línea de fondo" />
+          </picture>
+          <span class="photo-tag">Posición de espera</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="wrap section" id="reviews">
+      <header class="section-head">
+        <p class="eyebrow fade">Opiniones</p>
+        <h2 class="fade" style="--d:.06s">De quienes me han visto entrenar</h2>
+        <p class="section-sub fade" style="--d:.12s">Opiniones traducidas del inglés.</p>
+      </header>
+
+      <div class="review-list">
+        <figure class="review fade">
+          <blockquote>
+            Fui mentor de Isaac en LifeSport Libertyville y vi su crecimiento de primera mano. Su ética de trabajo, su autodisciplina y su compromiso con mejorar lo llevaron de alumno a Junior Professional, donde entrenó Red Ball, Orange Ball y partidos de preparatoria con gran liderazgo y cuidado por el desarrollo de cada jugador.
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+            </span>
+            <span>
+              <strong>Brice Krizman</strong>
+              Entrenador de tenis, LifeSport Libertyville
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="review fade">
+          <blockquote>
+            Isaac Lee es un tenista extraordinario que se dedicó a este deporte desde muy joven. No solo es un gran jugador, sino un mentor todavía mejor, con su estilo de enseñanza metódico y su atención al detalle.
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+            </span>
+            <span>
+              <strong>Albert Kim</strong>
+              Estudiante de Northwestern
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="Reproducir el video: Isaac Lee contra su antiguo entrenador en LifeSport Libertyville, noviembre de 2024">
+          <picture>
+            <source type="image/webp" srcset="/images/lifesport-2024-640.webp 640w, /images/lifesport-2024.webp 1280w"
+                    sizes="(max-width: 940px) 100vw, 1140px" />
+            <img src="/images/lifesport-2024.jpg" srcset="/images/lifesport-2024-640.jpg 640w, /images/lifesport-2024.jpg 1280w"
+                 sizes="(max-width: 940px) 100vw, 1140px"
+                 width="1280" height="720" loading="lazy" alt="" />
+          </picture>
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">Ver el punto</span>
+        </button>
+        <figcaption>
+          Por una vez, no estoy entrenando: un peloteo contra mi antiguo entrenador en LifeSport Libertyville, en noviembre de 2024, de mis días como jugador de preparatoria.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section notes-section" id="before-you-book">
+      <h2 class="fade">Antes de reservar</h2>
+      <dl class="notes fade" style="--d:.06s">
+        <div>
+          <dt>Dónde</dt>
+          <dd>Canchas de tenis de Toscana Apartments, Irvine. Las clases son en mi cancha &mdash; los jugadores vienen a mí.</dd>
+        </div>
+        <div>
+          <dt>Para quién</dt>
+          <dd>Juveniles desde principiantes absolutos (los más pequeños empiezan con una pelota más lenta y suave) y adultos de cualquier nivel.</dd>
+        </div>
+        <div>
+          <dt>Pago</dt>
+          <dd>En persona. Reservar en línea aparta el horario &mdash; sin tarjeta ni depósito.</dd>
+        </div>
+        <div>
+          <dt>Primera sesión</dt>
+          <dd>Cuando reserves, cuéntame tu nivel y en qué estás trabajando, y llegaré con un plan.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap section">
+        <div class="contact-grid">
+          <div class="contact-text">
+            <h2 class="fade">Vamos a la cancha</h2>
+            <p class="fade" style="--d:.06s">
+              Elige un horario en el calendario y, al reservar, cuéntame tu nivel y en qué estás trabajando. Llegaré a la primera sesión con un plan.
+            </p>
+            <div class="actions fade" style="--d:.12s">
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
+              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme primero</a>
+            </div>
+            <p class="book-note fade" style="--d:.16s">Reservar solo aparta el horario: sin tarjeta ni depósito. Pagas en persona.
+              <button class="link-btn" type="button" data-open="bookingModal">Otras formas de contactarme</button></p>
+          </div>
+
+          <dl class="contact-details fade" style="--d:.18s">
+            <div>
+              <dt>Correo</dt>
+              <dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>Mi cancha</dt>
+              <dd>Canchas de tenis de Toscana Apartments, Irvine</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
+      <p class="footer-links">
+        <a href="/portfolio/">Portafolio profesional</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="bookingModal" aria-labelledby="bookingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="bookingTitle" tabindex="-1" autofocus>Contáctame</h3>
+      <p>
+        El correo es lo más rápido. Si prefieres escribirlo todo, el formulario pregunta por tu nivel, tus objetivos y tu disponibilidad.
+      </p>
+      <dl class="contact-details modal-details">
+        <div><dt>Correo</dt><dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSdlKDW_YhhF3B93UG77lXCi8AlWbZAEvEwlXJ3_dHlmn4HmRQ/viewform"
+           target="_blank" rel="noopener noreferrer">Abrir el formulario</a>
+        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="isaacleetennis@gmail.com">Copiar correo</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalPrivate" aria-labelledby="privateTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="privateTitle" tabindex="-1" autofocus>Clases particulares</h3>
+      <p class="price">$80<span>/hora</span></p>
+      <p>Para juveniles y adultos &mdash; el mismo formato uno a uno, adaptado a tu nivel.</p>
+      <ul>
+        <li>Técnica de golpes y saque</li>
+        <li>Juego de pies y desplazamiento en la cancha</li>
+        <li>Progresión de pelota roja, naranja y verde para los más pequeños &mdash; las pelotas más lentas y de menos bote con las que aprenden los principiantes</li>
+        <li>Un plan de práctica para entre sesiones</li>
+        <li>Preparación para competir en torneos</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase particular</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons%20(Spanish%20page)" data-mail="Private%20lessons%20(Spanish%20page)">Escríbeme</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalSemi" aria-labelledby="semiTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="semiTitle" tabindex="-1" autofocus>Clases semiprivadas</h3>
+      <p class="price">$110<span>/hora para dos &mdash; $55 cada uno</span></p>
+      <p>Dos jugadores de nivel parecido en una cancha, compartiendo la hora y el costo.</p>
+      <ul>
+        <li>Técnica de golpes y saque, igual que en una clase particular</li>
+        <li>Peloteos y puntos reales contra un compañero en lugar de recibir bolas a solas</li>
+        <li>Colocación y comunicación en dobles, si es para lo que entrenas</li>
+        <li>Cada jugador recibe correcciones individuales, no solo instrucción de grupo</li>
+        <li>Funciona mejor cuando los dos tienen un nivel parecido, para que nadie espere</li>
+        <li>Trae a tu propio compañero o pídeme que te busque uno</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase semiprivada</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons%20(Spanish%20page)" data-mail="Semi-private%20lessons%20(Spanish%20page)">Escríbeme</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="hittingTitle" tabindex="-1" autofocus>Sesiones de peloteo</h3>
+      <p class="price">$45<span>/hora</span></p>
+      <p>Peloteo, no entrenamiento: te lanzo bolas y peloteo a tu nivel para que acumules repeticiones en lugar de recibir instrucción.</p>
+      <ul>
+        <li>60 minutos o más</li>
+        <li>Peloteos constantes cruzados y paralelos</li>
+        <li>Práctica de saque y devolución con alguien que de verdad devuelve</li>
+        <li>Tie-breaks y sets si los pides</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una sesión de peloteo</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions%20(Spanish%20page)" data-mail="Hitting%20partner%20sessions%20(Spanish%20page)">Escríbeme</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="adultTitle" tabindex="-1" autofocus>Clínicas para adultos</h3>
+      <p class="price">Por grupo<span>, según cuántos sean</span></p>
+      <p>El precio es por grupo, así que el costo por jugador baja cuantos más sean. Dime cuántos son y te paso el precio.</p>
+      <ul>
+        <li>Grupos pequeños en una sola cancha</li>
+        <li>Ejercicios y juegos con bola viva, con rotación para que nadie se quede parado</li>
+        <li>Aguante en el peloteo y consistencia bajo presión</li>
+        <li>Trae a tu propio grupo o pídeme que te incluya en uno</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Pedir precio por correo</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Visor de fotos">
+    <button class="modal-close lightbox-close" data-close type="button" aria-label="Cerrar">&times;</button>
+    <figure>
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </dialog>
+
+  <div class="ask" id="ask" hidden>
+    <section class="ask-panel" id="askPanel" role="dialog" aria-labelledby="askTitle" hidden>
+      <header class="ask-head">
+        <div>
+          <h2 id="askTitle">Pregúntale a Isaac</h2>
+          <p>Respuestas escritas por mí, elegidas por IA.</p>
+        </div>
+        <div class="ask-tools">
+          <button class="ask-sound" type="button" aria-label="Silenciar sonidos" title="Silenciar sonidos">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path class="ask-sound-on" d="M13.5 7.2a4 4 0 0 1 0 5.6M15.6 5.2a7 7 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="ask-sound-off" d="M13.5 7.5l4 5M17.5 7.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="ask-close" type="button" aria-label="Cerrar el chat">&times;</button>
+        </div>
+      </header>
+      <div class="ask-log" role="log" aria-live="polite" aria-relevant="additions" tabindex="-1"></div>
+      <form class="ask-form">
+        <input class="ask-input" id="askInput" name="question" type="text" maxlength="300" autocomplete="off"
+               aria-label="Tu pregunta" placeholder="Pregunta por clases, precios, horarios…" required>
+        <button class="ask-send" type="submit" aria-label="Enviar">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </section>
+    <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Pregúntale a Isaac</span>
+    </button>
+  </div>
+
+  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿Qué clase me conviene?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Escríbeme cuántos son y te paso un precio."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script src="/tennis.js?v=20261006" defer></script>
+  <script src="/focus.js?v=3" defer></script>
+  <script src="/match.js?v=4" defer></script>
+  <script src="/ask.js?v=7" defer></script>
+  <script src="/hero.js?v=1" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/ballo.js?v=3" defer></script>
+</body>
+</html>

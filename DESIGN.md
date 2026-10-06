@@ -12,7 +12,7 @@ colors:
 typography:
   display:
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-    fontSize: "clamp(3rem, 8.5vw, 6.5rem)"
+    fontSize: "clamp(3rem, min(7.5vw, 9.5vh), 5.5rem)"
     fontWeight: 600
     lineHeight: 0.92
     letterSpacing: "-0.055em"
@@ -52,6 +52,18 @@ typography:
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
+  # The translated pages: the same system face, named per script so each
+  # language gets its regional glyphs. Sizes follow the roles above.
+  script-korean:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', 'Malgun Gothic', 'Noto Sans KR', Roboto, sans-serif"
+  script-japanese:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Segoe UI', 'Yu Gothic UI', Meiryo, 'Noto Sans JP', Roboto, sans-serif"
+  script-chinese-simplified:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', 'Microsoft YaHei', 'Noto Sans SC', Roboto, sans-serif"
+  script-chinese-traditional:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'PingFang TC', 'Segoe UI', 'Microsoft JhengHei', 'Noto Sans TC', Roboto, sans-serif"
+  script-persian:
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, 'Noto Sans Arabic', Roboto, sans-serif"
 rounded:
   base: "6px"
   none: "0px"
@@ -154,10 +166,10 @@ A monochrome system: white paper, near-black ink, and three greys chosen for the
 **Character:** one family at every size, carried by scale and tracking rather than by a second face. The display sizes are set tighter than the platform default would ever go, which is what makes the native face read as designed rather than as default.
 
 ### Hierarchy
-- **Display** (600, `clamp(3rem, 8.5vw, 6.5rem)`, line-height .92, tracking -0.055em): the hero headline only. Three words, three lines, each line a separate mask so the words drop in one at a time.
+- **Display** (600, `clamp(3rem, min(7.5vw, 9.5vh), 5.5rem)`, line-height .92, tracking -0.055em): the hero headline only. Three words, three lines, each line a separate mask so the words drop in one at a time. Sized by the shorter of width and height, so a short laptop screen still shows the prices and the Book button without scrolling.
 - **Statement** (600, `clamp(1.85rem, 5.2vw, 3.75rem)`, line-height 1.06, tracking -0.045em, max 36ch, `text-wrap: pretty`): white on the ink band. Three lines, breaking at the full stop.
 - **Headline** (600, `clamp(1.75rem, 3.4vw, 2.5rem)`, line-height 1.15, tracking -0.03em): section h2s.
-- **Figure** (600, 1.6rem, line-height 1.2, tracking -0.03em; 1.35rem for the hero facts on phones): prices and hero facts — the hero's three are the two key prices and the credential, Pro Staff at Newport Beach TC. One treatment across the hero, the cards, and the modals; the unit after a price drops to label size and muted.
+- **Figure** (600, 1.6rem, line-height 1.2, tracking -0.03em; 1.35rem for the hero facts on phones): prices and hero facts — the hero's three are the two key prices and where lessons happen ("Lessons at my home court" over "Toscana, Irvine"). The Grip N Rip / Newport Beach credential lives in About, never in this row: set at figure size, a club's name reads as the place you'll be coached. One treatment across the hero, the cards, and the modals; the unit after a price drops to label size and muted.
 - **Title** (600, 1.125rem): card and modal h3s.
 - **Body** (400, 1.0625rem, line-height 1.65): paragraphs; measure held by a 40rem section head and the two-column grid.
 - **Label** (400, .8125rem, muted): eyebrows, fact labels, contact labels. Sentence case, never tracked out, never uppercase.
@@ -173,7 +185,9 @@ A single 1140px column (`{spacing.pad}` inline padding, `{spacing.section}` bloc
 
 Section order is fixed by the persuasion, not by the content type: hero → statement band → lessons → about → in action → reviews (with the one match clip as a closing figure) → before you book → contact band. The offer sits in the second screen. Proof follows it.
 
-Breakpoints are content-driven. At **940px** the grids stack, the photo moves above the text (and back below it under 680px, so a phone's first screen holds the prices and Book), the desktop nav collapses to a toggle and a stacked menu whose first row is Book, and the header keeps a compact Book button. At **680px** the photo strip stacks to a single column, the hover-only photo tags become always-on, and every action button goes full width. At **480px** the wordmark shrinks to 126px and the header button's label shortens to "Book" so wordmark, button, and toggle share the width.
+Inside the hero the order is the same at every size: eyebrow, headline, intro, the three facts (prices first), then the Book and Email buttons, then one muted line under them, "No card, no deposit: booking just holds the time." The price is what the visitor weighs and the button is what they do about it, so the facts sit above the buttons, and the page's best reassurance sits where the decision is made. The hero's top padding is tight (`clamp(1.5rem, 3vw, 2.5rem)`) for the same reason as the headline's height cap. On short desktop windows (wider than 940px, 820px tall or less: a 1366×768 or 1536×864 laptop once the browser's bars are counted) the hero packs tighter (smaller headline and intro, closer facts and buttons) and the text starts at the top of the grid instead of centring on the portrait, which is taller than the window; the Book button then clears the fold in every language down to a 657px-tall window.
+
+Breakpoints are content-driven. At **1100px** the desktop nav collapses to a toggle and a stacked menu whose first row is Book, and the header keeps a compact Book button (the links, the language menu and Book need about 1,050px in the longer languages; no nav label or button ever wraps). At **940px** the grids stack and the photo moves above the text (and back below it under 680px, so a phone's first screen holds the prices and Book). At **680px** the photo strip stacks to a single column, the hover-only photo tags become always-on, and every action button goes full width. At **480px** the wordmark shrinks to 126px, the header button's label shortens to "Book" and the language menu shows only its globe, so wordmark, globe, button and toggle share the width.
 
 The sticky header is 66px with a blurred white ground and a hairline bottom rule; content scrolls under it.
 
@@ -182,7 +196,7 @@ The sticky header is 66px with a blurred white ground and a hairline bottom rule
 Flat by default. Surfaces are separated by ground (white, soft, card, ink) and by hairline rules, not by shadow. The only shadows are responses to hover: a lesson card lifts 3px and gains a soft ambient shadow (`0 12px 30px rgba(0,0,0,.06)`); the video's play disc scales 8%. Photographs settle out of a 6% zoom on reveal. Nothing casts a shadow at rest.
 
 ### Named Rules
-**The Rest-Is-Flat Rule.** A shadow is a hover state, never a resting state. If a resting element seems to need depth, it needs a different ground. The one exception is what genuinely floats above the page: the Ask Isaac launcher and panel, and the one-time sound note. Those carry depth by shadow alone, never a hairline border and a wide shadow together.
+**The Rest-Is-Flat Rule.** A shadow is a hover state, never a resting state. If a resting element seems to need depth, it needs a different ground. The one exception is what genuinely floats above the page: the Ask Isaac launcher and panel, the open language list, and the one-time sound note. Those carry depth by shadow alone, never a hairline border and a wide shadow together.
 
 **The One Motion, One Ball Rule.** The page moves in one way — a block fades and lifts into place as you reach it, once, with the hero's words dropping in as its strongest form — and has one delight: the ball. It lands in the headline once on arrival, and it is what the player serves when you press Book. New motion has to be one of those two or replace one; nothing is added beside them. (Heading line-splits, scroll parallax, a drifting hero photo, morphing review cards and hover wiggles were tried and taken out for this reason.)
 
@@ -210,7 +224,8 @@ Confident and quiet: solid fills, hairline outlines, no icons, and a 1px lift on
 - **Border:** 1px `{colors.rule}`, warming to `#d6d3cb` on hover
 - **Internal Padding:** `clamp(1.5rem, 2.5vw, 2rem)`
 - **Lesson card anatomy:** title, figure-size price with muted unit, muted body, then an actions row — a small primary button naming the tier ("Book a private lesson") and a "What's covered" link button with a per-tier accessible name.
-- **Matched card:** when the lesson matcher picks a card it gets a black 1px edge plus a 1px black ring and a muted "Your match" label after the title. The other three cards are left exactly as they are, never dimmed.
+- **Matched card:** when the lesson matcher picks a card it gets a black 1px edge plus a 1px black ring and a muted "Your match" label after the title (drawn from the card's `data-match`, so each language page shows its own). The other three cards are left exactly as they are, never dimmed.
+- **Reviews:** headed "From people who've seen me coach", the two reviews in full, side by side, as plain cards (quote, then a rule, then avatar, name and role). The list is built to take more: a student's or a parent's words are the proof the section most needs.
 
 ### Lesson matcher
 One bold label, one plain input (1px `#c9c9c6` border, softened radius, darkening to text-black on focus) and the page's primary button, under the lesson cards (the offer comes first; the matcher is for whoever the four cards didn't settle; its messages point "above", and a match adds a "See the card ↑" link that scrolls to the marked card) and no wider than the section head. The answer is one sentence in Isaac's voice ("Sounds like **a semi-private lesson.** …"), a muted line if the visitor asked him to travel, then a clone of the matched card's own action, so booking behaves identically. A 13px muted note, held to 60ch, says in plain words that an AI reads the sentence and nothing is saved. Hidden with no JS or no endpoint; stacks full width under 680px.
@@ -219,7 +234,12 @@ One bold label, one plain input (1px `#c9c9c6` border, softened radius, darkenin
 A black launcher bottom-right ("Ask Isaac" with a speech-bubble icon), styled like the Book button, opening a white panel with the softened radius and a floating shadow and no border (it and its launcher are the only things above the content). Header: "Ask Isaac" and a muted line saying the answers are Isaac's own, picked by AI — the chat never pretends to be him typing. Isaac's messages sit on `{colors.paper-soft}` grey, the visitor's on black; each answer can carry buttons, and a Book button is a clone of the lesson card's own. The greeting doesn't claim to be Isaac typing ("These are my answers to what people ask most"). Four suggestion chips on open, and up to three follow-up chips after every answer (each topic's `next` in `ask.json`, minus anything already asked). Replies feel live without faking it: typing dots for at least 650ms, then the answer types out word by word (words are laid out from the start and only fade in, so nothing jumps), then its buttons and chips rise in. Sound is two tiny Web Audio cues, no files: a high tick on send and a tennis-ball "pok" (a falling sine over a 12ms string click) when the answer lands; a speaker button in the header mutes them and the choice is remembered; it is the same setting the Book FX sound note switches off. Reduced motion skips the typing-out; screen readers get each answer once, whole. Non-modal: the page stays usable, Escape closes and returns focus to the launcher. Under 560px the panel is a bottom sheet, and the launcher shrinks to a 48px icon square that stays hidden while the hero's Book button is on screen, so it never covers the page's main action.
 
 ### Navigation
-Sticky, translucent white, hairline bottom rule. Desktop: brand mark left, five muted 15px links (Lessons, About, Reviews, Contact, and a divider before the one off-page link), and a small primary Book button. Hover darkens a link to text-black. Under 940px the links become a stacked menu behind a 44px toggle; the menu's first row is Book in 600 weight. Escape closes it and returns focus to the toggle.
+Sticky, translucent white, hairline bottom rule. Desktop: brand mark left, five muted 15px links (Lessons, About, Reviews, Contact, and a divider before the one off-page link), the language menu, and a small primary Book button. Hover darkens a link to text-black. Under 940px the links become a stacked menu behind a 44px toggle; the menu's first row is Book in 600 weight. Escape closes it and returns focus to the toggle.
+
+**Language menu.** A `<details>` beside the Book button: a 18px line globe and the page's code (EN, KO, 简, FA…) in the muted nav colour, darkening on hover or when open. It opens a white list with the floating shadow, each language named in itself (English, Español, 한국어, 简体中文, 繁體中文, 日本語, Tiếng Việt, فارسی), the current one in 600 weight with a small black dot. It works with no script; `tennis.js` closes it on a tap outside, on Escape, and when the mobile menu opens. Under 480px only the globe shows; its accessible name still says the language ("Language: English", and on the translated pages the language's own word with "(Language)" beside it, so an English reader who landed there can find the way back).
+
+### Contact band
+The page's last word, on ink: "Let's get you on court", one sentence on what to send when you book, then one main action, an invert "Book a lesson", with "Email me first" as the outline second. Under them, in 72% white, "Booking just holds the time: no card, no deposit. You pay in person.", and on its own line a white text link, "Other ways to reach me", which opens the popup with the form and the copy-email button. Beside it, the email address and the home court as plain details.
 
 ### Dialogs
 Native `<dialog>` opened with `showModal()`, a 50% dark backdrop, a white card with the softened radius, a 44px close control top-right, and focus placed on the heading so a reader hears the title before the price. Closing returns focus to the opener. The lightbox variant is a transparent dialog with the image centred and its caption on an 88% ink plate.
@@ -235,6 +255,16 @@ The hero photograph holds still. A muted looping clip made from the same photogr
 
 ### The ball in "lessons" (hero headline)
 The "o" of "lessons" is an optic-yellow tennis ball, the same ball Book FX serves (the Ball Exception). The letter stays in the text (transparent, holding its width), so the heading still reads "Private tennis lessons"; `ballo.js` draws the ball over it, sized and placed from the font's own measured glyph and baseline, so it sits right in any system font at any width. After the words rise in, the ball drops in from behind the line above and bounces three times (fall time grows with height, a squash on each landing), once; then it is just the letter. It is not a control: no hover, no click, no sound, nothing a keyboard can't reach. Reduced motion: the ball just sits there. No JS: a plain "o".
+
+### The translated pages
+The tennis page also exists in Spanish (`/es/`), Korean (`/ko/`), Simplified and Traditional Chinese (`/zh-hans/`, `/zh-hant/`), Japanese (`/ja/`), Vietnamese (`/vi/`) and Persian (`/fa/`). They are the same page, not variants: `tools/i18n/build.mjs` writes each from `public/index.html` and a dictionary (`tools/i18n/ko.mjs` …) holding that language's version of every English string, plus the words the scripts write (`window.I18N`) and the chat's answers. Edit the English, update the dictionaries, run the build; it fails loudly when a dictionary string no longer appears on the English page or English is left on a translated one. Every page lists all eight with `hreflang` links, and the sitemap names them.
+
+- **Same world.** Same layout, same black and white, same motion, same ball. Nothing is redesigned per language; only type is fitted to the script.
+- **Type per script.** The system face still, but named per language so each gets its regional forms (Apple SD Gothic Neo / Malgun Gothic for Korean, Hiragino / Yu Gothic for Japanese, PingFang SC / Microsoft YaHei and PingFang TC / Microsoft JhengHei for the two Chinese, Segoe UI / Tahoma for Persian). The tight Latin tracking is eased for Hangul, Han and kana and removed entirely for Persian (it would pull its joined letters apart); line heights open up for their taller glyphs; the CJK headline is a step smaller (`clamp(2.75rem, min(6.6vw, 8.4vh), 4.9rem)`) because those glyphs fill the whole em. Korean breaks lines between words (`word-break: keep-all`).
+- **The ball becomes the full stop.** Translated headlines have no "o" to borrow, so the ball sits at the end of the last word as its full stop (`.ball-stop`), the size of an "o" in the same font, landing with the same bounce.
+- **Persian runs right to left.** `dir="rtl"` on the page; the stylesheet uses logical sides (`inset-inline-end`, `padding-inline-start` …) throughout, so the header, hero bleed, chat corner, dialogs and lists all mirror without a second set of rules. Arrows flip; the video's play triangle doesn't.
+- **The chat and matcher speak the language.** Jev reads questions in any of these languages and still picks from the English topics, so `public/ask.json` stays the one source; each page shows that language's answers (`/ko/ask.json` …). Chinese and Japanese answers type out character by character. Email subjects gain "(Korean page)" and so on, so Isaac knows which language the visitor read.
+- **Honest about translation.** Names, clubs and courts stay in Latin letters; the reviews are translated and the section says so in one muted line.
 
 ### Page transitions
 The tennis page and the portfolio both declare `@view-transition { navigation: auto; }`: crossing between them, the old page lifts 2.5vh and fades in .32s while the new one rises 4vh in .55s. Browsers without cross-document view transitions navigate normally; reduced motion turns it off.
@@ -260,7 +290,8 @@ The statement sentence on the black band carries the focus reveal: white bracket
 
 ### Don't:
 - **Don't** introduce a hue. Not for a CTA, not for a link, not for a chart.
-- **Don't** add a second typeface or an icon set; the page has one dash and one monogram, and that is the graphic vocabulary.
+- **Don't** add a second typeface or an icon set; the page has one dash and one monogram, and that is the graphic vocabulary. (The per-language font stacks are still the system face, picked per script.)
+- **Don't** hand-edit a translated page. Change the English page or the dictionary and run `node tools/i18n/build.mjs`.
 - **Don't** add a theme toggle or `prefers-color-scheme` rules; the black bands are the dark, placed on purpose.
 - **Don't** put a shadow on anything at rest.
 - **Don't** let a paragraph rule (`.lesson p`, `.modal-card > p`) style a price; that is how every price on the page once rendered 16px grey.

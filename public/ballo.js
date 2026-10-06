@@ -12,6 +12,11 @@
    the line above and bounces three times before settling, once, on arrival.
    After that it is just the letter. Reduced motion: the ball simply sits
    there. No JS: a plain "o".
+
+   The translated headlines have no "o" to borrow, so there the ball is the
+   full stop: an empty .ball-stop slot at the end of the last word, a ball
+   the size of an "o" in the same font, sitting on the baseline. No JS: no
+   stop, which a headline doesn't need.
    ========================================================================== */
 
 (function () {
@@ -45,6 +50,7 @@
 
   /* ------------------------------------------------------- Placement -- */
   var canvas = document.createElement("canvas").getContext("2d");
+  var stop = slot.classList.contains("ball-stop");
   function place() {
     var cs = getComputedStyle(slot);
     canvas.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
@@ -57,7 +63,7 @@
     var baseline = probe.getBoundingClientRect().top - slot.getBoundingClientRect().top;
     var glyph = asc + desc;
     var d = glyph * 1.04;                              // a hair larger than the o: it's the hero
-    var cx = (left + right) / 2;
+    var cx = stop ? slot.getBoundingClientRect().width / 2 : (left + right) / 2;
     var cy = baseline - (asc - desc) / 2;
     ball.style.width = ball.style.height = d + "px";
     ball.style.left = (cx - d / 2) + "px";

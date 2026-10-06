@@ -3,6 +3,9 @@
 One repository, one site, two faces:
 
 - **leetennisco.com/** — the tennis coaching page. This is the front door.
+  It also comes in Spanish, Korean, Chinese (simplified and traditional),
+  Japanese, Vietnamese and Persian, at **/es/**, **/ko/**, **/zh-hans/**,
+  **/zh-hant/**, **/ja/**, **/vi/** and **/fa/**.
 - **leetennisco.com/portfolio/** — Isaac's personal portfolio, with a printable résumé at **/resume**.
 
 It's live. Every push to `main` deploys within about a minute.
@@ -42,14 +45,20 @@ portfolio-site/
 │   ├── portfolio/               the portfolio: index.html, styles.css, main.js,
 │   │                            images/, and its own DESIGN.md
 │   ├── resume/                  the résumé as a web page, print-styled
+│   ├── es/ ko/ zh-hans/ zh-hant/ ja/ vi/ fa/
+│   │                            the tennis page in other languages: built, not
+│   │                            hand-written (see Translations below)
 │   ├── CNAME  robots.txt  sitemap.xml
+├── tools/i18n/                the translation build and one dictionary per language
 ├── DESIGN.md                  the tennis page's visual system
 ├── .impeccable/               design sidecar, detector config, critique snapshots
 └── .github/workflows/pages.yml
 ```
 
 **The pages are hand-written HTML/CSS/vanilla JS with no build step.** There
-are no dependencies and nothing to install.
+are no dependencies and nothing to install. (The translated pages are the one
+generated thing, and they are generated on Isaac's machine and committed;
+the deploy never runs anything.)
 
 **Deploy:** GitHub Actions uploads `public/` as-is to GitHub Pages. Custom domain is `leetennisco.com` (Namecheap DNS → Pages
 IPs, `www` CNAME, HTTPS enforced). The domain is set in Settings → Pages by
@@ -80,7 +89,7 @@ secret, and the Windows user environment variable `TYPESAFE_API_KEY` on
 Isaac's machine.
 
 - **Lesson matcher** (`public/match.js`, `POST /match`): the "Not sure which
-  fits?" box above the lesson cards. Jev picks the card; the page highlights it.
+  fits?" box under the lesson cards. Jev picks the card; the page highlights it.
 - **Ask Isaac** (`public/ask.js`, `POST /ask`): the chat in the corner. Every
   answer is written in **`public/ask.json`**; Jev only picks which one answers
   the question, then checks that it really does, and the chat says "email me"
@@ -108,5 +117,37 @@ npx wrangler secret put TYPESAFE_API_KEY
 `secret put` asks for the key; paste it yourself. `deploy` prints the
 Worker's address (`https://lee-tennis-jev.<you>.workers.dev`). Put that
 address in the `jev-endpoint` meta tag and push.
+
+</details>
+
+<details>
+<summary>Translations (/es/, /ko/, /zh-hans/, /zh-hant/, /ja/, /vi/, /fa/)</summary>
+
+Each translated page is built from the English page by
+
+```bash
+node tools/i18n/build.mjs
+```
+
+which reads `public/index.html`, `public/ask.json` and one dictionary per
+language (`tools/i18n/ko.mjs` and so on), and writes `public/<lang>/index.html`
+and `public/<lang>/ask.json`. **Never edit those output files by hand**; they
+are overwritten on the next build.
+
+- **After changing the English page or `ask.json`, run the build.** If a
+  sentence was reworded or added, it stops with a list: "no longer on the
+  English page" (update that dictionary entry) or "still in English" (add one).
+  Each entry is `[English exactly as on the page, translation]`; inline markup
+  can be part of it.
+- The chat: Jev still chooses from the English topics (the Worker reads
+  `public/ask.json`), and each page shows its own language's answer for that
+  topic. A new topic needs an answer in every dictionary's `ask.topics`.
+- What the scripts write (chat messages, matcher sentences, the sound note,
+  menu labels) is in each dictionary's `js`, handed to the page as
+  `window.I18N`.
+- Persian is right to left (`dir: "rtl"`); the stylesheet uses logical sides,
+  so new CSS should too (`margin-inline-start`, not `margin-left`).
+- The translations were written by Claude. Have a native speaker read a
+  language before leaning on it.
 
 </details>

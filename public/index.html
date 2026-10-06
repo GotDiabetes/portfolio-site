@@ -12,6 +12,17 @@
         content="Private tennis lessons in Irvine, California. $80/hour one-on-one coaching, $110/hour semi-private for two, $45/hour hitting partner sessions, and small adult clinics with Isaac Lee." />
   <link rel="canonical" href="https://leetennisco.com/" />
   <meta name="robots" content="index, follow" />
+  <!-- The same page in other languages, built from this one by
+       tools/i18n/build.mjs. Every version lists all of them. -->
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Lee Tennis Co. — Private Tennis Coaching in Irvine, CA" />
@@ -29,7 +40,7 @@
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261006c" />
+  <link rel="stylesheet" href="tennis.css?v=20261006j" />
   <link rel="stylesheet" href="focus.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
@@ -138,6 +149,26 @@
         </a>
       </nav>
 
+      <!-- Language menu. Each name is written in its own language; the
+           translated pages are generated (tools/i18n/), and the build marks
+           the current one. -->
+      <details class="lang">
+        <summary aria-label="Language: English">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">EN</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/" hreflang="en" lang="en" aria-current="page">English</a>
+          <a href="/es/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Book a lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
         <span class="cta-full">Book a lesson</span><span class="cta-short" aria-hidden="true">Book</span>
       </a>
@@ -170,16 +201,23 @@
             one-on-one sessions built on solid fundamentals and steady, deliberate practice.
           </p>
 
-          <div class="actions fade" style="--d:.18s">
+          <!-- Prices before the buttons, at every size: the price is what the
+               visitor weighs, the button is what they do about it. The third
+               fact is where lessons happen. It used to be the Grip N Rip
+               credential, and "Newport Beach TC" at that size read as the
+               place; the credential is in About. -->
+          <dl class="hero-facts fade" style="--d:.16s">
+            <div><dt>Private lesson</dt><dd>$80<span>/hr</span></dd></div>
+            <div><dt>Hitting partner</dt><dd>$45<span>/hr</span></dd></div>
+            <div><dt>Lessons at my home court</dt><dd>Toscana, Irvine</dd></div>
+          </dl>
+
+          <div class="actions fade" style="--d:.2s">
             <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
           </div>
-
-          <dl class="hero-facts fade" style="--d:.24s">
-            <div><dt>Private lesson</dt><dd>$80<span>/hr</span></dd></div>
-            <div><dt>Hitting partner</dt><dd>$45<span>/hr</span></dd></div>
-            <div><dt>Pro Staff</dt><dd>Newport Beach TC</dd></div>
-          </dl>
+          <!-- The best reassurance on the page, said where the decision is. -->
+          <p class="book-note hero-note fade" style="--d:.24s">No card, no deposit: booking just holds the time.</p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -234,7 +272,7 @@
           <p class="price">$80<span>/hour</span></p>
           <p>
             One-on-one for juniors and adults alike. Stroke and serve mechanics, footwork,
-            ball-progression fundamentals for younger players, and a practice plan you can
+            the slower, softer balls young beginners learn on, and a practice plan you can
             actually work on between sessions.
           </p>
           <div class="lesson-actions">
@@ -272,7 +310,7 @@
 
         <article class="lesson fade" data-lesson="group">
           <h3>Adult clinics</h3>
-          <p class="price">Group rate</p>
+          <p class="price">Per group<span>, quoted by size</span></p>
           <p>
             Small groups on one court, working through drills and live-ball games with enough
             rotation that everyone keeps hitting. Cost depends on how many of you there are.
@@ -295,7 +333,7 @@
         <label class="matcher-label" for="matchText">Not sure which fits? Describe yourself in a sentence.</label>
         <div class="matcher-row">
           <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
-                 placeholder="e.g. 3.5 player, want to fix my serve" required>
+                 placeholder="e.g. intermediate, want to fix my serve" required>
           <button class="btn btn-primary" type="submit">Find my lesson</button>
         </div>
         <div class="matcher-result" role="status" aria-live="polite"></div>
@@ -403,7 +441,7 @@
     <section class="wrap section" id="reviews">
       <header class="section-head">
         <p class="eyebrow fade">Reviews</p>
-        <h2 class="fade" style="--d:.06s">What people say</h2>
+        <h2 class="fade" style="--d:.06s">From people who've seen me coach</h2>
       </header>
 
       <!-- Both reviews in full, side by side. Room for more: a student's or a
@@ -483,7 +521,7 @@
         </div>
         <div>
           <dt>Who</dt>
-          <dd>Juniors from red-ball beginners up, and adults at any level.</dd>
+          <dd>Juniors from complete beginners up (the youngest start on a slower, softer ball), and adults at any level.</dd>
         </div>
         <div>
           <dt>Paying</dt>
@@ -506,14 +544,17 @@
           <div class="contact-text">
             <h2 class="fade">Let's get you on court</h2>
             <p class="fade" style="--d:.06s">
-              Tell me your level, what you're working on, and when you're free. I'll reply
-              with availability and what a first session would look like.
+              Pick a time on the calendar and tell me your level and what you're working on
+              when you book. I'll come to the first session with a plan.
             </p>
+            <!-- One main action. Email is the quieter second; the form and the
+                 copy-email live behind the text link. -->
             <div class="actions fade" style="--d:.12s">
               <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
-              <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
-              <button class="btn btn-outline btn-lg" type="button" data-open="bookingModal">Other ways to reach me</button>
+              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me first</a>
             </div>
+            <p class="book-note fade" style="--d:.16s">Booking just holds the time: no card, no deposit. You pay in person.
+              <button class="link-btn" type="button" data-open="bookingModal">Other ways to reach me</button></p>
           </div>
 
           <dl class="contact-details fade" style="--d:.18s">
@@ -626,7 +667,7 @@
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
       <h3 id="adultTitle" tabindex="-1" autofocus>Adult clinics</h3>
-      <p class="price">Group rate</p>
+      <p class="price">Per group<span>, quoted by size</span></p>
       <p>Priced per group, so the cost per player falls the more of you there are. Tell me how many and I'll quote it.</p>
       <ul>
         <li>Small groups on a single court</li>
@@ -686,12 +727,12 @@
     </button>
   </div>
 
-  <script src="tennis.js?v=20260920" defer></script>
-  <script src="focus.js?v=2" defer></script>
-  <script src="match.js?v=3" defer></script>
-  <script src="ask.js?v=5" defer></script>
+  <script src="tennis.js?v=20261006" defer></script>
+  <script src="focus.js?v=3" defer></script>
+  <script src="match.js?v=4" defer></script>
+  <script src="ask.js?v=7" defer></script>
   <script src="hero.js?v=1" defer></script>
-  <script src="bookfx.js?v=14" defer></script>
-  <script src="ballo.js?v=2" defer></script>
+  <script src="bookfx.js?v=15" defer></script>
+  <script src="ballo.js?v=3" defer></script>
 </body>
 </html>

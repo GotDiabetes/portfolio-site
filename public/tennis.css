@@ -74,11 +74,13 @@ dl, dd { margin: 0; }
 ::selection { background: var(--ink); color: #fff; }
 .contact ::selection, .footer ::selection, .statement ::selection { background: #fff; color: var(--ink); }
 
+/* Sides are logical (inline-start/end) throughout, so the Persian page,
+   which runs right to left, mirrors without a second set of rules. */
 .skip-link {
-  position: absolute; left: -9999px; top: 0; z-index: 100;
+  position: absolute; inset-inline-start: -9999px; top: 0; z-index: 100;
   background: var(--text); color: #fff; padding: .7rem 1.1rem; text-decoration: none;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus { inset-inline-start: 0; }
 
 .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
 .section { padding-block: var(--section-y); }
@@ -97,7 +99,7 @@ dl, dd { margin: 0; }
 .header-row { display: flex; align-items: center; gap: 1.5rem; min-height: 66px; }
 .brand {
   display: inline-flex; align-items: center; flex-shrink: 0;
-  text-decoration: none; margin-right: auto; padding-block: .25rem;
+  text-decoration: none; margin-inline-end: auto; padding-block: .25rem;
 }
 .brand-logo { width: 168px; height: 56px; }
 .nav { display: flex; gap: 1.7rem; }
@@ -105,6 +107,7 @@ dl, dd { margin: 0; }
 .nav-book { display: none; }
 .nav a {
   font-size: .9375rem; color: var(--muted); text-decoration: none;
+  white-space: nowrap;   /* a label never breaks; the header folds instead */
   transition: color var(--dur-ui) var(--ease);
 }
 .nav a:hover { color: var(--text); }
@@ -113,8 +116,8 @@ dl, dd { margin: 0; }
    apart from the in-page anchors beside it. */
 .nav-portfolio {
   display: inline-flex; align-items: center; gap: .45rem;
-  padding-left: 1.7rem;
-  border-left: 1px solid var(--line);
+  padding-inline-start: 1.7rem;
+  border-inline-start: 1px solid var(--line);
 }
 /* Hover: the muted label slides up and its black twin slides in beneath it,
    while the arrow draws itself left to right. The arrow keeps its width at
@@ -126,10 +129,12 @@ dl, dd { margin: 0; }
 }
 .np-text::after {
   content: attr(data-text);
-  position: absolute; left: 0; top: 100%;
+  position: absolute; inset-inline-start: 0; top: 100%;
   color: var(--text); white-space: nowrap;   /* same weight: a heavier twin is wider and wraps */
 }
 .np-arrow { flex: 0 0 auto; color: var(--text); }
+/* Arrows point the way the text reads. */
+[dir="rtl"] .np-arrow, [dir="rtl"] .ask-send svg { transform: scaleX(-1); }
 .np-arrow path {
   stroke-dasharray: 1; stroke-dashoffset: 1;
   transition: stroke-dashoffset .45s var(--ease) .05s;
@@ -151,6 +156,43 @@ dl, dd { margin: 0; }
 }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(3.25px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* Language menu, beside the Book button: a globe and the page's language
+   code, opening the list of translations, each named in its own language.
+   A <details>, so it works with no script; tennis.js adds the closing on a
+   tap outside and on Escape. */
+.lang { position: relative; flex: 0 0 auto; }
+.lang summary {
+  display: inline-flex; align-items: center; gap: .35rem;
+  min-height: 2.75rem; padding-inline: .35rem;
+  font-size: .875rem; font-weight: 500; color: var(--muted);
+  list-style: none; cursor: pointer; border-radius: var(--radius);
+  transition: color var(--dur-ui) var(--ease);
+}
+.lang summary::-webkit-details-marker { display: none; }
+.lang summary:hover, .lang[open] summary { color: var(--text); }
+.lang-globe { flex: 0 0 auto; }
+.lang-list {
+  position: absolute; top: calc(100% + .35rem); inset-inline-end: 0; z-index: 2;
+  min-width: 11.5rem; padding: .35rem;
+  background: var(--bg);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .1);
+  animation: langIn .22s var(--ease);
+}
+@keyframes langIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.lang-list a {
+  display: flex; align-items: center; gap: .75rem;
+  min-height: 2.75rem; padding-inline: .75rem;
+  font-size: .9375rem; color: var(--text); text-decoration: none;
+  border-radius: calc(var(--radius) - 2px);
+}
+.lang-list a:hover { background: var(--bg-soft); }
+.lang-list a[aria-current="page"] { font-weight: 600; }
+.lang-list a[aria-current="page"]::after {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text); margin-inline-start: auto;
+}
 
 /* -------------------------------------------------------------- Buttons -- */
 .btn {
@@ -181,6 +223,7 @@ dl, dd { margin: 0; }
 
 .btn-lg { padding: .95rem 1.8rem; font-size: 1rem; }
 .btn-sm { padding: .55rem 1.1rem; font-size: .875rem; }
+.header-cta { white-space: nowrap; flex: 0 0 auto; }
 .header-cta .cta-short { display: none; }
 
 .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
@@ -206,7 +249,8 @@ dl, dd { margin: 0; }
 
 /* ----------------------------------------------------------------- Hero -- */
 .hero {
-  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem);
+  /* Tight at the top: on a laptop the prices have to make the first screen. */
+  padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(3rem, 7vw, 5rem);
   overflow: hidden;               /* guards the bleed against side-scroll */
 }
 .hero-grid {
@@ -219,11 +263,13 @@ dl, dd { margin: 0; }
    edge of the screen. Breaking the grid on one side only is what stops the
    layout feeling like a row of boxes. */
 .hero-text {
-  padding-left: max(var(--pad), calc((100vw - var(--wrap)) / 2 + var(--pad)));
-  padding-right: var(--pad);
+  padding-inline-start: max(var(--pad), calc((100vw - var(--wrap)) / 2 + var(--pad)));
+  padding-inline-end: var(--pad);
 }
 .hero h1 {
-  font-size: clamp(3rem, 8.5vw, 6.5rem);
+  /* Sized by the shorter of width and height, so a short laptop screen
+     still gets the prices and the Book button in the first view. */
+  font-size: clamp(3rem, min(7.5vw, 9.5vh), 5.5rem);
   letter-spacing: -0.055em;
   line-height: .92;
   margin-bottom: 1.4rem;
@@ -238,15 +284,24 @@ dl, dd { margin: 0; }
 .me-emoji {
   display: inline-block;
   width: 1.45em; height: 1.45em;
-  margin-left: .22em;
+  margin-inline-start: .22em;
   vertical-align: -.36em;
 }
 
 .hero-facts {
   display: flex; flex-wrap: wrap; gap: 2.5rem;
-  margin-top: 2.75rem; padding-top: 1.75rem;
+  margin-top: 1.75rem; padding-top: 1.25rem;
   border-top: 1px solid var(--line);
 }
+.hero-facts + .actions { margin-top: 1.5rem; }
+
+/* "No card, no deposit" under the Book buttons: the page's best
+   reassurance, said where the decision is made. */
+.book-note { margin: .8rem 0 0; font-size: .875rem; color: var(--muted); }
+.contact .book-note { color: rgba(255, 255, 255, .72); }
+.book-note .link-btn { display: flex; width: fit-content; margin-top: .15rem; font-size: .875rem; }
+.contact .link-btn { color: #fff; }
+.contact .link-btn:hover { color: rgba(255, 255, 255, .72); }
 .hero-facts dt { font-size: .8125rem; color: var(--muted); margin-bottom: .3rem; }
 .hero-facts dd { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
 .hero-facts dd span { font-size: .875rem; font-weight: 400; color: var(--muted); letter-spacing: 0; }
@@ -410,7 +465,7 @@ dl, dd { margin: 0; }
   transform: translateX(-50%);
   display: flex; align-items: center; gap: 1rem;
   white-space: nowrap;   /* one line, even at 390px */
-  padding: .45rem .5rem .45rem 1rem;
+  padding-block: .45rem; padding-inline: 1rem .5rem;
   background: var(--ink); color: #fff;
   border-radius: var(--radius);
   box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
@@ -439,7 +494,7 @@ dl, dd { margin: 0; }
    sit on the soft band grey, the visitor's on black. */
 .ask {
   position: fixed; z-index: 60;
-  right: max(1rem, env(safe-area-inset-right));
+  inset-inline-end: max(1rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
   display: flex; flex-direction: column; align-items: flex-end; gap: .75rem;
 }
@@ -476,12 +531,12 @@ dl, dd { margin: 0; }
 
 .ask-head {
   display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
-  padding: 1rem 1rem .9rem 1.25rem;
+  padding-block: 1rem .9rem; padding-inline: 1.25rem 1rem;
   border-bottom: 1px solid var(--line);
 }
 .ask-head h2 { font-size: 1.0625rem; letter-spacing: -0.02em; }
 .ask-head p { margin: .15rem 0 0; font-size: .8125rem; color: var(--muted); }
-.ask-tools { display: flex; flex: 0 0 auto; margin: -.5rem -.5rem 0 0; }
+.ask-tools { display: flex; flex: 0 0 auto; margin-block-start: -.5rem; margin-inline-end: -.5rem; }
 .ask-close, .ask-sound {
   width: 2.75rem; height: 2.75rem;
   display: grid; place-items: center;
@@ -585,7 +640,9 @@ dl, dd { margin: 0; }
   .ask > * { pointer-events: auto; }
   .ask-launch {
     align-self: flex-end;
-    margin: 0 max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) 0;
+    margin: 0;
+    margin-inline-end: max(1rem, env(safe-area-inset-right));
+    margin-block-end: max(1rem, env(safe-area-inset-bottom));
   }
   .ask.is-open .ask-launch { display: none; }
   /* Room at the very bottom of the page, so the last line of the footer can
@@ -616,7 +673,7 @@ dl, dd { margin: 0; }
 .lesson.is-match { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
 .lesson.is-match h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .75rem; }
 .lesson.is-match h3::after {
-  content: "Your match";
+  content: attr(data-match);   /* set by match.js, in the page's language */
   font-size: .8125rem; font-weight: 500; letter-spacing: 0;
   color: var(--muted);
 }
@@ -825,6 +882,9 @@ dl, dd { margin: 0; }
   filter: drop-shadow(0 .02em .02em rgba(0, 0, 0, .18));
 }
 .hero-drop.is-settled .drop-line { overflow: visible; }
+/* The translated headlines' full stop: an empty slot the width of the
+   ball at the end of the last word (ballo.js puts the ball in it). */
+.ball-stop { width: .56em; margin-inline-start: .05em; }
 
 /* Photos fade in while easing back from a slight zoom. */
 .fade-img { border-radius: var(--radius); overflow: hidden; }
@@ -951,17 +1011,17 @@ dl, dd { margin: 0; }
 .modal-card > p { color: var(--muted); }
 .modal-card ul { margin: 1.25rem 0 0; }
 .modal-card li {
-  position: relative; padding: .6rem 0 .6rem 1.2rem;
+  position: relative; padding-block: .6rem; padding-inline-start: 1.2rem;
   color: var(--muted); border-bottom: 1px solid var(--line);
 }
 .modal-card li::before {
-  content: ""; position: absolute; left: 0; top: 1.25em;
+  content: ""; position: absolute; inset-inline-start: 0; top: 1.25em;
   width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
 }
 .modal-card .contact-details { margin: 1.4rem 0; }
 
 .modal-close {
-  position: absolute; top: .5rem; right: .5rem;
+  position: absolute; top: .5rem; inset-inline-end: .5rem;
   width: 2.75rem; height: 2.75rem; font-size: 1.5rem; line-height: 1;
   color: var(--muted); border-radius: var(--radius);
   transition: color var(--dur-ui) var(--ease), background-color var(--dur-ui) var(--ease);
@@ -976,10 +1036,47 @@ dl, dd { margin: 0; }
   font-size: .875rem; color: #fff;
   background: rgba(13, 13, 13, .88); padding: .45rem .9rem; border-radius: var(--radius);
 }
-.lightbox-close { position: fixed; top: 1rem; right: 1rem; color: #fff; }
+.lightbox-close { position: fixed; top: 1rem; inset-inline-end: 1rem; color: #fff; }
 .lightbox-close:hover { color: #fff; background: rgba(255, 255, 255, .16); }
 
 body.modal-open { overflow: hidden; }
+
+/* ==========================================================================
+   LANGUAGES
+   The translated pages (/ko/, /zh-hans/, /fa/ ... built by tools/i18n/)
+   share every rule above. These only fit the type to scripts the Latin
+   settings don't suit: the tight tracking that gives the English
+   headlines their weight crushes Hangul, Han and kana and pulls apart
+   Persian's joined letters, and a .92 line height clips their taller
+   glyphs. Fonts stay the system's own, named so each language gets its
+   regional forms (Chinese and Japanese share code points but not shapes).
+   ========================================================================== */
+:root:lang(ko) { --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", "Noto Sans KR", Roboto, sans-serif; }
+:root:lang(ja) { --font: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Segoe UI", "Yu Gothic UI", Meiryo, "Noto Sans JP", Roboto, sans-serif; }
+:root:lang(zh-Hans) { --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif; }
+:root:lang(zh-Hant) { --font: -apple-system, BlinkMacSystemFont, "PingFang TC", "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", Roboto, sans-serif; }
+:root:lang(fa) { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, "Noto Sans Arabic", Roboto, sans-serif; }
+
+/* Korean breaks lines between words, not inside them. */
+:lang(ko) body { word-break: keep-all; overflow-wrap: break-word; }
+
+:root:is(:lang(ko), :lang(ja), :lang(zh)) :is(h2, h3, .statement blockquote) { letter-spacing: -0.01em; line-height: 1.3; }
+/* Hangul, Han and kana fill the whole em, so they read a size larger than
+   Latin at the same setting, and need the taller line: a step down keeps
+   the headline's weight and the prices and Book button on a laptop's
+   first screen. */
+:root:is(:lang(ko), :lang(ja), :lang(zh)) .hero h1 { font-size: clamp(2.75rem, min(6.6vw, 8.4vh), 4.9rem); }
+:root:is(:lang(ja), :lang(zh)) .hero h1 { letter-spacing: 0; line-height: 1.1; }
+:root:lang(ko) .hero h1 { letter-spacing: -0.04em; line-height: 1.08; }
+:root:lang(vi) .hero h1 { line-height: .98; }
+
+/* Persian: no tracking anywhere (it would break the joins), and more
+   line height for the dots and descenders. */
+:root:lang(fa) :is(h1, h2, h3, .statement blockquote, .price, .hero-facts dd, .eyebrow) { letter-spacing: 0; }
+:root:lang(fa) body { line-height: 1.8; }
+:root:lang(fa) :is(h2, h3) { line-height: 1.45; }
+:root:lang(fa) .hero h1 { line-height: 1.02; }
+:root:lang(fa) .statement blockquote { line-height: 1.5; }
 
 /* ==========================================================================
    RESPONSIVE
@@ -999,12 +1096,38 @@ body.modal-open { overflow: hidden; }
   .contact-details { margin-top: 1rem; }
 }
 
-/* The wordmark needs enough room to stay legible beside the booking action. */
+/* Short laptop windows: a 1366×768 or 1536×864 screen leaves 650–730px
+   under the browser's bars. The same hero, packed tighter, so the prices
+   and the Book button still make the first view. The text starts at the
+   top instead of centring on the photo: centred against a portrait taller
+   than the window, it began a hundred pixels down and pushed Book off the
+   bottom. */
+@media (min-width: 941px) and (max-height: 820px) {
+  .hero { padding-block-start: 1rem; }
+  .hero-grid { align-items: start; }
+  .hero-text { padding-block-start: clamp(1rem, 4vh, 2.5rem); }
+  .hero .eyebrow { margin-bottom: .6rem; }
+  .hero h1 { font-size: clamp(2.75rem, 8.6vh, 5rem); margin-bottom: 1rem; }
+  :root:is(:lang(ko), :lang(ja), :lang(zh)) .hero h1 { font-size: clamp(2.5rem, 7.6vh, 4.4rem); }
+  .hero-sub { font-size: 1.0625rem; max-width: 50ch; }
+  .hero-facts { margin-top: 1.25rem; padding-top: 1rem; }
+  .hero-facts + .actions { margin-top: 1.1rem; }
+}
+
 @media (max-width: 940px) {
+  .lesson-actions .btn { min-height: 44px; }
+  .notes { grid-template-columns: 1fr 1fr; }
+}
+
+/* The header folds its links into the menu earlier than the page stacks:
+   wordmark, five links, the language menu and the Book button need about
+   1,050px in the longer languages (Spanish, Japanese, Persian), and below
+   that the labels wrapped. The wordmark needs room to stay legible beside
+   the booking action. */
+@media (max-width: 1100px) {
   .nav-toggle { display: flex; }
   .header-row { gap: .75rem; }
-  .header-cta, .lesson-actions .btn { min-height: 44px; }
-  .notes { grid-template-columns: 1fr 1fr; }
+  .header-cta { min-height: 44px; }
   .nav {
     display: none;
     position: absolute; top: 100%; left: 0; right: 0;
@@ -1020,7 +1143,7 @@ body.modal-open { overflow: hidden; }
   .nav-portfolio { gap: .55rem; }
   .np-arrow path { stroke-dashoffset: 0; }
   /* The desktop divider would read as a stray indent in the stacked menu. */
-  .nav-portfolio { padding-left: 0; border-left: none; }
+  .nav-portfolio { padding-inline-start: 0; border-inline-start: none; }
 }
 
 @media (max-width: 680px) {
@@ -1035,10 +1158,8 @@ body.modal-open { overflow: hidden; }
      in), and the prices sit just above the buttons. */
   .hero-photo { order: 1; }
   .hero-photo img { object-position: 50% 18%; }
-  .hero-text { display: flex; flex-direction: column; }
-  .hero-facts { order: 1; margin-top: 1.5rem; padding-top: 1.25rem; }
+  .hero-facts { margin-top: 1.5rem; padding-top: 1.25rem; }
   .hero-facts dd { font-size: 1.35rem; }
-  .hero-text .actions { order: 2; margin-top: 1.5rem; }
   .matcher-row { flex-direction: column; }
   .matcher-row .btn, .matcher-actions .btn { width: 100%; min-height: 44px; }
 }
@@ -1049,6 +1170,8 @@ body.modal-open { overflow: hidden; }
   .header-row { gap: .6rem; }
   .header-cta .cta-full { display: none; }
   .header-cta .cta-short { display: inline; }
+  /* The globe alone; its name is still read out. */
+  .lang-code { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
   .notes { grid-template-columns: 1fr; }
 }
 

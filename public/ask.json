@@ -42,7 +42,7 @@
     {
       "id": "private",
       "covers": "What a private (one-on-one) lesson is, what it covers, or who it is for.",
-      "answer": "A private lesson is one-on-one, $80 an hour, for juniors and adults, tailored to your level. We work on stroke and serve mechanics, footwork and court movement, red, orange and green ball progression for younger players, match-readiness for tournaments, and you leave with a practice plan for between sessions.",
+      "answer": "A private lesson is one-on-one, $80 an hour, for juniors and adults, tailored to your level. We work on stroke and serve mechanics, footwork and court movement, the slower, softer balls younger players learn on, match-readiness for tournaments, and you leave with a practice plan for between sessions.",
       "actions": [
         {
           "type": "book",
@@ -107,7 +107,7 @@
     {
       "id": "which_lesson",
       "covers": "The visitor asks which lesson or option they should choose, or describes themselves and wants a recommendation.",
-      "answer": "Quick guide: one player who wants coaching — a private lesson. Two of you at a similar level — semi-private. You just want someone reliable to hit with, no instruction — a hitting session. Three or more — an adult clinic. The box above the lesson cards can also match you from a sentence.",
+      "answer": "Quick guide: one player who wants coaching — a private lesson. Two of you at a similar level — semi-private. You just want someone reliable to hit with, no instruction — a hitting session. Three or more — an adult clinic. The box under the lesson cards can also match you from a sentence.",
       "actions": [
         {
           "type": "scroll",
@@ -134,7 +134,7 @@
     {
       "id": "who",
       "covers": "Who Isaac teaches: ages, levels, kids, juniors, adults, complete beginners, or advanced players.",
-      "answer": "Juniors from red-ball beginners up, and adults at any level. Most of my work is with developing juniors, and I run adult clinics for players who want more consistency and a clearer plan once points start.",
+      "answer": "Juniors from complete beginners up (the youngest start on a slower, softer ball, so first-timers are welcome) and adults at any level. Most of my work is with developing juniors, and I run adult clinics for players who want more consistency and a clearer plan once points start.",
       "next": [
         "What's your coaching style?",
         "Which lesson fits me?",

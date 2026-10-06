@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from index.html and tools/i18n/ja.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Lee Tennis Co. — カリフォルニア州アーバインのテニス個人レッスン</title>
+  <meta name="description"
+        content="カリフォルニア州アーバインのテニス個人レッスン。Isaac Lee によるマンツーマン指導が1時間 $80、2人でのペアレッスンが1時間 $110、ヒッティングセッションが1時間 $45、少人数の大人向けクリニックもあります。" />
+  <link rel="canonical" href="https://leetennisco.com/ja/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lee Tennis Co. — カリフォルニア州アーバインのテニス個人レッスン" />
+  <meta property="og:description"
+        content="カリフォルニア州アーバインのテニス個人レッスン。マンツーマン指導、ヒッティングセッション、少人数の大人向けクリニック。" />
+  <meta property="og:url" content="https://leetennisco.com/ja/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/focus.css?v=1" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Lee Tennis Co.",
+    "alternateName": "Isaac Lee Tennis",
+    "description": "Private tennis coaching in Irvine, California.",
+    "url": "https://leetennisco.com/",
+    "email": "isaacleetennis@gmail.com",
+    "priceRange": "$45-$110",
+    "areaServed": { "@type": "City", "name": "Irvine, California" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Irvine",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="Lee Tennis Co. — ホーム">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT モノグラム" />
+      </a>
+
+      <nav class="nav" id="nav" aria-label="メインメニュー">
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>レッスンを予約</a>
+        <a href="#lessons">レッスン</a>
+        <a href="#about">プロフィール</a>
+        <a href="#reviews">推薦の声</a>
+        <a href="#contact">お問い合わせ</a>
+        <a class="nav-portfolio" href="/portfolio/">
+          <span class="np-label"><span class="np-text" data-text="キャリアポートフォリオ">キャリアポートフォリオ</span></span>
+          <svg class="np-arrow" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+            <path pathLength="1" d="M1.5 7h10.5M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </nav>
+
+      <details class="lang">
+        <summary aria-label="言語 (Language)：日本語">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">JA</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/" hreflang="en" lang="en">English</a>
+          <a href="/es/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/" hreflang="ja" lang="ja" aria-current="page">日本語</a>
+          <a href="/vi/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="レッスンを予約" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
+        <span class="cta-full">レッスンを予約</span><span class="cta-short" aria-hidden="true">予約</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow fade">個人レッスン · アーバイン Toscana コート</p>
+          <h1 class="hero-drop">
+            <span class="drop-line"><span class="drop-word">テニス</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.09s">個人</span></span>
+            <span class="drop-line"><span class="drop-word" style="--d:.18s">レッスン<span class="ball-o ball-stop" aria-hidden="true"></span></span></span>
+          </h1>
+          <p class="hero-sub fade" style="--d:.12s">
+            <span class="me">Isaac Lee<img class="me-emoji" src="/images/isaac-emoji.svg" width="28" height="28" alt="" /></span>です。アーバインのホームコートで、ジュニアと大人を指導しています。しっかりした基礎と、目的を持った着実な練習にもとづくマンツーマンのレッスンです。
+          </p>
+
+          <dl class="hero-facts fade" style="--d:.16s">
+            <div><dt>個人レッスン</dt><dd>$80<span>/時間</span></dd></div>
+            <div><dt>ヒッティング</dt><dd>$45<span>/時間</span></dd></div>
+            <div><dt>レッスンは私のホームコートで</dt><dd>アーバイン Toscana</dd></div>
+          </dl>
+
+          <div class="actions fade" style="--d:.2s">
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>レッスンを予約</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Japanese%20page)" data-mail="Tennis%20lessons%20(Japanese%20page)">メールする</a>
+          </div>
+          <p class="book-note hero-note fade" style="--d:.24s">カードも前金も不要です。予約は時間を押さえるだけです。</p>
+        </div>
+
+        <figure class="hero-photo fade-img">
+          <picture>
+            <source type="image/webp" srcset="/images/pointing-480.webp 480w, /images/pointing.webp 960w"
+                    sizes="(max-width: 940px) 100vw, 46vw" />
+            <img src="/images/pointing.jpg" srcset="/images/pointing-480.jpg 480w, /images/pointing.jpg 960w"
+                 sizes="(max-width: 940px) 100vw, 46vw"
+                 width="960" height="1280" fetchpriority="high"
+                 alt="レッスン中に練習メニューを指示する Isaac Lee" />
+          </picture>
+          <video class="hero-loop" data-src="" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div class="wrap">
+        <blockquote class="fade" data-focus-reveal="hover">
+          テニスはすべての人のものです。練習に目的が生まれれば、ほとんどの選手が自分の予想より早く上達します。
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="wrap section" id="lessons">
+      <header class="section-head">
+        <p class="eyebrow fade">レッスン</p>
+        <h2 class="fade" style="--d:.06s">4つのレッスンスタイル</h2>
+        <p class="section-sub fade" style="--d:.12s">
+          選手によってスタート地点はさまざまです。レッスンは、あなたのレベルとコートに来られる頻度に合わせて組み立てます。
+        </p>
+      </header>
+
+      <div class="lesson-list">
+        <article class="lesson fade" data-lesson="private">
+          <h3>個人レッスン</h3>
+          <p class="price">$80<span>/時間</span></p>
+          <p>
+            ジュニアにも大人にも対応するマンツーマンのレッスンです。ストロークとサーブの技術、フットワーク、小さな初心者が使うゆっくりした柔らかいボール、そしてレッスンの合間に実際に取り組める練習プランまで。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>個人レッスンを予約</a>
+            <button class="link-btn" type="button" data-open="modalPrivate" aria-label="個人レッスンの内容">レッスン内容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="semi">
+          <h3>ペアレッスン</h3>
+          <p class="price">$110<span>/時間（2人）&mdash; 1人 $55</span></p>
+          <p>
+            同じレッスンを、近いレベルの2人で受けます。1人あたりの料金は個人レッスンより安く、1人で球出しを受ける代わりに、実際のラリーやポイント練習ができます。友達やきょうだい、ダブルスのパートナーと一緒にどうぞ。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>ペアレッスンを予約</a>
+            <button class="link-btn" type="button" data-open="modalSemi" aria-label="ペアレッスンの内容">レッスン内容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="hitting">
+          <h3>ヒッティングセッション</h3>
+          <p class="price">$45<span>/時間</span></p>
+          <p>
+            指導ではなく打ち合いが中心で、安定した相手と練習したい選手向けです。1回60分以上です。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>ヒッティングセッションを予約</a>
+            <button class="link-btn" type="button" data-open="modalHitting" aria-label="ヒッティングセッションの内容">レッスン内容</button>
+          </div>
+        </article>
+
+        <article class="lesson fade" data-lesson="group">
+          <h3>大人向けクリニック</h3>
+          <p class="price">グループ料金<span>、人数に応じてお見積もり</span></p>
+          <p>
+            1面のコートで、少人数のグループがドリルと実戦形式のゲームに取り組みます。ローテーションが多く、全員が打ち続けられます。料金は人数によって変わります。
+          </p>
+          <div class="lesson-actions">
+            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Japanese%20page)" data-mail="Adult%20clinics%20(Japanese%20page)">メールで見積もりを依頼</a>
+            <button class="link-btn" type="button" data-open="modalAdult" aria-label="大人向けクリニックの内容">レッスン内容</button>
+          </div>
+        </article>
+      </div>
+
+      <form class="matcher" id="matcher" hidden>
+        <label class="matcher-label" for="matchText">どれが合うかわからない場合は、ひとことで自己紹介してください。</label>
+        <div class="matcher-row">
+          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
+                 placeholder="例：中級者で、サーブを直したい" required>
+          <button class="btn btn-primary" type="submit">レッスンを探す</button>
+        </div>
+        <div class="matcher-result" role="status" aria-live="polite"></div>
+        <p class="matcher-note">AI があなたの文を読んでレッスンを選びます。このサイトには何も保存されません。</p>
+      </form>
+    </section>
+
+    <section class="band" id="about">
+      <div class="wrap section">
+        <div class="two-col">
+          <figure class="about-photo fade-img">
+            <picture>
+              <source type="image/webp" srcset="/images/coaching-clinic.webp" />
+              <img src="/images/coaching-clinic.jpg" width="780" height="419" loading="lazy"
+                   alt="ネット際でジュニアクリニックを指導する Isaac Lee" />
+            </picture>
+          </figure>
+
+          <div class="about-text">
+            <p class="eyebrow fade">プロフィール</p>
+            <h2 class="fade" style="--d:.06s">まず基礎、すべてはそこから</h2>
+
+            <div class="fade" style="--d:.12s">
+              <p>
+                コーチを始めて3年になります。LifeSport Libertyville でジュニアプロとしてスタートし、その後 Newport Beach Tennis Club のジュニアプログラム、Grip N Rip のプロスタッフに加わりました。
+              </p>
+              <p>
+                主に成長中のジュニア選手を指導しています。早いうちに基礎を正しく身につけることで、上達が積み重なっていくからです。安定感を高め、実際にポイントが始まってからも明確なプランを持ちたい大人向けのクリニックも行っています。
+              </p>
+              <p>
+                高校ではバーシティ（代表チーム）で4年間プレーしました。コーチは学業と両立しているパートタイムの仕事なので、スケジュールは少なめに、丁寧に組んでいます。
+              </p>
+            </div>
+
+            <dl class="facts fade" style="--d:.18s">
+              <div><dt>ホームコート</dt><dd>アーバイン Toscana</dd></div>
+              <div><dt>高校代表</dt><dd>4年</dd></div>
+              <div><dt>スケジュール</dt><dd>パートタイム</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="photos wrap" id="in-action">
+      <header class="section-head">
+        <p class="eyebrow fade">コートで</p>
+        <h2 class="fade" style="--d:.06s">プレーの様子</h2>
+      </header>
+
+      <div class="photo-strip fade">
+        <button class="photo" type="button"
+                data-lightbox="/images/forehand.jpg" data-caption="フォアハンド、室内練習">
+          <picture>
+            <source type="image/webp" srcset="/images/forehand-600.webp 600w, /images/forehand.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/forehand.jpg" srcset="/images/forehand-600.jpg 600w, /images/forehand.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="フォアハンドを打つ Isaac Lee" />
+          </picture>
+          <span class="photo-tag">フォアハンド</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/serve.jpg" data-caption="試合中のサーブ">
+          <picture>
+            <source type="image/webp" srcset="/images/serve-600.webp 600w, /images/serve.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/serve.jpg" srcset="/images/serve-600.jpg 600w, /images/serve.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1800" loading="lazy"
+                 alt="試合中にサーブを打つ Isaac Lee" />
+          </picture>
+          <span class="photo-tag">サーブ</span>
+        </button>
+
+        <button class="photo" type="button"
+                data-lightbox="/images/ready.jpg" data-caption="構え、リターンを待つ">
+          <picture>
+            <source type="image/webp" srcset="/images/ready-600.webp 600w, /images/ready.webp 1200w"
+                    sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
+            <img src="/images/ready.jpg" srcset="/images/ready-600.jpg 600w, /images/ready.jpg 1200w"
+                 sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px"
+                 width="1200" height="1600" loading="lazy"
+                 alt="ベースラインの後ろで構える Isaac Lee" />
+          </picture>
+          <span class="photo-tag">構え</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="wrap section" id="reviews">
+      <header class="section-head">
+        <p class="eyebrow fade">推薦の声</p>
+        <h2 class="fade" style="--d:.06s">私の指導を見てきた人たちの声</h2>
+        <p class="section-sub fade" style="--d:.12s">英語の原文を翻訳しています。</p>
+      </header>
+
+      <div class="review-list">
+        <figure class="review fade">
+          <blockquote>
+            私は LifeSport Libertyville で Isaac のメンターを務め、彼の成長を間近で見てきました。勤勉さと自己管理、向上への強い意志によって、彼は生徒からジュニアプロフェッショナルへと成長し、レッドボール、オレンジボール、高校の試合の指導で、優れたリーダーシップとすべての選手の成長への思いやりを発揮しました。
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+            </span>
+            <span>
+              <strong>Brice Krizman</strong>
+              テニスコーチ、LifeSport Libertyville
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="review fade">
+          <blockquote>
+            Isaac Lee は幼いころからテニスに打ち込んできた素晴らしい選手です。優れた選手であるだけでなく、体系的な指導スタイルと細部への気配りを備えた、さらに優れたメンターでもあります。
+          </blockquote>
+          <figcaption>
+            <span class="avatar">
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+            </span>
+            <span>
+              <strong>Albert Kim</strong>
+              ノースウェスタン大学の学生
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <figure class="video-frame fade">
+        <button class="video-play" type="button" data-video="4oZhhesVV2E"
+                aria-label="動画を再生：2024年11月、LifeSport Libertyville でかつてのコーチと対戦する Isaac Lee">
+          <picture>
+            <source type="image/webp" srcset="/images/lifesport-2024-640.webp 640w, /images/lifesport-2024.webp 1280w"
+                    sizes="(max-width: 940px) 100vw, 1140px" />
+            <img src="/images/lifesport-2024.jpg" srcset="/images/lifesport-2024-640.jpg 640w, /images/lifesport-2024.jpg 1280w"
+                 sizes="(max-width: 940px) 100vw, 1140px"
+                 width="1280" height="720" loading="lazy" alt="" />
+          </picture>
+          <span class="video-cue" aria-hidden="true"></span>
+          <span class="photo-tag">ポイントを見る</span>
+        </button>
+        <figcaption>
+          今回は指導ではありません。高校で選手をしていた2024年11月、LifeSport Libertyville でかつてのコーチと打ち合ったときの映像です。
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section notes-section" id="before-you-book">
+      <h2 class="fade">ご予約の前に</h2>
+      <dl class="notes fade" style="--d:.06s">
+        <div>
+          <dt>場所</dt>
+          <dd>アーバインの Toscana Apartments テニスコート。レッスンは私のホームコートで行います &mdash; こちらへお越しください。</dd>
+        </div>
+        <div>
+          <dt>対象</dt>
+          <dd>まったくの初心者からのジュニア（いちばん小さい子はゆっくりした柔らかいボールから始めます）と、あらゆるレベルの大人。</dd>
+        </div>
+        <div>
+          <dt>お支払い</dt>
+          <dd>現地で直接お支払いください。オンライン予約は時間を押さえるだけです &mdash; カードも前金も不要です。</dd>
+        </div>
+        <div>
+          <dt>初回レッスン</dt>
+          <dd>予約の際にレベルと取り組んでいることを教えていただければ、プランを用意しておきます。</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap section">
+        <div class="contact-grid">
+          <div class="contact-text">
+            <h2 class="fade">さあ、コートへ</h2>
+            <p class="fade" style="--d:.06s">
+              カレンダーから時間を選び、予約の際にレベルと取り組んでいることを教えてください。初回レッスンにはプランを用意しておきます。
+            </p>
+            <div class="actions fade" style="--d:.12s">
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>レッスンを予約</a>
+              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Japanese%20page)" data-mail="Tennis%20lessons%20(Japanese%20page)">まずメールする</a>
+            </div>
+            <p class="book-note fade" style="--d:.16s">予約は時間を押さえるだけで、カードも前金も不要です。お支払いは現地でどうぞ。
+              <button class="link-btn" type="button" data-open="bookingModal">その他の連絡方法</button></p>
+          </div>
+
+          <dl class="contact-details fade" style="--d:.18s">
+            <div>
+              <dt>メール</dt>
+              <dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>ホームコート</dt>
+              <dd>アーバインの Toscana Apartments テニスコート</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; カリフォルニア州アーバイン</p>
+      <p class="footer-links">
+        <a href="/portfolio/">キャリアポートフォリオ</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="bookingModal" aria-labelledby="bookingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="bookingTitle" tabindex="-1" autofocus>お問い合わせ</h3>
+      <p>
+        メールがいちばん早いです。詳しく書きたい場合は、フォームでレベル、目標、ご都合のよい時間をお聞きします。
+      </p>
+      <dl class="contact-details modal-details">
+        <div><dt>メール</dt><dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSdlKDW_YhhF3B93UG77lXCi8AlWbZAEvEwlXJ3_dHlmn4HmRQ/viewform"
+           target="_blank" rel="noopener noreferrer">フォームを開く</a>
+        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="isaacleetennis@gmail.com">メールアドレスをコピー</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalPrivate" aria-labelledby="privateTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="privateTitle" tabindex="-1" autofocus>個人レッスン</h3>
+      <p class="price">$80<span>/時間</span></p>
+      <p>ジュニアも大人も &mdash; 同じマンツーマン形式で、レベルに合わせて進めます。</p>
+      <ul>
+        <li>ストロークとサーブの技術</li>
+        <li>フットワークとコートでの動き</li>
+        <li>小さな選手向けのレッド、オレンジ、グリーンボールの段階 &mdash; 初心者が使う、ゆっくりで弾みの低いボール</li>
+        <li>レッスンの合間に取り組む練習プラン</li>
+        <li>試合に向けた実戦準備</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>個人レッスンを予約</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons%20(Japanese%20page)" data-mail="Private%20lessons%20(Japanese%20page)">メールする</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalSemi" aria-labelledby="semiTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="semiTitle" tabindex="-1" autofocus>ペアレッスン</h3>
+      <p class="price">$110<span>/時間（2人）&mdash; 1人 $55</span></p>
+      <p>近いレベルの2人が1面のコートで、時間と料金を分け合います。</p>
+      <ul>
+        <li>個人レッスンと同じストロークとサーブの技術</li>
+        <li>1人で球出しを受ける代わりに、パートナーとの実際のラリーとポイント練習</li>
+        <li>ダブルスに向けて練習しているなら、ダブルスのポジションとコミュニケーション</li>
+        <li>全体への指導だけでなく、一人ひとりに個別のフィードバック</li>
+        <li>2人のレベルが近いほど効果的で、どちらも待つ時間がありません</li>
+        <li>パートナーと一緒に来るか、パートナー探しをご相談ください</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>ペアレッスンを予約</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons%20(Japanese%20page)" data-mail="Semi-private%20lessons%20(Japanese%20page)">メールする</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalHitting" aria-labelledby="hittingTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="hittingTitle" tabindex="-1" autofocus>ヒッティングセッション</h3>
+      <p class="price">$45<span>/時間</span></p>
+      <p>指導ではなく打ち合いです。あなたのレベルに合わせて球出しやラリーをするので、説明を聞くより打つ量を重ねられます。</p>
+      <ul>
+        <li>60分以上</li>
+        <li>安定したクロスとストレートのラリー</li>
+        <li>実際に返球する相手とのサーブとリターン練習</li>
+        <li>ご希望でタイブレークやセットマッチも</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>ヒッティングセッションを予約</a>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions%20(Japanese%20page)" data-mail="Hitting%20partner%20sessions%20(Japanese%20page)">メールする</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="modalAdult" aria-labelledby="adultTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="adultTitle" tabindex="-1" autofocus>大人向けクリニック</h3>
+      <p class="price">グループ料金<span>、人数に応じてお見積もり</span></p>
+      <p>グループ単位の料金なので、人数が多いほど1人あたりの料金が下がります。人数を教えていただければお見積もりします。</p>
+      <ul>
+        <li>1面での少人数グループ</li>
+        <li>誰も待たないローテーションで行うドリルと実戦形式のゲーム</li>
+        <li>ラリーを続ける粘りと、プレッシャーの中での安定感</li>
+        <li>グループで来ていただくか、既存のグループへの参加をご相談ください</li>
+      </ul>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Japanese%20page)" data-mail="Adult%20clinics%20(Japanese%20page)">メールで見積もりを依頼</a>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="写真ビューア">
+    <button class="modal-close lightbox-close" data-close type="button" aria-label="閉じる">&times;</button>
+    <figure>
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+  </dialog>
+
+  <div class="ask" id="ask" hidden>
+    <section class="ask-panel" id="askPanel" role="dialog" aria-labelledby="askTitle" hidden>
+      <header class="ask-head">
+        <div>
+          <h2 id="askTitle">Isaac に聞く</h2>
+          <p>回答はすべて私が書いたもので、AI が選びます。</p>
+        </div>
+        <div class="ask-tools">
+          <button class="ask-sound" type="button" aria-label="音を消す" title="音を消す">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path class="ask-sound-on" d="M13.5 7.2a4 4 0 0 1 0 5.6M15.6 5.2a7 7 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path class="ask-sound-off" d="M13.5 7.5l4 5M17.5 7.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="ask-close" type="button" aria-label="チャットを閉じる">&times;</button>
+        </div>
+      </header>
+      <div class="ask-log" role="log" aria-live="polite" aria-relevant="additions" tabindex="-1"></div>
+      <form class="ask-form">
+        <input class="ask-input" id="askInput" name="question" type="text" maxlength="300" autocomplete="off"
+               aria-label="質問" placeholder="レッスン、料金、時間などを質問…" required>
+        <button class="ask-send" type="submit" aria-label="送信">
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </section>
+    <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Isaac に聞く</span>
+    </button>
+  </div>
+
+  <script>window.I18N = {"copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","どのレッスンが合っていますか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。人数をメールで教えていただければお見積もりします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script src="/tennis.js?v=20261006" defer></script>
+  <script src="/focus.js?v=3" defer></script>
+  <script src="/match.js?v=4" defer></script>
+  <script src="/ask.js?v=7" defer></script>
+  <script src="/hero.js?v=1" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/ballo.js?v=3" defer></script>
+</body>
+</html>
