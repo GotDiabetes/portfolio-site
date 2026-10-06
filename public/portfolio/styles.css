@@ -679,3 +679,16 @@ html { scroll-behavior: smooth; }
   .js .fade.is-pending { opacity: 1; }
   .js .fade.is-in { animation: none; }
 }
+
+/* Page transitions: arriving from (or leaving for) the tennis page is one
+   continuous move: the old page lifts and fades, this one rises in under
+   it. The tennis page declares the same; both have to opt in. Browsers
+   without cross-document view transitions just navigate normally. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .32s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-in .55s var(--ease-out) .06s both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-2.5vh) scale(.985); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(4vh); } }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}

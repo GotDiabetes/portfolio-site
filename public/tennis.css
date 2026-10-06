@@ -87,7 +87,9 @@ dl, dd { margin: 0; }
 /* --------------------------------------------------------------- Header -- */
 .header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(255, 255, 255, .88);
+  /* Nearly opaque: at .88 the black bands blurred up through it into a
+     muddy grey bar. */
+  background: rgba(255, 255, 255, .97);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
@@ -230,18 +232,15 @@ dl, dd { margin: 0; }
 
 /* Isaac's emoji, right after his name in the intro (images/isaac-emoji.svg,
    drawn from the hero photo). It sits like a glyph: em-sized, on the text's
-   baseline, never splitting from the name across a line break, and it gives
-   a small wave of a tilt on hover. Decorative: the name is already text. */
+   baseline, never splitting from the name across a line break. It holds
+   still. Decorative: the name is already text. */
 .me { white-space: nowrap; color: var(--text); }
 .me-emoji {
   display: inline-block;
   width: 1.45em; height: 1.45em;
   margin-left: .22em;
   vertical-align: -.36em;
-  transform-origin: 50% 85%;
-  transition: transform .45s var(--ease);
 }
-.me:hover .me-emoji { transform: rotate(-10deg) scale(1.12); }
 
 .hero-facts {
   display: flex; flex-wrap: wrap; gap: 2.5rem;
@@ -256,20 +255,6 @@ dl, dd { margin: 0; }
 .hero-photo { margin: 0; overflow: hidden; position: relative; }
 .hero-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
 
-/* The hero is alive, not static: the photograph drifts very slowly, a
-   long, barely-there push-in and pan, the way a camera on a tripod still
-   breathes. It runs on the <picture> so it never fights the image's own
-   reveal (which animates the <img>). */
-.hero-photo picture {
-  display: block;
-  transform-origin: 60% 40%;
-  animation: heroDrift 28s ease-in-out infinite alternate;
-}
-@keyframes heroDrift {
-  from { transform: scale(1.02) translate3d(0, 0, 0); }
-  to   { transform: scale(1.09) translate3d(-1.6%, -1.2%, 0); }
-}
-
 /* The looping clip (hero.js), when there is one: it sits over the photo
    and fades in only once it is actually playing, so a slow connection
    just keeps seeing the photograph. */
@@ -280,7 +265,6 @@ dl, dd { margin: 0; }
   pointer-events: none;
 }
 .hero-photo.has-loop .hero-loop { opacity: 1; }
-.hero-photo.has-loop picture { animation-play-state: paused; }
 
 /* ------------------------------------------------------------ Statement -- */
 .statement {
@@ -360,13 +344,14 @@ dl, dd { margin: 0; }
   gap: .5rem 1.25rem; margin-top: 1.25rem;
 }
 
-/* Lesson matcher (match.js). One plain field and the page's own button; the
-   answer is a sentence and the matched card's real Book control. The card it
-   picks gets a black edge and a label, the same weight as a hover, so the
-   other three stay readable rather than being greyed out. */
+/* Lesson matcher (match.js), under the cards. One plain field and the
+   page's own button; the answer is a sentence and the matched card's real
+   Book control. The card it picks gets a black edge and a label, the same
+   weight as a hover, so the other three stay readable rather than being
+   greyed out. */
 .matcher {
   max-width: 40rem;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 .matcher[hidden] { display: none; }
 .matcher-label { display: block; font-weight: 600; margin-bottom: .6rem; }
@@ -388,15 +373,18 @@ dl, dd { margin: 0; }
 .matcher-result:not(:empty) { margin-top: 1.1rem; }
 .matcher-result p { margin-bottom: .5rem; }
 .matcher-result p + p { color: var(--muted); }
-.matcher-actions { margin-top: .9rem; }
-.matcher-note { margin-top: .9rem; font-size: .8125rem; color: var(--muted); }
+.matcher-actions {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .5rem 1.25rem; margin-top: .9rem;
+}
+.matcher-note { margin-top: .9rem; font-size: .8125rem; color: var(--muted); max-width: 60ch; }
 
 /* ----------------------------------------------------------- Book FX -- */
-/* The ball that comes off a Book button (bookfx.js). One fixed layer above
-   everything, the calendar's popup included, that never takes a click; the
-   pieces are positioned by the script and animated with Web Animations.
-   The optic yellow is the page's one deliberate colour, and only for the
-   second the ball is in the air. */
+/* The stick-figure server on a Book button (bookfx.js). One fixed layer
+   above everything, the calendar's popup included, that never takes a
+   click; the script draws and animates the pieces. The optic yellow ball
+   is the page's one deliberate colour, and only for the second it's in
+   the air. */
 .bookfx {
   position: fixed; inset: 0; z-index: 2147483647;
   pointer-events: none; overflow: hidden;
@@ -412,12 +400,36 @@ dl, dd { margin: 0; }
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .08);
 }
 .bookfx-fuzz:nth-child(3n) { background: #fff; }
-.bookfx-ball { width: 30px; height: 30px; }
-.bookfx-ball svg { display: block; width: 30px; height: 30px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
-.bookfx-shadow {
-  width: 22px; height: 6px; border-radius: 50%;
-  background: rgba(0, 0, 0, .45); filter: blur(1.5px);
+
+/* The one-time note after the first Book press that makes a sound: says
+   the sound is on and offers the off switch where it happened. Ink bar,
+   bottom centre, above the calendar popup. */
+.sound-note {
+  position: fixed; z-index: 2147483647;
+  left: 50%; bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 1rem;
+  white-space: nowrap;   /* one line, even at 390px */
+  padding: .45rem .5rem .45rem 1rem;
+  background: var(--ink); color: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+  font-size: .875rem;
+  animation: noteIn .35s var(--ease) both;
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
 }
+.sound-note button {
+  min-height: 2.25rem; padding: 0 .6rem;
+  color: #fff; font-weight: 600;
+  text-decoration: underline; text-underline-offset: 3px;
+  border-radius: calc(var(--radius) - 2px);
+}
+.sound-note button:hover { background: rgba(255, 255, 255, .12); }
+.sound-note button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.sound-note.is-out { opacity: 0; transform: translate(-50%, 8px); }
+@keyframes noteIn { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translateX(-50%); } }
+/* The stick-figure server is drawn into one viewport-sized SVG per press. */
+.bookfx-court { position: absolute; left: 0; top: 0; overflow: visible; }
 
 /* --------------------------------------------------------- Ask Isaac -- */
 /* The chat in the corner (ask.js). A black launcher that reads like the
@@ -453,9 +465,10 @@ dl, dd { margin: 0; }
   width: min(23.5rem, calc(100vw - 2rem));
   height: min(38rem, calc(100dvh - 6.5rem));
   background: var(--bg);
-  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .14);
+  /* Depth from the shadow alone; a hairline on top of a wide shadow is a
+     belt and braces that reads as a template. */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .06);
   overflow: hidden;
   animation: askIn .28s var(--ease);
 }
@@ -643,6 +656,20 @@ dl, dd { margin: 0; }
 }
 .photo:hover img { transform: scale(1.04); }
 
+/* ---------------------------------------------------- Page transitions --
+   Going between the tennis page and the portfolio (same site, both opt in)
+   is one continuous move instead of a hard reload: the old page lifts and
+   fades, the new one rises in under it. Browsers without cross-document
+   view transitions just navigate normally. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vtOut .32s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vtIn .55s cubic-bezier(.22, 1, .36, 1) .06s both; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-2.5vh) scale(.985); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(4vh); } }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
 /* Caption sits on the image and slides up on hover. */
 .photo-tag {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -693,77 +720,6 @@ dl, dd { margin: 0; }
 }
 .review figcaption strong { display: block; color: var(--text); font-weight: 600; }
 
-/* Morph pill cards (morph.js). The row becomes pills with one card open;
-   a pill grows into its card while the open one folds back. Width and
-   height are animated by the script between measured sizes; everything
-   else (padding, corners, the photo) transitions here. The pill's corner
-   is its half-height, so the corner change reads as one shape relaxing
-   into another rather than a jump. */
-.review-list.morph-stage {
-  display: flex; align-items: center; gap: 1rem;
-}
-.morph-stage .review {
-  --morph: .56s var(--ease);
-  position: relative;
-  flex: 0 0 auto;
-  display: grid;
-  grid-template-columns: 2.75rem auto;
-  grid-template-areas: "photo cap";
-  align-items: center; column-gap: .8rem;
-  padding: .45rem 1.3rem .45rem .45rem;
-  border-radius: 1.85rem;
-  overflow: hidden;
-  cursor: pointer;
-  transition: width var(--morph), height var(--morph), padding var(--morph),
-              border-radius var(--morph), border-color var(--dur-ui) var(--ease),
-              box-shadow var(--dur-ui) var(--ease),
-              opacity var(--dur-fade) var(--ease), transform var(--dur-fade) var(--ease);
-}
-.morph-stage .review:hover { border-color: #c9c9c6; }
-.morph-stage .review figcaption { display: contents; }
-.morph-stage .review blockquote { grid-area: quote; display: none; margin: 0; }
-.morph-stage .review .avatar {
-  grid-area: photo;
-  width: 2.75rem; height: 2.75rem;
-  border-radius: 50%;
-  transition: width var(--morph), height var(--morph), border-radius var(--morph);
-}
-.morph-stage .review figcaption > span:last-child {
-  grid-area: cap;
-  font-size: .8125rem; line-height: 1.3; white-space: nowrap;
-}
-.morph-stage .review figcaption strong { font-size: .9375rem; }
-
-.morph-stage .review.is-open {
-  width: min(44rem, 100%);
-  grid-template-columns: 9rem minmax(0, 1fr);
-  grid-template-areas: "photo quote" "photo cap";
-  align-items: start; column-gap: 1.6rem; row-gap: 1.1rem;
-  padding: 1.25rem 1.75rem 1.4rem 1.25rem;
-  border-radius: var(--radius);
-  border-color: var(--line);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, .06);
-  cursor: default;
-}
-.morph-stage .review.is-open blockquote { display: block; animation: morphIn .42s var(--ease) .2s both; }
-.morph-stage .review.is-open figcaption > span:last-child { white-space: normal; animation: morphIn .42s var(--ease) .26s both; }
-.morph-stage .review.is-open .avatar {
-  width: 9rem; height: 11rem;
-  border-radius: calc(var(--radius) - 2px);
-}
-@keyframes morphIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-/* The pill's button covers the pill; on the open card it shrinks to nothing
-   but keeps focus and its "expanded" state for keyboard and screen-reader
-   users. */
-.morph-hit { position: absolute; inset: 0; border-radius: inherit; }
-.morph-hit:focus-visible { outline-offset: -3px; }
-.morph-stage .review.is-open .morph-hit {
-  inset: auto; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0, 0, 0, 0); white-space: nowrap;
-}
-/* A 1px button can't show a focus ring, so the card shows it instead. */
-.morph-stage .review.is-open:has(.morph-hit:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .avatar {
   flex: 0 0 auto; display: grid; place-items: center;
@@ -865,7 +821,7 @@ dl, dd { margin: 0; }
   position: absolute;
   overflow: visible;
   transform-origin: 50% 100%;
-  cursor: pointer;
+  pointer-events: none;
   filter: drop-shadow(0 .02em .02em rgba(0, 0, 0, .18));
 }
 .hero-drop.is-settled .drop-line { overflow: visible; }
@@ -925,6 +881,7 @@ dl, dd { margin: 0; }
   margin-top: .9rem;
   color: var(--muted);
   font-size: .9375rem;
+  max-width: 65ch;
 }
 .js .fade-img img {
   opacity: 0;
@@ -1073,17 +1030,15 @@ body.modal-open { overflow: hidden; }
   .actions .btn { width: 100%; }
   .hero-facts, .facts { gap: 1.5rem 2.25rem; }
   .lesson-actions .btn { width: 100%; }
-  /* Reviews stack: the pills sit full width under each other, and the open
-     card puts a smaller portrait beside the name, with the quote below. */
-  .review-list.morph-stage { flex-direction: column; align-items: stretch; justify-content: center; }
-  .morph-stage .review.is-open {
-    width: auto;
-    grid-template-columns: 4.5rem minmax(0, 1fr);
-    grid-template-areas: "photo cap" "quote quote";
-    align-items: center;
-    padding: 1rem 1.25rem 1.25rem 1rem;
-  }
-  .morph-stage .review.is-open .avatar { width: 4.5rem; height: 4.5rem; }
+  /* Price and Book in the first screen on a phone: the photo follows the
+     text instead of leading it (cropped from the top so the head stays
+     in), and the prices sit just above the buttons. */
+  .hero-photo { order: 1; }
+  .hero-photo img { object-position: 50% 18%; }
+  .hero-text { display: flex; flex-direction: column; }
+  .hero-facts { order: 1; margin-top: 1.5rem; padding-top: 1.25rem; }
+  .hero-facts dd { font-size: 1.35rem; }
+  .hero-text .actions { order: 2; margin-top: 1.5rem; }
   .matcher-row { flex-direction: column; }
   .matcher-row .btn, .matcher-actions .btn { width: 100%; min-height: 44px; }
 }
@@ -1129,9 +1084,6 @@ body.modal-open { overflow: hidden; }
 
   /* Hover lifts and zooms off too — colour changes are harmless and stay. */
   .btn:hover, .lesson:hover { transform: none; }
-  .morph-stage .review, .morph-stage .review .avatar { transition: opacity .55s var(--ease); }
-  .hero-photo picture { animation: none; }
-  .me:hover .me-emoji { transform: none; }
   .photo:hover img { transform: none; }
   .modal-card, .modal[open] .modal-card { transform: none; }
 }

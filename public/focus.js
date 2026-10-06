@@ -8,7 +8,8 @@
 
    Behaviour, deliberately readable at rest:
      · when the line first comes into view the frame sweeps it once, word by
-       word, like a lens pulling focus, then settles with every word sharp;
+       word, like a lens pulling focus, then settles with every word sharp
+       (skipped with data-focus-reveal="hover": the line arrives sharp);
      · a mouse over the line brings the frame back and it follows the word
        under the pointer; leaving the line settles it again;
      · on touch, tapping a word focuses it briefly, then settles;
@@ -153,7 +154,9 @@
     }
     function cancelPass() { passing = false; clearTimeout(passTimer); }
 
-    if ("IntersectionObserver" in window) {
+    /* data-focus-reveal="hover" skips the opening pull: the line arrives
+       sharp and only answers a pointer. */
+    if (el.getAttribute("data-focus-reveal") !== "hover" && "IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
         if (!entries[0].isIntersecting) return;
         io.disconnect();

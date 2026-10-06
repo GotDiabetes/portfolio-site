@@ -1,6 +1,6 @@
 {
   "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | semi | hitting), email (subject), link (href), scroll (#section). Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'.",
-  "greeting": "Hi! I'm Isaac. Ask me anything about lessons — prices, where I coach, who I teach, or how booking works.",
+  "greeting": "Hi! These are my answers to what people ask most. Try prices, where I coach, who I teach, or how booking works.",
   "fallback": "I don't have that written down here. Email me and I'll answer you directly.",
   "unavailable": "The chat isn't answering right now. Email me and I'll get back to you.",
   "topics": [

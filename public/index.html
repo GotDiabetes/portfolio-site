@@ -29,7 +29,7 @@
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261002d" />
+  <link rel="stylesheet" href="tennis.css?v=20261006c" />
   <link rel="stylesheet" href="focus.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
@@ -67,12 +67,21 @@
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      document.addEventListener("pointerover", function (e) {
-        if (e.target.closest && e.target.closest("[data-cal-link]")) arm();
-      }, { passive: true });
-      document.addEventListener("focusin", function (e) {
-        if (e.target.closest && e.target.closest("[data-cal-link]")) arm();
-      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
       /* Not requestIdleCallback: an idle page is idle at once, which would put
          the script straight back on the load path. A plain timer keeps the
          first paint and the load event clear of it. */
@@ -114,7 +123,7 @@
       <nav class="nav" id="nav" aria-label="Main">
         <!-- Only rendered in the stacked mobile menu; on desktop the header
              button beside it is the same action. -->
-        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
+        <a class="nav-book" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
         <a href="#lessons">Lessons</a>
         <a href="#about">About</a>
         <a href="#reviews">Reviews</a>
@@ -129,7 +138,7 @@
         </a>
       </nav>
 
-      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Book a lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Book a lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
         <span class="cta-full">Book a lesson</span><span class="cta-short" aria-hidden="true">Book</span>
       </a>
 
@@ -162,14 +171,14 @@
           </p>
 
           <div class="actions fade" style="--d:.18s">
-            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
+            <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
           </div>
 
           <dl class="hero-facts fade" style="--d:.24s">
             <div><dt>Private lesson</dt><dd>$80<span>/hr</span></dd></div>
             <div><dt>Hitting partner</dt><dd>$45<span>/hr</span></dd></div>
-            <div><dt>Coaching since</dt><dd>2023</dd></div>
+            <div><dt>Pro Staff</dt><dd>Newport Beach TC</dd></div>
           </dl>
         </div>
 
@@ -184,7 +193,7 @@
           </picture>
           <!-- The living version of this photo: a short muted loop made from
                it (Higgsfield). hero.js only loads it when data-src is set, so
-               until the clip exists the page just shows the drifting photo.
+               until the clip exists the page just shows the photo.
                Set data-src="images/hero-loop.mp4" once the file is in place. -->
           <video class="hero-loop" data-src="" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
         </figure>
@@ -199,8 +208,9 @@
       <div class="wrap">
         <!-- The one display sentence on the page, so the one place for the
              focus reveal: a lens pulling focus across a line about
-             deliberate practice. It reads sharp at rest (focus.js). -->
-        <blockquote class="fade" data-focus-reveal>
+             deliberate practice. "hover": it arrives sharp, and the frame
+             only follows a pointer (focus.js). -->
+        <blockquote class="fade" data-focus-reveal="hover">
           Tennis is for everyone. Almost every player improves faster than they
           expect once the practice is deliberate.
         </blockquote>
@@ -218,23 +228,6 @@
         </p>
       </header>
 
-      <!-- Lesson matcher. A visitor describes themselves in a sentence; a
-           Cloudflare Worker (worker/ in the repo) asks TypeSafe's Jev model
-           which card fits and the page highlights it. Hidden until match.js
-           finds an endpoint (the jev-endpoint meta tag), so with no JS, or
-           before the Worker is deployed, the section reads exactly as it did
-           without it. -->
-      <form class="matcher" id="matcher" hidden>
-        <label class="matcher-label" for="matchText">Not sure which fits? Describe yourself in a sentence.</label>
-        <div class="matcher-row">
-          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
-                 placeholder="e.g. 3.5 player, want to fix my serve" required>
-          <button class="btn btn-primary" type="submit">Find my lesson</button>
-        </div>
-        <div class="matcher-result" role="status" aria-live="polite"></div>
-        <p class="matcher-note">Your sentence goes to TypeSafe's Jev model to pick a lesson. Nothing is saved on this site.</p>
-      </form>
-
       <div class="lesson-list">
         <article class="lesson fade" data-lesson="private">
           <h3>Private lessons</h3>
@@ -245,7 +238,7 @@
             actually work on between sessions.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a private lesson</a>
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a private lesson</a>
             <button class="link-btn" type="button" data-open="modalPrivate" aria-label="What's covered in a private lesson">What's covered</button>
           </div>
         </article>
@@ -259,7 +252,7 @@
             rather than feeding alone. Bring a friend, a sibling, or a doubles partner.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a semi-private lesson</a>
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a semi-private lesson</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="What's covered in a semi-private lesson">What's covered</button>
           </div>
         </article>
@@ -272,7 +265,7 @@
             ball to work against. Sessions run 60 minutes or longer.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view"}'>Book a hitting session</a>
+            <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a hitting session</a>
             <button class="link-btn" type="button" data-open="modalHitting" aria-label="What's covered in a hitting session">What's covered</button>
           </div>
         </article>
@@ -290,6 +283,24 @@
           </div>
         </article>
       </div>
+
+      <!-- Lesson matcher, under the cards: the offer comes first, and the
+           matcher is there for anyone the four cards didn't settle. A visitor
+           describes themselves in a sentence; a Cloudflare Worker (worker/ in
+           the repo) asks TypeSafe's Jev model which card fits and the page
+           highlights it. Hidden until match.js finds an endpoint (the
+           jev-endpoint meta tag), so with no JS the section reads exactly as
+           it did without it. -->
+      <form class="matcher" id="matcher" hidden>
+        <label class="matcher-label" for="matchText">Not sure which fits? Describe yourself in a sentence.</label>
+        <div class="matcher-row">
+          <input class="matcher-input" id="matchText" name="text" type="text" maxlength="400" autocomplete="off"
+                 placeholder="e.g. 3.5 player, want to fix my serve" required>
+          <button class="btn btn-primary" type="submit">Find my lesson</button>
+        </div>
+        <div class="matcher-result" role="status" aria-live="polite"></div>
+        <p class="matcher-note">An AI reads your sentence to pick a lesson. Nothing is saved on this site.</p>
+      </form>
     </section>
 
     <!-- ============================ ABOUT ============================ -->
@@ -395,9 +406,11 @@
         <h2 class="fade" style="--d:.06s">What people say</h2>
       </header>
 
-      <!-- data-morph: morph.js turns these into pills with one card open
-           (hover or tap a pill to open it). Without JS both show in full. -->
-      <div class="review-list" data-morph>
+      <!-- Both reviews in full, side by side. Room for more: a student's or a
+           parent's words are the proof this section most needs, so add each
+           new one as another <figure class="review fade"> in this list
+           (the grid wraps to a new row on its own). -->
+      <div class="review-list">
         <figure class="review fade">
           <blockquote>
             I mentored Isaac at LifeSport Libertyville and watched his growth firsthand. His
@@ -497,7 +510,7 @@
               with availability and what a first session would look like.
             </p>
             <div class="actions fade" style="--d:.12s">
-              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a lesson</a>
+              <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
               <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons" data-mail="Tennis%20lessons">Email me</a>
               <button class="btn btn-outline btn-lg" type="button" data-open="bookingModal">Other ways to reach me</button>
             </div>
@@ -563,7 +576,7 @@
         <li>Match-readiness for tournament play</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a private lesson</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a private lesson</a>
         <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons" data-mail="Private%20lessons">Email me</a>
       </div>
     </div>
@@ -584,7 +597,7 @@
         <li>Bring your own partner, or ask me to match you with one</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view"}'>Book a semi-private lesson</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a semi-private lesson</a>
         <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons" data-mail="Semi-private%20lessons">Email me</a>
       </div>
     </div>
@@ -603,7 +616,7 @@
         <li>Tie-breaks and sets on request</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view"}'>Book a hitting session</a>
+        <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a hitting session</a>
         <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions" data-mail="Hitting%20partner%20sessions">Email me</a>
       </div>
     </div>
@@ -674,12 +687,11 @@
   </div>
 
   <script src="tennis.js?v=20260920" defer></script>
-  <script src="focus.js?v=1" defer></script>
-  <script src="match.js?v=2" defer></script>
-  <script src="ask.js?v=4" defer></script>
-  <script src="morph.js?v=2" defer></script>
+  <script src="focus.js?v=2" defer></script>
+  <script src="match.js?v=3" defer></script>
+  <script src="ask.js?v=5" defer></script>
   <script src="hero.js?v=1" defer></script>
-  <script src="bookfx.js?v=3" defer></script>
-  <script src="ballo.js?v=1" defer></script>
+  <script src="bookfx.js?v=14" defer></script>
+  <script src="ballo.js?v=2" defer></script>
 </body>
 </html>

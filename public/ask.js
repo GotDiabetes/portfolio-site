@@ -401,6 +401,12 @@
     var ctx = null;
 
     render();
+    /* The same setting can be switched off from the note that appears the
+       first time a Book press makes a sound (bookfx.js). */
+    window.addEventListener("isaac:sound", function (e) {
+      on = !!(e.detail && e.detail.on);
+      render();
+    });
     if (soundBtn) {
       soundBtn.addEventListener("click", function () {
         on = !on;

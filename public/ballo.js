@@ -9,9 +9,9 @@
    device uses, at any width.
 
    Once the words have risen in, the ball drops into its place from behind
-   the line above and bounces twice before settling. Hovering it gives a
-   small hop; clicking gives a bigger one with a "pok" (muted along with
-   the chat). Reduced motion: the ball simply sits there. No JS: a plain "o".
+   the line above and bounces three times before settling, once, on arrival.
+   After that it is just the letter. Reduced motion: the ball simply sits
+   there. No JS: a plain "o".
    ========================================================================== */
 
 (function () {
@@ -122,42 +122,7 @@
     }).observe(head, { attributes: true, attributeFilter: ["class"] });
   }
 
-  var hopping = false;
-  function hop(big) {
-    if (hopping || !size) return;
-    hopping = true;
-    bounce(big ? [size * 1.3, size * .35] : [size * .45], false, big ? 680 : 360, big ? .2 : .12);
-    window.setTimeout(function () { hopping = false; }, big ? 680 : 360);
-  }
-  ball.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hop(false); });
-  ball.addEventListener("click", function () { hop(true); pok(); });
-
-  /* ------------------------------------------------------------- Sound -- */
-  var ctx = null;
-  function pok() {
-    try { if (localStorage.getItem("askIsaacSound") === "off") return; } catch (e) {}
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    try {
-      if (!ctx) ctx = new AC();
-      var go = function () {
-        /* On the two landings of the click hop (see hop(): 680ms, the
-           first landing about two-thirds of the way through). */
-        var t = ctx.currentTime + .005;
-        tone(t + .45, 440, 150, .14, .16);
-        tone(t + .68, 400, 150, .12, .07);
-      };
-      if (ctx.state === "suspended") ctx.resume().then(go, function () {}); else go();
-    } catch (e) { ctx = null; }
-  }
-  function tone(t, f0, f1, dur, vol) {
-    var o = ctx.createOscillator(), g = ctx.createGain();
-    o.frequency.setValueAtTime(f0, t);
-    o.frequency.exponentialRampToValueAtTime(f1, t + dur * .6);
-    g.gain.setValueAtTime(.0001, t);
-    g.gain.exponentialRampToValueAtTime(vol, t + .004);
-    g.gain.exponentialRampToValueAtTime(.0001, t + dur);
-    o.connect(g).connect(ctx.destination);
-    o.start(t); o.stop(t + dur + .02);
-  }
+  /* That is the whole of it: the ball lands once and then is a letter. It
+     is not a control (no hover, no click, no sound), so there is nothing a
+     keyboard or screen-reader user can't reach. */
 })();

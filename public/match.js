@@ -1,5 +1,5 @@
 /* ============================================================================
-   Lesson matcher — the "Not sure which fits?" box above the lesson cards.
+   Lesson matcher — the "Not sure which fits?" box under the lesson cards.
 
    The visitor's sentence goes to a Cloudflare Worker (worker/ in the repo),
    which holds the TypeSafe key and asks Jev which of the four offers fits.
@@ -36,9 +36,9 @@
     group:   { name: "an adult clinic", line: "Small group on one court. Email me with how many of you there are and I'll quote it." },
   };
   var TRAVEL = "One thing: lessons are at my home court, Toscana in Irvine. I can't travel to you, but you're welcome to come to me.";
-  var UNSURE = "I couldn't tell from that. Try your level and who's playing, or pick from the four below.";
-  var DOWN = "The matcher isn't answering right now. The four options are just below, or email me.";
-  var BUSY = "That's a lot of matching. Give it a minute, or pick from the four below.";
+  var UNSURE = "I couldn't tell from that. Try your level and who's playing, or pick from the four above.";
+  var DOWN = "The matcher isn't answering right now. The four options are just above, or email me.";
+  var BUSY = "That's a lot of matching. Give it a minute, or pick from the four above.";
 
   form.hidden = false;
 
@@ -96,6 +96,16 @@
       var wrap = document.createElement("div");
       wrap.className = "matcher-actions";
       wrap.appendChild(clone);
+      /* The matched card is above, usually off screen: a way back to it,
+         where it is marked "Your match". */
+      var see = document.createElement("button");
+      see.type = "button";
+      see.className = "link-btn";
+      see.textContent = "See the card ↑";
+      see.addEventListener("click", function () {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      wrap.appendChild(see);
       result.appendChild(wrap);
     }
 
