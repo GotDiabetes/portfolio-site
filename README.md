@@ -10,8 +10,9 @@ One repository, one site, two faces:
   problems, the same ones the chat gives, in every language (/ko/tips/ …).
 - **leetennisco.com/portfolio/** — Isaac's personal portfolio, with a printable résumé at **/resume**.
 
-And four pages that are Isaac's own, not linked from the site and kept out
-of search:
+And pages that are Isaac's own, kept out of search. **leetennisco.com/admin/**
+(the "Admin" link at the end of the footer) links them all, plus Cal.com,
+Gmail, Cloudflare, TypeSafe billing and the Google Business Profile:
 
 - **/flyer/** — a printable flyer for notice boards, with a QR code and
   tear-off strips, in every language (/ko/flyer/ …).

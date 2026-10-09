@@ -58,7 +58,7 @@ const SITE = "https://leetennisco.com";
 const KEEP = [
   "Lee Tennis Co.", "Isaac Lee", "Brice Krizman", "Albert Kim",
   "isaacleetennis@gmail.com", "Grip N Rip", "LifeSport Libertyville", "RSPA",
-  "leetennisco.com",
+  "leetennisco.com", "Admin",   // the footer link to Isaac's own pages stays English
   // the language menu names every language in itself
   "English", "Español", "한국어", "简体中文", "繁體中文", "日本語", "Tiếng Việt", "فارسی", "EN",
 ];

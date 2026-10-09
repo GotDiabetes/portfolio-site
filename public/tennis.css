@@ -899,6 +899,23 @@ dl, dd { margin: 0; }
 .desk-questions li { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
 .desk-q-meta { flex: 0 0 auto; font-size: .8125rem; color: var(--muted); }
 .desk-questions .is-empty { color: var(--muted); }
+/* The admin page: each tool a row on hairlines, its name as an ink link at
+   title size and one muted line on what it's for. */
+.desk-links { border-top: 1px solid var(--line); }
+.desk-links li { padding: .9rem 0 1rem; border-bottom: 1px solid var(--line); }
+.desk-links a {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em;
+  text-underline-offset: 4px; text-decoration-thickness: 1px;
+}
+.desk-links a:hover { color: var(--muted); }
+.desk-links p { margin: 0; max-width: 62ch; color: var(--muted); }
+/* Isaac's pages lead back with one quiet link above the eyebrow. */
+.desk-back {
+  display: inline-flex; align-items: center; min-height: 2.75rem; margin-bottom: .75rem;
+  font-size: .875rem; color: var(--muted); text-underline-offset: 4px;
+}
+.desk-back:hover { color: var(--text); }
 
 /* -------------------------------------------------------------- Reviews -- */
 .review-list {
