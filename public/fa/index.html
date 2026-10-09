@@ -8,7 +8,7 @@
 
   <title>Lee Tennis Co. — کلاس خصوصی تنیس در ارواین، کالیفرنیا</title>
   <meta name="description"
-        content="کلاس خصوصی تنیس در ارواین، کالیفرنیا. آموزش یک‌به‌یک ساعتی $80، کلاس دونفره ساعتی $110، جلسه رالی با هم‌تمرینی ساعتی $45 و کلاس‌های گروهی کوچک بزرگسالان با Isaac Lee." />
+        content="کلاس خصوصی تنیس در ارواین، کالیفرنیا. آموزش یک‌به‌یک ساعتی ⁦$80⁩، کلاس دونفره ساعتی ⁦$110⁩، جلسه رالی با هم‌تمرینی ساعتی ⁦$45⁩ و کلاس‌های گروهی کوچک بزرگسالان با Isaac Lee." />
   <link rel="canonical" href="https://leetennisco.com/fa/" />
   <meta name="robots" content="index, follow" />
   <link rel="alternate" hreflang="en" href="https://leetennisco.com/" />
@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">آموزش خصوصی · زمین‌های Toscana، ارواین</p>
+          <p class="eyebrow fade">مربی دارای گواهی RSPA · زمین‌های Toscana، ارواین</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">کلاس</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">خصوصی</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>کلاس خصوصی</h3>
           <p class="price">$80<span> در ساعت</span></p>
+          <p class="package">یا ۵ جلسه ⁦$375⁩ و ۱۰ جلسه ⁦$700⁩، پرداخت حضوری.</p>
           <p>
             یک‌به‌یک، هم برای کودکان و نوجوانان و هم برای بزرگسالان. تکنیک ضربه‌ها و سرویس، حرکت پا، توپ‌های کندتر و نرم‌تری که مبتدی‌های کم‌سن با آن‌ها یاد می‌گیرند، و یک برنامه تمرینی که واقعاً بتوانید بین جلسه‌ها انجامش دهید.
           </p>
@@ -228,7 +240,7 @@
 
         <article class="lesson fade" data-lesson="semi">
           <h3>کلاس دونفره</h3>
-          <p class="price">$110<span> در ساعت برای دو نفر &mdash; هر نفر $55</span></p>
+          <p class="price">$110<span> در ساعت برای دو نفر &mdash; هر نفر ⁦$55⁩</span></p>
           <p>
             همان کلاس، بین دو بازیکن با سطح نزدیک به هم تقسیم می‌شود. هر کدام کمتر از کلاس خصوصی می‌پردازید و کار دونفره به شما رالی و امتیاز واقعی برای تمرین می‌دهد، به‌جای اینکه تنها توپ بگیرید. با یک دوست، خواهر یا برادر، یا یار دوبل‌تان بیایید.
           </p>
@@ -257,7 +269,7 @@
             گروه‌های کوچک در یک زمین، با تمرین‌ها و بازی‌های توپ زنده و چرخش کافی تا همه مدام ضربه بزنند. هزینه به تعداد نفرات بستگی دارد.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Persian%20page)" data-mail="Adult%20clinics%20(Persian%20page)">ایمیل برای قیمت</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">ثبت‌نام در کلاس گروهی</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="محتوای کلاس گروهی بزرگسالان">شامل چه چیزهایی است</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">یک هوش مصنوعی جمله شما را می‌خواند تا کلاسی پیشنهاد کند. چیزی در این سایت ذخیره نمی‌شود.</p>
       </form>
+
+      <p class="gift-line fade">
+        می‌خواهید تنیس هدیه بدهید؟ هر کلاس خصوصی، بسته یا جلسه رالی می‌تواند هدیه باشد.
+        <button class="link-btn" type="button" data-open="giftForm">هدیه دادن کلاس</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 سه سال است که مربی‌گری می‌کنم. به‌عنوان Junior Pro در LifeSport Libertyville شروع کردم و بعد به Pro Staff برنامه Grip N Rip پیوستم، برنامه نوجوانان Newport Beach Tennis Club.
               </p>
               <p>
+                من گواهی RSPA (Racket Sports Professionals Association، همان USPTA سابق) را دارم و تأییدیه USTA Safe Play گرفته‌ام: سوابقم بررسی شده و دوره SafeSport را گذرانده‌ام.
+              </p>
+              <p>
                 بیشتر کارم با نوجوانانی است که در حال پیشرفت‌اند: درست جا انداختن اصول از همان ابتدا، تا پیشرفت مدام روی هم جمع شود. برای بزرگسالانی هم که ثبات بیشتر و برنامه روشن‌تری در امتیازهای واقعی می‌خواهند، کلاس گروهی برگزار می‌کنم.
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>زمین خانگی</dt><dd>Toscana، ارواین</dd></div>
+              <div><dt>گواهی</dt><dd>RSPA</dd></div>
               <div><dt>تیم دبیرستان</dt><dd>۴ سال</dd></div>
               <div><dt>برنامه</dt><dd>پاره‌وقت</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        با من کلاس داشته‌اید؟ یک نظر کوتاه در گوگل به بازیکنان و والدین دیگر کمک می‌کند مرا پیدا کنند.
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">نوشتن نظر</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="پخش ویدیو: Isaac Lee مقابل مربی سابقش در LifeSport Libertyville، نوامبر ۲۰۲۴">
@@ -437,7 +463,72 @@
           <dt>جلسه اول</dt>
           <dd>موقع رزرو، سطحتان و چیزی را که روی آن کار می‌کنید بگویید تا با یک برنامه بیایم.</dd>
         </div>
+        <div>
+          <dt>ایمنی</dt>
+          <dd>تأییدشده در USTA Safe Play: بررسی سوابق و گذراندن دوره SafeSport. دارای گواهی RSPA.</dd>
+        </div>
+        <div>
+          <dt>لغو کلاس</dt>
+          <dd>برای لغو یا جابه‌جایی کلاس ۲۴ ساعت زودتر خبر بدهید؛ لغو دیرتر هزینه دارد. اگر باران یا گرما کلاس را لغو کند، بدون هزینه زمان دیگری می‌گذاریم.</dd>
+        </div>
+        <div>
+          <dt>راکت</dt>
+          <dd>هنوز راکت ندارید؟ یکی از راکت‌های من را قرض بگیرید.</dd>
+        </div>
+        <div>
+          <dt>بسته‌ها</dt>
+          <dd>کلاس خصوصی: ۵ جلسه ⁦$375⁩ یا ۱۰ جلسه ⁦$700⁩، پرداخت حضوری.</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">پرسش‌های رایج</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>آیا فرزندم باید قبلاً تنیس بازی کرده باشد؟</summary>
+          <p>نه. بچه‌ها می‌توانند از صفر شروع کنند. کم‌سن‌ترها با توپ‌های کندتر و نرم‌تر (قرمز، بعد نارنجی، بعد سبز) یاد می‌گیرند و هر وقت آماده شدند به مرحله بعد می‌روند.</p>
+        </details>
+        <details>
+          <summary>فرزندم پیش شما در امان است؟</summary>
+          <p>من تأییدیه USTA Safe Play دارم؛ یعنی سوابقم بررسی شده و دوره SafeSport را گذرانده‌ام. گواهی RSPA (Racket Sports Professionals Association) را هم دارم.</p>
+        </details>
+        <details>
+          <summary>موقع رزرو باید پرداخت کنم؟</summary>
+          <p>نه. رزرو آنلاین فقط زمان را نگه می‌دارد: بدون کارت، بدون بیعانه. پرداخت حضوری است.</p>
+        </details>
+        <details>
+          <summary>اگر لازم شد لغو کنم چه؟</summary>
+          <p>برای لغو یا جابه‌جایی کلاس ۲۴ ساعت زودتر خبر بدهید؛ لغو دیرتر هزینه دارد. اگر باران یا گرما کلاسی را لغو کند، بدون هزینه زمان دیگری می‌گذاریم.</p>
+        </details>
+        <details>
+          <summary>می‌توانید به زمین یا خانه من بیایید؟</summary>
+          <p>نه. همه کلاس‌ها در زمین خودم برگزار می‌شود: زمین‌های تنیس Toscana Apartments در ارواین.</p>
+        </details>
+        <details>
+          <summary>راکت ندارم. اشکالی دارد؟</summary>
+          <p>نه. می‌توانید یکی از راکت‌های من را قرض بگیرید.</p>
+        </details>
+        <details>
+          <summary>بسته‌های چندجلسه‌ای دارید؟</summary>
+          <p>بله، برای کلاس خصوصی: ۵ جلسه ⁦$375⁩ یا ۱۰ جلسه ⁦$700⁩، پرداخت حضوری. یعنی ساعتی ⁦$75⁩ و ⁦$70⁩ به‌جای ⁦$80.⁩</p>
+        </details>
+        <details>
+          <summary>می‌توانم کلاس را هدیه بدهم؟</summary>
+          <p>بله: یک کلاس خصوصی، ۵ یا ۱۰ کلاس خصوصی، یا یک جلسه رالی. درخواست را برایم بفرستید، پرداخت حضوری انجام می‌شود و یک کارت هدیهٔ قابل چاپ می‌گیرید.</p>
+          <button class="link-btn" type="button" data-open="giftForm">هدیه دادن کلاس</button>
+        </details>
+        <details>
+          <summary>چرا یک مربی جوان؟</summary>
+          <p>سؤال بجایی است. از سال ۲۰۲۳ مربی‌گری می‌کنم؛ اول به‌عنوان Junior Pro در LifeSport Libertyville و بعد در Pro Staff برنامه Grip N Rip در Newport Beach Tennis Club. گواهی RSPA و تأییدیه Safe Play دارم و چهار سال در تیم اصلی دبیرستان بازی کرده‌ام. یک جلسه بیایید و خودتان قضاوت کنید.</p>
+        </details>
+        <details>
+          <summary>یک جای بازی‌ام مدام خراب می‌شود.</summary>
+          <p>نکته‌های تمرینی من رایج‌ترین مشکل‌ها را پوشش می‌دهند، از سرویسی که به تور می‌خورد تا استرس مسابقه، و برای هر کدام یک کار برای امتحان دارند.</p>
+          <a class="link-btn" href="tips/">خواندن نکته‌های تمرینی</a>
+          <button class="link-btn faq-ask" type="button" data-ask="روی چه چیزی کار کنم؟" hidden>مشکل خودتان را از چت بپرسید</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; ارواین، کالیفرنیا</p>
       <p class="footer-links">
+        <a href="tips/">نکته‌های تمرینی</a>
         <a href="/portfolio/">نمونه‌کار حرفه‌ای</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="بستن">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>کلاس خصوصی</h3>
       <p class="price">$80<span> در ساعت</span></p>
+      <p class="package">یا ۵ جلسه ⁦$375⁩ و ۱۰ جلسه ⁦$700⁩، پرداخت حضوری.</p>
       <p>برای کودکان، نوجوانان و بزرگسالان &mdash; همان قالب یک‌به‌یک، متناسب با سطح شما.</p>
       <ul>
         <li>تکنیک ضربه‌ها و سرویس</li>
@@ -524,7 +617,7 @@
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="بستن">&times;</button>
       <h3 id="semiTitle" tabindex="-1" autofocus>کلاس دونفره</h3>
-      <p class="price">$110<span> در ساعت برای دو نفر &mdash; هر نفر $55</span></p>
+      <p class="price">$110<span> در ساعت برای دو نفر &mdash; هر نفر ⁦$55⁩</span></p>
       <p>دو بازیکن با سطح نزدیک در یک زمین، که ساعت و هزینه را تقسیم می‌کنند.</p>
       <ul>
         <li>تکنیک ضربه‌ها و سرویس، مثل کلاس خصوصی</li>
@@ -573,8 +666,85 @@
         <li>با گروه خودتان بیایید، یا از من بخواهید شما را در یک گروه بگذارم</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Persian%20page)" data-mail="Adult%20clinics%20(Persian%20page)">ایمیل برای قیمت</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">ثبت‌نام در کلاس گروهی</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Persian%20page)" data-mail="Adult%20clinics%20(Persian%20page)">ایمیل به من</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="بستن">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>ثبت‌نام در کلاس گروهی</h3>
+      <p>کلاس گروهی، گروه‌های کوچک در یک زمین است. سطح و زمان‌های مناسبتان را بگویید تا شما را در گروهی با بازیکنانی مثل خودتان بگذارم.</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">سطح شما</span>
+          <select name="level" required>
+            <option value="">انتخاب کنید</option>
+            <option value="0">تازه‌کار: هرگز بازی نکرده‌ام یا از کودکی نه</option>
+            <option value="1">مبتدی: چند توپ را برمی‌گردانم؛ رالی‌ها کوتاه‌اند</option>
+            <option value="2">متوسط: رالی و سرویس می‌زنم؛ روی ثبات کار می‌کنم</option>
+            <option value="3">پیشرفته: در دبیرستان، لیگ یا USTA مسابقه می‌دهم</option>
+            <option value="4">رقابتی: نوجوان تورنمنتی، بازیکن دانشگاهی یا بزرگسال 4.5 به بالا</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">چه کسی می‌آید</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> فقط خودم: مرا در یک گروه بگذارید</label>
+          <label class="choice"><input type="radio" name="group" value="own"> با گروه خودم می‌آیم</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">زمان‌هایی که معمولاً مناسب است</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> بعدازظهرهای وسط هفته</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> عصرهای وسط هفته</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> صبح‌های آخر هفته</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> بعدازظهرهای آخر هفته</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">توضیح دیگر <span class="field-optional">اختیاری</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="مثلاً: چهار نفریم، همه در یک سطح"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>اول سطحتان را انتخاب کنید.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">ارسال با ایمیل</button>
+        </div>
+        <p class="form-note">با این دکمه یک ایمیل با پاسخ‌هایتان برای من باز می‌شود. چیزی در این سایت ذخیره نمی‌شود.</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="بستن">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>هدیه دادن کلاس</h3>
+      <p>یک هدیه انتخاب کنید تا برایش کارت هدیهٔ قابل چاپ درست کنم. هر کسی که آن را بگیرد، مثل بقیه وقت رزرو می‌کند.</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">هدیه</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> یک کلاس خصوصی <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> ۵ کلاس خصوصی <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> ۱۰ کلاس خصوصی <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> یک جلسه رالی <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">برای چه کسی <span class="field-optional">اختیاری</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="نام کوچک، برای کارت">
+        </label>
+        <label class="field">
+          <span class="field-label">از طرف چه کسی <span class="field-optional">اختیاری</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="همان‌طور که روی کارت نوشته شود">
+        </label>
+        <label class="field">
+          <span class="field-label">پیامی برای کارت <span class="field-optional">اختیاری</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="مثلاً: تولدت مبارک! در زمین می‌بینمت."></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>اول یک هدیه انتخاب کنید.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">ارسال درخواست با ایمیل</button>
+        </div>
+        <p class="form-note">با این دکمه یک ایمیل برای من باز می‌شود. جواب می‌دهم تا پرداخت حضوری را هماهنگ کنیم و بعد کارت را به شما می‌دهم. چیزی در این سایت ذخیره نمی‌شود.</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">پرسش‌هایی که هنوز جوابی برایشان ندارم ۹۰ روز نگه داشته می‌شوند تا بتوانم جوابشان را بنویسم.</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","کدام کلاس برای من مناسب است؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر $55."},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی $45."},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. تعداد نفرات را ایمیل کنید تا قیمت بدهم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

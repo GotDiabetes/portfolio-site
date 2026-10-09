@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">私人教學 · 爾灣 Toscana 球場</p>
+          <p class="eyebrow fade">RSPA 認證教練 · 爾灣 Toscana 球場</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">網球</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">私人</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>一對一私人課</h3>
           <p class="price">$80<span>/小時</span></p>
+          <p class="package">或 5 堂 $375、10 堂 $700，當面付款。</p>
           <p>
             青少年和成人都適合的一對一課程。擊球與發球技術、步法、小朋友入門用的較慢較軟的球，以及一份兩次課之間你真的練得起來的練習計畫。
           </p>
@@ -257,7 +269,7 @@
             一個場地的小團體，做專項訓練和實戰對打，輪替充足，每個人都能一直有球打。費用依你們的人數而定。
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Traditional%20Chinese%20page)" data-mail="Adult%20clinics%20(Traditional%20Chinese%20page)">寄信詢價</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">報名團體班</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="成人團體班的內容">課程內容</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">AI 會讀你的這句話來推薦課程。本網站不會儲存任何內容。</p>
       </form>
+
+      <p class="gift-line fade">
+        想把網球當作禮物送人嗎？私人課、多堂方案或陪打課都可以當作禮物。
+        <button class="link-btn" type="button" data-open="giftForm">送一堂課</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 我已經教球三年。最早在 LifeSport Libertyville 擔任 Junior Pro，之後加入 Grip N Rip 的教練團（Pro Staff），那是 Newport Beach Tennis Club 的青少年計畫。
               </p>
               <p>
+                我是 RSPA（Racket Sports Professionals Association，前身為 USPTA）認證教練，並通過 USTA Safe Play 審核：已完成背景查核與 SafeSport 訓練。
+              </p>
+              <p>
                 我大部分的工作是帶正在成長的青少年球員：及早把基本功打扎實，進步才會不斷累積。我也為成人開設團體班，幫助想打得更穩定、比分真正開始後策略更清楚的人。
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>主場</dt><dd>爾灣 Toscana</dd></div>
+              <div><dt>認證</dt><dd>RSPA</dd></div>
               <div><dt>高中校隊</dt><dd>4 年</dd></div>
               <div><dt>時間安排</dt><dd>兼職</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        上過我的課嗎？在 Google 留下簡短的評價，能幫助其他球員和家長找到我。
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">留下評價</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="播放影片：2024 年 11 月，Isaac Lee 在 LifeSport Libertyville 對上他以前的教練">
@@ -437,7 +463,72 @@
           <dt>第一堂課</dt>
           <dd>預約時告訴我你的程度和正在練的內容，我會帶著計畫來上課。</dd>
         </div>
+        <div>
+          <dt>安全</dt>
+          <dd>通過 USTA Safe Play 審核：已完成背景查核與 SafeSport 訓練。RSPA 認證教練。</dd>
+        </div>
+        <div>
+          <dt>取消</dt>
+          <dd>取消或改期請提前 24 小時告知，之後取消需照常收費。如因下雨或高溫取消，免費改期。</dd>
+        </div>
+        <div>
+          <dt>球拍</dt>
+          <dd>還沒有球拍？可以借我的。</dd>
+        </div>
+        <div>
+          <dt>多堂方案</dt>
+          <dd>一對一私人課：5 堂 $375 或 10 堂 $700，當面付款。</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">常見問題</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>孩子需要打過網球嗎？</summary>
+          <p>不需要。青少年可以從零基礎開始。年紀最小的孩子用較慢較軟的球學習（先紅球，再橘球，再綠球），準備好了再升級。</p>
+        </details>
+        <details>
+          <summary>孩子跟你上課安全嗎？</summary>
+          <p>我通過 USTA Safe Play 審核，也就是說我已完成背景查核與 SafeSport 訓練。我也是 RSPA（Racket Sports Professionals Association）認證教練。</p>
+        </details>
+        <details>
+          <summary>預約時需要付款嗎？</summary>
+          <p>不需要。線上預約只是幫你保留時間：不需要信用卡，也不用訂金。當面付款。</p>
+        </details>
+        <details>
+          <summary>需要取消怎麼辦？</summary>
+          <p>取消或改期請提前 24 小時告知，之後取消需照常收費。如因下雨或高溫取消課程，免費改期。</p>
+        </details>
+        <details>
+          <summary>你可以到我的球場或家裡上課嗎？</summary>
+          <p>不行。所有課程都在我的主場，爾灣的 Toscana Apartments 網球場。</p>
+        </details>
+        <details>
+          <summary>我沒有球拍，可以嗎？</summary>
+          <p>可以，借我的就好。</p>
+        </details>
+        <details>
+          <summary>有多堂方案嗎？</summary>
+          <p>有，一對一私人課：5 堂 $375 或 10 堂 $700，當面付款。等於每小時 $75 和 $70，而不是 $80。</p>
+        </details>
+        <details>
+          <summary>可以把課程當作禮物送人嗎？</summary>
+          <p>可以：一堂私人課、5 堂或 10 堂私人課，或一堂陪打課。把申請寄給我，我們當面付款，你會收到一張可列印的禮物卡。</p>
+          <button class="link-btn" type="button" data-open="giftForm">送一堂課</button>
+        </details>
+        <details>
+          <summary>為什麼選年輕的教練？</summary>
+          <p>問得好。我從 2023 年開始教球，先在 LifeSport Libertyville 擔任 Junior Pro，之後加入 Newport Beach Tennis Club 的 Grip N Rip 教練團。我是 RSPA 認證教練，通過 Safe Play 審核，並在高中校隊打了四年。上一堂課，你自己來判斷。</p>
+        </details>
+        <details>
+          <summary>我打球總有一個地方不對勁。</summary>
+          <p>我的練習技巧涵蓋最常見的問題，從發球掛網到比賽緊張，每個問題都有一個可以試試的方法。</p>
+          <a class="link-btn" href="tips/">閱讀練習技巧</a>
+          <button class="link-btn faq-ask" type="button" data-ask="我該練什麼？" hidden>在聊天裡問問你的問題</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 加州爾灣</p>
       <p class="footer-links">
+        <a href="tips/">練習技巧</a>
         <a href="/portfolio/">職涯作品集</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>一對一私人課</h3>
       <p class="price">$80<span>/小時</span></p>
+      <p class="package">或 5 堂 $375、10 堂 $700，當面付款。</p>
       <p>青少年和成人都適合 &mdash; 同樣的一對一形式，依你的程度安排。</p>
       <ul>
         <li>擊球與發球技術</li>
@@ -573,8 +666,85 @@
         <li>可以自己組團，也可以請我把你安排進一個團體</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Traditional%20Chinese%20page)" data-mail="Adult%20clinics%20(Traditional%20Chinese%20page)">寄信詢價</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">報名團體班</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Traditional%20Chinese%20page)" data-mail="Adult%20clinics%20(Traditional%20Chinese%20page)">寄信給我</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>報名團體班</h3>
+      <p>團體班是一個場地的小團體。告訴我你的程度和方便的時間，我會把你安排進程度相近的團體。</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">你的程度</span>
+          <select name="level" required>
+            <option value="">請選擇</option>
+            <option value="0">網球新手：從沒打過，或小時候之後就沒打過</option>
+            <option value="1">初級：能回一些球，但對打很短</option>
+            <option value="2">中級：能對打、能發球，正在加強穩定度</option>
+            <option value="3">高級：打比賽，高中校隊、聯賽或 USTA</option>
+            <option value="4">競技：打巡迴賽的青少年、大學球員，或 4.5 以上的成人</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">參加的人</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> 只有我：請幫我安排團體</label>
+          <label class="choice"><input type="radio" name="group" value="own"> 我會自己組團</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">通常方便的時間</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> 平日下午</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> 平日晚上</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> 週末上午</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> 週末下午</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">其他補充 <span class="field-optional">選填</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="例如：我們四個人，程度差不多"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>請先選擇你的程度。</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">用 Email 寄出</button>
+        </div>
+        <p class="form-note">按下後會開啟一封寫好答案、寄給我的信。本網站不會儲存任何內容。</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="關閉">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>送一堂課</h3>
+      <p>選好禮物，我會為它做一張可列印的禮物卡。收到禮物的人就像其他人一樣預約即可。</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">禮物</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> 一堂私人課 <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 5 堂私人課 <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 10 堂私人課 <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> 一堂陪打課 <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">送給誰 <span class="field-optional">選填</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="名字，寫在卡片上">
+        </label>
+        <label class="field">
+          <span class="field-label">誰送的 <span class="field-optional">選填</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="照卡片上要寫的樣子填寫">
+        </label>
+        <label class="field">
+          <span class="field-label">寫在卡片上的話 <span class="field-optional">選填</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="例如：生日快樂！球場上見。"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>請先選擇禮物。</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">用 Email 寄出申請</button>
+        </div>
+        <p class="form-note">按下後會開啟一封寄給我的信。我會回信約好當面付款，然後把卡片交給你。本網站不會儲存任何內容。</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">暫時還沒有答案的問題會保留 90 天，方便我寫出答案。</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"已複製","menuOpen":"開啟選單","menuClose":"關閉選單","loadingCal":"正在載入日曆…","askSuggestions":["課程多少錢？","在哪裡上課？","怎麼預約？","哪種課適合我？"],"askDown":"聊天目前無法回覆。請寄信給我，我會盡快回覆。","askBusy":"一次問了好多問題。請稍等一分鐘，或寄信給我。","emailMe":"寄信給我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"建議問題","askFinding":"正在尋找答案","open":"開啟","showMe":"查看","soundMute":"關閉聲音","soundOn":"開啟聲音","typeBy":"char","matchCopy":{"private":{"name":"一對一私人課","line":"一對一，針對你想改進的地方安排。"},"semi":{"name":"雙人課","line":"兩人共用一小時，每人 $55。"},"hitting":{"name":"陪打課","line":"單純對打，不教學，每小時 $45。"},"group":{"name":"成人團體班","line":"一個場地的小團體。寄信告訴我有幾個人，我再報價。"}},"matchAnswer":"看起來最適合你的是{name}。{line}","matchTravel":"提醒一下：課程都在我的主場，爾灣的 Toscana 球場。我沒辦法到你那裡，但很歡迎你過來。","matchUnsure":"從這句話我判斷不出來。試著寫寫你的程度和誰要來打球，或從上面四種課裡選一個。","matchDown":"課程配對目前無法回覆。四種課程就在上面，也可以寄信給我。","matchBusy":"配對的請求有點多。請稍等一分鐘，或從上面四種課裡選一個。","matchSeeCard":"查看課程卡片 ↑","matchLabel":"為你推薦","matchBusyButton":"配對中…","soundsOn":"網球音效已開啟","soundsTurnOff":"關閉","soundsOff":"音效已關閉","askUrl":"/zh-hant/ask.json","mailSubject":"Tennis lessons (Traditional Chinese page)","mailSubjectQuestion":"Question about lessons (Traditional Chinese page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"已複製","menuOpen":"開啟選單","menuClose":"關閉選單","loadingCal":"正在載入日曆…","askSuggestions":["課程多少錢？","在哪裡上課？","怎麼預約？","我該練什麼？"],"askDown":"聊天目前無法回覆。請寄信給我，我會盡快回覆。","askBusy":"一次問了好多問題。請稍等一分鐘，或寄信給我。","emailMe":"寄信給我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"建議問題","askFinding":"正在尋找答案","open":"開啟","showMe":"查看","soundMute":"關閉聲音","soundOn":"開啟聲音","typeBy":"char","matchCopy":{"private":{"name":"一對一私人課","line":"一對一，針對你想改進的地方安排。"},"semi":{"name":"雙人課","line":"兩人共用一小時，每人 $55。"},"hitting":{"name":"陪打課","line":"單純對打，不教學，每小時 $45。"},"group":{"name":"成人團體班","line":"一個場地的小團體。報名後，我會把你安排進程度相近的團體。"}},"matchAnswer":"看起來最適合你的是{name}。{line}","matchTravel":"提醒一下：課程都在我的主場，爾灣的 Toscana 球場。我沒辦法到你那裡，但很歡迎你過來。","matchUnsure":"從這句話我判斷不出來。試著寫寫你的程度和誰要來打球，或從上面四種課裡選一個。","matchDown":"課程配對目前無法回覆。四種課程就在上面，也可以寄信給我。","matchBusy":"配對的請求有點多。請稍等一分鐘，或從上面四種課裡選一個。","matchSeeCard":"查看課程卡片 ↑","matchLabel":"為你推薦","matchBusyButton":"配對中…","soundsOn":"網球音效已開啟","soundsTurnOff":"關閉","soundsOff":"音效已關閉","matchLevels":["網球新手","初級","中級","高級","競技"],"matchFocus":{"serve":"發球","groundstrokes":"正反拍","net":"網前","movement":"步法","match":"比賽","basics":"基本功"},"matchLevelLine":"程度：{level}。","matchFocusLine":"重點：{focus}。","matchNotesLine":"從這裡預約，這些資訊會寫進預約備註，方便我準備第一堂課。","matchJunior":"幫孩子預約？請用你自己的名字預約，並在備註寫上孩子的年齡。","lang":"zh-hant","pageName":"Traditional Chinese","askUrl":"/zh-hant/ask.json","mailSubject":"Tennis lessons (Traditional Chinese page)","mailSubjectQuestion":"Question about lessons (Traditional Chinese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

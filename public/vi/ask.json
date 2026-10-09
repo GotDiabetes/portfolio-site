@@ -1,8 +1,10 @@
 {
   "_readme": "Built by tools/i18n/build.mjs from ask.json and tools/i18n/vi.mjs; edit those, not this. The Worker still picks topics from the English file.",
-  "greeting": "Xin chào! Đây là câu trả lời của tôi cho những điều mọi người hay hỏi nhất. Hãy thử hỏi về học phí, nơi tôi dạy, tôi dạy ai, hoặc cách đặt lịch.",
+  "greeting": "Xin chào! Đây là câu trả lời của tôi cho những điều mọi người hay hỏi nhất. Hãy hỏi về học phí, nơi tôi dạy, tôi dạy ai, cách đặt lịch, hoặc điều bạn muốn sửa trong lối chơi.",
   "fallback": "Điều đó tôi chưa viết ở đây. Hãy gửi email cho tôi, tôi sẽ trả lời bạn trực tiếp.",
   "unavailable": "Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.",
+  "misuse": "Ở đây tôi chỉ trả lời các câu hỏi về lớp học.",
+  "personal": "Vui lòng đừng ghi số điện thoại, địa chỉ, tên trường hay họ tên đầy đủ ở đây. Việc riêng xin gửi email cho tôi.",
   "topics": [
     {
       "id": "hello",
@@ -10,7 +12,7 @@
       "next": [
         "Học phí bao nhiêu?",
         "Học ở đâu?",
-        "Lớp nào hợp với tôi?"
+        "Tôi nên tập gì?"
       ]
     },
     {
@@ -23,7 +25,7 @@
     },
     {
       "id": "prices",
-      "answer": "Lớp kèm riêng 1-1 là $80 một giờ. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp — hãy cho tôi biết số người, tôi sẽ báo giá.",
+      "answer": "Lớp kèm riêng 1-1 là $80 một giờ, hoặc 5 buổi $375 và 10 buổi $700. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp.",
       "actions": [
         {
           "type": "book",
@@ -33,6 +35,37 @@
       "next": [
         "Lớp nào hợp với tôi?",
         "Có phải trả tiền trước không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "packages",
+      "answer": "Cho học riêng 1-1: 5 buổi $375 hoặc 10 buổi $700, trả trực tiếp. Tức là $75 và $70 một giờ thay vì $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Có phải trả tiền trước không?",
+        "Nếu cần hủy thì sao?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "gifts",
+      "answer": "Có. Bạn có thể tặng một buổi học riêng 1-1 ($80), 5 buổi học riêng 1-1 ($375), 10 buổi ($700) hoặc một buổi đánh tập ($45). Gửi yêu cầu cho tôi, chúng ta thanh toán trực tiếp, và tôi sẽ đưa bạn một thẻ quà tặng để in.",
+      "actions": [
+        {
+          "type": "open",
+          "target": "giftForm",
+          "label": "Tặng một buổi học"
+        }
+      ],
+      "next": [
+        "Học riêng 1-1 giá bao nhiêu?",
+        "Học ở đâu?",
         "Đặt lịch thế nào?"
       ]
     },
@@ -47,7 +80,7 @@
       ],
       "next": [
         "Buổi học đầu tiên thế nào?",
-        "Một buổi học bao lâu?",
+        "Có gói học không?",
         "Đặt lịch thế nào?"
       ]
     },
@@ -83,12 +116,12 @@
     },
     {
       "id": "clinics",
-      "answer": "Lớp nhóm cho người lớn là nhóm nhỏ trên một sân: bài tập và trò chơi bóng sống, luân phiên đủ để không ai phải đứng chờ, rèn sức bền khi đánh qua lại và sự ổn định khi bị áp lực. Giá tính theo nhóm — hãy email cho tôi biết nhóm có bao nhiêu người, tôi sẽ báo giá. Bạn có thể tự lập nhóm, hoặc nhờ tôi xếp vào một nhóm.",
+      "answer": "Lớp nhóm cho người lớn là nhóm nhỏ trên một sân: bài tập và trò chơi bóng sống, luân phiên đủ để không ai phải đứng chờ, rèn sức bền khi đánh qua lại và sự ổn định khi bị áp lực. Giá tính theo nhóm. Hãy đăng ký với trình độ và thời gian bạn rảnh, tôi sẽ xếp bạn vào nhóm cùng những người chơi giống bạn, hoặc bạn tự lập nhóm.",
       "actions": [
         {
-          "type": "email",
-          "subject": "Adult clinics (Vietnamese page)",
-          "label": "Gửi email để báo giá"
+          "type": "open",
+          "target": "clinicList",
+          "label": "Đăng ký lớp nhóm"
         }
       ],
       "next": [
@@ -125,6 +158,7 @@
     {
       "id": "who",
       "answer": "Các em thiếu niên từ người mới hoàn toàn trở lên (các bé nhỏ nhất bắt đầu với bóng chậm và mềm hơn, nên chưa chơi bao giờ cũng không sao) và người lớn ở mọi trình độ. Phần lớn tôi dạy các em thiếu niên đang phát triển, và tôi mở lớp nhóm cho người lớn muốn chơi ổn định hơn và có chiến thuật rõ ràng hơn khi vào điểm.",
+      "answer_parent": "Bé chưa từng chơi cũng không sao. Các bé nhỏ nhất bắt đầu với bóng chậm và mềm hơn (đỏ, rồi cam, rồi xanh lá) và lên cấp khi đã sẵn sàng. Tôi được USTA Safe Play chấp thuận, đã kiểm tra lý lịch và hoàn thành đào tạo SafeSport, và có chứng chỉ RSPA.",
       "next": [
         "Phong cách dạy của bạn thế nào?",
         "Lớp nào hợp với tôi?",
@@ -132,8 +166,25 @@
       ]
     },
     {
+      "id": "credentials",
+      "answer": "Tôi có chứng chỉ của RSPA (Racket Sports Professionals Association, trước đây là USPTA) và được USTA Safe Play chấp thuận: đã kiểm tra lý lịch và hoàn thành đào tạo SafeSport. Tôi làm huấn luyện viên từ năm 2023.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "Thêm về tôi"
+        }
+      ],
+      "next": [
+        "Bạn dạy được bao lâu rồi?",
+        "Bạn dạy những ai?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
       "id": "booking",
       "answer": "Bấm bất kỳ nút Đặt lịch nào trên trang này và chọn một giờ trên lịch. Đặt lịch trực tuyến chỉ để giữ giờ — không cần thẻ, không cần đặt cọc. Khi đặt lịch, hãy cho tôi biết trình độ và điều bạn đang luyện, tôi sẽ chuẩn bị sẵn kế hoạch.",
+      "answer_parent": "Chọn một giờ trên lịch và đặt bằng tên của bạn. Trong phần ghi chú, hãy cho tôi biết tuổi của con, con đã chơi bao lâu và muốn tập gì, tôi sẽ chuẩn bị buổi đầu tiên cho phù hợp với con. Không cần thẻ, không cần đặt cọc: bạn trả tiền trực tiếp.",
       "actions": [
         {
           "type": "book",
@@ -143,7 +194,7 @@
       "next": [
         "Có phải trả tiền trước không?",
         "Khi nào bạn rảnh?",
-        "Buổi học đầu tiên thế nào?"
+        "Nếu cần hủy thì sao?"
       ]
     },
     {
@@ -171,14 +222,32 @@
       "answer": "Bạn thanh toán trực tiếp tại sân. Đặt lịch trực tuyến chỉ giữ giờ — không cần thẻ, không cần đặt cọc.",
       "next": [
         "Học phí bao nhiêu?",
+        "Có gói học không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "cancellation",
+      "answer": "Hủy hoặc đổi buổi học trước 24 giờ; hủy muộn hơn vẫn tính phí. Nếu mưa hoặc nắng nóng làm hủy buổi học, chúng ta đổi lịch miễn phí.",
+      "next": [
+        "Có phải trả tiền trước không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "equipment",
+      "answer": "Chưa có vợt? Bạn có thể mượn vợt của tôi.",
+      "next": [
+        "Buổi học đầu tiên thế nào?",
         "Đặt lịch thế nào?"
       ]
     },
     {
       "id": "first_session",
       "answer": "Khi đặt lịch, hãy cho tôi biết trình độ và điều bạn đang luyện, tôi sẽ đến buổi đầu tiên với một kế hoạch dành riêng cho bạn.",
+      "answer_parent": "Khi đặt lịch, hãy cho tôi biết tuổi và trình độ của con, tôi sẽ đến với một kế hoạch dành riêng cho con. Các bé mới tập bắt đầu với bóng chậm và mềm hơn.",
       "next": [
-        "Phong cách dạy của bạn thế nào?",
+        "Tôi có cần vợt riêng không?",
         "Một buổi học bao lâu?",
         "Đặt lịch thế nào?"
       ]
@@ -194,7 +263,7 @@
     },
     {
       "id": "experience",
-      "answer": "Tôi làm huấn luyện viên từ năm 2023. Tôi bắt đầu là Junior Pro tại LifeSport Libertyville, sau đó gia nhập Pro Staff của Grip N Rip, chương trình thiếu niên tại Newport Beach Tennis Club. Tôi đã chơi bốn năm trong đội tuyển varsity của trường trung học.",
+      "answer": "Tôi làm huấn luyện viên từ năm 2023. Tôi bắt đầu là Junior Pro tại LifeSport Libertyville, sau đó gia nhập Pro Staff của Grip N Rip, chương trình thiếu niên tại Newport Beach Tennis Club. Tôi có chứng chỉ RSPA và đã chơi bốn năm trong đội tuyển varsity của trường trung học.",
       "actions": [
         {
           "type": "scroll",
@@ -203,7 +272,7 @@
         }
       ],
       "next": [
-        "Phong cách dạy của bạn thế nào?",
+        "Bạn có chứng chỉ không?",
         "Mọi người nói gì về bạn?",
         "Bạn dạy những ai?"
       ]
@@ -280,6 +349,206 @@
       "next": [
         "Bạn dạy được bao lâu rồi?",
         "Email của bạn là gì?"
+      ]
+    },
+    {
+      "id": "tips",
+      "answer": "Hãy cho tôi biết điều gì đang không ổn, ví dụ \"giao bóng của tôi hay vào lưới\" hay \"tôi không giữ được nhịp đánh qua lại\", tôi sẽ gợi ý một điều để thử. Đây chỉ là cách sửa nhanh; trong buổi học chúng ta sẽ tìm ra nguyên nhân thật.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/vi/tips/",
+          "label": "Xem tất cả mẹo"
+        }
+      ],
+      "next": [
+        "Giao bóng của tôi hay vào lưới",
+        "Cú thuận tay của tôi hay bay dài",
+        "Tôi không giữ được nhịp đánh qua lại"
+      ]
+    },
+    {
+      "id": "tip_serve_net",
+      "title": "Giao bóng của tôi hay vào lưới",
+      "answer": "Giao bóng vào lưới thường là do tung bóng quá thấp hoặc quá xa phía trước, nên bạn đánh xuống quá sớm. Tung bóng cao hơn một chút, ngay phía trước vai bên tay cầm vợt, và vươn lên đánh khi tay duỗi thẳng. Tập tung bóng mười lần mà không vung vợt: mỗi lần bóng nên rơi đúng một chỗ, phía trước chân trước.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Giao bóng của tôi hay bị dài",
+        "Tôi hay lỗi kép",
+        "Tôi tự tập một mình thế nào?"
+      ]
+    },
+    {
+      "id": "tip_serve_long",
+      "title": "Giao bóng của tôi hay bị dài",
+      "answer": "Giao bóng dài thường là do bóng tung bị trôi ra sau lưng, làm mặt vợt mở khi tiếp xúc. Giữ bóng tung hơi chếch về phía trước, đánh lên và trùm qua bóng, rồi để vợt tự xoay sau khi chạm bóng. Nhắm vào giữa ô giao bóng, đừng nhắm vạch.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Giao bóng của tôi hay vào lưới",
+        "Tôi hay lỗi kép",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_double_fault",
+      "title": "Tôi hay lỗi kép",
+      "answer": "Phần lớn lỗi kép là do đánh quả giao thứ hai như một quả giao thứ nhất chậm hơn. Quả giao thứ hai cần nhiều xoáy hơn, không phải chậm hơn: chải lên phía sau quả bóng để bóng qua lưới cao và rơi vào ô. Tập riêng một giỏ giao bóng thứ hai và đếm xem vào được bao nhiêu quả.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Giao bóng của tôi hay vào lưới",
+        "Tôi đánh trận kém hơn lúc tập",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_forehand_net",
+      "title": "Cú thuận tay của tôi hay vào lưới",
+      "answer": "Thuận tay vào lưới thường là do vung vợt quá phẳng hoặc chạm bóng muộn. Bắt đầu vợt thấp hơn bóng và kết thúc cao qua vai bên kia, chạm bóng phía trước người. Nhắm cao hơn lưới khoảng một mét: độ cao đó là khoảng an toàn của bạn.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú thuận tay của tôi hay bay dài",
+        "Tôi luôn đến bóng muộn",
+        "Tôi không giữ được nhịp đánh qua lại"
+      ]
+    },
+    {
+      "id": "tip_forehand_long",
+      "title": "Cú thuận tay của tôi hay bay dài",
+      "answer": "Cú thuận tay bay dài thường là do đánh phẳng với mặt vợt mở. Chải lên phía sau quả bóng để tạo xoáy lên, bóng sẽ cắm xuống trong sân, và kết thúc cú đánh qua vai thay vì đẩy thẳng về mục tiêu. Nhắm sâu vào giữa sân, cách đường cuối sân vài bước.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú thuận tay của tôi hay vào lưới",
+        "Cú trái tay của tôi yếu",
+        "Học phí bao nhiêu?"
+      ]
+    },
+    {
+      "id": "tip_backhand",
+      "title": "Cú trái tay của tôi yếu",
+      "answer": "Trái tay yếu thường bắt đầu từ việc xoay người muộn. Vừa thấy bóng đến phía đó, hãy xoay vai để lưng hơi quay về phía lưới, rồi vung từ dưới lên phía trước người. Đánh qua lại chéo sân trái tay với trái tay cùng bạn tập cho đến khi thành thói quen.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Tôi luôn đến bóng muộn",
+        "Tôi không giữ được nhịp đánh qua lại",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_rally",
+      "title": "Tôi không giữ được nhịp đánh qua lại",
+      "answer": "Pha đánh qua lại kết thúc sớm khi cú nào cũng nhắm quá sát vạch hoặc lưới. Nhắm cao hơn qua lưới và sâu vào giữa sân, rồi đếm số lần đánh qua lại: cố phá kỷ lục của chính mình, không phải thắng bạn tập. Ổn định trước, sức mạnh sau.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú thuận tay của tôi hay vào lưới",
+        "Tôi tự tập một mình thế nào?",
+        "Lớp nào hợp với tôi?"
+      ]
+    },
+    {
+      "id": "tip_footwork",
+      "title": "Tôi luôn đến bóng muộn",
+      "answer": "Đến bóng muộn thường là vấn đề bộ chân, không phải cú vung. Nhún bật nhẹ (split-step) đúng lúc đối thủ đánh bóng để bạn đứng trên mũi chân khi đọc bóng, rồi bước những bước nhỏ điều chỉnh trước khi đánh. Tập không bóng ở nhà: nhún, xoay, vung, về vị trí.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú trái tay của tôi yếu",
+        "Tôi không giữ được nhịp đánh qua lại",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_volley",
+      "title": "Tôi ngại lên lưới",
+      "answer": "Ở lưới, càng ít càng tốt: không kéo vợt về sau nhiều. Giữ vợt cao phía trước, xoay vai, và đẩy bóng bằng một động tác ngắn, bước lên khi đánh. Bắt đầu gần lưới với bạn tập đưa bóng nhẹ, rồi lùi dần ra.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Tôi đánh trận kém hơn lúc tập",
+        "Hai người học chung được không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_matches",
+      "title": "Tôi đánh trận kém hơn lúc tập",
+      "answer": "Hầu hết người chơi bị cứng người vì cố đánh những cú khó hơn khi bị áp lực. Hãy chọn một kế hoạch đơn giản trước trận, như đánh chéo sâu cho đến khi có bóng ngắn, và lặp lại cùng một thói quen ngắn giữa mỗi điểm. Khi tập cũng hãy tính điểm: đánh game và tie-break, không chỉ đánh qua lại.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "Chúng ta có thể đánh set không?",
+        "Tôi hay lỗi kép",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_practice",
+      "title": "Tôi tự tập một mình thế nào?",
+      "answer": "Bức tường là bạn tập tốt nhất: đánh thuận tay và trái tay vào tường, nhắm cao hơn một vạch kẻ. Một giỏ giao bóng trên sân trống giúp tung bóng ổn định, và vung vợt không bóng trước gương giúp sửa kỹ thuật. Tập ngắn mà đều tốt hơn tập dài mà thưa.",
+      "next": [
+        "Giao bóng của tôi hay vào lưới",
+        "Tôi không giữ được nhịp đánh qua lại",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_kids",
+      "title": "Con tôi có thể tập ở nhà thế nào?",
+      "answer": "Hãy giữ cho ngắn và vui: tung và bắt bóng, tâng bóng trên mặt vợt, đánh qua lại qua một vạch trên lối xe chạy bằng bóng mềm. Vài phút mỗi lần, vài lần mỗi tuần hiệu quả hơn một buổi dài. Trong buổi học, các bé mới tập dùng bóng chậm và mềm hơn nên sẽ đánh qua lại được sớm hơn.",
+      "next": [
+        "Bạn có dạy người mới không?",
+        "Con tôi học với bạn có an toàn không?",
+        "Đặt lịch thế nào?"
       ]
     }
   ],

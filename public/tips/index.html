@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- ============================================================
+       Practice tips: Isaac's short fixes for common problems, at
+       leetennisco.com/tips/. The tips themselves are the tip_* answers
+       in /ask.json (the chat gives the same ones): tools/i18n/build.mjs
+       writes them into each <div class="tips"> below, here and on every
+       language's copy. Edit a tip in ask.json, then run the build.
+       ============================================================ -->
+  <title>Tennis practice tips — Lee Tennis Co., Irvine</title>
+  <meta name="description"
+        content="Quick fixes for common tennis problems from Isaac Lee, an RSPA-certified coach in Irvine: a serve in the net, a forehand that flies long, double faults, nerves in matches, and practising on your own." />
+  <link rel="canonical" href="https://leetennisco.com/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Tennis practice tips — Lee Tennis Co." />
+  <meta property="og:description"
+        content="Quick fixes for the most common tennis problems, from a serve in the net to nerves in matches." />
+  <meta property="og:url" content="https://leetennisco.com/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <!-- The same two addresses as the front page: the Worker (counts Book
+       presses) and the Cloudflare Web Analytics token (visits). -->
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
+       popup; every one of them is also a real link to the same event on
+       cal.com, so a blocked or slow script still lands somewhere.
+
+       The embed is not fetched on load. It was 1.5s of a 1.6s load for a
+       script most visitors never use. It loads on the first sign of intent
+       — a pointer moving over a Book control, focus landing on one, any
+       scroll or tap — or three seconds in, whichever comes first.
+       tennis.js handles a click that arrives before it is ready. -->
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- The front page's header without its section links: the wordmark
+       goes home, the language menu goes to this page in each language. -->
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="Lee Tennis Co. — home">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="Language: English">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">EN</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en" aria-current="page">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="Book a lesson">
+        <span class="cta-full">Book a lesson</span><span class="cta-short" aria-hidden="true">Book</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">Practice tips</p>
+      <h1 class="fade" style="--d:.06s">Quick fixes for common problems</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        One thing to try for each of the problems I see most. They're quick fixes;
+        in a lesson we'd find the real cause.
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="Tip topics">
+        <a href="#serve">Serve</a>
+        <a href="#groundstrokes">Forehands, backhands and rallies</a>
+        <a href="#movement">Footwork and the net</a>
+        <a href="#matches">Matches and practice</a>
+        <a href="#parents">For parents</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">Serve</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>My serve goes into the net</h3>
+            <p>A serve in the net usually means the toss is too low or too far in front, so you hit down on the ball too early. Toss a little higher, just in front of your hitting shoulder, and reach up to hit it at full stretch. Practise ten tosses without swinging: each one should come down in the same spot, in front of your front foot.</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>My serve goes long</h3>
+            <p>A long serve usually comes from a toss drifting behind you, which opens the racket face at contact. Keep the toss slightly in front, hit up and over the ball, and let the racket turn over after contact. Aim for the middle of the box, not the lines.</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>I double fault a lot</h3>
+            <p>Most double faults come from hitting the second serve like a slower first serve. A second serve needs more spin, not less speed: brush up the back of the ball so it clears the net with room and dips into the box. Practise a basket of second serves only, and count how many land in.</p>
+          </article>
+        </div><!-- /tips -->
+    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">Forehands, backhands and rallies</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>My forehand goes into the net</h3>
+            <p>Forehands into the net usually mean the swing is too flat or the contact is late. Start the racket below the ball and finish high over your opposite shoulder, and meet the ball out in front of your body. Aim about three feet above the net: that height is your margin.</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>My forehand flies long</h3>
+            <p>A forehand that sails long is usually hit flat with an open racket face. Brush up the back of the ball for topspin, so it dips down into the court, and finish the swing over your shoulder instead of straight at the target. Aim deep to the middle, a few feet inside the baseline.</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>My backhand is weak</h3>
+            <p>A weak backhand usually starts with a late turn. As soon as you see the ball coming to that side, turn your shoulders so your back is partly to the net, then swing from low to high out in front. Rally backhand to backhand cross-court with a partner until it feels routine.</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>I can't keep a rally going</h3>
+            <p>Rallies end early when every shot aims too close to the lines or the net. Aim higher over the net and deep to the middle of the court, and count your rallies: try to beat your own record, not your partner. Consistency comes before power.</p>
+          </article>
+        </div><!-- /tips -->
+    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">Footwork and the net</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>I'm always late to the ball</h3>
+            <p>Being late is usually a footwork problem, not a swing problem. Do a small split-step just as your opponent hits, so you're on your toes when you read the ball, then take small adjusting steps before you swing. Shadow it at home: split, turn, swing, recover.</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>I'm uneasy at the net</h3>
+            <p>At the net, less is more: no big backswing. Keep the racket up in front of you, turn your shoulders, and punch the ball with a short motion, stepping forward as you hit. Start close to the net with a partner feeding gently, then move back.</p>
+          </article>
+        </div><!-- /tips -->
+    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">Matches and practice</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>I play worse in matches</h3>
+            <p>Most players tighten up because they try harder shots under pressure. Pick a simple plan before the match, like deep cross-court until you get a short ball, and use the same short routine between every point. Practise with a score, too: games and tie-breaks, not just rallies.</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>How can I practise on my own?</h3>
+            <p>A wall is the best practice partner there is: rally forehands and backhands against it, aiming above a line. A basket of serves on an empty court builds a reliable toss, and shadow swings in front of a mirror fix technique without a ball. Short and often beats long and rare.</p>
+          </article>
+        </div><!-- /tips -->
+    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">For parents</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>How can my child practise at home?</h3>
+            <p>Keep it short and playful: catching and throwing, bouncing a ball on the racket, rallying over a line on the driveway with a soft ball. A few minutes several times a week builds more than one long session. In lessons, young beginners use slower, softer balls, so they rally sooner.</p>
+          </article>
+        </div><!-- /tips -->
+    </section>
+
+    <!-- The page's one ask, on the ink band like the front page's close. -->
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">Want the real cause?</h2>
+          <p class="fade" style="--d:.06s">
+            A tip treats the symptom. In a lesson I watch you hit and fix what's behind it.
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a lesson</a>
+            <a class="btn btn-outline btn-lg" href="/#lessons">See lessons and prices</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">Booking just holds the time: no card, no deposit. You pay in person.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
+      <p class="footer-links">
+        <a href="/">Private tennis lessons</a>
+        <a href="/portfolio/">Career portfolio</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>

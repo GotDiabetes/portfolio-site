@@ -433,6 +433,9 @@ dl, dd { margin: 0; }
   gap: .5rem 1.25rem; margin-top: .9rem;
 }
 .matcher-note { margin-top: .9rem; font-size: .8125rem; color: var(--muted); max-width: 60ch; }
+/* The level and focus the matcher read from the sentence: a second line in
+   the answer's own colour, the values in weight, not size. */
+.matcher-result .matcher-fit { color: var(--text); }
 
 /* ----------------------------------------------------------- Book FX -- */
 /* The stick-figure server on a Book button (bookfx.js). One fixed layer
@@ -632,6 +635,8 @@ dl, dd { margin: 0; }
 }
 .ask-send:hover { background: #383838; }
 .ask-send:disabled { background: #383838; cursor: progress; }
+/* What happens to a question the chat can't answer, said where it's typed. */
+.ask-note { margin: 0; padding: 0 .9rem .7rem; font-size: .75rem; line-height: 1.4; color: var(--muted); }
 
 /* Phones: the panel becomes a sheet across the bottom of the screen, and
    the launcher steps aside while it is open (the sheet has its own close). */
@@ -689,6 +694,11 @@ dl, dd { margin: 0; }
   margin: .5rem 0 .9rem; line-height: 1.2;
 }
 .price span { font-size: .875rem; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+/* The private lesson's packages, under its price: label size, in ink, so it
+   reads as part of the price rather than as body copy. */
+.package, .lesson .package, .modal-card .package {
+  margin: -.55rem 0 .9rem; font-size: .875rem; color: var(--text);
+}
 
 /* --------------------------------------------------------------- Photos -- */
 .photos { padding-block: var(--section-y); }
@@ -756,6 +766,139 @@ dl, dd { margin: 0; }
 }
 .notes dt { font-size: .8125rem; color: var(--muted); margin-bottom: .3rem; }
 .notes dd { margin: 0; font-size: 1rem; line-height: 1.55; }
+
+/* ------------------------------------------------------------------ FAQ --
+   Questions on hairlines, each opening in place (native <details>). The
+   marker is a drawn plus that turns to a minus; the answer reads at body
+   size under the question, held to a reading measure. */
+.faq-section { padding-block: 0 clamp(2.5rem, 5vw, 4rem); }
+.faq-section h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+.faq { border-top: 1px solid var(--line); max-width: 52rem; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  min-height: 3.25rem; padding-block: .75rem;
+  font-weight: 600; cursor: pointer; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: 0 0 auto; width: 12px; height: 12px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+}
+.faq details[open] summary::after {
+  background: linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat;
+}
+.faq summary:hover { color: var(--muted); }
+.faq details > p { margin: 0 0 1.1rem; max-width: 62ch; color: var(--muted); }
+.faq details > .link-btn { margin: -.6rem 0 .6rem; }
+.faq details > .link-btn + .link-btn { margin-inline-start: 1.5rem; }
+.faq .link-btn[hidden] { display: none; }
+
+/* ---------------------------------------------------------- Clinic list --
+   Inside the popup: plain fields in the matcher's style (1px border,
+   softened corner, black on focus), labels above, the choices as a column
+   of rows with a 44px hit area each. */
+.clinic-form { margin-top: 1.25rem; display: grid; gap: 1.1rem; }
+.clinic-form .field { display: grid; gap: .45rem; margin: 0; padding: 0; border: 0; min-width: 0; }
+.field-label { font-size: .875rem; font-weight: 600; color: var(--text); padding: 0; }
+.field-optional { font-weight: 400; color: var(--muted); }
+.clinic-form select, .clinic-form textarea, .clinic-form input[type="text"], .clinic-form input[type="password"], .desk-period select {
+  width: 100%; padding: .7rem .85rem;
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: var(--bg);
+  border: 1px solid #c9c9c6; border-radius: var(--radius);
+  transition: border-color var(--dur-ui) var(--ease);
+}
+.clinic-form textarea { resize: vertical; min-height: 5rem; }
+.clinic-form select:hover, .clinic-form textarea:hover, .clinic-form input:is([type="text"], [type="password"]):hover, .desk-period select:hover { border-color: var(--muted); }
+.clinic-form select:focus, .clinic-form textarea:focus, .clinic-form input:is([type="text"], [type="password"]):focus, .desk-period select:focus { border-color: var(--text); }
+.clinic-form ::placeholder { color: var(--muted); opacity: 1; }
+.choice {
+  display: flex; align-items: center; gap: .65rem;
+  min-height: 2.75rem; font-size: .9375rem; color: var(--text); cursor: pointer;
+}
+.choice input { width: 1.1rem; height: 1.1rem; margin: 0; accent-color: var(--text); flex: 0 0 auto; }
+/* A gift's price sits at the end of its row, in weight: the form's one
+   figure, kept to the row's size so the list still reads as a list. */
+.choice-price { margin-inline-start: auto; font-weight: 600; }
+.clinic-form .actions { margin-top: .2rem; }
+.form-error { margin: 0; font-size: .875rem; font-weight: 600; color: var(--text); }
+.form-error[hidden] { display: none; }
+.form-note { margin: 0; font-size: .8125rem; color: var(--muted); }
+
+/* ------------------------------------------- Gift line, review request --
+   One muted sentence each, under the lesson cards and under the reviews,
+   with the action as an ink link: an offer and a request, never a card. */
+.gift-line, .review-ask { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); max-width: 44rem; color: var(--muted); }
+.gift-line .link-btn, .review-ask .link-btn { display: flex; width: fit-content; margin-top: .1rem; }
+.review-ask[hidden] { display: none; }
+
+/* ---------------------------------------------------- Practice tips page --
+   /tips/: a reading page in the same world. A section head with a row of
+   topic links, then each group's tips on hairlines like the FAQ: the
+   problem as the heading on the left, the fix beside it, stacked on
+   phones. It ends on the ink band, the front page's close. */
+.tips-head { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 2vw, 1.5rem); }
+.tips-head h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02;
+  max-width: 16ch; margin-top: .25rem;
+}
+.tips-head .section-sub { max-width: 40rem; }
+.tips-jump { display: flex; flex-wrap: wrap; gap: 0 1.5rem; margin-top: 1.25rem; }
+.tips-jump a {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  font-size: .9375rem; color: var(--muted);
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line);
+  transition: color var(--dur-ui) var(--ease), text-decoration-color var(--dur-ui) var(--ease);
+}
+.tips-jump a:hover { color: var(--text); text-decoration-color: currentColor; }
+.tips-group { padding-block: clamp(1.5rem, 3vw, 2.25rem); scroll-margin-top: 66px; }
+.tips-group:last-of-type { padding-bottom: var(--section-y); }
+.tips-group h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin-bottom: .9rem; }
+.tips { border-top: 1px solid var(--line); }
+.tip {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: .5rem clamp(1.5rem, 4vw, 3rem);
+  padding-block: 1.35rem; border-bottom: 1px solid var(--line);
+  scroll-margin-top: 80px;
+}
+.tip h3 { font-size: 1.125rem; }
+.tip p { margin: 0; max-width: 62ch; }
+@media (max-width: 760px) {
+  .tip { grid-template-columns: 1fr; }
+}
+:root:is(:lang(ko), :lang(ja), :lang(zh)) .tips-head h1 { letter-spacing: -0.01em; line-height: 1.2; }
+:root:lang(fa) .tips-head h1 { line-height: 1.4; }
+
+/* ------------------------------------------ Isaac's pages: recap, stats --
+   Working pages, not the shop window: the same face, fields and buttons on
+   plain white, no header, held to a working width. */
+.desk-main { max-width: calc(54rem + 2 * var(--pad)); padding-block: clamp(2rem, 5vw, 3.5rem) var(--section-y); }
+.desk h1 { font-size: clamp(2rem, 4vw, 2.75rem); letter-spacing: -0.04em; margin: .4rem 0 .6rem; }
+.desk h2 { font-size: 1.25rem; letter-spacing: -0.02em; margin: 2.5rem 0 .75rem; }
+.desk-sub { color: var(--muted); max-width: 60ch; }
+.desk-form { margin-top: 1.75rem; }
+.desk-key { max-width: 24rem; }
+.desk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.1rem 1.25rem; }
+.desk-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0 1.25rem; }
+.clinic-form .desk-out { font-size: .9375rem; line-height: 1.55; min-height: 18rem; }
+.desk .form-note a { color: var(--text); text-underline-offset: 3px; }
+.desk-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin: 2.5rem 0 .75rem; }
+.desk-row h2 { margin: 0; }
+.desk-period { display: grid; gap: .35rem; }
+.desk-table-wrap { overflow-x: auto; border-top: 1px solid var(--line); margin-bottom: .9rem; }
+.desk-table { width: 100%; border-collapse: collapse; font-size: .9375rem; font-variant-numeric: tabular-nums; }
+.desk-table th, .desk-table td { padding: .6rem .75rem; border-bottom: 1px solid var(--line); text-align: end; white-space: nowrap; }
+.desk-table th:first-child { padding-inline-start: 0; text-align: start; font-weight: 400; }
+.desk-table thead th { font-size: .8125rem; font-weight: 400; color: var(--muted); }
+.desk-table td:nth-child(2) { font-weight: 600; }
+.desk-table .is-zero { color: var(--muted); }
+.desk-questions { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.desk-questions li { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.desk-q-meta { flex: 0 0 auto; font-size: .8125rem; color: var(--muted); }
+.desk-questions .is-empty { color: var(--muted); }
 
 /* -------------------------------------------------------------- Reviews -- */
 .review-list {

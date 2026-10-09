@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from tips/index.html and tools/i18n/ko.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>테니스 연습 팁 — Lee Tennis Co., 어바인</title>
+  <meta name="description"
+        content="어바인의 RSPA 인증 코치 Isaac Lee가 알려 주는 흔한 테니스 문제의 빠른 해결법: 네트에 걸리는 서브, 길게 나가는 포핸드, 더블 폴트, 경기 중 긴장, 혼자 연습하는 법." />
+  <link rel="canonical" href="https://leetennisco.com/ko/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="테니스 연습 팁 — Lee Tennis Co." />
+  <meta property="og:description"
+        content="네트에 걸리는 서브부터 경기 중 긴장까지, 가장 흔한 테니스 문제의 빠른 해결법." />
+  <meta property="og:url" content="https://leetennisco.com/ko/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/ko/" aria-label="Lee Tennis Co. — 홈">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 모노그램" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="언어 (Language): 한국어">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">KO</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko" aria-current="page">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="레슨 예약">
+        <span class="cta-full">레슨 예약</span><span class="cta-short" aria-hidden="true">예약</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">연습 팁</p>
+      <h1 class="fade" style="--d:.06s">흔한 문제의 빠른 해결법</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        제가 가장 자주 보는 문제마다 해 볼 것 하나씩이에요. 빠른 해결법일 뿐이고, 레슨에서는 진짜 원인을 찾아요.
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="팁 주제">
+        <a href="#serve">서브</a>
+        <a href="#groundstrokes">포핸드, 백핸드, 랠리</a>
+        <a href="#movement">풋워크와 네트 플레이</a>
+        <a href="#matches">경기와 연습</a>
+        <a href="#parents">부모님께</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">서브</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>서브가 네트에 걸려요</h3>
+            <p>서브가 네트에 걸리는 건 보통 토스가 너무 낮거나 너무 앞에 있어서, 공을 너무 일찍 내려치기 때문이에요. 토스를 조금 더 높이, 치는 쪽 어깨 바로 앞에 올리고, 팔을 끝까지 뻗어서 쳐 보세요. 스윙하지 말고 토스만 열 번 해 보세요. 매번 앞발 앞 같은 자리에 떨어져야 해요.</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>서브가 길게 나가요</h3>
+            <p>서브가 길게 나가는 건 보통 토스가 몸 뒤로 흘러서 임팩트 때 라켓 면이 열리기 때문이에요. 토스를 살짝 앞에 두고, 공 위로 덮어 치듯 올려 치고, 임팩트 후에 라켓이 자연스럽게 돌아가게 하세요. 라인이 아니라 서비스 박스 가운데를 노리세요.</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>더블 폴트가 많아요</h3>
+            <p>더블 폴트는 대부분 세컨드 서브를 느린 퍼스트 서브처럼 치기 때문이에요. 세컨드 서브는 속도를 줄이는 게 아니라 스핀을 더 거는 거예요. 공 뒤를 위로 쓸어 올려서 네트를 넉넉히 넘기고 박스 안으로 떨어지게 하세요. 세컨드 서브만 한 바구니 치면서 몇 개가 들어가는지 세어 보세요.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">포핸드, 백핸드, 랠리</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>포핸드가 네트에 걸려요</h3>
+            <p>포핸드가 네트에 걸리는 건 보통 스윙이 너무 평평하거나 타점이 늦어서예요. 라켓을 공보다 아래에서 시작해 반대쪽 어깨 위로 높게 마무리하고, 공을 몸 앞에서 맞히세요. 네트보다 1미터쯤 위를 노리세요. 그 높이가 여유예요.</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>포핸드가 자꾸 길게 나가요</h3>
+            <p>포핸드가 길게 나가는 건 보통 라켓 면이 열린 채로 평평하게 치기 때문이에요. 공 뒤를 위로 쓸어 올려 톱스핀을 걸면 공이 코트 안으로 떨어져요. 스윙은 목표 쪽으로 곧게 뻗지 말고 어깨 위로 마무리하세요. 베이스라인 몇 걸음 안쪽, 가운데 깊숙이를 노리세요.</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>백핸드가 약해요</h3>
+            <p>백핸드가 약한 건 보통 몸을 늦게 돌리기 때문이에요. 공이 그쪽으로 오는 게 보이자마자 등이 살짝 네트를 향할 만큼 어깨를 돌리고, 몸 앞에서 아래에서 위로 스윙하세요. 파트너와 백핸드 크로스 랠리를 익숙해질 때까지 해 보세요.</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>랠리가 이어지지 않아요</h3>
+            <p>랠리가 일찍 끝나는 건 매번 라인이나 네트에 너무 가깝게 치기 때문이에요. 네트 위로 더 높게, 코트 가운데 깊숙이 노리고 랠리 횟수를 세어 보세요. 상대가 아니라 내 기록을 깨는 게 목표예요. 파워보다 안정감이 먼저예요.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">풋워크와 네트 플레이</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>항상 공에 늦게 도착해요</h3>
+            <p>공에 늦는 건 보통 스윙이 아니라 풋워크 문제예요. 상대가 공을 치는 순간 작게 스플릿 스텝을 해서 발끝으로 서 있다가, 공을 읽고 작은 스텝으로 위치를 맞춘 뒤 치세요. 집에서 섀도로 연습하세요: 스플릿, 턴, 스윙, 리커버리.</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>네트 앞에서 불안해요</h3>
+            <p>네트에서는 적을수록 좋아요. 큰 백스윙은 하지 마세요. 라켓을 몸 앞에 세우고 어깨를 돌린 뒤, 짧게 끊어 치면서 앞으로 한 걸음 내디디세요. 처음엔 네트 가까이서 파트너가 부드럽게 넘겨 주는 공으로 시작해 점점 뒤로 물러나세요.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">경기와 연습</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>경기만 하면 실력이 안 나와요</h3>
+            <p>대부분은 압박감 속에서 더 어려운 샷을 치려다 몸이 굳어요. 경기 전에 '짧은 공이 올 때까지 크로스로 깊게'처럼 간단한 계획을 정하고, 포인트 사이에는 매번 같은 짧은 루틴을 하세요. 연습도 점수를 내면서 하세요. 랠리만이 아니라 게임과 타이브레이크로요.</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>혼자 어떻게 연습하나요?</h3>
+            <p>벽은 최고의 연습 상대예요. 선 위를 노리면서 포핸드와 백핸드로 벽치기를 하세요. 빈 코트에서 서브를 한 바구니 치면 토스가 안정되고, 거울 앞 섀도 스윙은 공 없이도 자세를 고쳐 줘요. 길고 드물게보다 짧고 자주가 나아요.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">부모님께</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>아이가 집에서 어떻게 연습하면 될까요?</h3>
+            <p>짧고 재미있게 하세요. 공 던지고 받기, 라켓 위로 공 튀기기, 부드러운 공으로 마당의 선을 사이에 두고 주고받기 같은 거요. 한 번에 길게 하는 것보다 일주일에 몇 번, 몇 분씩 하는 게 더 효과적이에요. 레슨에서는 어린 초보자가 느리고 부드러운 공을 써서 랠리를 더 빨리 할 수 있어요.</p>
+          </article>
+        </div>    </section>
+
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">진짜 원인이 궁금하세요?</h2>
+          <p class="fade" style="--d:.06s">
+            팁은 증상을 다룰 뿐이에요. 레슨에서는 직접 치는 모습을 보고 그 뒤에 있는 원인을 고쳐요.
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>레슨 예약</a>
+            <a class="btn btn-outline btn-lg" href="/ko/#lessons">레슨과 가격 보기</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">예약은 시간만 잡아 둬요. 카드도 보증금도 필요 없고, 결제는 현장에서 해요.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 캘리포니아 어바인</p>
+      <p class="footer-links">
+        <a href="/ko/">개인 테니스 레슨</a>
+        <a href="/portfolio/">커리어 포트폴리오</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>window.I18N = {"copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>

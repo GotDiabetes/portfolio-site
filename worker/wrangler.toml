@@ -24,3 +24,19 @@ namespace_id = "2002"
   [ratelimits.simple]
   limit = 60
   period = 60
+
+# Page events (a Book press, a form sent): 30 a minute per visitor.
+[[ratelimits]]
+name = "HITS"
+namespace_id = "2003"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60
+
+# Isaac's numbers: daily counts and the chat's unanswered questions (see
+# README). Wrangler creates the database on the first deploy that has this
+# block; the Worker makes its own tables on first use.
+[[d1_databases]]
+binding = "DB"
+database_name = "lee-tennis-stats"

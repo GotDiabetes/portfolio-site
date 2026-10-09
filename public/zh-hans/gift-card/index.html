@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from gift-card/index.html and tools/i18n/zh-hans.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>礼品卡 — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>制作礼品卡</h1>
+    <p>填写你知道的内容；空着的地方会打印成一条横线，可以手写。用 Letter 纸或卡纸按 100% 比例打印，然后沿虚线剪下。</p>
+    <form class="card-form" id="cardForm">
+      <label>
+        <span class="field-label">礼物</span>
+        <select name="gift">
+          <option>一节私教课</option>
+          <option>5 节私教课</option>
+          <option>10 节私教课</option>
+          <option>一节陪练课</option>
+        </select>
+      </label>
+      <label>
+        <span class="field-label">送给 <span class="field-optional">可选</span></span>
+        <input type="text" name="to" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">来自 <span class="field-optional">可选</span></span>
+        <input type="text" name="from" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">留言 <span class="field-optional">可选</span></span>
+        <input type="text" name="message" maxlength="140" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">卡号 <span class="field-optional">可选</span></span>
+        <input type="text" name="number" maxlength="12" autocomplete="off" />
+      </label>
+    </form>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>打印礼品卡</button>
+      <a class="print-home" href="/zh-hans/">返回网站</a>
+    </div>
+    <nav class="print-langs" aria-label="其他语言版本的礼品卡">
+      <a href="/gift-card/" hreflang="en" lang="en">English</a>
+      <a href="/es/gift-card/" hreflang="es" lang="es">Español</a>
+      <a href="/ko/gift-card/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/gift-card/" hreflang="zh-Hans" lang="zh-Hans" aria-current="page">简体中文</a>
+      <a href="/zh-hant/gift-card/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+      <a href="/ja/gift-card/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/gift-card/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/gift-card/" hreflang="fa" lang="fa">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet card-sheet">
+      <article class="gift-card">
+        <div class="gc-head">
+          <img class="gc-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 标志" />
+          <div class="gc-meta">
+            <p class="eyebrow">礼品卡</p>
+            <p class="gc-number"><span>编号</span> <span data-card="number"></span></p>
+          </div>
+        </div>
+
+        <div class="gc-body">
+          <p class="gc-label">送给</p>
+          <p class="gc-to" data-card="to"></p>
+          <p class="gc-gift" data-card="gift">一节私教课</p>
+          <p><span class="gc-message" data-card="message" data-card-row></span></p>
+          <p class="gc-from"><span class="gc-label">来自</span> <span data-card="from"></span></p>
+        </div>
+
+        <div class="gc-foot">
+          <div>
+            <p class="gc-book">预约时请扫码或访问 leetennisco.com，并提到这张卡。</p>
+            <p class="gc-coach">Isaac Lee · RSPA 认证教练 · 尔湾 Toscana 球场</p>
+          </div>
+          <div class="qr" data-qr="" role="img" aria-label="打开课程页面的二维码"></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>window.I18N = {"copied":"已复制","menuOpen":"打开菜单","menuClose":"关闭菜单","loadingCal":"正在加载日历…","askSuggestions":["课程多少钱？","在哪里上课？","怎么预约？","我应该练什么？"],"askDown":"聊天暂时无法回复。请发邮件给我，我会尽快回复。","askBusy":"一下子问题太多了。请稍等一分钟，或者给我发邮件。","emailMe":"发邮件给我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"推荐问题","askFinding":"正在查找答案","open":"打开","showMe":"查看","soundMute":"关闭声音","soundOn":"打开声音","typeBy":"char","matchCopy":{"private":{"name":"一对一私教课","line":"一对一，围绕你想改进的地方来安排。"},"semi":{"name":"双人课","line":"两人共享一小时，每人 $55。"},"hitting":{"name":"陪练课","line":"纯对打，不教学，每小时 $45。"},"group":{"name":"成人小组课","line":"一块场地上的小组课。报名后，我会把你安排进水平相近的小组。"}},"matchAnswer":"看起来最适合你的是{name}。{line}","matchTravel":"提醒一下：课程都在我的主场，尔湾的 Toscana 球场。我没法去你那里，但很欢迎你过来。","matchUnsure":"从这句话我判断不出来。试着写写你的水平和谁来打球，或者从上面四种课里选一个。","matchDown":"课程匹配暂时无法回复。四种课程就在上面，也可以给我发邮件。","matchBusy":"匹配请求有点多。请稍等一分钟，或者从上面四种课里选一个。","matchSeeCard":"查看课程卡片 ↑","matchLabel":"为你推荐","matchBusyButton":"匹配中…","soundsOn":"网球音效已开启","soundsTurnOff":"关闭","soundsOff":"音效已关闭","matchLevels":["网球新手","初级","中级","高级","竞技"],"matchFocus":{"serve":"发球","groundstrokes":"正反手","net":"网前","movement":"步法","match":"比赛","basics":"基本功"},"matchLevelLine":"水平：{level}。","matchFocusLine":"重点：{focus}。","matchNotesLine":"在这里预约，这些信息会写进预约备注，方便我准备第一节课。","matchJunior":"为孩子预约？请用你自己的名字预约，并在备注里写上孩子的年龄。","lang":"zh-hans","pageName":"Simplified Chinese","askUrl":"/zh-hans/ask.json","mailSubject":"Tennis lessons (Simplified Chinese page)","mailSubjectQuestion":"Question about lessons (Simplified Chinese page)"};</script>
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">個人レッスン · アーバイン Toscana コート</p>
+          <p class="eyebrow fade">RSPA 認定コーチ · アーバイン Toscana コート</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">テニス</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">個人</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>個人レッスン</h3>
           <p class="price">$80<span>/時間</span></p>
+          <p class="package">5回券 $375、10回券 $700 もあります（現地払い）。</p>
           <p>
             ジュニアにも大人にも対応するマンツーマンのレッスンです。ストロークとサーブの技術、フットワーク、小さな初心者が使うゆっくりした柔らかいボール、そしてレッスンの合間に実際に取り組める練習プランまで。
           </p>
@@ -257,7 +269,7 @@
             1面のコートで、少人数のグループがドリルと実戦形式のゲームに取り組みます。ローテーションが多く、全員が打ち続けられます。料金は人数によって変わります。
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Japanese%20page)" data-mail="Adult%20clinics%20(Japanese%20page)">メールで見積もりを依頼</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">クリニックに申し込む</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="大人向けクリニックの内容">レッスン内容</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">AI があなたの文を読んでレッスンを選びます。このサイトには何も保存されません。</p>
       </form>
+
+      <p class="gift-line fade">
+        テニスを贈り物にしませんか？個人レッスン、回数券、ヒッティングセッション、どれもギフトにできます。
+        <button class="link-btn" type="button" data-open="giftForm">レッスンを贈る</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 コーチを始めて3年になります。LifeSport Libertyville でジュニアプロとしてスタートし、その後 Newport Beach Tennis Club のジュニアプログラム、Grip N Rip のプロスタッフに加わりました。
               </p>
               <p>
+                RSPA（Racket Sports Professionals Association、旧 USPTA）の認定コーチで、USTA Safe Play の承認も受けています。身元調査を済ませ、SafeSport の研修を修了しています。
+              </p>
+              <p>
                 主に成長中のジュニア選手を指導しています。早いうちに基礎を正しく身につけることで、上達が積み重なっていくからです。安定感を高め、実際にポイントが始まってからも明確なプランを持ちたい大人向けのクリニックも行っています。
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>ホームコート</dt><dd>アーバイン Toscana</dd></div>
+              <div><dt>資格</dt><dd>RSPA</dd></div>
               <div><dt>高校代表</dt><dd>4年</dd></div>
               <div><dt>スケジュール</dt><dd>パートタイム</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        レッスンを受けてくださった方へ。Google に短いレビューをいただけると、ほかの選手や保護者の方が私を見つけやすくなります。
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">レビューを書く</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="動画を再生：2024年11月、LifeSport Libertyville でかつてのコーチと対戦する Isaac Lee">
@@ -437,7 +463,72 @@
           <dt>初回レッスン</dt>
           <dd>予約の際にレベルと取り組んでいることを教えていただければ、プランを用意しておきます。</dd>
         </div>
+        <div>
+          <dt>安全</dt>
+          <dd>USTA Safe Play 承認済み：身元調査済み、SafeSport 研修修了。RSPA 認定コーチ。</dd>
+        </div>
+        <div>
+          <dt>キャンセル</dt>
+          <dd>キャンセルや日時の変更は24時間前までにご連絡ください。それ以降のキャンセルは料金がかかります。雨や暑さで中止になった場合は、無料で振り替えます。</dd>
+        </div>
+        <div>
+          <dt>ラケット</dt>
+          <dd>ラケットがなくても大丈夫。私のものをお貸しします。</dd>
+        </div>
+        <div>
+          <dt>回数券</dt>
+          <dd>個人レッスン：5回 $375、10回 $700、現地払い。</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">よくある質問</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>子どもがテニス未経験でも大丈夫ですか？</summary>
+          <p>大丈夫です。ジュニアはまったくの初心者から始められます。いちばん小さい子は、ゆっくりした柔らかいボール（レッド、オレンジ、グリーンの順）で学び、準備ができたら次の段階に進みます。</p>
+        </details>
+        <details>
+          <summary>子どもを安心して任せられますか？</summary>
+          <p>USTA Safe Play の承認を受けています。身元調査を済ませ、SafeSport の研修を修了しているということです。RSPA（Racket Sports Professionals Association）の認定コーチでもあります。</p>
+        </details>
+        <details>
+          <summary>予約時に支払いは必要ですか？</summary>
+          <p>いいえ。オンライン予約は時間を押さえるだけで、カードも前金も不要です。お支払いは現地でどうぞ。</p>
+        </details>
+        <details>
+          <summary>キャンセルするときは？</summary>
+          <p>キャンセルや日時の変更は24時間前までにご連絡ください。それ以降のキャンセルは料金がかかります。雨や暑さでレッスンが中止になった場合は、無料で振り替えます。</p>
+        </details>
+        <details>
+          <summary>こちらのコートや自宅に来てもらえますか？</summary>
+          <p>いいえ。レッスンはすべて、私のホームコートであるアーバインの Toscana Apartments テニスコートで行います。</p>
+        </details>
+        <details>
+          <summary>ラケットを持っていなくても大丈夫ですか？</summary>
+          <p>大丈夫です。私のものをお貸しします。</p>
+        </details>
+        <details>
+          <summary>回数券はありますか？</summary>
+          <p>はい、個人レッスンに5回 $375、10回 $700 の回数券があり、現地払いです。1時間 $80 のところが $75、$70 になります。</p>
+        </details>
+        <details>
+          <summary>レッスンをギフトにできますか？</summary>
+          <p>はい。個人レッスン1回、個人レッスン5回または10回、ヒッティングセッション1回を贈れます。お申し込みを送っていただければ、お支払いは対面で、印刷できるギフトカードをお渡しします。</p>
+          <button class="link-btn" type="button" data-open="giftForm">レッスンを贈る</button>
+        </details>
+        <details>
+          <summary>若いコーチで大丈夫ですか？</summary>
+          <p>もっともな質問です。2023年からコーチをしていて、LifeSport Libertyville でジュニアプロとして始め、その後 Newport Beach Tennis Club の Grip N Rip のプロスタッフになりました。RSPA 認定コーチで Safe Play の承認も受けており、高校ではバーシティで4年間プレーしました。一度レッスンを受けて、ご自身で判断してください。</p>
+        </details>
+        <details>
+          <summary>いつも同じところがうまくいきません。</summary>
+          <p>練習のヒントでは、ネットにかかるサーブから試合での緊張まで、よくある悩みごとに試してほしいことをひとつずつ紹介しています。</p>
+          <a class="link-btn" href="tips/">練習のヒントを読む</a>
+          <button class="link-btn faq-ask" type="button" data-ask="何を練習すればいいですか？" hidden>自分の悩みをチャットで聞く</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; カリフォルニア州アーバイン</p>
       <p class="footer-links">
+        <a href="tips/">練習のヒント</a>
         <a href="/portfolio/">キャリアポートフォリオ</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>個人レッスン</h3>
       <p class="price">$80<span>/時間</span></p>
+      <p class="package">5回券 $375、10回券 $700 もあります（現地払い）。</p>
       <p>ジュニアも大人も &mdash; 同じマンツーマン形式で、レベルに合わせて進めます。</p>
       <ul>
         <li>ストロークとサーブの技術</li>
@@ -573,8 +666,85 @@
         <li>グループで来ていただくか、既存のグループへの参加をご相談ください</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Japanese%20page)" data-mail="Adult%20clinics%20(Japanese%20page)">メールで見積もりを依頼</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">クリニックに申し込む</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Japanese%20page)" data-mail="Adult%20clinics%20(Japanese%20page)">メールする</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>クリニックに申し込む</h3>
+      <p>クリニックは1面での少人数グループです。レベルとご都合のよい時間を教えていただければ、近いレベルの方と同じグループにお入れします。</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">レベル</span>
+          <select name="level" required>
+            <option value="">選んでください</option>
+            <option value="0">テニス初めて：未経験、または子どものころ以来</option>
+            <option value="1">初級：ボールは返せるが、ラリーが続かない</option>
+            <option value="2">中級：ラリーとサーブができ、安定感をつけたい</option>
+            <option value="3">上級：高校、リーグ、USTA などで試合に出ている</option>
+            <option value="4">競技レベル：大会に出るジュニア、大学選手、4.5 以上の大人</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">参加する人</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> 自分だけ：グループに入れてほしい</label>
+          <label class="choice"><input type="radio" name="group" value="own"> 自分たちのグループで参加する</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">都合のよい時間帯</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> 平日の午後</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> 平日の夕方以降</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> 週末の午前</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> 週末の午後</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">その他 <span class="field-optional">任意</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="例：4人で、全員同じくらいのレベルです"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>先にレベルを選んでください。</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">メールで送る</button>
+        </div>
+        <p class="form-note">回答が入った私宛てのメールが開きます。このサイトには何も保存されません。</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="閉じる">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>レッスンを贈る</h3>
+      <p>ギフトを選んでいただければ、印刷できるギフトカードをお作りします。受け取った方は、ほかの方と同じように予約できます。</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">ギフト</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> 個人レッスン1回 <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 個人レッスン5回 <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 個人レッスン10回 <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> ヒッティングセッション1回 <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">贈る相手 <span class="field-optional">任意</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="カードに書くお名前">
+        </label>
+        <label class="field">
+          <span class="field-label">贈り主 <span class="field-optional">任意</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="カードに書く表記のまま">
+        </label>
+        <label class="field">
+          <span class="field-label">カードに添えるメッセージ <span class="field-optional">任意</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="例：お誕生日おめでとう！コートで会おうね。"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>先にギフトを選んでください。</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">メールで申し込む</button>
+        </div>
+        <p class="form-note">私宛てのメールが開きます。対面でのお支払いについてお返事し、その際にカードをお渡しします。このサイトには何も保存されません。</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">まだ答えのない質問は、答えを書けるよう90日間保存されます。</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","どのレッスンが合っていますか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。人数をメールで教えていただければお見積もりします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

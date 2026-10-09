@@ -1,8 +1,10 @@
 {
   "_readme": "Built by tools/i18n/build.mjs from ask.json and tools/i18n/es.mjs; edit those, not this. The Worker still picks topics from the English file.",
-  "greeting": "¡Hola! Estas son mis respuestas a lo que más me preguntan. Prueba con precios, dónde entreno, a quién enseño o cómo reservar.",
+  "greeting": "¡Hola! Estas son mis respuestas a lo que más me preguntan. Prueba con precios, dónde entreno, a quién enseño, cómo reservar o algo de tu juego que quieras mejorar.",
   "fallback": "Eso no lo tengo escrito aquí. Escríbeme por correo y te respondo directamente.",
   "unavailable": "El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.",
+  "misuse": "Aquí solo puedo responder preguntas sobre las clases.",
+  "personal": "Por favor, no escribas aquí teléfonos, direcciones, escuelas ni nombres completos. Para algo personal, escríbeme por correo.",
   "topics": [
     {
       "id": "hello",
@@ -10,7 +12,7 @@
       "next": [
         "¿Cuánto cuestan las clases?",
         "¿Dónde son las clases?",
-        "¿Qué clase me conviene?"
+        "¿En qué debería trabajar?"
       ]
     },
     {
@@ -23,7 +25,7 @@
     },
     {
       "id": "prices",
-      "answer": "Las clases particulares cuestan $80 la hora. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean: dime cuántos son y te paso el precio.",
+      "answer": "Las clases particulares cuestan $80 la hora, o 5 por $375 y 10 por $700. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean.",
       "actions": [
         {
           "type": "book",
@@ -33,6 +35,37 @@
       "next": [
         "¿Qué clase me conviene?",
         "¿Se paga por adelantado?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "packages",
+      "answer": "Para clases particulares: 5 por $375 o 10 por $700, pagadas en persona. Son $75 y $70 la hora en vez de $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Se paga por adelantado?",
+        "¿Y si necesito cancelar?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "gifts",
+      "answer": "Sí. Puedes regalar una clase particular ($80), 5 clases particulares ($375), 10 clases particulares ($700) o una sesión de peloteo ($45). Envíame la solicitud, arreglamos el pago en persona y te doy una tarjeta de regalo para imprimir.",
+      "actions": [
+        {
+          "type": "open",
+          "target": "giftForm",
+          "label": "Regala una clase"
+        }
+      ],
+      "next": [
+        "¿Cuánto cuestan las clases particulares?",
+        "¿Dónde son las clases?",
         "¿Cómo reservo?"
       ]
     },
@@ -47,7 +80,7 @@
       ],
       "next": [
         "¿Cómo es la primera clase?",
-        "¿Cuánto dura una clase?",
+        "¿Hay paquetes?",
         "¿Cómo reservo?"
       ]
     },
@@ -83,12 +116,12 @@
     },
     {
       "id": "clinics",
-      "answer": "Las clínicas para adultos son grupos pequeños en una sola cancha: ejercicios y juegos con bola viva con suficiente rotación para que nadie se quede parado, trabajando el aguante en el peloteo y la consistencia bajo presión. El precio es por grupo: escríbeme cuántos son y te paso el precio. Trae a tu propio grupo o pídeme que te incluya en uno.",
+      "answer": "Las clínicas para adultos son grupos pequeños en una sola cancha: ejercicios y juegos con bola viva con suficiente rotación para que nadie se quede parado, trabajando el aguante en el peloteo y la consistencia bajo presión. El precio es por grupo. Apúntate con tu nivel y los horarios que te vienen bien, y te pondré en un grupo con jugadores como tú, o trae tu propio grupo.",
       "actions": [
         {
-          "type": "email",
-          "subject": "Adult clinics (Spanish page)",
-          "label": "Pedir precio por correo"
+          "type": "open",
+          "target": "clinicList",
+          "label": "Apúntate a una clínica"
         }
       ],
       "next": [
@@ -125,6 +158,7 @@
     {
       "id": "who",
       "answer": "Juveniles desde principiantes absolutos (los más pequeños empiezan con una pelota más lenta y suave, así que los que nunca han jugado son bienvenidos) y adultos de cualquier nivel. La mayor parte de mi trabajo es con juveniles en desarrollo, y dirijo clínicas para adultos que quieren más consistencia y un plan más claro cuando empiezan los puntos.",
+      "answer_parent": "Niños desde cero. Los más pequeños empiezan con pelotas más lentas y suaves (roja, luego naranja, luego verde) y suben cuando están listos, así que un niño que nunca ha jugado es bienvenido. Estoy aprobado por USTA Safe Play, con verificación de antecedentes y formación de SafeSport, y certificado por la RSPA.",
       "next": [
         "¿Cómo es tu estilo de enseñanza?",
         "¿Qué clase me conviene?",
@@ -132,8 +166,25 @@
       ]
     },
     {
+      "id": "credentials",
+      "answer": "Estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport. Entreno desde 2023.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "Más sobre mí"
+        }
+      ],
+      "next": [
+        "¿Cuánto tiempo llevas entrenando?",
+        "¿A quién enseñas?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
       "id": "booking",
       "answer": "Pulsa cualquier botón de Reservar en esta página y elige un horario en el calendario. Reservar en línea solo aparta el horario: sin tarjeta ni depósito. Al reservar, cuéntame tu nivel y en qué estás trabajando, y llegaré con un plan.",
+      "answer_parent": "Elige un horario en el calendario y reserva a tu nombre. En las notas, cuéntame la edad de tu hijo, cuánto tiempo lleva jugando y qué le gustaría trabajar, y prepararé la primera clase pensando en él. Sin tarjeta ni depósito: pagas en persona.",
       "actions": [
         {
           "type": "book",
@@ -143,7 +194,7 @@
       "next": [
         "¿Se paga por adelantado?",
         "¿Cuándo tienes disponibilidad?",
-        "¿Cómo es la primera clase?"
+        "¿Y si necesito cancelar?"
       ]
     },
     {
@@ -171,14 +222,32 @@
       "answer": "Pagas en persona. Reservar en línea aparta el horario: sin tarjeta ni depósito.",
       "next": [
         "¿Cuánto cuestan las clases?",
+        "¿Hay paquetes?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "cancellation",
+      "answer": "Cancela o cambia una clase con 24 horas de aviso; las cancelaciones más tarde se cobran. Si la lluvia o el calor cancelan una clase, la reprogramamos sin costo.",
+      "next": [
+        "¿Se paga por adelantado?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "equipment",
+      "answer": "¿Aún no tienes raqueta? Te presto una de las mías.",
+      "next": [
+        "¿Cómo es la primera clase?",
         "¿Cómo reservo?"
       ]
     },
     {
       "id": "first_session",
       "answer": "Cuando reserves, cuéntame tu nivel y en qué estás trabajando, y llegaré a la primera sesión con un plan hecho para ti.",
+      "answer_parent": "Cuando reserves, cuéntame la edad y el nivel de tu hijo, y llegaré con un plan hecho para él. Los principiantes pequeños empiezan con una pelota más lenta y suave.",
       "next": [
-        "¿Cómo es tu estilo de enseñanza?",
+        "¿Necesito mi propia raqueta?",
         "¿Cuánto dura una clase?",
         "¿Cómo reservo?"
       ]
@@ -194,7 +263,7 @@
     },
     {
       "id": "experience",
-      "answer": "Entreno desde 2023. Empecé como Junior Pro en LifeSport Libertyville y después me uní al Pro Staff de Grip N Rip, el programa juvenil del Newport Beach Tennis Club. Jugué cuatro años en el equipo varsity de mi preparatoria.",
+      "answer": "Entreno desde 2023. Empecé como Junior Pro en LifeSport Libertyville y después me uní al Pro Staff de Grip N Rip, el programa juvenil del Newport Beach Tennis Club. Estoy certificado por la RSPA y jugué cuatro años en el equipo varsity de mi preparatoria.",
       "actions": [
         {
           "type": "scroll",
@@ -203,7 +272,7 @@
         }
       ],
       "next": [
-        "¿Cómo es tu estilo de enseñanza?",
+        "¿Tienes certificación?",
         "¿Qué dice la gente de ti?",
         "¿A quién enseñas?"
       ]
@@ -280,6 +349,206 @@
       "next": [
         "¿Cuánto tiempo llevas entrenando?",
         "¿Cuál es tu correo?"
+      ]
+    },
+    {
+      "id": "tips",
+      "answer": "Cuéntame qué te sale mal, como \"mi saque se va a la red\" o \"no consigo mantener un peloteo\", y te daré una cosa para probar. Son arreglos rápidos; en una clase encontraríamos la causa de verdad.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/es/tips/",
+          "label": "Ver todos los consejos"
+        }
+      ],
+      "next": [
+        "Mi saque se va a la red",
+        "Mi derecha se va larga",
+        "No consigo mantener un peloteo"
+      ]
+    },
+    {
+      "id": "tip_serve_net",
+      "title": "Mi saque se va a la red",
+      "answer": "Un saque a la red suele significar que el lanzamiento es muy bajo o va muy adelante, así que golpeas hacia abajo demasiado pronto. Lanza un poco más alto, justo delante de tu hombro de golpe, y estírate para pegarle con el brazo extendido. Practica diez lanzamientos sin golpear: cada uno debe caer en el mismo sitio, delante de tu pie adelantado.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi saque se va largo",
+        "Hago muchas dobles faltas",
+        "¿Cómo practico por mi cuenta?"
+      ]
+    },
+    {
+      "id": "tip_serve_long",
+      "title": "Mi saque se va largo",
+      "answer": "Un saque largo suele venir de un lanzamiento que se va hacia atrás, lo que abre la cara de la raqueta al golpear. Mantén el lanzamiento un poco adelante, golpea hacia arriba y por encima de la pelota, y deja que la raqueta gire después del impacto. Apunta al centro del cuadro, no a las líneas.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi saque se va a la red",
+        "Hago muchas dobles faltas",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_double_fault",
+      "title": "Hago muchas dobles faltas",
+      "answer": "La mayoría de las dobles faltas vienen de sacar el segundo servicio como un primero más lento. El segundo saque necesita más efecto, no menos velocidad: cepilla la parte de atrás de la pelota hacia arriba para que pase la red con margen y caiga dentro del cuadro. Practica una canasta solo de segundos saques y cuenta cuántos entran.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi saque se va a la red",
+        "Juego peor en los partidos",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_forehand_net",
+      "title": "Mi derecha se va a la red",
+      "answer": "Las derechas a la red suelen significar que el golpe es muy plano o que llegas tarde. Empieza con la raqueta por debajo de la pelota y termina alto, sobre el hombro contrario, y golpea la pelota por delante del cuerpo. Apunta un metro por encima de la red: esa altura es tu margen.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi derecha se va larga",
+        "Siempre llego tarde a la pelota",
+        "No consigo mantener un peloteo"
+      ]
+    },
+    {
+      "id": "tip_forehand_long",
+      "title": "Mi derecha se va larga",
+      "answer": "Una derecha que se va larga suele golpearse plana y con la cara de la raqueta abierta. Cepilla la parte de atrás de la pelota hacia arriba para darle efecto liftado, así baja dentro de la cancha, y termina el golpe sobre el hombro en lugar de recto hacia el objetivo. Apunta profundo al centro, unos pasos dentro de la línea de fondo.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi derecha se va a la red",
+        "Mi revés es débil",
+        "¿Cuánto cuestan las clases?"
+      ]
+    },
+    {
+      "id": "tip_backhand",
+      "title": "Mi revés es débil",
+      "answer": "Un revés débil suele empezar por girar tarde. En cuanto veas que la pelota viene a ese lado, gira los hombros hasta dar la espalda en parte a la red, y luego golpea de abajo hacia arriba por delante del cuerpo. Pelotea revés contra revés en cruzado con un compañero hasta que te salga solo.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Siempre llego tarde a la pelota",
+        "No consigo mantener un peloteo",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_rally",
+      "title": "No consigo mantener un peloteo",
+      "answer": "Los peloteos terminan pronto cuando cada golpe apunta demasiado cerca de las líneas o de la red. Apunta más alto sobre la red y profundo al centro de la cancha, y cuenta tus peloteos: intenta batir tu propio récord, no a tu compañero. La consistencia va antes que la potencia.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi derecha se va a la red",
+        "¿Cómo practico por mi cuenta?",
+        "¿Qué clase me conviene?"
+      ]
+    },
+    {
+      "id": "tip_footwork",
+      "title": "Siempre llego tarde a la pelota",
+      "answer": "Llegar tarde suele ser un problema de pies, no del golpe. Haz un pequeño split-step justo cuando tu rival golpea, para estar de puntillas al leer la pelota, y luego da pasitos de ajuste antes de golpear. Practícalo en casa sin pelota: split, giro, golpe, recuperación.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi revés es débil",
+        "No consigo mantener un peloteo",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_volley",
+      "title": "Me siento incómodo en la red",
+      "answer": "En la red, menos es más: nada de swing grande. Mantén la raqueta arriba delante de ti, gira los hombros y golpea la pelota con un movimiento corto, dando un paso adelante al golpear. Empieza cerca de la red con un compañero que te lance suave y luego aléjate.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Juego peor en los partidos",
+        "¿Podemos compartir una clase entre dos?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_matches",
+      "title": "Juego peor en los partidos",
+      "answer": "La mayoría de los jugadores se agarrotan porque intentan golpes más difíciles bajo presión. Elige un plan simple antes del partido, como cruzado y profundo hasta que llegue una pelota corta, y usa la misma rutina corta entre cada punto. Practica también con marcador: juegos y tie-breaks, no solo peloteos.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "¿Podemos jugar sets?",
+        "Hago muchas dobles faltas",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_practice",
+      "title": "¿Cómo practico por mi cuenta?",
+      "answer": "Una pared es el mejor compañero de práctica: pelotea derechas y reveses contra ella, apuntando por encima de una línea. Una canasta de saques en una cancha vacía te da un lanzamiento fiable, y los golpes en seco frente a un espejo corrigen la técnica sin pelota. Poco y seguido vale más que mucho y de vez en cuando.",
+      "next": [
+        "Mi saque se va a la red",
+        "No consigo mantener un peloteo",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_kids",
+      "title": "¿Cómo puede practicar mi hijo en casa?",
+      "answer": "Que sea corto y divertido: lanzar y atrapar, botar la pelota sobre la raqueta, pelotear por encima de una línea en la entrada de casa con una pelota blanda. Unos minutos varias veces por semana construyen más que una sesión larga. En las clases, los principiantes pequeños usan pelotas más lentas y suaves, así que pelotean antes.",
+      "next": [
+        "¿Enseñas a principiantes?",
+        "¿Mi hijo está seguro contigo?",
+        "¿Cómo reservo?"
       ]
     }
   ],

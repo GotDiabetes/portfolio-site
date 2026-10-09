@@ -1,8 +1,10 @@
 {
-  "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | semi | hitting), email (subject), link (href), scroll (#section). Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'.",
-  "greeting": "Hi! These are my answers to what people ask most. Try prices, where I coach, who I teach, or how booking works.",
+  "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'answer_parent' (optional) is shown instead when the visitor is asking for their child. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | semi | hitting), email (subject), link (href), scroll (#section), open (a popup's id, e.g. clinicList or giftForm). A tip topic's 'title' is its heading on the practice tips page (/tips/), which the build makes from these answers. 'misuse' is what the chat says to abuse or attempts to give it instructions; 'personal' is prefixed when someone types contact details. Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'. After editing, run node tools/i18n/build.mjs and update the translated answers it lists.",
+  "greeting": "Hi! These are my answers to what people ask most. Try prices, where I coach, who I teach, booking, or something in your game you want to fix.",
   "fallback": "I don't have that written down here. Email me and I'll answer you directly.",
   "unavailable": "The chat isn't answering right now. Email me and I'll get back to you.",
+  "misuse": "I can only answer questions about lessons here.",
+  "personal": "Please leave out phone numbers, addresses, schools and full names here. Email me for anything personal.",
   "topics": [
     {
       "id": "hello",
@@ -11,7 +13,7 @@
       "next": [
         "How much are lessons?",
         "Where are lessons?",
-        "Which lesson fits me?"
+        "What should I work on?"
       ]
     },
     {
@@ -26,7 +28,7 @@
     {
       "id": "prices",
       "covers": "How much lessons or sessions cost, rates, pricing, fees, or comparing prices.",
-      "answer": "Private lessons are $80 an hour. Semi-private is $110 an hour for two players, so $55 each. A hitting partner session is $45 an hour. Adult clinics are priced per group, so the cost per player falls the more of you there are — tell me how many and I'll quote it.",
+      "answer": "Private lessons are $80 an hour, or 5 for $375 and 10 for $700. Semi-private is $110 an hour for two players, so $55 each. A hitting partner session is $45 an hour. Adult clinics are priced per group, so the cost per player falls the more of you there are.",
       "actions": [
         {
           "type": "book",
@@ -36,6 +38,39 @@
       "next": [
         "Which lesson fits me?",
         "Do I pay upfront?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "packages",
+      "covers": "Lesson packages, buying several lessons at once, bulk prices, discounts or deals.",
+      "answer": "For private lessons: 5 for $375 or 10 for $700, paid in person. That's $75 and $70 an hour instead of $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Do I pay upfront?",
+        "What if I need to cancel?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "gifts",
+      "covers": "Buying lessons as a gift, gift cards or gift certificates, or giving tennis lessons to someone as a present.",
+      "answer": "Yes. You can give one private lesson ($80), 5 private lessons ($375), 10 private lessons ($700) or a hitting session ($45). Send me the request, we settle payment in person, and I'll give you a printable gift card.",
+      "actions": [
+        {
+          "type": "open",
+          "target": "giftForm",
+          "label": "Give a lesson"
+        }
+      ],
+      "next": [
+        "How much are private lessons?",
+        "Where are lessons?",
         "How do I book?"
       ]
     },
@@ -51,7 +86,7 @@
       ],
       "next": [
         "What's the first lesson like?",
-        "How long is a lesson?",
+        "Are there packages?",
         "How do I book?"
       ]
     },
@@ -89,13 +124,13 @@
     },
     {
       "id": "clinics",
-      "covers": "Adult clinics, group lessons, or lessons for three or more people together.",
-      "answer": "Adult clinics are small groups on a single court: drills and live-ball games with enough rotation that nobody stands around, working on rally tolerance and consistency under pressure. They're priced per group — email me how many of you there are and I'll quote it. Bring your own group, or ask me to place you in one.",
+      "covers": "Adult clinics, group lessons, joining a group, or lessons for three or more people together.",
+      "answer": "Adult clinics are small groups on a single court: drills and live-ball games with enough rotation that nobody stands around, working on rally tolerance and consistency under pressure. They're priced per group. Join the clinic list with your level and the times that suit you, and I'll put you in a group with players like you, or bring your own group.",
       "actions": [
         {
-          "type": "email",
-          "subject": "Adult clinics",
-          "label": "Email for a quote"
+          "type": "open",
+          "target": "clinicList",
+          "label": "Join the clinic list"
         }
       ],
       "next": [
@@ -135,6 +170,7 @@
       "id": "who",
       "covers": "Who Isaac teaches: ages, levels, kids, juniors, adults, complete beginners, or advanced players.",
       "answer": "Juniors from complete beginners up (the youngest start on a slower, softer ball, so first-timers are welcome) and adults at any level. Most of my work is with developing juniors, and I run adult clinics for players who want more consistency and a clearer plan once points start.",
+      "answer_parent": "Kids from complete beginners up. The youngest start on slower, softer balls (red, then orange, then green) and move up as they're ready, so a first-timer is welcome. I'm approved under USTA Safe Play, background-checked and SafeSport-trained, and RSPA-certified.",
       "next": [
         "What's your coaching style?",
         "Which lesson fits me?",
@@ -142,9 +178,27 @@
       ]
     },
     {
+      "id": "credentials",
+      "covers": "Isaac's certifications or qualifications (RSPA, USPTA, PTR), whether he is certified, background checks, SafeSport, or whether he is safe to coach children.",
+      "answer": "I'm certified by the RSPA, the Racket Sports Professionals Association (formerly the USPTA), and approved under USTA Safe Play: background-checked and SafeSport-trained. I've coached since 2023.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "More about me"
+        }
+      ],
+      "next": [
+        "How long have you been coaching?",
+        "Who do you teach?",
+        "How do I book?"
+      ]
+    },
+    {
       "id": "booking",
       "covers": "How to book or schedule a lesson, sign up, or reserve a time.",
       "answer": "Hit any Book button on this page and pick a time on the calendar. Booking online just holds the time — no card, no deposit. When you book, tell me your level and what you're working on, and I'll come with a plan.",
+      "answer_parent": "Pick a time on the calendar and book in your own name. In the notes, tell me your child's age, how long they've played and what they'd like to work on, and I'll plan the first lesson around them. No card, no deposit: you pay in person.",
       "actions": [
         {
           "type": "book",
@@ -154,7 +208,7 @@
       "next": [
         "Do I pay upfront?",
         "When are you free?",
-        "What's the first lesson like?"
+        "What if I need to cancel?"
       ]
     },
     {
@@ -184,6 +238,25 @@
       "answer": "You pay in person. Booking online holds the time — no card, no deposit.",
       "next": [
         "How much are lessons?",
+        "Are there packages?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "cancellation",
+      "covers": "Cancelling, rescheduling or moving a lesson, the cancellation policy, being sick or running late, or what happens if it rains or is too hot.",
+      "answer": "Cancel or move a lesson with 24 hours' notice; later cancellations are charged. If rain or heat cancels a lesson, we reschedule at no cost.",
+      "next": [
+        "Do I pay upfront?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "equipment",
+      "covers": "What to bring, whether the player needs their own racket or equipment, or borrowing a racket.",
+      "answer": "No racket yet? You can borrow one of mine.",
+      "next": [
+        "What's the first lesson like?",
         "How do I book?"
       ]
     },
@@ -191,8 +264,9 @@
       "id": "first_session",
       "covers": "What the first lesson is like, what to expect, or how to prepare for it.",
       "answer": "When you book, tell me your level and what you're working on, and I'll come to the first session with a plan built around it.",
+      "answer_parent": "Tell me your child's age and level when you book, and I'll come with a plan built around them. Young beginners start on a slower, softer ball.",
       "next": [
-        "What's your coaching style?",
+        "Do I need my own racket?",
         "How long is a lesson?",
         "How do I book?"
       ]
@@ -209,8 +283,8 @@
     },
     {
       "id": "experience",
-      "covers": "Isaac's background, experience, qualifications, how long he has coached, where he coached before, or his playing history.",
-      "answer": "I've been coaching since 2023. I started as a Junior Pro at LifeSport Libertyville, then joined the Pro Staff of Grip N Rip, the junior program at Newport Beach Tennis Club. I played four years of high school varsity.",
+      "covers": "Isaac's coaching experience, how long he has coached, where he coached before, or his playing history.",
+      "answer": "I've been coaching since 2023. I started as a Junior Pro at LifeSport Libertyville, then joined the Pro Staff of Grip N Rip, the junior program at Newport Beach Tennis Club. I'm RSPA-certified, and I played four years of high school varsity.",
       "actions": [
         {
           "type": "scroll",
@@ -219,7 +293,7 @@
         }
       ],
       "next": [
-        "What's your coaching style?",
+        "Are you certified?",
         "What do people say about you?",
         "Who do you teach?"
       ]
@@ -301,6 +375,219 @@
       "next": [
         "How long have you been coaching?",
         "What's your email?"
+      ]
+    },
+    {
+      "id": "tips",
+      "covers": "The visitor wants a tip or advice on improving their tennis, or asks what they should work on, without describing a specific problem yet.",
+      "answer": "Tell me what's going wrong, like \"my serve goes into the net\" or \"I can't keep a rally going\", and I'll give you one thing to try. These are quick fixes; in a lesson we'd find the real cause.",
+      "next": [
+        "My serve goes into the net",
+        "My forehand flies long",
+        "I can't keep a rally going"
+      ],
+      "actions": [
+        {
+          "type": "link",
+          "href": "/tips/",
+          "label": "See all the tips"
+        }
+      ]
+    },
+    {
+      "id": "tip_serve_net",
+      "title": "My serve goes into the net",
+      "covers": "The visitor's serve keeps going into the net, or their serve is too low.",
+      "answer": "A serve in the net usually means the toss is too low or too far in front, so you hit down on the ball too early. Toss a little higher, just in front of your hitting shoulder, and reach up to hit it at full stretch. Practise ten tosses without swinging: each one should come down in the same spot, in front of your front foot.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My serve goes long",
+        "I double fault a lot",
+        "How can I practise on my own?"
+      ]
+    },
+    {
+      "id": "tip_serve_long",
+      "title": "My serve goes long",
+      "covers": "The visitor's serve goes long, past the service line, or out.",
+      "answer": "A long serve usually comes from a toss drifting behind you, which opens the racket face at contact. Keep the toss slightly in front, hit up and over the ball, and let the racket turn over after contact. Aim for the middle of the box, not the lines.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My serve goes into the net",
+        "I double fault a lot",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_double_fault",
+      "title": "I double fault a lot",
+      "covers": "The visitor double faults a lot, their second serve is weak or unreliable, or they get nervous on second serves.",
+      "answer": "Most double faults come from hitting the second serve like a slower first serve. A second serve needs more spin, not less speed: brush up the back of the ball so it clears the net with room and dips into the box. Practise a basket of second serves only, and count how many land in.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My serve goes into the net",
+        "I play worse in matches",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_forehand_net",
+      "title": "My forehand goes into the net",
+      "covers": "The visitor's forehand goes into the net, or their groundstrokes are too low.",
+      "answer": "Forehands into the net usually mean the swing is too flat or the contact is late. Start the racket below the ball and finish high over your opposite shoulder, and meet the ball out in front of your body. Aim about three feet above the net: that height is your margin.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My forehand flies long",
+        "I'm always late to the ball",
+        "I can't keep a rally going"
+      ]
+    },
+    {
+      "id": "tip_forehand_long",
+      "title": "My forehand flies long",
+      "covers": "The visitor's forehand flies long, sails out the back, or has no control.",
+      "answer": "A forehand that sails long is usually hit flat with an open racket face. Brush up the back of the ball for topspin, so it dips down into the court, and finish the swing over your shoulder instead of straight at the target. Aim deep to the middle, a few feet inside the baseline.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My forehand goes into the net",
+        "My backhand is weak",
+        "How much are lessons?"
+      ]
+    },
+    {
+      "id": "tip_backhand",
+      "title": "My backhand is weak",
+      "covers": "The visitor's backhand is weak or inconsistent, or they avoid hitting backhands.",
+      "answer": "A weak backhand usually starts with a late turn. As soon as you see the ball coming to that side, turn your shoulders so your back is partly to the net, then swing from low to high out in front. Rally backhand to backhand cross-court with a partner until it feels routine.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "I'm always late to the ball",
+        "I can't keep a rally going",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_rally",
+      "title": "I can't keep a rally going",
+      "covers": "The visitor can't keep a rally going, makes too many unforced errors, or wants more consistency.",
+      "answer": "Rallies end early when every shot aims too close to the lines or the net. Aim higher over the net and deep to the middle of the court, and count your rallies: try to beat your own record, not your partner. Consistency comes before power.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My forehand goes into the net",
+        "How can I practise on my own?",
+        "Which lesson fits me?"
+      ]
+    },
+    {
+      "id": "tip_footwork",
+      "title": "I'm always late to the ball",
+      "covers": "The visitor is late to the ball, feels rushed or jammed, or wants better footwork or movement.",
+      "answer": "Being late is usually a footwork problem, not a swing problem. Do a small split-step just as your opponent hits, so you're on your toes when you read the ball, then take small adjusting steps before you swing. Shadow it at home: split, turn, swing, recover.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My backhand is weak",
+        "I can't keep a rally going",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_volley",
+      "title": "I'm uneasy at the net",
+      "covers": "Volleys, net play, overheads, or the visitor is nervous or uncomfortable at the net.",
+      "answer": "At the net, less is more: no big backswing. Keep the racket up in front of you, turn your shoulders, and punch the ball with a short motion, stepping forward as you hit. Start close to the net with a partner feeding gently, then move back.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "I play worse in matches",
+        "Can two of us share a lesson?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_matches",
+      "title": "I play worse in matches",
+      "covers": "The visitor plays worse in matches than in practice, gets nervous, or wants match strategy.",
+      "answer": "Most players tighten up because they try harder shots under pressure. Pick a simple plan before the match, like deep cross-court until you get a short ball, and use the same short routine between every point. Practise with a score, too: games and tie-breaks, not just rallies.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        },
+        {
+          "type": "book",
+          "lesson": "hitting"
+        }
+      ],
+      "next": [
+        "Can we play sets?",
+        "I double fault a lot",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_practice",
+      "title": "How can I practise on my own?",
+      "covers": "How to practise alone or between lessons, drills to do at home, or practising against a wall.",
+      "answer": "A wall is the best practice partner there is: rally forehands and backhands against it, aiming above a line. A basket of serves on an empty court builds a reliable toss, and shadow swings in front of a mirror fix technique without a ball. Short and often beats long and rare.",
+      "next": [
+        "My serve goes into the net",
+        "I can't keep a rally going",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_kids",
+      "title": "How can my child practise at home?",
+      "covers": "A parent asks how their child can practise at home, get started, or stay interested in tennis.",
+      "answer": "Keep it short and playful: catching and throwing, bouncing a ball on the racket, rallying over a line on the driveway with a soft ball. A few minutes several times a week builds more than one long session. In lessons, young beginners use slower, softer balls, so they rally sooner.",
+      "next": [
+        "Do you teach beginners?",
+        "Is my child safe with you?",
+        "How do I book?"
       ]
     }
   ],

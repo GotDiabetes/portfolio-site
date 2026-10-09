@@ -1,0 +1,196 @@
+/* ============================================================================
+   The printed pieces: the flyer (/flyer/) and the gift card (/gift-card/).
+
+   The same world as the site: the system face, black on white, emphasis
+   by weight and size, never colour; the eyebrow's short black dash; prices
+   at figure size with a muted unit. On screen each is a sheet of Letter
+   paper on the soft grey of the About band, under a bar of instructions;
+   in print, only the sheet. Sizes are in inches and points, the units the
+   paper is measured in.
+   ========================================================================== */
+
+:root {
+  --text: #111111;
+  --muted: #5e5e5e;
+  --line: #e5e5e3;
+  --cut: #9a9a96;
+  --soft: #f4f4f2;
+  --radius: 6px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+/* The translated copies: the system face named per script (as tennis.css). */
+:root:lang(ko) { --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", "Noto Sans KR", Roboto, sans-serif; }
+:root:lang(ja) { --font: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Segoe UI", "Yu Gothic UI", Meiryo, "Noto Sans JP", Roboto, sans-serif; }
+:root:lang(zh-Hans) { --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif; }
+:root:lang(zh-Hant) { --font: -apple-system, BlinkMacSystemFont, "PingFang TC", "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", Roboto, sans-serif; }
+:root:lang(fa) { --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, "Noto Sans Arabic", Roboto, sans-serif; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0; background: var(--soft); color: var(--text);
+  font-family: var(--font); font-size: 1rem; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+:lang(ko) body { word-break: keep-all; overflow-wrap: break-word; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+[hidden] { display: none !important; }
+
+/* ----------------------------------------------------------- Screen bar -- */
+.print-bar {
+  width: min(8.5in, 100% - 2rem); margin: 0 auto; padding: 1.5rem 0 1.25rem;
+  display: grid; gap: .9rem;
+}
+.print-bar h1 { font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1.15; }
+.print-bar p { color: var(--muted); max-width: 62ch; }
+.print-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; }
+.print-btn {
+  appearance: none; border: 0; border-radius: var(--radius);
+  background: var(--text); color: #fff;
+  font: inherit; font-size: .9375rem; font-weight: 500;
+  min-height: 2.75rem; padding: .7rem 1.5rem; cursor: pointer;
+  transition: background-color .3s cubic-bezier(.22, 1, .36, 1);
+}
+.print-btn:hover { background: #383838; }
+.print-home { font-size: .9375rem; text-underline-offset: 4px; min-height: 2.75rem; display: inline-flex; align-items: center; }
+.print-langs { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+.print-langs a {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  font-size: .875rem; color: var(--muted); text-decoration: none;
+}
+.print-langs a:hover { color: var(--text); }
+.print-langs a[aria-current] { color: var(--text); font-weight: 600; }
+
+/* The sheet scrolls sideways inside its own strip on a phone, so the page
+   itself never does. */
+.sheet-scroll { overflow-x: auto; padding: 0 1rem 3rem; }
+.sheet {
+  width: 8.5in; height: 11in; margin: 0 auto;
+  background: #fff; border: 1px solid var(--line);
+  overflow: hidden;
+  zoom: var(--fit, 1);   /* print.js shrinks the preview to a narrow screen */
+}
+
+/* Shared marks */
+.eyebrow { display: flex; align-items: center; gap: .55em; font-size: 10.5pt; color: var(--muted); }
+.eyebrow::before { content: ""; flex: 0 0 auto; width: 22px; height: 2px; background: var(--text); }
+.price { font-size: 21pt; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
+.price span { font-size: 10pt; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+.qr svg { display: block; width: 100%; height: auto; }
+
+/* ---------------------------------------------------------------- Flyer -- */
+.flyer { display: flex; flex-direction: column; padding: .55in .6in 0; }
+.flyer-top { display: grid; grid-template-columns: 1fr 2.55in; gap: .4in; align-items: start; }
+.flyer-logo { width: 1.55in; margin-bottom: .32in; }
+.flyer h1 {
+  font-size: 50pt; font-weight: 600; line-height: .96; letter-spacing: -0.05em;
+  margin: .16in 0 .2in; text-wrap: balance;
+}
+.flyer-sub { font-size: 13.5pt; line-height: 1.4; color: var(--muted); max-width: 30ch; }
+.flyer-photo {
+  width: 2.55in; height: 3.15in; object-fit: cover; object-position: 50% 18%;
+  border-radius: var(--radius);
+}
+.flyer-prices {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .2in .4in;
+  margin-top: .3in; padding-top: .26in; border-top: 1px solid var(--line);
+}
+.flyer-prices h2 { font-size: 12.5pt; letter-spacing: -0.02em; line-height: 1.25; }
+.flyer-prices .price { margin-top: .03in; }
+.flyer-prices .package { font-size: 10pt; margin-top: .03in; }
+.flyer-book {
+  display: grid; grid-template-columns: 1.65in 1fr; gap: .32in; align-items: center;
+  margin-top: .28in; padding-top: .26in; border-top: 1px solid var(--line);
+}
+.flyer-scan { font-size: 15pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+.flyer-url { font-size: 15pt; font-weight: 600; letter-spacing: -0.02em; }
+.flyer-mail { font-size: 11.5pt; margin-bottom: .1in; }
+.flyer-note { font-size: 9.5pt; line-height: 1.4; color: var(--muted); }
+.flyer-note + .flyer-note { margin-top: .03in; }
+
+/* Tear-off strips along the bottom edge, for notice boards: cut on the
+   dashed lines, and each strip carries the address on its own. */
+.tabs {
+  margin: auto -.6in 0; height: 1.95in;
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  border-top: 1px dashed var(--cut);
+}
+/* Each strip is an ordinary cell, so its cut line sits on the reading
+   side in both directions; only the words inside run vertically. */
+.tabs p { display: flex; align-items: center; justify-content: center; padding: .12in .04in; }
+.tabs p + p { border-inline-start: 1px dashed var(--cut); }
+.tab {
+  writing-mode: vertical-rl;
+  display: flex; flex-direction: column; gap: .02in;
+  font-size: 8.5pt; line-height: 1.35; text-align: center;
+}
+.tabs b { font-weight: 600; }
+
+/* ------------------------------------------------------------ Gift card --
+   A 7 × 5 in card at the top of the sheet, inside a dashed cut line, so it
+   can go on card stock and be trimmed. */
+.card-sheet { padding: .6in .75in; }
+.gift-card {
+  width: 7in; height: 5in; padding: .42in .48in;
+  border: 1px dashed var(--cut);
+  display: grid; grid-template-rows: auto 1fr auto;
+}
+.gc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: .3in; }
+.gc-logo { width: 1.25in; }
+.gc-meta { text-align: end; }
+.gc-meta .eyebrow { justify-content: flex-end; }
+.gc-number { font-size: 10pt; color: var(--muted); margin-top: .05in; }
+.gc-body { align-self: center; }
+.gc-label { font-size: 10pt; color: var(--muted); }
+.gc-to { font-size: 20pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; min-height: 1.2em; }
+.gc-gift {
+  font-size: 30pt; font-weight: 600; letter-spacing: -0.04em; line-height: 1.05;
+  margin: .14in 0 .12in;
+}
+.gc-message { font-size: 12pt; line-height: 1.45; max-width: 44ch; margin-bottom: .1in; }
+.gc-message::before { content: open-quote; }
+.gc-message::after { content: close-quote; }
+.gc-from { display: flex; align-items: baseline; gap: .1in; font-size: 12pt; }
+.gc-from .gc-label { font-size: 10pt; }
+/* An empty field prints as a line to write on. */
+.is-blank { display: inline-block; min-width: 2.4in; border-bottom: 1px solid var(--text); }
+.gc-to.is-blank { min-height: .34in; }
+.gc-number .is-blank { min-width: .7in; }
+.gc-foot {
+  display: grid; grid-template-columns: 1fr .95in; gap: .3in; align-items: end;
+  padding-top: .16in; border-top: 1px solid var(--line);
+}
+.gc-book { font-size: 10.5pt; line-height: 1.4; }
+.gc-coach { font-size: 9pt; color: var(--muted); margin-top: .04in; }
+
+/* The fill-in form above the card (screen only). */
+.card-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .9rem 1.25rem; }
+.card-form label { display: grid; gap: .35rem; }
+.card-form .field-label { font-size: .875rem; font-weight: 600; }
+.card-form .field-optional { font-weight: 400; color: var(--muted); }
+.card-form input, .card-form select {
+  width: 100%; padding: .65rem .8rem;
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: #fff; border: 1px solid #c9c9c6; border-radius: var(--radius);
+}
+.card-form input:hover, .card-form select:hover { border-color: var(--muted); }
+.card-form input:focus, .card-form select:focus { border-color: var(--text); }
+.card-form ::placeholder { color: var(--muted); opacity: 1; }
+
+/* Right to left: the tightened Latin tracking would pull Persian apart. */
+:root:lang(fa) :is(h1, h2, .price, .gc-gift, .gc-to, .flyer-scan, .flyer-url) { letter-spacing: 0; }
+:root:lang(fa) .flyer h1 { line-height: 1.25; }
+:root:is(:lang(ko), :lang(ja), :lang(zh)) .flyer h1 { letter-spacing: -0.02em; line-height: 1.12; }
+:root:is(:lang(ko), :lang(ja), :lang(zh)) .gc-gift { letter-spacing: -0.01em; line-height: 1.2; }
+
+/* ---------------------------------------------------------------- Print -- */
+@page { size: letter; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .print-bar { display: none; }
+  .sheet-scroll { padding: 0; overflow: visible; }
+  .sheet { border: 0; margin: 0; zoom: 1; }
+}

@@ -48,7 +48,7 @@
   var send = root.querySelector(".ask-send");
 
   var MAIL_TO = "isaacleetennis@gmail.com";
-  var SUGGESTIONS = T.askSuggestions || ["How much are lessons?", "Where are lessons?", "How do I book?", "Which lesson fits me?"];
+  var SUGGESTIONS = T.askSuggestions || ["How much are lessons?", "Where are lessons?", "How do I book?", "What should I work on?"];
   var DOWN = T.askDown || "The chat isn't answering right now. Email me and I'll get back to you.";
   var EMAIL = { type: "email", subject: T.mailSubject || "Tennis lessons", label: T.emailMe || "Email me" };
   var MIN_THINK_MS = 650;     // the dots show at least this long
@@ -96,7 +96,10 @@
     if (e.key === "Escape" && !panel.hidden) { close(); }
   });
 
+  var counted = false;
   function open() {
+    /* Counted once a page view, for Isaac's numbers (tennis.js). */
+    if (!counted && window.leeHit) { counted = true; window.leeHit("chat_open"); }
     panel.hidden = false;
     root.classList.add("is-open");
     launch.setAttribute("aria-expanded", "true");
@@ -165,7 +168,9 @@
       fetch(base + "/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: question, previous: previous }),
+        /* lang: the Worker checks each answer in the words this visitor
+           will read (/ko/ask.json and so on). */
+        body: JSON.stringify({ question: question, previous: previous, lang: T.lang || "" }),
         signal: controller ? controller.signal : undefined,
       }).then(function (r) {
         if (r.status === 429) throw new Error("busy");
@@ -173,8 +178,8 @@
         return r.json();
       }),
     ])
-      .then(function (both) { return afterThinking(started).then(function () { return both[1].topics || []; }); })
-      .then(function (ids) { typing.remove(); return reply(ids); })
+      .then(function (both) { return afterThinking(started).then(function () { return both[1]; }); })
+      .then(function (res) { typing.remove(); return reply(res); })
       .catch(function (err) {
         typing.remove();
         var text = err && err.message === "busy"
@@ -198,7 +203,18 @@
     return new Promise(function (r) { window.setTimeout(r, Math.max(0, wait)); });
   }
 
-  function reply(ids) {
+  /* res: { topics: [ids], parent: bool, notice: "misuse" | "personal" }.
+     Misuse (abuse, or text aimed at the bot) gets Isaac's one-line refusal
+     and nothing else; personal details typed in get a one-line note ahead
+     of the answer. When a parent is asking, a topic's parent wording is
+     shown where Isaac wrote one. */
+  function reply(res) {
+    res = res || {};
+    if (res.notice === "misuse") {
+      return addMessage("isaac", faq.data.misuse || faq.data.fallback, null, faq.data.fallback_next || SUGGESTIONS);
+    }
+    var ids = res.topics || [];
+    var lead = res.notice === "personal" && faq.data.personal ? faq.data.personal + "\n\n" : "";
     /* A follow-up ("and for two people?") often pulls the previous answer
        in as a second topic; the visitor has just read it, so drop it
        whenever something new is left to say. */
@@ -207,7 +223,7 @@
     lastTopics = ids;
     var topics = ids.map(function (id) { return faq.byId[id]; }).filter(Boolean);
     if (!topics.length) {
-      return addMessage("isaac", faq.data.fallback,
+      return addMessage("isaac", lead + faq.data.fallback,
         [{ type: "email", subject: T.mailSubjectQuestion || "Question about lessons", label: EMAIL.label }],
         faq.data.fallback_next || SUGGESTIONS);
     }
@@ -223,7 +239,8 @@
       });
       (t.next || []).forEach(function (q) { if (next.indexOf(q) < 0) next.push(q); });
     });
-    return addMessage("isaac", topics.map(function (t) { return t.answer; }).join("\n\n"), actions, next);
+    var text = topics.map(function (t) { return res.parent && t.answer_parent ? t.answer_parent : t.answer; }).join("\n\n");
+    return addMessage("isaac", lead + text, actions, next);
   }
 
   /* -------------------------------------------------------- Rendering -- */
@@ -368,6 +385,13 @@
       el = document.createElement("a");
       el.href = a.href;
       el.textContent = a.label || T.open || "Open";
+    } else if (a.type === "open" && /^[\w-]+$/.test(a.target || "") && document.getElementById(a.target)) {
+      /* One of the page's popups (the clinic list). tennis.js opens anything
+         with data-open, clones and chat buttons included. */
+      el = document.createElement("button");
+      el.type = "button";
+      el.setAttribute("data-open", a.target);
+      el.textContent = a.label || T.open || "Open";
     } else if (a.type === "scroll" && /^#[\w-]+$/.test(a.target || "")) {
       var target = document.querySelector(a.target);
       if (!target) return null;
@@ -382,9 +406,21 @@
     } else {
       return null;
     }
-    el.className = "btn btn-sm " + (a.type === "book" ? "btn-primary" : "btn-quiet");
+    el.className = "btn btn-sm " + (a.type === "book" || a.type === "open" ? "btn-primary" : "btn-quiet");
     return el;
   }
+
+  /* Elsewhere on the page, a [data-ask] button opens the chat and asks its
+     question (the FAQ's "something keeps going wrong" item); those items
+     stay hidden unless the chat is here to answer. */
+  document.querySelectorAll(".faq-ask").forEach(function (el) { el.hidden = false; });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-ask]");
+    if (!b) return;
+    var q = b.getAttribute("data-ask");
+    if (panel.hidden) open();
+    loadFaq().then(function () { askQuestion(q); }, function () {});
+  });
 
   function typingDots() {
     var t = document.createElement("div");

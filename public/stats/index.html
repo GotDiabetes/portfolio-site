@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- ============================================================
+       Isaac's numbers, at leetennisco.com/stats/: what the Worker counts
+       (Book presses, the matcher, the chat, the forms, flyer visits, by
+       language) and the chat's unanswered questions. It asks the Worker
+       with the key Isaac set himself (npx wrangler secret put STATS_KEY);
+       without the key it shows nothing. Visits themselves are in
+       Cloudflare Web Analytics, linked below. Not linked from the site
+       and kept out of search.
+       ============================================================ -->
+  <title>Numbers — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+</head>
+
+<body class="desk">
+  <main class="wrap desk-main">
+    <p class="eyebrow">For Isaac</p>
+    <h1>Your numbers</h1>
+    <p class="desk-sub">What people did on the site, by day and language, and the chat questions you have no answer for yet. Counts only: nothing here says who.</p>
+
+    <form class="clinic-form desk-form desk-key" id="statsForm">
+      <label class="field">
+        <span class="field-label">Stats key</span>
+        <input type="password" name="key" autocomplete="current-password" required>
+      </label>
+      <label class="choice"><input type="checkbox" name="remember" checked> Remember it on this device</label>
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">Show my numbers</button>
+      </div>
+      <p class="form-error" role="alert" hidden></p>
+    </form>
+
+    <div id="statsOut" hidden>
+      <div class="desk-row">
+        <h2>What people did</h2>
+        <label class="desk-period">
+          <span class="field-label">Period</span>
+          <select id="statsDays">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+        </label>
+      </div>
+      <div class="desk-table-wrap"><table class="desk-table" id="statsTable"></table></div>
+      <p class="form-note">Visits (which pages, from where, on what device) are in <a href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">Cloudflare Web Analytics</a>.</p>
+
+      <h2>Questions the chat couldn't answer</h2>
+      <p class="desk-sub">Kept for 90 days. Write an answer for the ones that come up, in ask.json.</p>
+      <ol class="desk-questions" id="statsQuestions"></ol>
+    </div>
+  </main>
+
+  <script src="/stats.js?v=1" defer></script>
+</body>
+</html>

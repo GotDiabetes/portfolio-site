@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from gift-card/index.html and tools/i18n/zh-hant.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>禮物卡 — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>製作禮物卡</h1>
+    <p>填寫你知道的內容；空白的地方會印成一條線，可以手寫。用 Letter 紙張或卡紙以 100% 比例列印，再沿著虛線剪下。</p>
+    <form class="card-form" id="cardForm">
+      <label>
+        <span class="field-label">禮物</span>
+        <select name="gift">
+          <option>一堂私人課</option>
+          <option>5 堂私人課</option>
+          <option>10 堂私人課</option>
+          <option>一堂陪打課</option>
+        </select>
+      </label>
+      <label>
+        <span class="field-label">送給 <span class="field-optional">選填</span></span>
+        <input type="text" name="to" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">來自 <span class="field-optional">選填</span></span>
+        <input type="text" name="from" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">留言 <span class="field-optional">選填</span></span>
+        <input type="text" name="message" maxlength="140" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">卡號 <span class="field-optional">選填</span></span>
+        <input type="text" name="number" maxlength="12" autocomplete="off" />
+      </label>
+    </form>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>列印禮物卡</button>
+      <a class="print-home" href="/zh-hant/">回到網站</a>
+    </div>
+    <nav class="print-langs" aria-label="其他語言版本的禮物卡">
+      <a href="/gift-card/" hreflang="en" lang="en">English</a>
+      <a href="/es/gift-card/" hreflang="es" lang="es">Español</a>
+      <a href="/ko/gift-card/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/gift-card/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      <a href="/zh-hant/gift-card/" hreflang="zh-Hant" lang="zh-Hant" aria-current="page">繁體中文</a>
+      <a href="/ja/gift-card/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/gift-card/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/gift-card/" hreflang="fa" lang="fa">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet card-sheet">
+      <article class="gift-card">
+        <div class="gc-head">
+          <img class="gc-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 標誌" />
+          <div class="gc-meta">
+            <p class="eyebrow">禮物卡</p>
+            <p class="gc-number"><span>編號</span> <span data-card="number"></span></p>
+          </div>
+        </div>
+
+        <div class="gc-body">
+          <p class="gc-label">送給</p>
+          <p class="gc-to" data-card="to"></p>
+          <p class="gc-gift" data-card="gift">一堂私人課</p>
+          <p><span class="gc-message" data-card="message" data-card-row></span></p>
+          <p class="gc-from"><span class="gc-label">來自</span> <span data-card="from"></span></p>
+        </div>
+
+        <div class="gc-foot">
+          <div>
+            <p class="gc-book">預約時請掃描 QR 碼或前往 leetennisco.com，並告訴我這張卡片。</p>
+            <p class="gc-coach">Isaac Lee · RSPA 認證教練 · 爾灣 Toscana 球場</p>
+          </div>
+          <div class="qr" data-qr="" role="img" aria-label="開啟課程頁面的 QR 碼"></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>window.I18N = {"copied":"已複製","menuOpen":"開啟選單","menuClose":"關閉選單","loadingCal":"正在載入日曆…","askSuggestions":["課程多少錢？","在哪裡上課？","怎麼預約？","我該練什麼？"],"askDown":"聊天目前無法回覆。請寄信給我，我會盡快回覆。","askBusy":"一次問了好多問題。請稍等一分鐘，或寄信給我。","emailMe":"寄信給我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"建議問題","askFinding":"正在尋找答案","open":"開啟","showMe":"查看","soundMute":"關閉聲音","soundOn":"開啟聲音","typeBy":"char","matchCopy":{"private":{"name":"一對一私人課","line":"一對一，針對你想改進的地方安排。"},"semi":{"name":"雙人課","line":"兩人共用一小時，每人 $55。"},"hitting":{"name":"陪打課","line":"單純對打，不教學，每小時 $45。"},"group":{"name":"成人團體班","line":"一個場地的小團體。報名後，我會把你安排進程度相近的團體。"}},"matchAnswer":"看起來最適合你的是{name}。{line}","matchTravel":"提醒一下：課程都在我的主場，爾灣的 Toscana 球場。我沒辦法到你那裡，但很歡迎你過來。","matchUnsure":"從這句話我判斷不出來。試著寫寫你的程度和誰要來打球，或從上面四種課裡選一個。","matchDown":"課程配對目前無法回覆。四種課程就在上面，也可以寄信給我。","matchBusy":"配對的請求有點多。請稍等一分鐘，或從上面四種課裡選一個。","matchSeeCard":"查看課程卡片 ↑","matchLabel":"為你推薦","matchBusyButton":"配對中…","soundsOn":"網球音效已開啟","soundsTurnOff":"關閉","soundsOff":"音效已關閉","matchLevels":["網球新手","初級","中級","高級","競技"],"matchFocus":{"serve":"發球","groundstrokes":"正反拍","net":"網前","movement":"步法","match":"比賽","basics":"基本功"},"matchLevelLine":"程度：{level}。","matchFocusLine":"重點：{focus}。","matchNotesLine":"從這裡預約，這些資訊會寫進預約備註，方便我準備第一堂課。","matchJunior":"幫孩子預約？請用你自己的名字預約，並在備註寫上孩子的年齡。","lang":"zh-hant","pageName":"Traditional Chinese","askUrl":"/zh-hant/ask.json","mailSubject":"Tennis lessons (Traditional Chinese page)","mailSubjectQuestion":"Question about lessons (Traditional Chinese page)"};</script>
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

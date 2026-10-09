@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from tips/index.html and tools/i18n/vi.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Mẹo luyện tập tennis — Lee Tennis Co., Irvine</title>
+  <meta name="description"
+        content="Cách sửa nhanh những lỗi tennis thường gặp từ Isaac Lee, huấn luyện viên được RSPA chứng nhận ở Irvine: giao bóng vào lưới, cú thuận tay bay dài, lỗi kép, hồi hộp khi thi đấu, và cách tự tập." />
+  <link rel="canonical" href="https://leetennisco.com/vi/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Mẹo luyện tập tennis — Lee Tennis Co." />
+  <meta property="og:description"
+        content="Cách sửa nhanh những lỗi tennis thường gặp nhất, từ giao bóng vào lưới đến hồi hộp khi thi đấu." />
+  <meta property="og:url" content="https://leetennisco.com/vi/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Chuyển đến nội dung</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/vi/" aria-label="Lee Tennis Co. — trang chủ">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — biểu tượng LT" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="Ngôn ngữ (Language): Tiếng Việt">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">VI</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="Đặt lịch học">
+        <span class="cta-full">Đặt lịch học</span><span class="cta-short" aria-hidden="true">Đặt lịch</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">Mẹo luyện tập</p>
+      <h1 class="fade" style="--d:.06s">Cách sửa nhanh những lỗi thường gặp</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        Mỗi vấn đề tôi hay gặp nhất có một điều để thử. Đây chỉ là cách sửa nhanh; trong buổi học chúng ta sẽ tìm ra nguyên nhân thật.
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="Chủ đề mẹo">
+        <a href="#serve">Giao bóng</a>
+        <a href="#groundstrokes">Thuận tay, trái tay và đánh qua lại</a>
+        <a href="#movement">Bộ chân và lên lưới</a>
+        <a href="#matches">Thi đấu và luyện tập</a>
+        <a href="#parents">Dành cho phụ huynh</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">Giao bóng</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>Giao bóng của tôi hay vào lưới</h3>
+            <p>Giao bóng vào lưới thường là do tung bóng quá thấp hoặc quá xa phía trước, nên bạn đánh xuống quá sớm. Tung bóng cao hơn một chút, ngay phía trước vai bên tay cầm vợt, và vươn lên đánh khi tay duỗi thẳng. Tập tung bóng mười lần mà không vung vợt: mỗi lần bóng nên rơi đúng một chỗ, phía trước chân trước.</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>Giao bóng của tôi hay bị dài</h3>
+            <p>Giao bóng dài thường là do bóng tung bị trôi ra sau lưng, làm mặt vợt mở khi tiếp xúc. Giữ bóng tung hơi chếch về phía trước, đánh lên và trùm qua bóng, rồi để vợt tự xoay sau khi chạm bóng. Nhắm vào giữa ô giao bóng, đừng nhắm vạch.</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>Tôi hay lỗi kép</h3>
+            <p>Phần lớn lỗi kép là do đánh quả giao thứ hai như một quả giao thứ nhất chậm hơn. Quả giao thứ hai cần nhiều xoáy hơn, không phải chậm hơn: chải lên phía sau quả bóng để bóng qua lưới cao và rơi vào ô. Tập riêng một giỏ giao bóng thứ hai và đếm xem vào được bao nhiêu quả.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">Thuận tay, trái tay và đánh qua lại</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>Cú thuận tay của tôi hay vào lưới</h3>
+            <p>Thuận tay vào lưới thường là do vung vợt quá phẳng hoặc chạm bóng muộn. Bắt đầu vợt thấp hơn bóng và kết thúc cao qua vai bên kia, chạm bóng phía trước người. Nhắm cao hơn lưới khoảng một mét: độ cao đó là khoảng an toàn của bạn.</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>Cú thuận tay của tôi hay bay dài</h3>
+            <p>Cú thuận tay bay dài thường là do đánh phẳng với mặt vợt mở. Chải lên phía sau quả bóng để tạo xoáy lên, bóng sẽ cắm xuống trong sân, và kết thúc cú đánh qua vai thay vì đẩy thẳng về mục tiêu. Nhắm sâu vào giữa sân, cách đường cuối sân vài bước.</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>Cú trái tay của tôi yếu</h3>
+            <p>Trái tay yếu thường bắt đầu từ việc xoay người muộn. Vừa thấy bóng đến phía đó, hãy xoay vai để lưng hơi quay về phía lưới, rồi vung từ dưới lên phía trước người. Đánh qua lại chéo sân trái tay với trái tay cùng bạn tập cho đến khi thành thói quen.</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>Tôi không giữ được nhịp đánh qua lại</h3>
+            <p>Pha đánh qua lại kết thúc sớm khi cú nào cũng nhắm quá sát vạch hoặc lưới. Nhắm cao hơn qua lưới và sâu vào giữa sân, rồi đếm số lần đánh qua lại: cố phá kỷ lục của chính mình, không phải thắng bạn tập. Ổn định trước, sức mạnh sau.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">Bộ chân và lên lưới</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>Tôi luôn đến bóng muộn</h3>
+            <p>Đến bóng muộn thường là vấn đề bộ chân, không phải cú vung. Nhún bật nhẹ (split-step) đúng lúc đối thủ đánh bóng để bạn đứng trên mũi chân khi đọc bóng, rồi bước những bước nhỏ điều chỉnh trước khi đánh. Tập không bóng ở nhà: nhún, xoay, vung, về vị trí.</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>Tôi ngại lên lưới</h3>
+            <p>Ở lưới, càng ít càng tốt: không kéo vợt về sau nhiều. Giữ vợt cao phía trước, xoay vai, và đẩy bóng bằng một động tác ngắn, bước lên khi đánh. Bắt đầu gần lưới với bạn tập đưa bóng nhẹ, rồi lùi dần ra.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">Thi đấu và luyện tập</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>Tôi đánh trận kém hơn lúc tập</h3>
+            <p>Hầu hết người chơi bị cứng người vì cố đánh những cú khó hơn khi bị áp lực. Hãy chọn một kế hoạch đơn giản trước trận, như đánh chéo sâu cho đến khi có bóng ngắn, và lặp lại cùng một thói quen ngắn giữa mỗi điểm. Khi tập cũng hãy tính điểm: đánh game và tie-break, không chỉ đánh qua lại.</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>Tôi tự tập một mình thế nào?</h3>
+            <p>Bức tường là bạn tập tốt nhất: đánh thuận tay và trái tay vào tường, nhắm cao hơn một vạch kẻ. Một giỏ giao bóng trên sân trống giúp tung bóng ổn định, và vung vợt không bóng trước gương giúp sửa kỹ thuật. Tập ngắn mà đều tốt hơn tập dài mà thưa.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">Dành cho phụ huynh</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>Con tôi có thể tập ở nhà thế nào?</h3>
+            <p>Hãy giữ cho ngắn và vui: tung và bắt bóng, tâng bóng trên mặt vợt, đánh qua lại qua một vạch trên lối xe chạy bằng bóng mềm. Vài phút mỗi lần, vài lần mỗi tuần hiệu quả hơn một buổi dài. Trong buổi học, các bé mới tập dùng bóng chậm và mềm hơn nên sẽ đánh qua lại được sớm hơn.</p>
+          </article>
+        </div>    </section>
+
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">Muốn biết nguyên nhân thật?</h2>
+          <p class="fade" style="--d:.06s">
+            Mẹo chỉ xử lý triệu chứng. Trong buổi học, tôi xem bạn đánh và sửa điều nằm phía sau.
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Đặt lịch học</a>
+            <a class="btn btn-outline btn-lg" href="/vi/#lessons">Xem các lớp và giá</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">Đặt lịch chỉ để giữ giờ: không cần thẻ, không cần đặt cọc. Bạn thanh toán trực tiếp.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
+      <p class="footer-links">
+        <a href="/vi/">Học tennis riêng 1-1</a>
+        <a href="/portfolio/">Hồ sơ nghề nghiệp</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>window.I18N = {"copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>

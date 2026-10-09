@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ============================================================
+       The printable flyer, for notice boards: leetennisco.com/flyer/,
+       and the same flyer in each language (/ko/flyer/ …), built by
+       tools/i18n/build.mjs. Letter paper. The QR code and the address
+       under it are drawn by print.js for the page's own language, and
+       carry ?from=flyer so visits from paper are counted. Not linked
+       from the site and kept out of search; it's Isaac's to print.
+       ============================================================ -->
+  <title>Flyer — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>The flyer</h1>
+    <p>Print on Letter paper at 100% scale. Then cut along the dashed lines between the strips at the bottom, so people can tear one off.</p>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>Print this flyer</button>
+      <a class="print-home" href="/">Back to the site</a>
+    </div>
+    <nav class="print-langs" aria-label="This flyer in other languages">
+      <a href="/flyer/" hreflang="en" lang="en" aria-current="page">English</a>
+      <a href="/es/flyer/" hreflang="es" lang="es">Español</a>
+      <a href="/ko/flyer/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/flyer/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      <a href="/zh-hant/flyer/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+      <a href="/ja/flyer/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/flyer/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/flyer/" hreflang="fa" lang="fa">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet flyer">
+      <div class="flyer-top">
+        <div>
+          <img class="flyer-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+          <p class="eyebrow">RSPA-certified coach · Toscana courts, Irvine</p>
+          <h1>Tennis lessons in Irvine</h1>
+          <p class="flyer-sub">Juniors and adults, from complete beginners up: one-on-one, in pairs or in small groups.</p>
+        </div>
+        <img class="flyer-photo" src="/images/pointing.jpg" width="960" height="1280" alt="Isaac Lee calling out a drill during a lesson" />
+      </div>
+
+      <div class="flyer-prices">
+        <div>
+          <h2>Private lessons</h2>
+          <p class="price">$80<span>/hour</span></p>
+          <p class="package">Or 5 lessons for $375, 10 for $700, paid in person.</p>
+        </div>
+        <div>
+          <h2>Semi-private lessons</h2>
+          <p class="price">$110<span>/hour for two &mdash; $55 each</span></p>
+        </div>
+        <div>
+          <h2>Hitting partner sessions</h2>
+          <p class="price">$45<span>/hour</span></p>
+        </div>
+        <div>
+          <h2>Adult clinics</h2>
+          <p class="price">Per group<span>, quoted by size</span></p>
+        </div>
+      </div>
+
+      <div class="flyer-book">
+        <div class="qr" data-qr="?from=flyer" role="img" aria-label="QR code that opens the lessons page"></div>
+        <div>
+          <p class="flyer-scan">Scan to see times and book.</p>
+          <p class="flyer-url" data-qr-text>leetennisco.com</p>
+          <p class="flyer-mail">isaacleetennis@gmail.com</p>
+          <p class="flyer-note">No card, no deposit: booking just holds the time.</p>
+          <p class="flyer-note">USTA Safe Play approved: background-checked and SafeSport-trained. RSPA-certified.</p>
+          <p class="flyer-note">Toscana Apartments tennis courts, Irvine</p>
+        </div>
+      </div>
+
+      <div class="tabs" aria-hidden="true">
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+        <p><span class="tab"><b>Tennis lessons</b><span data-qr-text>leetennisco.com</span><span>isaacleetennis@gmail.com</span></span></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

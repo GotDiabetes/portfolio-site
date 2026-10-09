@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from tips/index.html and tools/i18n/ja.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>テニス練習のヒント — Lee Tennis Co.（アーバイン）</title>
+  <meta name="description"
+        content="アーバインの RSPA 認定コーチ Isaac Lee による、よくあるテニスの悩みへの対策：ネットにかかるサーブ、アウトするフォアハンド、ダブルフォルト、試合での緊張、一人での練習法。" />
+  <link rel="canonical" href="https://leetennisco.com/ja/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="テニス練習のヒント — Lee Tennis Co." />
+  <meta property="og:description"
+        content="ネットにかかるサーブから試合での緊張まで、よくあるテニスの悩みへのすぐできる対策。" />
+  <meta property="og:url" content="https://leetennisco.com/ja/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/ja/" aria-label="Lee Tennis Co. — ホーム">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT モノグラム" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="言語 (Language)：日本語">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">JA</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja" aria-current="page">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="レッスンを予約">
+        <span class="cta-full">レッスンを予約</span><span class="cta-short" aria-hidden="true">予約</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">練習のヒント</p>
+      <h1 class="fade" style="--d:.06s">よくある悩みへのすぐできる対策</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        私がよく見る悩みごとに、試してほしいことをひとつずつ。あくまで応急の対策で、レッスンでは本当の原因を見つけます。
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="ヒントのテーマ">
+        <a href="#serve">サーブ</a>
+        <a href="#groundstrokes">フォア、バック、ラリー</a>
+        <a href="#movement">フットワークとネットプレー</a>
+        <a href="#matches">試合と練習</a>
+        <a href="#parents">保護者の方へ</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">サーブ</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>サーブがネットにかかる</h3>
+            <p>サーブがネットにかかるのは、たいていトスが低すぎるか前すぎて、早く打ち下ろしてしまうからです。トスを少し高く、打つ側の肩のすぐ前に上げ、腕をいっぱいに伸ばして打ちましょう。スイングせずにトスだけ10回練習してみてください。毎回、前足の前の同じ場所に落ちるのが理想です。</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>サーブがオーバーする</h3>
+            <p>サーブがオーバーするのは、たいていトスが体の後ろに流れて、インパクトでラケット面が開くからです。トスを少し前に上げ、ボールの上をかぶせるように打ち上げ、インパクト後はラケットを自然に返しましょう。ラインではなくサービスボックスの真ん中を狙ってください。</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>ダブルフォルトが多い</h3>
+            <p>ダブルフォルトの多くは、セカンドサーブを遅いファーストサーブのように打つことから起きます。セカンドサーブに必要なのは、スピードを落とすことではなく回転を増やすことです。ボールの後ろを下から上にこすり上げ、ネットを余裕で越えてボックスに落ちるようにしましょう。セカンドサーブだけをかご一杯打ち、何本入るか数えてみてください。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">フォア、バック、ラリー</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>フォアハンドがネットにかかる</h3>
+            <p>フォアハンドがネットにかかるのは、たいていスイングが平らすぎるか、打点が遅いからです。ラケットをボールより下から始めて反対側の肩の上まで高く振り抜き、ボールは体の前でとらえましょう。ネットの1メートルほど上を狙ってください。その高さが安全の余裕です。</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>フォアハンドがアウトする</h3>
+            <p>フォアハンドがアウトするのは、たいていラケット面が開いたまま平らに打っているからです。ボールの後ろを下から上にこすり上げてトップスピンをかければ、ボールはコートの中に落ちます。ターゲットにまっすぐ押し出すのではなく、肩の上へ振り抜きましょう。ベースラインの数歩内側、真ん中の深いところを狙ってください。</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>バックハンドが苦手</h3>
+            <p>バックハンドが弱いのは、たいてい体をひねるのが遅いからです。ボールがそちらに来るとわかった瞬間に肩を回し、背中が少しネットに向くくらいまで構えてから、体の前で下から上に振りましょう。パートナーとバックハンドのクロスラリーを、体が覚えるまで続けてください。</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>ラリーが続かない</h3>
+            <p>ラリーがすぐ終わるのは、毎回ラインやネットぎりぎりを狙っているからです。ネットのもっと上、コートの真ん中の深いところを狙い、ラリーの回数を数えましょう。相手ではなく、自分の記録を更新するのが目標です。パワーより先に安定感です。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">フットワークとネットプレー</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>いつもボールに遅れる</h3>
+            <p>ボールに遅れるのは、たいていスイングではなくフットワークの問題です。相手が打つ瞬間に小さくスプリットステップを踏み、つま先立ちでボールを読み、細かいステップで位置を合わせてから打ちましょう。家ではボールなしで練習できます。スプリット、ターン、スイング、リカバリー。</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>ネットに出るのが不安</h3>
+            <p>ネットでは、動きは少ないほど良いです。大きなテイクバックはしないでください。ラケットを体の前に立て、肩を回し、短い動作でボールを押し出しながら一歩前へ踏み込みます。最初はネットの近くでパートナーにやさしく球出ししてもらい、少しずつ下がっていきましょう。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">試合と練習</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>試合になると実力が出ない</h3>
+            <p>多くの人は、プレッシャーの中で難しいショットを打とうとして体が固くなります。試合前に「短いボールが来るまでクロスに深く」のような簡単なプランを決め、ポイント間は毎回同じ短いルーティンを行いましょう。練習でもスコアをつけて、ラリーだけでなくゲームやタイブレークをしてください。</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>一人でどう練習すればいい？</h3>
+            <p>壁は最高の練習相手です。線より上を狙って、フォアとバックで壁打ちをしましょう。空いているコートでサーブをかご一杯打てばトスが安定し、鏡の前の素振りはボールなしでもフォームを直せます。長く時々より、短く頻繁にのほうが効果的です。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">保護者の方へ</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>子どもは家でどう練習すればいい？</h3>
+            <p>短く楽しくがコツです。ボールを投げて捕る、ラケットでボールをつく、柔らかいボールで駐車スペースの線をはさんで打ち合う、など。1回長くやるより、週に数回、数分ずつのほうが身につきます。レッスンでは小さな初心者はゆっくりした柔らかいボールを使うので、早くラリーができるようになります。</p>
+          </article>
+        </div>    </section>
+
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">本当の原因を知りたいですか？</h2>
+          <p class="fade" style="--d:.06s">
+            ヒントが扱うのは症状だけです。レッスンでは実際に打つところを見て、その裏にある原因を直します。
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>レッスンを予約</a>
+            <a class="btn btn-outline btn-lg" href="/ja/#lessons">レッスンと料金を見る</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">予約は時間を押さえるだけで、カードも前金も不要です。お支払いは現地でどうぞ。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; カリフォルニア州アーバイン</p>
+      <p class="footer-links">
+        <a href="/ja/">テニスの個人レッスン</a>
+        <a href="/portfolio/">キャリアポートフォリオ</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>window.I18N = {"copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>

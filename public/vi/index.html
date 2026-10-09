@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">Dạy kèm riêng · Sân Toscana, Irvine</p>
+          <p class="eyebrow fade">Huấn luyện viên có chứng chỉ RSPA · Sân Toscana, Irvine</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">Lớp</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">tennis</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>Lớp kèm riêng 1-1</h3>
           <p class="price">$80<span>/giờ</span></p>
+          <p class="package">Hoặc 5 buổi $375, 10 buổi $700, trả trực tiếp.</p>
           <p>
             Học một kèm một, cho cả thiếu niên lẫn người lớn. Kỹ thuật đánh bóng và giao bóng, bộ chân, loại bóng chậm và mềm hơn mà các bé mới tập dùng, cùng một kế hoạch luyện tập bạn thật sự làm được giữa các buổi học.
           </p>
@@ -257,7 +269,7 @@
             Nhóm nhỏ trên một sân, tập các bài tập và trò chơi bóng sống, luân phiên đủ để ai cũng được đánh liên tục. Chi phí tùy theo số người trong nhóm.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Vietnamese%20page)" data-mail="Adult%20clinics%20(Vietnamese%20page)">Gửi email để báo giá</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">Đăng ký lớp nhóm</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="Nội dung lớp nhóm cho người lớn">Nội dung</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">AI đọc câu của bạn để chọn lớp. Trang web này không lưu lại gì cả.</p>
       </form>
+
+      <p class="gift-line fade">
+        Muốn tặng quà là tennis? Buổi học riêng 1-1, gói học hay buổi đánh tập đều có thể làm quà.
+        <button class="link-btn" type="button" data-open="giftForm">Tặng một buổi học</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 Tôi đã làm huấn luyện viên được ba năm. Tôi bắt đầu là Junior Pro tại LifeSport Libertyville, sau đó gia nhập Pro Staff của Grip N Rip, chương trình thiếu niên tại Newport Beach Tennis Club.
               </p>
               <p>
+                Tôi có chứng chỉ của RSPA (Racket Sports Professionals Association, trước đây là USPTA) và được USTA Safe Play chấp thuận: đã kiểm tra lý lịch và hoàn thành khóa đào tạo SafeSport.
+              </p>
+              <p>
                 Phần lớn công việc của tôi là với các em thiếu niên đang phát triển — làm đúng nền tảng từ sớm để sự tiến bộ cứ thế tích lũy. Tôi cũng mở lớp nhóm cho người lớn muốn chơi ổn định hơn và có chiến thuật rõ ràng hơn khi vào điểm thật.
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>Sân nhà</dt><dd>Toscana, Irvine</dd></div>
+              <div><dt>Chứng chỉ</dt><dd>RSPA</dd></div>
               <div><dt>Đội tuyển trường</dt><dd>4 năm</dd></div>
               <div><dt>Lịch dạy</dt><dd>Bán thời gian</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        Bạn đã học với tôi rồi? Một đánh giá ngắn trên Google giúp những người chơi và phụ huynh khác tìm thấy tôi.
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">Viết đánh giá</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="Phát video: Isaac Lee đấu với huấn luyện viên cũ tại LifeSport Libertyville, tháng 11 năm 2024">
@@ -437,7 +463,72 @@
           <dt>Buổi đầu tiên</dt>
           <dd>Khi đặt lịch, hãy cho tôi biết trình độ và điều bạn đang luyện, tôi sẽ chuẩn bị sẵn kế hoạch.</dd>
         </div>
+        <div>
+          <dt>An toàn</dt>
+          <dd>Được USTA Safe Play chấp thuận: đã kiểm tra lý lịch và hoàn thành đào tạo SafeSport. Có chứng chỉ RSPA.</dd>
+        </div>
+        <div>
+          <dt>Hủy buổi học</dt>
+          <dd>Hủy hoặc đổi buổi học trước 24 giờ; hủy muộn hơn vẫn tính phí. Nếu mưa hoặc nắng nóng làm hủy buổi học, chúng ta đổi lịch miễn phí.</dd>
+        </div>
+        <div>
+          <dt>Vợt</dt>
+          <dd>Chưa có vợt? Mượn vợt của tôi.</dd>
+        </div>
+        <div>
+          <dt>Gói học</dt>
+          <dd>Học riêng 1-1: 5 buổi $375 hoặc 10 buổi $700, trả trực tiếp.</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">Câu hỏi thường gặp</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>Con tôi có cần biết chơi trước không?</summary>
+          <p>Không. Các em có thể bắt đầu từ con số không. Các bé nhỏ nhất học với bóng chậm và mềm hơn (đỏ, rồi cam, rồi xanh lá) và lên cấp khi đã sẵn sàng.</p>
+        </details>
+        <details>
+          <summary>Con tôi học với bạn có an toàn không?</summary>
+          <p>Tôi được USTA Safe Play chấp thuận, nghĩa là tôi đã được kiểm tra lý lịch và hoàn thành đào tạo SafeSport. Tôi cũng có chứng chỉ của RSPA, Racket Sports Professionals Association.</p>
+        </details>
+        <details>
+          <summary>Tôi có trả tiền khi đặt lịch không?</summary>
+          <p>Không. Đặt lịch trực tuyến chỉ để giữ giờ: không cần thẻ, không cần đặt cọc. Bạn trả tiền trực tiếp.</p>
+        </details>
+        <details>
+          <summary>Nếu cần hủy thì sao?</summary>
+          <p>Hủy hoặc đổi buổi học trước 24 giờ; hủy muộn hơn vẫn tính phí. Nếu mưa hoặc nắng nóng làm hủy buổi học, chúng ta đổi lịch miễn phí.</p>
+        </details>
+        <details>
+          <summary>Bạn có thể đến sân hoặc nhà tôi không?</summary>
+          <p>Không. Tất cả các buổi học đều ở sân nhà của tôi, sân tennis Toscana Apartments ở Irvine.</p>
+        </details>
+        <details>
+          <summary>Tôi chưa có vợt. Có sao không?</summary>
+          <p>Không sao. Bạn có thể mượn vợt của tôi.</p>
+        </details>
+        <details>
+          <summary>Có gói học không?</summary>
+          <p>Có, cho học riêng 1-1: 5 buổi $375 hoặc 10 buổi $700, trả trực tiếp. Tức là $75 và $70 một giờ thay vì $80.</p>
+        </details>
+        <details>
+          <summary>Tôi có thể tặng buổi học làm quà không?</summary>
+          <p>Có: một buổi học riêng 1-1, 5 hoặc 10 buổi học riêng 1-1, hoặc một buổi đánh tập. Gửi yêu cầu cho tôi, chúng ta thanh toán trực tiếp, và bạn nhận một thẻ quà tặng để in.</p>
+          <button class="link-btn" type="button" data-open="giftForm">Tặng một buổi học</button>
+        </details>
+        <details>
+          <summary>Sao lại chọn một huấn luyện viên trẻ?</summary>
+          <p>Câu hỏi chính đáng. Tôi làm huấn luyện viên từ năm 2023, đầu tiên là Junior Pro tại LifeSport Libertyville, sau đó trong Pro Staff của Grip N Rip tại Newport Beach Tennis Club. Tôi có chứng chỉ RSPA, được Safe Play chấp thuận, và đã chơi bốn năm trong đội tuyển varsity của trường trung học. Hãy học thử một buổi rồi tự đánh giá.</p>
+        </details>
+        <details>
+          <summary>Có một điểm tôi cứ chơi sai mãi.</summary>
+          <p>Các mẹo luyện tập của tôi nói về những vấn đề thường gặp nhất, từ giao bóng vào lưới đến hồi hộp khi thi đấu, mỗi vấn đề có một điều để thử.</p>
+          <a class="link-btn" href="tips/">Đọc mẹo luyện tập</a>
+          <button class="link-btn faq-ask" type="button" data-ask="Tôi nên tập gì?" hidden>Hỏi khung chat về vấn đề của bạn</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
       <p class="footer-links">
+        <a href="tips/">Mẹo luyện tập</a>
         <a href="/portfolio/">Hồ sơ nghề nghiệp</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="Đóng">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>Lớp kèm riêng 1-1</h3>
       <p class="price">$80<span>/giờ</span></p>
+      <p class="package">Hoặc 5 buổi $375, 10 buổi $700, trả trực tiếp.</p>
       <p>Cho cả thiếu niên và người lớn &mdash; cùng hình thức một kèm một, điều chỉnh theo trình độ của bạn.</p>
       <ul>
         <li>Kỹ thuật đánh bóng và giao bóng</li>
@@ -573,8 +666,85 @@
         <li>Tự lập nhóm, hoặc nhờ tôi xếp bạn vào một nhóm</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Vietnamese%20page)" data-mail="Adult%20clinics%20(Vietnamese%20page)">Gửi email để báo giá</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">Đăng ký lớp nhóm</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Vietnamese%20page)" data-mail="Adult%20clinics%20(Vietnamese%20page)">Gửi email cho tôi</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Đóng">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>Đăng ký lớp nhóm</h3>
+      <p>Lớp nhóm là nhóm nhỏ trên một sân. Hãy cho tôi biết trình độ và thời gian bạn rảnh, tôi sẽ xếp bạn vào nhóm cùng những người chơi giống bạn.</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">Trình độ của bạn</span>
+          <select name="level" required>
+            <option value="">Chọn một</option>
+            <option value="0">Mới chơi tennis: chưa chơi bao giờ, hoặc không chơi từ nhỏ</option>
+            <option value="1">Mới bắt đầu: đánh trả được vài quả; đánh qua lại còn ngắn</option>
+            <option value="2">Trung bình: đánh qua lại và giao bóng được; đang tập cho ổn định</option>
+            <option value="3">Khá: thi đấu ở trường trung học, giải phong trào hoặc USTA</option>
+            <option value="4">Thi đấu: tay vợt trẻ dự giải, tay vợt đại học, hoặc người lớn trình 4.5+</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">Ai sẽ tham gia</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> Chỉ mình tôi: xếp tôi vào một nhóm</label>
+          <label class="choice"><input type="radio" name="group" value="own"> Tôi đi cùng nhóm của mình</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">Thời gian thường rảnh</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> Chiều các ngày trong tuần</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> Tối các ngày trong tuần</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> Sáng cuối tuần</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> Chiều cuối tuần</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">Còn gì khác không? <span class="field-optional">Không bắt buộc</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="ví dụ: nhóm bốn người, trình độ ngang nhau"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Hãy chọn trình độ trước.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Gửi email câu trả lời</button>
+        </div>
+        <p class="form-note">Thao tác này mở một email gửi tôi kèm câu trả lời của bạn. Trang web không lưu gì cả.</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Đóng">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>Tặng một buổi học</h3>
+      <p>Chọn món quà và tôi sẽ làm một thẻ quà tặng để in. Người nhận đặt lịch như mọi người khác.</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">Món quà</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> Một buổi học riêng 1-1 <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 5 buổi học riêng 1-1 <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 10 buổi học riêng 1-1 <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> Một buổi đánh tập <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">Tặng cho ai <span class="field-optional">Không bắt buộc</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="Tên, để ghi trên thẻ">
+        </label>
+        <label class="field">
+          <span class="field-label">Người tặng <span class="field-optional">Không bắt buộc</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="Đúng như sẽ ghi trên thẻ">
+        </label>
+        <label class="field">
+          <span class="field-label">Lời nhắn trên thẻ <span class="field-optional">Không bắt buộc</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="VD: Chúc mừng sinh nhật! Hẹn gặp trên sân."></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Hãy chọn món quà trước.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Gửi yêu cầu qua email</button>
+        </div>
+        <p class="form-note">Thao tác này mở một email gửi tôi. Tôi sẽ trả lời để hẹn thanh toán trực tiếp, rồi đưa thẻ cho bạn. Trang web không lưu gì cả.</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">Những câu hỏi tôi chưa có câu trả lời được lưu 90 ngày để tôi viết câu trả lời.</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Lớp nào hợp với tôi?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Email cho tôi biết nhóm có bao nhiêu người, tôi sẽ báo giá."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

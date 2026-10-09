@@ -38,9 +38,18 @@
        Empty keeps both hidden on the live site; on localhost they use the
        local Worker on :8787. -->
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <!-- Two addresses Isaac fills in once he has them; until then the things
+       that use them stay hidden or off (tennis.js).
+       review-link: the "Ask for reviews" link from his Google Business
+       Profile (see GOOGLE-PROFILE.md). Shows "Leave a review" under the
+       reviews.
+       cf-analytics: the token from Cloudflare Web Analytics (Add a site →
+       leetennisco.com). Turns on visit counts: no cookies, no banner. -->
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="tennis.css?v=20261008a" />
   <link rel="stylesheet" href="focus.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
@@ -117,7 +126,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -186,7 +204,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">Private coaching · Toscana courts, Irvine</p>
+          <p class="eyebrow fade">RSPA-certified coach · Toscana courts, Irvine</p>
           <!-- Each line is its own mask, so the word drops in from behind the
                line above rather than sliding over it. -->
           <h1 class="hero-drop">
@@ -270,6 +288,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>Private lessons</h3>
           <p class="price">$80<span>/hour</span></p>
+          <p class="package">Or 5 lessons for $375, 10 for $700, paid in person.</p>
           <p>
             One-on-one for juniors and adults alike. Stroke and serve mechanics, footwork,
             the slower, softer balls young beginners learn on, and a practice plan you can
@@ -316,7 +335,7 @@
             rotation that everyone keeps hitting. Cost depends on how many of you there are.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email for a quote</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">Join the clinic list</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="What's covered in an adult clinic">What's covered</button>
           </div>
         </article>
@@ -339,6 +358,13 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">An AI reads your sentence to pick a lesson. Nothing is saved on this site.</p>
       </form>
+
+      <!-- Gift lessons: one quiet line under the offer, not a fifth card.
+           The popup sends Isaac the request; payment stays in person. -->
+      <p class="gift-line fade">
+        Giving tennis as a present? Any private lesson, package or hitting session can be a gift.
+        <button class="link-btn" type="button" data-open="giftForm">Give a lesson</button>
+      </p>
     </section>
 
     <!-- ============================ ABOUT ============================ -->
@@ -364,6 +390,11 @@
                 Newport Beach Tennis Club.
               </p>
               <p>
+                I'm certified by the RSPA, the Racket Sports Professionals Association
+                (formerly the USPTA), and approved under USTA Safe Play: background-checked
+                and SafeSport-trained.
+              </p>
+              <p>
                 Most of my work is with developing juniors — getting the fundamentals right
                 early so progress keeps compounding. I also run adult clinics for players who
                 want more consistency and a clearer plan once points actually start.
@@ -376,6 +407,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>Home court</dt><dd>Toscana, Irvine</dd></div>
+              <div><dt>Certified</dt><dd>RSPA</dd></div>
               <div><dt>Varsity</dt><dd>4 years</dd></div>
               <div><dt>Schedule</dt><dd>Part time</dd></div>
             </dl>
@@ -485,6 +517,13 @@
         </figure>
       </div>
 
+      <!-- Shown only once the review-link meta tag holds Isaac's Google
+           review link (tennis.js fills the href and unhides it). -->
+      <p class="review-ask" hidden>
+        Had a lesson with me? A short Google review helps other players and parents find me.
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">Leave a review</a>
+      </p>
+
       <!-- The one clip of Isaac playing rather than coaching, and it sits after
            the reviews on purpose: supporting evidence, not the offer. Our own
            poster and play control, no YouTube chrome; the player is only
@@ -531,7 +570,78 @@
           <dt>First session</dt>
           <dd>Tell me your level and what you're working on when you book, and I'll come with a plan.</dd>
         </div>
+        <div>
+          <dt>Safety</dt>
+          <dd>USTA Safe Play approved: background-checked and SafeSport-trained. RSPA-certified.</dd>
+        </div>
+        <div>
+          <dt>Cancelling</dt>
+          <dd>Cancel or move a lesson with 24 hours' notice; later cancellations are charged. If rain or heat cancels it, we reschedule at no cost.</dd>
+        </div>
+        <div>
+          <dt>Rackets</dt>
+          <dd>No racket yet? Borrow one of mine.</dd>
+        </div>
+        <div>
+          <dt>Packages</dt>
+          <dd>Private lessons: 5 for $375 or 10 for $700, paid in person.</dd>
+        </div>
       </dl>
+    </section>
+
+    <!-- ============================== FAQ ==============================
+         The questions a visitor would otherwise email, answered where they
+         can be scanned: native <details>, so each opens with no script, and
+         everything here is a fact Isaac has confirmed. The last one sends
+         a technique question to the practice tips page, and to the chat
+         when the chat can answer (its button shows only then, ask.js). -->
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">Questions people ask</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>Does my child need to have played before?</summary>
+          <p>No. Juniors start from complete beginners. The youngest learn on slower, softer balls (red, then orange, then green) and move up as they're ready.</p>
+        </details>
+        <details>
+          <summary>Is my child safe with you?</summary>
+          <p>I'm approved under USTA Safe Play, which means I'm background-checked and SafeSport-trained. I'm also certified by the RSPA, the Racket Sports Professionals Association.</p>
+        </details>
+        <details>
+          <summary>Do I pay when I book?</summary>
+          <p>No. Booking online just holds the time: no card, no deposit. You pay in person.</p>
+        </details>
+        <details>
+          <summary>What if I need to cancel?</summary>
+          <p>Cancel or move a lesson with 24 hours' notice; later cancellations are charged. If rain or heat cancels a lesson, we reschedule at no cost.</p>
+        </details>
+        <details>
+          <summary>Can you come to my court or my home?</summary>
+          <p>No. All lessons are at my home court, the Toscana Apartments tennis courts in Irvine.</p>
+        </details>
+        <details>
+          <summary>I don't have a racket. Is that okay?</summary>
+          <p>Yes. You can borrow one of mine.</p>
+        </details>
+        <details>
+          <summary>Are there lesson packages?</summary>
+          <p>Yes, for private lessons: 5 for $375 or 10 for $700, paid in person. That's $75 and $70 an hour instead of $80.</p>
+        </details>
+        <details>
+          <summary>Can I give lessons as a gift?</summary>
+          <p>Yes: one private lesson, 5 or 10 private lessons, or a hitting session. Send me the request, we settle payment in person, and you get a printable gift card.</p>
+          <button class="link-btn" type="button" data-open="giftForm">Give a lesson</button>
+        </details>
+        <details>
+          <summary>Why a younger coach?</summary>
+          <p>Fair question. I've coached since 2023, first as a Junior Pro at LifeSport Libertyville and then on the Pro Staff of Grip N Rip at Newport Beach Tennis Club. I'm RSPA-certified and Safe Play approved, and I played four years of high school varsity. Book one lesson and judge for yourself.</p>
+        </details>
+        <details>
+          <summary>Something specific keeps going wrong in my game.</summary>
+          <p>My practice tips cover the most common problems, from a serve in the net to nerves in matches, with one thing to try for each.</p>
+          <a class="link-btn" href="tips/">Read the practice tips</a>
+          <button class="link-btn faq-ask" type="button" data-ask="What should I work on?" hidden>Ask the chat about yours</button>
+        </details>
+      </div>
     </section>
 
     <!-- ============================ CONTACT ============================
@@ -576,6 +686,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
       <p class="footer-links">
+        <a href="tips/">Practice tips</a>
         <a href="/portfolio/">Career portfolio</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -608,6 +719,7 @@
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>Private lessons</h3>
       <p class="price">$80<span>/hour</span></p>
+      <p class="package">Or 5 lessons for $375, 10 for $700, paid in person.</p>
       <p>For juniors and adults &mdash; same one-on-one format, tailored to your level.</p>
       <ul>
         <li>Stroke and serve mechanics</li>
@@ -676,8 +788,95 @@
         <li>Bring your own group, or ask me to place you in one</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email for a quote</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">Join the clinic list</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics" data-mail="Adult%20clinics">Email me</a>
       </div>
+    </div>
+  </dialog>
+
+  <!-- The clinic list. Isaac forms groups by level and time, so this asks
+       for exactly that, and nothing personal: submitting opens an email to
+       him with the answers (tennis.js), from the visitor's own account, so
+       the reply address is theirs and the site stores nothing. Values are
+       codes, turned into English for Isaac whatever language the page is
+       in. -->
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>Join the clinic list</h3>
+      <p>Clinics are small groups on one court. Tell me your level and when suits you, and I'll put you in a group with players like you.</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">Your level</span>
+          <select name="level" required>
+            <option value="">Choose one</option>
+            <option value="0">New to tennis: never played, or not since childhood</option>
+            <option value="1">Beginner: can hit some balls back; rallies are short</option>
+            <option value="2">Intermediate: rallies and serves; working on consistency</option>
+            <option value="3">Advanced: plays matches, in high school, a league or USTA</option>
+            <option value="4">Competitive: tournament junior, college, or a 4.5+ adult</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">Who's coming</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> Just me: put me in a group</label>
+          <label class="choice"><input type="radio" name="group" value="own"> I'm bringing my own group</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">Times that usually work</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> Weekday afternoons</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> Weekday evenings</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> Weekend mornings</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> Weekend afternoons</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">Anything else? <span class="field-optional">Optional</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="e.g. four of us, all around the same level"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Choose your level first.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Email my answers</button>
+        </div>
+        <p class="form-note">This opens an email to me with your answers. Nothing is saved on this site.</p>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Gift lessons. The same hand-off as the clinic list: the answers become
+       an email to Isaac from the visitor's own account (tennis.js), in
+       English whatever the page language. He replies to settle payment in
+       person and makes the card at /gift-card/. Nothing is stored. -->
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>Give a lesson</h3>
+      <p>Choose a gift and I'll make a printable gift card for it. Whoever you give it to books like anyone else.</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">The gift</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> One private lesson <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 5 private lessons <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 10 private lessons <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> One hitting session <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">Who it's for <span class="field-optional">Optional</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="First name, for the card">
+        </label>
+        <label class="field">
+          <span class="field-label">Who it's from <span class="field-optional">Optional</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="As it should read on the card">
+        </label>
+        <label class="field">
+          <span class="field-label">A message for the card <span class="field-optional">Optional</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="e.g. Happy birthday! See you on court."></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Choose a gift first.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Email my request</button>
+        </div>
+        <p class="form-note">This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.</p>
+      </form>
     </div>
   </dialog>
 
@@ -720,6 +919,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">Questions I have no answer for yet are kept for 90 days, so I can write one.</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -727,10 +927,10 @@
     </button>
   </div>
 
-  <script src="tennis.js?v=20261006" defer></script>
+  <script src="tennis.js?v=20261008" defer></script>
   <script src="focus.js?v=3" defer></script>
-  <script src="match.js?v=4" defer></script>
-  <script src="ask.js?v=7" defer></script>
+  <script src="match.js?v=6" defer></script>
+  <script src="ask.js?v=9" defer></script>
   <script src="hero.js?v=1" defer></script>
   <script src="bookfx.js?v=15" defer></script>
   <script src="ballo.js?v=3" defer></script>

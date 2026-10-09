@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- ============================================================
+       Lesson recap: Isaac's own tool, at leetennisco.com/recap/. After a
+       lesson he ticks what they worked on, and it writes a short note
+       for the player or parent: the matching practice tips from
+       /ask.json (in the family's language if he picks one), his own
+       line, the next lesson. He sends it from Gmail or copies it into a
+       text message. Nothing is sent anywhere else and nothing is stored.
+       Not linked from the site and kept out of search. English only:
+       it's his page; only the note it writes changes language.
+       ============================================================ -->
+  <title>Lesson recap — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <!-- Isaac's Google review link (the same as on the front page); once it
+       is set, the recap can end with a request for a review. -->
+  <meta name="review-link" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+</head>
+
+<body class="desk">
+  <main class="wrap desk-main">
+    <p class="eyebrow">For Isaac</p>
+    <h1>Lesson recap</h1>
+    <p class="desk-sub">Tick what you worked on and it writes the note. Read it over, then send it from Gmail or copy it into a text.</p>
+
+    <form class="clinic-form desk-form" id="recapForm">
+      <div class="desk-grid">
+        <label class="field">
+          <span class="field-label">Player's first name <span class="field-optional">Optional</span></span>
+          <input type="text" name="name" maxlength="40" autocomplete="off">
+        </label>
+        <label class="field">
+          <span class="field-label">Send to <span class="field-optional">Optional</span></span>
+          <input type="text" name="to" maxlength="120" autocomplete="off" inputmode="email" placeholder="Their email, for Gmail">
+        </label>
+        <label class="field">
+          <span class="field-label">Write the note in</span>
+          <select name="lang">
+            <option value="">English</option>
+            <option value="es">Spanish</option>
+            <option value="ko">Korean</option>
+            <option value="zh-hans">Chinese (simplified)</option>
+            <option value="zh-hant">Chinese (traditional)</option>
+            <option value="ja">Japanese</option>
+            <option value="vi">Vietnamese</option>
+            <option value="fa">Persian</option>
+          </select>
+        </label>
+      </div>
+
+      <fieldset class="field">
+        <legend class="field-label">What we worked on</legend>
+        <div class="desk-tips" id="recapTips"><p class="form-note">Loading the tips…</p></div>
+      </fieldset>
+
+      <label class="field">
+        <span class="field-label">Your own line <span class="field-optional">Optional, sent as you type it</span></span>
+        <textarea name="note" rows="2" maxlength="600" placeholder="e.g. Great job keeping the toss in front today."></textarea>
+      </label>
+      <label class="field">
+        <span class="field-label">Next lesson <span class="field-optional">Optional</span></span>
+        <input type="text" name="next" maxlength="80" autocomplete="off" placeholder="e.g. Saturday 10am">
+      </label>
+      <label class="choice" id="recapReviewRow" hidden><input type="checkbox" name="review"> Ask for a Google review at the end</label>
+
+      <label class="field">
+        <span class="field-label">The note</span>
+        <textarea name="out" rows="14" class="desk-out" spellcheck="true"></textarea>
+      </label>
+      <p class="form-note">Change it here last: ticking a box or typing above writes it again. The buttons send what's in this box.</p>
+      <div class="actions">
+        <button class="btn btn-primary" type="button" id="recapGmail">Open in Gmail</button>
+        <button class="btn btn-quiet" type="button" id="recapCopy">Copy the note</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="/recap.js?v=1" defer></script>
+</body>
+</html>

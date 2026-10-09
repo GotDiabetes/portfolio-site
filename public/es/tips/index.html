@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from tips/index.html and tools/i18n/es.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Consejos de práctica de tenis — Lee Tennis Co., Irvine</title>
+  <meta name="description"
+        content="Soluciones rápidas para problemas comunes de tenis de Isaac Lee, entrenador certificado por la RSPA en Irvine: el saque a la red, una derecha que se va larga, las dobles faltas, los nervios en los partidos y cómo practicar por tu cuenta." />
+  <link rel="canonical" href="https://leetennisco.com/es/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Consejos de práctica de tenis — Lee Tennis Co." />
+  <meta property="og:description"
+        content="Soluciones rápidas para los problemas de tenis más comunes, desde un saque a la red hasta los nervios en los partidos." />
+  <meta property="og:url" content="https://leetennisco.com/es/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/es/" aria-label="Lee Tennis Co. — inicio">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — monograma LT" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="Idioma (Language): Español">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">ES</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es" aria-current="page">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="Reservar una clase">
+        <span class="cta-full">Reservar una clase</span><span class="cta-short" aria-hidden="true">Reservar</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">Consejos de práctica</p>
+      <h1 class="fade" style="--d:.06s">Soluciones rápidas para problemas comunes</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        Una cosa para probar en cada uno de los problemas que más veo. Son soluciones rápidas; en una clase encontraríamos la causa real.
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="Temas de los consejos">
+        <a href="#serve">Saque</a>
+        <a href="#groundstrokes">Derechas, reveses y peloteos</a>
+        <a href="#movement">Juego de pies y la red</a>
+        <a href="#matches">Partidos y práctica</a>
+        <a href="#parents">Para padres</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">Saque</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>Mi saque se va a la red</h3>
+            <p>Un saque a la red suele significar que el lanzamiento es muy bajo o va muy adelante, así que golpeas hacia abajo demasiado pronto. Lanza un poco más alto, justo delante de tu hombro de golpe, y estírate para pegarle con el brazo extendido. Practica diez lanzamientos sin golpear: cada uno debe caer en el mismo sitio, delante de tu pie adelantado.</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>Mi saque se va largo</h3>
+            <p>Un saque largo suele venir de un lanzamiento que se va hacia atrás, lo que abre la cara de la raqueta al golpear. Mantén el lanzamiento un poco adelante, golpea hacia arriba y por encima de la pelota, y deja que la raqueta gire después del impacto. Apunta al centro del cuadro, no a las líneas.</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>Hago muchas dobles faltas</h3>
+            <p>La mayoría de las dobles faltas vienen de sacar el segundo servicio como un primero más lento. El segundo saque necesita más efecto, no menos velocidad: cepilla la parte de atrás de la pelota hacia arriba para que pase la red con margen y caiga dentro del cuadro. Practica una canasta solo de segundos saques y cuenta cuántos entran.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">Derechas, reveses y peloteos</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>Mi derecha se va a la red</h3>
+            <p>Las derechas a la red suelen significar que el golpe es muy plano o que llegas tarde. Empieza con la raqueta por debajo de la pelota y termina alto, sobre el hombro contrario, y golpea la pelota por delante del cuerpo. Apunta un metro por encima de la red: esa altura es tu margen.</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>Mi derecha se va larga</h3>
+            <p>Una derecha que se va larga suele golpearse plana y con la cara de la raqueta abierta. Cepilla la parte de atrás de la pelota hacia arriba para darle efecto liftado, así baja dentro de la cancha, y termina el golpe sobre el hombro en lugar de recto hacia el objetivo. Apunta profundo al centro, unos pasos dentro de la línea de fondo.</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>Mi revés es débil</h3>
+            <p>Un revés débil suele empezar por girar tarde. En cuanto veas que la pelota viene a ese lado, gira los hombros hasta dar la espalda en parte a la red, y luego golpea de abajo hacia arriba por delante del cuerpo. Pelotea revés contra revés en cruzado con un compañero hasta que te salga solo.</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>No consigo mantener un peloteo</h3>
+            <p>Los peloteos terminan pronto cuando cada golpe apunta demasiado cerca de las líneas o de la red. Apunta más alto sobre la red y profundo al centro de la cancha, y cuenta tus peloteos: intenta batir tu propio récord, no a tu compañero. La consistencia va antes que la potencia.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">Juego de pies y la red</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>Siempre llego tarde a la pelota</h3>
+            <p>Llegar tarde suele ser un problema de pies, no del golpe. Haz un pequeño split-step justo cuando tu rival golpea, para estar de puntillas al leer la pelota, y luego da pasitos de ajuste antes de golpear. Practícalo en casa sin pelota: split, giro, golpe, recuperación.</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>Me siento incómodo en la red</h3>
+            <p>En la red, menos es más: nada de swing grande. Mantén la raqueta arriba delante de ti, gira los hombros y golpea la pelota con un movimiento corto, dando un paso adelante al golpear. Empieza cerca de la red con un compañero que te lance suave y luego aléjate.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">Partidos y práctica</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>Juego peor en los partidos</h3>
+            <p>La mayoría de los jugadores se agarrotan porque intentan golpes más difíciles bajo presión. Elige un plan simple antes del partido, como cruzado y profundo hasta que llegue una pelota corta, y usa la misma rutina corta entre cada punto. Practica también con marcador: juegos y tie-breaks, no solo peloteos.</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>¿Cómo practico por mi cuenta?</h3>
+            <p>Una pared es el mejor compañero de práctica: pelotea derechas y reveses contra ella, apuntando por encima de una línea. Una canasta de saques en una cancha vacía te da un lanzamiento fiable, y los golpes en seco frente a un espejo corrigen la técnica sin pelota. Poco y seguido vale más que mucho y de vez en cuando.</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">Para padres</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>¿Cómo puede practicar mi hijo en casa?</h3>
+            <p>Que sea corto y divertido: lanzar y atrapar, botar la pelota sobre la raqueta, pelotear por encima de una línea en la entrada de casa con una pelota blanda. Unos minutos varias veces por semana construyen más que una sesión larga. En las clases, los principiantes pequeños usan pelotas más lentas y suaves, así que pelotean antes.</p>
+          </article>
+        </div>    </section>
+
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">¿Quieres la causa real?</h2>
+          <p class="fade" style="--d:.06s">
+            Un consejo trata el síntoma. En una clase te veo jugar y corrijo lo que hay detrás.
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
+            <a class="btn btn-outline btn-lg" href="/es/#lessons">Ver clases y precios</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">Reservar solo aparta el horario: sin tarjeta ni depósito. Pagas en persona.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
+      <p class="footer-links">
+        <a href="/es/">Clases particulares de tenis</a>
+        <a href="/portfolio/">Portafolio profesional</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>

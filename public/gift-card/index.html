@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ============================================================
+       The gift card Isaac prints for someone who has bought lessons as a
+       gift (the "Give a lesson" popup on the front page emails him the
+       request): leetennisco.com/gift-card/, and in each language
+       (/ko/gift-card/ …), built by tools/i18n/build.mjs. The form fills
+       the card as he types (print.js); anything left blank prints as a
+       line to write on. No expiry date, on purpose: in California a gift
+       certificate can't carry one. Not linked from the site and kept out
+       of search.
+       ============================================================ -->
+  <title>Gift card — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>Make a gift card</h1>
+    <p>Fill in what you know; anything left blank prints as a line to write on by hand. Print on Letter paper or card stock at 100% scale, then cut along the dashed line.</p>
+    <form class="card-form" id="cardForm">
+      <label>
+        <span class="field-label">The gift</span>
+        <select name="gift">
+          <option>One private lesson</option>
+          <option>5 private lessons</option>
+          <option>10 private lessons</option>
+          <option>One hitting session</option>
+        </select>
+      </label>
+      <label>
+        <span class="field-label">For <span class="field-optional">Optional</span></span>
+        <input type="text" name="to" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">From <span class="field-optional">Optional</span></span>
+        <input type="text" name="from" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">Message <span class="field-optional">Optional</span></span>
+        <input type="text" name="message" maxlength="140" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">Card number <span class="field-optional">Optional</span></span>
+        <input type="text" name="number" maxlength="12" autocomplete="off" />
+      </label>
+    </form>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>Print the card</button>
+      <a class="print-home" href="/">Back to the site</a>
+    </div>
+    <nav class="print-langs" aria-label="This card in other languages">
+      <a href="/gift-card/" hreflang="en" lang="en" aria-current="page">English</a>
+      <a href="/es/gift-card/" hreflang="es" lang="es">Español</a>
+      <a href="/ko/gift-card/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/gift-card/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      <a href="/zh-hant/gift-card/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+      <a href="/ja/gift-card/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/gift-card/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/gift-card/" hreflang="fa" lang="fa">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet card-sheet">
+      <article class="gift-card">
+        <div class="gc-head">
+          <img class="gc-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+          <div class="gc-meta">
+            <p class="eyebrow">Gift card</p>
+            <p class="gc-number"><span>No.</span> <span data-card="number"></span></p>
+          </div>
+        </div>
+
+        <div class="gc-body">
+          <p class="gc-label">For</p>
+          <p class="gc-to" data-card="to"></p>
+          <p class="gc-gift" data-card="gift">One private lesson</p>
+          <p><span class="gc-message" data-card="message" data-card-row></span></p>
+          <p class="gc-from"><span class="gc-label">From</span> <span data-card="from"></span></p>
+        </div>
+
+        <div class="gc-foot">
+          <div>
+            <p class="gc-book">To book, scan the code or go to leetennisco.com, and mention this card.</p>
+            <p class="gc-coach">Isaac Lee · RSPA-certified coach · Toscana courts, Irvine</p>
+          </div>
+          <div class="qr" data-qr="" role="img" aria-label="QR code that opens the lessons page"></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

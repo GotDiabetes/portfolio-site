@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from gift-card/index.html and tools/i18n/fa.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>کارت هدیه — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>ساختن کارت هدیه</h1>
+    <p>هر چه را می‌دانید پر کنید؛ جاهای خالی به‌صورت خطی برای نوشتن با دست چاپ می‌شوند. روی کاغذ Letter یا مقوا با مقیاس ۱۰۰٪ چاپ کنید و بعد از روی خط‌چین ببرید.</p>
+    <form class="card-form" id="cardForm">
+      <label>
+        <span class="field-label">هدیه</span>
+        <select name="gift">
+          <option>یک کلاس خصوصی</option>
+          <option>۵ کلاس خصوصی</option>
+          <option>۱۰ کلاس خصوصی</option>
+          <option>یک جلسه رالی</option>
+        </select>
+      </label>
+      <label>
+        <span class="field-label">برای <span class="field-optional">اختیاری</span></span>
+        <input type="text" name="to" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">از طرف <span class="field-optional">اختیاری</span></span>
+        <input type="text" name="from" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">پیام <span class="field-optional">اختیاری</span></span>
+        <input type="text" name="message" maxlength="140" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">شمارهٔ کارت <span class="field-optional">اختیاری</span></span>
+        <input type="text" name="number" maxlength="12" autocomplete="off" />
+      </label>
+    </form>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>چاپ کارت</button>
+      <a class="print-home" href="/fa/">بازگشت به سایت</a>
+    </div>
+    <nav class="print-langs" aria-label="این کارت به زبان‌های دیگر">
+      <a href="/gift-card/" hreflang="en" lang="en">English</a>
+      <a href="/es/gift-card/" hreflang="es" lang="es">Español</a>
+      <a href="/ko/gift-card/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/gift-card/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      <a href="/zh-hant/gift-card/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+      <a href="/ja/gift-card/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/gift-card/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/gift-card/" hreflang="fa" lang="fa" aria-current="page">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet card-sheet">
+      <article class="gift-card">
+        <div class="gc-head">
+          <img class="gc-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — نشان LT" />
+          <div class="gc-meta">
+            <p class="eyebrow">کارت هدیه</p>
+            <p class="gc-number"><span>شماره</span> <span data-card="number"></span></p>
+          </div>
+        </div>
+
+        <div class="gc-body">
+          <p class="gc-label">برای</p>
+          <p class="gc-to" data-card="to"></p>
+          <p class="gc-gift" data-card="gift">یک کلاس خصوصی</p>
+          <p><span class="gc-message" data-card="message" data-card-row></span></p>
+          <p class="gc-from"><span class="gc-label">از طرف</span> <span data-card="from"></span></p>
+        </div>
+
+        <div class="gc-foot">
+          <div>
+            <p class="gc-book">برای رزرو، کد را اسکن کنید یا به leetennisco.com بروید و این کارت را ذکر کنید.</p>
+            <p class="gc-coach">Isaac Lee · مربی دارای گواهی RSPA · زمین‌های Toscana، ارواین</p>
+          </div>
+          <div class="qr" data-qr="" role="img" aria-label="کد QR برای باز کردن صفحهٔ کلاس‌ها"></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>window.I18N = {"copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

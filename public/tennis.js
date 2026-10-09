@@ -10,6 +10,10 @@
      7. Booking before the calendar script has arrived
      8. Footer year
      9. Language menu
+    10. Clinic list
+    11. Gift request
+    12. Review link
+    13. Isaac's numbers (visit counts and page events)
 
    Words this file writes into the page come from window.I18N on the
    translated pages (tools/i18n/), and fall back to English here.
@@ -261,16 +265,21 @@
     var link = e.target.closest && e.target.closest("[data-mail]");
     if (!link) return;
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-
-    var subject = link.getAttribute("data-mail") || "";
-    var url = "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-              encodeURIComponent(MAIL_TO) + (subject ? "&su=" + subject : "");
-
-    /* If the popup is blocked, window.open returns null and we fall through to
-       the mailto: default rather than leaving the click doing nothing. */
-    var opened = window.open(url, "_blank", "noopener");
-    if (opened) e.preventDefault();
+    /* data-mail is already URI-encoded. */
+    if (gmail("&su=" + (link.getAttribute("data-mail") || ""))) e.preventDefault();
   });
+
+  /* Opens Gmail's compose window to Isaac. Returns false if the popup was
+     blocked, so the caller can fall back to mailto:. Not opened with the
+     "noopener" feature: with it, window.open always returns null, which
+     read as "blocked" and sent every click to the desktop mail app as
+     well. The new window's opener is cut by hand instead. */
+  function gmail(params) {
+    var w = window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(MAIL_TO) + params, "_blank");
+    if (!w) return false;
+    try { w.opener = null; } catch (err) { /* cross-origin already */ }
+    return true;
+  }
 
   /* ------------------------------------------- 7. Booking before ready --
      The calendar script is deferred (see the loader in <head>). Every Book
@@ -340,5 +349,173 @@
       if (e.key === "Escape" && lang.open) { closeLang(); lang.querySelector("summary").focus(); }
     });
     lang.addEventListener("toggle", function () { if (lang.open && nav) closeMenu(); });
+  }
+
+  /* ------------------------------------------------- 10. Clinic list --
+     The popup's form becomes an email to Isaac, through the same Gmail
+     hand-off as the email buttons (mailto: if the popup is blocked), sent
+     from the visitor's own account so his reply goes straight back. The
+     body is always English: the form's values are codes, and these are the
+     words he reads, whatever language the visitor saw. Nothing is stored. */
+  var clinicForm = document.getElementById("clinicForm");
+  if (clinicForm) {
+    var LEVELS = [
+      "New to tennis (never played, or not since childhood)",
+      "Beginner (can hit some balls back; rallies are short)",
+      "Intermediate (rallies and serves; working on consistency)",
+      "Advanced (plays matches: high school, league or USTA)",
+      "Competitive (tournament junior, college, or 4.5+ adult)",
+    ];
+    var TIMES = {
+      "weekday-afternoon": "weekday afternoons", "weekday-evening": "weekday evenings",
+      "weekend-morning": "weekend mornings", "weekend-afternoon": "weekend afternoons",
+    };
+    var clinicError = clinicForm.querySelector(".form-error");
+    var levelField = clinicForm.querySelector("select[name=level]");
+    levelField.addEventListener("change", function () { clinicError.hidden = true; });
+
+    clinicForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var level = levelField.value;
+      if (!LEVELS[level]) {
+        clinicError.hidden = false;
+        levelField.focus();
+        return;
+      }
+      clinicError.hidden = true;
+      var group = clinicForm.querySelector("input[name=group]:checked");
+      var times = Array.prototype.map.call(clinicForm.querySelectorAll("input[name=times]:checked"), function (b) { return TIMES[b.value]; });
+      var notes = clinicForm.elements.notes.value.replace(/\s+/g, " ").trim();
+      var lines = [
+        "Please add me to the clinic list.",
+        "",
+        "Level: " + LEVELS[level],
+        "Who's coming: " + (group && group.value === "own" ? "I'm bringing my own group" : "just me, please put me in a group"),
+        "Times that usually work: " + (times.length ? times.join(", ") : "not given"),
+      ];
+      if (notes) lines.push("Anything else: " + notes);
+      sendMail("Clinic list", lines);
+      hit("clinic_list");
+    });
+  }
+
+  /* Both forms end the same way: an English email to Isaac, through Gmail
+     or, if its window is blocked, the visitor's mail app. */
+  function sendMail(subject, lines) {
+    subject += T.pageName ? " (" + T.pageName + " page)" : "";
+    if (T.pageName) lines = lines.concat("", "(Sent from the " + T.pageName + " page.)");
+    var body = lines.join("\n");
+    if (!gmail("&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body))) {
+      window.location.href = "mailto:" + MAIL_TO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+  }
+
+  /* ------------------------------------------------- 11. Gift request --
+     The gift popup, the same way as the clinic list: codes in, English out.
+     Isaac replies to settle payment in person and makes the card on
+     /gift-card/. */
+  var giftForm = document.getElementById("giftRequest");
+  if (giftForm) {
+    var GIFTS = {
+      private1: "One private lesson ($80)", private5: "5 private lessons ($375)",
+      private10: "10 private lessons ($700)", hitting1: "One hitting session ($45)",
+    };
+    var giftError = giftForm.querySelector(".form-error");
+    giftForm.addEventListener("change", function () { giftError.hidden = true; });
+
+    giftForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var picked = giftForm.querySelector("input[name=gift]:checked");
+      if (!picked || !GIFTS[picked.value]) {
+        giftError.hidden = false;
+        giftForm.querySelector("input[name=gift]").focus();
+        return;
+      }
+      giftError.hidden = true;
+      var field = function (name) { return giftForm.elements[name].value.replace(/\s+/g, " ").trim(); };
+      var lines = [
+        "I'd like to give a lesson as a gift.",
+        "",
+        "Gift: " + GIFTS[picked.value],
+        "For: " + (field("to") || "not given"),
+        "From: " + (field("from") || "not given"),
+      ];
+      if (field("message")) lines.push("Message for the card: " + field("message"));
+      lines.push("", "Please reply so we can settle payment in person.");
+      sendMail("Gift lesson", lines);
+      hit("gift");
+    });
+  }
+
+  /* --------------------------------------------------- 12. Review link --
+     Isaac's Google review link goes in the review-link meta tag once his
+     Business Profile exists. Until then the request under the reviews stays
+     hidden, so the page never points at nothing. */
+  var reviewMeta = document.querySelector('meta[name="review-link"]');
+  var reviewUrl = reviewMeta && /^https:\/\//.test(reviewMeta.content) ? reviewMeta.content : "";
+  if (reviewUrl) {
+    document.querySelectorAll("[data-review-link]").forEach(function (a) { a.href = reviewUrl; });
+    document.querySelectorAll(".review-ask").forEach(function (p) { p.hidden = false; });
+  }
+
+  /* --------------------------------------------- 13. Isaac's numbers --
+     Two sources, both counts with no record of who:
+       · Cloudflare Web Analytics, for visits (which pages, which language,
+         where people came from). No cookies, so no consent banner. Loads
+         only when the cf-analytics meta tag holds Isaac's token, after the
+         page has finished loading.
+       · The Worker's /hit, for what only the page sees: Book pressed (and
+         which lesson), the clinic list or a gift request sent, the chat
+         opened, a visit from the flyer's QR code. sendBeacon, so it never
+         holds up a click or a page change.
+     Isaac reads both on /stats/. */
+  var cfMeta = document.querySelector('meta[name="cf-analytics"]');
+  if (cfMeta && /^[\w-]{16,64}$/.test(cfMeta.content) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+    window.addEventListener("load", function () {
+      var s = document.createElement("script");
+      s.defer = true;
+      s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+      s.setAttribute("data-cf-beacon", JSON.stringify({ token: cfMeta.content }));
+      document.body.appendChild(s);
+    });
+  }
+
+  function hitBase() {
+    if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return "http://localhost:8787";
+    var meta = document.querySelector('meta[name="jev-endpoint"]');
+    return meta ? meta.content.replace(/\/+$/, "") : "";
+  }
+  function hit(event) {
+    var base = hitBase();
+    if (!base || !navigator.sendBeacon) return;
+    try {
+      navigator.sendBeacon(base + "/hit", JSON.stringify({ event: event, page: T.lang || "en" }));
+    } catch (err) { /* counting is never worth an error */ }
+  }
+  window.leeHit = hit;
+
+  var BOOKED = { "60-min-private-lesson": "book_private", "60-min-semi-private-lesson": "book_semi", "60-min-hitting-session": "book_hitting" };
+  /* One count per press: a click the calendar loader holds and replays a
+     moment later (section 7) is the same press. */
+  var counted = window.WeakMap ? new WeakMap() : null;
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("[data-cal-link]");
+    if (!el) return;
+    if (counted) {
+      if (Date.now() - (counted.get(el) || 0) < 8000) return;
+      counted.set(el, Date.now());
+    }
+    var slug = (el.getAttribute("data-cal-link") || "").split("/").pop();
+    hit(BOOKED[slug] || "book_other");
+  });
+
+  /* The flyer's QR code opens the page with ?from=flyer: counted once,
+     then taken out of the address so a shared link doesn't count again. */
+  if (/[?&]from=flyer\b/.test(location.search)) {
+    hit("flyer_visit");
+    if (window.history && history.replaceState) {
+      var rest = location.search.replace(/[?&]from=flyer\b/, "").replace(/^&/, "?");
+      history.replaceState(null, "", location.pathname + (rest === "?" ? "" : rest) + location.hash);
+    }
   }
 })();

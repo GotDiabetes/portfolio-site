@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from gift-card/index.html and tools/i18n/es.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarjeta de regalo — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=2" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1>Hacer una tarjeta de regalo</h1>
+    <p>Rellena lo que sepas; lo que quede en blanco se imprime como una línea para escribir a mano. Imprímela en papel tamaño carta o cartulina al 100 % y córtala por la línea discontinua.</p>
+    <form class="card-form" id="cardForm">
+      <label>
+        <span class="field-label">El regalo</span>
+        <select name="gift">
+          <option>Una clase particular</option>
+          <option>5 clases particulares</option>
+          <option>10 clases particulares</option>
+          <option>Una sesión de peloteo</option>
+        </select>
+      </label>
+      <label>
+        <span class="field-label">Para <span class="field-optional">Opcional</span></span>
+        <input type="text" name="to" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">De <span class="field-optional">Opcional</span></span>
+        <input type="text" name="from" maxlength="40" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">Mensaje <span class="field-optional">Opcional</span></span>
+        <input type="text" name="message" maxlength="140" autocomplete="off" />
+      </label>
+      <label>
+        <span class="field-label">Número de tarjeta <span class="field-optional">Opcional</span></span>
+        <input type="text" name="number" maxlength="12" autocomplete="off" />
+      </label>
+    </form>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden>Imprimir la tarjeta</button>
+      <a class="print-home" href="/es/">Volver al sitio</a>
+    </div>
+    <nav class="print-langs" aria-label="Esta tarjeta en otros idiomas">
+      <a href="/gift-card/" hreflang="en" lang="en">English</a>
+      <a href="/es/gift-card/" hreflang="es" lang="es" aria-current="page">Español</a>
+      <a href="/ko/gift-card/" hreflang="ko" lang="ko">한국어</a>
+      <a href="/zh-hans/gift-card/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+      <a href="/zh-hant/gift-card/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+      <a href="/ja/gift-card/" hreflang="ja" lang="ja">日本語</a>
+      <a href="/vi/gift-card/" hreflang="vi" lang="vi">Tiếng Việt</a>
+      <a href="/fa/gift-card/" hreflang="fa" lang="fa">فارسی</a>
+    </nav>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet card-sheet">
+      <article class="gift-card">
+        <div class="gc-head">
+          <img class="gc-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — monograma LT" />
+          <div class="gc-meta">
+            <p class="eyebrow">Tarjeta de regalo</p>
+            <p class="gc-number"><span>N.º</span> <span data-card="number"></span></p>
+          </div>
+        </div>
+
+        <div class="gc-body">
+          <p class="gc-label">Para</p>
+          <p class="gc-to" data-card="to"></p>
+          <p class="gc-gift" data-card="gift">Una clase particular</p>
+          <p><span class="gc-message" data-card="message" data-card-row></span></p>
+          <p class="gc-from"><span class="gc-label">De</span> <span data-card="from"></span></p>
+        </div>
+
+        <div class="gc-foot">
+          <div>
+            <p class="gc-book">Para reservar, escanea el código o entra en leetennisco.com y menciona esta tarjeta.</p>
+            <p class="gc-coach">Isaac Lee · Certificado RSPA · Canchas Toscana, Irvine</p>
+          </div>
+          <div class="qr" data-qr="" role="img" aria-label="Código QR que abre la página de clases"></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script src="/print.js?v=2" defer></script>
+</body>
+</html>

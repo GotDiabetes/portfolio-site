@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">개인 코칭 · 어바인 Toscana 코트</p>
+          <p class="eyebrow fade">RSPA 공인 코치 · 어바인 Toscana 코트</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">개인</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">테니스</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>개인 레슨</h3>
           <p class="price">$80<span>/시간</span></p>
+          <p class="package">또는 5회 $375, 10회 $700, 현장 결제.</p>
           <p>
             주니어와 성인 모두를 위한 1:1 수업이에요. 스트로크와 서브 기술, 풋워크, 어린 초보자들이 배우는 느리고 부드러운 공, 그리고 레슨 사이에 실제로 해 볼 수 있는 연습 계획까지 다뤄요.
           </p>
@@ -257,7 +269,7 @@
             한 코트에서 소규모 그룹으로 드릴과 라이브 볼 게임을 해요. 로테이션이 충분해서 모두가 계속 공을 쳐요. 비용은 인원에 따라 달라요.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Korean%20page)" data-mail="Adult%20clinics%20(Korean%20page)">이메일로 견적 받기</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">클리닉 신청하기</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="성인 클리닉에서 다루는 내용">다루는 내용</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">AI가 문장을 읽고 레슨을 골라요. 이 사이트에는 아무것도 저장되지 않아요.</p>
       </form>
+
+      <p class="gift-line fade">
+        테니스를 선물하고 싶으신가요? 개인 레슨, 패키지, 히팅 세션 모두 선물할 수 있어요.
+        <button class="link-btn" type="button" data-open="giftForm">레슨 선물하기</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 코치 생활은 3년째예요. LifeSport Libertyville에서 주니어 프로로 시작했고, 이후 Newport Beach Tennis Club의 주니어 프로그램인 Grip N Rip의 프로 스태프가 되었어요.
               </p>
               <p>
+                저는 RSPA(Racket Sports Professionals Association, 옛 USPTA) 공인 코치이고, USTA Safe Play 승인을 받았어요. 신원 조회를 마쳤고 SafeSport 교육을 이수했어요.
+              </p>
+              <p>
                 주로 성장 중인 주니어 선수들을 가르쳐요. 기본기를 일찍 제대로 잡아야 실력이 계속 쌓이거든요. 더 안정적인 플레이와, 실제 포인트가 시작됐을 때의 분명한 계획을 원하는 성인을 위한 클리닉도 운영해요.
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>홈 코트</dt><dd>어바인 Toscana</dd></div>
+              <div><dt>인증</dt><dd>RSPA</dd></div>
               <div><dt>고교 대표팀</dt><dd>4년</dd></div>
               <div><dt>일정</dt><dd>파트타임</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        저와 레슨해 보셨나요? 짧은 구글 리뷰 하나가 다른 선수와 부모님들이 저를 찾는 데 큰 도움이 돼요.
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">리뷰 남기기</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="영상 재생: 2024년 11월, LifeSport Libertyville에서 전 코치와 경기하는 Isaac Lee">
@@ -437,7 +463,72 @@
           <dt>첫 수업</dt>
           <dd>예약할 때 실력과 연습하고 싶은 부분을 알려 주시면, 계획을 준비해 둘게요.</dd>
         </div>
+        <div>
+          <dt>안전</dt>
+          <dd>USTA Safe Play 승인: 신원 조회 완료, SafeSport 교육 이수. RSPA 공인 코치.</dd>
+        </div>
+        <div>
+          <dt>취소</dt>
+          <dd>레슨 취소나 변경은 24시간 전까지 알려 주세요. 그 이후 취소는 비용이 청구돼요. 비나 더위로 취소되면 무료로 다시 잡아 드려요.</dd>
+        </div>
+        <div>
+          <dt>라켓</dt>
+          <dd>라켓이 없나요? 제 라켓을 빌려 드려요.</dd>
+        </div>
+        <div>
+          <dt>패키지</dt>
+          <dd>개인 레슨: 5회 $375, 10회 $700, 현장 결제.</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">자주 묻는 질문</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>아이가 테니스를 처음 해도 되나요?</summary>
+          <p>네. 주니어는 완전 초보부터 시작해요. 가장 어린 선수들은 느리고 부드러운 공(레드, 오렌지, 그린 순서)으로 배우고, 준비되면 다음 단계로 올라가요.</p>
+        </details>
+        <details>
+          <summary>아이를 맡겨도 안전한가요?</summary>
+          <p>저는 USTA Safe Play 승인을 받았어요. 신원 조회를 마쳤고 SafeSport 교육을 이수했다는 뜻이에요. RSPA(Racket Sports Professionals Association) 공인 코치이기도 해요.</p>
+        </details>
+        <details>
+          <summary>예약할 때 결제하나요?</summary>
+          <p>아니요. 온라인 예약은 시간만 잡아 둬요. 카드도 보증금도 필요 없고, 결제는 현장에서 해요.</p>
+        </details>
+        <details>
+          <summary>취소해야 하면 어떻게 하나요?</summary>
+          <p>레슨 취소나 변경은 24시간 전까지 알려 주세요. 그 이후 취소는 비용이 청구돼요. 비나 더위로 레슨이 취소되면 무료로 다시 잡아 드려요.</p>
+        </details>
+        <details>
+          <summary>제 코트나 집으로 와 줄 수 있나요?</summary>
+          <p>아니요. 모든 레슨은 제 홈 코트인 어바인 Toscana Apartments 테니스 코트에서 해요.</p>
+        </details>
+        <details>
+          <summary>라켓이 없어도 괜찮나요?</summary>
+          <p>네. 제 라켓을 빌려 드려요.</p>
+        </details>
+        <details>
+          <summary>레슨 패키지가 있나요?</summary>
+          <p>네, 개인 레슨은 5회 $375, 10회 $700이고 현장에서 결제해요. 시간당 $80 대신 $75, $70인 셈이에요.</p>
+        </details>
+        <details>
+          <summary>레슨을 선물할 수 있나요?</summary>
+          <p>네. 개인 레슨 1회, 개인 레슨 5회나 10회, 또는 히팅 세션 1회를 선물할 수 있어요. 신청을 보내 주시면 결제는 직접 만나서 하고, 인쇄용 기프트 카드를 드려요.</p>
+          <button class="link-btn" type="button" data-open="giftForm">레슨 선물하기</button>
+        </details>
+        <details>
+          <summary>코치가 젊은데 괜찮을까요?</summary>
+          <p>충분히 물어볼 만한 질문이에요. 저는 2023년부터 코칭했어요. LifeSport Libertyville에서 주니어 프로로 시작했고, 이후 Newport Beach Tennis Club의 Grip N Rip 프로 스태프로 일했어요. RSPA 공인 코치이고 USTA Safe Play 승인을 받았으며, 고등학교 대표팀에서 4년 동안 뛰었어요. 레슨을 한 번 받아 보고 판단해 주세요.</p>
+        </details>
+        <details>
+          <summary>계속 잘 안 되는 부분이 있어요.</summary>
+          <p>제 연습 팁에는 네트에 걸리는 서브부터 경기 중 긴장까지, 가장 흔한 문제마다 해 볼 것이 하나씩 있어요.</p>
+          <a class="link-btn" href="tips/">연습 팁 보기</a>
+          <button class="link-btn faq-ask" type="button" data-ask="무엇을 연습하면 좋을까요?" hidden>내 문제를 채팅에 물어보기</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 캘리포니아 어바인</p>
       <p class="footer-links">
+        <a href="tips/">연습 팁</a>
         <a href="/portfolio/">커리어 포트폴리오</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>개인 레슨</h3>
       <p class="price">$80<span>/시간</span></p>
+      <p class="package">또는 5회 $375, 10회 $700, 현장 결제.</p>
       <p>주니어와 성인 모두 &mdash; 같은 1:1 형식으로, 실력에 맞춰 진행해요.</p>
       <ul>
         <li>스트로크와 서브 기술</li>
@@ -573,8 +666,85 @@
         <li>그룹을 직접 꾸려 오거나, 기존 그룹에 넣어 달라고 요청하세요</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Korean%20page)" data-mail="Adult%20clinics%20(Korean%20page)">이메일로 견적 받기</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">클리닉 신청하기</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Korean%20page)" data-mail="Adult%20clinics%20(Korean%20page)">이메일 보내기</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>클리닉 신청하기</h3>
+      <p>클리닉은 한 코트에서 하는 소규모 그룹 수업이에요. 실력과 가능한 시간을 알려 주시면, 비슷한 선수들과 같은 그룹에 넣어 드릴게요.</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">실력</span>
+          <select name="level" required>
+            <option value="">선택하세요</option>
+            <option value="0">테니스 처음: 쳐 본 적이 없거나 어릴 때 이후로 안 쳤어요</option>
+            <option value="1">초급: 공을 넘길 수는 있지만 랠리가 짧아요</option>
+            <option value="2">중급: 랠리와 서브가 되고, 안정감을 키우는 중이에요</option>
+            <option value="3">상급: 고등학교, 리그, USTA 경기를 해요</option>
+            <option value="4">선수급: 토너먼트 주니어, 대학 선수, 또는 4.5 이상 성인</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">누가 오나요</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> 저 혼자예요: 그룹에 넣어 주세요</label>
+          <label class="choice"><input type="radio" name="group" value="own"> 제 그룹과 함께 와요</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">보통 가능한 시간</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> 평일 오후</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> 평일 저녁</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> 주말 오전</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> 주말 오후</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">더 알려 주실 내용 <span class="field-optional">선택</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="예: 네 명이고 실력이 다 비슷해요"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>실력을 먼저 선택해 주세요.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">이메일로 보내기</button>
+        </div>
+        <p class="form-note">누르면 답변이 담긴 이메일 창이 열려요. 이 사이트에는 아무것도 저장되지 않아요.</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="닫기">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>레슨 선물하기</h3>
+      <p>선물을 고르시면 인쇄용 기프트 카드를 만들어 드려요. 선물 받은 분은 다른 분들과 똑같이 예약하시면 돼요.</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">선물</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> 개인 레슨 1회 <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 개인 레슨 5회 <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 개인 레슨 10회 <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> 히팅 세션 1회 <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">받는 분 <span class="field-optional">선택</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="카드에 쓸 이름">
+        </label>
+        <label class="field">
+          <span class="field-label">보내는 분 <span class="field-optional">선택</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="카드에 적힐 그대로">
+        </label>
+        <label class="field">
+          <span class="field-label">카드에 쓸 메시지 <span class="field-optional">선택</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="예: 생일 축하해! 코트에서 만나."></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>선물을 먼저 선택해 주세요.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">이메일로 신청하기</button>
+        </div>
+        <p class="form-note">누르면 저에게 보내는 이메일 창이 열려요. 답장으로 직접 만나 결제할 시간을 정하고, 그때 카드를 드릴게요. 이 사이트에는 아무것도 저장되지 않아요.</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">아직 답이 없는 질문은 제가 답을 써 둘 수 있도록 90일 동안 보관돼요.</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","어떤 레슨이 저에게 맞을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 몇 명인지 이메일로 알려 주시면 견적을 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

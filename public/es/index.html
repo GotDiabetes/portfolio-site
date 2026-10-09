@@ -31,8 +31,10 @@
 
   <meta name="theme-color" content="#ffffff" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="review-link" content="" />
+  <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261006j" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
   <link rel="stylesheet" href="/focus.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
@@ -98,7 +100,16 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "founder": { "@type": "Person", "name": "Isaac Lee", "jobTitle": "Private Tennis Coach" }
+    "founder": {
+      "@type": "Person",
+      "name": "Isaac Lee",
+      "jobTitle": "Private Tennis Coach",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "recognizedBy": { "@type": "Organization", "name": "Racket Sports Professionals Association (RSPA)" }
+      }
+    }
   }
   </script>
 </head>
@@ -159,7 +170,7 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="eyebrow fade">Clases particulares · Canchas Toscana, Irvine</p>
+          <p class="eyebrow fade">Certificado RSPA · Canchas Toscana, Irvine</p>
           <h1 class="hero-drop">
             <span class="drop-line"><span class="drop-word">Clases</span></span>
             <span class="drop-line"><span class="drop-word" style="--d:.09s">de tenis</span></span>
@@ -217,6 +228,7 @@
         <article class="lesson fade" data-lesson="private">
           <h3>Clases particulares</h3>
           <p class="price">$80<span>/hora</span></p>
+          <p class="package">O 5 clases por $375 y 10 por $700, pagadas en persona.</p>
           <p>
             Uno a uno, para juveniles y adultos por igual. Técnica de golpes y saque, juego de pies, las pelotas más lentas y suaves con las que aprenden los principiantes más pequeños, y un plan de práctica que de verdad puedes seguir entre sesiones.
           </p>
@@ -257,7 +269,7 @@
             Grupos pequeños en una sola cancha, con ejercicios y juegos con bola viva y suficiente rotación para que todos sigan pegándole. El costo depende de cuántos sean.
           </p>
           <div class="lesson-actions">
-            <a class="btn btn-primary btn-sm" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Pedir precio por correo</a>
+            <button class="btn btn-primary btn-sm" type="button" data-open="clinicList">Apúntate a una clínica</button>
             <button class="link-btn" type="button" data-open="modalAdult" aria-label="Qué incluye una clínica para adultos">Qué incluye</button>
           </div>
         </article>
@@ -273,6 +285,11 @@
         <div class="matcher-result" role="status" aria-live="polite"></div>
         <p class="matcher-note">Una IA lee tu frase para elegir una clase. Este sitio no guarda nada.</p>
       </form>
+
+      <p class="gift-line fade">
+        ¿Quieres regalar tenis? Cualquier clase particular, paquete o sesión de peloteo puede ser un regalo.
+        <button class="link-btn" type="button" data-open="giftForm">Regala una clase</button>
+      </p>
     </section>
 
     <section class="band" id="about">
@@ -295,6 +312,9 @@
                 Llevo tres años entrenando. Empecé como Junior Pro en LifeSport Libertyville y después me uní al Pro Staff de Grip N Rip, el programa juvenil del Newport Beach Tennis Club.
               </p>
               <p>
+                Estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport.
+              </p>
+              <p>
                 La mayor parte de mi trabajo es con juveniles en desarrollo: asentar bien los fundamentos desde temprano para que el progreso se siga acumulando. También dirijo clínicas para adultos que quieren más consistencia y un plan más claro cuando empiezan los puntos de verdad.
               </p>
               <p>
@@ -304,6 +324,7 @@
 
             <dl class="facts fade" style="--d:.18s">
               <div><dt>Mi cancha</dt><dd>Toscana, Irvine</dd></div>
+              <div><dt>Certificación</dt><dd>RSPA</dd></div>
               <div><dt>Equipo escolar</dt><dd>4 años</dd></div>
               <div><dt>Horario</dt><dd>Medio tiempo</dd></div>
             </dl>
@@ -399,6 +420,11 @@
         </figure>
       </div>
 
+      <p class="review-ask" hidden>
+        ¿Ya tomaste una clase conmigo? Una breve reseña en Google ayuda a otros jugadores y padres a encontrarme.
+        <a class="link-btn" data-review-link href="#" target="_blank" rel="noopener">Deja una reseña</a>
+      </p>
+
       <figure class="video-frame fade">
         <button class="video-play" type="button" data-video="4oZhhesVV2E"
                 aria-label="Reproducir el video: Isaac Lee contra su antiguo entrenador en LifeSport Libertyville, noviembre de 2024">
@@ -437,7 +463,72 @@
           <dt>Primera sesión</dt>
           <dd>Cuando reserves, cuéntame tu nivel y en qué estás trabajando, y llegaré con un plan.</dd>
         </div>
+        <div>
+          <dt>Seguridad</dt>
+          <dd>Aprobado por USTA Safe Play: verificación de antecedentes y formación de SafeSport. Certificado por la RSPA.</dd>
+        </div>
+        <div>
+          <dt>Cancelaciones</dt>
+          <dd>Cancela o cambia una clase con 24 horas de aviso; las cancelaciones más tarde se cobran. Si la lluvia o el calor la cancelan, la reprogramamos sin costo.</dd>
+        </div>
+        <div>
+          <dt>Raquetas</dt>
+          <dd>¿Aún no tienes raqueta? Te presto una.</dd>
+        </div>
+        <div>
+          <dt>Paquetes</dt>
+          <dd>Clases particulares: 5 por $375 o 10 por $700, pagadas en persona.</dd>
+        </div>
       </dl>
+    </section>
+
+    <section class="wrap section faq-section" id="faq">
+      <h2 class="fade">Preguntas frecuentes</h2>
+      <div class="faq fade" style="--d:.06s">
+        <details>
+          <summary>¿Mi hijo necesita haber jugado antes?</summary>
+          <p>No. Los juveniles empiezan desde cero. Los más pequeños aprenden con pelotas más lentas y suaves (roja, luego naranja, luego verde) y suben cuando están listos.</p>
+        </details>
+        <details>
+          <summary>¿Mi hijo está seguro contigo?</summary>
+          <p>Estoy aprobado por USTA Safe Play, lo que significa que tengo verificación de antecedentes y formación de SafeSport. También estoy certificado por la RSPA, la Racket Sports Professionals Association.</p>
+        </details>
+        <details>
+          <summary>¿Pago al reservar?</summary>
+          <p>No. Reservar en línea solo aparta el horario: sin tarjeta ni depósito. Pagas en persona.</p>
+        </details>
+        <details>
+          <summary>¿Y si necesito cancelar?</summary>
+          <p>Cancela o cambia una clase con 24 horas de aviso; las cancelaciones más tarde se cobran. Si la lluvia o el calor cancelan una clase, la reprogramamos sin costo.</p>
+        </details>
+        <details>
+          <summary>¿Puedes venir a mi cancha o a mi casa?</summary>
+          <p>No. Todas las clases son en mi cancha, las canchas de tenis de Toscana Apartments en Irvine.</p>
+        </details>
+        <details>
+          <summary>No tengo raqueta. ¿Hay problema?</summary>
+          <p>Ninguno. Te presto una de las mías.</p>
+        </details>
+        <details>
+          <summary>¿Hay paquetes de clases?</summary>
+          <p>Sí, para clases particulares: 5 por $375 o 10 por $700, pagadas en persona. Son $75 y $70 la hora en vez de $80.</p>
+        </details>
+        <details>
+          <summary>¿Puedo regalar clases?</summary>
+          <p>Sí: una clase particular, 5 o 10 clases particulares, o una sesión de peloteo. Envíame la solicitud, arreglamos el pago en persona y recibes una tarjeta de regalo para imprimir.</p>
+          <button class="link-btn" type="button" data-open="giftForm">Regala una clase</button>
+        </details>
+        <details>
+          <summary>¿Por qué un entrenador joven?</summary>
+          <p>Buena pregunta. Entreno desde 2023, primero como Junior Pro en LifeSport Libertyville y después en el Pro Staff de Grip N Rip, en el Newport Beach Tennis Club. Estoy certificado por la RSPA y aprobado por Safe Play, y jugué cuatro años en el equipo varsity de mi preparatoria. Reserva una clase y juzga tú mismo.</p>
+        </details>
+        <details>
+          <summary>Hay algo de mi juego que siempre me sale mal.</summary>
+          <p>Mis consejos de práctica cubren los problemas más comunes, desde un saque a la red hasta los nervios en los partidos, con una cosa para probar en cada uno.</p>
+          <a class="link-btn" href="tips/">Leer los consejos de práctica</a>
+          <button class="link-btn faq-ask" type="button" data-ask="¿En qué debería trabajar?" hidden>Pregúntale al chat por el tuyo</button>
+        </details>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -475,6 +566,7 @@
     <div class="wrap footer-row">
       <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
       <p class="footer-links">
+        <a href="tips/">Consejos de práctica</a>
         <a href="/portfolio/">Portafolio profesional</a>
         <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
       </p>
@@ -505,6 +597,7 @@
       <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
       <h3 id="privateTitle" tabindex="-1" autofocus>Clases particulares</h3>
       <p class="price">$80<span>/hora</span></p>
+      <p class="package">O 5 clases por $375 y 10 por $700, pagadas en persona.</p>
       <p>Para juveniles y adultos &mdash; el mismo formato uno a uno, adaptado a tu nivel.</p>
       <ul>
         <li>Técnica de golpes y saque</li>
@@ -573,8 +666,85 @@
         <li>Trae a tu propio grupo o pídeme que te incluya en uno</li>
       </ul>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Pedir precio por correo</a>
+        <button class="btn btn-primary" type="button" data-close data-open="clinicList">Apúntate a una clínica</button>
+        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Escríbeme</a>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="clinicList" aria-labelledby="clinicTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="clinicTitle" tabindex="-1" autofocus>Apúntate a una clínica</h3>
+      <p>Las clínicas son grupos pequeños en una cancha. Dime tu nivel y cuándo puedes, y te pondré en un grupo con jugadores como tú.</p>
+      <form class="clinic-form" id="clinicForm" novalidate>
+        <label class="field">
+          <span class="field-label">Tu nivel</span>
+          <select name="level" required>
+            <option value="">Elige uno</option>
+            <option value="0">Nuevo en el tenis: nunca he jugado, o no desde niño</option>
+            <option value="1">Principiante: devuelvo algunas pelotas; los peloteos son cortos</option>
+            <option value="2">Intermedio: peloteo y saco; trabajo la consistencia</option>
+            <option value="3">Avanzado: juego partidos, en la escuela, una liga o la USTA</option>
+            <option value="4">Competitivo: juvenil de torneos, universitario o adulto de 4.5+</option>
+          </select>
+        </label>
+        <fieldset class="field">
+          <legend class="field-label">Quién viene</legend>
+          <label class="choice"><input type="radio" name="group" value="single" checked> Solo yo: ponme en un grupo</label>
+          <label class="choice"><input type="radio" name="group" value="own"> Traigo mi propio grupo</label>
+        </fieldset>
+        <fieldset class="field">
+          <legend class="field-label">Horarios que me suelen venir bien</legend>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-afternoon"> Tardes entre semana</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekday-evening"> Noches entre semana</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-morning"> Mañanas de fin de semana</label>
+          <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> Tardes de fin de semana</label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">¿Algo más? <span class="field-optional">Opcional</span></span>
+          <textarea name="notes" rows="3" maxlength="500" placeholder="p. ej.: somos cuatro, todos de nivel parecido"></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Primero elige tu nivel.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Enviar mis respuestas</button>
+        </div>
+        <p class="form-note">Esto abre un correo para mí con tus respuestas. Este sitio no guarda nada.</p>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Cerrar">&times;</button>
+      <h3 id="giftTitle" tabindex="-1" autofocus>Regala una clase</h3>
+      <p>Elige un regalo y haré una tarjeta de regalo para imprimir. Quien la reciba reserva como cualquier otra persona.</p>
+      <form class="clinic-form" id="giftRequest" novalidate>
+        <fieldset class="field">
+          <legend class="field-label">El regalo</legend>
+          <label class="choice"><input type="radio" name="gift" value="private1"> Una clase particular <b class="choice-price">$80</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private5"> 5 clases particulares <b class="choice-price">$375</b></label>
+          <label class="choice"><input type="radio" name="gift" value="private10"> 10 clases particulares <b class="choice-price">$700</b></label>
+          <label class="choice"><input type="radio" name="gift" value="hitting1"> Una sesión de peloteo <b class="choice-price">$45</b></label>
+        </fieldset>
+        <label class="field">
+          <span class="field-label">Para quién es <span class="field-optional">Opcional</span></span>
+          <input type="text" name="to" maxlength="60" autocomplete="off" placeholder="Nombre, para la tarjeta">
+        </label>
+        <label class="field">
+          <span class="field-label">De parte de quién <span class="field-optional">Opcional</span></span>
+          <input type="text" name="from" maxlength="60" autocomplete="off" placeholder="Como debe aparecer en la tarjeta">
+        </label>
+        <label class="field">
+          <span class="field-label">Un mensaje para la tarjeta <span class="field-optional">Opcional</span></span>
+          <textarea name="message" rows="2" maxlength="140" placeholder="p. ej., ¡Feliz cumpleaños! Nos vemos en la cancha."></textarea>
+        </label>
+        <p class="form-error" role="alert" hidden>Primero elige un regalo.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Enviar mi solicitud</button>
+        </div>
+        <p class="form-note">Esto abre un correo para mí. Te responderé para arreglar el pago en persona y luego te daré la tarjeta. Este sitio no guarda nada.</p>
+      </form>
     </div>
   </dialog>
 
@@ -612,6 +782,7 @@
           <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="ask-note">Las preguntas que aún no tienen respuesta se guardan 90 días, para que pueda escribir una.</p>
     </section>
     <button class="ask-launch" type="button" aria-expanded="false" aria-controls="askPanel">
       <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -619,11 +790,11 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿Qué clase me conviene?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Escríbeme cuántos son y te paso un precio."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
-  <script src="/tennis.js?v=20261006" defer></script>
+  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=4" defer></script>
-  <script src="/ask.js?v=7" defer></script>
+  <script src="/match.js?v=6" defer></script>
+  <script src="/ask.js?v=9" defer></script>
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/ballo.js?v=3" defer></script>

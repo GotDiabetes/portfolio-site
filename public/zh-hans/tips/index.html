@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Built by tools/i18n/build.mjs from tips/index.html and tools/i18n/zh-hans.mjs.
+     Edit those and run it again; changes made here are overwritten. -->
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>网球练习技巧 — Lee Tennis Co.，尔湾</title>
+  <meta name="description"
+        content="尔湾 RSPA 认证教练 Isaac Lee 的网球常见问题快速解决方法：发球下网、正手打长、双误、比赛紧张，以及如何自己练习。" />
+  <link rel="canonical" href="https://leetennisco.com/zh-hans/tips/" />
+  <meta name="robots" content="index, follow" />
+  <link rel="alternate" hreflang="en" href="https://leetennisco.com/tips/" />
+  <link rel="alternate" hreflang="es" href="https://leetennisco.com/es/tips/" />
+  <link rel="alternate" hreflang="ko" href="https://leetennisco.com/ko/tips/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://leetennisco.com/zh-hans/tips/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://leetennisco.com/zh-hant/tips/" />
+  <link rel="alternate" hreflang="ja" href="https://leetennisco.com/ja/tips/" />
+  <link rel="alternate" hreflang="vi" href="https://leetennisco.com/vi/tips/" />
+  <link rel="alternate" hreflang="fa" href="https://leetennisco.com/fa/tips/" />
+  <link rel="alternate" hreflang="x-default" href="https://leetennisco.com/tips/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="网球练习技巧 — Lee Tennis Co." />
+  <meta property="og:description"
+        content="最常见网球问题的快速解决方法，从发球下网到比赛紧张。" />
+  <meta property="og:url" content="https://leetennisco.com/zh-hans/tips/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <meta name="cf-analytics" content="" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261008a" />
+
+  <script>document.documentElement.classList.add("js");</script>
+
+  <script>
+    (function () {
+      var started = false;
+      window.__loadCal = function () {
+        if (started) return;
+        started = true;
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "lesson", { origin: "https://cal.com" });
+        /* The theme is pinned. The page has one theme, and a dark calendar over
+           a white page is the one thing a dark-mode OS must not do here. */
+        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
+        var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
+        if (tag) {
+          tag.addEventListener("load", ready);
+          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+        }
+      };
+      var arm = function () { window.__loadCal(); };
+      ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
+        window.addEventListener(ev, arm, { once: true, passive: true });
+      });
+      /* A pointer over (or focus on) a particular Book control also starts
+         loading that event's calendar in the background, so by the time the
+         click's serve animation finishes the calendar is usually there. */
+      var preloaded = {};
+      var intent = function (e) {
+        var el = e.target.closest && e.target.closest("[data-cal-link]");
+        if (!el) return;
+        arm();
+        var link = el.getAttribute("data-cal-link");
+        if (preloaded[link]) return;
+        preloaded[link] = true;
+        try { Cal.ns.lesson("preload", { calLink: link }); } catch (err) {}
+      };
+      document.addEventListener("pointerover", intent, { passive: true });
+      document.addEventListener("focusin", intent);
+      /* Not requestIdleCallback: an idle page is idle at once, which would put
+         the script straight back on the load path. A plain timer keeps the
+         first paint and the load event clear of it. */
+      setTimeout(arm, 3000);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/zh-hans/" aria-label="Lee Tennis Co. — 首页">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT 标志" />
+      </a>
+
+      <details class="lang">
+        <summary aria-label="语言 (Language)：简体中文">
+          <svg class="lang-globe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="lang-code">简</span>
+        </summary>
+        <div class="lang-list">
+          <a href="/tips/" hreflang="en" lang="en">English</a>
+          <a href="/es/tips/" hreflang="es" lang="es">Español</a>
+          <a href="/ko/tips/" hreflang="ko" lang="ko">한국어</a>
+          <a href="/zh-hans/tips/" hreflang="zh-Hans" lang="zh-Hans" aria-current="page">简体中文</a>
+          <a href="/zh-hant/tips/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="/ja/tips/" hreflang="ja" lang="ja">日本語</a>
+          <a href="/vi/tips/" hreflang="vi" lang="vi">Tiếng Việt</a>
+          <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
+        </div>
+      </details>
+
+      <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="预约课程">
+        <span class="cta-full">预约课程</span><span class="cta-short" aria-hidden="true">预约</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap tips-head">
+      <p class="eyebrow fade">练习技巧</p>
+      <h1 class="fade" style="--d:.06s">常见问题的快速解决方法</h1>
+      <p class="section-sub fade" style="--d:.12s">
+        针对我最常见到的每个问题，给出一个可以试试的方法。这些只是快速解决办法；上课时我们会找到真正的原因。
+      </p>
+      <nav class="tips-jump fade" style="--d:.16s" aria-label="技巧主题">
+        <a href="#serve">发球</a>
+        <a href="#groundstrokes">正手、反手与对拉</a>
+        <a href="#movement">步法与网前</a>
+        <a href="#matches">比赛与练习</a>
+        <a href="#parents">写给家长</a>
+      </nav>
+    </section>
+
+    <section class="wrap tips-group" id="serve">
+      <h2 class="fade">发球</h2>
+      <div class="tips" data-tips="tip_serve_net tip_serve_long tip_double_fault">
+          <article class="tip fade" id="serve-net">
+            <h3>我发球总是下网</h3>
+            <p>发球下网通常是因为抛球太低或太靠前，结果太早往下打。抛球再高一点，放在击球手那侧肩膀的正前方，伸直手臂在最高点击球。不挥拍，只练十次抛球：每次都应该落在前脚前方的同一个位置。</p>
+          </article>
+          <article class="tip fade" id="serve-long">
+            <h3>我发球总是出界</h3>
+            <p>发球出底线通常是因为抛球往身后飘，击球时拍面打开。把抛球放得稍微靠前，向上并越过球的上方击打，击球后让球拍自然翻转。瞄准发球区中间，而不是边线。</p>
+          </article>
+          <article class="tip fade" id="double-fault">
+            <h3>我双误很多</h3>
+            <p>大多数双误是因为把二发当成慢一点的一发来打。二发需要的是更多旋转，而不是更低的速度：从球的后下方往上刷，让球高高越过球网再落进发球区。专门练一筐二发，数数进了几个。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="groundstrokes">
+      <h2 class="fade">正手、反手与对拉</h2>
+      <div class="tips" data-tips="tip_forehand_net tip_forehand_long tip_backhand tip_rally">
+          <article class="tip fade" id="forehand-net">
+            <h3>我正手总是下网</h3>
+            <p>正手下网通常是因为挥拍太平，或者击球点太晚。拍头从球的下方开始，收拍高过另一侧的肩膀，并在身体前方击球。瞄准球网上方大约一米：这个高度就是你的安全余量。</p>
+          </article>
+          <article class="tip fade" id="forehand-long">
+            <h3>我正手总是打长</h3>
+            <p>正手打长通常是拍面打开、打得太平。从球的后方往上刷出上旋，球就会往下坠进场内；收拍收到肩膀上方，而不是直直地往目标方向送。瞄准中路深区，底线内几步的位置。</p>
+          </article>
+          <article class="tip fade" id="backhand">
+            <h3>我的反手很弱</h3>
+            <p>反手弱通常是因为转身太晚。一看到球往那边来，就转肩，让背部稍微朝向球网，然后在身体前方由下往上挥拍。和搭档反手斜线对拉，练到成为习惯为止。</p>
+          </article>
+          <article class="tip fade" id="rally">
+            <h3>我对拉坚持不了几拍</h3>
+            <p>对拉早早结束，是因为每一拍都瞄得离边线或球网太近。把球打得更高过网，打到场地中间的深区，并数一数对拉的拍数：目标是打破自己的纪录，而不是打败对手。先求稳定，再求力量。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="movement">
+      <h2 class="fade">步法与网前</h2>
+      <div class="tips" data-tips="tip_footwork tip_volley">
+          <article class="tip fade" id="footwork">
+            <h3>我总是来不及到位</h3>
+            <p>来不及到位通常是步法问题，不是挥拍问题。在对手击球的一瞬间做一个小的分腿垫步，让自己踮着脚判断来球，然后用小碎步调整好位置再挥拍。在家可以徒手练：垫步、转身、挥拍、回位。</p>
+          </article>
+          <article class="tip fade" id="volley">
+            <h3>我在网前很紧张</h3>
+            <p>在网前，动作越少越好：不要大引拍。拍子立在身体前方，转肩，用短促的动作把球推出去，击球时向前迈一步。先站在离网近的地方，请搭档轻轻喂球，再慢慢往后退。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="matches">
+      <h2 class="fade">比赛与练习</h2>
+      <div class="tips" data-tips="tip_matches tip_practice">
+          <article class="tip fade" id="matches">
+            <h3>我一比赛就打不好</h3>
+            <p>大多数人比赛时发紧，是因为在压力下想打更难的球。赛前定一个简单的计划，比如"先打斜线深球，等短球再进攻"，每分之间用同样的简短例行动作。平时也要带比分练：打局和抢七，而不只是对拉。</p>
+          </article>
+          <article class="tip fade" id="practice">
+            <h3>我一个人怎么练？</h3>
+            <p>墙是最好的练习伙伴：对着墙打正反手，瞄准一条线以上。在空场地练一筐发球能让抛球更稳定，对着镜子徒手挥拍不用球也能纠正动作。少量多次，胜过偶尔练很久。</p>
+          </article>
+        </div>    </section>
+
+    <section class="wrap tips-group" id="parents">
+      <h2 class="fade">写给家长</h2>
+      <div class="tips" data-tips="tip_kids">
+          <article class="tip fade" id="kids">
+            <h3>孩子在家怎么练习？</h3>
+            <p>保持简短有趣：抛接球、用球拍颠球、在车道上隔着一条线用软球对打。每周几次、每次几分钟，比一次练很久效果更好。上课时，年纪小的初学者用更慢更软的球，所以能更早打起对拉。</p>
+          </article>
+        </div>    </section>
+
+    <section class="contact">
+      <div class="wrap section">
+        <div class="contact-text">
+          <h2 class="fade">想找到真正的原因？</h2>
+          <p class="fade" style="--d:.06s">
+            技巧只能处理表面症状。上课时我会看你打球，解决背后的问题。
+          </p>
+          <div class="actions fade" style="--d:.12s">
+            <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>预约课程</a>
+            <a class="btn btn-outline btn-lg" href="/zh-hans/#lessons">查看课程和价格</a>
+          </div>
+          <p class="book-note fade" style="--d:.16s">预约只是为你保留时间：无需信用卡，无需定金。当面付款。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year">2026</span> Lee Tennis Co. &middot; Isaac Lee &middot; 加州尔湾</p>
+      <p class="footer-links">
+        <a href="/zh-hans/">网球私教课</a>
+        <a href="/portfolio/">职业作品集</a>
+        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>window.I18N = {"copied":"已复制","menuOpen":"打开菜单","menuClose":"关闭菜单","loadingCal":"正在加载日历…","askSuggestions":["课程多少钱？","在哪里上课？","怎么预约？","我应该练什么？"],"askDown":"聊天暂时无法回复。请发邮件给我，我会尽快回复。","askBusy":"一下子问题太多了。请稍等一分钟，或者给我发邮件。","emailMe":"发邮件给我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"推荐问题","askFinding":"正在查找答案","open":"打开","showMe":"查看","soundMute":"关闭声音","soundOn":"打开声音","typeBy":"char","matchCopy":{"private":{"name":"一对一私教课","line":"一对一，围绕你想改进的地方来安排。"},"semi":{"name":"双人课","line":"两人共享一小时，每人 $55。"},"hitting":{"name":"陪练课","line":"纯对打，不教学，每小时 $45。"},"group":{"name":"成人小组课","line":"一块场地上的小组课。报名后，我会把你安排进水平相近的小组。"}},"matchAnswer":"看起来最适合你的是{name}。{line}","matchTravel":"提醒一下：课程都在我的主场，尔湾的 Toscana 球场。我没法去你那里，但很欢迎你过来。","matchUnsure":"从这句话我判断不出来。试着写写你的水平和谁来打球，或者从上面四种课里选一个。","matchDown":"课程匹配暂时无法回复。四种课程就在上面，也可以给我发邮件。","matchBusy":"匹配请求有点多。请稍等一分钟，或者从上面四种课里选一个。","matchSeeCard":"查看课程卡片 ↑","matchLabel":"为你推荐","matchBusyButton":"匹配中…","soundsOn":"网球音效已开启","soundsTurnOff":"关闭","soundsOff":"音效已关闭","matchLevels":["网球新手","初级","中级","高级","竞技"],"matchFocus":{"serve":"发球","groundstrokes":"正反手","net":"网前","movement":"步法","match":"比赛","basics":"基本功"},"matchLevelLine":"水平：{level}。","matchFocusLine":"重点：{focus}。","matchNotesLine":"在这里预约，这些信息会写进预约备注，方便我准备第一节课。","matchJunior":"为孩子预约？请用你自己的名字预约，并在备注里写上孩子的年龄。","lang":"zh-hans","pageName":"Simplified Chinese","askUrl":"/zh-hans/ask.json","mailSubject":"Tennis lessons (Simplified Chinese page)","mailSubjectQuestion":"Question about lessons (Simplified Chinese page)"};</script>
+  <script src="/tennis.js?v=20261008" defer></script>
+  <script src="/bookfx.js?v=15" defer></script>
+</body>
+</html>
