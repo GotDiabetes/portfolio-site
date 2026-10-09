@@ -12,7 +12,11 @@ One repository, one site, two faces:
 
 And pages that are Isaac's own, kept out of search. **leetennisco.com/admin/**
 (the "Admin" link at the end of the footer) links them all, plus Cal.com,
-Gmail, Cloudflare, TypeSafe billing and the Google Business Profile:
+Gmail, Cloudflare, TypeSafe billing and the Google Business Profile. It
+opens on a gate that asks for your stats key: get it wrong and the lock
+blows up and sends you back; get it right and it unlocks with a little
+show. (The links behind it are ordinary pages; the gate is the front door,
+and the numbers page checks the key itself.)
 
 - **/flyer/** — a printable flyer for notice boards, with a QR code and
   tear-off strips, in every language (/ko/flyer/ …).

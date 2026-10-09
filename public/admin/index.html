@@ -6,22 +6,59 @@
   <!-- ============================================================
        Isaac's admin page, at leetennisco.com/admin/: one place for his
        own pages and the outside services the site runs on. The footer's
-       "Admin" link leads here. It holds only links; the one page with
-       anything private behind it (/stats/) asks for its own key. Kept
-       out of search.
+       "Admin" link leads here. Kept out of search.
+
+       The gate. With scripts on, the page opens on a black screen asking
+       for the stats key, which the Worker checks (the key is never in
+       the page). Wrong, and the lock explodes and sends the visitor back
+       where they came from; right, and a stick figure rises with two
+       rackets and unlocks it, and the gate lifts (admin-gate.js runs the
+       flow; admin-explode.js and admin-ascend.js are the two scenes).
+       It's a front door, not the security: the links below are public
+       pages, and the one with anything private (/stats/) checks the key
+       itself. With scripts off, the links simply show.
        ============================================================ -->
   <title>Admin — Lee Tennis Co.</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/admin.css?v=2" />
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 
 <body class="desk">
-  <main class="wrap desk-main">
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <button class="gate-sound" id="gateSound" type="button" aria-label="Mute sounds" aria-pressed="false">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+        <path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path class="gate-sound-on" d="M13.5 7.2a4 4 0 0 1 0 5.6M15.6 5.2a7 7 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="gate-sound-off" d="M13.5 7.5l4 5M17.5 7.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="gate-card" id="gateCard">
+      <svg class="gate-lock" id="gateLock" viewBox="0 0 64 84" aria-hidden="true" focusable="false">
+        <path class="gate-shackle" d="M18 38V24a14 14 0 0 1 28 0v14" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        <rect class="gate-body" x="7" y="36" width="50" height="44" rx="7" fill="currentColor"/>
+        <path class="gate-hole" d="M32 51a5 5 0 0 1 2.5 9.3V67h-5v-6.7A5 5 0 0 1 32 51z" fill="#0d0d0d"/>
+      </svg>
+      <p class="gate-eyebrow">For Isaac</p>
+      <h1 class="gate-title" id="gateTitle">What's the key?</h1>
+      <form class="gate-form" id="gateForm" novalidate>
+        <label class="gate-label" for="gateKey">Stats key</label>
+        <div class="gate-row">
+          <input class="gate-input" id="gateKey" name="key" type="password" autocomplete="current-password" spellcheck="false" required>
+          <button class="gate-go" type="submit">Unlock</button>
+        </div>
+        <p class="gate-note" id="gateNote" aria-live="polite">Your stats password. Get it wrong and it sends you back.</p>
+      </form>
+    </div>
+  </div>
+
+  <main class="wrap desk-main" id="adminContent">
     <a class="desk-back" href="/">Back to the site</a>
     <p class="eyebrow">For Isaac</p>
     <h1>Admin</h1>
-    <p class="desk-sub">Your tools for the site, and the services it runs on.</p>
+    <p class="desk-sub">Your tools for the site, and the services it runs on. <button class="link-btn desk-lock" id="adminLock" type="button" hidden>Forget the key on this device</button></p>
 
     <h2>On the site</h2>
     <ul class="desk-links">
@@ -67,5 +104,9 @@
       </li>
     </ul>
   </main>
+
+  <script src="/admin-explode.js?v=2" defer></script>
+  <script src="/admin-ascend.js?v=2" defer></script>
+  <script src="/admin-gate.js?v=2" defer></script>
 </body>
 </html>

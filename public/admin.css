@@ -1,0 +1,142 @@
+/* ============================================================================
+   The admin page's gate (/admin/). A full-screen ink band, the site's own
+   black, asking for the stats key: the padlock, the eyebrow, one statement
+   line, and a single field with the invert button. admin-gate.js runs it;
+   admin-explode.js and admin-ascend.js draw the two endings on top of it.
+
+   Same world as the site: the system face, white on ink, the white focus
+   ring of the black bands. The ball (optic yellow) and the Book FX spark
+   (amber) are the only colours the scenes may use.
+   ========================================================================== */
+
+/* With no script, there is no gate: the links show. */
+.gate { display: none; }
+.js .gate {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  padding: max(1.25rem, env(safe-area-inset-top)) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+  background: #0d0d0d; color: #fff;
+  overflow: hidden;
+  /* The lift that opens it: a curtain going up (admin-gate.js adds .is-open). */
+  clip-path: inset(0 0 0 0);
+  transition: clip-path .9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.js .gate.is-open { clip-path: inset(0 0 100% 0); transition-delay: .15s; }
+/* The wrong-key exit: the whole gate slides off to the left, back. */
+.js .gate.is-leaving {
+  transform: translateX(-6vw); opacity: 0;
+  transition: transform .32s cubic-bezier(.7, 0, .84, 0), opacity .32s cubic-bezier(.7, 0, .84, 0);
+}
+.js .gate.is-gone { display: none; }
+/* The page's scrollbar gutter (scrollbar-gutter: stable in tennis.css) is
+   painted with the root's background, so while the gate is up the root
+   is ink too, or a white strip shows down the right edge. */
+html.is-gated { background: #0d0d0d; }
+/* Under the gate, the page waits still and hidden from screen readers. */
+.js body.is-gated { overflow: hidden; }
+.js body.is-gated #adminContent { visibility: hidden; }
+
+.gate :focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.gate ::selection { background: #fff; color: #0d0d0d; }
+
+.gate-card {
+  width: min(32rem, 100%);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.gate-lock { width: 56px; height: auto; color: #fff; margin-bottom: 1.75rem; overflow: visible; }
+.gate-shackle { transform-box: fill-box; transform-origin: 100% 100%; }
+
+.gate-eyebrow {
+  display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 .85rem;
+  font-size: .8125rem; color: rgba(255, 255, 255, .62);
+}
+.gate-eyebrow::before { content: ""; width: 22px; height: 2px; background: #fff; }
+
+/* .gate ahead of each so the admin page's own .desk h1 can't restyle it. */
+.gate .gate-title {
+  margin: 0 0 2rem;
+  font-size: clamp(2.5rem, 8vw, 4.25rem); font-weight: 600;
+  line-height: 1; letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.gate-form { width: 100%; }
+.gate-label {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.gate-row { display: flex; gap: .6rem; }
+.gate-input {
+  flex: 1 1 auto; min-width: 0; height: 3.25rem; padding: 0 1rem;
+  font: inherit; font-size: 1.125rem; letter-spacing: .12em; color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .38); border-radius: 6px;
+  transition: border-color .3s ease;
+}
+.gate-input:hover { border-color: rgba(255, 255, 255, .62); }
+.gate-input:focus { border-color: #fff; outline: none; }
+.gate-input:focus-visible { outline: none; box-shadow: inset 0 0 0 1px #fff; }
+.gate-go {
+  flex: 0 0 auto; height: 3.25rem; padding: 0 1.6rem;
+  font: inherit; font-size: 1rem; font-weight: 500;
+  color: #0d0d0d; background: #fff; border: 0; border-radius: 6px; cursor: pointer;
+  transition: background-color .3s ease, transform .3s ease;
+}
+.gate-go:hover { background: #e9e9e7; transform: translateY(-1px); }
+.gate-go:disabled { cursor: progress; background: #d6d6d3; transform: none; }
+.gate-note {
+  min-height: 1.5em; margin: 1rem 0 0;
+  font-size: .875rem; color: rgba(255, 255, 255, .6);
+}
+.gate-note.is-strong { color: #fff; font-weight: 600; }
+/* After the lock has blown up: one line where the card was. */
+.gate-after {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  margin: 0; width: min(32rem, calc(100% - 2.5rem)); text-align: center;
+  font-size: clamp(1.25rem, 3vw, 1.6rem); font-weight: 600; letter-spacing: -0.02em; color: #fff;
+  opacity: 0; z-index: 3;
+}
+.gate-after:focus { outline: none; }
+/* Stamped in: from a touch larger, landing hard. */
+.gate-after.is-in { animation: gateStamp .22s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes gateStamp {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(1.12); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.gate-sound {
+  position: absolute; top: max(.75rem, env(safe-area-inset-top)); right: max(.75rem, env(safe-area-inset-right));
+  width: 2.75rem; height: 2.75rem; display: grid; place-items: center;
+  color: rgba(255, 255, 255, .7); background: none; border: 0; border-radius: 6px; cursor: pointer;
+}
+.gate-sound:hover { color: #fff; }
+.gate-sound-off { display: none; }
+.gate-sound[aria-pressed="true"] .gate-sound-on { display: none; }
+.gate-sound[aria-pressed="true"] .gate-sound-off { display: inline; }
+
+/* While the key is checked: the shackle gives one small tug. */
+.gate.is-checking .gate-shackle { animation: gateTug .5s cubic-bezier(.3, 0, .2, 1) infinite alternate; }
+@keyframes gateTug { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+
+/* The scenes draw on a layer of their own above everything in the gate. */
+.gate-fx { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+
+/* The page underneath, once the gate has lifted: one lift into place. */
+.js #adminContent.is-arriving { animation: adminArrive .8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes adminArrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.desk-lock { display: flex; width: fit-content; margin-top: .1rem; font-size: .875rem; color: var(--muted); }
+
+@media (max-width: 480px) {
+  .gate-row { flex-direction: column; }
+  .gate-go { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .gate { transition: clip-path .01s linear, opacity .4s ease; }
+  .js .gate.is-open { clip-path: inset(0); opacity: 0; transition-delay: 0s; }
+  .js .gate.is-leaving { transform: none; }
+  .gate-after.is-in { animation: none; opacity: 1; }
+  .gate.is-checking .gate-shackle { animation: none; }
+  .js #adminContent.is-arriving { animation: none; }
+}
