@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- ============================================================
+       Drill library: Isaac's own coaching reference, at
+       leetennisco.com/admin/drills/, opened from the admin page. About
+       200 drills and games, the faults they fix, an age-by-age guide and
+       300+ checked YouTube videos, built from the research notes in
+       research_notes/ by tools/drills (data.js is generated; don't edit
+       it by hand). Students and lesson plans are kept in this browser
+       only (localStorage); nothing is sent anywhere.
+
+       Hidden behind the admin gate: a device that hasn't unlocked
+       /admin/ (which remembers the stats key) is sent there first. Like
+       the gate itself, it's a front door, not security: the files are
+       still static and public to anyone with the address and no
+       scripts. Nothing private lives here.
+       ============================================================ -->
+  <title>Drill library — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <script>
+    (function () {
+      var key = null;
+      try { key = localStorage.getItem("lee-stats-key"); } catch (e) { /* storage blocked */ }
+      if (!key) location.replace("/admin/");
+    })();
+  </script>
+  <meta name="description" content="Tennis drills by age, skill and problem, with court diagrams and videos." />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="drills.css?v=6" />
+</head>
+
+<body>
+  <!-- Arrowheads for every court diagram, defined once. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="cdArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cd-arrowhead"/></marker>
+      <marker id="cdStep" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9" class="cd-stephead"/></marker>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="#/">
+        <img src="/images/lee-tennis-mark.svg" alt="" width="28" height="28" />
+        <span><b>Drill library</b><small>Lee Tennis Co.</small></span>
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#/" data-nav="drills">Drills</a>
+        <a href="#/fix" data-nav="fix">Fix a problem</a>
+        <a href="#/students" data-nav="students">Students</a>
+        <a href="#/plan" data-nav="plan">Lesson plan</a>
+        <a href="#/ages" data-nav="ages">Age guide</a>
+        <a href="#/videos" data-nav="videos">Videos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main" tabindex="-1"></main>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <p>Built from USTA Net Generation, ITF, LTA, Tennis Australia, Tennis Canada and coaching sources, checked October 2026. Items marked <span class="adapt">adapted</span> are a coach's adaptation, not the source's words. Videos open on YouTube's own player; every one was checked to exist.</p>
+      <p><a href="/admin/">Admin</a> · <a href="/">leetennisco.com</a></p>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-back" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-x" type="button" data-close aria-label="Close">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="data.js?v=3"></script>
+  <script src="guide.js?v=2"></script>
+  <script src="court.js?v=2"></script>
+  <script src="app.js?v=6"></script>
+</body>
+</html>

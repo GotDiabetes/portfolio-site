@@ -49,12 +49,18 @@
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261009" />
+  <link rel="stylesheet" href="tennis.css?v=20261013" />
   <link rel="stylesheet" href="focus.css?v=1" />
+  <link rel="stylesheet" href="motion-court.css?v=1" />
+  <link rel="stylesheet" href="motion-reveal.css?v=1" />
+  <link rel="stylesheet" href="motion-transitions.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
        leaves a fully visible page rather than a blank one. -->
   <script>document.documentElement.classList.add("js");</script>
+  <!-- Preview switch for the motion upgrade (motion-*.css/js): ?classic in
+       the address shows the page without it, to compare. -->
+  <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
 
   <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
        popup; every one of them is also a real link to the same event on
@@ -930,13 +936,17 @@
     </button>
   </div>
 
-  <script src="tennis.js?v=20261008" defer></script>
+  <script src="tennis.js?v=20261010" defer></script>
   <script src="focus.js?v=3" defer></script>
   <script src="match.js?v=6" defer></script>
   <script src="ask.js?v=9" defer></script>
   <script src="hero.js?v=1" defer></script>
   <script src="bookfx.js?v=15" defer></script>
   <script src="booked.js?v=1" defer></script>
+  <script src="motion-court.js?v=1" defer></script>
+  <script src="motion-reveal.js?v=1" defer></script>
+  <script src="motion-transitions.js?v=1" defer></script>
   <script src="ballo.js?v=3" defer></script>
+  <script src="motion.js?v=4" defer></script>
 </body>
 </html>

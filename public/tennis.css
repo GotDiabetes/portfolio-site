@@ -1336,6 +1336,297 @@ body.modal-open { overflow: hidden; }
 }
 
 /* ==========================================================================
+   SECTION SIGNATURES
+   Each block of the page arrives in its own way, all in black and white,
+   all once (except the scroll-linked pieces, which follow the scroll both
+   ways because they are the scroll). The vocabulary stays the page's own:
+   masks that reveal (the hero's drop-line), lines that get drawn (the
+   eyebrow's dash, a court's lines), and photographs as the only colour.
+   motion.js adds the pieces that need a script (prices, pointer light,
+   magnetic Book buttons, the contact band's court, the lightbox zoom).
+   Every piece starts from content that is already readable without it.
+   ========================================================================== */
+
+/* --- Lines that draw themselves: the eyebrow's dash, and the hairline
+       over the hero's prices and About's facts, like a court being lined. */
+.js .eyebrow.fade::before { transform: scaleX(0); transform-origin: 0 50%; transition: transform .7s var(--ease) calc(var(--d, 0s) + .15s); }
+.js .eyebrow.fade.is-in::before { transform: scaleX(1); }
+.js .hero-facts.fade, .js .facts.fade { border-top-color: transparent; position: relative; }
+.js .hero-facts.fade::before, .js .facts.fade::before {
+  content: ""; position: absolute; top: -1px; inset-inline: 0; height: 1px;
+  background: var(--text); transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform 1.1s var(--ease) calc(var(--d, 0s) + .1s), background-color 1.2s var(--ease) 1.1s;
+}
+.js .hero-facts.fade.is-in::before, .js .facts.fade.is-in::before { transform: scaleX(1); background-color: var(--line); }
+:root[dir="rtl"] .js .eyebrow.fade::before,
+:root[dir="rtl"] .js .hero-facts.fade::before,
+:root[dir="rtl"] .js .facts.fade::before { transform-origin: 100% 50%; }
+
+/* --- Headings rise from behind their own baseline, the hero's drop-line
+       move at section scale: a mask on the heading, the text climbing up
+       through it. */
+/* The mask sits on an inner line (motion.js wraps the heading's words in
+   .rise) rather than on the heading: the reveal watches the heading, and a
+   fully masked element never counts as on screen. */
+.js main h2.fade { opacity: 1; transform: none; }
+.js main h2.fade > .rise {
+  display: block;
+  clip-path: inset(100% -.3em -.3em -.3em);
+  transform: translateY(.45em);
+  transition: clip-path .95s var(--ease), transform .95s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.js main h2.fade.is-in > .rise { clip-path: inset(-.3em -.3em -.3em -.3em); transform: none; }
+
+/* --- Hero. The portrait opens like a shutter rising, settling out of a
+       zoom as it does; then, as the page scrolls away, it drifts a little
+       slower than the text (scroll-linked, where the browser can). */
+.hero-photo picture, .about-photo picture { display: block; }
+.js .hero-photo.fade-img picture { clip-path: inset(100% 0 0 0); transition: clip-path 1.25s cubic-bezier(.77, 0, .18, 1) .05s; }
+.js .hero-photo.fade-img.is-in picture { clip-path: inset(0); }
+.js .hero-photo.fade-img img { transform: scale(1.14); transition: opacity .6s var(--ease), transform 1.6s var(--ease) .05s; }
+.js .hero-photo.fade-img.is-in img { transform: scale(1); }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 941px) {
+    .hero-photo picture { display: block; animation: heroDrift linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+  }
+  /* The zoom always covers the drift, so no edge of the frame shows. */
+  @keyframes heroDrift { to { translate: 0 6%; scale: 1.14; } }
+}
+
+/* Prices roll in like a scoreboard (motion.js wraps the digits; the real
+   number stays in the text for screen readers). */
+.sb { display: inline-flex; font-variant-numeric: tabular-nums; }
+/* The digits are spans inside the price, so they opt out of the unit's
+   small muted style that every other span in a price gets. */
+.hero-facts dd .sb, .hero-facts dd .sb span, .price .sb, .price .sb span {
+  font-size: 1em; font-weight: inherit; color: inherit; letter-spacing: inherit;
+}
+.sb-col { display: inline-block; height: 1em; line-height: 1; overflow: hidden; vertical-align: top; }
+/* At rest every column already shows the real digit, so a price can never
+   be stuck on a wrong number; the roll snaps back to the start (is-reset)
+   and runs up to the real digit again. */
+.sb-col > span { display: flex; flex-direction: column; transform: translateY(calc(var(--n) * -1em)); }
+.sb-col > span > span { height: 1em; line-height: 1; }
+.sb-col > span > span::before { content: attr(data-d); }
+.sb.is-reset .sb-col > span { transform: translateY(0); transition: none; }
+.sb.is-rolling .sb-col > span {
+  transition: transform 1.15s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * .09s + var(--sb-d, 0s));
+}
+.sb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+/* --- The statement band opens like a shutter as it scrolls in, and the
+       sentence racks into focus once it arrives. */
+@supports (animation-timeline: view()) {
+  .statement { animation: bandOpen linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
+  @keyframes bandOpen { from { clip-path: inset(14% 5% 14% 5%); } to { clip-path: inset(0); } }
+}
+.js .statement blockquote.fade {
+  transform: scale(1.035); filter: blur(14px);
+  transition: opacity 1s var(--ease), transform 1.3s var(--ease), filter 1.1s var(--ease);
+}
+.js .statement blockquote.fade.is-in { transform: none; filter: blur(0); }
+
+/* --- Lessons. The four cards are dealt onto the table: each tips up from
+       its bottom edge and settles, one after another. On a pointer, a soft
+       light follows the cursor across the card and the edge darkens where
+       the light is (--mx/--my from motion.js). */
+/* The deal is an animation that fills backwards only, so once it has
+   played the card's own hover lift works again. */
+.lesson-list { perspective: 1200px; }
+.js .lesson.fade {
+  opacity: 1; transform: none; transform-origin: 50% 100%;
+  transition: transform var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease), box-shadow var(--dur-ui) var(--ease);
+}
+.js .lesson.fade:not(.is-in) { opacity: 0; }
+.js .lesson.fade.is-in { animation: deal 1.05s var(--ease) var(--d, 0s) backwards; }
+.js .lesson.fade.is-in:hover { transform: translateY(-4px); }
+@keyframes deal { from { opacity: 0; transform: translateY(46px) rotateX(14deg); } }
+.lesson { position: relative; isolation: isolate; }
+.lesson::before, .lesson::after {
+  content: ""; position: absolute; border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity .35s var(--ease);
+}
+.lesson::before {
+  inset: 0; z-index: -1;
+  background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 0%), #fff, rgba(255, 255, 255, 0) 55%);
+}
+.lesson::after {
+  inset: -1px; padding: 1px;
+  background: radial-gradient(16rem circle at var(--mx, 50%) var(--my, 0%), rgba(17, 17, 17, .7), rgba(17, 17, 17, 0) 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lesson:hover::before, .lesson:hover::after { opacity: 1; }
+}
+.lesson.is-match::after { opacity: 0; }
+
+/* --- About. The photograph is uncovered from its leading edge, the way a
+       curtain is drawn; inside the frame it keeps drifting with the scroll. */
+.js .about-photo.fade-img picture { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s cubic-bezier(.77, 0, .18, 1); }
+:root[dir="rtl"] .js .about-photo.fade-img picture { clip-path: inset(0 0 0 100%); }
+.js .about-photo.fade-img.is-in picture { clip-path: inset(0); }
+@supports (animation-timeline: view()) {
+  .about-photo picture { display: block; overflow: hidden; }
+  .about-photo picture img { animation: innerDrift linear both; animation-timeline: view(); }
+  @keyframes innerDrift { from { translate: 0 -5%; scale: 1.12; } to { translate: 0 5%; scale: 1.12; } }
+}
+
+/* --- In action. Three shutters lift one after another; on scroll the
+       frames drift at different speeds; and hovering one photograph
+       leaves only it in colour, the other two drained to grey. */
+.js .photo-strip.fade { opacity: 1; transform: none; }
+.js .photo-strip.fade .photo { clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.77, 0, .18, 1) var(--d, 0s); }
+.js .photo-strip.fade.is-in .photo { clip-path: inset(0); }
+.photo-strip .photo img { transition: transform .6s var(--ease), filter .5s var(--ease), opacity .5s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .photo-strip:has(.photo:hover) .photo:not(:hover) img { filter: grayscale(1) contrast(1.05); opacity: .62; }
+}
+@supports (animation-timeline: view()) {
+  .photo-strip .photo picture { display: block; }
+  .photo-strip .photo img { animation: innerDrift linear both; animation-timeline: view(); }
+  .photo-strip .photo:nth-child(2) img { animation-name: innerDriftUp; }
+  @keyframes innerDriftUp { from { translate: 0 6%; scale: 1.14; } to { translate: 0 -6%; scale: 1.14; } }
+}
+
+/* --- Reviews come in from either side and meet in the middle, like the
+       two ends of a rally. One column on phones: they simply rise. */
+.js .review-list .review.fade:nth-child(odd):not(.is-in) { transform: translateX(-56px); }
+.js .review-list .review.fade:nth-child(even):not(.is-in) { transform: translateX(56px); }
+:root[dir="rtl"] .js .review-list .review.fade:nth-child(odd):not(.is-in) { transform: translateX(56px); }
+:root[dir="rtl"] .js .review-list .review.fade:nth-child(even):not(.is-in) { transform: translateX(-56px); }
+/* The cards slide in from behind the column's own edges, so neither one
+   pokes past the screen and adds a sideways scroll on the way in. */
+.review-list { overflow-x: clip; }
+.review figcaption { position: relative; border-top-color: transparent; }
+.review figcaption::before {
+  content: ""; position: absolute; top: -1px; inset-inline: 0; height: 1px; background: var(--line);
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform 1s var(--ease) .45s;
+}
+:root[dir="rtl"] .review figcaption::before { transform-origin: 100% 50%; }
+.review.is-in figcaption::before, html:not(.js) .review figcaption::before { transform: scaleX(1); }
+.review .avatar { transition: transform .8s cubic-bezier(.16, 1, .3, 1) .55s, opacity .6s var(--ease) .55s; }
+.js .review.fade:not(.is-in) .avatar { transform: scale(.4); opacity: 0; }
+
+/* The match clip opens out to its full frame as it scrolls into view, the
+   poster easing back from a zoom: the camera pulling out onto the court. */
+@supports (animation-timeline: view()) {
+  .video-play:not(.is-playing) { animation: clipOpen linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  .video-play:not(.is-playing) img { animation: clipZoom linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  @keyframes clipOpen { from { clip-path: inset(7% 9% round 18px); } to { clip-path: inset(0 round var(--radius)); } }
+  @keyframes clipZoom { from { scale: 1.18; } to { scale: 1; } }
+}
+
+/* --- Before you book: the notes are written up one after another, each
+       under its own short dash, the eyebrow's mark. */
+.notes > div { position: relative; padding-top: .95rem; }
+.notes > div::before { content: ""; position: absolute; top: 0; inset-inline-start: 0; width: 22px; height: 2px; background: var(--text); }
+.js .notes.fade { opacity: 1; transform: none; }
+.js .notes.fade > div { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+.js .notes.fade > div::before { transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s var(--ease) calc(var(--i, 0) * 70ms + .15s); }
+:root[dir="rtl"] .js .notes.fade > div::before { transform-origin: 100% 50%; }
+.js .notes.fade.is-in > div { opacity: 1; transform: none; }
+.js .notes.fade.is-in > div::before { transform: scaleX(1); }
+.notes > div:nth-child(2) { --i: 1; } .notes > div:nth-child(3) { --i: 2; } .notes > div:nth-child(4) { --i: 3; }
+.notes > div:nth-child(5) { --i: 4; } .notes > div:nth-child(6) { --i: 5; } .notes > div:nth-child(7) { --i: 6; }
+.notes > div:nth-child(8) { --i: 7; }
+
+/* --- FAQ. Rows arrive in a quick run; a question opens smoothly instead of
+       snapping (where the browser can animate to auto), the plus turns into
+       a minus, and the answer rises into place. */
+.js .faq.fade { opacity: 1; transform: none; }
+.js .faq.fade > details { opacity: 0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .7s var(--ease); }
+.js .faq.fade.is-in > details { opacity: 1; transform: none; }
+.faq.fade > details:nth-child(2) { transition-delay: 45ms; } .faq.fade > details:nth-child(3) { transition-delay: 90ms; }
+.faq.fade > details:nth-child(4) { transition-delay: 135ms; } .faq.fade > details:nth-child(5) { transition-delay: 180ms; }
+.faq.fade > details:nth-child(6) { transition-delay: 225ms; } .faq.fade > details:nth-child(7) { transition-delay: 270ms; }
+.faq.fade > details:nth-child(8) { transition-delay: 315ms; } .faq.fade > details:nth-child(9) { transition-delay: 360ms; }
+.faq.fade > details:nth-child(10) { transition-delay: 405ms; }
+.faq summary { transition: color var(--dur-ui) var(--ease); }
+/* The plus's upright stroke shrinks away as the whole mark turns half a
+   circle, so it closes into a minus rather than swapping. */
+.faq summary::after {
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+  transition: background-size .4s var(--ease), transform .45s var(--ease);
+}
+.faq details[open] summary::after {
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 0 no-repeat;
+  transform: rotate(180deg);
+}
+@supports (interpolate-size: allow-keywords) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq details::details-content { block-size: 0; overflow: clip; transition: block-size .45s var(--ease), content-visibility .45s allow-discrete; }
+  .faq details[open]::details-content { block-size: auto; }
+}
+.faq details[open] > :not(summary) { animation: answerIn .5s var(--ease) both; }
+@keyframes answerIn { from { opacity: 0; transform: translateY(-6px); } }
+
+/* --- Contact. The band's court (drawn by motion.js) paints its lines when
+       the band arrives; a soft light follows the pointer across it, like
+       the court lights coming on. */
+.contact { position: relative; overflow: hidden; isolation: isolate; }
+.contact > .wrap { position: relative; z-index: 1; }
+.contact-court {
+  position: absolute; z-index: 0; pointer-events: none;
+  inset-block: 8% 8%; inset-inline-end: -6%; width: min(62rem, 78%);
+  color: rgba(255, 255, 255, .13);
+}
+:root[dir="rtl"] .contact-court { transform: scaleX(-1); }
+.contact-court svg { width: 100%; height: 100%; overflow: visible; }
+.contact-court line { fill: none; stroke: currentColor; stroke-linecap: round; }
+.js .contact-court line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s cubic-bezier(.65, 0, .35, 1) var(--cd, 0s); }
+.contact-court.is-in line { stroke-dashoffset: 0; }
+.contact::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(36rem circle at var(--mx, 70%) var(--my, 40%), rgba(255, 255, 255, .085), rgba(255, 255, 255, 0) 62%);
+  opacity: 0; transition: opacity .6s var(--ease);
+}
+.contact.is-lit::before { opacity: 1; }
+
+/* --- Book buttons lean toward the pointer (motion.js sets --tx/--ty). */
+.btn-lg { translate: var(--tx, 0) var(--ty, 0); transition: background-color var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), translate .5s cubic-bezier(.16, 1, .3, 1); }
+.btn-lg.is-magnet { transition: background-color var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), translate .12s linear; }
+
+/* --- A thin ink line under the header measures how far down the page you
+       are (scroll-linked; nothing shows where the browser can't). */
+@supports (animation-timeline: scroll()) {
+  .header::after {
+    content: ""; position: absolute; inset-inline: 0; bottom: -1px; height: 2px;
+    background: var(--text); transform-origin: 0 50%; transform: scaleX(0);
+    animation: readLine linear both; animation-timeline: scroll(root);
+  }
+  :root[dir="rtl"] .header::after { transform-origin: 100% 50%; }
+  @keyframes readLine { to { transform: scaleX(1); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js main h2.fade > .rise { clip-path: none; transform: none; opacity: 0; transition: opacity .55s var(--ease); }
+  .js main h2.fade.is-in > .rise { opacity: 1; }
+  .js .hero-photo.fade-img picture, .js .about-photo.fade-img picture, .js .photo-strip.fade .photo { clip-path: none; }
+  .js .hero-photo.fade-img img { transform: none; }
+  .hero-photo picture, .about-photo picture img, .photo-strip .photo img, .statement,
+  .video-play:not(.is-playing), .video-play:not(.is-playing) img, .header::after { animation: none; }
+  .header::after { display: none; }
+  .js .statement blockquote.fade { transform: none; filter: none; }
+  .js .lesson.fade:not(.is-in), .js .lesson.fade.is-in:hover { transform: none; }
+  .js .review-list .review.fade:not(.is-in) { transform: none; }
+  .js .review.fade:not(.is-in) .avatar { transform: none; }
+  .js .notes.fade > div, .js .faq.fade > details { transform: none; }
+  .js .notes.fade > div::before, .js .eyebrow.fade::before, .js .hero-facts.fade::before, .js .facts.fade::before, .review figcaption::before { transform: none; transition: none; }
+  .js .contact-court line { transition: none; stroke-dashoffset: 0; }
+  .btn-lg { translate: none; }
+  .faq details[open] > :not(summary) { animation: none; }
+  .photo-strip:has(.photo:hover) .photo:not(:hover) img { filter: none; opacity: 1; }
+}
+
+/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 /* Reduced motion means "no movement", not "no life". The accessibility

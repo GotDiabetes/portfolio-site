@@ -26,7 +26,7 @@ and the numbers page checks the key itself.)
   tear-off strips, in every language (/ko/flyer/ …).
 - **/gift-card/** — makes a printable gift card when someone buys lessons as
   a gift (the "Give a lesson" popup emails you the request).
-- **/drills/** — the drill library: about 200 drills and games by age stage
+- **/admin/drills/** — the drill library, opened from the admin page: about 200 drills and games by age stage
   and skill, with court diagrams, the faults they fix, an age guide, a
   students list and a lesson-plan builder (students and plans stay in your
   browser). `data.js` is built from the research notes; see
@@ -151,6 +151,15 @@ Isaac's machine.
   a parent asking for a child (the chat then shows a topic's `answer_parent`),
   abuse or attempts to instruct the bot (one refusal line), and phone numbers
   or addresses typed in (a one-line "leave those out").
+- **Describe a student** (`public/admin/drills/app.js`, `POST /drills/describe`):
+  in the drill library, Isaac writes a sentence about a student and Jev
+  places them: ball stage, level, up to four things to work on and up to five
+  of the library's problems (a Choice each for stage and level, a Noul per
+  skill and per problem, in one call). The page offers their drills, a
+  prefilled student or a lesson plan; nothing is saved until he presses Save.
+  It needs the `STATS_KEY` (the drill page sends the one the admin gate saved
+  on that device), so it is his alone. The problem list the Worker asks about,
+  `worker/src/drill-faults.js`, is written by `tools/drills/build.mjs`.
 - **Practice tips:** the `tip_*` topics in `ask.json` are short fixes for
   common problems ("my serve goes into the net"). They were drafted for Isaac
   to read and edit like any other answer. The tennis elbow one
@@ -238,15 +247,6 @@ overwritten on the next build. One dictionary covers all four pages.
   itself, and from each dictionary's chat answers on the copies. Edit a tip
   in `ask.json` and run the build; a new tip needs a `title` and its id in
   one of the `data-tips` lists.
-- Links between the built pages stay in the language: `tips/` on the front
-  page and `/#lessons` on the tips page lead to `/ko/tips/` and `/ko/#lessons`
-  on the Korean copies, and a chat button linking to `/tips/` does too.
-- What the scripts write (chat messages, matcher sentences, the sound note,
-  menu labels) is in each dictionary's `js`, handed to the page as
-  `window.I18N`.
-- Persian is right to left (`dir: "rtl"`); the stylesheet uses logical sides,
-  so new CSS should too (`margin-inline-start`, not `margin-left`).
-- The translations were written by Claude. Have a native speaker read a
 - **The tennis elbow figure** (`/tips/#elbow`): two drawings in
   `public/images` (`elbow-strain`, `elbow-fix`; a player at backhand contact
   with the forearm muscles drawn in and a close-up of the elbow, made with an
@@ -259,6 +259,15 @@ overwritten on the next build. One dictionary covers all four pages.
   views and the hover highlights are `public/elbow.css` and
   `public/elbow.js`. Edit the legend in the page; move a badge in the script
   and run it; then run the i18n build.
+- Links between the built pages stay in the language: `tips/` on the front
+  page and `/#lessons` on the tips page lead to `/ko/tips/` and `/ko/#lessons`
+  on the Korean copies, and a chat button linking to `/tips/` does too.
+- What the scripts write (chat messages, matcher sentences, the sound note,
+  menu labels) is in each dictionary's `js`, handed to the page as
+  `window.I18N`.
+- Persian is right to left (`dir: "rtl"`); the stylesheet uses logical sides,
+  so new CSS should too (`margin-inline-start`, not `margin-left`).
+- The translations were written by Claude. Have a native speaker read a
   language before leaning on it.
 
 </details>

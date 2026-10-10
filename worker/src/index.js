@@ -23,7 +23,13 @@
    It also keeps Isaac's numbers (POST /hit, GET /stats, at the end): how
    often each thing on the page gets used, by language, and the questions
    the chat had no answer for. Counts only — never who.
+
+   And one route for Isaac's drill library (POST /drills/describe, after
+   /ask): he describes a student in a sentence and Jev places them. It
+   takes his stats key, like /stats, so it is his alone.
    ========================================================================== */
+
+import { DRILL_FAULTS } from "./drill-faults.js";
 
 const ALLOWED_ORIGINS = [
   "https://leetennisco.com",
@@ -152,6 +158,7 @@ const ROUTES = {
   "/ask": { method: "POST", limit: "PER_VISITOR", jev: true, run: ask },
   "/hit": { method: "POST", limit: "HITS", run: hit },
   "/stats": { method: "GET", limit: "PER_VISITOR", run: stats },
+  "/drills/describe": { method: "POST", limit: "PER_VISITOR", jev: true, run: describeStudent },
 };
 
 export default {
@@ -424,6 +431,182 @@ async function ask(body, env, later) {
     };
   }
   return out;
+}
+
+/* --------------------------------------------- /drills/describe --------
+   Isaac's drill library (/admin/drills/). He writes a sentence about a
+   student ("9, rallies fine but serves underhand and gets upset when she
+   misses") and Jev places them: the ball stage, the level, what to work on
+   and which of the library's problems the sentence describes. The page
+   turns that into the student's drills, a saved student or a lesson plan;
+   Isaac checks it and changes anything before it's saved.
+
+   POST /drills/describe   Authorization: Bearer <STATS_KEY>
+                           { "text": "…" }
+   →  { "stage": "green" | null, "stage_confidence": 0.81,
+        "level": "beg" | "int" | "adv" | null,
+        "skills": ["serve", "mental"], "faults": ["sf3", "tp3"], "age": 9 | null }
+
+   All of it is one request to Jev: two Choices and a Noul per skill and per
+   problem, all asked in parallel. The stage and level say "unclear" rather
+   than guess when the sentence doesn't place the player; an age written as
+   a number fills the stage in code when Jev can't. Only the key holder can
+   call it: it spends Jev calls and has nothing to do with visitors.
+   ---------------------------------------------------------------------- */
+const DESCRIBE_MAX = 600;
+/* The stage and level are suggestions Isaac sees before anything is saved,
+   so a moderate floor: below it the page leaves the field for him. */
+const STAGE_FLOOR = 0.45;
+const DRILL_LEVEL_FLOOR = 0.45;
+/* A problem is offered when Jev leans yes: a wrong one costs a click to
+   untick. Skills need a clearer yes and are capped, because a vague note
+   ("volleys are a mess") otherwise picks up half the list. Tuned on the
+   sample notes in the route's test; adjust after real use. */
+const SKILL_FLOOR = 0.6;
+const MAX_SKILLS = 4;
+const FAULT_FLOOR = 0.5;
+const MAX_FAULTS = 5;
+
+const STAGE_CRITERIA = {
+  tots: "A child about 3 to 5 years old: a toddler or preschooler, just starting with balloons, foam balls and catching games.",
+  red: "A child about 5 to 8, or a child up to about 9 who is a complete beginner: learns on the red ball and the small 36-foot court.",
+  orange: "A child about 8 to 10 who can rally a little, or a child up to about 12 who is still a beginner: plays on the orange ball and the 60-foot court.",
+  green: "A child about 9 to 11 who can rally and serve and is moving to the full court with the green-dot ball.",
+  yellow: "A junior about 11 to 14 who plays with regular yellow balls on the full court.",
+  teen: "A teenager about 14 to 18: a high school player, a team tryout, a competitive junior.",
+  adult: "An adult about 18 to 54: a beginner adult, a parent, a league or USTA player, a college player.",
+  senior: "An adult about 55 or older.",
+  unclear: "The note gives no age and nothing else that places the player in one of these groups.",
+};
+
+const DRILL_LEVELS = {
+  beg: "Beginner: new to tennis or still learning the basic strokes; can't keep a rally going yet.",
+  int: "Intermediate: can rally and serve; working on consistency, a particular stroke, or playing points and matches casually (most 3.0–3.5 league players).",
+  adv: "Advanced: competes seriously, such as tournaments, a varsity or college team, or 4.0+ adult play.",
+  unclear: "The note says nothing about how well the player plays.",
+};
+
+/* The library's skills, each as the kind of thing a coach would write. */
+const DRILL_SKILLS = {
+  coord: "basic ball skills for a young child: tracking the ball, catching, hand-eye coordination, making contact at all",
+  forehand: "the forehand",
+  backhand: "the backhand, one- or two-handed, or the slice",
+  rally: "keeping rallies going: consistency, depth, height over the net, hitting with direction",
+  serve: "the serve: the toss, the motion, the grip, double faults, the second serve",
+  return: "returning serve",
+  net: "net play: volleys, half-volleys, approaching or coming to the net",
+  overhead: "the overhead smash, or dealing with lobs",
+  footwork: "footwork and movement: the split step, getting to the ball, spacing, recovering, speed or fitness on court",
+  tactics: "singles tactics and point play: shot choice, patterns, playing points and matches",
+  doubles: "doubles: positioning, poaching, teamwork with a partner",
+  mental: "the mental side: nerves, focus, confidence, frustration, pressure, closing out matches",
+};
+
+async function describeStudent(body, env, later, request) {
+  if (!env.STATS_KEY) return { status: 503, error: "not_set_up" };
+  const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  if (!(await sameSecret(given, env.STATS_KEY))) return { status: 401, error: "wrong_key" };
+  const text = clean(body.text);
+  if (text.length < 3 || text.length > DESCRIBE_MAX) return null;
+
+  const state = {
+    coach: "Isaac Lee, a tennis coach who teaches juniors from age 3 and adults",
+    note: text,
+  };
+  const questions = {
+    stage: {
+      type: "choice",
+      instructions: "Isaac wrote `note` about one of his tennis students. Which group does that student belong in? Go by the age the note gives, and for a child, also by how far along they are.",
+      criteria: STAGE_CRITERIA,
+    },
+    level: {
+      type: "choice",
+      instructions: "Isaac wrote `note` about one of his tennis students. How well does that student play for their age?",
+      criteria: DRILL_LEVELS,
+    },
+  };
+  for (const [k, what] of Object.entries(DRILL_SKILLS)) {
+    questions["sk_" + k] = {
+      type: "noul",
+      instructions: { task: "Isaac wrote `note` about one of his tennis students. Does it say, or clearly imply, that the student needs work on this?", skill: what },
+      criteria: {
+        true: "The note names this as something the student struggles with, is working on, or wants to improve, or describes a problem that belongs to it.",
+        false: "The note doesn't touch on it, or mentions it only as something the student already does well.",
+      },
+    };
+  }
+  for (const f of DRILL_FAULTS) {
+    questions["f_" + f.id] = {
+      type: "noul",
+      instructions: {
+        task: "Isaac wrote `note` about one of his tennis students. Does the note describe this problem in the student's game?",
+        problem: f.problem,
+        what_it_looks_like: f.looks || undefined,
+        applies_to: f.area,
+      },
+      criteria: {
+        true: "The note describes this problem or its usual symptom, in Isaac's own words or close to them.",
+        false: "The note doesn't describe this problem; a different problem in the same stroke doesn't count.",
+      },
+    };
+  }
+
+  const answers = await askJev(env.TYPESAFE_API_KEY, state, questions);
+  const age = ageIn(text);
+
+  let stage = answers.stage.choice !== "unclear" && answers.stage.confidence >= STAGE_FLOOR ? answers.stage.choice : null;
+  if (!stage && age) stage = stageForAge(age);
+  const level = answers.level.choice !== "unclear" && answers.level.confidence >= DRILL_LEVEL_FLOOR ? answers.level.choice : null;
+  const skills = Object.keys(DRILL_SKILLS)
+    .map((k) => [k, answers["sk_" + k].noul])
+    .filter(([, p]) => p >= SKILL_FLOOR)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_SKILLS)
+    .map(([k]) => k);
+  const young = ["tots", "red", "orange"].includes(stage);
+  const faults = DRILL_FAULTS
+    .map((f) => [f, answers["f_" + f.id].noul])
+    /* A young child's stroke problems come from the kids' list, and an
+       older or unplaced player's never do; the tactics and mental problems
+       (tp…) can belong to anyone. */
+    .filter(([f]) => f.id.startsWith("tp") || (young ? f.id.startsWith("kf") : !f.id.startsWith("kf")))
+    .filter(([, p]) => p >= FAULT_FLOOR)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_FAULTS)
+    .map(([f]) => f.id);
+
+  const out = { stage, stage_confidence: round(answers.stage.confidence), level, skills, faults, age };
+  if (env.DEBUG) {
+    out.debug = {
+      stage: Object.entries(answers.stage.probabilities).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, p]) => k + " " + round(p)),
+      level: Object.entries(answers.level.probabilities).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, p]) => k + " " + round(p)),
+      skills: Object.keys(DRILL_SKILLS).map((k) => k + " " + round(answers["sk_" + k].noul)).filter((s) => +s.split(" ")[1] >= 0.2),
+      faults: DRILL_FAULTS.map((f) => [f.id, answers["f_" + f.id].noul]).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([id, p]) => id + " " + round(p)),
+    };
+  }
+  return out;
+}
+
+/* An age written as a number: "9", "9yo", "age 9", "a 9-year-old",
+   "9 years old". Anything else is left to Jev. */
+function ageIn(text) {
+  const m = text.match(/\b(?:age[ds]?\s*)?(\d{1,2})\s*(?:-|\s)?(?:years?[\s-]*old|year[\s-]*old|yrs?\b|yo\b|y\/o\b)/i)
+    || text.match(/\bage[ds]?\s*(\d{1,2})\b/i);
+  const n = m ? Number(m[1]) : 0;
+  return n >= 2 && n <= 99 ? n : null;
+}
+
+/* The drill library's own age → stage rule, used only when Jev can't place
+   the player but the note gives a number. */
+function stageForAge(age) {
+  if (age <= 4) return "tots";
+  if (age <= 7) return "red";
+  if (age <= 9) return "orange";
+  if (age <= 10) return "green";
+  if (age <= 13) return "yellow";
+  if (age <= 18) return "teen";
+  if (age < 55) return "adult";
+  return "senior";
 }
 
 /* ------------------------------------------------ /hit and /stats ------
