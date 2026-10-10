@@ -373,6 +373,23 @@ export default {
     [`>No.<`, `>شماره<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `برای رزرو، کد را اسکن کنید یا به leetennisco.com بروید و این کارت را ذکر کنید.`],
     [`This card in other languages`, `این کارت به زبان‌های دیگر`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>آرنج تنیس‌بازان<`],
+    [`Aches and pains`, `دردها و آسیب‌ها`],
+    [`>Show<`, `>نمایش<`],
+    [`>What goes wrong<`, `>چه اشتباهی رخ می‌دهد<`],
+    [`>The fix<`, `>راه‌حل<`],
+    [`>How to fix it<`, `>چطور درستش کنیم<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `بازیکنی در لحظهٔ ضربهٔ بک‌هند، با عضلات ساعد نمایان، و نمای نزدیک از بیرون آرنج`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `عضلاتی که مچ را بالا می‌آورند از یک برجستگی کوچک در بیرون آرنج تا پشت دست کشیده شده‌اند. بک‌هند دیر و مچی (شماره‌های ۱ تا ۳) به همان نقطه ضربه می‌زند؛ بازوی صاف که توپ را جلوی بدن می‌گیرد (شماره‌های ۴ تا ۶) کار را بین شانه و بازو تقسیم می‌کند.`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>یک نقطهٔ کوچک همه‌چیز را تحمل می‌کند.</strong> عضلاتی که مچ و انگشت‌ها را بالا می‌آورند همه به یک برجستگی در بیرون آرنج چسبیده‌اند. هر تکان همان‌جا می‌نشیند و تاندون پارگی‌های ریز پیدا می‌کند.`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>مچ جلو می‌افتد و خم می‌شود.</strong> در بک‌هند دیر، سر راکت پشت دست می‌ماند، مچ آن را با شلاق جلو می‌آورد و ساعد تمام ضربه را می‌گیرد.`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>گرفتن بیش از حد محکم.</strong> فشردن دسته، زه سفت و راکت سنگین همگی لرزش بیشتری را به بالای بازو می‌فرستند.`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>بچرخید و از شانه بزنید.</strong> شانه‌ها را زود پهلو کنید و بگذارید پشت و شانه کار کنند؛ ساعد فقط راکت را نگه می‌دارد.`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>توپ را جلوی بدن و با مچ محکم بگیرید.</strong> بازو کشیده، سر راکت بالاتر از مچ: یک خط از شانه تا توپ، تا عضلات بزرگ ضربه را بگیرند.`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>تجهیزات را نرم‌تر کنید.</strong> زه شل‌تر یا نرم‌تر، گریپ کمی ضخیم‌تر، فریم سبک‌تر، و دستی که راکت را مثل یک پرندهٔ کوچک نگه دارد.`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `تا وقتی درد دارد استراحت بدهید، ساعد را بکشید، و اگر درد بیش از دو هفته ادامه داشت به پزشک یا فیزیوتراپ مراجعه کنید.`],
   ],
 
   ask: {
@@ -393,6 +410,7 @@ export default {
       "Join the clinic list": "ثبت‌نام در کلاس گروهی",
       "Give a lesson": "هدیه دادن کلاس",
       "See all the tips": "دیدن همهٔ نکته‌ها",
+      "See the diagram": "دیدن تصویر",
     },
     topics: {
       hello: {
@@ -598,6 +616,12 @@ export default {
         title: "چطور تنهایی تمرین کنم؟",
         answer: "دیوار بهترین هم‌تمرینی است: فورهند و بک‌هند را به دیوار بزنید و بالای یک خط را هدف بگیرید. یک سبد سرویس در زمین خالی پرتابتان را ثابت می‌کند و ضربه‌های بدون توپ جلوی آینه تکنیک را درست می‌کند. کوتاه و مرتب بهتر از طولانی و گاه‌به‌گاه است.",
         next: ["سرویسم به تور می‌خورد", "نمی‌توانم رالی را ادامه بدهم", "چطور وقت رزرو کنم؟"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "آرنجم درد می‌کند (آرنج تنیس‌بازان)",
+        answer: "آرنج تنیس‌بازان نقطه‌ای دردناک در بیرون آرنج است، جایی که عضلات بالابرندهٔ مچ به استخوان می‌چسبند. در زمین معمولاً از بک‌هند دیر و مچی می‌آید: توپ به‌جای جلوی بدن در کنار شما به راکت می‌خورد، مچ خم می‌شود و ساعد ضربه‌ای می‌گیرد که برایش ساخته نشده. توپ را جلوی بدن با مچ محکم بگیرید و بگذارید شانه‌ها سوئینگ کنند، گریپ را شل‌تر بگیرید و زه نرم‌تر یا گریپ ضخیم‌تر را امتحان کنید. تا وقتی درد دارد استراحت بدهید و اگر بعد از دو هفته هنوز درد داشت به پزشک مراجعه کنید.",
+        next: ["بک‌هندم ضعیف است","راکت خودم لازم است؟","چطور وقت رزرو کنم؟"],
       },
       tip_kids: {
         src: "ftve6h",

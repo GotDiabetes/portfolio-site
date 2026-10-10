@@ -370,6 +370,23 @@ export default {
     [`>No.<`, `>번호<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `예약하려면 코드를 스캔하거나 leetennisco.com에 들어가서 이 카드를 말씀해 주세요.`],
     [`This card in other languages`, `다른 언어로 된 카드`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>테니스 엘보<`],
+    [`Aches and pains`, `통증과 부상`],
+    [`>Show<`, `>보기<`],
+    [`>What goes wrong<`, `>무엇이 잘못되나<`],
+    [`>The fix<`, `>고치는 법<`],
+    [`>How to fix it<`, `>이렇게 고쳐요<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `백핸드 임팩트 순간의 선수를 팔뚝 근육이 보이게 그린 그림과, 팔꿈치 바깥쪽 확대 그림`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `손목을 들어 올리는 근육들은 팔꿈치 바깥쪽의 작은 뼈 돌기에서 손등까지 이어져요. 늦고 손목에 의존하는 백핸드(1~3번)는 그 지점에 충격을 주고, 앞에서 공을 맞히는 쭉 뻗은 팔(4~6번)은 그 힘을 어깨와 팔 전체에 나눠요.`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>작은 한 점이 다 받아요.</strong> 손목과 손가락을 들어 올리는 근육이 모두 팔꿈치 바깥쪽의 돌기 하나에 붙어 있어요. 충격이 올 때마다 거기에 쌓이고, 힘줄에 미세한 손상이 생겨요.`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>손목이 앞서고 꺾여요.</strong> 늦은 백핸드에서는 라켓 헤드가 손 뒤로 처지고, 손목이 그걸 휙 돌리느라 팔뚝이 충격을 다 받아요.`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>그립을 꽉 쥐어요.</strong> 손잡이를 세게 쥐는 것, 딱딱한 스트링, 무거운 라켓 모두 충격을 팔 위로 더 올려 보내요.`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>몸을 돌려 어깨로 스윙하세요.</strong> 어깨를 일찍 옆으로 돌리고 등과 어깨가 일하게 하세요. 팔뚝은 잡고만 있으면 돼요.`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>앞에서, 손목을 단단히 하고 맞히세요.</strong> 팔은 길게, 라켓 헤드는 손목보다 위에. 어깨에서 공까지 한 줄이 되면 큰 근육이 충격을 받아요.`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>장비를 부드럽게.</strong> 더 느슨하거나 부드러운 스트링, 조금 더 굵은 그립, 더 가벼운 라켓, 그리고 작은 새를 쥐듯 가볍게 잡는 손.`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `아플 때는 쉬고 팔뚝을 스트레칭하세요. 통증이 2주 넘게 이어지면 병원이나 물리치료사를 찾아가세요.`],
   ],
 
   ask: {
@@ -390,6 +407,7 @@ export default {
       "Join the clinic list": "클리닉 신청하기",
       "Give a lesson": "레슨 선물하기",
       "See all the tips": "팁 전체 보기",
+      "See the diagram": "그림 보기",
     },
     topics: {
       hello: {
@@ -595,6 +613,12 @@ export default {
         title: "혼자 어떻게 연습하나요?",
         answer: "벽은 최고의 연습 상대예요. 선 위를 노리면서 포핸드와 백핸드로 벽치기를 하세요. 빈 코트에서 서브를 한 바구니 치면 토스가 안정되고, 거울 앞 섀도 스윙은 공 없이도 자세를 고쳐 줘요. 길고 드물게보다 짧고 자주가 나아요.",
         next: ["서브가 네트에 걸려요", "랠리가 이어지지 않아요", "예약은 어떻게 해요?"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "팔꿈치가 아파요 (테니스 엘보)",
+        answer: "테니스 엘보는 손목을 들어 올리는 근육이 뼈에 붙는 팔꿈치 바깥쪽이 아픈 거예요. 코트에서는 주로 늦고 손목에 의존하는 백핸드 때문에 생겨요. 공이 앞이 아니라 몸 옆에서 라켓에 맞고, 손목이 꺾이면서 팔뚝이 감당 못 할 충격을 받죠. 손목을 단단히 하고 앞에서 공을 맞히면서 어깨로 스윙하고, 그립을 느슨하게 쥐고, 부드러운 스트링이나 더 굵은 그립을 써 보세요. 아플 때는 쉬고, 2주가 지나도 아프면 병원에 가 보세요.",
+        next: ["백핸드가 약해요","라켓이 꼭 있어야 하나요?","예약은 어떻게 해요?"],
       },
       tip_kids: {
         src: "ftve6h",

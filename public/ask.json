@@ -580,6 +580,28 @@
       ]
     },
     {
+      "id": "tip_tennis_elbow",
+      "title": "My elbow hurts (tennis elbow)",
+      "covers": "The visitor's elbow or forearm hurts when they play, or they ask about tennis elbow: what causes it, how to avoid it, or how to get rid of it.",
+      "answer": "Tennis elbow is a sore spot on the outside of the elbow, where the muscles that lift the wrist attach to the bone. On court it usually comes from a late, wristy backhand: the ball meets the racket beside you instead of in front, the wrist bends, and the forearm takes a jolt it isn't built for. Meet the ball out in front with a firm wrist and let the shoulders do the swinging, loosen your grip, and try softer strings or a bigger grip. Rest it while it's sore, and if it still hurts after a couple of weeks, see a doctor.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/tips/#elbow",
+          "label": "See the diagram"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My backhand is weak",
+        "Do I need my own racket?",
+        "How do I book?"
+      ]
+    },
+    {
       "id": "tip_kids",
       "title": "How can my child practise at home?",
       "covers": "A parent asks how their child can practise at home, get started, or stay interested in tennis.",

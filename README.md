@@ -153,7 +153,9 @@ Isaac's machine.
   or addresses typed in (a one-line "leave those out").
 - **Practice tips:** the `tip_*` topics in `ask.json` are short fixes for
   common problems ("my serve goes into the net"). They were drafted for Isaac
-  to read and edit like any other answer.
+  to read and edit like any other answer. The tennis elbow one
+  (`tip_tennis_elbow`) also has a drawn figure on the tips page, and its chat
+  answer links there ("See the diagram").
 - The Jev model is pinned (`MODEL` in `worker/src/index.js`); the thresholds
   were tuned on that version. Move to a newer one deliberately.
   **To change or add an answer, edit `ask.json` and push** — the Worker reads
@@ -245,6 +247,18 @@ overwritten on the next build. One dictionary covers all four pages.
 - Persian is right to left (`dir: "rtl"`); the stylesheet uses logical sides,
   so new CSS should too (`margin-inline-start`, not `margin-left`).
 - The translations were written by Claude. Have a native speaker read a
+- **The tennis elbow figure** (`/tips/#elbow`): two drawings in
+  `public/images` (`elbow-strain`, `elbow-fix`; a player at backhand contact
+  with the forearm muscles drawn in and a close-up of the elbow, made with an
+  image model from a written description) and, over them, numbered badges.
+  The markup between the `elbow-svg` markers in `public/tips/index.html` is
+  written by `node tools/elbow-figure.mjs`, where the badge positions live
+  (in the drawings' own pixels). The drawings have no words, so they serve
+  every language; the words are the legend beside them in the page,
+  translated through the dictionaries like everything else, and the two
+  views and the hover highlights are `public/elbow.css` and
+  `public/elbow.js`. Edit the legend in the page; move a badge in the script
+  and run it; then run the i18n build.
   language before leaning on it.
 
 </details>

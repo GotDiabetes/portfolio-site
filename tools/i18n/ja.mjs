@@ -369,6 +369,23 @@ export default {
     [`>No.<`, `>番号<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `予約は、コードをスキャンするか leetennisco.com から。その際にこのカードのことをお伝えください。`],
     [`This card in other languages`, `ほかの言語のカード`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>テニス肘<`],
+    [`Aches and pains`, `痛みとけが`],
+    [`>Show<`, `>表示<`],
+    [`>What goes wrong<`, `>何が起きているか<`],
+    [`>The fix<`, `>直し方<`],
+    [`>How to fix it<`, `>こう直す<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `バックハンドの打点の瞬間の選手を、前腕の筋肉が見えるように描いた図と、肘の外側の拡大図`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `手首を持ち上げる筋肉は、肘の外側の小さな骨の出っ張りから手の甲までつながっています。遅れて手首に頼るバックハンド（1〜3）はその一点に衝撃を与え、腕を伸ばして体の前でボールをとらえる打ち方（4〜6）は、その力を肩と腕全体に分散します。`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>小さな一点にすべてがかかる。</strong> 手首と指を持ち上げる筋肉は、すべて肘の外側のひとつの出っ張りについています。衝撃のたびにそこに負担がかかり、腱に小さな傷ができます。`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>手首が先行して曲がる。</strong> 遅れたバックハンドではラケットヘッドが手の後ろに垂れ、手首でこね回すことになり、前腕が衝撃を全部受け止めます。`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>力いっぱい握っている。</strong> グリップを強く握ること、硬いストリング、重いラケットは、どれも衝撃を腕の上へ多く伝えます。`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>体を回して肩から振る。</strong> 早めに肩を横に向け、背中と肩に仕事をさせましょう。前腕は握っているだけで十分です。`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>体の前で、手首を固めてとらえる。</strong> 腕は長く、ラケットヘッドは手首より上に。肩からボールまで一直線になれば、大きな筋肉が衝撃を受け止めます。`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>道具をやさしく。</strong> テンションを下げるか柔らかいストリングに、グリップは少し太く、フレームは軽く、そして小鳥を持つくらいの握り方で。`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `痛いうちは休ませて前腕を伸ばし、痛みが2週間以上続くなら医師か理学療法士に相談してください。`],
   ],
 
   ask: {
@@ -389,6 +406,7 @@ export default {
       "Join the clinic list": "クリニックに申し込む",
       "Give a lesson": "レッスンを贈る",
       "See all the tips": "ヒントをすべて見る",
+      "See the diagram": "図を見る",
     },
     topics: {
       hello: {
@@ -594,6 +612,12 @@ export default {
         title: "一人でどう練習すればいい？",
         answer: "壁は最高の練習相手です。線より上を狙って、フォアとバックで壁打ちをしましょう。空いているコートでサーブをかご一杯打てばトスが安定し、鏡の前の素振りはボールなしでもフォームを直せます。長く時々より、短く頻繁にのほうが効果的です。",
         next: ["サーブがネットにかかる", "ラリーが続かない", "予約の方法は？"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "肘が痛い（テニス肘）",
+        answer: "テニス肘は、手首を持ち上げる筋肉が骨につく肘の外側が痛くなるものです。コートでは、遅れて手首に頼るバックハンドが原因になることがほとんどです。ボールを体の前ではなく横でとらえ、手首が曲がり、前腕が耐えられない衝撃を受けます。手首を固めて体の前でボールをとらえ、肩でスイングし、握りをゆるめて、柔らかいストリングや少し太いグリップを試してください。痛いうちは休ませ、2週間たっても痛むなら医師に相談しましょう。",
+        next: ["バックハンドが苦手","ラケットは必要ですか？","予約の方法は？"],
       },
       tip_kids: {
         src: "ftve6h",

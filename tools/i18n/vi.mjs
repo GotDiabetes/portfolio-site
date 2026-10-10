@@ -366,6 +366,23 @@ export default {
     [`>No.<`, `>Số<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `Để đặt lịch, hãy quét mã hoặc vào leetennisco.com và nhắc đến thẻ này.`],
     [`This card in other languages`, `Thẻ này bằng các ngôn ngữ khác`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>Khuỷu tay tennis<`],
+    [`Aches and pains`, `Đau nhức và chấn thương`],
+    [`>Show<`, `>Hiện<`],
+    [`>What goes wrong<`, `>Điều gì sai<`],
+    [`>The fix<`, `>Cách sửa<`],
+    [`>How to fix it<`, `>Sửa thế nào<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `Một người chơi ở thời điểm chạm bóng trái tay, vẽ rõ các cơ cẳng tay, kèm hình phóng to mặt ngoài khuỷu tay`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `Các cơ nâng cổ tay chạy từ một mấu xương nhỏ ở mặt ngoài khuỷu tay đến mu bàn tay. Cú trái tay đánh muộn, dùng cổ tay (số 1 đến 3) giật mạnh vào điểm đó; cánh tay thẳng đón bóng phía trước (số 4 đến 6) chia lực cho vai và cả cánh tay.`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>Một điểm nhỏ gánh tất cả.</strong> Các cơ nâng cổ tay và ngón tay đều bám vào một mấu xương ở mặt ngoài khuỷu tay. Mỗi cú giật đều dồn vào đó, và gân bị rách li ti.`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>Cổ tay đi trước và gập lại.</strong> Khi đánh trái tay muộn, đầu vợt tụt lại sau bàn tay, cổ tay phải hất vợt qua, và cẳng tay hứng trọn lực va chạm.`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>Nắm vợt quá chặt.</strong> Siết chặt cán vợt, dây cứng và vợt nặng đều đẩy thêm chấn động lên cánh tay.`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>Xoay người và vung từ vai.</strong> Xoay vai nghiêng sớm, để lưng và vai làm việc; cẳng tay chỉ cần giữ vợt.`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>Đón bóng phía trước, cổ tay chắc.</strong> Cánh tay dài, đầu vợt cao hơn cổ tay: một đường thẳng từ vai đến bóng, để các cơ lớn chịu lực.`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>Dùng dụng cụ nhẹ nhàng hơn.</strong> Dây lỏng hơn hoặc mềm hơn, cán vợt to hơn một chút, khung nhẹ hơn, và nắm vợt nhẹ như đang giữ một chú chim.`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `Nghỉ khi còn đau, giãn cơ cẳng tay, và nếu đau kéo dài hơn vài tuần thì đi khám bác sĩ hoặc chuyên gia vật lý trị liệu.`],
   ],
 
   ask: {
@@ -386,6 +403,7 @@ export default {
       "Join the clinic list": "Đăng ký lớp nhóm",
       "Give a lesson": "Tặng một buổi học",
       "See all the tips": "Xem tất cả mẹo",
+      "See the diagram": "Xem hình",
     },
     topics: {
       hello: {
@@ -591,6 +609,12 @@ export default {
         title: "Tôi tự tập một mình thế nào?",
         answer: "Bức tường là bạn tập tốt nhất: đánh thuận tay và trái tay vào tường, nhắm cao hơn một vạch kẻ. Một giỏ giao bóng trên sân trống giúp tung bóng ổn định, và vung vợt không bóng trước gương giúp sửa kỹ thuật. Tập ngắn mà đều tốt hơn tập dài mà thưa.",
         next: ["Giao bóng của tôi hay vào lưới", "Tôi không giữ được nhịp đánh qua lại", "Đặt lịch thế nào?"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "Khuỷu tay tôi bị đau (tennis elbow)",
+        answer: "Tennis elbow là chỗ đau ở mặt ngoài khuỷu tay, nơi các cơ nâng cổ tay bám vào xương. Trên sân, nó thường đến từ cú trái tay đánh muộn và dùng cổ tay: bóng chạm vợt ở bên cạnh người thay vì phía trước, cổ tay gập lại, và cẳng tay hứng một cú giật mà nó không được sinh ra để chịu. Hãy đón bóng phía trước với cổ tay chắc, để vai vung vợt, nới lỏng tay nắm, và thử dây mềm hơn hoặc cán vợt to hơn. Nghỉ khi còn đau, và nếu sau vài tuần vẫn đau thì đi khám bác sĩ.",
+        next: ["Cú trái tay của tôi yếu","Tôi có cần vợt riêng không?","Đặt lịch thế nào?"],
       },
       tip_kids: {
         src: "ftve6h",

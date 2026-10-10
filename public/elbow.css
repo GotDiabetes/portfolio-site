@@ -1,0 +1,100 @@
+/* ============================================================================
+   The tennis elbow figure on the practice tips page (/tips/#elbow).
+
+   Under the tip, a drawn player at backhand contact with the forearm
+   muscles showing and a close-up of the outside of the elbow, beside a
+   numbered legend. Two views share the drawing, "What goes wrong" (a late,
+   wristy backhand: the elbow lit in the ball's colour, jolt arcs) and "The
+   fix" (a straight arm meeting the ball out in front): a switch above the
+   drawing crossfades them, and resting on a legend item brings up its view
+   and its number. The drawing has no words, so one serves every language.
+   ========================================================================== */
+
+.elbow {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr; gap: .75rem clamp(1.5rem, 4vw, 3rem);
+  margin: 1.5rem 0 0; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line);
+}
+.elbow .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.elbow-switch { grid-column: 1; grid-row: 1; display: inline-flex; gap: .25rem; justify-self: start;
+  padding: .2rem; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+.elbow-tab {
+  appearance: none; border: 0; background: transparent; color: var(--muted);
+  font: inherit; font-size: .875rem; padding: .45rem .9rem; min-height: 2.25rem;
+  border-radius: 999px; cursor: pointer;
+  transition: background var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease);
+}
+.elbow-tab:hover { color: var(--text); }
+.elbow-tab[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.elbow-tab:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+
+/* The plate: two drawings of the same player (one per view) stacked in one
+   box, with a transparent SVG over them carrying the numbered badges, the
+   sore spot's glow and the guide line. The box keeps the drawings' shape so
+   nothing jumps while they load. */
+.elbow-art {
+  grid-column: 1; grid-row: 2; position: relative; aspect-ratio: 1200 / 896;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); overflow: hidden;
+}
+.elbow-art picture, .elbow-art img, .elbow-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.elbow-art img { display: block; object-fit: cover; }
+.elbow-svg { font-family: var(--font); }
+
+/* The two views crossfade; the one not shown can't be hovered or read. */
+.elbow-art .st { transition: opacity .45s var(--ease); }
+.elbow[data-state="strain"] .st-fix, .elbow[data-state="fix"] .st-strain { opacity: 0; pointer-events: none; }
+
+/* The jolt arcs ripple out from the elbow when the strain view arrives. */
+.elbow-svg .jolt { transform-box: fill-box; transform-origin: 100% 100%; }
+.elbow.is-jolting .jolt { animation: elbowJolt .9s var(--ease) both; animation-delay: calc(var(--i) * .12s); }
+@keyframes elbowJolt { from { opacity: 0; transform: scale(.4); } 35% { opacity: 1; } to { opacity: 1; transform: none; } }
+
+/* Numbers: resting on a legend item lifts its number and quiets the others. */
+.elbow-svg .mk-badge { transition: transform var(--dur-ui) var(--ease); }
+.elbow-svg .mk { transition: opacity var(--dur-ui) var(--ease); }
+.elbow[data-hot] .mk { opacity: .3; }
+.elbow[data-hot="1"] .mk[data-n="1"], .elbow[data-hot="2"] .mk[data-n="2"], .elbow[data-hot="3"] .mk[data-n="3"],
+.elbow[data-hot="4"] .mk[data-n="4"], .elbow[data-hot="5"] .mk[data-n="5"], .elbow[data-hot="6"] .mk[data-n="6"] { opacity: 1; }
+.elbow[data-hot="1"] .mk[data-n="1"] .mk-badge, .elbow[data-hot="2"] .mk[data-n="2"] .mk-badge, .elbow[data-hot="3"] .mk[data-n="3"] .mk-badge,
+.elbow[data-hot="4"] .mk[data-n="4"] .mk-badge, .elbow[data-hot="5"] .mk[data-n="5"] .mk-badge, .elbow[data-hot="6"] .mk[data-n="6"] .mk-badge { transform: scale(1.3); }
+.elbow[data-hot="5"] .guide { stroke: var(--text); }
+.elbow[data-hot="1"] .hot-in, .elbow[data-hot="1"] .hot { filter: drop-shadow(0 0 4px rgba(217, 239, 63, .9)); }
+
+/* The legend: two short numbered lists and one quiet line. */
+.elbow-legend { grid-column: 2; grid-row: 1 / span 2; margin: 0; font-size: .9375rem; line-height: 1.55; }
+.elbow-list + .elbow-list { margin-top: 1.1rem; }
+.elbow-list h4 { font-size: .8125rem; font-weight: 400; color: var(--muted); letter-spacing: .02em; margin: 0 0 .35rem; }
+.elbow-list ol { list-style: none; margin: 0; padding: 0; }
+.elbow-list li {
+  position: relative; padding: .45rem 0 .45rem 2.1rem; border-top: 1px solid var(--line);
+  cursor: default; transition: color var(--dur-ui) var(--ease);
+}
+.elbow-list li:last-child { border-bottom: 1px solid var(--line); }
+.elbow-list li::before {
+  content: attr(data-mark); position: absolute; left: 0; top: .55rem;
+  width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--text); color: var(--bg);
+  font-size: .8125rem; font-weight: 600; display: grid; place-items: center;
+  transition: transform var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease);
+}
+.elbow-list li.is-hot::before { transform: scale(1.15); }
+.elbow[data-hot] .elbow-list li:not(.is-hot) { color: var(--muted); }
+.elbow-list strong { font-weight: 600; color: var(--text); }
+.elbow[data-hot] .elbow-list li:not(.is-hot) strong { color: inherit; }
+.elbow-note { margin: 1.1rem 0 0; color: var(--muted); font-size: .875rem; max-width: 40ch; }
+
+:root[dir="rtl"] .elbow-list li { padding: .45rem 2.1rem .45rem 0; }
+:root[dir="rtl"] .elbow-list li::before { left: auto; right: 0; }
+
+@media (max-width: 860px) {
+  .elbow { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+  .elbow-legend { grid-column: 1; grid-row: 3; margin-top: .5rem; }
+  /* The numbers stay readable when the drawing shrinks to a phone. */
+  .elbow-svg .mk-badge { transform: scale(1.35); }
+  .elbow[data-hot="1"] .mk[data-n="1"] .mk-badge, .elbow[data-hot="2"] .mk[data-n="2"] .mk-badge, .elbow[data-hot="3"] .mk[data-n="3"] .mk-badge,
+  .elbow[data-hot="4"] .mk[data-n="4"] .mk-badge, .elbow[data-hot="5"] .mk[data-n="5"] .mk-badge, .elbow[data-hot="6"] .mk[data-n="6"] .mk-badge { transform: scale(1.65); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elbow-svg .st, .elbow-svg .mk, .elbow-svg .mk-badge, .elbow-svg .hot-in, .elbow-svg .tears { transition: none; }
+  .elbow.is-jolting .jolt { animation: none; }
+}

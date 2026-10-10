@@ -374,6 +374,23 @@ export default {
     [`>No.<`, `>N.º<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `Para reservar, escanea el código o entra en leetennisco.com y menciona esta tarjeta.`],
     [`This card in other languages`, `Esta tarjeta en otros idiomas`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>Codo de tenista<`],
+    [`Aches and pains`, `Dolores y molestias`],
+    [`>Show<`, `>Mostrar<`],
+    [`>What goes wrong<`, `>Qué sale mal<`],
+    [`>The fix<`, `>La solución<`],
+    [`>How to fix it<`, `>Cómo arreglarlo<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `Un jugador en el momento del impacto de revés, dibujado con los músculos del antebrazo a la vista, y un primer plano de la parte externa del codo`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `Los músculos que levantan la muñeca van desde un pequeño bulto en la parte externa del codo hasta el dorso de la mano. Un revés tardío y de muñeca, numerado del 1 al 3, sacude ese punto; un brazo recto que golpea la pelota por delante, numerado del 4 al 6, reparte el trabajo entre el hombro y el brazo.`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>Un solo punto se lo lleva todo.</strong> Los músculos que levantan la muñeca y los dedos se sujetan todos a un bulto en la parte externa del codo. Cada sacudida cae ahí, y el tendón sufre pequeños desgarros.`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>La muñeca va por delante y se dobla.</strong> En un revés tardío la cabeza de la raqueta se queda detrás de la mano, la muñeca la lanza de golpe y el antebrazo recibe todo el impacto.`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>Agarre de hierro.</strong> Apretar el mango, unas cuerdas rígidas y una raqueta pesada mandan más golpe brazo arriba.`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>Gira y golpea desde el hombro.</strong> Hombros de lado desde el principio, y deja que la espalda y el hombro hagan el trabajo; el antebrazo solo sujeta.`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>Golpea la pelota por delante, con la muñeca firme.</strong> Brazo largo, cabeza de la raqueta por encima de la muñeca: una sola línea del hombro a la pelota, para que los músculos grandes reciban el golpe.`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>Suaviza el equipo.</strong> Cuerdas más flojas o más blandas, un grip un poco más grueso, un marco más ligero, y un agarre con el que podrías sostener un pajarito.`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `Déjalo descansar mientras duela, estira el antebrazo y, si el dolor dura más de un par de semanas, ve al médico o al fisio.`],
   ],
 
   ask: {
@@ -394,6 +411,7 @@ export default {
       "Join the clinic list": "Apúntate a una clínica",
       "Give a lesson": "Regala una clase",
       "See all the tips": "Ver todos los consejos",
+      "See the diagram": "Ver el dibujo",
     },
     topics: {
       hello: {
@@ -599,6 +617,12 @@ export default {
         title: "¿Cómo practico por mi cuenta?",
         answer: "Una pared es el mejor compañero de práctica: pelotea derechas y reveses contra ella, apuntando por encima de una línea. Una canasta de saques en una cancha vacía te da un lanzamiento fiable, y los golpes en seco frente a un espejo corrigen la técnica sin pelota. Poco y seguido vale más que mucho y de vez en cuando.",
         next: ["Mi saque se va a la red", "No consigo mantener un peloteo", "¿Cómo reservo?"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "Me duele el codo (codo de tenista)",
+        answer: "El codo de tenista es un punto dolorido en la parte externa del codo, donde los músculos que levantan la muñeca se sujetan al hueso. En la cancha suele venir de un revés tardío y de muñeca: la pelota llega a la raqueta a tu lado en vez de por delante, la muñeca se dobla y el antebrazo recibe una sacudida para la que no está hecho. Golpea la pelota por delante con la muñeca firme y deja que los hombros hagan el swing, afloja el agarre y prueba unas cuerdas más blandas o un grip más grueso. Déjalo descansar mientras duela y, si sigue doliendo después de un par de semanas, ve al médico.",
+        next: ["Mi revés es débil","¿Necesito mi propia raqueta?","¿Cómo reservo?"],
       },
       tip_kids: {
         src: "ftve6h",

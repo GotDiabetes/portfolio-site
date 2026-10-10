@@ -370,6 +370,23 @@ export default {
     [`>No.<`, `>编号<`],
     [`To book, scan the code or go to leetennisco.com, and mention this card.`, `预约时请扫码或访问 leetennisco.com，并提到这张卡。`],
     [`This card in other languages`, `其他语言版本的礼品卡`],
+
+    // added with the tennis elbow tip and its figure
+    [`>Tennis elbow<`, `>网球肘<`],
+    [`Aches and pains`, `酸痛与伤病`],
+    [`>Show<`, `>显示<`],
+    [`>What goes wrong<`, `>问题出在哪<`],
+    [`>The fix<`, `>怎么改<`],
+    [`>How to fix it<`, `>怎么解决<`],
+    [`A player at backhand contact, drawn with the forearm muscles showing, and a close-up of the outside of the elbow`, `一名球员反手击球瞬间的画像，画出了前臂肌肉，并有肘部外侧的特写`],
+    [`The muscles that lift the wrist run from a small bump on the outside of the elbow to the back of the hand. A late, wristy backhand, numbered 1 to 3, jolts that spot; a straight arm meeting the ball out in front, numbered 4 to 6, spreads the work over the shoulder and arm.`, `抬起手腕的肌肉从肘部外侧的一个小骨突一直连到手背。又晚又靠手腕的反手（1 到 3）会震到那一点；手臂伸直、在身前击球（4 到 6）则把力量分到肩膀和整条手臂。`],
+    [`<strong>One small spot takes it all.</strong> The muscles that lift the wrist and fingers all attach to one bump on the outside of the elbow. Every jolt lands there, and the tendon gets tiny tears.`, `<strong>一个小点承受全部。</strong> 抬起手腕和手指的肌肉全都连在肘部外侧的一个骨突上。每一次震动都落在那里，肌腱会出现细小撕裂。`],
+    [`<strong>The wrist leads and bends.</strong> On a late backhand the racket head drops behind the hand, the wrist flicks it through, and the forearm takes the whole impact.`, `<strong>手腕领先并弯曲。</strong> 反手打晚了，拍头落在手的后面，靠手腕甩过去，前臂就承受了全部冲击。`],
+    [`<strong>A death grip.</strong> Squeezing the handle, stiff strings and a heavy racket all send more of the shock up the arm.`, `<strong>握得太死。</strong> 用力攥拍柄、太硬的线、太重的球拍，都会把更多震动送到手臂上。`],
+    [`<strong>Turn and swing from the shoulder.</strong> Shoulders sideways early, and let the back and shoulder do the work; the forearm only holds on.`, `<strong>转身，用肩膀挥拍。</strong> 早早侧身，让背部和肩膀出力；前臂只负责握住。`],
+    [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>在身前击球，手腕稳住。</strong> 手臂伸长，拍头高于手腕：从肩膀到球成一条线，让大肌肉来承受冲击。`],
+    [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>让装备更温和。</strong> 线磅数低一点或更软，握柄稍粗一点，拍框更轻一点，握力轻得像握着一只小鸟。`],
+    [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `疼的时候先休息，拉伸前臂；如果疼痛超过两周，去看医生或理疗师。`],
   ],
 
   ask: {
@@ -390,6 +407,7 @@ export default {
       "Join the clinic list": "报名小组课",
       "Give a lesson": "送一节课",
       "See all the tips": "查看全部技巧",
+      "See the diagram": "看图解",
     },
     topics: {
       hello: {
@@ -595,6 +613,12 @@ export default {
         title: "我一个人怎么练？",
         answer: "墙是最好的练习伙伴：对着墙打正反手，瞄准一条线以上。在空场地练一筐发球能让抛球更稳定，对着镜子徒手挥拍不用球也能纠正动作。少量多次，胜过偶尔练很久。",
         next: ["我发球总是下网", "我对拉坚持不了几拍", "怎么预约？"],
+      },
+      tip_tennis_elbow: {
+        src: "12j31b5",
+        title: "我的肘部疼（网球肘）",
+        answer: "网球肘是肘部外侧的一处酸痛点，那里是抬起手腕的肌肉连到骨头的地方。在球场上多半来自又晚又靠手腕的反手：球在身侧而不是身前碰到球拍，手腕弯了，前臂受到它承受不了的震动。手腕稳住、在身前击球，让肩膀来挥拍，放松握力，试试更软的线或更粗一点的握柄。疼的时候先休息，两周后还疼就去看医生。",
+        next: ["我的反手很弱","我需要自己带球拍吗？","怎么预约？"],
       },
       tip_kids: {
         src: "ftve6h",

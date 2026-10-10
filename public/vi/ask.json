@@ -542,6 +542,27 @@
       ]
     },
     {
+      "id": "tip_tennis_elbow",
+      "title": "Khuỷu tay tôi bị đau (tennis elbow)",
+      "answer": "Tennis elbow là chỗ đau ở mặt ngoài khuỷu tay, nơi các cơ nâng cổ tay bám vào xương. Trên sân, nó thường đến từ cú trái tay đánh muộn và dùng cổ tay: bóng chạm vợt ở bên cạnh người thay vì phía trước, cổ tay gập lại, và cẳng tay hứng một cú giật mà nó không được sinh ra để chịu. Hãy đón bóng phía trước với cổ tay chắc, để vai vung vợt, nới lỏng tay nắm, và thử dây mềm hơn hoặc cán vợt to hơn. Nghỉ khi còn đau, và nếu sau vài tuần vẫn đau thì đi khám bác sĩ.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/vi/tips/#elbow",
+          "label": "Xem hình"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú trái tay của tôi yếu",
+        "Tôi có cần vợt riêng không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
       "id": "tip_kids",
       "title": "Con tôi có thể tập ở nhà thế nào?",
       "answer": "Hãy giữ cho ngắn và vui: tung và bắt bóng, tâng bóng trên mặt vợt, đánh qua lại qua một vạch trên lối xe chạy bằng bóng mềm. Vài phút mỗi lần, vài lần mỗi tuần hiệu quả hơn một buổi dài. Trong buổi học, các bé mới tập dùng bóng chậm và mềm hơn nên sẽ đánh qua lại được sớm hơn.",

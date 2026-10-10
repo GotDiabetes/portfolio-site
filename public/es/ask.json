@@ -542,6 +542,27 @@
       ]
     },
     {
+      "id": "tip_tennis_elbow",
+      "title": "Me duele el codo (codo de tenista)",
+      "answer": "El codo de tenista es un punto dolorido en la parte externa del codo, donde los músculos que levantan la muñeca se sujetan al hueso. En la cancha suele venir de un revés tardío y de muñeca: la pelota llega a la raqueta a tu lado en vez de por delante, la muñeca se dobla y el antebrazo recibe una sacudida para la que no está hecho. Golpea la pelota por delante con la muñeca firme y deja que los hombros hagan el swing, afloja el agarre y prueba unas cuerdas más blandas o un grip más grueso. Déjalo descansar mientras duela y, si sigue doliendo después de un par de semanas, ve al médico.",
+      "actions": [
+        {
+          "type": "link",
+          "href": "/es/tips/#elbow",
+          "label": "Ver el dibujo"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi revés es débil",
+        "¿Necesito mi propia raqueta?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
       "id": "tip_kids",
       "title": "¿Cómo puede practicar mi hijo en casa?",
       "answer": "Que sea corto y divertido: lanzar y atrapar, botar la pelota sobre la raqueta, pelotear por encima de una línea en la entrada de casa con una pelota blanda. Unos minutos varias veces por semana construyen más que una sesión larga. En las clases, los principiantes pequeños usan pelotas más lentas y suaves, así que pelotean antes.",
