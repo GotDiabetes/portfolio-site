@@ -52,6 +52,10 @@ export default {
     matchFocusLine: "연습할 부분: {focus}.",
     matchNotesLine: "여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.",
     matchJunior: "자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.",
+    bookedToast: "예약됐어요. 코트에서 만나요.",
+    tipDemoPlay: "고치는 법 보기",
+    tipDemoReplay: "다시 보기",
+    tipDemoLabel: "고치는 법 애니메이션",
   },
 
   pairs: [

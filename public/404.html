@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- GitHub Pages serves this file for any address that doesn't exist, at
+       that address, so every reference here is root-absolute. -->
+  <title>Page not found — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/notfound.css?v=1" />
+
+  <!-- The page speaks the language of the address it was reached at: the
+       first path segment (/ko/…, /fa/…) picks the words, <html lang> and
+       the links home. On localhost, ?path=/ko/some-missing-page simulates
+       one. Names stay in Latin letters. -->
+  <script>
+    (function () {
+      var T = {
+        en: { code: "en", title: "Page not found — Lee Tennis Co.", h1: "That one's out.", line: "The page you were looking for isn't here.", back: "Back to the court", lessons: "Lessons", tips: "Practice tips", retry: "Try again", home: "Lee Tennis Co. — home", logo: "Lee Tennis Co. — LT monogram", missed: "Missed it. Try again.", late: "Too late. One more.", winner: "Winner!" },
+        es: { code: "es", title: "Página no encontrada — Lee Tennis Co.", h1: "Esa se fue afuera.", line: "La página que buscabas no está aquí.", back: "Volver a la cancha", lessons: "Clases", tips: "Consejos de práctica", retry: "Inténtalo otra vez", home: "Lee Tennis Co. — inicio", logo: "Lee Tennis Co. — monograma LT", missed: "Fallaste. Inténtalo otra vez.", late: "Demasiado tarde. Otra más.", winner: "¡Golpe ganador!" },
+        ko: { code: "ko", title: "페이지를 찾을 수 없어요 — Lee Tennis Co.", h1: "아웃이에요.", line: "찾으시는 페이지가 여기에 없어요.", back: "코트로 돌아가기", lessons: "레슨", tips: "연습 팁", retry: "다시 쳐 보기", home: "Lee Tennis Co. — 홈", logo: "Lee Tennis Co. — LT 모노그램", missed: "놓쳤어요. 다시 쳐 보세요.", late: "너무 늦었어요. 한 번 더요.", winner: "위너예요!" },
+        "zh-hans": { code: "zh-Hans", title: "找不到页面 — Lee Tennis Co.", h1: "这球出界了。", line: "你要找的页面不在这里。", back: "回到球场", lessons: "课程", tips: "练习技巧", retry: "再来一球", home: "Lee Tennis Co. — 首页", logo: "Lee Tennis Co. — LT 标志", missed: "没打到。再试一次。", late: "慢了一步。再来一球。", winner: "制胜球！" },
+        "zh-hant": { code: "zh-Hant", title: "找不到頁面 — Lee Tennis Co.", h1: "這球出界了。", line: "你要找的頁面不在這裡。", back: "回到球場", lessons: "課程", tips: "練習技巧", retry: "再來一球", home: "Lee Tennis Co. — 首頁", logo: "Lee Tennis Co. — LT 標誌", missed: "沒打到。再試一次。", late: "慢了一步。再來一球。", winner: "致勝球！" },
+        ja: { code: "ja", title: "ページが見つかりません — Lee Tennis Co.", h1: "今のはアウトです。", line: "お探しのページはここにはありません。", back: "コートに戻る", lessons: "レッスン", tips: "練習のヒント", retry: "もう一球", home: "Lee Tennis Co. — ホーム", logo: "Lee Tennis Co. — LT モノグラム", missed: "空振りです。もう一度どうぞ。", late: "遅すぎました。もう一球。", winner: "ウィナーです！" },
+        vi: { code: "vi", title: "Không tìm thấy trang — Lee Tennis Co.", h1: "Bóng này ra ngoài rồi.", line: "Trang bạn đang tìm không có ở đây.", back: "Quay lại sân", lessons: "Lớp học", tips: "Mẹo luyện tập", retry: "Thử lại", home: "Lee Tennis Co. — trang chủ", logo: "Lee Tennis Co. — biểu tượng LT", missed: "Hụt rồi. Thử lại nhé.", late: "Trễ quá. Thêm một quả nữa.", winner: "Ghi điểm trực tiếp!" },
+        fa: { code: "fa", title: "صفحه پیدا نشد — Lee Tennis Co.", h1: "این توپ بیرون رفت.", line: "صفحه‌ای که به دنبال آن بودید اینجا نیست.", back: "بازگشت به زمین", lessons: "کلاس‌ها", tips: "نکته‌های تمرینی", retry: "دوباره امتحان کنید", home: "Lee Tennis Co. — صفحه اصلی", logo: "Lee Tennis Co. — نشان LT", missed: "از دست رفت. دوباره امتحان کنید.", late: "دیر شد. یک بار دیگر.", winner: "ضربه برنده!" }
+      };
+      var path = location.pathname;
+      if (/^(localhost|127\.0\.0\.1|\[::1\])$|\.(localhost|test)$/.test(location.hostname)) {
+        var m = /[?&]path=([^&]*)/.exec(location.search);
+        if (m) { try { path = decodeURIComponent(m[1]); } catch (e) {} }
+      }
+      var seg = (path.split("/")[1] || "").toLowerCase();
+      var lang = T[seg] && seg !== "en" ? seg : "en";
+      var t = T[lang], root = document.documentElement;
+      root.lang = t.code;
+      root.classList.add("nf-js");
+      if (lang === "fa") root.dir = "rtl";
+      document.title = t.title;
+      var base = lang === "en" ? "/" : "/" + lang + "/";
+      window.NF = { lang: lang, t: t, href: { home: base, lessons: base + "#lessons", tips: base + "tips/" } };
+      /* Called right after the words are parsed, before the first paint. */
+      window.NF.apply = function () {
+        var i, n = document.querySelectorAll("[data-nf]");
+        for (i = 0; i < n.length; i++) n[i].textContent = t[n[i].getAttribute("data-nf")];
+        n = document.querySelectorAll("[data-nf-href]");
+        for (i = 0; i < n.length; i++) n[i].setAttribute("href", window.NF.href[n[i].getAttribute("data-nf-href")]);
+        n = document.querySelector(".brand");
+        if (n) { n.setAttribute("aria-label", t.home); n.firstElementChild.setAttribute("alt", t.logo); }
+      };
+    })();
+  </script>
+  <script src="/notfound.js?v=1" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" data-nf-href="home" aria-label="Lee Tennis Co. — home">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="nf-main">
+    <!-- The player on his baseline (notfound.js draws him). The whole court
+         is the replay button; with no script it is simply an empty band. -->
+    <button class="nf-scene" type="button" hidden>
+      <canvas aria-hidden="true"></canvas>
+      <span class="nf-retry" data-nf="retry">Try again</span>
+    </button>
+    <!-- After each replay, one short line for screen readers (notfound.js
+         writes it from the table above and clears it again). -->
+    <p class="nf-live" role="status" aria-live="polite"></p>
+
+    <section class="wrap nf-text">
+      <p class="eyebrow">404</p>
+      <h1 data-nf="h1">That one's out.</h1>
+      <p class="nf-sub" data-nf="line">The page you were looking for isn't here.</p>
+      <div class="actions nf-actions">
+        <a class="btn btn-primary btn-lg" href="/" data-nf-href="home" data-nf="back">Back to the court</a>
+        <span class="nf-links">
+          <a class="link-btn" href="/#lessons" data-nf-href="lessons" data-nf="lessons">Lessons</a>
+          <a class="link-btn" href="/tips/" data-nf-href="tips" data-nf="tips">Practice tips</a>
+        </span>
+      </div>
+    </section>
+    <script>window.NF && window.NF.apply();</script>
+  </main>
+</body>
+</html>

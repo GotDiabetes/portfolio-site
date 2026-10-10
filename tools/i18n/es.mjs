@@ -58,6 +58,10 @@ export default {
     matchFocusLine: "Para trabajar: {focus}.",
     matchNotesLine: "Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.",
     matchJunior: "¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.",
+    bookedToast: "¡Reservado! Nos vemos en la cancha.",
+    tipDemoPlay: "Ver la corrección",
+    tipDemoReplay: "Ver otra vez",
+    tipDemoLabel: "Animación de la corrección",
   },
 
   pairs: [

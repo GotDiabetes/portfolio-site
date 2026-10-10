@@ -52,6 +52,10 @@ export default {
     matchFocusLine: "重点：{focus}。",
     matchNotesLine: "在这里预约，这些信息会写进预约备注，方便我准备第一节课。",
     matchJunior: "为孩子预约？请用你自己的名字预约，并在备注里写上孩子的年龄。",
+    bookedToast: "预约成功，球场上见。",
+    tipDemoPlay: "看看怎么改",
+    tipDemoReplay: "再看一次",
+    tipDemoLabel: "改正方法动画",
   },
 
   pairs: [

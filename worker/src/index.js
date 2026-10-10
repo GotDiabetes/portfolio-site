@@ -445,7 +445,7 @@ async function ask(body, env, later) {
    shut. Everything here does nothing, quietly, until the DB binding
    exists. */
 const HIT_EVENTS = [
-  "book_private", "book_semi", "book_hitting", "book_other",
+  "book_private", "book_semi", "book_hitting", "book_other", "booked",
   "clinic_list", "gift", "chat_open", "flyer_visit",
 ];
 const PAGES = ["en", ...LANGS];

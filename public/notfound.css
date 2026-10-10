@@ -1,0 +1,81 @@
+/* ============================================================================
+   The not-found page (404.html): "That one's out."
+   Shared tokens, header, buttons and the per-language faces come from
+   tennis.css; this file only adds the page's own layout and the scene.
+   Sides are logical, so the Persian version mirrors without extra rules.
+   ========================================================================== */
+
+.nf-main { padding-block-end: clamp(3rem, 9vh, 5.5rem); }
+
+/* The scene: one full-bleed button holding the canvas, so a press anywhere
+   on the court replays it. Its visible label is the scene's caption: it
+   sits under the baseline, centred under the player's feet (notfound.js
+   sets --nf-x from where it stands him, measured from the inline start). */
+.nf-scene {
+  position: relative; display: block;
+  width: 100%; height: clamp(230px, 38vh, 340px);
+  margin: 0; padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;              /* the ball leaves the screen, not the page */
+}
+/* Hidden without script; shown from the first paint when it runs. */
+.nf-js .nf-scene[hidden] { display: block; }
+.nf-scene canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; display: block;
+}
+.nf-scene:focus-visible { outline: none; }
+
+.nf-retry {
+  position: absolute; bottom: 8px;
+  inset-inline-start: var(--nf-x, 50%);
+  transform: translateX(-50%);
+  display: inline-flex; align-items: center; min-height: 2rem;   /* the whole court is the hit area */
+  font-size: .9375rem; font-weight: 500; color: var(--text); white-space: nowrap;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+  border-radius: 2px;
+  transition: color var(--dur-ui) var(--ease);
+}
+[dir="rtl"] .nf-retry { transform: translateX(50%); }
+.nf-scene:hover .nf-retry { color: var(--muted); }
+/* The whole court is the button; the ring goes round its label. */
+.nf-scene:focus-visible .nf-retry { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* What a replay did, for screen readers only. */
+.nf-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ------------------------------------------------------------- Words -- */
+.nf-text { padding-block-start: clamp(.75rem, 2.5vh, 1.75rem); }
+.nf-text .eyebrow { margin-bottom: .8rem; }
+.nf-text h1 {
+  font-size: clamp(3rem, min(7.5vw, 9.5vh), 5.5rem);
+  letter-spacing: -0.055em;
+  line-height: .92;
+  margin-bottom: 1.1rem;
+  text-wrap: balance;
+}
+.nf-sub { font-size: 1.1875rem; color: var(--muted); max-width: 42ch; margin: 0; }
+.nf-actions { align-items: center; gap: .7rem 1.75rem; margin-top: 1.75rem; }
+.nf-links { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+
+/* Per-script fitting, as on the front page: Hangul, Han and kana are eased
+   and a step smaller; Persian loses the tracking and opens its lines. */
+:root:is(:lang(ko), :lang(ja), :lang(zh)) .nf-text h1 {
+  font-size: clamp(2.6rem, min(6.4vw, 8.2vh), 4.8rem);
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+:root:lang(ko) .nf-text h1 { letter-spacing: -0.04em; }
+:root:lang(vi) .nf-text h1 { line-height: 1; }
+:root:lang(fa) .nf-text h1 { letter-spacing: 0; line-height: 1.25; }
+:root:lang(fa) .nf-text .eyebrow { letter-spacing: 0; }
+
+@media (max-width: 680px) {
+  .nf-scene { height: clamp(210px, 30vh, 280px); }
+  .nf-actions { gap: .4rem 1.5rem; }
+  .nf-links { width: 100%; }
+}

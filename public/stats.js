@@ -22,6 +22,7 @@
     ["book_semi", "Pressed Book: semi-private"],
     ["book_hitting", "Pressed Book: hitting session"],
     ["book_other", "Pressed Book: other"],
+    ["booked", "Finished a booking"],
     ["match", "Lesson matcher: found a lesson"],
     ["match_unsure", "Lesson matcher: couldn't tell"],
     ["chat_open", "Opened the chat"],

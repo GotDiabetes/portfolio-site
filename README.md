@@ -9,6 +9,10 @@ One repository, one site, two faces:
 - **leetennisco.com/tips/** — practice tips: Isaac's short fixes for common
   problems, the same ones the chat gives, in every language (/ko/tips/ …).
 - **leetennisco.com/portfolio/** — Isaac's personal portfolio, with a printable résumé at **/resume**.
+- Any missing address shows **public/404.html**, "That one's out.", in the
+  language of the address (a little scene: the player whiffs; tap to try again).
+- A finished booking plays a short celebration over the calendar (booked.js)
+  and is counted on /stats/ as "Finished a booking".
 
 And pages that are Isaac's own, kept out of search. **leetennisco.com/admin/**
 (the "Admin" link at the end of the footer) links them all, plus Cal.com,
@@ -22,6 +26,11 @@ and the numbers page checks the key itself.)
   tear-off strips, in every language (/ko/flyer/ …).
 - **/gift-card/** — makes a printable gift card when someone buys lessons as
   a gift (the "Give a lesson" popup emails you the request).
+- **/drills/** — the drill library: about 200 drills and games by age stage
+  and skill, with court diagrams, the faults they fix, an age guide, a
+  students list and a lesson-plan builder (students and plans stay in your
+  browser). `data.js` is built from the research notes; see
+  `tools/drills/README.md`.
 - **/recap/** — after a lesson, tick what you worked on and it writes a short
   note for the player or parent, in their language, to send from Gmail or
   paste into a text.

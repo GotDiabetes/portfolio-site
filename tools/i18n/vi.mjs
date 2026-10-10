@@ -51,6 +51,10 @@ export default {
     matchFocusLine: "Cần tập: {focus}.",
     matchNotesLine: "Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.",
     matchJunior: "Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.",
+    bookedToast: "Bạn đã đặt lịch xong. Hẹn gặp trên sân.",
+    tipDemoPlay: "Xem cách sửa",
+    tipDemoReplay: "Xem lại",
+    tipDemoLabel: "Hoạt hình cách sửa",
   },
 
   pairs: [

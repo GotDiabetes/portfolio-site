@@ -52,6 +52,10 @@ export default {
     matchFocusLine: "重點：{focus}。",
     matchNotesLine: "從這裡預約，這些資訊會寫進預約備註，方便我準備第一堂課。",
     matchJunior: "幫孩子預約？請用你自己的名字預約，並在備註寫上孩子的年齡。",
+    bookedToast: "預約成功，球場上見。",
+    tipDemoPlay: "看看怎麼改",
+    tipDemoReplay: "再看一次",
+    tipDemoLabel: "改正方法動畫",
   },
 
   pairs: [

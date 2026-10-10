@@ -51,6 +51,10 @@ export default {
     matchFocusLine: "練習のテーマ：{focus}。",
     matchNotesLine: "ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。",
     matchJunior: "お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。",
+    bookedToast: "予約できました。コートでお会いしましょう。",
+    tipDemoPlay: "直し方を見る",
+    tipDemoReplay: "もう一度見る",
+    tipDemoLabel: "直し方のアニメーション",
   },
 
   pairs: [

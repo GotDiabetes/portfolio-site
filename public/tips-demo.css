@@ -1,0 +1,43 @@
+/* ============================================================================
+   Tip demos: "Watch the fix" on the practice tips page (/tips/).
+
+   Each tip gets a quiet link button; pressing it opens a small stage (a
+   canvas drawn by tips-demo.js) with the Book FX stick figure showing the
+   mistake, then the fix. Idle, the only thing added is the button, under
+   the title on desktop (the title's column) and under the fix on phones,
+   so the reading layout is unchanged until someone asks for a demo.
+   ========================================================================== */
+
+.tip-demo { min-width: 0; }
+
+.tip-demo-btn { font-size: .875rem; }
+
+/* The stage: a white plate on the page's hairline, the softened radius.
+   The canvas sets the height (its 2:1 drawing size); width follows the
+   column, held to a size where the figure reads without shouting. */
+.tip-demo-stage {
+  width: 100%;
+  max-width: 24rem;
+  margin-block: .25rem .35rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  overflow: hidden;
+}
+.tip-demo-stage canvas { display: block; width: 100%; height: auto; }
+.tip-demo-stage.is-new { animation: tipDemoIn .35s var(--ease) both; }
+@keyframes tipDemoIn { from { opacity: 0; } }
+
+/* Desktop: the title's column holds the control and the stage, under the
+   title; the fix spans both rows beside them. The second row takes the
+   slack, so a long fix never pushes the button away from the title. */
+@media (min-width: 761px) {
+  .tip.has-demo { grid-template-rows: auto 1fr; }
+  .tip.has-demo > h3 { grid-column: 1; grid-row: 1; }
+  .tip.has-demo > p { grid-column: 2; grid-row: 1 / span 2; }
+  .tip.has-demo > .tip-demo { grid-column: 1; grid-row: 2; align-self: start; margin-top: -.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip-demo-stage.is-new { animation: none; }
+}
