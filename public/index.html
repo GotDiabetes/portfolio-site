@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="motion-court.css?v=1" />
   <link rel="stylesheet" href="motion-reveal.css?v=1" />
   <link rel="stylesheet" href="motion-transitions.css?v=1" />
+  <link rel="stylesheet" href="features.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
        leaves a fully visible page rather than a blank one. -->
@@ -242,6 +243,11 @@
           </div>
           <!-- The best reassurance on the page, said where the decision is. -->
           <p class="book-note hero-note fade" style="--d:.24s">No card, no deposit: booking just holds the time.</p>
+          <!-- Two live lines (features.js): the next open lesson on the
+               calendar and today's court weather, both from the Worker.
+               Hidden until they have something true to say. -->
+          <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
+          <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -272,7 +278,7 @@
              focus reveal: a lens pulling focus across a line about
              deliberate practice. "hover": it arrives sharp, and the frame
              only follows a pointer (focus.js). -->
-        <blockquote class="fade" data-focus-reveal="hover">
+        <blockquote class="fade" data-statement-reveal>
           Tennis is for everyone. Almost every player improves faster than they
           expect once the practice is deliberate.
         </blockquote>
@@ -314,6 +320,7 @@
             than a private, and the pairing gives you live rallies and points to work through
             rather than feeding alone. Bring a friend, a sibling, or a doubles partner.
           </p>
+          <p class="offer">Bring a friend who's new to me and you both get $10 off your first semi-private lesson.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Book a semi-private lesson</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="What's covered in a semi-private lesson">What's covered</button>
@@ -417,6 +424,13 @@
               <div><dt>Varsity</dt><dd>4 years</dd></div>
               <div><dt>Schedule</dt><dd>Part time</dd></div>
             </dl>
+
+            <!-- A minute of Isaac on video. Shown once data-video names the
+                 file (images/intro.mp4); until then nothing is on the page. -->
+            <figure class="intro-video fade" style="--d:.22s" data-video="" hidden>
+              <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
+              <figcaption>One minute: who I am, where the court is, and what a first lesson is like.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -601,6 +615,15 @@
          everything here is a fact Isaac has confirmed. The last one sends
          a technique question to the practice tips page, and to the chat
          when the chat can answer (its button shows only then, ask.js). -->
+    <!-- Tip of the week: one of the practice tips, changing every Monday
+         (features.js fills it from ask.json, in the page's language). -->
+    <section class="wrap tip-week" id="tipWeek" hidden>
+      <p class="eyebrow fade">Tip of the week</p>
+      <h2 class="fade tip-week-title" style="--d:.06s"></h2>
+      <p class="fade tip-week-text" style="--d:.12s"></p>
+      <p class="fade" style="--d:.16s"><a class="link-btn tip-week-link" href="tips/">Read the practice tips</a></p>
+    </section>
+
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">Questions people ask</h2>
       <div class="faq fade" style="--d:.06s">
@@ -654,7 +677,7 @@
          Full-bleed black block. This is the visual full stop — the page
          has been building toward it.
          ================================================================= -->
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" data-band-sweep>
       <div class="wrap section">
         <div class="contact-grid">
           <div class="contact-text">
@@ -684,6 +707,61 @@
             </div>
           </dl>
         </div>
+
+        <!-- How to find the court: a drawn map, not to scale, with the five
+             things a first-time visitor needs in the order they meet them.
+             No words in the drawing (numbers only), so one serves every
+             language; the words are the legend. -->
+        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
+          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
+            <!-- Jamboree Road along the top, Via Lucca turning down from it -->
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
+            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
+            <!-- the community -->
+            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <!-- the way in from Via Lucca -->
+            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
+            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
+            <!-- guest parking: stalls just inside -->
+            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
+              <rect x="178" y="112" width="104" height="76" rx="3"/>
+              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
+            </g>
+            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
+            <!-- the walk: parking to the gate to the courts -->
+            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+            <!-- the gate -->
+            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <!-- the courts -->
+            <g stroke="#fff" stroke-width="1.5" fill="none">
+              <rect x="340" y="124" width="66" height="150" rx="2"/>
+              <rect x="414" y="124" width="66" height="150" rx="2"/>
+              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
+              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
+            </g>
+            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
+            <!-- the numbers, in the order a visitor meets them -->
+            <g font-size="14" font-weight="600" text-anchor="middle">
+              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
+              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
+              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
+              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
+              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
+            </g>
+          </svg>
+          <figcaption>
+            <ol class="court-map-legend">
+              <li>Jamboree Road</li>
+              <li>Via Lucca</li>
+              <li>Guest parking</li>
+              <li>The gate: I meet you here</li>
+              <li>The courts</li>
+            </ol>
+            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate. <span class="court-map-scale">Not to scale</span></p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -946,6 +1024,7 @@
   <script src="motion-court.js?v=1" defer></script>
   <script src="motion-reveal.js?v=1" defer></script>
   <script src="motion-transitions.js?v=1" defer></script>
+  <script src="features.js?v=1" defer></script>
   <script src="ballo.js?v=3" defer></script>
   <script src="motion.js?v=4" defer></script>
 </body>

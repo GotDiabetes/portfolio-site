@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ============================================================
+       The practice sheet: one Letter page a family keeps after a lesson,
+       at leetennisco.com/sheet/. Everything on it comes from the link
+       (#s=…), which the recap page (/recap/) makes when Isaac writes a
+       note: the player's name, the date, the language, which tips the
+       lesson covered, his own line and the next lesson. The tips' words
+       are the site's own (ask.json, in that language), so the sheet says
+       what the tips page says. sheet.js reads the link and writes the
+       page in that language. No link, nothing to show. Kept out of search.
+       ============================================================ -->
+  <title>Practice sheet — Lee Tennis Co.</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="stylesheet" href="/print.css?v=3" />
+</head>
+
+<body>
+  <div class="print-bar">
+    <h1 data-s="barTitle">Practice sheet</h1>
+    <p data-s="barLine">Print it, or keep the link: it opens this sheet on any phone.</p>
+    <div class="print-row">
+      <button class="print-btn" type="button" data-print hidden data-s="print">Print the sheet</button>
+      <button class="print-btn print-btn-quiet" type="button" data-copy hidden data-s="copy">Copy the link</button>
+      <a class="print-home" href="/" data-s="back">Back to the site</a>
+    </div>
+  </div>
+
+  <div class="sheet-scroll">
+    <main class="sheet practice-sheet">
+      <div class="ps-head">
+        <img class="ps-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+        <div class="ps-meta">
+          <p class="eyebrow" data-s="eyebrow">Practice sheet</p>
+          <p class="ps-date" data-s-date></p>
+        </div>
+      </div>
+
+      <h1 class="ps-title" data-s-title>After today's lesson</h1>
+      <p class="ps-intro" data-s="intro">What we worked on, and one thing to practise for each before next time.</p>
+
+      <ol class="ps-tips" data-s-tips></ol>
+
+      <div class="ps-note" data-s-note hidden>
+        <p class="ps-label" data-s="from">From Isaac</p>
+        <p class="ps-note-text"></p>
+      </div>
+      <p class="ps-next" data-s-next hidden></p>
+
+      <p class="ps-empty" data-s="empty" hidden>Nothing here yet: this sheet is made from a link on the recap page.</p>
+
+      <div class="ps-foot">
+        <p class="ps-tipslink" data-s="tips">All the tips: leetennisco.com/tips</p>
+        <p class="ps-coach" data-s="coach">Isaac Lee · RSPA-certified coach · Toscana courts, Irvine</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="/sheet.js?v=1" defer></script>
+</body>
+</html>

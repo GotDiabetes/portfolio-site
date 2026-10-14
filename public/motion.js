@@ -88,10 +88,17 @@
       sr.textContent = num;
 
       var parent = node.parentNode;
-      parent.insertBefore(before, node);
-      parent.insertBefore(board, node);
-      parent.insertBefore(sr, node);
-      parent.insertBefore(after, node);
+      // A price is read left to right in every language. On the Persian
+      // page the split pieces ("$", the columns, the rest) would be laid
+      // out as separate right-to-left runs ("08$"), so there they are kept
+      // together in one left-to-right isolate.
+      var host0 = document.documentElement.dir === "rtl" ? document.createElement("span") : parent;
+      if (host0 !== parent) { host0.dir = "ltr"; host0.className = "sb-ltr"; parent.insertBefore(host0, node); }
+      var at = host0 === parent ? node : null;
+      host0.insertBefore(before, at);
+      host0.insertBefore(board, at);
+      host0.insertBefore(sr, at);
+      host0.insertBefore(after, at);
       parent.removeChild(node);
 
       // Start once the block holding the price has begun to arrive.

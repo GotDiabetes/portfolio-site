@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="/motion-court.css?v=1" />
   <link rel="stylesheet" href="/motion-reveal.css?v=1" />
   <link rel="stylesheet" href="/motion-transitions.css?v=1" />
+  <link rel="stylesheet" href="/features.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
@@ -195,6 +196,8 @@
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Vietnamese%20page)" data-mail="Tennis%20lessons%20(Vietnamese%20page)">Gửi email cho tôi</a>
           </div>
           <p class="book-note hero-note fade" style="--d:.24s">Không cần thẻ, không cần đặt cọc: đặt lịch chỉ để giữ giờ.</p>
+          <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
+          <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -213,7 +216,7 @@
 
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade" data-focus-reveal="hover">
+        <blockquote class="fade" data-statement-reveal>
           Tennis dành cho tất cả mọi người. Gần như ai cũng tiến bộ nhanh hơn mình nghĩ khi luyện tập có chủ đích.
         </blockquote>
       </div>
@@ -248,6 +251,7 @@
           <p>
             Cùng một buổi học, chia cho hai người có trình độ tương đương. Mỗi người trả ít hơn học riêng, và học theo cặp cho bạn những pha đánh qua lại và tính điểm thật thay vì chỉ đỡ bóng một mình. Hãy rủ bạn bè, anh chị em hoặc bạn đánh đôi.
           </p>
+          <p class="offer">Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi bán riêng đầu tiên.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Đặt lịch học đôi</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="Nội dung lớp học đôi">Nội dung</button>
@@ -332,6 +336,11 @@
               <div><dt>Đội tuyển trường</dt><dd>4 năm</dd></div>
               <div><dt>Lịch dạy</dt><dd>Bán thời gian</dd></div>
             </dl>
+
+            <figure class="intro-video fade" style="--d:.22s" data-video="" hidden>
+              <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
+              <figcaption>Một phút: tôi là ai, sân ở đâu, và buổi học đầu tiên diễn ra thế nào.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -486,6 +495,13 @@
       </dl>
     </section>
 
+    <section class="wrap tip-week" id="tipWeek" hidden>
+      <p class="eyebrow fade">Mẹo của tuần</p>
+      <h2 class="fade tip-week-title" style="--d:.06s"></h2>
+      <p class="fade tip-week-text" style="--d:.12s"></p>
+      <p class="fade" style="--d:.16s"><a class="link-btn tip-week-link" href="tips/">Đọc mẹo luyện tập</a></p>
+    </section>
+
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">Câu hỏi thường gặp</h2>
       <div class="faq fade" style="--d:.06s">
@@ -535,7 +551,7 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" data-band-sweep>
       <div class="wrap section">
         <div class="contact-grid">
           <div class="contact-text">
@@ -562,6 +578,49 @@
             </div>
           </dl>
         </div>
+
+        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
+          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
+            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
+            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
+            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
+            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
+              <rect x="178" y="112" width="104" height="76" rx="3"/>
+              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
+            </g>
+            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
+            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <g stroke="#fff" stroke-width="1.5" fill="none">
+              <rect x="340" y="124" width="66" height="150" rx="2"/>
+              <rect x="414" y="124" width="66" height="150" rx="2"/>
+              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
+              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
+            </g>
+            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
+            <g font-size="14" font-weight="600" text-anchor="middle">
+              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
+              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
+              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
+              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
+              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
+            </g>
+          </svg>
+          <figcaption>
+            <ol class="court-map-legend">
+              <li>Jamboree Road</li>
+              <li>Via Lucca</li>
+              <li>Chỗ đậu xe cho khách</li>
+              <li>Cổng: tôi đón bạn ở đây</li>
+              <li>Sân tennis</li>
+            </ol>
+            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine, ngay cạnh Jamboree Road. Chỗ đậu xe cho khách ở trong khu dân cư, và tôi đón bạn ở cổng. <span class="court-map-scale">Không theo tỷ lệ</span></p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -795,7 +854,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","bookedToast":"Bạn đã đặt lịch xong. Hẹn gặp trên sân.","tipDemoPlay":"Xem cách sửa","tipDemoReplay":"Xem lại","tipDemoLabel":"Hoạt hình cách sửa","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
+  <script>window.I18N = {"nextOpen":"Giờ trống gần nhất: {when}","openHours":"{n} giờ trống trong tuần này","openHour":"1 giờ trống trong tuần này","courtDry":"Hôm nay sân khô ráo, {hi}°F.","courtRain":"Hôm nay có thể mưa. Nếu phải dời buổi học, tôi sẽ nhắn tin.","courtRainSoon":"Dự báo mưa vào {day}; nếu phải dời buổi học, tôi sẽ nhắn tin.","copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","bookedToast":"Bạn đã đặt lịch xong. Hẹn gặp trên sân.","tipDemoPlay":"Xem cách sửa","tipDemoReplay":"Xem lại","tipDemoLabel":"Hoạt hình cách sửa","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
   <script src="/tennis.js?v=20261010" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -806,6 +865,7 @@
   <script src="/motion-court.js?v=1" defer></script>
   <script src="/motion-reveal.js?v=1" defer></script>
   <script src="/motion-transitions.js?v=1" defer></script>
+  <script src="/features.js?v=1" defer></script>
   <script src="/ballo.js?v=3" defer></script>
   <script src="/motion.js?v=4" defer></script>
 </body>

@@ -11,6 +11,13 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "Próxima hora libre: {when}",
+    openHours: "{n} horas libres esta semana",
+    openHour: "1 hora libre esta semana",
+    courtDry: "Hoy la cancha está seca y a {hi}°F.",
+    courtRain: "Hoy es probable que llueva. Si hay que mover una clase, te escribo.",
+    courtRainSoon: "Se espera lluvia el {day}; si hay que mover una clase, te escribo.",
     copied: "Copiado",
     menuOpen: "Abrir menú",
     menuClose: "Cerrar menú",
@@ -391,6 +398,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>Golpea la pelota por delante, con la muñeca firme.</strong> Brazo largo, cabeza de la raqueta por encima de la muñeca: una sola línea del hombro a la pelota, para que los músculos grandes reciban el golpe.`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>Suaviza el equipo.</strong> Cuerdas más flojas o más blandas, un grip un poco más grueso, un marco más ligero, y un agarre con el que podrías sostener un pajarito.`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `Déjalo descansar mientras duela, estira el antebrazo y, si el dolor dura más de un par de semanas, ve al médico o al fisio.`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>Consejo de la semana<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `Trae a un amigo que no me conozca y los dos tienen $10 de descuento en su primera clase semiprivada.`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `Un minuto: quién soy, dónde está la cancha y cómo es una primera clase.`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca, Irvine, junto a Jamboree Road. El estacionamiento para visitas está dentro del complejo, y te espero en la entrada.`],
+    [`>Guest parking<`, `>Estacionamiento para visitas<`],
+    [`>The gate: I meet you here<`, `>La entrada: aquí te espero<`],
+    [`>The courts<`, `>Las canchas<`],
+    [`>Not to scale<`, `>Sin escala<`],
   ],
 
   ask: {

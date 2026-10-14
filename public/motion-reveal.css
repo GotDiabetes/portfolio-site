@@ -1,1 +1,48 @@
-/* Placeholder: motion-reveal is being built. */
+/* ============================================================================
+   Two reveals, both answers to the scroll (motion-reveal.js):
+
+     · The statement band's one sentence lights up word by word as it
+       climbs the screen: each word starts dim and brightens at its own
+       point of the scroll, so the line is read at the pace of the reader.
+       Scroll-driven in CSS where the browser can; a scroll handler
+       elsewhere; plain bright text with reduced motion or no script.
+     · The black bands (the contact block, the tips page's close) arrive
+       behind a net cord: a yellow line sweeps across once and the black
+       follows it. The words don't move; only the ground changes.
+
+   ?classic in the address turns both off, to compare.
+   ========================================================================== */
+
+/* --- The statement, word by word. */
+.js:not(.classic) [data-statement-reveal].is-split .sw { color: rgba(255, 255, 255, .3); transition: color .25s linear; }
+.js:not(.classic) [data-statement-reveal].is-split .sw.is-lit { color: #fff; }
+@supports (animation-timeline: view()) {
+  .js:not(.classic) [data-statement-reveal].is-split.is-timeline .sw {
+    transition: none;
+    animation: swLit linear both; animation-timeline: view();
+    /* each word's own window is set inline by the script (animation-range) */
+  }
+  @keyframes swLit { from { color: rgba(255, 255, 255, .3); } to { color: #fff; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-statement-reveal].is-split .sw { color: #fff; animation: none; transition: none; }
+}
+
+/* --- The net cord. The cover is the page's white laid over the band; its
+       edge, slanted like a net post seen at an angle, slides off to the
+       right with the cord a step ahead of it. */
+.band-cover {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: var(--bg, #fff);
+  clip-path: polygon(-16% 0, 100% 0, 100% 100%, -32% 100%);
+}
+.band-cover .band-cord {
+  position: absolute; top: -16%; height: 132%; width: 3px; inset-inline-start: -16%;
+  background: #d9ef3f; transform: rotate(-9deg); transform-origin: 50% 0;
+}
+.is-sweeping > .band-cover { animation: bandCover .95s cubic-bezier(.77, 0, .18, 1) forwards; }
+.is-sweeping > .band-cover .band-cord { animation: bandCord .95s cubic-bezier(.77, 0, .18, 1) forwards; }
+@keyframes bandCover { from { clip-path: polygon(-16% 0, 100% 0, 100% 100%, -32% 100%); } to { clip-path: polygon(116% 0, 100% 0, 100% 100%, 100% 100%); } }
+@keyframes bandCord { from { inset-inline-start: -16%; opacity: 1; } 92% { opacity: 1; } to { inset-inline-start: 112%; opacity: 0; } }
+.has-swept > .band-cover { display: none; }
+:root[dir="rtl"] .band-cover { transform: scaleX(-1); }

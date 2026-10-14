@@ -1,0 +1,83 @@
+/* ============================================================================
+   The small features added in October 2026 (features.js):
+
+     · the two live lines under the hero's Book button (next open lesson,
+       today's court weather), each with the ball's dot;
+     · the tip of the week, a short section before the FAQ;
+     · the bring-a-friend line on the semi-private card;
+     · the intro video in About (hidden until a clip is named);
+     · the press ripple: every button answers a press with a ring in the
+       ball's colour spreading from the fingertip.
+   ========================================================================== */
+
+/* --- Live lines. */
+.live-line {
+  display: flex; align-items: center; gap: .55rem;
+  margin: .4rem 0 0; font-size: .875rem; color: var(--muted);
+}
+.live-line[hidden] { display: none; }
+.live-line::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: #d9ef3f; }
+.hero-note + .live-line { margin-top: .75rem; }
+
+/* --- Tip of the week. */
+.tip-week { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.25rem); }
+.tip-week h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin: .4rem 0 .6rem; max-width: 26ch; }
+.tip-week .tip-week-text { max-width: 62ch; margin: 0 0 .5rem; }
+.tip-week .tip-week-link { margin-top: 0; }
+
+/* --- Bring a friend. */
+.offer {
+  margin: .6rem 0 0; padding-inline-start: .85rem;
+  border-inline-start: 3px solid #d9ef3f;
+  font-size: .9375rem; color: var(--muted);
+}
+
+/* --- How to find the court: a drawn map on the black band, after the
+       contact grid, with its numbered legend beside it. */
+.court-map {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.25rem clamp(1.5rem, 4vw, 3rem); align-items: center;
+  margin: clamp(2rem, 4vw, 3rem) 0 0; padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid rgba(255, 255, 255, .18);
+}
+.court-map-art { display: block; width: 100%; height: auto; max-width: 34rem; font-family: var(--font); }
+.court-map figcaption { min-width: 0; }
+.court-map-legend { list-style: none; margin: 0; padding: 0; counter-reset: stop; }
+.court-map-legend li {
+  position: relative; padding: .4rem 0 .4rem 2.1rem; counter-increment: stop;
+  border-top: 1px solid rgba(255, 255, 255, .18); color: rgba(255, 255, 255, .86);
+}
+.court-map-legend li:last-child { border-bottom: 1px solid rgba(255, 255, 255, .18); }
+.court-map-legend li::before {
+  content: counter(stop); position: absolute; left: 0; top: .5rem;
+  width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #fff; color: var(--ink);
+  font-size: .8125rem; font-weight: 600; display: grid; place-items: center;
+}
+.court-map-note { margin: .9rem 0 0; font-size: .9375rem; color: rgba(255, 255, 255, .76); max-width: 44ch; }
+.court-map-scale { display: inline-block; margin-inline-start: .35rem; font-size: .8125rem; color: rgba(255, 255, 255, .5); }
+:root[dir="rtl"] .court-map-legend li { padding: .4rem 2.1rem .4rem 0; }
+:root[dir="rtl"] .court-map-legend li::before { left: auto; right: 0; }
+@media (max-width: 760px) { .court-map { grid-template-columns: 1fr; } }
+
+/* --- The intro video. */
+.intro-video { margin: 1.75rem 0 0; }
+.intro-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background: #000; }
+.intro-video figcaption { margin-top: .6rem; font-size: .875rem; color: var(--muted); }
+
+/* --- On the Persian page motion.js keeps each rolling price in one
+       left-to-right span; it is the number itself, not a unit, so it opts
+       out of the unit's small muted style like the digits do. */
+.hero-facts dd .sb-ltr, .price .sb-ltr { font-size: 1em; font-weight: inherit; color: inherit; letter-spacing: inherit; }
+
+/* --- The press ripple. The ring lives in its own clipped layer, so the
+       button's shape clips it and nothing else on the button changes. */
+.btn { position: relative; isolation: isolate; }
+.btn > .ripple { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.btn > .ripple > i {
+  position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+  background: #d9ef3f; opacity: .85; transform: scale(0);
+  animation: btnRipple .65s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+.btn-primary > .ripple > i, .btn-invert > .ripple > i { mix-blend-mode: normal; }
+@keyframes btnRipple { to { transform: scale(28); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .btn > .ripple { display: none; } }

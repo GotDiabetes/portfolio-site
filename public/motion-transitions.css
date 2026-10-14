@@ -1,1 +1,43 @@
-/* Placeholder: motion-transitions is being built. */
+/* ============================================================================
+   Transitions between states (motion-transitions.js):
+
+     · Between pages (front page ↔ tips, in any language): the browser's
+       own cross-document view transition. The header stays where it is;
+       the new page wipes in from the left behind a slanted edge, like a
+       line judge's flag, instead of a white flash.
+     · Between languages (the language menu): the same mechanism, but the
+       words melt, a short blur and lift, and the page stays put.
+     · A popup opened from a card grows out of that card and shrinks back
+       into it (the script animates; the dialog's own open styles stay).
+
+   Only in browsers that have view transitions; others get the ordinary
+   page load. ?classic in the address turns it off.
+   ========================================================================== */
+
+@view-transition { navigation: auto; }
+
+/* The header is its own layer, so it holds still while the page changes. */
+.header { view-transition-name: site-header; }
+
+::view-transition-old(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: vtWipe .62s cubic-bezier(.77, 0, .18, 1) both; mix-blend-mode: normal; }
+@keyframes vtWipe {
+  from { clip-path: polygon(-16% 0, -16% 0, -32% 100%, -32% 100%); }
+  to   { clip-path: polygon(-16% 0, 116% 0, 100% 100%, -32% 100%); }
+}
+:root[dir="rtl"]::view-transition-new(root) { animation-name: vtWipeRtl; }
+@keyframes vtWipeRtl {
+  from { clip-path: polygon(116% 0, 116% 0, 132% 100%, 132% 100%); }
+  to   { clip-path: polygon(-16% 0, 116% 0, 132% 100%, 0 100%); }
+}
+::view-transition-group(site-header) { animation-duration: .4s; }
+
+/* A language change: the words melt rather than wipe. */
+:root.vt-lang::view-transition-old(root) { animation: vtMeltOut .32s cubic-bezier(.4, 0, 1, 1) both; }
+:root.vt-lang::view-transition-new(root) { animation: vtMeltIn .55s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes vtMeltOut { to { opacity: 0; filter: blur(6px); transform: translateY(-6px); } }
+@keyframes vtMeltIn { from { opacity: 0; filter: blur(6px); transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root), ::view-transition-group(*) { animation-duration: .01s; }
+}

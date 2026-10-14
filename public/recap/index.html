@@ -68,6 +68,9 @@
         <input type="text" name="next" maxlength="80" autocomplete="off" placeholder="e.g. Saturday 10am">
       </label>
       <label class="choice" id="recapReviewRow" hidden><input type="checkbox" name="review"> Ask for a Google review at the end</label>
+      <!-- The practice sheet (/sheet/): a printable page made from this
+           form. The note carries its link; the button opens it. -->
+      <label class="choice"><input type="checkbox" name="sheet" checked> Add a link to the practice sheet (one page they can print or keep)</label>
 
       <label class="field">
         <span class="field-label">The note</span>
@@ -77,6 +80,7 @@
       <div class="actions">
         <button class="btn btn-primary" type="button" id="recapGmail">Open in Gmail</button>
         <button class="btn btn-quiet" type="button" id="recapCopy">Copy the note</button>
+        <button class="btn btn-quiet" type="button" id="recapSheet">Open the practice sheet</button>
       </div>
     </form>
   </main>

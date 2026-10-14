@@ -11,6 +11,13 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "Giờ trống gần nhất: {when}",
+    openHours: "{n} giờ trống trong tuần này",
+    openHour: "1 giờ trống trong tuần này",
+    courtDry: "Hôm nay sân khô ráo, {hi}°F.",
+    courtRain: "Hôm nay có thể mưa. Nếu phải dời buổi học, tôi sẽ nhắn tin.",
+    courtRainSoon: "Dự báo mưa vào {day}; nếu phải dời buổi học, tôi sẽ nhắn tin.",
     copied: "Đã sao chép",
     menuOpen: "Mở menu",
     menuClose: "Đóng menu",
@@ -383,6 +390,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>Đón bóng phía trước, cổ tay chắc.</strong> Cánh tay dài, đầu vợt cao hơn cổ tay: một đường thẳng từ vai đến bóng, để các cơ lớn chịu lực.`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>Dùng dụng cụ nhẹ nhàng hơn.</strong> Dây lỏng hơn hoặc mềm hơn, cán vợt to hơn một chút, khung nhẹ hơn, và nắm vợt nhẹ như đang giữ một chú chim.`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `Nghỉ khi còn đau, giãn cơ cẳng tay, và nếu đau kéo dài hơn vài tuần thì đi khám bác sĩ hoặc chuyên gia vật lý trị liệu.`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>Mẹo của tuần<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi bán riêng đầu tiên.`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `Một phút: tôi là ai, sân ở đâu, và buổi học đầu tiên diễn ra thế nào.`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca, Irvine, ngay cạnh Jamboree Road. Chỗ đậu xe cho khách ở trong khu dân cư, và tôi đón bạn ở cổng.`],
+    [`>Guest parking<`, `>Chỗ đậu xe cho khách<`],
+    [`>The gate: I meet you here<`, `>Cổng: tôi đón bạn ở đây<`],
+    [`>The courts<`, `>Sân tennis<`],
+    [`>Not to scale<`, `>Không theo tỷ lệ<`],
   ],
 
   ask: {

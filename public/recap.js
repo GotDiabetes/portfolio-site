@@ -19,35 +19,35 @@
     en: { subject: "Your lesson recap", hi: "Hi {name},", hiNone: "Hi,",
       intro: "Thanks for today's lesson. Here's what we worked on, and one thing to practise for each before next time.",
       introShort: "Thanks for today's lesson.", next: "Next lesson: {next}.",
-      review: "If the lessons are helping, a short Google review would mean a lot: {link}", bye: "See you on court,\nIsaac" },
+      review: "If the lessons are helping, a short Google review would mean a lot: {link}", sheet: "Your practice sheet, one page to print or keep: {link}", bye: "See you on court,\nIsaac" },
     es: { subject: "Resumen de tu clase", hi: "Hola, {name}:", hiNone: "Hola:",
       intro: "Gracias por la clase de hoy. Esto es lo que trabajamos, con una cosa para practicar de cada tema antes de la próxima vez.",
       introShort: "Gracias por la clase de hoy.", next: "Próxima clase: {next}.",
-      review: "Si las clases te están ayudando, una breve reseña en Google me ayudaría mucho: {link}", bye: "Nos vemos en la cancha,\nIsaac" },
+      review: "Si las clases te están ayudando, una breve reseña en Google me ayudaría mucho: {link}", sheet: "Tu hoja de práctica, una página para imprimir o guardar: {link}", bye: "Nos vemos en la cancha,\nIsaac" },
     ko: { subject: "오늘 레슨 정리", hi: "{name} 님, 안녕하세요.", hiNone: "안녕하세요.",
       intro: "오늘 레슨 고마웠어요. 오늘 연습한 내용과, 다음 레슨 전까지 하나씩 연습해 볼 것을 정리했어요.",
       introShort: "오늘 레슨 고마웠어요.", next: "다음 레슨: {next}",
-      review: "레슨이 도움이 되고 있다면, 구글에 짧은 리뷰를 남겨 주시면 정말 큰 힘이 돼요: {link}", bye: "코트에서 만나요.\nIsaac" },
+      review: "레슨이 도움이 되고 있다면, 구글에 짧은 리뷰를 남겨 주시면 정말 큰 힘이 돼요: {link}", sheet: "연습 시트예요. 한 장으로 인쇄하거나 보관해 두세요: {link}", bye: "코트에서 만나요.\nIsaac" },
     "zh-hans": { subject: "本次课程小结", hi: "{name}，你好：", hiNone: "你好：",
       intro: "谢谢你今天来上课。下面是我们今天练习的内容，每一项都附上一个下次课前可以练习的方法。",
       introShort: "谢谢你今天来上课。", next: "下次课：{next}。",
-      review: "如果课程对你有帮助，欢迎在 Google 上留下简短的评价，这对我意义很大：{link}", bye: "球场上见，\nIsaac" },
+      review: "如果课程对你有帮助，欢迎在 Google 上留下简短的评价，这对我意义很大：{link}", sheet: "你的练习单，一页，可以打印或保存：{link}", bye: "球场上见，\nIsaac" },
     "zh-hant": { subject: "本次課程重點整理", hi: "{name}，你好：", hiNone: "你好：",
       intro: "謝謝你今天來上課。以下是我們今天練習的內容，每一項都附上一個下次上課前可以練習的方法。",
       introShort: "謝謝你今天來上課。", next: "下次上課：{next}。",
-      review: "如果課程對你有幫助，歡迎在 Google 上留下簡短的評價，這對我意義很大：{link}", bye: "球場上見，\nIsaac" },
+      review: "如果課程對你有幫助，歡迎在 Google 上留下簡短的評價，這對我意義很大：{link}", sheet: "你的練習單，一頁，可以列印或保存：{link}", bye: "球場上見，\nIsaac" },
     ja: { subject: "今日のレッスンのまとめ", hi: "{name}さん、こんにちは。", hiNone: "こんにちは。",
       intro: "今日のレッスン、ありがとうございました。今日取り組んだことと、次回までにそれぞれ練習してほしいことをまとめました。",
       introShort: "今日のレッスン、ありがとうございました。", next: "次回のレッスン：{next}",
-      review: "レッスンがお役に立っていれば、Google に短いレビューをいただけるととても励みになります：{link}", bye: "コートでお会いしましょう。\nIsaac" },
+      review: "レッスンがお役に立っていれば、Google に短いレビューをいただけるととても励みになります：{link}", sheet: "練習シートです。1ページなので印刷するか保存しておいてください：{link}", bye: "コートでお会いしましょう。\nIsaac" },
     vi: { subject: "Tóm tắt buổi học của bạn", hi: "Chào {name},", hiNone: "Xin chào,",
       intro: "Cảm ơn bạn về buổi học hôm nay. Dưới đây là những gì chúng ta đã luyện, kèm một điều để tập cho mỗi phần trước buổi sau.",
       introShort: "Cảm ơn bạn về buổi học hôm nay.", next: "Buổi học tiếp theo: {next}.",
-      review: "Nếu các buổi học giúp ích cho bạn, một đánh giá ngắn trên Google sẽ rất có ý nghĩa với tôi: {link}", bye: "Hẹn gặp lại trên sân,\nIsaac" },
+      review: "Nếu các buổi học giúp ích cho bạn, một đánh giá ngắn trên Google sẽ rất có ý nghĩa với tôi: {link}", sheet: "Phiếu luyện tập của bạn, một trang để in hoặc giữ lại: {link}", bye: "Hẹn gặp lại trên sân,\nIsaac" },
     fa: { subject: "خلاصهٔ جلسهٔ تمرین", hi: "سلام {name}،", hiNone: "سلام،",
       intro: "ممنون بابت جلسهٔ امروز. این‌ها چیزهایی است که امروز رویشان کار کردیم، و برای هر کدام یک تمرین تا جلسهٔ بعد.",
       introShort: "ممنون بابت جلسهٔ امروز.", next: "جلسهٔ بعد: {next}.",
-      review: "اگر جلسه‌ها کمکتان کرده، یک نظر کوتاه در گوگل برایم خیلی ارزشمند است: {link}", bye: "در زمین می‌بینمتان،\nIsaac" },
+      review: "اگر جلسه‌ها کمکتان کرده، یک نظر کوتاه در گوگل برایم خیلی ارزشمند است: {link}", sheet: "برگهٔ تمرین شما، یک صفحه برای چاپ یا نگه داشتن: {link}", bye: "در زمین می‌بینمتان،\nIsaac" },
   };
 
   var reviewMeta = document.querySelector('meta[name="review-link"]');
@@ -90,6 +90,17 @@
   });
 
   function fill(s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k] || ""; }); }
+
+  /* The practice sheet's link: the form's content, packed into the address
+     of /sheet/ (base64url JSON), so the sheet needs nothing stored. */
+  function sheetLink() {
+    var picked = Array.prototype.map.call(form.querySelectorAll("input[name=tips]:checked"), function (b) { return b.value; });
+    var d = new Date(), day = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+    var data = { n: field("name"), d: day, l: form.elements.lang.value || "en", t: picked, o: field("note"), x: field("next") };
+    var bytes = new TextEncoder().encode(JSON.stringify(data)), bin = "";
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return location.origin + "/sheet/#s=" + btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
   function field(name) { return form.elements[name].value.replace(/[ \t]+/g, " ").trim(); }
 
   function compose() {
@@ -108,6 +119,7 @@
       if (field("note")) lines.push(field("note"), "");
       if (field("next")) lines.push(fill(L.next, { next: field("next") }), "");
       if (reviewUrl && form.elements.review.checked) lines.push(fill(L.review, { link: reviewUrl }), "");
+      if (form.elements.sheet.checked && picked.length) lines.push(fill(L.sheet, { link: sheetLink() }), "");
       lines.push(L.bye);
       out.value = lines.join("\n");
     }, function () {
@@ -125,6 +137,11 @@
     var url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(field("to")) +
       "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(out.value);
     var w = window.open(url, "_blank");
+    if (w) { try { w.opener = null; } catch (err) { /* already cut */ } }
+  });
+
+  document.getElementById("recapSheet").addEventListener("click", function () {
+    var w = window.open(sheetLink(), "_blank");
     if (w) { try { w.opener = null; } catch (err) { /* already cut */ } }
   });
 

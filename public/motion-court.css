@@ -1,1 +1,33 @@
-/* Placeholder: motion-court is being built. */
+/* ============================================================================
+   The margin ball (motion-court.js adds it): a hairline down the right
+   edge of the screen with a tennis ball on it that rolls down as you
+   scroll, spinning as it goes. Scroll-driven in CSS, so it costs nothing
+   per frame; where the browser can't do that it isn't shown at all.
+   Desktop only, where the margin has room; never on the printed pages.
+   ?classic in the address turns it off, to compare.
+   ========================================================================== */
+
+.scroll-ball { display: none; }
+
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 960px) and (hover: hover) {
+    .js:not(.classic) .scroll-ball {
+      display: block; position: fixed; z-index: 40; pointer-events: none;
+      top: 88px; bottom: 28px; inset-inline-end: 15px; width: 1px;
+      background: var(--line);
+    }
+    .scroll-ball i {
+      position: absolute; top: 0; left: 50%; width: 15px; height: 15px; margin-left: -7.5px;
+      border-radius: 50%; background: #d9ef3f;
+      animation: scrollBall linear both; animation-timeline: scroll(root);
+    }
+    /* the seam: two white arcs, like the drawn ball everywhere else on the site */
+    .scroll-ball i::before, .scroll-ball i::after {
+      content: ""; position: absolute; top: 2px; bottom: 2px; width: 7px; border-radius: 50%;
+      border: 1.3px solid #fff; border-top-color: transparent; border-bottom-color: transparent;
+    }
+    .scroll-ball i::before { left: -2px; } .scroll-ball i::after { right: -2px; }
+    @keyframes scrollBall { to { top: calc(100% - 15px); rotate: 1800deg; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-ball { display: none !important; } }

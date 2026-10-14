@@ -11,6 +11,13 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "次の空き：{when}",
+    openHours: "今週の空きは{n}時間",
+    openHour: "今週の空きは1時間",
+    courtDry: "今日のコートは晴れ、最高{hi}°Fです。",
+    courtRain: "今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。",
+    courtRainSoon: "{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。",
     copied: "コピーしました",
     menuOpen: "メニューを開く",
     menuClose: "メニューを閉じる",
@@ -386,6 +393,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>体の前で、手首を固めてとらえる。</strong> 腕は長く、ラケットヘッドは手首より上に。肩からボールまで一直線になれば、大きな筋肉が衝撃を受け止めます。`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>道具をやさしく。</strong> テンションを下げるか柔らかいストリングに、グリップは少し太く、フレームは軽く、そして小鳥を持つくらいの握り方で。`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `痛いうちは休ませて前腕を伸ばし、痛みが2週間以上続くなら医師か理学療法士に相談してください。`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>今週のヒント<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `私のレッスンが初めてのお友達と一緒に来ると、初回のセミプライベートがお二人とも$10引きになります。`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `1分でわかる、私のこと、コートの場所、初回レッスンの様子。`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca, Irvine、Jamboree Roadのすぐそばです。来客用駐車場は敷地内にあり、ゲートで私がお迎えします。`],
+    [`>Guest parking<`, `>来客用駐車場<`],
+    [`>The gate: I meet you here<`, `>ゲート：ここでお迎えします<`],
+    [`>The courts<`, `>テニスコート<`],
+    [`>Not to scale<`, `>縮尺なし<`],
   ],
 
   ask: {

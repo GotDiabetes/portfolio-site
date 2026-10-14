@@ -159,6 +159,8 @@ const ROUTES = {
   "/hit": { method: "POST", limit: "HITS", run: hit },
   "/stats": { method: "GET", limit: "PER_VISITOR", run: stats },
   "/drills/describe": { method: "POST", limit: "PER_VISITOR", jev: true, run: describeStudent },
+  "/slots": { method: "GET", limit: "PER_VISITOR", run: slots },
+  "/court": { method: "GET", limit: "PER_VISITOR", run: court },
 };
 
 export default {
@@ -235,6 +237,58 @@ async function match(body, env, later) {
     focus,
     junior,
   };
+}
+
+/* ------------------------------------------------- /slots, /court ------
+   Two live lines for the front page, each a public feed read through the
+   Worker so the page never talks to a third party itself, and each kept
+   a while so a busy day costs a handful of requests.
+
+   GET /slots → { "next": "2026-10-12T19:00:00.000-07:00", "week": 14 }
+     The next open private lesson on Isaac's Cal.com calendar and how many
+     hours are open in the next seven days (the booking page's own public
+     availability feed; nothing private in it). Kept five minutes.
+   GET /court → { "days": [{ "date": "2026-10-11", "hi": 70, "rain": 68 }, …] }
+     Four days of the forecast at the court (Open-Meteo, no key): the
+     day's high in °F and the chance of rain in %. Kept thirty minutes.
+   ---------------------------------------------------------------------- */
+const CAL_USER = "isaac-lee-hlkghj", CAL_EVENT = "60-min-private-lesson", CAL_TZ = "America/Los_Angeles";
+const COURT_LAT = 33.69, COURT_LON = -117.79;
+const SLOTS_TTL_MS = 5 * 60 * 1000, COURT_TTL_MS = 30 * 60 * 1000;
+
+async function slots() {
+  const hit = cache.get("live:slots");
+  if (hit && hit.at > Date.now() - SLOTS_TTL_MS) return hit.data;
+  const now = Date.now();
+  const day = (t) => new Date(t).toISOString().slice(0, 10);
+  const url = `https://api.cal.com/v2/slots?eventTypeSlug=${CAL_EVENT}&username=${CAL_USER}&start=${day(now)}&end=${day(now + 9 * 864e5)}&timeZone=${encodeURIComponent(CAL_TZ)}`;
+  const r = await fetch(url, { headers: { "cal-api-version": "2024-09-04", "Accept": "application/json" } });
+  if (!r.ok) return { status: 503, error: "unavailable" };
+  const j = await r.json();
+  const starts = Object.values((j && j.data) || {}).flat().map((s) => s && s.start).filter(Boolean)
+    .filter((s) => new Date(s).getTime() > now).sort();
+  const data = { next: starts[0] || null, week: starts.filter((s) => new Date(s).getTime() < now + 7 * 864e5).length };
+  cache.set("live:slots", { at: now, data });
+  return data;
+}
+
+async function court() {
+  const hit = cache.get("live:court");
+  if (hit && hit.at > Date.now() - COURT_TTL_MS) return hit.data;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${COURT_LAT}&longitude=${COURT_LON}&daily=precipitation_probability_max,temperature_2m_max&temperature_unit=fahrenheit&timezone=${encodeURIComponent(CAL_TZ)}&forecast_days=4`;
+  const r = await fetch(url, { headers: { "Accept": "application/json" } });
+  if (!r.ok) return { status: 503, error: "unavailable" };
+  const j = await r.json();
+  const d = (j && j.daily) || {};
+  const days = (d.time || []).map((date, i) => ({
+    date,
+    hi: Math.round(Number((d.temperature_2m_max || [])[i])),
+    rain: Math.round(Number((d.precipitation_probability_max || [])[i])),
+  })).filter((x) => Number.isFinite(x.hi) && Number.isFinite(x.rain));
+  if (!days.length) return { status: 503, error: "unavailable" };
+  const data = { days };
+  cache.set("live:court", { at: Date.now(), data });
+  return data;
 }
 
 /* -------------------------------------------------------- /ask ---------

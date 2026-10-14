@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="/motion-court.css?v=1" />
   <link rel="stylesheet" href="/motion-reveal.css?v=1" />
   <link rel="stylesheet" href="/motion-transitions.css?v=1" />
+  <link rel="stylesheet" href="/features.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
@@ -195,6 +196,8 @@
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme</a>
           </div>
           <p class="book-note hero-note fade" style="--d:.24s">Sin tarjeta ni depósito: reservar solo aparta el horario.</p>
+          <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
+          <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -213,7 +216,7 @@
 
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade" data-focus-reveal="hover">
+        <blockquote class="fade" data-statement-reveal>
           El tenis es para todos. Casi todos los jugadores mejoran más rápido de lo que esperan cuando la práctica es deliberada.
         </blockquote>
       </div>
@@ -248,6 +251,7 @@
           <p>
             La misma clase, compartida entre dos jugadores de nivel parecido. Cada uno paga menos que en una particular, y en pareja tienen peloteos y puntos reales para trabajar en lugar de recibir bolas a solas. Trae a un amigo, a un hermano o a tu pareja de dobles.
           </p>
+          <p class="offer">Trae a un amigo que no me conozca y los dos tienen $10 de descuento en su primera clase semiprivada.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase semiprivada</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="Qué incluye una clase semiprivada">Qué incluye</button>
@@ -332,6 +336,11 @@
               <div><dt>Equipo escolar</dt><dd>4 años</dd></div>
               <div><dt>Horario</dt><dd>Medio tiempo</dd></div>
             </dl>
+
+            <figure class="intro-video fade" style="--d:.22s" data-video="" hidden>
+              <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
+              <figcaption>Un minuto: quién soy, dónde está la cancha y cómo es una primera clase.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -486,6 +495,13 @@
       </dl>
     </section>
 
+    <section class="wrap tip-week" id="tipWeek" hidden>
+      <p class="eyebrow fade">Consejo de la semana</p>
+      <h2 class="fade tip-week-title" style="--d:.06s"></h2>
+      <p class="fade tip-week-text" style="--d:.12s"></p>
+      <p class="fade" style="--d:.16s"><a class="link-btn tip-week-link" href="tips/">Leer los consejos de práctica</a></p>
+    </section>
+
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">Preguntas frecuentes</h2>
       <div class="faq fade" style="--d:.06s">
@@ -535,7 +551,7 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" data-band-sweep>
       <div class="wrap section">
         <div class="contact-grid">
           <div class="contact-text">
@@ -562,6 +578,49 @@
             </div>
           </dl>
         </div>
+
+        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
+          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
+            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
+            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
+            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
+            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
+              <rect x="178" y="112" width="104" height="76" rx="3"/>
+              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
+            </g>
+            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
+            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <g stroke="#fff" stroke-width="1.5" fill="none">
+              <rect x="340" y="124" width="66" height="150" rx="2"/>
+              <rect x="414" y="124" width="66" height="150" rx="2"/>
+              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
+              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
+            </g>
+            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
+            <g font-size="14" font-weight="600" text-anchor="middle">
+              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
+              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
+              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
+              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
+              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
+            </g>
+          </svg>
+          <figcaption>
+            <ol class="court-map-legend">
+              <li>Jamboree Road</li>
+              <li>Via Lucca</li>
+              <li>Estacionamiento para visitas</li>
+              <li>La entrada: aquí te espero</li>
+              <li>Las canchas</li>
+            </ol>
+            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine, junto a Jamboree Road. El estacionamiento para visitas está dentro del complejo, y te espero en la entrada. <span class="court-map-scale">Sin escala</span></p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -795,7 +854,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script>window.I18N = {"nextOpen":"Próxima hora libre: {when}","openHours":"{n} horas libres esta semana","openHour":"1 hora libre esta semana","courtDry":"Hoy la cancha está seca y a {hi}°F.","courtRain":"Hoy es probable que llueva. Si hay que mover una clase, te escribo.","courtRainSoon":"Se espera lluvia el {day}; si hay que mover una clase, te escribo.","copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
   <script src="/tennis.js?v=20261010" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -806,6 +865,7 @@
   <script src="/motion-court.js?v=1" defer></script>
   <script src="/motion-reveal.js?v=1" defer></script>
   <script src="/motion-transitions.js?v=1" defer></script>
+  <script src="/features.js?v=1" defer></script>
   <script src="/ballo.js?v=3" defer></script>
   <script src="/motion.js?v=4" defer></script>
 </body>

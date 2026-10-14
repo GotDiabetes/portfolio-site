@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="/motion-court.css?v=1" />
   <link rel="stylesheet" href="/motion-reveal.css?v=1" />
   <link rel="stylesheet" href="/motion-transitions.css?v=1" />
+  <link rel="stylesheet" href="/features.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
@@ -195,6 +196,8 @@
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Korean%20page)" data-mail="Tennis%20lessons%20(Korean%20page)">이메일 보내기</a>
           </div>
           <p class="book-note hero-note fade" style="--d:.24s">카드도 보증금도 필요 없어요. 예약은 시간만 잡아 둬요.</p>
+          <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
+          <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -213,7 +216,7 @@
 
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade" data-focus-reveal="hover">
+        <blockquote class="fade" data-statement-reveal>
           테니스는 모두를 위한 운동이에요. 의식적으로 연습하기 시작하면 거의 모든 선수가 생각보다 빨리 늘어요.
         </blockquote>
       </div>
@@ -248,6 +251,7 @@
           <p>
             같은 레슨을 비슷한 실력의 두 사람이 함께 받아요. 개인 레슨보다 1인 비용이 적고, 혼자 공을 받는 대신 실제 랠리와 포인트로 연습할 수 있어요. 친구, 형제자매, 복식 파트너와 함께 오세요.
           </p>
+          <p class="offer">저를 처음 만나는 친구와 함께 오시면 두 분 모두 첫 세미프라이빗 레슨에서 $10 할인이에요.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>2인 레슨 예약</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="2인 레슨에서 다루는 내용">다루는 내용</button>
@@ -332,6 +336,11 @@
               <div><dt>고교 대표팀</dt><dd>4년</dd></div>
               <div><dt>일정</dt><dd>파트타임</dd></div>
             </dl>
+
+            <figure class="intro-video fade" style="--d:.22s" data-video="" hidden>
+              <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
+              <figcaption>1분: 제가 누구인지, 코트는 어디인지, 첫 레슨은 어떤지.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -486,6 +495,13 @@
       </dl>
     </section>
 
+    <section class="wrap tip-week" id="tipWeek" hidden>
+      <p class="eyebrow fade">이번 주의 팁</p>
+      <h2 class="fade tip-week-title" style="--d:.06s"></h2>
+      <p class="fade tip-week-text" style="--d:.12s"></p>
+      <p class="fade" style="--d:.16s"><a class="link-btn tip-week-link" href="tips/">연습 팁 보기</a></p>
+    </section>
+
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">자주 묻는 질문</h2>
       <div class="faq fade" style="--d:.06s">
@@ -535,7 +551,7 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" data-band-sweep>
       <div class="wrap section">
         <div class="contact-grid">
           <div class="contact-text">
@@ -562,6 +578,49 @@
             </div>
           </dl>
         </div>
+
+        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
+          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
+            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
+            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
+            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
+            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
+              <rect x="178" y="112" width="104" height="76" rx="3"/>
+              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
+            </g>
+            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
+            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <g stroke="#fff" stroke-width="1.5" fill="none">
+              <rect x="340" y="124" width="66" height="150" rx="2"/>
+              <rect x="414" y="124" width="66" height="150" rx="2"/>
+              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
+              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
+            </g>
+            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
+            <g font-size="14" font-weight="600" text-anchor="middle">
+              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
+              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
+              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
+              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
+              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
+            </g>
+          </svg>
+          <figcaption>
+            <ol class="court-map-legend">
+              <li>Jamboree Road</li>
+              <li>Via Lucca</li>
+              <li>방문객 주차</li>
+              <li>게이트: 여기서 만나요</li>
+              <li>테니스 코트</li>
+            </ol>
+            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine, Jamboree Road 바로 옆이에요. 방문객 주차는 단지 안에 있고, 게이트에서 제가 맞이해요. <span class="court-map-scale">축척 없음</span></p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -795,7 +854,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script>window.I18N = {"nextOpen":"다음 빈 시간: {when}","openHours":"이번 주 빈 시간 {n}시간","openHour":"이번 주 빈 시간 1시간","courtDry":"오늘 코트는 맑고 {hi}°F예요.","courtRain":"오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.","courtRainSoon":"{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.","copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
   <script src="/tennis.js?v=20261010" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -806,6 +865,7 @@
   <script src="/motion-court.js?v=1" defer></script>
   <script src="/motion-reveal.js?v=1" defer></script>
   <script src="/motion-transitions.js?v=1" defer></script>
+  <script src="/features.js?v=1" defer></script>
   <script src="/ballo.js?v=3" defer></script>
   <script src="/motion.js?v=4" defer></script>
 </body>

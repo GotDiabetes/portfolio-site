@@ -22,6 +22,7 @@
 }
 /* Hidden without script; shown from the first paint when it runs. */
 .nf-js .nf-scene[hidden] { display: block; }
+.nf-js .nf-scene.nf-off { display: none; }     /* the rally game has taken its place */
 .nf-scene canvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%; display: block;
@@ -42,6 +43,15 @@
 .nf-scene:hover .nf-retry { color: var(--muted); }
 /* The whole court is the button; the ring goes round its label. */
 .nf-scene:focus-visible .nf-retry { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The rally game (rally.js) takes the scene's place: the same band, a
+   canvas, the pointer is the racket. */
+.nf-rally {
+  position: relative; width: 100%; height: clamp(260px, 42vh, 380px);
+  touch-action: none; cursor: none; user-select: none; -webkit-user-select: none;
+}
+.nf-rally canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+@media (max-width: 680px) { .nf-rally { height: clamp(240px, 36vh, 320px); } }
 
 /* What a replay did, for screen readers only. */
 .nf-live {

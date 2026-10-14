@@ -186,6 +186,33 @@ a { color: inherit; }
 :root:is(:lang(ko), :lang(ja), :lang(zh)) .flyer h1 { letter-spacing: -0.02em; line-height: 1.12; }
 :root:is(:lang(ko), :lang(ja), :lang(zh)) .gc-gift { letter-spacing: -0.01em; line-height: 1.2; }
 
+/* ------------------------------------------------------- Practice sheet --
+   One Letter page a family keeps after a lesson (/sheet/, sheet.js): the
+   wordmark and the date, a title with the player's name, each tip the
+   lesson covered as a heading and its fix, Isaac's own line, the next
+   lesson, and a quiet foot. */
+.practice-sheet { padding: .6in .7in .55in; display: flex; flex-direction: column; }
+.ps-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .4in; padding-bottom: .22in; border-bottom: 1px solid var(--text); }
+.ps-logo { width: 1.55in; height: auto; }
+.ps-meta { text-align: end; }
+.ps-date { color: var(--muted); font-size: .9rem; margin-top: .15rem; }
+.ps-title { font-size: 2rem; letter-spacing: -0.04em; line-height: 1.05; margin: .3in 0 .12in; max-width: 16ch; text-wrap: balance; }
+.ps-intro { color: var(--muted); max-width: 52ch; }
+.ps-tips { list-style: none; margin: .25in 0 0; padding: 0; }
+.ps-tips li { padding: .16in 0; border-top: 1px solid var(--line); }
+.ps-tips h2 { font-size: 1.05rem; letter-spacing: -0.02em; margin-bottom: .12rem; }
+.ps-tips p { font-size: .95rem; line-height: 1.5; max-width: 66ch; }
+.ps-note { margin-top: .22in; padding: .16in .2in; background: var(--soft); border-radius: var(--radius); }
+.ps-label { font-size: .75rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin-bottom: .2rem; }
+.ps-note-text { font-size: .95rem; }
+.ps-next { margin-top: .18in; font-weight: 600; }
+.ps-empty { margin-top: .4in; color: var(--muted); }
+.ps-foot { margin-top: auto; padding-top: .2in; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: .3in; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
+:lang(fa) .ps-title { letter-spacing: 0; line-height: 1.3; }
+:lang(fa) .ps-label { letter-spacing: 0; }
+.print-btn-quiet { background: #fff; color: var(--text); border: 1px solid var(--line); }
+.print-btn-quiet:hover { background: #fff; border-color: var(--text); }
+
 /* ---------------------------------------------------------------- Print -- */
 @page { size: letter; margin: 0; }
 @media print {

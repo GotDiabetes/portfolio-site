@@ -12,6 +12,13 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "最近的空档：{when}",
+    openHours: "本周还有 {n} 个空闲小时",
+    openHour: "本周还有 1 个空闲小时",
+    courtDry: "今天球场干燥，最高 {hi}°F。",
+    courtRain: "今天可能下雨。如果需要改时间，我会发短信通知。",
+    courtRainSoon: "{day}预计有雨；如果需要改时间，我会发短信通知。",
     copied: "已复制",
     menuOpen: "打开菜单",
     menuClose: "关闭菜单",
@@ -387,6 +394,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>在身前击球，手腕稳住。</strong> 手臂伸长，拍头高于手腕：从肩膀到球成一条线，让大肌肉来承受冲击。`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>让装备更温和。</strong> 线磅数低一点或更软，握柄稍粗一点，拍框更轻一点，握力轻得像握着一只小鸟。`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `疼的时候先休息，拉伸前臂；如果疼痛超过两周，去看医生或理疗师。`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>本周小贴士<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `带一位我还没教过的朋友来，你们俩的第一节半私教课各减 $10。`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `一分钟：我是谁、球场在哪里、第一节课是什么样。`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca, Irvine，紧邻 Jamboree Road。访客停车位在社区内，我在大门口接你。`],
+    [`>Guest parking<`, `>访客停车<`],
+    [`>The gate: I meet you here<`, `>大门：我在这里接你<`],
+    [`>The courts<`, `>球场<`],
+    [`>Not to scale<`, `>示意图，非按比例<`],
   ],
 
   ask: {

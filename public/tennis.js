@@ -100,20 +100,32 @@
     });
   }
 
-  function openDialog(id) {
+  /* window.leeMorph (motion-transitions.js), when present, may animate the
+     change: it gets the dialog, the control that opened it and a function
+     that does the plain open (or close), and returns true if it took over
+     (it must still call that function). Otherwise the popup just opens. */
+  function openDialog(id, opener) {
     var dlg = document.getElementById(id);
     if (!dlg || dlg.open) return;
     openerFocus = document.activeElement;
-    if (typeof dlg.showModal === "function") dlg.showModal();
-    else dlg.setAttribute("open", "");
-    syncDialogState();
+    var show = function () {
+      if (typeof dlg.showModal === "function") dlg.showModal();
+      else dlg.setAttribute("open", "");
+      syncDialogState();
+    };
+    if (window.leeMorph && window.leeMorph.open && window.leeMorph.open(dlg, opener || openerFocus, show)) return;
+    show();
   }
 
   function closeDialog(dlg) {
     if (!dlg || !dlg.open) return;
-    if (typeof dlg.close === "function") dlg.close();
-    else dlg.removeAttribute("open");
-    syncDialogState();
+    var hide = function () {
+      if (typeof dlg.close === "function") dlg.close();
+      else dlg.removeAttribute("open");
+      syncDialogState();
+    };
+    if (window.leeMorph && window.leeMorph.close && window.leeMorph.close(dlg, hide)) return;
+    hide();
   }
 
   // data-open="dialogId" opens a popup; data-close closes the one it's inside.
@@ -125,13 +137,13 @@
     if (closer) {
       closeDialog(closer.closest("dialog"));
       if (opener && opener === closer) {
-        window.setTimeout(function () { openDialog(opener.getAttribute("data-open")); }, 180);
+        window.setTimeout(function () { openDialog(opener.getAttribute("data-open"), opener); }, 180);
         return;
       }
     }
     if (opener && opener !== closer) {
       e.preventDefault();
-      openDialog(opener.getAttribute("data-open"));
+      openDialog(opener.getAttribute("data-open"), opener);
     }
   });
 

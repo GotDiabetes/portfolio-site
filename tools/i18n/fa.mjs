@@ -15,6 +15,13 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "نزدیک‌ترین وقت خالی: {when}",
+    openHours: "{n} ساعت خالی در این هفته",
+    openHour: "۱ ساعت خالی در این هفته",
+    courtDry: "امروز زمین خشک است و دما به {hi}°F می‌رسد.",
+    courtRain: "امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.",
+    courtRainSoon: "{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.",
     copied: "کپی شد",
     menuOpen: "باز کردن منو",
     menuClose: "بستن منو",
@@ -390,6 +397,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>توپ را جلوی بدن و با مچ محکم بگیرید.</strong> بازو کشیده، سر راکت بالاتر از مچ: یک خط از شانه تا توپ، تا عضلات بزرگ ضربه را بگیرند.`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>تجهیزات را نرم‌تر کنید.</strong> زه شل‌تر یا نرم‌تر، گریپ کمی ضخیم‌تر، فریم سبک‌تر، و دستی که راکت را مثل یک پرندهٔ کوچک نگه دارد.`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `تا وقتی درد دارد استراحت بدهید، ساعد را بکشید، و اگر درد بیش از دو هفته ادامه داشت به پزشک یا فیزیوتراپ مراجعه کنید.`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>نکتهٔ هفته<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `دوستی را که تا حالا با من کلاس نداشته بیاورید تا هر دو در اولین کلاس نیمه‌خصوصی $10 تخفیف بگیرید.`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `یک دقیقه: من کی هستم، زمین کجاست و جلسهٔ اول چطور می‌گذرد.`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca، ارواین، کنار Jamboree Road. پارکینگ مهمان داخل مجموعه است و من شما را دم در ورودی می‌بینم.`],
+    [`>Guest parking<`, `>پارکینگ مهمان<`],
+    [`>The gate: I meet you here<`, `>در ورودی: اینجا می‌بینمتان<`],
+    [`>The courts<`, `>زمین‌ها<`],
+    [`>Not to scale<`, `>بدون مقیاس<`],
   ],
 
   ask: {

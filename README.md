@@ -259,6 +259,43 @@ overwritten on the next build. One dictionary covers all four pages.
   views and the hover highlights are `public/elbow.css` and
   `public/elbow.js`. Edit the legend in the page; move a badge in the script
   and run it; then run the i18n build.
+- **The October motion** (front page and tips page; `?classic` in the
+  address shows a page without it, to compare):
+  `motion-reveal.css/js` (the statement band lights up word by word as it
+  climbs the screen, scroll-driven; the black bands arrive behind a yellow
+  net cord, once), `motion-court.css/js` (a ball on a hairline down the
+  right edge rolls with the scroll, desktop only), `motion-transitions.css/js`
+  (the browser's cross-document view transitions between the pages, a wipe
+  for a page change and a melt for a language change; `window.leeMorph`,
+  which grows a popup out of the card that opened it, is what tennis.js's
+  `openDialog` hands over to). `features.css/js` holds the press ripple on
+  every button.
+- **Live lines** (`features.js`, the hero): the next open private lesson
+  and how many hours are open this week, from the Worker's `GET /slots`
+  (Cal.com's public availability feed for the booking page, kept five
+  minutes), and today's court weather from `GET /court` (Open-Meteo at the
+  court, kept thirty minutes). Both lines stay hidden when the Worker has
+  nothing. On localhost, `?local` reads from a Worker on :8787.
+- **Tip of the week** (`features.js`): one `tip_*` topic from this
+  language's `ask.json`, chosen by the ISO week, in a short section before
+  the FAQ. **Bring a friend**: one line on the semi-private card (the
+  amount is in the page and the dictionaries). **The intro video**: a
+  figure in About that shows once its `data-video` names a file.
+- **The court map** (the contact band): a drawn schematic, not to scale,
+  with a numbered legend (the streets stay English; `KEEP` in the build).
+  The facts in its caption are Isaac's: guest parking inside the
+  community, and he meets visitors at the gate.
+- **The practice sheet** (`public/sheet/`, `sheet.js`, styles in
+  `print.css`): one printable Letter page a family keeps after a lesson.
+  The recap page makes its link (`/sheet/#s=…`, the form packed as
+  base64url JSON: name, date, language, tip ids, Isaac's line, next lesson)
+  and puts it in the note; the sheet reads the link and the language's
+  `ask.json`, so nothing is stored anywhere. English only in the source;
+  its words are in `sheet.js` per language, like the recap's.
+- **The rally game** (`public/rally.js`, on the 404 page): "Play a rally"
+  swaps the scene for a top-down court; the pointer is the racket, the
+  streak counts, the best is kept on the device. Its words are in the 404
+  page's own table.
 - Links between the built pages stay in the language: `tips/` on the front
   page and `/#lessons` on the tips page lead to `/ko/tips/` and `/ko/#lessons`
   on the Korean copies, and a chat button linking to `/tips/` does too.

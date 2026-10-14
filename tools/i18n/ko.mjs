@@ -12,6 +12,13 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    // the live lines under the hero's Book button (features.js)
+    nextOpen: "다음 빈 시간: {when}",
+    openHours: "이번 주 빈 시간 {n}시간",
+    openHour: "이번 주 빈 시간 1시간",
+    courtDry: "오늘 코트는 맑고 {hi}°F예요.",
+    courtRain: "오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.",
+    courtRainSoon: "{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.",
     copied: "복사됨",
     menuOpen: "메뉴 열기",
     menuClose: "메뉴 닫기",
@@ -387,6 +394,18 @@ export default {
     [`<strong>Meet the ball out in front, wrist firm.</strong> Arm long, racket head above the wrist: one line from shoulder to ball, so the big muscles take the hit.`, `<strong>앞에서, 손목을 단단히 하고 맞히세요.</strong> 팔은 길게, 라켓 헤드는 손목보다 위에. 어깨에서 공까지 한 줄이 되면 큰 근육이 충격을 받아요.`],
     [`<strong>Ease the equipment.</strong> Looser or softer strings, a slightly bigger grip, a lighter frame, and a grip you could hold a bird with.`, `<strong>장비를 부드럽게.</strong> 더 느슨하거나 부드러운 스트링, 조금 더 굵은 그립, 더 가벼운 라켓, 그리고 작은 새를 쥐듯 가볍게 잡는 손.`],
     [`Rest it while it's sore, stretch the forearm, and if the pain lasts more than a couple of weeks, see a doctor or physio.`, `아플 때는 쉬고 팔뚝을 스트레칭하세요. 통증이 2주 넘게 이어지면 병원이나 물리치료사를 찾아가세요.`],
+
+    // added with the tip of the week, bring-a-friend and the intro video
+    [`>Tip of the week<`, `>이번 주의 팁<`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `저를 처음 만나는 친구와 함께 오시면 두 분 모두 첫 세미프라이빗 레슨에서 $10 할인이에요.`],
+    [`One minute: who I am, where the court is, and what a first lesson is like.`, `1분: 제가 누구인지, 코트는 어디인지, 첫 레슨은 어떤지.`],
+
+    // the court map
+    [`35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate.`, `35 Via Lucca, Irvine, Jamboree Road 바로 옆이에요. 방문객 주차는 단지 안에 있고, 게이트에서 제가 맞이해요.`],
+    [`>Guest parking<`, `>방문객 주차<`],
+    [`>The gate: I meet you here<`, `>게이트: 여기서 만나요<`],
+    [`>The courts<`, `>테니스 코트<`],
+    [`>Not to scale<`, `>축척 없음<`],
   ],
 
   ask: {

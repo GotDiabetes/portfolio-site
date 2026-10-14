@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="/motion-court.css?v=1" />
   <link rel="stylesheet" href="/motion-reveal.css?v=1" />
   <link rel="stylesheet" href="/motion-transitions.css?v=1" />
+  <link rel="stylesheet" href="/features.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
@@ -195,6 +196,8 @@
             <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Japanese%20page)" data-mail="Tennis%20lessons%20(Japanese%20page)">メールする</a>
           </div>
           <p class="book-note hero-note fade" style="--d:.24s">カードも前金も不要です。予約は時間を押さえるだけです。</p>
+          <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
+          <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -213,7 +216,7 @@
 
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade" data-focus-reveal="hover">
+        <blockquote class="fade" data-statement-reveal>
           テニスはすべての人のものです。練習に目的が生まれれば、ほとんどの選手が自分の予想より早く上達します。
         </blockquote>
       </div>
@@ -248,6 +251,7 @@
           <p>
             同じレッスンを、近いレベルの2人で受けます。1人あたりの料金は個人レッスンより安く、1人で球出しを受ける代わりに、実際のラリーやポイント練習ができます。友達やきょうだい、ダブルスのパートナーと一緒にどうぞ。
           </p>
+          <p class="offer">私のレッスンが初めてのお友達と一緒に来ると、初回のセミプライベートがお二人とも$10引きになります。</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>ペアレッスンを予約</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="ペアレッスンの内容">レッスン内容</button>
@@ -332,6 +336,11 @@
               <div><dt>高校代表</dt><dd>4年</dd></div>
               <div><dt>スケジュール</dt><dd>パートタイム</dd></div>
             </dl>
+
+            <figure class="intro-video fade" style="--d:.22s" data-video="" hidden>
+              <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
+              <figcaption>1分でわかる、私のこと、コートの場所、初回レッスンの様子。</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -486,6 +495,13 @@
       </dl>
     </section>
 
+    <section class="wrap tip-week" id="tipWeek" hidden>
+      <p class="eyebrow fade">今週のヒント</p>
+      <h2 class="fade tip-week-title" style="--d:.06s"></h2>
+      <p class="fade tip-week-text" style="--d:.12s"></p>
+      <p class="fade" style="--d:.16s"><a class="link-btn tip-week-link" href="tips/">練習のヒントを読む</a></p>
+    </section>
+
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">よくある質問</h2>
       <div class="faq fade" style="--d:.06s">
@@ -535,7 +551,7 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" data-band-sweep>
       <div class="wrap section">
         <div class="contact-grid">
           <div class="contact-text">
@@ -562,6 +578,49 @@
             </div>
           </dl>
         </div>
+
+        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
+          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
+            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
+            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
+            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
+            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
+            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
+              <rect x="178" y="112" width="104" height="76" rx="3"/>
+              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
+            </g>
+            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
+            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <g stroke="#fff" stroke-width="1.5" fill="none">
+              <rect x="340" y="124" width="66" height="150" rx="2"/>
+              <rect x="414" y="124" width="66" height="150" rx="2"/>
+              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
+              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
+            </g>
+            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
+            <g font-size="14" font-weight="600" text-anchor="middle">
+              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
+              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
+              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
+              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
+              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
+            </g>
+          </svg>
+          <figcaption>
+            <ol class="court-map-legend">
+              <li>Jamboree Road</li>
+              <li>Via Lucca</li>
+              <li>来客用駐車場</li>
+              <li>ゲート：ここでお迎えします</li>
+              <li>テニスコート</li>
+            </ol>
+            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine、Jamboree Roadのすぐそばです。来客用駐車場は敷地内にあり、ゲートで私がお迎えします。 <span class="court-map-scale">縮尺なし</span></p>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -795,7 +854,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script>window.I18N = {"nextOpen":"次の空き：{when}","openHours":"今週の空きは{n}時間","openHour":"今週の空きは1時間","courtDry":"今日のコートは晴れ、最高{hi}°Fです。","courtRain":"今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。","courtRainSoon":"{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。","copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
   <script src="/tennis.js?v=20261010" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -806,6 +865,7 @@
   <script src="/motion-court.js?v=1" defer></script>
   <script src="/motion-reveal.js?v=1" defer></script>
   <script src="/motion-transitions.js?v=1" defer></script>
+  <script src="/features.js?v=1" defer></script>
   <script src="/ballo.js?v=3" defer></script>
   <script src="/motion.js?v=4" defer></script>
 </body>
