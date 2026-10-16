@@ -36,12 +36,14 @@
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <link rel="stylesheet" href="/tennis.css?v=20261013" />
   <link rel="stylesheet" href="/focus.css?v=1" />
-  <link rel="stylesheet" href="/motion-court.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=1" />
-  <link rel="stylesheet" href="/motion-transitions.css?v=1" />
-  <link rel="stylesheet" href="/features.css?v=1" />
+  <link rel="stylesheet" href="/motion-court.css?v=2" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-transitions.css?v=2" />
+  <link rel="stylesheet" href="/features.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
+  <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
 
   <script>
@@ -54,7 +56,7 @@
         Cal("init", "lesson", { origin: "https://cal.com" });
         /* The theme is pinned. The page has one theme, and a dark calendar over
            a white page is the one thing a dark-mode OS must not do here. */
-        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
@@ -96,7 +98,7 @@
     "alternateName": "Isaac Lee Tennis",
     "description": "Private tennis coaching in Irvine, California.",
     "url": "https://leetennisco.com/",
-    "email": "isaacleetennis@gmail.com",
+    "email": "21euisungisaac@gmail.com",
     "priceRange": "$45-$110",
     "areaServed": { "@type": "City", "name": "Irvine, California" },
     "address": {
@@ -159,6 +161,11 @@
         </div>
       </details>
 
+      <button class="theme-toggle" type="button" aria-label="Cambiar a modo oscuro" data-theme-toggle>
+        <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Reservar una clase" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
         <span class="cta-full">Reservar una clase</span><span class="cta-short" aria-hidden="true">Reservar</span>
       </a>
@@ -193,7 +200,7 @@
 
           <div class="actions fade" style="--d:.2s">
             <a class="btn btn-primary btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
-            <a class="btn btn-quiet btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme</a>
+            <a class="btn btn-quiet btn-lg" href="mailto:21euisungisaac@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme</a>
           </div>
           <p class="book-note hero-note fade" style="--d:.24s">Sin tarjeta ni depósito: reservar solo aparta el horario.</p>
           <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
@@ -216,9 +223,40 @@
 
     <section class="statement">
       <div class="wrap">
-        <blockquote class="fade" data-statement-reveal>
-          El tenis es para todos. Casi todos los jugadores mejoran más rápido de lo que esperan cuando la práctica es deliberada.
+        <blockquote class="fade" data-focus-reveal="hover">
+          El tenis es para todos.
         </blockquote>
+        <div class="everyone fade" style="--d:.1s" aria-hidden="true">
+<svg class="everyone-art is-wide" viewBox="0 0 1200 212" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+<path class="ev-ground" pathLength="1" d="M0 200 H1200" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+<g class="ev-fig" style="--d:0s"><path pathLength="1" d="M52,155.8 L52,174.8"/><path pathLength="1" d="M52,174.8 L47,187.1 L45.3,200"/><path pathLength="1" d="M52,174.8 L57,187.1 L58.7,200"/><path pathLength="1" d="M52,155.8 L46.4,163 L54.2,167.5"/><path pathLength="1" d="M52,155.8 L58.7,163 L55.4,167.5"/><circle pathLength="1" cx="52" cy="150.2" r="4.5"/><path pathLength="1" d="M47.7,148.8 A4.5 4.5 0 0 1 56.3,148.8"/><path pathLength="1" d="M55.4,167.5 L59.3,168.9"/><ellipse pathLength="1" cx="62.5" cy="170.1" rx="3.5" ry="2.6" transform="rotate(20 62.5 170.1)"/><circle class="ev-ball" fill="#d9ef3f" stroke="none" cx="61" cy="177.6" r="2.5"/></g>
+<g class="ev-fig" style="--d:0.1s"><path pathLength="1" d="M145.2,136.8 L146,164"/><path pathLength="1" d="M146,164 L138,181.6 L135.6,200"/><path pathLength="1" d="M146,164 L153.2,181.6 L155.6,200"/><path pathLength="1" d="M145.2,136.8 L136.4,147.2 L128.4,152"/><path pathLength="1" d="M145.2,136.8 L141.2,148.8 L130,153.6"/><circle pathLength="1" cx="145.2" cy="128.8" r="6.4"/><path pathLength="1" d="M138.8,127.5 A6.4 6.4 0 0 1 151,126.2"/><path pathLength="1" d="M139.4,128.2 L131.1,136.5"/><path pathLength="1" d="M130,153.6 L121.9,150.6"/><ellipse pathLength="1" cx="115.1" cy="148.2" rx="7.2" ry="5.4" transform="rotate(200 115.1 148.2)"/></g>
+<g class="ev-fig" style="--d:0.2s"><path pathLength="1" d="M259,118 L256,153"/><path pathLength="1" d="M256,153 L252,176 L250,198"/><path pathLength="1" d="M256,153 L266,176 L267,198"/><path pathLength="1" d="M259,118 L252,102 L256,86"/><path pathLength="1" d="M259,118 L272,106 L268,92"/><circle pathLength="1" cx="260" cy="108" r="8"/><path pathLength="1" d="M252.4,105.6 A8 8 0 0 1 267.6,105.6"/><path pathLength="1" d="M268,92 L272.1,80.7"/><ellipse pathLength="1" cx="275.5" cy="71.3" rx="10" ry="7.5" transform="rotate(-70 275.5 71.3)"/></g>
+<g class="ev-fig" style="--d:0.3s"><path pathLength="1" d="M373.6,137.7 L370.4,162.3"/><path pathLength="1" d="M370.4,162.3 L385.1,165.6 L390,178.7"/><circle pathLength="1" cx="367.1" cy="182" r="18"/><circle pathLength="1" cx="367.1" cy="182" r="3.3"/><circle pathLength="1" cx="393.3" cy="194.3" r="5.7"/><path pathLength="1" d="M358.9,160.6 L380.2,160.6 L393.3,180.3"/><path pathLength="1" d="M373.6,137.7 L365.4,149.2 L370.4,159"/><path pathLength="1" d="M373.6,137.7 L385.1,145.9 L396.6,149.2"/><circle pathLength="1" cx="373.6" cy="129.5" r="6.6"/><path pathLength="1" d="M367.4,127.5 A6.6 6.6 0 0 1 379.9,127.5"/><path pathLength="1" d="M396.6,149.2 L405.6,146.7"/><ellipse pathLength="1" cx="413.2" cy="144.7" rx="7.8" ry="5.8" transform="rotate(-15 413.2 144.7)"/></g>
+<g class="ev-fig" style="--d:0.4s"><path pathLength="1" d="M486,127.3 L486,158.6"/><path pathLength="1" d="M486,158.6 L478.6,178.8 L475.9,200"/><path pathLength="1" d="M486,158.6 L495.2,179.8 L499.8,200"/><path pathLength="1" d="M486,127.3 L475,137.4 L478.6,146.6"/><path pathLength="1" d="M486,127.3 L498.9,131.9 L504.4,120.9"/><circle pathLength="1" cx="486.9" cy="118.1" r="7.4"/><path pathLength="1" d="M479.9,115.9 A7.4 7.4 0 0 1 493.9,115.9"/><circle pathLength="1" cx="484" cy="108.2" r="3.1"/><path pathLength="1" d="M481.4,160.4 L474,177 L498,177 L490.6,160.4"/><path pathLength="1" d="M504.4,120.9 L506.2,110.6"/><ellipse pathLength="1" cx="507.7" cy="101.9" rx="8.7" ry="6.6" transform="rotate(-80 507.7 101.9)"/></g>
+<g class="ev-fig" style="--d:0.4s"><path pathLength="1" d="M596,130.5 L593.4,160.4"/><path pathLength="1" d="M596,160.4 L588.1,179.8 L585.4,200"/><path pathLength="1" d="M596,160.4 L603.9,179.8 L606.6,200"/><path pathLength="1" d="M596,130.5 L587.2,141.9 L599.5,149"/><path pathLength="1" d="M596,130.5 L606.6,141.9 L601.3,149"/><circle pathLength="1" cx="596" cy="121.7" r="7"/><path pathLength="1" d="M589,119.9 A7 7 0 0 1 603,119.9"/><path pathLength="1" d="M600.2,119.9 L610.1,121.3"/><path pathLength="1" d="M601.3,149 L610.7,152.4"/><ellipse pathLength="1" cx="618.6" cy="155.3" rx="8.4" ry="6.3" transform="rotate(20 618.6 155.3)"/></g>
+<g class="ev-fig" style="--d:0.5s"><path pathLength="1" d="M706.9,125.7 L706,157.7"/><path pathLength="1" d="M706,157.7 L696.6,178.4 L692.8,200"/><path pathLength="1" d="M706,157.7 L716.3,178.4 L719.2,200"/><path pathLength="1" d="M706.9,125.7 L692.8,134.2 L685.3,141.7"/><path pathLength="1" d="M706.9,125.7 L719.2,136.1 L732.3,141.7"/><circle pathLength="1" cx="707.9" cy="116.3" r="7.5"/><path pathLength="1" d="M698.5,123.1 A9.4 9.4 0 1 1 717.3,123.1 L716.2,134.4"/><path pathLength="1" d="M732.3,141.7 L742.9,137.9"/><ellipse pathLength="1" cx="751.8" cy="134.6" rx="9.4" ry="7.1" transform="rotate(-20 751.8 134.6)"/></g>
+<g class="ev-fig" style="--d:0.6s"><path pathLength="1" d="M821.3,144.7 L822,168.5"/><path pathLength="1" d="M822,168.5 L815,183.9 L812.9,200"/><path pathLength="1" d="M822,168.5 L828.3,183.9 L830.4,200"/><path pathLength="1" d="M821.3,144.7 L813.6,153.8 L806.6,158"/><path pathLength="1" d="M821.3,144.7 L817.8,155.2 L808,159.4"/><circle pathLength="1" cx="821.3" cy="137.7" r="5.6"/><circle pathLength="1" cx="815.7" cy="131.8" r="2"/><circle pathLength="1" cx="818.5" cy="132.1" r="2"/><circle pathLength="1" cx="821.3" cy="132.4" r="2"/><circle pathLength="1" cx="824.1" cy="132.1" r="2"/><circle pathLength="1" cx="826.9" cy="131.8" r="2"/><path pathLength="1" d="M808,159.4 L801.7,157.1"/><ellipse pathLength="1" cx="796.4" cy="155.2" rx="5.6" ry="4.2" transform="rotate(200 796.4 155.2)"/></g>
+<g class="ev-fig" style="--d:0.7s"><path pathLength="1" d="M930,124.2 L930,156.8"/><path pathLength="1" d="M930,156.8 L922.3,177.9 L920.4,200"/><path pathLength="1" d="M930,156.8 L937.7,177.9 L939.6,200"/><path pathLength="1" d="M930,124.2 L918.5,132.8 L914.6,111.7"/><path pathLength="1" d="M930,124.2 L941.5,136.6 L943.4,152"/><circle pathLength="1" cx="930" cy="114.6" r="7.7"/><path pathLength="1" d="M922.7,112.3 A7.7 7.7 0 0 1 937.3,112.3"/><path pathLength="1" d="M924.6,118.4 Q930,126.1 935.4,118.4"/><path pathLength="1" d="M943.4,152 L947,161.7"/><ellipse pathLength="1" cx="949.9" cy="169.9" rx="8.6" ry="6.5" transform="rotate(70 949.9 169.9)"/></g>
+<g class="ev-fig" style="--d:0.8s"><path pathLength="1" d="M1046.6,149.4 L1046,171.2"/><path pathLength="1" d="M1046,171.2 L1039.6,185.3 L1037,200"/><path pathLength="1" d="M1046,171.2 L1053,185.3 L1055,200"/><path pathLength="1" d="M1046.6,149.4 L1037,155.2 L1031.9,160.3"/><path pathLength="1" d="M1046.6,149.4 L1055,156.5 L1063.9,160.3"/><circle pathLength="1" cx="1047.3" cy="143" r="5.1"/><path pathLength="1" d="M1042.4,141.5 A5.1 5.1 0 0 1 1052.1,141.5"/><path pathLength="1" d="M1042.2,143 L1037.6,147.6"/><path pathLength="1" d="M1052.4,143 L1057,147.6"/><path pathLength="1" d="M1063.9,160.3 L1069,158.5"/><ellipse pathLength="1" cx="1073.2" cy="156.9" rx="4.5" ry="3.4" transform="rotate(-20 1073.2 156.9)"/></g>
+<g class="ev-fig" style="--d:0.9s"><path pathLength="1" d="M1150,128.9 L1150,159.5"/><path pathLength="1" d="M1150,159.5 L1141.9,179.3 L1139.2,200"/><path pathLength="1" d="M1150,159.5 L1158.1,179.3 L1160.8,200"/><path pathLength="1" d="M1150,128.9 L1141,140.6 L1153.6,147.8"/><path pathLength="1" d="M1150,128.9 L1160.8,140.6 L1155.4,147.8"/><circle pathLength="1" cx="1150" cy="119.9" r="7.2"/><path pathLength="1" d="M1143.2,117.7 A7.2 7.2 0 0 1 1156.8,117.7"/><circle pathLength="1" cx="1147.1" cy="110.2" r="3"/><path pathLength="1" d="M1145.5,161.3 L1138.3,177.5 L1161.7,177.5 L1154.5,161.3"/><path pathLength="1" d="M1155.4,147.8 L1164.7,151.2"/><ellipse pathLength="1" cx="1172.5" cy="154" rx="8.3" ry="6.2" transform="rotate(20 1172.5 154)"/></g>
+</svg>
+<svg class="everyone-art is-narrow" viewBox="0 0 640 450" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.8">
+<path class="ev-ground" pathLength="1" d="M0 212 H640" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+<path class="ev-ground" pathLength="1" d="M0 438 H640" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+<g class="ev-fig" style="--d:0s"><path pathLength="1" d="M60,161.1 L60,183"/><path pathLength="1" d="M60,183 L54.2,197.2 L52.3,212"/><path pathLength="1" d="M60,183 L65.8,197.2 L67.7,212"/><path pathLength="1" d="M60,161.1 L53.6,169.5 L62.6,174.6"/><path pathLength="1" d="M60,161.1 L67.7,169.5 L63.9,174.6"/><circle pathLength="1" cx="60" cy="154.7" r="5.2"/><path pathLength="1" d="M55.1,153.1 A5.2 5.2 0 0 1 64.9,153.1"/><path pathLength="1" d="M63.9,174.6 L68.4,176.3"/><ellipse pathLength="1" cx="72.1" cy="177.7" rx="4" ry="3" transform="rotate(20 72.1 177.7)"/><circle class="ev-ball" fill="#d9ef3f" stroke="none" cx="70.3" cy="186.2" r="2.9"/></g>
+<g class="ev-fig" style="--d:0.1s"><path pathLength="1" d="M163.1,139.3 L164,170.6"/><path pathLength="1" d="M164,170.6 L154.8,190.8 L152,212"/><path pathLength="1" d="M164,170.6 L172.3,190.8 L175,212"/><path pathLength="1" d="M163.1,139.3 L153,151.3 L143.8,156.8"/><path pathLength="1" d="M163.1,139.3 L158.5,153.1 L145.6,158.6"/><circle pathLength="1" cx="163.1" cy="130.1" r="7.4"/><path pathLength="1" d="M155.7,128.6 A7.4 7.4 0 0 1 169.7,127.2"/><path pathLength="1" d="M156.5,129.4 L146.9,139"/><path pathLength="1" d="M145.6,158.6 L136.3,155.2"/><ellipse pathLength="1" cx="128.5" cy="152.4" rx="8.3" ry="6.2" transform="rotate(200 128.5 152.4)"/></g>
+<g class="ev-fig" style="--d:0.2s"><path pathLength="1" d="M269.2,117.7 L265.7,158"/><path pathLength="1" d="M265.7,158 L261.1,184.4 L258.8,209.7"/><path pathLength="1" d="M265.7,158 L277.2,184.4 L278.4,209.7"/><path pathLength="1" d="M269.2,117.7 L261.1,99.3 L265.7,80.9"/><path pathLength="1" d="M269.2,117.7 L284.1,103.9 L279.5,87.8"/><circle pathLength="1" cx="270.3" cy="106.2" r="9.2"/><path pathLength="1" d="M261.6,103.4 A9.2 9.2 0 0 1 279,103.4"/><path pathLength="1" d="M279.5,87.8 L284.2,74.8"/><ellipse pathLength="1" cx="288.2" cy="64" rx="11.5" ry="8.6" transform="rotate(-70 288.2 64)"/></g>
+<g class="ev-fig" style="--d:0.3s"><path pathLength="1" d="M373.9,140.3 L370.1,168.6"/><path pathLength="1" d="M370.1,168.6 L387.1,172.4 L392.7,187.5"/><circle pathLength="1" cx="366.3" cy="191.3" r="20.7"/><circle pathLength="1" cx="366.3" cy="191.3" r="3.8"/><circle pathLength="1" cx="396.5" cy="205.4" r="6.6"/><path pathLength="1" d="M356.9,166.7 L381.4,166.7 L396.5,189.4"/><path pathLength="1" d="M373.9,140.3 L364.5,153.5 L370.1,164.9"/><path pathLength="1" d="M373.9,140.3 L387.1,149.8 L400.3,153.5"/><circle pathLength="1" cx="373.9" cy="130.9" r="7.5"/><path pathLength="1" d="M366.7,128.6 A7.5 7.5 0 0 1 381.1,128.6"/><path pathLength="1" d="M400.3,153.5 L410.7,150.8"/><ellipse pathLength="1" cx="419.3" cy="148.4" rx="9" ry="6.7" transform="rotate(-15 419.3 148.4)"/></g>
+<g class="ev-fig" style="--d:0.4s"><path pathLength="1" d="M476,128.4 L476,164.4"/><path pathLength="1" d="M476,164.4 L467.5,187.7 L464.4,212"/><path pathLength="1" d="M476,164.4 L486.6,188.7 L491.9,212"/><path pathLength="1" d="M476,128.4 L463.3,140.1 L467.5,150.6"/><path pathLength="1" d="M476,128.4 L490.8,133.7 L497.2,121"/><circle pathLength="1" cx="477.1" cy="117.8" r="8.5"/><path pathLength="1" d="M469,115.3 A8.5 8.5 0 0 1 485.1,115.3"/><circle pathLength="1" cx="473.7" cy="106.4" r="3.6"/><path pathLength="1" d="M470.7,166.5 L462.2,185.5 L489.8,185.5 L481.3,166.5"/><path pathLength="1" d="M497.2,121 L499.3,109.1"/><ellipse pathLength="1" cx="501" cy="99.2" rx="10.1" ry="7.5" transform="rotate(-80 501 99.2)"/></g>
+<g class="ev-fig" style="--d:0.4s"><path pathLength="1" d="M580,132.1 L577,166.5"/><path pathLength="1" d="M580,166.5 L570.9,188.7 L567.9,212"/><path pathLength="1" d="M580,166.5 L589.1,188.7 L592.1,212"/><path pathLength="1" d="M580,132.1 L569.9,145.2 L584,153.3"/><path pathLength="1" d="M580,132.1 L592.1,145.2 L586.1,153.3"/><circle pathLength="1" cx="580" cy="121.9" r="8.1"/><path pathLength="1" d="M571.9,119.9 A8.1 8.1 0 0 1 588.1,119.9"/><path pathLength="1" d="M584.9,119.9 L596.2,121.5"/><path pathLength="1" d="M586.1,153.3 L596.9,157.2"/><ellipse pathLength="1" cx="605.9" cy="160.5" rx="9.6" ry="7.2" transform="rotate(20 605.9 160.5)"/></g>
+<g class="ev-fig" style="--d:0s"><path pathLength="1" d="M61.1,352.6 L60,389.4"/><path pathLength="1" d="M60,389.4 L49.2,413.1 L44.9,438"/><path pathLength="1" d="M60,389.4 L71.9,413.1 L75.1,438"/><path pathLength="1" d="M61.1,352.6 L44.9,362.3 L36.2,371"/><path pathLength="1" d="M61.1,352.6 L75.1,364.5 L90.3,371"/><circle pathLength="1" cx="62.2" cy="341.8" r="8.6"/><path pathLength="1" d="M51.4,349.6 A10.8 10.8 0 1 1 73,349.6 L71.7,362.5"/><path pathLength="1" d="M90.3,371 L102.5,366.5"/><ellipse pathLength="1" cx="112.6" cy="362.8" rx="10.8" ry="8.1" transform="rotate(-20 112.6 362.8)"/></g>
+<g class="ev-fig" style="--d:0.1s"><path pathLength="1" d="M189.2,374.4 L190,401.8"/><path pathLength="1" d="M190,401.8 L182,419.5 L179.5,438"/><path pathLength="1" d="M190,401.8 L197.2,419.5 L199.7,438"/><path pathLength="1" d="M189.2,374.4 L180.3,384.9 L172.3,389.7"/><path pathLength="1" d="M189.2,374.4 L185.2,386.5 L173.9,391.3"/><circle pathLength="1" cx="189.2" cy="366.4" r="6.4"/><circle pathLength="1" cx="182.8" cy="359.6" r="2.3"/><circle pathLength="1" cx="186" cy="359.9" r="2.3"/><circle pathLength="1" cx="189.2" cy="360.2" r="2.3"/><circle pathLength="1" cx="192.4" cy="359.9" r="2.3"/><circle pathLength="1" cx="195.6" cy="359.6" r="2.3"/><path pathLength="1" d="M173.9,391.3 L166.6,388.7"/><ellipse pathLength="1" cx="160.6" cy="386.5" rx="6.4" ry="4.8" transform="rotate(200 160.6 386.5)"/></g>
+<g class="ev-fig" style="--d:0.2s"><path pathLength="1" d="M320,350.8 L320,388.3"/><path pathLength="1" d="M320,388.3 L311.2,412.6 L309,438"/><path pathLength="1" d="M320,388.3 L328.8,412.6 L331,438"/><path pathLength="1" d="M320,350.8 L306.8,360.7 L302.3,336.4"/><path pathLength="1" d="M320,350.8 L333.2,365.1 L335.5,382.8"/><circle pathLength="1" cx="320" cy="339.7" r="8.8"/><path pathLength="1" d="M311.6,337.1 A8.8 8.8 0 0 1 328.4,337.1"/><path pathLength="1" d="M313.8,344.2 Q320,353 326.2,344.2"/><path pathLength="1" d="M335.5,382.8 L339.5,394"/><ellipse pathLength="1" cx="342.9" cy="403.3" rx="9.9" ry="7.5" transform="rotate(70 342.9 403.3)"/></g>
+<g class="ev-fig" style="--d:0.3s"><path pathLength="1" d="M450.7,379.9 L450,404.9"/><path pathLength="1" d="M450,404.9 L442.6,421.1 L439.7,438"/><path pathLength="1" d="M450,404.9 L458.1,421.1 L460.3,438"/><path pathLength="1" d="M450.7,379.9 L439.7,386.5 L433.8,392.4"/><path pathLength="1" d="M450.7,379.9 L460.3,388 L470.6,392.4"/><circle pathLength="1" cx="451.5" cy="372.5" r="5.9"/><path pathLength="1" d="M445.9,370.7 A5.9 5.9 0 0 1 457.1,370.7"/><path pathLength="1" d="M445.6,372.5 L440.3,377.8"/><path pathLength="1" d="M457.4,372.5 L462.7,377.8"/><path pathLength="1" d="M470.6,392.4 L476.4,390.3"/><ellipse pathLength="1" cx="481.3" cy="388.5" rx="5.2" ry="3.9" transform="rotate(-20 481.3 388.5)"/></g>
+<g class="ev-fig" style="--d:0.4s"><path pathLength="1" d="M580,356.2 L580,391.4"/><path pathLength="1" d="M580,391.4 L570.7,414.2 L567.6,438"/><path pathLength="1" d="M580,391.4 L589.3,414.2 L592.4,438"/><path pathLength="1" d="M580,356.2 L569.7,369.7 L584.1,378"/><path pathLength="1" d="M580,356.2 L592.4,369.7 L586.2,378"/><circle pathLength="1" cx="580" cy="345.9" r="8.3"/><path pathLength="1" d="M572.1,343.4 A8.3 8.3 0 0 1 587.9,343.4"/><circle pathLength="1" cx="576.7" cy="334.7" r="3.5"/><path pathLength="1" d="M574.8,393.5 L566.5,412.1 L593.5,412.1 L585.2,393.5"/><path pathLength="1" d="M586.2,378 L596.9,381.9"/><ellipse pathLength="1" cx="605.9" cy="385.1" rx="9.5" ry="7.1" transform="rotate(20 605.9 385.1)"/></g>
+</svg>
+        </div>
       </div>
     </section>
 
@@ -561,7 +599,7 @@
             </p>
             <div class="actions fade" style="--d:.12s">
               <a class="btn btn-invert btn-lg" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase</a>
-              <a class="btn btn-outline btn-lg" href="mailto:isaacleetennis@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme primero</a>
+              <a class="btn btn-outline btn-lg" href="mailto:21euisungisaac@gmail.com?subject=Tennis%20lessons%20(Spanish%20page)" data-mail="Tennis%20lessons%20(Spanish%20page)">Escríbeme primero</a>
             </div>
             <p class="book-note fade" style="--d:.16s">Reservar solo aparta el horario: sin tarjeta ni depósito. Pagas en persona.
               <button class="link-btn" type="button" data-open="bookingModal">Otras formas de contactarme</button></p>
@@ -570,7 +608,7 @@
           <dl class="contact-details fade" style="--d:.18s">
             <div>
               <dt>Correo</dt>
-              <dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd>
+              <dd><a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a></dd>
             </div>
             <div>
               <dt>Mi cancha</dt>
@@ -631,7 +669,7 @@
       <p class="footer-links">
         <a href="tips/">Consejos de práctica</a>
         <a href="/portfolio/">Portafolio profesional</a>
-        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <a href="/admin/">Admin</a>
       </p>
     </div>
@@ -645,13 +683,13 @@
         El correo es lo más rápido. Si prefieres escribirlo todo, el formulario pregunta por tu nivel, tus objetivos y tu disponibilidad.
       </p>
       <dl class="contact-details modal-details">
-        <div><dt>Correo</dt><dd><a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a></dd></div>
+        <div><dt>Correo</dt><dd><a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a></dd></div>
       </dl>
       <div class="actions">
         <a class="btn btn-primary"
            href="https://docs.google.com/forms/d/e/1FAIpQLSdlKDW_YhhF3B93UG77lXCi8AlWbZAEvEwlXJ3_dHlmn4HmRQ/viewform"
            target="_blank" rel="noopener noreferrer">Abrir el formulario</a>
-        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="isaacleetennis@gmail.com">Copiar correo</button>
+        <button class="btn btn-quiet" type="button" id="copyEmail" data-email="21euisungisaac@gmail.com">Copiar correo</button>
       </div>
     </div>
   </dialog>
@@ -672,7 +710,7 @@
       </ul>
       <div class="actions">
         <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase particular</a>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Private%20lessons%20(Spanish%20page)" data-mail="Private%20lessons%20(Spanish%20page)">Escríbeme</a>
+        <a class="btn btn-quiet" href="mailto:21euisungisaac@gmail.com?subject=Private%20lessons%20(Spanish%20page)" data-mail="Private%20lessons%20(Spanish%20page)">Escríbeme</a>
       </div>
     </div>
   </dialog>
@@ -693,7 +731,7 @@
       </ul>
       <div class="actions">
         <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una clase semiprivada</a>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Semi-private%20lessons%20(Spanish%20page)" data-mail="Semi-private%20lessons%20(Spanish%20page)">Escríbeme</a>
+        <a class="btn btn-quiet" href="mailto:21euisungisaac@gmail.com?subject=Semi-private%20lessons%20(Spanish%20page)" data-mail="Semi-private%20lessons%20(Spanish%20page)">Escríbeme</a>
       </div>
     </div>
   </dialog>
@@ -712,7 +750,7 @@
       </ul>
       <div class="actions">
         <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-close data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}'>Reservar una sesión de peloteo</a>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Hitting%20partner%20sessions%20(Spanish%20page)" data-mail="Hitting%20partner%20sessions%20(Spanish%20page)">Escríbeme</a>
+        <a class="btn btn-quiet" href="mailto:21euisungisaac@gmail.com?subject=Hitting%20partner%20sessions%20(Spanish%20page)" data-mail="Hitting%20partner%20sessions%20(Spanish%20page)">Escríbeme</a>
       </div>
     </div>
   </dialog>
@@ -731,7 +769,7 @@
       </ul>
       <div class="actions">
         <button class="btn btn-primary" type="button" data-close data-open="clinicList">Apúntate a una clínica</button>
-        <a class="btn btn-quiet" href="mailto:isaacleetennis@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Escríbeme</a>
+        <a class="btn btn-quiet" href="mailto:21euisungisaac@gmail.com?subject=Adult%20clinics%20(Spanish%20page)" data-mail="Adult%20clinics%20(Spanish%20page)">Escríbeme</a>
       </div>
     </div>
   </dialog>
@@ -854,7 +892,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"nextOpen":"Próxima hora libre: {when}","openHours":"{n} horas libres esta semana","openHour":"1 hora libre esta semana","courtDry":"Hoy la cancha está seca y a {hi}°F.","courtRain":"Hoy es probable que llueva. Si hay que mover una clase, te escribo.","courtRainSoon":"Se espera lluvia el {day}; si hay que mover una clase, te escribo.","copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script>window.I18N = {"themeDark":"Cambiar a modo oscuro","themeLight":"Cambiar a modo claro","nextOpen":"Próxima hora libre: {when}","openHours":"{n} horas libres esta semana","openHour":"1 hora libre esta semana","courtDry":"Hoy la cancha está seca y a {hi}°F.","courtRain":"Hoy es probable que llueva. Si hay que mover una clase, te escribo.","courtRainSoon":"Se espera lluvia el {day}; si hay que mover una clase, te escribo.","copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
   <script src="/tennis.js?v=20261010" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -862,11 +900,12 @@
   <script src="/hero.js?v=1" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/booked.js?v=1" defer></script>
-  <script src="/motion-court.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=1" defer></script>
-  <script src="/motion-transitions.js?v=1" defer></script>
-  <script src="/features.js?v=1" defer></script>
-  <script src="/ballo.js?v=3" defer></script>
-  <script src="/motion.js?v=4" defer></script>
+  <script src="/motion-court.js?v=2" defer></script>
+  <script src="/motion-reveal.js?v=2" defer></script>
+  <script src="/motion-transitions.js?v=2" defer></script>
+  <script src="/features.js?v=2" defer></script>
+  <script src="/arrival.js?v=1" defer></script>
+  <script src="/ballo.js?v=4" defer></script>
+  <script src="/motion.js?v=5" defer></script>
 </body>
 </html>

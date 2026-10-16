@@ -119,7 +119,15 @@
     var settle = function () { if (head) head.classList.add("is-settled"); };
     if (a) a.onfinish = settle; else settle();
   }
-  if (head) {
+  if (head && document.documentElement.classList.contains("arrival-serve")) {
+    /* The arrival (arrival.js) is serving the ball up to here: the drop
+       starts when it arrives (or after four seconds, whatever happens). */
+    var entered = false;
+    ball.style.opacity = "0";                   // the served ball is the only ball until it lands
+    var once = function () { if (!entered) { entered = true; ball.style.opacity = ""; enter(); } };
+    window.addEventListener("lee:arrival-ball", once, { once: true });
+    window.setTimeout(once, 4200);
+  } else if (head) {
     if (head.classList.contains("is-in")) window.setTimeout(enter, 700);
     else new MutationObserver(function (_, obs) {
       if (!head.classList.contains("is-in")) return;

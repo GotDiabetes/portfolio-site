@@ -43,11 +43,13 @@
   <link rel="stylesheet" href="/tennis.css?v=20261009" />
   <link rel="stylesheet" href="/tips-demo.css?v=1" />
   <link rel="stylesheet" href="/elbow.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=1" />
-  <link rel="stylesheet" href="/motion-transitions.css?v=1" />
-  <link rel="stylesheet" href="/features.css?v=1" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-transitions.css?v=2" />
+  <link rel="stylesheet" href="/features.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
+  <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
 
   <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
        popup; every one of them is also a real link to the same event on
@@ -68,7 +70,7 @@
         Cal("init", "lesson", { origin: "https://cal.com" });
         /* The theme is pinned. The page has one theme, and a dark calendar over
            a white page is the one thing a dark-mode OS must not do here. */
-        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
@@ -130,6 +132,11 @@
           <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
         </div>
       </details>
+
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="Book a lesson">
         <span class="cta-full">Book a lesson</span><span class="cta-short" aria-hidden="true">Book</span>
@@ -322,7 +329,7 @@
       <p class="footer-links">
         <a href="/">Private tennis lessons</a>
         <a href="/portfolio/">Career portfolio</a>
-        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <a href="/admin/">Admin</a>
       </p>
     </div>
@@ -333,8 +340,8 @@
   <script src="/booked.js?v=1" defer></script>
   <script src="/tips-demo.js?v=1" defer></script>
   <script src="/elbow.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=1" defer></script>
-  <script src="/motion-transitions.js?v=1" defer></script>
-  <script src="/features.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=2" defer></script>
+  <script src="/motion-transitions.js?v=2" defer></script>
+  <script src="/features.js?v=2" defer></script>
 </body>
 </html>

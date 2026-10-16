@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    themeDark: "切換到深色模式",
+    themeLight: "切換到淺色模式",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "最近的空檔：{when}",
     openHours: "本週還有 {n} 個空閒小時",
@@ -104,8 +106,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `Isaac Lee 在課堂上說明訓練內容`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `網球屬於每一個人。只要練習有目標，幾乎每位球員都會比自己預期的進步更快。`],
+    [`Tennis is for everyone.`, `網球屬於每一個人。`],
 
     // lessons
     [`Four ways to work together`, `四種上課方式`],
@@ -406,6 +407,9 @@ export default {
     [`>The gate: I meet you here<`, `>大門：我在這裡接你<`],
     [`>The courts<`, `>球場<`],
     [`>Not to scale<`, `>示意圖，非按比例<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `切換到深色模式`],
   ],
 
   ask: {
@@ -553,8 +557,8 @@ export default {
         next: ["你教球多久了？", "你的教學風格是什麼？", "怎麼預約？"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "寄信最快：isaacleetennis@gmail.com。告訴我你的程度、正在練的內容和你什麼時候有空。",
+        src: "d5bfk0",
+        answer: "寄信最快：21euisungisaac@gmail.com。告訴我你的程度、正在練的內容和你什麼時候有空。",
         next: ["你什麼時候有空？", "怎麼預約？"],
       },
       portfolio: {

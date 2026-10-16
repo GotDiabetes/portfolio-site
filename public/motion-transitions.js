@@ -48,6 +48,9 @@
 
   window.leeMorph = {
     open: function (dlg, opener, show) {
+      /* Only the popups with a card inside grow; the photo lightbox has
+         its own zoom (motion.js flies the picture out of its thumbnail). */
+      if (!dlg.querySelector(".modal-card")) return false;
       var src = sourceFor(opener);
       if (!src) return false;
       var from = src.getBoundingClientRect();

@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    themeDark: "ダークモードに切り替え",
+    themeLight: "ライトモードに切り替え",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "次の空き：{when}",
     openHours: "今週の空きは{n}時間",
@@ -103,8 +105,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `レッスン中に練習メニューを指示する Isaac Lee`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `テニスはすべての人のものです。練習に目的が生まれれば、ほとんどの選手が自分の予想より早く上達します。`],
+    [`Tennis is for everyone.`, `テニスはすべての人のものです。`],
 
     // lessons
     [`Four ways to work together`, `4つのレッスンスタイル`],
@@ -405,6 +406,9 @@ export default {
     [`>The gate: I meet you here<`, `>ゲート：ここでお迎えします<`],
     [`>The courts<`, `>テニスコート<`],
     [`>Not to scale<`, `>縮尺なし<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `ダークモードに切り替え`],
   ],
 
   ask: {
@@ -552,8 +556,8 @@ export default {
         next: ["コーチ歴はどのくらいですか？", "指導スタイルは？", "予約の方法は？"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "メールがいちばん早いです：isaacleetennis@gmail.com。レベル、取り組んでいること、ご都合のよい時間を教えてください。",
+        src: "d5bfk0",
+        answer: "メールがいちばん早いです：21euisungisaac@gmail.com。レベル、取り組んでいること、ご都合のよい時間を教えてください。",
         next: ["空いている時間は？", "予約の方法は？"],
       },
       portfolio: {

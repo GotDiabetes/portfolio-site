@@ -36,11 +36,13 @@
   <link rel="stylesheet" href="/tennis.css?v=20261009" />
   <link rel="stylesheet" href="/tips-demo.css?v=1" />
   <link rel="stylesheet" href="/elbow.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=1" />
-  <link rel="stylesheet" href="/motion-transitions.css?v=1" />
-  <link rel="stylesheet" href="/features.css?v=1" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-transitions.css?v=2" />
+  <link rel="stylesheet" href="/features.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
+  <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
 
   <script>
     (function () {
@@ -52,7 +54,7 @@
         Cal("init", "lesson", { origin: "https://cal.com" });
         /* The theme is pinned. The page has one theme, and a dark calendar over
            a white page is the one thing a dark-mode OS must not do here. */
-        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
@@ -112,6 +114,11 @@
           <a href="/fa/tips/" hreflang="fa" lang="fa" aria-current="page">فارسی</a>
         </div>
       </details>
+
+      <button class="theme-toggle" type="button" aria-label="تغییر به حالت تاریک" data-theme-toggle>
+        <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="رزرو کلاس">
         <span class="cta-full">رزرو کلاس</span><span class="cta-short" aria-hidden="true">رزرو</span>
@@ -289,20 +296,20 @@
       <p class="footer-links">
         <a href="/fa/">کلاس خصوصی تنیس</a>
         <a href="/portfolio/">نمونه‌کار حرفه‌ای</a>
-        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <a href="/admin/">Admin</a>
       </p>
     </div>
   </footer>
 
-  <script>window.I18N = {"nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به {hi}°F می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
+  <script>window.I18N = {"themeDark":"تغییر به حالت تاریک","themeLight":"تغییر به حالت روشن","nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به {hi}°F می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
   <script src="/tennis.js?v=20261008" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/tips-demo.js?v=1" defer></script>
   <script src="/elbow.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=1" defer></script>
-  <script src="/motion-transitions.js?v=1" defer></script>
-  <script src="/features.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=2" defer></script>
+  <script src="/motion-transitions.js?v=2" defer></script>
+  <script src="/features.js?v=2" defer></script>
 </body>
 </html>

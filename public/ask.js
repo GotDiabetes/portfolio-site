@@ -47,7 +47,7 @@
   var input = root.querySelector(".ask-input");
   var send = root.querySelector(".ask-send");
 
-  var MAIL_TO = "isaacleetennis@gmail.com";
+  var MAIL_TO = "21euisungisaac@gmail.com";
   var SUGGESTIONS = T.askSuggestions || ["How much are lessons?", "Where are lessons?", "How do I book?", "What should I work on?"];
   var DOWN = T.askDown || "The chat isn't answering right now. Email me and I'll get back to you.";
   var EMAIL = { type: "email", subject: T.mailSubject || "Tennis lessons", label: T.emailMe || "Email me" };

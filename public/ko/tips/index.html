@@ -36,11 +36,13 @@
   <link rel="stylesheet" href="/tennis.css?v=20261009" />
   <link rel="stylesheet" href="/tips-demo.css?v=1" />
   <link rel="stylesheet" href="/elbow.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=1" />
-  <link rel="stylesheet" href="/motion-transitions.css?v=1" />
-  <link rel="stylesheet" href="/features.css?v=1" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-transitions.css?v=2" />
+  <link rel="stylesheet" href="/features.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
+  <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
 
   <script>
     (function () {
@@ -52,7 +54,7 @@
         Cal("init", "lesson", { origin: "https://cal.com" });
         /* The theme is pinned. The page has one theme, and a dark calendar over
            a white page is the one thing a dark-mode OS must not do here. */
-        Cal.ns.lesson("ui", { theme: "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
+        Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
@@ -112,6 +114,11 @@
           <a href="/fa/tips/" hreflang="fa" lang="fa">فارسی</a>
         </div>
       </details>
+
+      <button class="theme-toggle" type="button" aria-label="다크 모드로 바꾸기" data-theme-toggle>
+        <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="레슨 예약">
         <span class="cta-full">레슨 예약</span><span class="cta-short" aria-hidden="true">예약</span>
@@ -289,20 +296,20 @@
       <p class="footer-links">
         <a href="/ko/">개인 테니스 레슨</a>
         <a href="/portfolio/">커리어 포트폴리오</a>
-        <a href="mailto:isaacleetennis@gmail.com">isaacleetennis@gmail.com</a>
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <a href="/admin/">Admin</a>
       </p>
     </div>
   </footer>
 
-  <script>window.I18N = {"nextOpen":"다음 빈 시간: {when}","openHours":"이번 주 빈 시간 {n}시간","openHour":"이번 주 빈 시간 1시간","courtDry":"오늘 코트는 맑고 {hi}°F예요.","courtRain":"오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.","courtRainSoon":"{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.","copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script>window.I18N = {"themeDark":"다크 모드로 바꾸기","themeLight":"라이트 모드로 바꾸기","nextOpen":"다음 빈 시간: {when}","openHours":"이번 주 빈 시간 {n}시간","openHour":"이번 주 빈 시간 1시간","courtDry":"오늘 코트는 맑고 {hi}°F예요.","courtRain":"오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.","courtRainSoon":"{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.","copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
   <script src="/tennis.js?v=20261008" defer></script>
   <script src="/bookfx.js?v=15" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/tips-demo.js?v=1" defer></script>
   <script src="/elbow.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=1" defer></script>
-  <script src="/motion-transitions.js?v=1" defer></script>
-  <script src="/features.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=2" defer></script>
+  <script src="/motion-transitions.js?v=2" defer></script>
+  <script src="/features.js?v=2" defer></script>
 </body>
 </html>

@@ -270,6 +270,17 @@ overwritten on the next build. One dictionary covers all four pages.
   which grows a popup out of the card that opened it, is what tennis.js's
   `openDialog` hands over to). `features.css/js` holds the press ripple on
   every button.
+- **The arrival** (`arrival.js`, front page): the court drawn behind the
+  hero on every load and, once per session on wide screens, the player's
+  serve that lands the ball in the headline (ballo.js waits for it when
+  `<html>` has `arrival-serve`).
+- **Dark mode** (`dark.css`, `features.js`): tokens for `[data-theme=dark]`
+  plus the few rules that said white or black out loud; a line in the head
+  of index.html and tips/index.html sets the attribute before paint from
+  localStorage `leeTheme`, else the OS setting; the header's sun/moon
+  switch saves the choice; the Cal.com popup follows. Other pages (admin,
+  recap, sheet, flyer, 404) stay light. **The tilt and glow** are in
+  `features.css/js` (fine pointers only).
 - **Live lines** (`features.js`, the hero): the next open private lesson
   and how many hours are open this week, from the Worker's `GET /slots`
   (Cal.com's public availability feed for the booking page, kept five

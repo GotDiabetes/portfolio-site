@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    themeDark: "다크 모드로 바꾸기",
+    themeLight: "라이트 모드로 바꾸기",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "다음 빈 시간: {when}",
     openHours: "이번 주 빈 시간 {n}시간",
@@ -104,8 +106,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `레슨 중 드릴을 지시하는 Isaac Lee`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `테니스는 모두를 위한 운동이에요. 의식적으로 연습하기 시작하면 거의 모든 선수가 생각보다 빨리 늘어요.`],
+    [`Tennis is for everyone.`, `테니스는 모두를 위한 운동이에요.`],
 
     // lessons
     [`Four ways to work together`, `함께하는 네 가지 방법`],
@@ -406,6 +407,9 @@ export default {
     [`>The gate: I meet you here<`, `>게이트: 여기서 만나요<`],
     [`>The courts<`, `>테니스 코트<`],
     [`>Not to scale<`, `>축척 없음<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `다크 모드로 바꾸기`],
   ],
 
   ask: {
@@ -553,8 +557,8 @@ export default {
         next: ["코칭은 얼마나 하셨어요?", "코칭 스타일이 어떤가요?", "예약은 어떻게 해요?"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "이메일이 가장 빨라요: isaacleetennis@gmail.com. 실력과 연습하고 싶은 부분, 가능한 시간을 알려 주세요.",
+        src: "d5bfk0",
+        answer: "이메일이 가장 빨라요: 21euisungisaac@gmail.com. 실력과 연습하고 싶은 부분, 가능한 시간을 알려 주세요.",
         next: ["언제 시간이 돼요?", "예약은 어떻게 해요?"],
       },
       portfolio: {

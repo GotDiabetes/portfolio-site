@@ -57,7 +57,7 @@ const SITE = "https://leetennisco.com";
 /* Stay in English everywhere: names, the brand, the address. */
 const KEEP = [
   "Lee Tennis Co.", "Isaac Lee", "Brice Krizman", "Albert Kim",
-  "isaacleetennis@gmail.com", "Grip N Rip", "LifeSport Libertyville", "RSPA",
+  "21euisungisaac@gmail.com", "Grip N Rip", "LifeSport Libertyville", "RSPA",
   "leetennisco.com", "Admin",   // the footer link to Isaac's own pages stays English
   "Jamboree Road", "Via Lucca",  // the streets on the court map
   // the language menu names every language in itself

@@ -117,6 +117,54 @@
     });
   }
 
+  /* ------------------------------------------- 5. Dark mode switch -- */
+  var toggle = document.querySelector("[data-theme-toggle]");
+  var LABELS = { dark: T.themeDark || "Switch to dark mode", light: T.themeLight || "Switch to light mode" };
+  function applyTheme(dark, remember) {
+    if (dark) root.setAttribute("data-theme", "dark"); else root.removeAttribute("data-theme");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#141413" : "#ffffff");
+    if (toggle) toggle.setAttribute("aria-label", dark ? LABELS.light : LABELS.dark);
+    /* The calendar popup follows: its links carry the theme, and a loaded
+       embed is told directly. */
+    Array.prototype.forEach.call(document.querySelectorAll("[data-cal-config]"), function (el) {
+      el.setAttribute("data-cal-config", el.getAttribute("data-cal-config").replace(/"theme":"(light|dark)"/, '"theme":"' + (dark ? "dark" : "light") + '"'));
+    });
+    try { if (window.Cal && Cal.ns && Cal.ns.lesson) Cal.ns.lesson("ui", { theme: dark ? "dark" : "light" }); } catch (e) {}
+    if (remember) { try { localStorage.setItem("leeTheme", dark ? "dark" : "light"); } catch (e) {} }
+  }
+  applyTheme(root.getAttribute("data-theme") === "dark", false);
+  if (toggle) toggle.addEventListener("click", function () { applyTheme(root.getAttribute("data-theme") !== "dark", true); });
+  if (window.matchMedia) {
+    var scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    var follow = function () { var saved = null; try { saved = localStorage.getItem("leeTheme"); } catch (e) {} if (!saved) applyTheme(scheme.matches, false); };
+    if (scheme.addEventListener) scheme.addEventListener("change", follow); else if (scheme.addListener) scheme.addListener(follow);
+  }
+
+  /* ------------------------------------------- 6. Cards tilt, light -- */
+  var fine = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (fine && !reduced) {
+    Array.prototype.forEach.call(document.querySelectorAll(".lesson, .review"), function (card) {
+      var light = document.createElement("i");
+      light.className = "tilt-light";
+      light.setAttribute("aria-hidden", "true");
+      card.appendChild(light);
+      var raf = 0, ev = null;
+      function paint() {
+        raf = 0;
+        var r = card.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
+        card.style.setProperty("--ry", ((x - .5) * 9).toFixed(2) + "deg");
+        card.style.setProperty("--rx", ((.5 - y) * 7).toFixed(2) + "deg");
+        card.style.setProperty("--lx", (x * 100).toFixed(1) + "%");
+        card.style.setProperty("--ly", (y * 100).toFixed(1) + "%");
+      }
+      card.addEventListener("pointerenter", function (e) { if (e.pointerType !== "mouse") return; card.classList.add("is-tilt"); ev = e; paint(); });
+      card.addEventListener("pointermove", function (e) { if (e.pointerType !== "mouse" || !card.classList.contains("is-tilt")) return; ev = e; if (!raf) raf = window.requestAnimationFrame(paint); });
+      card.addEventListener("pointerleave", function () { card.classList.remove("is-tilt"); card.style.removeProperty("--rx"); card.style.removeProperty("--ry"); });
+    });
+  }
+
   /* ------------------------------------------- 4. The intro video -- */
   var fig = document.querySelector(".intro-video[data-video]");
   if (fig && fig.getAttribute("data-video")) {

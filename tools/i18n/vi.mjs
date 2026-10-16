@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    themeDark: "Chuyển sang chế độ tối",
+    themeLight: "Chuyển sang chế độ sáng",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "Giờ trống gần nhất: {when}",
     openHours: "{n} giờ trống trong tuần này",
@@ -103,8 +105,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `Isaac Lee hướng dẫn bài tập trong một buổi học`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `Tennis dành cho tất cả mọi người. Gần như ai cũng tiến bộ nhanh hơn mình nghĩ khi luyện tập có chủ đích.`],
+    [`Tennis is for everyone.`, `Tennis dành cho tất cả mọi người.`],
 
     // lessons
     [`Four ways to work together`, `Bốn cách học cùng tôi`],
@@ -402,6 +403,9 @@ export default {
     [`>The gate: I meet you here<`, `>Cổng: tôi đón bạn ở đây<`],
     [`>The courts<`, `>Sân tennis<`],
     [`>Not to scale<`, `>Không theo tỷ lệ<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `Chuyển sang chế độ tối`],
   ],
 
   ask: {
@@ -549,8 +553,8 @@ export default {
         next: ["Bạn dạy được bao lâu rồi?", "Phong cách dạy của bạn thế nào?", "Đặt lịch thế nào?"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "Email là nhanh nhất: isaacleetennis@gmail.com. Hãy cho tôi biết trình độ, điều bạn đang luyện và khi nào bạn rảnh.",
+        src: "d5bfk0",
+        answer: "Email là nhanh nhất: 21euisungisaac@gmail.com. Hãy cho tôi biết trình độ, điều bạn đang luyện và khi nào bạn rảnh.",
         next: ["Khi nào bạn rảnh?", "Đặt lịch thế nào?"],
       },
       portfolio: {

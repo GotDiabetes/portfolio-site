@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    themeDark: "Cambiar a modo oscuro",
+    themeLight: "Cambiar a modo claro",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "Próxima hora libre: {when}",
     openHours: "{n} horas libres esta semana",
@@ -110,8 +112,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `Isaac Lee indicando un ejercicio durante una clase`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `El tenis es para todos. Casi todos los jugadores mejoran más rápido de lo que esperan cuando la práctica es deliberada.`],
+    [`Tennis is for everyone.`, `El tenis es para todos.`],
 
     // lessons
     [`Four ways to work together`, `Cuatro formas de trabajar juntos`],
@@ -410,6 +411,9 @@ export default {
     [`>The gate: I meet you here<`, `>La entrada: aquí te espero<`],
     [`>The courts<`, `>Las canchas<`],
     [`>Not to scale<`, `>Sin escala<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `Cambiar a modo oscuro`],
   ],
 
   ask: {
@@ -557,8 +561,8 @@ export default {
         next: ["¿Cuánto tiempo llevas entrenando?", "¿Cómo es tu estilo de enseñanza?", "¿Cómo reservo?"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "El correo es lo más rápido: isaacleetennis@gmail.com. Cuéntame tu nivel, en qué estás trabajando y cuándo puedes.",
+        src: "d5bfk0",
+        answer: "El correo es lo más rápido: 21euisungisaac@gmail.com. Cuéntame tu nivel, en qué estás trabajando y cuándo puedes.",
         next: ["¿Cuándo tienes disponibilidad?", "¿Cómo reservo?"],
       },
       portfolio: {

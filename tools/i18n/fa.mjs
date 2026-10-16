@@ -15,6 +15,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    themeDark: "تغییر به حالت تاریک",
+    themeLight: "تغییر به حالت روشن",
     // the live lines under the hero's Book button (features.js)
     nextOpen: "نزدیک‌ترین وقت خالی: {when}",
     openHours: "{n} ساعت خالی در این هفته",
@@ -107,8 +109,7 @@ export default {
     [`Isaac Lee calling out a drill during a lesson`, `Isaac Lee در حال توضیح یک تمرین در کلاس`],
 
     // statement
-    [`Tennis is for everyone. Almost every player improves faster than they expect once the practice is deliberate.`,
-     `تنیس برای همه است. تقریباً هر بازیکنی وقتی تمرینش هدفمند شود، سریع‌تر از آنچه انتظار دارد پیشرفت می‌کند.`],
+    [`Tennis is for everyone.`, `تنیس برای همه است.`],
 
     // lessons
     [`Four ways to work together`, `چهار راه برای کار با هم`],
@@ -409,6 +410,9 @@ export default {
     [`>The gate: I meet you here<`, `>در ورودی: اینجا می‌بینمتان<`],
     [`>The courts<`, `>زمین‌ها<`],
     [`>Not to scale<`, `>بدون مقیاس<`],
+
+    // the dark-mode switch
+    [`Switch to dark mode`, `تغییر به حالت تاریک`],
   ],
 
   ask: {
@@ -556,8 +560,8 @@ export default {
         next: ["چند وقت است مربی‌گری می‌کنید؟", "سبک مربی‌گری‌تان چیست؟", "چطور وقت رزرو کنم؟"],
       },
       contact: {
-        src: "13vjvpw",
-        answer: "ایمیل سریع‌ترین راه است: isaacleetennis@gmail.com. سطحتان، چیزی که روی آن کار می‌کنید و زمان‌های آزادتان را بنویسید.",
+        src: "d5bfk0",
+        answer: "ایمیل سریع‌ترین راه است: 21euisungisaac@gmail.com. سطحتان، چیزی که روی آن کار می‌کنید و زمان‌های آزادتان را بنویسید.",
         next: ["چه زمان‌هایی وقت دارید؟", "چطور وقت رزرو کنم؟"],
       },
       portfolio: {

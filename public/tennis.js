@@ -271,7 +271,7 @@
      registered — on Windows that is usually Outlook, even for people who have
      never opened it. Modified clicks are left alone so ctrl/cmd-click, middle
      click and "open in new tab" keep doing what the browser normally does. */
-  var MAIL_TO = "isaacleetennis@gmail.com";
+  var MAIL_TO = "21euisungisaac@gmail.com";
 
   document.addEventListener("click", function (e) {
     var link = e.target.closest && e.target.closest("[data-mail]");
