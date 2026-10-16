@@ -33,21 +33,18 @@
 /* one row on wide screens, two rows (bigger people) on phones */
 .everyone-art.is-narrow { display: none; }
 @media (max-width: 640px) { .everyone-art.is-wide { display: none; } .everyone-art.is-narrow { display: block; } }
-.everyone-art path, .everyone-art circle, .everyone-art ellipse { fill: none; stroke: #fff; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
-.everyone-art .ev-ground { stroke: rgba(255, 255, 255, .3); stroke-width: 1; }
-.everyone-art .ev-ball { fill: #d9ef3f; stroke: none; }
+.everyone-art .ev-ground { fill: none; stroke: rgba(255, 255, 255, .3); stroke-width: 1; }
+.everyone-art .ev-string { opacity: .55; }
+/* The people rise into place one after another as the band arrives, and
+   step back out of sight once it has gone, so they arrive again. */
 .js .everyone.fade { opacity: 1; transform: none; }
-.js .everyone.fade .ev-fig path, .js .everyone.fade .ev-fig circle, .js .everyone.fade .ev-fig ellipse {
-  stroke-dasharray: 1; stroke-dashoffset: 1;
-  transition: stroke-dashoffset .9s cubic-bezier(.65, 0, .35, 1) var(--d, 0s);
-}
-.js .everyone.fade .ev-ground { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.65, 0, .35, 1); }
-.js .everyone.fade .ev-ball { stroke-dasharray: none; opacity: 0; transition: opacity .5s var(--ease) calc(var(--d, 0s) + .6s); }
-.js .everyone.fade.is-in .ev-fig path, .js .everyone.fade.is-in .ev-fig circle, .js .everyone.fade.is-in .ev-fig ellipse, .js .everyone.fade.is-in .ev-ground { stroke-dashoffset: 0; }
-.js .everyone.fade.is-in .ev-ball { opacity: 1; }
+.js .everyone.fade .ev-fig { opacity: 0; transform: translateY(14px); transition: opacity .55s var(--ease) var(--d, 0s), transform .8s var(--ease) var(--d, 0s); }
+.js .everyone.fade.is-in .ev-fig { opacity: 1; transform: none; }
+.js .everyone.fade .ev-ground { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s cubic-bezier(.65, 0, .35, 1); }
+.js .everyone.fade.is-in .ev-ground { stroke-dashoffset: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .js .everyone.fade .ev-fig path, .js .everyone.fade .ev-fig circle, .js .everyone.fade .ev-fig ellipse, .js .everyone.fade .ev-ground { transition: none; stroke-dashoffset: 0; }
-  .js .everyone.fade .ev-ball { opacity: 1; transition: none; }
+  .js .everyone.fade .ev-fig { opacity: 1; transform: none; transition: none; }
+  .js .everyone.fade .ev-ground { transition: none; stroke-dashoffset: 0; }
 }
 
 /* --- Cards tilt toward the pointer and catch a yellow light (features.js

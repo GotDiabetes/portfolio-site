@@ -39,11 +39,11 @@
   if (!("IntersectionObserver" in window)) {
     revealAll();
   } else {
-    /* Reveal once. It used to run in both directions, fading blocks back out
-       as they left the viewport, and scrolling up to re-read a price replayed
-       the whole entrance. A reading page should not animate again because
-       the reader went back. The observer lets go of each block after its
-       first arrival.
+    /* Reveal in both directions (Isaac's choice, October 2026): a block
+       arrives when it comes into view and, once it has left the viewport
+       completely, is reset so it arrives again on the way back. Only a
+       fully hidden block is reset, so nothing flickers at the edges while
+       someone is reading it.
 
        The margin is zero rather than the -5% it was: on a short laptop
        viewport that strip held back the last few lines of whatever section
@@ -51,12 +51,14 @@
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          observer.unobserve(entry.target);
+          if (entry.intersectionRatio >= 0.05 || (entry.isIntersecting && entry.target.classList.contains("is-in"))) {
+            entry.target.classList.add("is-in");
+          } else if (!entry.isIntersecting) {
+            entry.target.classList.remove("is-in");
+          }
         });
       },
-      { threshold: 0.05, rootMargin: "0px" }
+      { threshold: [0, 0.05], rootMargin: "0px" }
     );
     fadeEls.forEach(function (el) { observer.observe(el); });
 
