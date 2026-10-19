@@ -1,0 +1,262 @@
+/* ============================================================================
+   More, October 19 2026 (more.js has the list): the motion switch and its
+   kill-switch, the score, the magnetic buttons, the photo parallax and net
+   wipe, the stacked lesson cards on phones, the court, the package
+   builder, the racket spin, the photo pile, the floodlight, the daylight
+   bar, the lesson card, the shortcuts list, before-and-after, numbers.
+   ========================================================================== */
+
+/* --- U4. Reduced motion by choice. The head script adds .reduce-motion
+       from the stored preference (and answers every script's reduced-
+       motion query with "yes"); this is the stylesheet half: nothing
+       moves, everything is already where it ends. */
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
+  animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important;
+  animation-timeline: auto !important;
+  transition-duration: .001ms !important; transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+.motion-toggle .motion-off { display: none; }
+html.reduce-motion .motion-toggle .motion-off { display: block; }
+html.reduce-motion .motion-toggle .motion-on { display: none; }
+.motion-toggle[aria-pressed="true"] { border-color: var(--text); }
+
+/* --- M5. The score in the header: a small pill that counts Love, 15,
+       30, 40, Game with the way down the page. Desktop only, like the nav. */
+.score {
+  display: inline-grid; place-items: center; min-width: 3.4em; height: 28px; padding: 0 .55em;
+  border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); overflow: hidden; white-space: nowrap;
+}
+.score[hidden] { display: none; }
+.score .score-val { display: block; transition: transform .15s var(--ease), opacity .15s var(--ease); }
+.score.is-flip .score-val { transform: translateY(-110%); opacity: 0; }
+@media (max-width: 1100px) { .score { display: none; } }
+
+/* --- M1. Magnetic buttons: the pull follows at once, the snap back
+       takes the half second the buttons already have. */
+.btn-primary.is-near, .btn-invert.is-near, .nav-book.is-near {
+  transition-duration: var(--dur-ui), var(--dur-ui), var(--dur-ui), var(--dur-ui), .12s, .4s;
+}
+
+/* --- M3 lives in tennis.css (.drop-word): the headline's words land
+       with a bounce. */
+
+/* --- M2. The photos: each drifts slower than the page as it passes
+       (a scroll-driven move of the image inside its frame) and, the
+       first time it appears, the net mesh over it dissolves after the
+       frame's own wipe. Not in the pile, where the photos are moved by
+       hand. */
+.photo-strip:not(.is-pile) .photo picture, .photo-strip:not(.is-pile) .photo img { display: block; }
+@supports (animation-timeline: view()) {
+  .photo-strip:not(.is-pile) .photo img {
+    scale: 1.14;
+    animation: photoDrift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes photoDrift { from { translate: 0 -6%; } to { translate: 0 6%; } }
+}
+.photo::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .55) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .55) 0 1px, transparent 1px 11px);
+  opacity: 0; transform: scale(1);
+}
+.js .photo-strip.fade:not(.is-in) .photo::after { opacity: .9; }
+.js .photo-strip.fade.is-in .photo::after { opacity: 0; transform: scale(1.6); transition: opacity .9s var(--ease) calc(var(--d, 0s) + .55s), transform 1.3s var(--ease) calc(var(--d, 0s) + .55s); }
+@media (prefers-reduced-motion: reduce) {
+  .photo-strip:not(.is-pile) .photo img { animation: none; scale: 1; }
+  .photo::after { display: none; }
+}
+
+/* --- M4. On a phone the four lesson cards stack: each sticks under the
+       header as the next slides up over it. */
+@media (max-width: 940px) {
+  .js .lesson-list { --stack-top: 78px; }
+  .js .lesson-list .lesson { position: sticky; top: calc(var(--stack-top) + var(--i, 0) * .75rem); box-shadow: 0 -8px 28px rgba(0, 0, 0, .1); }
+  .js .lesson-list .lesson:nth-child(2) { --i: 1; }
+  .js .lesson-list .lesson:nth-child(3) { --i: 2; }
+  .js .lesson-list .lesson:nth-child(4) { --i: 3; }
+}
+
+/* --- I5. The floodlight: a soft white light where the pointer is, on
+       the black bands always and on the hero only in the dark. */
+.spot { position: relative; }
+.spot::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(26rem circle at var(--sx, 50%) var(--sy, 50%), rgba(255, 255, 255, .11), rgba(255, 255, 255, 0) 62%);
+  transition: opacity .5s var(--ease);
+}
+.spot.is-lit::after { opacity: 1; }
+.hero.spot::after { opacity: 0; }
+:root[data-theme="dark"] .hero.spot.is-lit::after { opacity: 1; }
+.contact.spot > .wrap { position: relative; z-index: 1; }
+
+/* --- I1. The court you'll learn on. */
+.court-section { padding-block: clamp(3rem, 6vw, 5rem); }
+.court-section .court-sub { max-width: 52ch; }
+.court {
+  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+.court-art { display: block; width: 100%; height: auto; overflow: visible; color: var(--text); }
+.court-art .court-ground { fill: var(--bg-soft); stroke: var(--line); }
+.court-art .court-lines path, .court-art .court-lines line { stroke: var(--text); stroke-width: 3; fill: none; stroke-linecap: square; }
+.court-art .court-net { stroke: var(--text); stroke-width: 5; stroke-dasharray: 4 5; }
+.court-art .zone { fill: #d9ef3f; fill-opacity: 0; stroke: none; cursor: pointer; transition: fill-opacity .3s var(--ease); outline: none; }
+.court-art .zone:hover, .court-art .zone.is-on { fill-opacity: .45; }
+.court-art .zone:focus-visible { fill-opacity: .45; stroke: var(--text); stroke-width: 3; stroke-dasharray: 6 4; }
+.court-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+.court-tabs button {
+  font: inherit; font-size: .875rem; font-weight: 600; padding: .42rem .8rem; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer;
+  transition: border-color var(--dur-ui) var(--ease), background-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease);
+}
+.court-tabs button:hover { border-color: var(--text); }
+.court-tabs button.is-on { background: var(--text); color: var(--bg); border-color: var(--text); }
+.court-note h3 { font-size: 1.25rem; letter-spacing: -0.02em; margin: 0 0 .4rem; }
+.court-note p { margin: 0; color: var(--muted); max-width: 44ch; }
+.court-note > div { animation: noteIn .35s var(--ease); }
+@keyframes noteIn { from { opacity: 0; transform: translateY(6px); } }
+@media (max-width: 760px) { .court { grid-template-columns: 1fr; } }
+
+/* --- I2. The package builder, under the lesson cards. */
+.builder {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem); padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem clamp(1.5rem, 4vw, 3rem); align-items: center;
+}
+.builder-title { font-size: 1.25rem; letter-spacing: -0.02em; margin: 0 0 .3rem; }
+.builder-sub { margin: 0 0 1rem; color: var(--muted); max-width: 48ch; }
+.builder-head { grid-column: 1 / -1; }
+.builder-set { border: 0; padding: 0; margin: 0 0 .9rem; min-width: 0; }
+.builder-set legend { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: .45rem; padding: 0; }
+.builder-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip span {
+  display: inline-block; padding: .5rem .9rem; border-radius: 999px; border: 1px solid var(--line); background: var(--bg);
+  font-size: .9375rem; font-weight: 600; transition: border-color var(--dur-ui) var(--ease), background-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease);
+}
+.chip:hover span { border-color: var(--text); }
+.chip input:checked + span { background: var(--text); color: var(--bg); border-color: var(--text); }
+.chip input:focus-visible + span { outline: 2px solid var(--text); outline-offset: 2px; }
+.builder-out { text-align: center; min-width: 14rem; }
+.builder-total { margin: 0; }
+.builder-num { display: block; font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.builder-month { display: block; margin-top: .35rem; font-size: .9375rem; color: var(--muted); }
+.builder-pack { margin: .6rem 0 0; font-size: .875rem; color: var(--muted); max-width: 26ch; margin-inline: auto; }
+.builder-out .btn { margin-top: 1rem; }
+.builder-out .btn[hidden] { display: none; }
+.builder-note { grid-column: 1 / -1; margin: 0; font-size: .875rem; color: var(--muted); }
+@media (max-width: 760px) {
+  .builder { grid-template-columns: 1fr; }
+  .builder-out { text-align: start; }
+  .builder-pack { margin-inline: 0; }
+  .builder-out .btn { width: 100%; }
+}
+
+/* --- I3. The racket spin (tips page). */
+.spin-section { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.spin {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem clamp(1.5rem, 4vw, 3rem); align-items: center;
+  padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
+}
+.spin h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin: 0 0 .4rem; }
+.spin p { margin: 0; color: var(--muted); max-width: 40ch; }
+.spin-result { min-height: 2.6rem; margin-top: .6rem !important; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--text) !important; }
+.spin.is-done .spin-result { animation: noteIn .35s var(--ease); }
+.spin-racket {
+  display: grid; place-items: center; width: clamp(9rem, 18vw, 12rem); aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--bg); cursor: pointer; padding: 0;
+  transition: border-color var(--dur-ui) var(--ease), box-shadow .35s var(--ease);
+}
+.spin-racket:hover { border-color: var(--text); box-shadow: 0 10px 28px rgba(217, 239, 63, .38); }
+.spin-racket:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.spin-art { width: 62%; height: auto; overflow: visible; color: var(--text); }
+.spin-art .racket-head { fill: none; stroke: currentColor; stroke-width: 7; }
+.spin-art .racket-strings { stroke: currentColor; stroke-width: 1.6; opacity: .5; }
+.spin-art .racket-throat, .spin-art .racket-grip { stroke: currentColor; stroke-width: 8; stroke-linecap: round; fill: none; }
+.spin-art .racket-cap { fill: #d9ef3f; stroke: currentColor; stroke-width: 3; }
+@media (max-width: 640px) { .spin { grid-template-columns: 1fr; } .spin-racket { justify-self: center; } }
+
+/* --- I4. The photo pile: polaroids, dragged about with a mouse. */
+.photo-strip.is-pile { display: block; position: relative; height: clamp(26rem, 42vw, 36rem); }
+.photo-strip.is-pile .photo {
+  position: absolute; left: var(--pl); top: var(--pt); width: 31%;
+  translate: var(--px, 0px) var(--py, 0px); rotate: var(--pr, 0deg);
+  border: 8px solid #fff; padding: 0 0 2.1rem; background: #fff;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .22); cursor: grab;
+  transition: box-shadow .35s var(--ease), scale .35s var(--ease);
+}
+.photo-strip.is-pile .photo.is-drag { cursor: grabbing; scale: 1.04; box-shadow: 0 30px 70px rgba(0, 0, 0, .32); z-index: 99; }
+.photo-strip.is-pile .photo img { aspect-ratio: 4 / 5; }
+.photo-strip.is-pile .photo .photo-tag {
+  opacity: 1; transform: none; inset: auto 0 .5rem 0; text-align: center;
+  background: none; color: var(--ink); font-weight: 600;
+}
+:root[dir="rtl"] .photo-strip.is-pile .photo { left: auto; right: var(--pl); }
+
+/* --- U1. The daylight bar under the weather line. */
+.daylight { gap: .7rem; }
+.daylight-bar { flex: 0 0 auto; width: 6.5rem; height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.daylight-bar i { display: block; height: 100%; width: 100%; background: #d9ef3f; border-radius: inherit; transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform 1.2s var(--ease); }
+:root[dir="rtl"] .daylight-bar i { transform-origin: right; }
+.daylight::before { display: none; }
+
+/* --- U2. The lesson card: bottom left, out of the chat's way. */
+.lesson-card {
+  position: fixed; left: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 60;
+  max-width: min(22rem, calc(100vw - 6.5rem)); padding: .9rem 1rem; border-radius: 10px;
+  background: var(--ink); color: #fff; box-shadow: 0 14px 40px rgba(0, 0, 0, .3);
+  opacity: 0; transform: translateY(12px); transition: opacity .45s var(--ease), transform .55s var(--ease);
+}
+.lesson-card.is-in { opacity: 1; transform: none; }
+.lesson-card-text { margin: 0; font-size: .9375rem; font-weight: 600; line-height: 1.35; padding-inline-end: 1.5rem; }
+.lesson-card-actions { display: flex; align-items: center; gap: .8rem; margin-top: .5rem; }
+.lesson-card-add { color: #d9ef3f; font-size: .875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.lesson-card-x {
+  position: absolute; top: .35rem; inset-inline-end: .45rem; width: 1.8rem; height: 1.8rem; border: 0; border-radius: 50%;
+  background: none; color: rgba(255, 255, 255, .7); font-size: 1.2rem; line-height: 1; cursor: pointer;
+}
+.lesson-card-x:hover { color: #fff; background: rgba(255, 255, 255, .12); }
+:root[dir="rtl"] .lesson-card { left: auto; right: 1rem; }
+
+/* --- U3. The shortcuts list. */
+.keys { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1rem; align-items: center; margin: 1.25rem 0 0; }
+.keys > div { display: contents; }
+.keys dt, .keys dd { margin: 0; }
+.keys kbd {
+  display: inline-block; min-width: 2.1em; padding: .25em .5em; text-align: center; font-family: inherit; font-size: .875rem; font-weight: 600;
+  border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; background: var(--card);
+}
+.keys dd { color: var(--muted); }
+.keys-hint { font-size: .8125rem; }
+@media (hover: none) { .keys-hint { display: none; } }
+
+/* --- N1. Before and after. */
+.compare { margin: 1.75rem 0 0; }
+.compare-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius); background: #000; --split: 50%; }
+.compare-stage img, .compare-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.compare-after { clip-path: inset(0 0 0 var(--split, 50%)); }
+.compare-label {
+  position: absolute; top: .6rem; padding: .25rem .55rem; border-radius: 4px; font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  background: rgba(0, 0, 0, .6); color: #fff; pointer-events: none;
+}
+.compare-label.is-before { left: .6rem; } .compare-label.is-after { right: .6rem; }
+.compare-handle { position: absolute; top: 0; bottom: 0; left: var(--split, 50%); width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
+.compare-handle::after {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 2.4rem; height: 2.4rem; translate: -50% -50%; border-radius: 50%;
+  background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+  background-image: linear-gradient(90deg, transparent 0 40%, #111 40% 45%, transparent 45% 55%, #111 55% 60%, transparent 60%);
+}
+.compare-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.compare figcaption { margin-top: .6rem; font-size: .875rem; color: var(--muted); }
+
+/* --- N3. The numbers. */
+.counts { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.counts li { display: grid; gap: .15rem; }
+.counts b { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.counts span { font-size: .875rem; color: var(--muted); }

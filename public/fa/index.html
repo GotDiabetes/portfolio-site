@@ -34,16 +34,18 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261013" />
+  <link rel="stylesheet" href="/tennis.css?v=20261019" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
   <link rel="stylesheet" href="/motion-reveal.css?v=2" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
-  <link rel="stylesheet" href="/features.css?v=3" />
+  <link rel="stylesheet" href="/features.css?v=4" />
   <link rel="stylesheet" href="/dark.css?v=1" />
+  <link rel="stylesheet" href="/more.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+  <script>(function () { try { if (localStorage.getItem("leeMotion") !== "reduce") return; var d = document.documentElement; d.classList.add("reduce-motion"); var mm = window.matchMedia; if (!mm) return; window.matchMedia = function (q) { var r = mm.call(window, q); if (/prefers-reduced-motion/.test(q) && /reduce/.test(q)) return { matches: true, media: q, onchange: null, addEventListener: function () {}, removeEventListener: function () {}, addListener: function () {}, removeListener: function () {}, dispatchEvent: function () { return false; } }; return r; }; } catch (e) {} })();</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
 
   <script>
@@ -161,9 +163,16 @@
         </div>
       </details>
 
+
+      <span class="score" data-score aria-hidden="true" hidden><span class="score-val">صفر</span></span>
       <button class="theme-toggle" type="button" aria-label="تغییر به حالت تاریک" data-theme-toggle>
         <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <button class="theme-toggle motion-toggle" type="button" aria-label="خاموش کردن انیمیشن‌ها" aria-pressed="false" data-motion-toggle>
+        <svg class="motion-on" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="12.5" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 7h4.5M1 10h3.5M1.5 13h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="motion-off" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 17L17 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="رزرو کلاس" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
@@ -205,6 +214,7 @@
           <p class="book-note hero-note fade" style="--d:.24s">بدون کارت، بدون بیعانه: رزرو فقط زمان را برایتان نگه می‌دارد.</p>
           <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
           <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
+          <p class="live-line daylight fade" id="daylight" style="--d:.3s" hidden><span class="daylight-bar" aria-hidden="true"><i></i></span><span class="daylight-text"></span></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -321,6 +331,39 @@
         </article>
       </div>
 
+      <form class="builder fade" id="builder" aria-labelledby="builderTitle">
+        <div class="builder-head">
+          <h3 class="builder-title" id="builderTitle">بستهٔ خودت را بساز</h3>
+          <p class="builder-sub">یک نوع جلسه و تعداد هفتگی را انتخاب کن تا هزینهٔ یک ماه را ببینی.</p>
+        </div>
+        <div class="builder-in">
+          <fieldset class="builder-set">
+            <legend>جلسه</legend>
+            <div class="builder-chips">
+              <label class="chip"><input type="radio" name="type" value="private" checked><span>خصوصی، ⁦$80⁩</span></label>
+              <label class="chip"><input type="radio" name="type" value="semi"><span>نیمه‌خصوصی، ⁦$110⁩</span></label>
+              <label class="chip"><input type="radio" name="type" value="hitting"><span>تمرین ضربه، ⁦$45⁩</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="builder-set">
+            <legend>در هفته</legend>
+            <div class="builder-chips">
+              <label class="chip"><input type="radio" name="n" value="1" checked><span>یک بار</span></label>
+              <label class="chip"><input type="radio" name="n" value="2"><span>دو بار</span></label>
+              <label class="chip"><input type="radio" name="n" value="3"><span>سه بار</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="builder-out" aria-live="polite">
+          <p class="builder-total"><b class="builder-num" data-total dir="ltr">$320</b><span class="builder-month" data-month></span></p>
+          <p class="builder-pack" data-pack hidden></p>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="private">رزرو اولین جلسه</a>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="semi" hidden>رزرو اولین جلسه</a>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="hitting" hidden>رزرو اولین جلسه</a>
+        </div>
+        <p class="builder-note">پرداخت برای هر جلسه، حضوری. پیش‌پرداختی در کار نیست.</p>
+      </form>
+
       <form class="matcher" id="matcher" hidden>
         <label class="matcher-label" for="matchText">مطمئن نیستید کدام مناسب است؟ خودتان را در یک جمله توصیف کنید.</label>
         <div class="matcher-row">
@@ -379,6 +422,79 @@
               <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
               <figcaption>یک دقیقه: من کی هستم، زمین کجاست و جلسهٔ اول چطور می‌گذرد.</figcaption>
             </figure>
+
+            <ul class="counts fade" style="--d:.24s" aria-label="به زبان اعداد" hidden>
+              <li><b data-count="" data-suffix="">0</b><span>بازیکنانی که آموزش دیده‌اند</span></li>
+              <li><b data-count="" data-suffix="">0</b><span>سال‌های مربیگری</span></li>
+              <li><b data-count="" data-suffix="">0</b><span>جلسه‌های برگزارشده</span></li>
+            </ul>
+
+            <figure class="compare fade" style="--d:.26s" data-before="" data-after="" hidden>
+              <div class="compare-stage">
+                <span class="compare-label is-before">قبل</span>
+                <span class="compare-label is-after">بعد</span>
+                <span class="compare-handle" aria-hidden="true"></span>
+                <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="مقایسهٔ قبل و بعد">
+              </div>
+              <figcaption>قبل و بعد: همان سوینگ، چند جلسه بعد.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section court-section" id="court">
+      <header class="section-head">
+        <p class="eyebrow fade">زمین</p>
+        <h2 class="fade" style="--d:.06s">زمینی که در آن یاد می‌گیری</h2>
+        <p class="section-sub court-sub fade" style="--d:.12s">نشانگر را روی بخشی از زمین ببر یا روی آن بزن تا ببینی آنجا روی چه چیزی کار می‌کنیم.</p>
+      </header>
+      <div class="court fade" data-court data-current="baseline">
+        <svg class="court-art" viewBox="-20 -20 820 400" aria-hidden="true" focusable="false">
+          <rect class="court-ground" x="-20" y="-20" width="820" height="400" rx="10"/>
+          <g class="zones">
+            <g class="zone" data-zone="baseline"><rect x="0" y="45" width="150" height="270"/><rect x="630" y="45" width="150" height="270"/></g>
+            <g class="zone" data-zone="mid"><rect x="150" y="45" width="60" height="270"/><rect x="570" y="45" width="60" height="270"/></g>
+            <g class="zone" data-zone="service"><rect x="210" y="45" width="165" height="270"/><rect x="405" y="45" width="165" height="270"/></g>
+            <g class="zone" data-zone="net"><rect x="375" y="0" width="30" height="360"/></g>
+            <g class="zone" data-zone="alleys"><rect x="0" y="0" width="780" height="45"/><rect x="0" y="315" width="780" height="45"/></g>
+          </g>
+          <g class="court-lines" pointer-events="none">
+            <path d="M0 0H780V360H0Z"/>
+            <path d="M0 45H780M0 315H780"/>
+            <path d="M180 45V315M600 45V315"/>
+            <path d="M180 180H600"/>
+            <path d="M0 180h14M780 180h-14"/>
+            <line class="court-net" x1="390" y1="-8" x2="390" y2="368"/>
+          </g>
+        </svg>
+        <div class="court-note">
+          <ul class="court-tabs" role="list">
+            <li><button type="button" data-zone="baseline" aria-pressed="true">خط انتهایی</button></li>
+            <li><button type="button" data-zone="service" aria-pressed="false">محوطه‌های سرویس</button></li>
+            <li><button type="button" data-zone="net" aria-pressed="false">تور</button></li>
+            <li><button type="button" data-zone="mid" aria-pressed="false">میانهٔ زمین</button></li>
+            <li><button type="button" data-zone="alleys" aria-pressed="false">راهروهای دونفره</button></li>
+          </ul>
+          <div data-note="baseline">
+            <h3>خط انتهایی</h3>
+            <p>بیشتر جلسه اینجا می‌گذرد. ضربه‌های زمینی، کار پا و تحمل رالی: ده توپ پشت سر هم، پیش از آنکه بخواهی یکی را محکم بزنی.</p>
+          </div>
+          <div data-note="service" hidden>
+            <h3>محوطه‌های سرویس</h3>
+            <p>سرویس و برگشت سرویس. اول پرتاب توپ و ریتم، بعد پیچ؛ و سرویس را به سمت هدف می‌زنی، نه فقط از روی تور.</p>
+          </div>
+          <div data-note="net" hidden>
+            <h3>تور</h3>
+            <p>والی و ضربهٔ بالای سر. سوینگ کوتاه، تماس زودهنگام و کار پایی که به‌موقع برساندت.</p>
+          </div>
+          <div data-note="mid" hidden>
+            <h3>میانهٔ زمین</h3>
+            <p>منطقهٔ گذار: ضربه‌های نزدیک‌شدن و نیم‌والی؛ ضربه‌هایی که تو را از خط انتهایی به تور می‌رسانند.</p>
+          </div>
+          <div data-note="alleys" hidden>
+            <h3>راهروهای دونفره</h3>
+            <p>دونفره. زاویه‌ها، شکار توپ در تور و جای ایستادن؛ برای هر کسی که در لیگ یا دوستانه دونفره بازی می‌کند.</p>
           </div>
         </div>
       </div>
@@ -616,49 +732,6 @@
             </div>
           </dl>
         </div>
-
-        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
-          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
-            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
-            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
-            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
-            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
-            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
-            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
-            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
-              <rect x="178" y="112" width="104" height="76" rx="3"/>
-              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
-            </g>
-            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
-            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
-            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <g stroke="#fff" stroke-width="1.5" fill="none">
-              <rect x="340" y="124" width="66" height="150" rx="2"/>
-              <rect x="414" y="124" width="66" height="150" rx="2"/>
-              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
-              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
-            </g>
-            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
-            <g font-size="14" font-weight="600" text-anchor="middle">
-              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
-              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
-              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
-              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
-              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
-            </g>
-          </svg>
-          <figcaption>
-            <ol class="court-map-legend">
-              <li>Jamboree Road</li>
-              <li>Via Lucca</li>
-              <li>پارکینگ مهمان</li>
-              <li>در ورودی: اینجا می‌بینمتان</li>
-              <li>زمین‌ها</li>
-            </ol>
-            <p class="court-map-note" id="mapCaption">35 Via Lucca، ارواین، کنار Jamboree Road. پارکینگ مهمان داخل مجموعه است و من شما را دم در ورودی می‌بینم. <span class="court-map-scale">بدون مقیاس</span></p>
-          </figcaption>
-        </figure>
       </div>
     </section>
   </main>
@@ -670,6 +743,7 @@
         <a href="tips/">نکته‌های تمرینی</a>
         <a href="/portfolio/">نمونه‌کار حرفه‌ای</a>
         <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
+        <button class="link-btn keys-hint" type="button" data-open="shortcuts">میان‌برهای صفحه‌کلید</button>
         <a href="/admin/">Admin</a>
       </p>
     </div>
@@ -850,6 +924,20 @@
     </div>
   </dialog>
 
+  <dialog class="modal" id="shortcuts" aria-labelledby="shortcutsTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="بستن">&times;</button>
+      <h3 id="shortcutsTitle" tabindex="-1" autofocus>میان‌برهای صفحه‌کلید</h3>
+      <dl class="keys">
+        <div><dt><kbd>B</kbd></dt><dd>رزرو کلاس</dd></div>
+        <div><dt><kbd>T</kbd></dt><dd>باز کردن صفحهٔ نکته‌ها</dd></div>
+        <div><dt><kbd>D</kbd></dt><dd>تغییر حالت تاریک</dd></div>
+        <div><dt><kbd>?</kbd></dt><dd>نمایش این فهرست</dd></div>
+        <div><dt><kbd>Esc</kbd></dt><dd>بستن</dd></div>
+      </dl>
+    </div>
+  </dialog>
+
   <dialog class="lightbox" id="lightbox" aria-label="نمایشگر عکس">
     <button class="modal-close lightbox-close" data-close type="button" aria-label="بستن">&times;</button>
     <figure>
@@ -892,7 +980,7 @@
     </button>
   </div>
 
-  <script>window.I18N = {"themeDark":"تغییر به حالت تاریک","themeLight":"تغییر به حالت روشن","nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به {hi}°F می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
+  <script>window.I18N = {"motionOff":"خاموش کردن انیمیشن‌ها","motionOn":"روشن کردن انیمیشن‌ها","scoreLove":"صفر","scoreGame":"گیم","builderMonth":"در ماه، برای {n} جلسه","builderPack5":"با بستهٔ ۵ جلسه‌ای هر جلسه ⁦$75⁩ می‌شود: {total} در ماه.","builderPack10":"با بستهٔ ۱۰ جلسه‌ای هر جلسه ⁦$70⁩ می‌شود: {total} در ماه.","daylightLeft":"{t} از روشنایی روز در زمین مانده","lessonLine":"جلسهٔ تو: {when}، {rel}.","addCal":"افزودن به تقویم","dismiss":"بستن","icsTitle":"جلسهٔ تنیس با Isaac Lee","titleAway":"برگرد و یک جلسه رزرو کن","spinUp":"بالا","spinDown":"پایین","themeDark":"تغییر به حالت تاریک","themeLight":"تغییر به حالت روشن","nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به {hi}°F می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
   <script src="/tennis.js?v=20261016" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
@@ -903,9 +991,10 @@
   <script src="/motion-court.js?v=2" defer></script>
   <script src="/motion-reveal.js?v=3" defer></script>
   <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=2" defer></script>
+  <script src="/features.js?v=3" defer></script>
   <script src="/arrival.js?v=1" defer></script>
   <script src="/ballo.js?v=4" defer></script>
   <script src="/motion.js?v=5" defer></script>
+  <script src="/more.js?v=1" defer></script>
 </body>
 </html>

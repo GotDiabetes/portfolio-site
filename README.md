@@ -71,6 +71,17 @@ pages named), and both stay off until filled in:
   leetennisco.com; copy the token from the snippet it shows. No cookies, no
   consent banner.
 
+Three more built on October 19 wait the same way, in `public/index.html`:
+
+- **Before and after** (the `<figure class="compare">` in About): put two
+  photos or short clips of a student's swing in `public/images/` and name
+  them in `data-before` and `data-after`. A drag handle between them appears.
+- **The numbers** (the `<ul class="counts">` in About): fill in
+  `data-count` on any of the three (players coached, years coaching,
+  lessons taught) with a real figure; the ones left blank stay hidden.
+- **The hero loop** (`data-src` on the `<video class="hero-loop">`): a
+  5–8 second silent clip of you hitting, and it plays behind the hero.
+
 ## For your assistant (technical details)
 
 <details>
@@ -292,10 +303,6 @@ overwritten on the next build. One dictionary covers all four pages.
   the FAQ. **Bring a friend**: one line on the semi-private card (the
   amount is in the page and the dictionaries). **The intro video**: a
   figure in About that shows once its `data-video` names a file.
-- **The court map** (the contact band): a drawn schematic, not to scale,
-  with a numbered legend (the streets stay English; `KEEP` in the build).
-  The facts in its caption are Isaac's: guest parking inside the
-  community, and he meets visitors at the gate.
 - **The practice sheet** (`public/sheet/`, `sheet.js`, styles in
   `print.css`): one printable Letter page a family keeps after a lesson.
   The recap page makes its link (`/sheet/#s=…`, the form packed as
@@ -303,6 +310,18 @@ overwritten on the next build. One dictionary covers all four pages.
   and puts it in the note; the sheet reads the link and the language's
   `ask.json`, so nothing is stored anywhere. English only in the source;
   its words are in `sheet.js` per language, like the recap's.
+- **The October 19 set** (`public/more.js`, `more.css`; the list is at
+  the top of the script): magnetic Book buttons, the header's score, the
+  court diagram with its five notes, the package builder (the cards' own
+  rates, no prepayment), the racket spin on the tips page, the draggable
+  photo pile, the pointer floodlight on the black bands, the daylight bar
+  (the Worker's `/court` now returns today's `sun`), the lesson card
+  after a booking (stored in `localStorage` as `leeLesson` with an .ics
+  link; `?demo=lesson` on localhost fakes one), keyboard shortcuts (B, T,
+  D, ?), the animations switch (`leeMotion` in `localStorage`, read by a
+  head script that also answers every script's reduced-motion query), and
+  the tab that asks the reader back. Its words are `js` keys in the
+  dictionaries; its markup is translated like the rest.
 - **The rally game** (`public/rally.js`, on the 404 page): "Play a rally"
   swaps the scene for a top-down court; the pointer is the racket, the
   streak counts, the best is kept on the device. Its words are in the 404

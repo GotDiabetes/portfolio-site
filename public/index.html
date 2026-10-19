@@ -49,13 +49,14 @@
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261013" />
+  <link rel="stylesheet" href="tennis.css?v=20261019" />
   <link rel="stylesheet" href="focus.css?v=1" />
   <link rel="stylesheet" href="motion-court.css?v=2" />
   <link rel="stylesheet" href="motion-reveal.css?v=2" />
   <link rel="stylesheet" href="motion-transitions.css?v=2" />
-  <link rel="stylesheet" href="features.css?v=3" />
+  <link rel="stylesheet" href="features.css?v=4" />
   <link rel="stylesheet" href="dark.css?v=1" />
+  <link rel="stylesheet" href="more.css?v=1" />
 
   <!-- Arms the fade-ins only when JS can actually run, so a failed script
        leaves a fully visible page rather than a blank one. -->
@@ -63,6 +64,10 @@
   <!-- Dark mode before the first paint: the saved choice, else the phone's
        setting (dark.css, features.js). -->
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+  <!-- Reduced motion by choice (the header's motion switch, more.js): the
+       stored preference becomes the reduced-motion answer every script
+       asks for, before any of them runs, and a class for more.css. -->
+  <script>(function () { try { if (localStorage.getItem("leeMotion") !== "reduce") return; var d = document.documentElement; d.classList.add("reduce-motion"); var mm = window.matchMedia; if (!mm) return; window.matchMedia = function (q) { var r = mm.call(window, q); if (/prefers-reduced-motion/.test(q) && /reduce/.test(q)) return { matches: true, media: q, onchange: null, addEventListener: function () {}, removeEventListener: function () {}, addListener: function () {}, removeListener: function () {}, dispatchEvent: function () { return false; } }; return r; }; } catch (e) {} })();</script>
   <!-- Preview switch for the motion upgrade (motion-*.css/js): ?classic in
        the address shows the page without it, to compare. -->
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
@@ -200,9 +205,20 @@
 
       <!-- Dark mode switch (dark.css, features.js); on phones the phone's
            own setting decides and the switch is hidden. -->
+
+      <!-- The score (more.js): Love, 15, 30, 40, Game with the way down the
+           page. Decoration, so it is not read out. -->
+      <span class="score" data-score aria-hidden="true" hidden><span class="score-val">Love</span></span>
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
         <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <!-- Animations on or off (more.js), beside the dark-mode switch and
+           hidden with it on phones, where the phone's own setting decides. -->
+      <button class="theme-toggle motion-toggle" type="button" aria-label="Turn animations off" aria-pressed="false" data-motion-toggle>
+        <svg class="motion-on" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="12.5" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 7h4.5M1 10h3.5M1.5 13h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="motion-off" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 17L17 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" aria-label="Book a lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>
@@ -259,6 +275,7 @@
                Hidden until they have something true to say. -->
           <p class="live-line fade" id="nextOpen" style="--d:.26s" hidden></p>
           <p class="live-line fade" id="courtDay" style="--d:.28s" hidden></p>
+          <p class="live-line daylight fade" id="daylight" style="--d:.3s" hidden><span class="daylight-bar" aria-hidden="true"><i></i></span><span class="daylight-text"></span></p>
         </div>
 
         <figure class="hero-photo fade-img">
@@ -400,6 +417,42 @@
         </article>
       </div>
 
+      <!-- The package builder (more.js): a lesson and how often, and the
+           month's total rolls up from the real rates on the cards. The
+           three Book links are the cards' own; one shows at a time. -->
+      <form class="builder fade" id="builder" aria-labelledby="builderTitle">
+        <div class="builder-head">
+          <h3 class="builder-title" id="builderTitle">Build a package</h3>
+          <p class="builder-sub">Pick a lesson and how often, and see what a month comes to.</p>
+        </div>
+        <div class="builder-in">
+          <fieldset class="builder-set">
+            <legend>Lesson</legend>
+            <div class="builder-chips">
+              <label class="chip"><input type="radio" name="type" value="private" checked><span>Private, $80</span></label>
+              <label class="chip"><input type="radio" name="type" value="semi"><span>Semi-private, $110</span></label>
+              <label class="chip"><input type="radio" name="type" value="hitting"><span>Hitting, $45</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="builder-set">
+            <legend>Per week</legend>
+            <div class="builder-chips">
+              <label class="chip"><input type="radio" name="n" value="1" checked><span>Once</span></label>
+              <label class="chip"><input type="radio" name="n" value="2"><span>Twice</span></label>
+              <label class="chip"><input type="radio" name="n" value="3"><span>Three times</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="builder-out" aria-live="polite">
+          <p class="builder-total"><b class="builder-num" data-total dir="ltr">$320</b><span class="builder-month" data-month></span></p>
+          <p class="builder-pack" data-pack hidden></p>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="private">Book the first one</a>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="semi" hidden>Book the first one</a>
+          <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-hitting-session" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-hitting-session" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="hitting" hidden>Book the first one</a>
+        </div>
+        <p class="builder-note">Paid per lesson, in person. Nothing to prepay.</p>
+      </form>
+
       <!-- Lesson matcher, under the cards: the offer comes first, and the
            matcher is there for anyone the four cards didn't settle. A visitor
            describes themselves in a sentence; a Cloudflare Worker (worker/ in
@@ -477,6 +530,89 @@
               <video class="intro-video-el" controls playsinline preload="none" poster="/images/coaching-clinic.jpg"></video>
               <figcaption>One minute: who I am, where the court is, and what a first lesson is like.</figcaption>
             </figure>
+
+            <!-- In numbers (more.js): shown once each data-count has a real
+                 figure from Isaac; a blank one stays hidden. -->
+            <ul class="counts fade" style="--d:.24s" aria-label="In numbers" hidden>
+              <li><b data-count="" data-suffix="">0</b><span>Players coached</span></li>
+              <li><b data-count="" data-suffix="">0</b><span>Years coaching</span></li>
+              <li><b data-count="" data-suffix="">0</b><span>Lessons taught</span></li>
+            </ul>
+
+            <!-- Before and after (more.js): two photos or clips of a student's
+                 swing with a handle between them. Set data-before and
+                 data-after to the files (images/…) and it appears. -->
+            <figure class="compare fade" style="--d:.26s" data-before="" data-after="" hidden>
+              <div class="compare-stage">
+                <span class="compare-label is-before">Before</span>
+                <span class="compare-label is-after">After</span>
+                <span class="compare-handle" aria-hidden="true"></span>
+                <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+              </div>
+              <figcaption>Before and after: the same swing a few lessons apart.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= THE COURT YOU'LL LEARN ON =======================
+         A drawn court (more.js): hover or tap a part and the note beside it
+         says what gets worked on there. The drawing has no words, so it
+         serves every language; the tabs and notes are the words.
+         ======================================================================= -->
+    <section class="wrap section court-section" id="court">
+      <header class="section-head">
+        <p class="eyebrow fade">The court</p>
+        <h2 class="fade" style="--d:.06s">The court you'll learn on</h2>
+        <p class="section-sub court-sub fade" style="--d:.12s">Hover or tap a part of the court to see what we work on there.</p>
+      </header>
+      <div class="court fade" data-court data-current="baseline">
+        <svg class="court-art" viewBox="-20 -20 820 400" aria-hidden="true" focusable="false">
+          <rect class="court-ground" x="-20" y="-20" width="820" height="400" rx="10"/>
+          <g class="zones">
+            <g class="zone" data-zone="baseline"><rect x="0" y="45" width="150" height="270"/><rect x="630" y="45" width="150" height="270"/></g>
+            <g class="zone" data-zone="mid"><rect x="150" y="45" width="60" height="270"/><rect x="570" y="45" width="60" height="270"/></g>
+            <g class="zone" data-zone="service"><rect x="210" y="45" width="165" height="270"/><rect x="405" y="45" width="165" height="270"/></g>
+            <g class="zone" data-zone="net"><rect x="375" y="0" width="30" height="360"/></g>
+            <g class="zone" data-zone="alleys"><rect x="0" y="0" width="780" height="45"/><rect x="0" y="315" width="780" height="45"/></g>
+          </g>
+          <g class="court-lines" pointer-events="none">
+            <path d="M0 0H780V360H0Z"/>
+            <path d="M0 45H780M0 315H780"/>
+            <path d="M180 45V315M600 45V315"/>
+            <path d="M180 180H600"/>
+            <path d="M0 180h14M780 180h-14"/>
+            <line class="court-net" x1="390" y1="-8" x2="390" y2="368"/>
+          </g>
+        </svg>
+        <div class="court-note">
+          <ul class="court-tabs" role="list">
+            <li><button type="button" data-zone="baseline" aria-pressed="true">Baseline</button></li>
+            <li><button type="button" data-zone="service" aria-pressed="false">Service boxes</button></li>
+            <li><button type="button" data-zone="net" aria-pressed="false">The net</button></li>
+            <li><button type="button" data-zone="mid" aria-pressed="false">Mid-court</button></li>
+            <li><button type="button" data-zone="alleys" aria-pressed="false">The alleys</button></li>
+          </ul>
+          <div data-note="baseline">
+            <h3>Baseline</h3>
+            <p>Where most of the lesson lives. Groundstrokes, footwork and rally tolerance: ten balls in a row before you try to hit one hard.</p>
+          </div>
+          <div data-note="service" hidden>
+            <h3>Service boxes</h3>
+            <p>Serves and returns. The toss and the rhythm come first, then the spin, and you serve at a target rather than just over the net.</p>
+          </div>
+          <div data-note="net" hidden>
+            <h3>The net</h3>
+            <p>Volleys and overheads. Short swings, early contact, and the footwork to get there in time.</p>
+          </div>
+          <div data-note="mid" hidden>
+            <h3>Mid-court</h3>
+            <p>The transition zone: approach shots and the half-volley, the shots that take you from the baseline to the net.</p>
+          </div>
+          <div data-note="alleys" hidden>
+            <h3>The alleys</h3>
+            <p>Doubles. Angles, poaching and where to stand, for anyone playing league or social doubles.</p>
           </div>
         </div>
       </div>
@@ -753,61 +889,6 @@
             </div>
           </dl>
         </div>
-
-        <!-- How to find the court: a drawn map, not to scale, with the five
-             things a first-time visitor needs in the order they meet them.
-             No words in the drawing (numbers only), so one serves every
-             language; the words are the legend. -->
-        <figure class="court-map fade" style="--d:.22s" aria-labelledby="mapCaption">
-          <svg class="court-map-art" viewBox="0 0 520 340" aria-hidden="true" focusable="false">
-            <!-- Jamboree Road along the top, Via Lucca turning down from it -->
-            <path d="M0 42 H520" stroke="rgba(255,255,255,.22)" stroke-width="26" fill="none"/>
-            <path d="M0 42 H520" stroke="rgba(255,255,255,.35)" stroke-width="1" stroke-dasharray="10 8" fill="none"/>
-            <path d="M118 55 V330" stroke="rgba(255,255,255,.22)" stroke-width="18" fill="none"/>
-            <!-- the community -->
-            <rect x="160" y="92" width="336" height="226" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
-            <!-- the way in from Via Lucca -->
-            <path d="M127 150 H160" stroke="rgba(255,255,255,.55)" stroke-width="12" fill="none"/>
-            <path d="M136 150 l16 -7 v14 z" fill="#fff"/>
-            <!-- guest parking: stalls just inside -->
-            <g stroke="rgba(255,255,255,.7)" stroke-width="1.5" fill="none">
-              <rect x="178" y="112" width="104" height="76" rx="3"/>
-              <path d="M204 112 V188 M230 112 V188 M256 112 V188"/>
-            </g>
-            <rect x="233" y="126" width="20" height="36" rx="5" fill="rgba(255,255,255,.75)"/>
-            <!-- the walk: parking to the gate to the courts -->
-            <path d="M230 200 V236 H306" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
-            <!-- the gate -->
-            <path d="M312 214 V258" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-            <path d="M312 236 l16 -9 M312 236 l16 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-            <!-- the courts -->
-            <g stroke="#fff" stroke-width="1.5" fill="none">
-              <rect x="340" y="124" width="66" height="150" rx="2"/>
-              <rect x="414" y="124" width="66" height="150" rx="2"/>
-              <path d="M340 199 H406 M414 199 H480 M352 124 V274 M394 124 V274 M426 124 V274 M468 124 V274"/>
-              <path d="M352 162 H394 M352 236 H394 M426 162 H468 M426 236 H468"/>
-            </g>
-            <circle cx="373" cy="199" r="6" fill="#d9ef3f"/>
-            <!-- the numbers, in the order a visitor meets them -->
-            <g font-size="14" font-weight="600" text-anchor="middle">
-              <circle cx="462" cy="42" r="12" fill="#fff"/><text x="462" y="47" fill="#0d0d0d">1</text>
-              <circle cx="118" cy="258" r="12" fill="#fff"/><text x="118" y="263" fill="#0d0d0d">2</text>
-              <circle cx="178" cy="112" r="12" fill="#fff"/><text x="178" y="117" fill="#0d0d0d">3</text>
-              <circle cx="312" cy="272" r="12" fill="#fff"/><text x="312" y="277" fill="#0d0d0d">4</text>
-              <circle cx="480" cy="124" r="12" fill="#fff"/><text x="480" y="129" fill="#0d0d0d">5</text>
-            </g>
-          </svg>
-          <figcaption>
-            <ol class="court-map-legend">
-              <li>Jamboree Road</li>
-              <li>Via Lucca</li>
-              <li>Guest parking</li>
-              <li>The gate: I meet you here</li>
-              <li>The courts</li>
-            </ol>
-            <p class="court-map-note" id="mapCaption">35 Via Lucca, Irvine, off Jamboree Road. Guest parking is inside the community, and I meet you at the gate. <span class="court-map-scale">Not to scale</span></p>
-          </figcaption>
-        </figure>
       </div>
     </section>
   </main>
@@ -821,6 +902,7 @@
         <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
         <!-- Isaac's way in to his own pages (/admin/): last and quiet, the
              footer's own colour, in English on every language's page. -->
+        <button class="link-btn keys-hint" type="button" data-open="shortcuts">Keyboard shortcuts</button>
         <a href="/admin/">Admin</a>
       </p>
     </div>
@@ -1013,6 +1095,21 @@
     </div>
   </dialog>
 
+  <!-- Keyboard shortcuts (more.js): ? opens this, the footer link too. -->
+  <dialog class="modal" id="shortcuts" aria-labelledby="shortcutsTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
+      <h3 id="shortcutsTitle" tabindex="-1" autofocus>Keyboard shortcuts</h3>
+      <dl class="keys">
+        <div><dt><kbd>B</kbd></dt><dd>Book a lesson</dd></div>
+        <div><dt><kbd>T</kbd></dt><dd>Open the tips page</dd></div>
+        <div><dt><kbd>D</kbd></dt><dd>Switch dark mode</dd></div>
+        <div><dt><kbd>?</kbd></dt><dd>Show this list</dd></div>
+        <div><dt><kbd>Esc</kbd></dt><dd>Close</dd></div>
+      </dl>
+    </div>
+  </dialog>
+
   <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
     <button class="modal-close lightbox-close" data-close type="button" aria-label="Close">&times;</button>
     <figure>
@@ -1070,9 +1167,10 @@
   <script src="motion-court.js?v=2" defer></script>
   <script src="motion-reveal.js?v=3" defer></script>
   <script src="motion-transitions.js?v=2" defer></script>
-  <script src="features.js?v=2" defer></script>
+  <script src="features.js?v=3" defer></script>
   <script src="arrival.js?v=1" defer></script>
   <script src="ballo.js?v=4" defer></script>
   <script src="motion.js?v=5" defer></script>
+  <script src="more.js?v=1" defer></script>
 </body>
 </html>

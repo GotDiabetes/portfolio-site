@@ -1019,6 +1019,11 @@ dl, dd { margin: 0; }
   opacity: 0;
   transition: transform var(--dur-fade) var(--ease),
               opacity calc(var(--dur-fade) * .7) var(--ease);
+  /* Where the browser has linear(), the word lands like a ball: a small
+     overshoot past the line and a settle. The plain ease above is the
+     fallback, and the delay comes after both shorthands. */
+  transition: transform .85s linear(0, .22 14%, .58 30%, .9 46%, 1.045 58%, 1 68%, .988 78%, 1),
+              opacity calc(var(--dur-fade) * .55) var(--ease);
   transition-delay: var(--d, 0s);
 }
 /* Carries the .js prefix so it outranks the hidden state above rather than

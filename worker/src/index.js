@@ -275,7 +275,7 @@ async function slots() {
 async function court() {
   const hit = cache.get("live:court");
   if (hit && hit.at > Date.now() - COURT_TTL_MS) return hit.data;
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${COURT_LAT}&longitude=${COURT_LON}&daily=precipitation_probability_max,temperature_2m_max&temperature_unit=fahrenheit&timezone=${encodeURIComponent(CAL_TZ)}&forecast_days=4`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${COURT_LAT}&longitude=${COURT_LON}&daily=precipitation_probability_max,temperature_2m_max,sunrise,sunset&temperature_unit=fahrenheit&timezone=${encodeURIComponent(CAL_TZ)}&forecast_days=4`;
   const r = await fetch(url, { headers: { "Accept": "application/json" } });
   if (!r.ok) return { status: 503, error: "unavailable" };
   const j = await r.json();
@@ -286,7 +286,10 @@ async function court() {
     rain: Math.round(Number((d.precipitation_probability_max || [])[i])),
   })).filter((x) => Number.isFinite(x.hi) && Number.isFinite(x.rain));
   if (!days.length) return { status: 503, error: "unavailable" };
-  const data = { days };
+  /* Today's sunrise and sunset at the court (local time, no offset), for
+     the page's daylight bar. */
+  const sun = { rise: (d.sunrise || [])[0] || "", set: (d.sunset || [])[0] || "" };
+  const data = { days, sun };
   cache.set("live:court", { at: Date.now(), data });
   return data;
 }

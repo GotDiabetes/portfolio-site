@@ -96,7 +96,9 @@
       nextEl.textContent = text;
       nextEl.hidden = false;
     });
-    if (courtEl) get("/court").then(function (c) {
+    var courtP = get("/court");
+    window.leeCourt = courtP;          // more.js reads the sun from the same answer
+    if (courtEl) courtP.then(function (c) {
       if (!c || !c.days || !c.days.length) return;
       var today = c.days[0], text = "";
       if (today.rain >= 50) text = W.courtRain;

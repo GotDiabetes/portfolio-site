@@ -59,7 +59,7 @@ const KEEP = [
   "Lee Tennis Co.", "Isaac Lee", "Brice Krizman", "Albert Kim",
   "21euisungisaac@gmail.com", "Grip N Rip", "LifeSport Libertyville", "RSPA",
   "leetennisco.com", "Admin",   // the footer link to Isaac's own pages stays English
-  "Jamboree Road", "Via Lucca",  // the streets on the court map
+  "Esc",                         // the key, in the shortcuts list
   // the language menu names every language in itself
   "English", "Español", "한국어", "简体中文", "繁體中文", "日本語", "Tiếng Việt", "فارسی", "EN",
 ];

@@ -45,11 +45,16 @@
   <link rel="stylesheet" href="/elbow.css?v=1" />
   <link rel="stylesheet" href="/motion-reveal.css?v=2" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
-  <link rel="stylesheet" href="/features.css?v=3" />
+  <link rel="stylesheet" href="/features.css?v=4" />
   <link rel="stylesheet" href="/dark.css?v=1" />
+  <link rel="stylesheet" href="/more.css?v=1" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+  <!-- Reduced motion by choice (the header's motion switch, more.js): the
+       stored preference becomes the reduced-motion answer every script
+       asks for, before any of them runs, and a class for more.css. -->
+  <script>(function () { try { if (localStorage.getItem("leeMotion") !== "reduce") return; var d = document.documentElement; d.classList.add("reduce-motion"); var mm = window.matchMedia; if (!mm) return; window.matchMedia = function (q) { var r = mm.call(window, q); if (/prefers-reduced-motion/.test(q) && /reduce/.test(q)) return { matches: true, media: q, onchange: null, addEventListener: function () {}, removeEventListener: function () {}, addListener: function () {}, removeListener: function () {}, dispatchEvent: function () { return false; } }; return r; }; } catch (e) {} })();</script>
 
   <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
        popup; every one of them is also a real link to the same event on
@@ -136,6 +141,13 @@
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
         <svg class="theme-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 2.5a7.5 7.5 0 1 0 5 13.1A8 8 0 0 1 12.5 2.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         <svg class="theme-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <!-- Animations on or off (more.js), beside the dark-mode switch and
+           hidden with it on phones, where the phone's own setting decides. -->
+      <button class="theme-toggle motion-toggle" type="button" aria-label="Turn animations off" aria-pressed="false" data-motion-toggle>
+        <svg class="motion-on" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="12.5" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 7h4.5M1 10h3.5M1.5 13h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="motion-off" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 17L17 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
 
       <a class="btn btn-primary btn-sm header-cta" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' aria-label="Book a lesson">
@@ -305,6 +317,30 @@
         </div><!-- /tips -->
     </section>
 
+    <!-- Who serves? A racket to spin (more.js): tap, it spins, and lands
+         Up or Down, the way a match starts. -->
+    <section class="wrap spin-section">
+      <div class="spin fade" data-spin>
+        <div class="spin-text">
+          <h2>Who serves?</h2>
+          <p>Spin the racket. Up or down, the way it lands on court.</p>
+          <p class="spin-result" aria-live="polite"></p>
+        </div>
+        <button class="spin-racket" type="button" aria-label="Spin the racket">
+          <svg class="spin-art" viewBox="0 0 100 200" aria-hidden="true" focusable="false">
+            <ellipse class="racket-head" cx="50" cy="52" rx="38" ry="48"/>
+            <g class="racket-strings" fill="none">
+              <path d="M30 14v76M40 7v90M50 4v96M60 7v90M70 14v76"/>
+              <path d="M14 30h72M12 45h76M12 60h76M14 75h72"/>
+            </g>
+            <path class="racket-throat" d="M32 92L44 118M68 92L56 118"/>
+            <path class="racket-grip" d="M50 118V184"/>
+            <circle class="racket-cap" cx="50" cy="190" r="7"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
     <!-- The page's one ask, on the ink band like the front page's close. -->
     <section class="contact" data-band-sweep>
       <div class="wrap section">
@@ -342,6 +378,7 @@
   <script src="/elbow.js?v=1" defer></script>
   <script src="/motion-reveal.js?v=3" defer></script>
   <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=2" defer></script>
+  <script src="/features.js?v=3" defer></script>
+  <script src="/more.js?v=1" defer></script>
 </body>
 </html>
