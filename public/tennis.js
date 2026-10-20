@@ -454,8 +454,12 @@
       if (!r.ok) throw new Error(String(r.status));
       return r.json();
     }).then(function () {
+      /* The thank-you takes the whole card: the title and the intro go
+         with the form, so the popup no longer asks what was just done. */
       var done = form.parentNode.querySelector(".form-done");
-      form.hidden = true;
+      Array.prototype.forEach.call(form.parentNode.children, function (el) {
+        if (el !== done && !el.classList.contains("modal-close")) el.hidden = true;
+      });
       if (done) { done.hidden = false; done.focus(); }
     }).catch(function () {
       button.disabled = false;
