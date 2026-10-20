@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formWho: "連絡できるように、お名前とメールアドレスか電話番号を入れてください。",
+    formFailed: "送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "アニメーションをオフにする",
     motionOn: "アニメーションをオンにする",
@@ -83,6 +85,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `お名前`],
+    [`Email or phone`, `メールアドレスか電話番号`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="グループができたらお知らせします"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="お支払いとカードについてお返事します"`],
+    [`Join the list`, `リストに登録する`],
+    [`Send my request`, `リクエストを送る`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `回答は私だけに届きます。グループができたら連絡します。`],
+    [`I'll reply to set up payment in person, then give you the card.`, `お返事して現地でのお支払いを決め、カードをお渡しします。`],
+    [`You're on the list.`, `リストに登録しました。`],
+    [`I'll email or text you when a group forms with players at your level.`, `同じくらいのレベルのグループができたら、メールかメッセージでお知らせします。`],
+    [`Got it.`, `受け取りました。`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `近いうちにお返事して現地でのお支払いを決め、カードをお渡しします。`],
+    [`>Done<`, `>閉じる<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `アニメーションをオフにする`],
     [`Love`, `ラブ`],
@@ -366,8 +382,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `その他 <span class="field-optional">任意</span>`],
     [`e.g. four of us, all around the same level`, `例：4人で、全員同じくらいのレベルです`],
     [`Choose your level first.`, `先にレベルを選んでください。`],
-    [`Email my answers`, `メールで送る`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `回答が入った私宛てのメールが開きます。このサイトには何も保存されません。`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `テニスを贈り物にしませんか？個人レッスン、回数券、ヒッティングセッション、どれもギフトにできます。`],
@@ -391,8 +405,6 @@ export default {
     [`Who it's from`, `贈り主`],
     [`A message for the card`, `カードに添えるメッセージ`],
     [`Choose a gift first.`, `先にギフトを選んでください。`],
-    [`>Email my request<`, `>メールで申し込む<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `私宛てのメールが開きます。対面でのお支払いについてお返事し、その際にカードをお渡しします。このサイトには何も保存されません。`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `まだ答えのない質問は、答えを書けるよう90日間保存されます。`],
     [`First name, for the card`, `カードに書くお名前`],
     [`As it should read on the card`, `カードに書く表記のまま`],

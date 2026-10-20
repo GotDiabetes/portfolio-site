@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    formWho: "Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.",
+    formFailed: "Chưa gửi được. Bấm nút lần nữa để email câu trả lời cho tôi thay vào đó.",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "Tắt hiệu ứng chuyển động",
     motionOn: "Bật hiệu ứng chuyển động",
@@ -83,6 +85,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `Tên của bạn`],
+    [`Email or phone`, `Email hoặc số điện thoại`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="Để tôi báo khi có nhóm"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="Để tôi trả lời về thanh toán và thẻ"`],
+    [`Join the list`, `Ghi tên vào danh sách`],
+    [`Send my request`, `Gửi yêu cầu`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `Câu trả lời chỉ gửi đến tôi. Có nhóm là tôi liên hệ ngay.`],
+    [`I'll reply to set up payment in person, then give you the card.`, `Tôi sẽ trả lời để hẹn thanh toán trực tiếp, rồi đưa thẻ cho bạn.`],
+    [`You're on the list.`, `Bạn đã có tên trong danh sách.`],
+    [`I'll email or text you when a group forms with players at your level.`, `Khi có nhóm cùng trình độ với bạn, tôi sẽ email hoặc nhắn tin.`],
+    [`Got it.`, `Đã nhận.`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `Tôi sẽ sớm trả lời để hẹn thanh toán trực tiếp, rồi đưa thẻ cho bạn.`],
+    [`>Done<`, `>Xong<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `Tắt hiệu ứng chuyển động`],
     [`Love`, `0`],
@@ -363,8 +379,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `Còn gì khác không? <span class="field-optional">Không bắt buộc</span>`],
     [`e.g. four of us, all around the same level`, `ví dụ: nhóm bốn người, trình độ ngang nhau`],
     [`Choose your level first.`, `Hãy chọn trình độ trước.`],
-    [`Email my answers`, `Gửi email câu trả lời`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `Thao tác này mở một email gửi tôi kèm câu trả lời của bạn. Trang web không lưu gì cả.`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `Muốn tặng quà là tennis? Buổi học riêng 1-1, gói học hay buổi đánh tập đều có thể làm quà.`],
@@ -388,8 +402,6 @@ export default {
     [`Who it's from`, `Người tặng`],
     [`A message for the card`, `Lời nhắn trên thẻ`],
     [`Choose a gift first.`, `Hãy chọn món quà trước.`],
-    [`>Email my request<`, `>Gửi yêu cầu qua email<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `Thao tác này mở một email gửi tôi. Tôi sẽ trả lời để hẹn thanh toán trực tiếp, rồi đưa thẻ cho bạn. Trang web không lưu gì cả.`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `Những câu hỏi tôi chưa có câu trả lời được lưu 90 ngày để tôi viết câu trả lời.`],
     [`First name, for the card`, `Tên, để ghi trên thẻ`],
     [`As it should read on the card`, `Đúng như sẽ ghi trên thẻ`],

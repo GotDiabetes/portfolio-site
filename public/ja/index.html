@@ -34,7 +34,7 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261019" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
   <link rel="stylesheet" href="/motion-reveal.css?v=2" />
@@ -878,15 +878,28 @@
           <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> 週末の午後</label>
         </fieldset>
         <label class="field">
+          <span class="field-label">お名前</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">メールアドレスか電話番号</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="グループができたらお知らせします" required>
+        </label>
+        <label class="field">
           <span class="field-label">その他 <span class="field-optional">任意</span></span>
           <textarea name="notes" rows="3" maxlength="500" placeholder="例：4人で、全員同じくらいのレベルです"></textarea>
         </label>
         <p class="form-error" role="alert" hidden>先にレベルを選んでください。</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">メールで送る</button>
+          <button class="btn btn-primary" type="submit">リストに登録する</button>
         </div>
-        <p class="form-note">回答が入った私宛てのメールが開きます。このサイトには何も保存されません。</p>
+        <p class="form-note">回答は私だけに届きます。グループができたら連絡します。</p>
       </form>
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">リストに登録しました。</p>
+        <p>同じくらいのレベルのグループができたら、メールかメッセージでお知らせします。</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>閉じる</button></div>
+      </div>
     </div>
   </dialog>
 
@@ -915,12 +928,25 @@
           <span class="field-label">カードに添えるメッセージ <span class="field-optional">任意</span></span>
           <textarea name="message" rows="2" maxlength="140" placeholder="例：お誕生日おめでとう！コートで会おうね。"></textarea>
         </label>
+        <label class="field">
+          <span class="field-label">お名前</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">メールアドレスか電話番号</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="お支払いとカードについてお返事します" required>
+        </label>
         <p class="form-error" role="alert" hidden>先にギフトを選んでください。</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">メールで申し込む</button>
+          <button class="btn btn-primary" type="submit">リクエストを送る</button>
         </div>
-        <p class="form-note">私宛てのメールが開きます。対面でのお支払いについてお返事し、その際にカードをお渡しします。このサイトには何も保存されません。</p>
+        <p class="form-note">お返事して現地でのお支払いを決め、カードをお渡しします。</p>
       </form>
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">受け取りました。</p>
+        <p>近いうちにお返事して現地でのお支払いを決め、カードをお渡しします。</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>閉じる</button></div>
+      </div>
     </div>
   </dialog>
 
@@ -980,8 +1006,8 @@
     </button>
   </div>
 
-  <script>window.I18N = {"motionOff":"アニメーションをオフにする","motionOn":"アニメーションをオンにする","scoreLove":"ラブ","scoreGame":"ゲーム","builderMonth":"1か月、レッスン {n} 回で","builderPack5":"5回パッケージなら1回 $75：月 {total}。","builderPack10":"10回パッケージなら1回 $70：月 {total}。","daylightLeft":"コートの日照はあと {t}","lessonLine":"あなたのレッスン：{when}、{rel}。","addCal":"カレンダーに追加","dismiss":"閉じる","icsTitle":"Isaac Lee のテニスレッスン","titleAway":"戻ってレッスンを予約しませんか","spinUp":"アップ","spinDown":"ダウン","themeDark":"ダークモードに切り替え","themeLight":"ライトモードに切り替え","nextOpen":"次の空き：{when}","openHours":"今週の空きは{n}時間","openHour":"今週の空きは1時間","courtDry":"今日のコートは晴れ、最高{hi}°Fです。","courtRain":"今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。","courtRainSoon":"{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。","copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
-  <script src="/tennis.js?v=20261016" defer></script>
+  <script>window.I18N = {"formWho":"連絡できるように、お名前とメールアドレスか電話番号を入れてください。","formFailed":"送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。","motionOff":"アニメーションをオフにする","motionOn":"アニメーションをオンにする","scoreLove":"ラブ","scoreGame":"ゲーム","builderMonth":"1か月、レッスン {n} 回で","builderPack5":"5回パッケージなら1回 $75：月 {total}。","builderPack10":"10回パッケージなら1回 $70：月 {total}。","daylightLeft":"コートの日照はあと {t}","lessonLine":"あなたのレッスン：{when}、{rel}。","addCal":"カレンダーに追加","dismiss":"閉じる","icsTitle":"Isaac Lee のテニスレッスン","titleAway":"戻ってレッスンを予約しませんか","spinUp":"アップ","spinDown":"ダウン","themeDark":"ダークモードに切り替え","themeLight":"ライトモードに切り替え","nextOpen":"次の空き：{when}","openHours":"今週の空きは{n}時間","openHour":"今週の空きは1時間","courtDry":"今日のコートは晴れ、最高{hi}°Fです。","courtRain":"今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。","courtRainSoon":"{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。","copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script src="/tennis.js?v=20261020" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
   <script src="/ask.js?v=9" defer></script>

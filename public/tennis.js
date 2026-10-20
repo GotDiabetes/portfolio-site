@@ -275,9 +275,14 @@
      click and "open in new tab" keep doing what the browser normally does. */
   var MAIL_TO = "21euisungisaac@gmail.com";
 
+  /* On a phone or tablet the mailto: goes through untouched: the phone's
+     own mail app (the Gmail app, if that is what is set up) opens with the
+     draft, where Gmail's web compose would land on a sign-in page. */
+  var finePointer = !!(window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+
   document.addEventListener("click", function (e) {
     var link = e.target.closest && e.target.closest("[data-mail]");
-    if (!link) return;
+    if (!link || !finePointer) return;
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     /* data-mail is already URI-encoded. */
     if (gmail("&su=" + (link.getAttribute("data-mail") || ""))) e.preventDefault();
@@ -366,11 +371,13 @@
   }
 
   /* ------------------------------------------------- 10. Clinic list --
-     The popup's form becomes an email to Isaac, through the same Gmail
-     hand-off as the email buttons (mailto: if the popup is blocked), sent
-     from the visitor's own account so his reply goes straight back. The
-     body is always English: the form's values are codes, and these are the
-     words he reads, whatever language the visitor saw. Nothing is stored. */
+     The popup's form goes to the Worker (POST /signup), which keeps the
+     answers for Isaac's numbers page and mails them to him; the form then
+     gives way to a thank-you. The body is always English: the form's
+     values are codes, and these are the words he reads, whatever language
+     the visitor saw. Only if the Worker can't be reached does the old
+     hand-off remain: an email from the visitor's own account, which once
+     stranded a client who wasn't signed in to Gmail on that device. */
   var clinicForm = document.getElementById("clinicForm");
   if (clinicForm) {
     var LEVELS = [
@@ -385,6 +392,7 @@
       "weekend-morning": "weekend mornings", "weekend-afternoon": "weekend afternoons",
     };
     var clinicError = clinicForm.querySelector(".form-error");
+    var levelMsg = clinicError.textContent;
     var levelField = clinicForm.querySelector("select[name=level]");
     levelField.addEventListener("change", function () { clinicError.hidden = true; });
 
@@ -392,11 +400,13 @@
       e.preventDefault();
       var level = levelField.value;
       if (!LEVELS[level]) {
-        clinicError.hidden = false;
+        showError(clinicForm, levelMsg);
         levelField.focus();
         return;
       }
       clinicError.hidden = true;
+      var who = whoFields(clinicForm);
+      if (!who) return;
       var group = clinicForm.querySelector("input[name=group]:checked");
       var times = Array.prototype.map.call(clinicForm.querySelectorAll("input[name=times]:checked"), function (b) { return TIMES[b.value]; });
       var notes = clinicForm.elements.notes.value.replace(/\s+/g, " ").trim();
@@ -408,18 +418,56 @@
         "Times that usually work: " + (times.length ? times.join(", ") : "not given"),
       ];
       if (notes) lines.push("Anything else: " + notes);
-      sendMail("Clinic list", lines);
-      hit("clinic_list");
+      submitForm(clinicForm, "clinic", who, "Clinic list", lines);
     });
   }
 
-  /* Both forms end the same way: an English email to Isaac, through Gmail
-     or, if its window is blocked, the visitor's mail app. */
+  /* Both forms end the same way. The name and a way to reach the visitor
+     are required (an email, or a number with at least seven digits); the
+     answers go to the Worker as one English text; the form gives way to
+     its thank-you. If the Worker can't be reached the submit button turns
+     into the email hand-off: Gmail's compose window on a desktop, the
+     phone's own mail app elsewhere. */
+  function showError(form, text) {
+    var el = form.querySelector(".form-error");
+    el.textContent = text;
+    el.hidden = false;
+  }
+  function whoFields(form) {
+    var name = form.elements.name.value.replace(/\s+/g, " ").trim();
+    var contact = form.elements.contact.value.replace(/\s+/g, " ").trim();
+    if (name && (/@/.test(contact) || (contact.match(/\d/g) || []).length >= 7)) return { name: name, contact: contact };
+    showError(form, T.formWho || "Add your name and an email or phone number, so I can reach you.");
+    form.elements[name ? "contact" : "name"].focus();
+    return null;
+  }
+  function submitForm(form, kind, who, subject, lines) {
+    var full = ["Name: " + who.name, "Contact: " + who.contact, ""].concat(lines);
+    var base = hitBase();
+    if (form.__fallback || !base || !window.fetch) { sendMail(subject, full); return; }
+    var button = form.querySelector("button[type=submit]");
+    button.disabled = true;
+    fetch(base + "/signup", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind: kind, name: who.name, contact: who.contact, body: lines.join("\n"), lang: T.lang || "en" }),
+    }).then(function (r) {
+      if (!r.ok) throw new Error(String(r.status));
+      return r.json();
+    }).then(function () {
+      var done = form.parentNode.querySelector(".form-done");
+      form.hidden = true;
+      if (done) { done.hidden = false; done.focus(); }
+    }).catch(function () {
+      button.disabled = false;
+      form.__fallback = true;
+      showError(form, T.formFailed || "That didn't send. Press the button again to email me your answers instead.");
+    });
+  }
   function sendMail(subject, lines) {
     subject += T.pageName ? " (" + T.pageName + " page)" : "";
     if (T.pageName) lines = lines.concat("", "(Sent from the " + T.pageName + " page.)");
     var body = lines.join("\n");
-    if (!gmail("&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body))) {
+    if (!finePointer || !gmail("&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body))) {
       window.location.href = "mailto:" + MAIL_TO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     }
   }
@@ -437,15 +485,18 @@
     var giftError = giftForm.querySelector(".form-error");
     giftForm.addEventListener("change", function () { giftError.hidden = true; });
 
+    var giftMsg = giftError.textContent;
     giftForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var picked = giftForm.querySelector("input[name=gift]:checked");
       if (!picked || !GIFTS[picked.value]) {
-        giftError.hidden = false;
+        showError(giftForm, giftMsg);
         giftForm.querySelector("input[name=gift]").focus();
         return;
       }
       giftError.hidden = true;
+      var who = whoFields(giftForm);
+      if (!who) return;
       var field = function (name) { return giftForm.elements[name].value.replace(/\s+/g, " ").trim(); };
       var lines = [
         "I'd like to give a lesson as a gift.",
@@ -456,8 +507,7 @@
       ];
       if (field("message")) lines.push("Message for the card: " + field("message"));
       lines.push("", "Please reply so we can settle payment in person.");
-      sendMail("Gift lesson", lines);
-      hit("gift");
+      submitForm(giftForm, "gift", who, "Gift lesson", lines);
     });
   }
 

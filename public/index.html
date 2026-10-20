@@ -49,7 +49,7 @@
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <!-- The query is a cache key, not a route. Bump it when either file changes. -->
-  <link rel="stylesheet" href="tennis.css?v=20261019" />
+  <link rel="stylesheet" href="tennis.css?v=20261020" />
   <link rel="stylesheet" href="focus.css?v=1" />
   <link rel="stylesheet" href="motion-court.css?v=2" />
   <link rel="stylesheet" href="motion-reveal.css?v=2" />
@@ -1045,22 +1045,36 @@
           <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> Weekend afternoons</label>
         </fieldset>
         <label class="field">
+          <span class="field-label">Your name</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">Email or phone</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="So I can tell you when a group forms" required>
+        </label>
+        <label class="field">
           <span class="field-label">Anything else? <span class="field-optional">Optional</span></span>
           <textarea name="notes" rows="3" maxlength="500" placeholder="e.g. four of us, all around the same level"></textarea>
         </label>
         <p class="form-error" role="alert" hidden>Choose your level first.</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">Email my answers</button>
+          <button class="btn btn-primary" type="submit">Join the list</button>
         </div>
-        <p class="form-note">This opens an email to me with your answers. Nothing is saved on this site.</p>
+        <p class="form-note">Your answers go to me and nowhere else. I'll be in touch when a group forms.</p>
       </form>
+      <!-- Shown in the form's place once the Worker has the answers. -->
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">You're on the list.</p>
+        <p>I'll email or text you when a group forms with players at your level.</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>Done</button></div>
+      </div>
     </div>
   </dialog>
 
-  <!-- Gift lessons. The same hand-off as the clinic list: the answers become
-       an email to Isaac from the visitor's own account (tennis.js), in
-       English whatever the page language. He replies to settle payment in
-       person and makes the card at /gift-card/. Nothing is stored. -->
+  <!-- Gift lessons. The same way as the clinic list: the answers go to the
+       Worker (tennis.js), in English whatever the page language, which keeps
+       them for the numbers page and mails Isaac. He replies to settle
+       payment in person and makes the card at /gift-card/. -->
   <dialog class="modal" id="giftForm" aria-labelledby="giftTitle">
     <div class="modal-card">
       <button class="modal-close" data-close type="button" aria-label="Close">&times;</button>
@@ -1086,12 +1100,25 @@
           <span class="field-label">A message for the card <span class="field-optional">Optional</span></span>
           <textarea name="message" rows="2" maxlength="140" placeholder="e.g. Happy birthday! See you on court."></textarea>
         </label>
+        <label class="field">
+          <span class="field-label">Your name</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">Email or phone</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="So I can reply about payment and the card" required>
+        </label>
         <p class="form-error" role="alert" hidden>Choose a gift first.</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">Email my request</button>
+          <button class="btn btn-primary" type="submit">Send my request</button>
         </div>
-        <p class="form-note">This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.</p>
+        <p class="form-note">I'll reply to set up payment in person, then give you the card.</p>
       </form>
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">Got it.</p>
+        <p>I'll reply soon to set up payment in person, then give you the card.</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>Done</button></div>
+      </div>
     </div>
   </dialog>
 
@@ -1157,7 +1184,7 @@
     </button>
   </div>
 
-  <script src="tennis.js?v=20261016" defer></script>
+  <script src="tennis.js?v=20261020" defer></script>
   <script src="focus.js?v=3" defer></script>
   <script src="match.js?v=6" defer></script>
   <script src="ask.js?v=9" defer></script>

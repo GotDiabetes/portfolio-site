@@ -34,7 +34,7 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261019" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
   <link rel="stylesheet" href="/motion-reveal.css?v=2" />
@@ -878,15 +878,28 @@
           <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> 周末下午</label>
         </fieldset>
         <label class="field">
+          <span class="field-label">你的名字</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">邮箱或电话</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="组好班我会通知你" required>
+        </label>
+        <label class="field">
           <span class="field-label">其他补充 <span class="field-optional">可选</span></span>
           <textarea name="notes" rows="3" maxlength="500" placeholder="例如：我们四个人，水平差不多"></textarea>
         </label>
         <p class="form-error" role="alert" hidden>请先选择你的水平。</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">用邮件发送</button>
+          <button class="btn btn-primary" type="submit">加入名单</button>
         </div>
-        <p class="form-note">点击后会打开一封写好答案的邮件发给我。本网站不会保存任何内容。</p>
+        <p class="form-note">你的回答只会发给我。组好班我会联系你。</p>
       </form>
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">你已在名单上。</p>
+        <p>组好和你水平相近的班，我会发邮件或短信通知你。</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>好的</button></div>
+      </div>
     </div>
   </dialog>
 
@@ -915,12 +928,25 @@
           <span class="field-label">写在卡上的话 <span class="field-optional">可选</span></span>
           <textarea name="message" rows="2" maxlength="140" placeholder="例如：生日快乐！球场上见。"></textarea>
         </label>
+        <label class="field">
+          <span class="field-label">你的名字</span>
+          <input type="text" name="name" maxlength="80" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span class="field-label">邮箱或电话</span>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="方便我回复付款和卡片的事" required>
+        </label>
         <p class="form-error" role="alert" hidden>请先选择礼物。</p>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">用邮件发送申请</button>
+          <button class="btn btn-primary" type="submit">发送申请</button>
         </div>
-        <p class="form-note">点击后会打开一封发给我的邮件。我会回复你，约好当面付款，然后把卡交给你。本网站不会保存任何内容。</p>
+        <p class="form-note">我会回复你，当面安排付款，然后把卡给你。</p>
       </form>
+      <div class="form-done" tabindex="-1" hidden>
+        <p class="form-done-title">收到了。</p>
+        <p>我会尽快回复你，当面安排付款，然后把卡给你。</p>
+        <div class="actions"><button class="btn btn-primary" type="button" data-close>好的</button></div>
+      </div>
     </div>
   </dialog>
 
@@ -980,8 +1006,8 @@
     </button>
   </div>
 
-  <script>window.I18N = {"motionOff":"关闭动画","motionOn":"开启动画","scoreLove":"零","scoreGame":"局","builderMonth":"每月，按 {n} 节课计","builderPack5":"买 5 节课的套餐，每节 $75：每月 {total}。","builderPack10":"买 10 节课的套餐，每节 $70：每月 {total}。","daylightLeft":"球场还有 {t} 的日光","lessonLine":"你的课：{when}，{rel}。","addCal":"加入日历","dismiss":"关闭","icsTitle":"Isaac Lee 网球课","titleAway":"回来预约一节课吧","spinUp":"朝上","spinDown":"朝下","themeDark":"切换到深色模式","themeLight":"切换到浅色模式","nextOpen":"最近的空档：{when}","openHours":"本周还有 {n} 个空闲小时","openHour":"本周还有 1 个空闲小时","courtDry":"今天球场干燥，最高 {hi}°F。","courtRain":"今天可能下雨。如果需要改时间，我会发短信通知。","courtRainSoon":"{day}预计有雨；如果需要改时间，我会发短信通知。","copied":"已复制","menuOpen":"打开菜单","menuClose":"关闭菜单","loadingCal":"正在加载日历…","askSuggestions":["课程多少钱？","在哪里上课？","怎么预约？","我应该练什么？"],"askDown":"聊天暂时无法回复。请发邮件给我，我会尽快回复。","askBusy":"一下子问题太多了。请稍等一分钟，或者给我发邮件。","emailMe":"发邮件给我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"推荐问题","askFinding":"正在查找答案","open":"打开","showMe":"查看","soundMute":"关闭声音","soundOn":"打开声音","typeBy":"char","matchCopy":{"private":{"name":"一对一私教课","line":"一对一，围绕你想改进的地方来安排。"},"semi":{"name":"双人课","line":"两人共享一小时，每人 $55。"},"hitting":{"name":"陪练课","line":"纯对打，不教学，每小时 $45。"},"group":{"name":"成人小组课","line":"一块场地上的小组课。报名后，我会把你安排进水平相近的小组。"}},"matchAnswer":"看起来最适合你的是{name}。{line}","matchTravel":"提醒一下：课程都在我的主场，尔湾的 Toscana 球场。我没法去你那里，但很欢迎你过来。","matchUnsure":"从这句话我判断不出来。试着写写你的水平和谁来打球，或者从上面四种课里选一个。","matchDown":"课程匹配暂时无法回复。四种课程就在上面，也可以给我发邮件。","matchBusy":"匹配请求有点多。请稍等一分钟，或者从上面四种课里选一个。","matchSeeCard":"查看课程卡片 ↑","matchLabel":"为你推荐","matchBusyButton":"匹配中…","soundsOn":"网球音效已开启","soundsTurnOff":"关闭","soundsOff":"音效已关闭","matchLevels":["网球新手","初级","中级","高级","竞技"],"matchFocus":{"serve":"发球","groundstrokes":"正反手","net":"网前","movement":"步法","match":"比赛","basics":"基本功"},"matchLevelLine":"水平：{level}。","matchFocusLine":"重点：{focus}。","matchNotesLine":"在这里预约，这些信息会写进预约备注，方便我准备第一节课。","matchJunior":"为孩子预约？请用你自己的名字预约，并在备注里写上孩子的年龄。","bookedToast":"预约成功，球场上见。","tipDemoPlay":"看看怎么改","tipDemoReplay":"再看一次","tipDemoLabel":"改正方法动画","lang":"zh-hans","pageName":"Simplified Chinese","askUrl":"/zh-hans/ask.json","mailSubject":"Tennis lessons (Simplified Chinese page)","mailSubjectQuestion":"Question about lessons (Simplified Chinese page)"};</script>
-  <script src="/tennis.js?v=20261016" defer></script>
+  <script>window.I18N = {"formWho":"请填上名字和邮箱或电话，方便我联系你。","formFailed":"没发出去。再按一次按钮，改用邮件把回答发给我。","motionOff":"关闭动画","motionOn":"开启动画","scoreLove":"零","scoreGame":"局","builderMonth":"每月，按 {n} 节课计","builderPack5":"买 5 节课的套餐，每节 $75：每月 {total}。","builderPack10":"买 10 节课的套餐，每节 $70：每月 {total}。","daylightLeft":"球场还有 {t} 的日光","lessonLine":"你的课：{when}，{rel}。","addCal":"加入日历","dismiss":"关闭","icsTitle":"Isaac Lee 网球课","titleAway":"回来预约一节课吧","spinUp":"朝上","spinDown":"朝下","themeDark":"切换到深色模式","themeLight":"切换到浅色模式","nextOpen":"最近的空档：{when}","openHours":"本周还有 {n} 个空闲小时","openHour":"本周还有 1 个空闲小时","courtDry":"今天球场干燥，最高 {hi}°F。","courtRain":"今天可能下雨。如果需要改时间，我会发短信通知。","courtRainSoon":"{day}预计有雨；如果需要改时间，我会发短信通知。","copied":"已复制","menuOpen":"打开菜单","menuClose":"关闭菜单","loadingCal":"正在加载日历…","askSuggestions":["课程多少钱？","在哪里上课？","怎么预约？","我应该练什么？"],"askDown":"聊天暂时无法回复。请发邮件给我，我会尽快回复。","askBusy":"一下子问题太多了。请稍等一分钟，或者给我发邮件。","emailMe":"发邮件给我","askYou":"你：","askIsaac":"Isaac：","askSuggested":"推荐问题","askFinding":"正在查找答案","open":"打开","showMe":"查看","soundMute":"关闭声音","soundOn":"打开声音","typeBy":"char","matchCopy":{"private":{"name":"一对一私教课","line":"一对一，围绕你想改进的地方来安排。"},"semi":{"name":"双人课","line":"两人共享一小时，每人 $55。"},"hitting":{"name":"陪练课","line":"纯对打，不教学，每小时 $45。"},"group":{"name":"成人小组课","line":"一块场地上的小组课。报名后，我会把你安排进水平相近的小组。"}},"matchAnswer":"看起来最适合你的是{name}。{line}","matchTravel":"提醒一下：课程都在我的主场，尔湾的 Toscana 球场。我没法去你那里，但很欢迎你过来。","matchUnsure":"从这句话我判断不出来。试着写写你的水平和谁来打球，或者从上面四种课里选一个。","matchDown":"课程匹配暂时无法回复。四种课程就在上面，也可以给我发邮件。","matchBusy":"匹配请求有点多。请稍等一分钟，或者从上面四种课里选一个。","matchSeeCard":"查看课程卡片 ↑","matchLabel":"为你推荐","matchBusyButton":"匹配中…","soundsOn":"网球音效已开启","soundsTurnOff":"关闭","soundsOff":"音效已关闭","matchLevels":["网球新手","初级","中级","高级","竞技"],"matchFocus":{"serve":"发球","groundstrokes":"正反手","net":"网前","movement":"步法","match":"比赛","basics":"基本功"},"matchLevelLine":"水平：{level}。","matchFocusLine":"重点：{focus}。","matchNotesLine":"在这里预约，这些信息会写进预约备注，方便我准备第一节课。","matchJunior":"为孩子预约？请用你自己的名字预约，并在备注里写上孩子的年龄。","bookedToast":"预约成功，球场上见。","tipDemoPlay":"看看怎么改","tipDemoReplay":"再看一次","tipDemoLabel":"改正方法动画","lang":"zh-hans","pageName":"Simplified Chinese","askUrl":"/zh-hans/ask.json","mailSubject":"Tennis lessons (Simplified Chinese page)","mailSubjectQuestion":"Question about lessons (Simplified Chinese page)"};</script>
+  <script src="/tennis.js?v=20261020" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=6" defer></script>
   <script src="/ask.js?v=9" defer></script>

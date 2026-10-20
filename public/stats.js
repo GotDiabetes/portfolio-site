@@ -106,6 +106,8 @@
     });
     table.innerHTML = html + "</tbody>";
 
+    renderSignups(data.signups || []);
+
     list.innerHTML = "";
     var qs = data.questions || [];
     if (!qs.length) {
@@ -124,6 +126,36 @@
       li.appendChild(text);
       li.appendChild(meta);
       list.appendChild(li);
+    });
+  }
+
+  /* The sign-ups: who, how to reach them, and their answers, as text. */
+  var KINDS = { clinic: "Clinic list", gift: "Gift lesson" };
+  function renderSignups(rows) {
+    var out = document.getElementById("statsSignups");
+    if (!out) return;
+    out.innerHTML = "";
+    if (!rows.length) {
+      var none = document.createElement("li");
+      none.className = "is-empty";
+      none.textContent = "None yet.";
+      out.appendChild(none);
+      return;
+    }
+    rows.forEach(function (s) {
+      var li = document.createElement("li");
+      var who = document.createElement("strong");
+      who.textContent = s.name + " · " + s.contact;      // visitor text: always as text
+      var body = document.createElement("span");
+      body.className = "desk-signup-body";
+      body.textContent = s.body;
+      var meta = document.createElement("span");
+      meta.className = "desk-q-meta";
+      meta.textContent = new Date(s.at).toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " · " + (KINDS[s.kind] || s.kind) + " · " + (PAGES[s.page] || s.page);
+      li.appendChild(who);
+      li.appendChild(body);
+      li.appendChild(meta);
+      out.appendChild(li);
     });
   }
 

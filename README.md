@@ -71,6 +71,17 @@ pages named), and both stay off until filled in:
   leetennisco.com; copy the token from the snippet it shows. No cookies, no
   consent banner.
 
+**Sign-ups in your inbox.** The clinic list and gift request forms send
+their answers to the Worker, which keeps them on your numbers page
+(`/stats/`, under "Sign-ups"). To have each one emailed to you as well:
+make a free account at resend.com with your Gmail, create an API key,
+then from the `worker` folder run `npx wrangler secret put RESEND_KEY`
+and paste it. Resend's free tier mails your own address without any
+domain setup, which is all this uses. (Before October 20 these forms
+opened a Gmail draft on the visitor's side, which stranded anyone not
+signed in to Gmail on that device; the draft is now only the fallback
+when the Worker can't be reached.)
+
 Three more built on October 19 wait the same way, in `public/index.html`:
 
 - **Before and after** (the `<figure class="compare">` in About): put two

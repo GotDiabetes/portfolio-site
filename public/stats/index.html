@@ -16,7 +16,7 @@
   <meta name="robots" content="noindex" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020" />
 </head>
 
 <body class="desk">
@@ -53,12 +53,16 @@
       <div class="desk-table-wrap"><table class="desk-table" id="statsTable"></table></div>
       <p class="form-note">Visits (which pages, from where, on what device) are in <a href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">Cloudflare Web Analytics</a>.</p>
 
+      <h2>Sign-ups</h2>
+      <p class="desk-sub">The clinic list and gift requests, newest first. Reply to each from your own email; with a Resend key set on the Worker they also arrive in your inbox.</p>
+      <ol class="desk-questions desk-signups" id="statsSignups"></ol>
+
       <h2>Questions the chat couldn't answer</h2>
       <p class="desk-sub">Kept for 90 days. Write an answer for the ones that come up, in ask.json.</p>
       <ol class="desk-questions" id="statsQuestions"></ol>
     </div>
   </main>
 
-  <script src="/stats.js?v=2" defer></script>
+  <script src="/stats.js?v=3" defer></script>
 </body>
 </html>

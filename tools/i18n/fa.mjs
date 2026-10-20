@@ -15,6 +15,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formWho: "نام و یک ایمیل یا شماره تلفن بنویس تا بتوانم با تو تماس بگیرم.",
+    formFailed: "ارسال نشد. دوباره دکمه را بزن تا به‌جای آن پاسخ‌هایت را ایمیل کنی.",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "خاموش کردن انیمیشن‌ها",
     motionOn: "روشن کردن انیمیشن‌ها",
@@ -87,6 +89,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `نام تو`],
+    [`Email or phone`, `ایمیل یا شماره تلفن`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="تا وقتی گروهی تشکیل شد خبرت کنم"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="تا دربارهٔ پرداخت و کارت جواب بدهم"`],
+    [`Join the list`, `ثبت در فهرست`],
+    [`Send my request`, `ارسال درخواست`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `پاسخ‌هایت فقط به من می‌رسد. وقتی گروهی تشکیل شود خبرت می‌کنم.`],
+    [`I'll reply to set up payment in person, then give you the card.`, `جواب می‌دهم تا پرداخت را حضوری هماهنگ کنیم، بعد کارت را می‌دهم.`],
+    [`You're on the list.`, `در فهرست هستی.`],
+    [`I'll email or text you when a group forms with players at your level.`, `وقتی گروهی هم‌سطح تو تشکیل شود، ایمیل یا پیامک می‌زنم.`],
+    [`Got it.`, `دریافت شد.`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `به‌زودی جواب می‌دهم تا پرداخت را حضوری هماهنگ کنیم، بعد کارت را می‌دهم.`],
+    [`>Done<`, `>باشه<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `خاموش کردن انیمیشن‌ها`],
     [`Love`, `صفر`],
@@ -370,8 +386,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `توضیح دیگر <span class="field-optional">اختیاری</span>`],
     [`e.g. four of us, all around the same level`, `مثلاً: چهار نفریم، همه در یک سطح`],
     [`Choose your level first.`, `اول سطحتان را انتخاب کنید.`],
-    [`Email my answers`, `ارسال با ایمیل`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `با این دکمه یک ایمیل با پاسخ‌هایتان برای من باز می‌شود. چیزی در این سایت ذخیره نمی‌شود.`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `می‌خواهید تنیس هدیه بدهید؟ هر کلاس خصوصی، بسته یا جلسه رالی می‌تواند هدیه باشد.`],
@@ -395,8 +409,6 @@ export default {
     [`Who it's from`, `از طرف چه کسی`],
     [`A message for the card`, `پیامی برای کارت`],
     [`Choose a gift first.`, `اول یک هدیه انتخاب کنید.`],
-    [`>Email my request<`, `>ارسال درخواست با ایمیل<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `با این دکمه یک ایمیل برای من باز می‌شود. جواب می‌دهم تا پرداخت حضوری را هماهنگ کنیم و بعد کارت را به شما می‌دهم. چیزی در این سایت ذخیره نمی‌شود.`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `پرسش‌هایی که هنوز جوابی برایشان ندارم ۹۰ روز نگه داشته می‌شوند تا بتوانم جوابشان را بنویسم.`],
     [`First name, for the card`, `نام کوچک، برای کارت`],
     [`As it should read on the card`, `همان‌طور که روی کارت نوشته شود`],

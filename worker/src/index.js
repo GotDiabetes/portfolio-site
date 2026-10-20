@@ -161,6 +161,7 @@ const ROUTES = {
   "/drills/describe": { method: "POST", limit: "PER_VISITOR", jev: true, run: describeStudent },
   "/slots": { method: "GET", limit: "PER_VISITOR", run: slots },
   "/court": { method: "GET", limit: "PER_VISITOR", run: court },
+  "/signup": { method: "POST", limit: "PER_VISITOR", run: signup },
 };
 
 export default {
@@ -691,6 +692,54 @@ const HIT_EVENTS = [
 const PAGES = ["en", ...LANGS];
 const KEEP_DAYS = 90;
 
+/* ------------------------------------------------------ /signup -------
+   The clinic list and the gift request. The page used to turn these into
+   an email from the visitor's own account, which stranded anyone not
+   signed in to Gmail on that device (a client of Isaac's found the button
+   "just went to Gmail"). Now the answers come here: they are kept in the
+   database, the numbers page (/stats/) lists them, and when a Resend key
+   is set (npx wrangler secret put RESEND_KEY, from the worker folder; the
+   README says how) each one is mailed to Isaac at once. The page keeps the
+   email hand-off only as a fallback for when this cannot be reached.
+
+   POST /signup  { "kind": "clinic" | "gift", "name": "…", "contact": "…", "body": "…", "lang": "ko" }
+   →             { "ok": true }
+   ---------------------------------------------------------------------- */
+const SIGNUP_KINDS = { clinic: "Clinic list", gift: "Gift lesson" };
+const MAIL_TO = "21euisungisaac@gmail.com";
+
+async function signup(body, env, later) {
+  const kind = SIGNUP_KINDS[body.kind] ? body.kind : null;
+  const name = clean(body.name).slice(0, 80);
+  const contact = clean(body.contact).slice(0, 120);
+  const text = (typeof body.body === "string" ? body.body : "").replace(/\r/g, "").replace(/[^\S\n]+/g, " ").trim().slice(0, 1500);
+  if (!kind || !name || !contact || !text) return { status: 400, error: "bad_request" };
+  if (!(/@/.test(contact) || (contact.match(/\d/g) || []).length >= 7)) return { status: 400, error: "bad_contact" };
+  if (!env.DB) return { status: 503, error: "not_set_up" };
+  await schema(env.DB);
+  const page = pageOf(body.lang);
+  const at = new Date().toISOString();
+  await env.DB.prepare("INSERT INTO signups (at, kind, page, name, contact, body) VALUES (?, ?, ?, ?, ?, ?)")
+    .bind(at, kind, page, name, contact, text).run();
+  later(count(env, kind === "clinic" ? "clinic_list" : "gift", page));
+  if (env.RESEND_KEY) {
+    later(notify(env, SIGNUP_KINDS[kind] + ": " + name,
+      [SIGNUP_KINDS[kind] + " from the site (" + page + " page)", "", "Name: " + name, "Contact: " + contact, "", text, "", "Every sign-up is also on https://leetennisco.com/stats/"].join("\n")));
+  }
+  return { ok: true };
+}
+
+/* One email to Isaac through Resend's API. Their free tier sends to the
+   account's own address from onboarding@resend.dev without a domain, which
+   is all this needs. */
+async function notify(env, subject, text) {
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + env.RESEND_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: "Lee Tennis Co. <onboarding@resend.dev>", to: [MAIL_TO], subject, text }),
+  });
+}
+
 function hit(body, env, later) {
   const event = HIT_EVENTS.includes(body.event) ? body.event : null;
   if (!event) return null;
@@ -704,11 +753,12 @@ async function stats(body, env, later, request) {
   if (!(await sameSecret(given, env.STATS_KEY))) return { status: 401, error: "wrong_key" };
   await schema(env.DB);
   const since = irvineDay(-KEEP_DAYS);
-  const [counts, questions] = await Promise.all([
+  const [counts, questions, signups] = await Promise.all([
     env.DB.prepare("SELECT day, event, page, n FROM counts WHERE day >= ? ORDER BY day DESC, event, page").bind(since).all(),
     env.DB.prepare("SELECT at, page, question FROM questions ORDER BY at DESC LIMIT 300").all(),
+    env.DB.prepare("SELECT id, at, kind, page, name, contact, body FROM signups ORDER BY at DESC LIMIT 200").all(),
   ]);
-  return { counts: counts.results, questions: questions.results };
+  return { counts: counts.results, questions: questions.results, signups: signups.results };
 }
 
 async function count(env, event, page) {
@@ -742,6 +792,7 @@ function schema(db) {
     schemaReady = db.batch([
       db.prepare("CREATE TABLE IF NOT EXISTS counts (day TEXT NOT NULL, event TEXT NOT NULL, page TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, event, page))"),
       db.prepare("CREATE TABLE IF NOT EXISTS questions (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, page TEXT NOT NULL, question TEXT NOT NULL)"),
+      db.prepare("CREATE TABLE IF NOT EXISTS signups (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, kind TEXT NOT NULL, page TEXT NOT NULL, name TEXT NOT NULL, contact TEXT NOT NULL, body TEXT NOT NULL)"),
     ]).catch((err) => { schemaReady = null; throw err; });
   }
   return schemaReady;

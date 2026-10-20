@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formWho: "請填上名字和電子郵件或電話，方便我聯絡你。",
+    formFailed: "沒送出去。再按一次按鈕，改用電子郵件把回答寄給我。",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "關閉動畫",
     motionOn: "開啟動畫",
@@ -84,6 +86,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `你的名字`],
+    [`Email or phone`, `電子郵件或電話`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="組好班我會通知你"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="方便我回覆付款和卡片的事"`],
+    [`Join the list`, `加入名單`],
+    [`Send my request`, `送出申請`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `你的回答只會傳給我。組好班我會聯絡你。`],
+    [`I'll reply to set up payment in person, then give you the card.`, `我會回覆你，當面安排付款，然後把卡給你。`],
+    [`You're on the list.`, `你已在名單上。`],
+    [`I'll email or text you when a group forms with players at your level.`, `組好和你程度相近的班，我會寄信或傳簡訊通知你。`],
+    [`Got it.`, `收到了。`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `我會盡快回覆你，當面安排付款，然後把卡給你。`],
+    [`>Done<`, `>好的<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `關閉動畫`],
     [`Love`, `零`],
@@ -367,8 +383,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `其他補充 <span class="field-optional">選填</span>`],
     [`e.g. four of us, all around the same level`, `例如：我們四個人，程度差不多`],
     [`Choose your level first.`, `請先選擇你的程度。`],
-    [`Email my answers`, `用 Email 寄出`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `按下後會開啟一封寫好答案、寄給我的信。本網站不會儲存任何內容。`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `想把網球當作禮物送人嗎？私人課、多堂方案或陪打課都可以當作禮物。`],
@@ -392,8 +406,6 @@ export default {
     [`Who it's from`, `誰送的`],
     [`A message for the card`, `寫在卡片上的話`],
     [`Choose a gift first.`, `請先選擇禮物。`],
-    [`>Email my request<`, `>用 Email 寄出申請<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `按下後會開啟一封寄給我的信。我會回信約好當面付款，然後把卡片交給你。本網站不會儲存任何內容。`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `暫時還沒有答案的問題會保留 90 天，方便我寫出答案。`],
     [`First name, for the card`, `名字，寫在卡片上`],
     [`As it should read on the card`, `照卡片上要寫的樣子填寫`],

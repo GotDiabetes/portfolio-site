@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formWho: "请填上名字和邮箱或电话，方便我联系你。",
+    formFailed: "没发出去。再按一次按钮，改用邮件把回答发给我。",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "关闭动画",
     motionOn: "开启动画",
@@ -84,6 +86,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `你的名字`],
+    [`Email or phone`, `邮箱或电话`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="组好班我会通知你"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="方便我回复付款和卡片的事"`],
+    [`Join the list`, `加入名单`],
+    [`Send my request`, `发送申请`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `你的回答只会发给我。组好班我会联系你。`],
+    [`I'll reply to set up payment in person, then give you the card.`, `我会回复你，当面安排付款，然后把卡给你。`],
+    [`You're on the list.`, `你已在名单上。`],
+    [`I'll email or text you when a group forms with players at your level.`, `组好和你水平相近的班，我会发邮件或短信通知你。`],
+    [`Got it.`, `收到了。`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `我会尽快回复你，当面安排付款，然后把卡给你。`],
+    [`>Done<`, `>好的<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `关闭动画`],
     [`Love`, `零`],
@@ -367,8 +383,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `其他补充 <span class="field-optional">可选</span>`],
     [`e.g. four of us, all around the same level`, `例如：我们四个人，水平差不多`],
     [`Choose your level first.`, `请先选择你的水平。`],
-    [`Email my answers`, `用邮件发送`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `点击后会打开一封写好答案的邮件发给我。本网站不会保存任何内容。`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `想把网球当作礼物送人？私教课、课程套餐或陪练课都可以作为礼物。`],
@@ -392,8 +406,6 @@ export default {
     [`Who it's from`, `谁送的`],
     [`A message for the card`, `写在卡上的话`],
     [`Choose a gift first.`, `请先选择礼物。`],
-    [`>Email my request<`, `>用邮件发送申请<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `点击后会打开一封发给我的邮件。我会回复你，约好当面付款，然后把卡交给你。本网站不会保存任何内容。`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `暂时没有答案的问题会保留 90 天，方便我写出答案。`],
     [`First name, for the card`, `名字，写在卡上`],
     [`As it should read on the card`, `按卡上要写的样子填写`],

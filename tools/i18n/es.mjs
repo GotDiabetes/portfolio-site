@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    formWho: "Añade tu nombre y un correo o teléfono para poder contactarte.",
+    formFailed: "No se pudo enviar. Pulsa el botón otra vez para mandarme tus respuestas por correo.",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "Desactivar las animaciones",
     motionOn: "Activar las animaciones",
@@ -90,6 +92,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `Tu nombre`],
+    [`Email or phone`, `Correo o teléfono`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="Para avisarte cuando se forme un grupo"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="Para responderte sobre el pago y la tarjeta"`],
+    [`Join the list`, `Apuntarme a la lista`],
+    [`Send my request`, `Enviar mi solicitud`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `Tus respuestas me llegan a mí y a nadie más. Te aviso cuando se forme un grupo.`],
+    [`I'll reply to set up payment in person, then give you the card.`, `Te respondo para acordar el pago en persona y luego te doy la tarjeta.`],
+    [`You're on the list.`, `Ya estás en la lista.`],
+    [`I'll email or text you when a group forms with players at your level.`, `Te escribo o te mando un mensaje cuando se forme un grupo con jugadores de tu nivel.`],
+    [`Got it.`, `Recibido.`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `Te respondo pronto para acordar el pago en persona y luego te doy la tarjeta.`],
+    [`>Done<`, `>Listo<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `Desactivar las animaciones`],
     [`Love`, `Cero`],
@@ -371,8 +387,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `¿Algo más? <span class="field-optional">Opcional</span>`],
     [`e.g. four of us, all around the same level`, `p. ej.: somos cuatro, todos de nivel parecido`],
     [`Choose your level first.`, `Primero elige tu nivel.`],
-    [`Email my answers`, `Enviar mis respuestas`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `Esto abre un correo para mí con tus respuestas. Este sitio no guarda nada.`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `¿Quieres regalar tenis? Cualquier clase particular, paquete o sesión de peloteo puede ser un regalo.`],
@@ -396,8 +410,6 @@ export default {
     [`Who it's from`, `De parte de quién`],
     [`A message for the card`, `Un mensaje para la tarjeta`],
     [`Choose a gift first.`, `Primero elige un regalo.`],
-    [`>Email my request<`, `>Enviar mi solicitud<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `Esto abre un correo para mí. Te responderé para arreglar el pago en persona y luego te daré la tarjeta. Este sitio no guarda nada.`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `Las preguntas que aún no tienen respuesta se guardan 90 días, para que pueda escribir una.`],
     [`First name, for the card`, `Nombre, para la tarjeta`],
     [`As it should read on the card`, `Como debe aparecer en la tarjeta`],

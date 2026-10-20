@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formWho: "연락할 수 있도록 이름과 이메일 또는 전화번호를 적어 주세요.",
+    formFailed: "전송이 안 됐어요. 버튼을 다시 누르면 대신 이메일로 답변을 보낼 수 있어요.",
     // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
     motionOff: "애니메이션 끄기",
     motionOn: "애니메이션 켜기",
@@ -84,6 +86,20 @@ export default {
   },
 
   pairs: [
+    // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
+    [`Your name`, `이름`],
+    [`Email or phone`, `이메일 또는 전화번호`],
+    [`placeholder="So I can tell you when a group forms"`, `placeholder="그룹이 만들어지면 알려 드릴게요"`],
+    [`placeholder="So I can reply about payment and the card"`, `placeholder="결제와 카드에 대해 답장드릴게요"`],
+    [`Join the list`, `명단에 올리기`],
+    [`Send my request`, `요청 보내기`],
+    [`Your answers go to me and nowhere else. I'll be in touch when a group forms.`, `답변은 저에게만 전달돼요. 그룹이 만들어지면 연락드릴게요.`],
+    [`I'll reply to set up payment in person, then give you the card.`, `답장으로 현장 결제를 정한 뒤 카드를 드려요.`],
+    [`You're on the list.`, `명단에 올랐어요.`],
+    [`I'll email or text you when a group forms with players at your level.`, `비슷한 수준의 그룹이 만들어지면 이메일이나 문자로 알려 드릴게요.`],
+    [`Got it.`, `잘 받았어요.`],
+    [`I'll reply soon to set up payment in person, then give you the card.`, `곧 답장해서 현장 결제를 정한 뒤 카드를 드릴게요.`],
+    [`>Done<`, `>확인<`],
     // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Turn animations off`, `애니메이션 끄기`],
     [`Love`, `러브`],
@@ -367,8 +383,6 @@ export default {
     [`Anything else? <span class="field-optional">Optional</span>`, `더 알려 주실 내용 <span class="field-optional">선택</span>`],
     [`e.g. four of us, all around the same level`, `예: 네 명이고 실력이 다 비슷해요`],
     [`Choose your level first.`, `실력을 먼저 선택해 주세요.`],
-    [`Email my answers`, `이메일로 보내기`],
-    [`This opens an email to me with your answers. Nothing is saved on this site.`, `누르면 답변이 담긴 이메일 창이 열려요. 이 사이트에는 아무것도 저장되지 않아요.`],
 
     // added with the gift lessons, practice tips page, flyer and gift card
     [`Giving tennis as a present? Any private lesson, package or hitting session can be a gift.`, `테니스를 선물하고 싶으신가요? 개인 레슨, 패키지, 히팅 세션 모두 선물할 수 있어요.`],
@@ -392,8 +406,6 @@ export default {
     [`Who it's from`, `보내는 분`],
     [`A message for the card`, `카드에 쓸 메시지`],
     [`Choose a gift first.`, `선물을 먼저 선택해 주세요.`],
-    [`>Email my request<`, `>이메일로 신청하기<`],
-    [`This opens an email to me. I'll reply to set up payment in person, then give you the card. Nothing is saved on this site.`, `누르면 저에게 보내는 이메일 창이 열려요. 답장으로 직접 만나 결제할 시간을 정하고, 그때 카드를 드릴게요. 이 사이트에는 아무것도 저장되지 않아요.`],
     [`Questions I have no answer for yet are kept for 90 days, so I can write one.`, `아직 답이 없는 질문은 제가 답을 써 둘 수 있도록 90일 동안 보관돼요.`],
     [`First name, for the card`, `카드에 쓸 이름`],
     [`As it should read on the card`, `카드에 적힐 그대로`],
