@@ -1,37 +1,9 @@
 /* ============================================================================
-   More, October 19 2026 (more.js has the list): the motion switch and its
-   kill-switch, the score, the magnetic buttons, the photo parallax and net
+   More, October 19 2026 (more.js has the list): the magnetic buttons, the photo parallax and net
    wipe, the stacked lesson cards on phones, the court, the package
    builder, the racket spin, the photo pile, the floodlight, the daylight
    bar, the lesson card, the shortcuts list, before-and-after, numbers.
    ========================================================================== */
-
-/* --- U4. Reduced motion by choice. The head script adds .reduce-motion
-       from the stored preference (and answers every script's reduced-
-       motion query with "yes"); this is the stylesheet half: nothing
-       moves, everything is already where it ends. */
-html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
-  animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important;
-  animation-timeline: auto !important;
-  transition-duration: .001ms !important; transition-delay: 0s !important;
-  scroll-behavior: auto !important;
-}
-.motion-toggle .motion-off { display: none; }
-html.reduce-motion .motion-toggle .motion-off { display: block; }
-html.reduce-motion .motion-toggle .motion-on { display: none; }
-.motion-toggle[aria-pressed="true"] { border-color: var(--text); }
-
-/* --- M5. The score in the header: a small pill that counts Love, 15,
-       30, 40, Game with the way down the page. Desktop only, like the nav. */
-.score {
-  display: inline-grid; place-items: center; min-width: 3.4em; height: 28px; padding: 0 .55em;
-  border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); overflow: hidden; white-space: nowrap;
-}
-.score[hidden] { display: none; }
-.score .score-val { display: block; transition: transform .15s var(--ease), opacity .15s var(--ease); }
-.score.is-flip .score-val { transform: translateY(-110%); opacity: 0; }
-@media (max-width: 1100px) { .score { display: none; } }
 
 /* --- M1. Magnetic buttons: the pull follows at once, the snap back
        takes the half second the buttons already have. */

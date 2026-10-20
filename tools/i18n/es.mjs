@@ -13,11 +13,7 @@ export default {
   js: {
     formWho: "Añade tu nombre y un correo o teléfono para poder contactarte.",
     formFailed: "No se pudo enviar. Pulsa el botón otra vez para mandarme tus respuestas por correo.",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "Desactivar las animaciones",
-    motionOn: "Activar las animaciones",
-    scoreLove: "Cero",
-    scoreGame: "Juego",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "al mes, por {n} clases",
     builderPack5: "Con el paquete de 5 clases sale a $75 por clase: {total} al mes.",
     builderPack10: "Con el paquete de 10 clases sale a $70 por clase: {total} al mes.",
@@ -106,9 +102,7 @@ export default {
     [`Got it.`, `Recibido.`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `Te respondo pronto para acordar el pago en persona y luego te doy la tarjeta.`],
     [`>Done<`, `>Listo<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `Desactivar las animaciones`],
-    [`Love`, `Cero`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `Arma tu paquete`],
     [`Pick a lesson and how often, and see what a month comes to.`, `Elige una clase y la frecuencia, y mira cuánto sale al mes.`],
     [`Lesson`, `Clase`],

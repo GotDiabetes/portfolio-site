@@ -17,11 +17,7 @@ export default {
   js: {
     formWho: "نام و یک ایمیل یا شماره تلفن بنویس تا بتوانم با تو تماس بگیرم.",
     formFailed: "ارسال نشد. دوباره دکمه را بزن تا به‌جای آن پاسخ‌هایت را ایمیل کنی.",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "خاموش کردن انیمیشن‌ها",
-    motionOn: "روشن کردن انیمیشن‌ها",
-    scoreLove: "صفر",
-    scoreGame: "گیم",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "در ماه، برای {n} جلسه",
     builderPack5: "با بستهٔ ۵ جلسه‌ای هر جلسه $75 می‌شود: {total} در ماه.",
     builderPack10: "با بستهٔ ۱۰ جلسه‌ای هر جلسه $70 می‌شود: {total} در ماه.",
@@ -103,9 +99,7 @@ export default {
     [`Got it.`, `دریافت شد.`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `به‌زودی جواب می‌دهم تا پرداخت را حضوری هماهنگ کنیم، بعد کارت را می‌دهم.`],
     [`>Done<`, `>باشه<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `خاموش کردن انیمیشن‌ها`],
-    [`Love`, `صفر`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `بستهٔ خودت را بساز`],
     [`Pick a lesson and how often, and see what a month comes to.`, `یک نوع جلسه و تعداد هفتگی را انتخاب کن تا هزینهٔ یک ماه را ببینی.`],
     [`Lesson`, `جلسه`],

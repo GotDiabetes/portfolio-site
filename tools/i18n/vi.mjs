@@ -13,11 +13,7 @@ export default {
   js: {
     formWho: "Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.",
     formFailed: "Chưa gửi được. Bấm nút lần nữa để email câu trả lời cho tôi thay vào đó.",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "Tắt hiệu ứng chuyển động",
-    motionOn: "Bật hiệu ứng chuyển động",
-    scoreLove: "0",
-    scoreGame: "Game",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "một tháng, cho {n} buổi",
     builderPack5: "Với gói 5 buổi, mỗi buổi còn $75: {total} một tháng.",
     builderPack10: "Với gói 10 buổi, mỗi buổi còn $70: {total} một tháng.",
@@ -99,9 +95,7 @@ export default {
     [`Got it.`, `Đã nhận.`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `Tôi sẽ sớm trả lời để hẹn thanh toán trực tiếp, rồi đưa thẻ cho bạn.`],
     [`>Done<`, `>Xong<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `Tắt hiệu ứng chuyển động`],
-    [`Love`, `0`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `Ghép gói học`],
     [`Pick a lesson and how often, and see what a month comes to.`, `Chọn loại buổi học và số buổi mỗi tuần để xem chi phí một tháng.`],
     [`Lesson`, `Buổi học`],

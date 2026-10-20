@@ -322,15 +322,14 @@ overwritten on the next build. One dictionary covers all four pages.
   `ask.json`, so nothing is stored anywhere. English only in the source;
   its words are in `sheet.js` per language, like the recap's.
 - **The October 19 set** (`public/more.js`, `more.css`; the list is at
-  the top of the script): magnetic Book buttons, the header's score, the
+  the top of the script): magnetic Book buttons, the
   court diagram with its five notes, the package builder (the cards' own
   rates, no prepayment), the racket spin on the tips page, the draggable
   photo pile, the pointer floodlight on the black bands, the daylight bar
   (the Worker's `/court` now returns today's `sun`), the lesson card
   after a booking (stored in `localStorage` as `leeLesson` with an .ics
   link; `?demo=lesson` on localhost fakes one), keyboard shortcuts (B, T,
-  D, ?), the animations switch (`leeMotion` in `localStorage`, read by a
-  head script that also answers every script's reduced-motion query), and
+  D, ?), and
   the tab that asks the reader back. Its words are `js` keys in the
   dictionaries; its markup is translated like the rest.
 - **The rally game** (`public/rally.js`, on the 404 page): "Play a rally"

@@ -13,11 +13,7 @@ export default {
   js: {
     formWho: "連絡できるように、お名前とメールアドレスか電話番号を入れてください。",
     formFailed: "送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "アニメーションをオフにする",
-    motionOn: "アニメーションをオンにする",
-    scoreLove: "ラブ",
-    scoreGame: "ゲーム",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "1か月、レッスン {n} 回で",
     builderPack5: "5回パッケージなら1回 $75：月 {total}。",
     builderPack10: "10回パッケージなら1回 $70：月 {total}。",
@@ -99,9 +95,7 @@ export default {
     [`Got it.`, `受け取りました。`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `近いうちにお返事して現地でのお支払いを決め、カードをお渡しします。`],
     [`>Done<`, `>閉じる<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `アニメーションをオフにする`],
-    [`Love`, `ラブ`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `パッケージを組む`],
     [`Pick a lesson and how often, and see what a month comes to.`, `レッスンと週の回数を選ぶと、1か月の目安が出ます。`],
     [`Lesson`, `レッスン`],

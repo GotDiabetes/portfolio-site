@@ -14,11 +14,7 @@ export default {
   js: {
     formWho: "請填上名字和電子郵件或電話，方便我聯絡你。",
     formFailed: "沒送出去。再按一次按鈕，改用電子郵件把回答寄給我。",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "關閉動畫",
-    motionOn: "開啟動畫",
-    scoreLove: "零",
-    scoreGame: "局",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "每月，以 {n} 堂課計",
     builderPack5: "買 5 堂課的方案，每堂 $75：每月 {total}。",
     builderPack10: "買 10 堂課的方案，每堂 $70：每月 {total}。",
@@ -100,9 +96,7 @@ export default {
     [`Got it.`, `收到了。`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `我會盡快回覆你，當面安排付款，然後把卡給你。`],
     [`>Done<`, `>好的<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `關閉動畫`],
-    [`Love`, `零`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `搭配課程方案`],
     [`Pick a lesson and how often, and see what a month comes to.`, `選一種課和每週次數，看看一個月多少錢。`],
     [`Lesson`, `課程`],

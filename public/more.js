@@ -5,8 +5,6 @@
 
      M1  Magnetic buttons: on a fine pointer the Book buttons lean a few
          pixels toward the pointer as it nears and snap back after.
-     M5  The score: a small Love · 15 · 30 · 40 · Game in the header that
-         follows how far down the page the reader is.
      I1  The court you'll learn on: hover or tap a part of the drawn court
          and the note beside it says what is worked on there.
      I2  The package builder: a lesson and a number of times a week, and
@@ -24,14 +22,15 @@
          (.ics) link, remembered until the lesson has passed.
      U3  Keyboard shortcuts: B books, T opens the tips, D flips dark mode,
          ? lists them. Never while typing in a field.
-     U4  The motion switch in the header: stores leeMotion=reduce, which
-         the head script turns into the reduced-motion signal every script
-         and stylesheet already honours, then reloads.
      U5  The tab: its title asks the reader back while they are away, and
          the favicon ball bounces once when they return.
      N1  Before and after: a drag handle between two photos or clips, once
          the figure's data-before and data-after name them.
      N3  The numbers: count-up figures, once each data-count has one.
+
+   (A header score that counted Love, 15, 30, 40, Game with the scroll, and
+   an animations switch beside the dark-mode one, were here for a day:
+   Isaac found neither would be understood.)
 
    Words come from window.I18N on the translated pages; English is the
    fallback here. Nothing here runs under ?classic.
@@ -55,18 +54,6 @@
   var TZ = "America/Los_Angeles";
   function fill(s, o) { return s.replace(/\{(\w+)\}/g, function (m, k) { return k in o ? o[k] : m; }); }
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
-
-  /* ------------------------------------------ U4. The motion switch -- */
-  var motionBtn = document.querySelector("[data-motion-toggle]");
-  if (motionBtn) {
-    var off = root.classList.contains("reduce-motion");
-    motionBtn.setAttribute("aria-pressed", off ? "true" : "false");
-    motionBtn.setAttribute("aria-label", off ? (T.motionOn || "Turn animations on") : (T.motionOff || "Turn animations off"));
-    motionBtn.addEventListener("click", function () {
-      try { if (off) localStorage.removeItem("leeMotion"); else localStorage.setItem("leeMotion", "reduce"); } catch (e) {}
-      location.reload();
-    });
-  }
 
   /* ------------------------------------------ U3. Keyboard shortcuts -- */
   document.addEventListener("keydown", function (e) {
@@ -151,29 +138,6 @@
     document.addEventListener("pointerleave", letGo);
     window.addEventListener("blur", letGo);
     window.addEventListener("scroll", letGo, { passive: true });
-  }
-
-  /* ------------------------------------------------- M5. The score -- */
-  var score = document.querySelector("[data-score]");
-  if (score) {
-    var STEPS = [T.scoreLove || "Love", "15", "30", "40", T.scoreGame || "Game"];
-    var val = score.querySelector(".score-val") || score, cur = -1, sraf = 0;
-    var setScore = function () {
-      sraf = 0;
-      var max = (root.scrollHeight - window.innerHeight) || 1;
-      var p = Math.min(1, Math.max(0, (window.scrollY || root.scrollTop) / max));
-      var i = p >= .97 ? 4 : Math.min(3, Math.floor(p * 4));
-      if (i === cur) return;
-      var first = cur < 0;
-      cur = i;
-      if (first || reduced) { val.textContent = STEPS[i]; return; }
-      score.classList.add("is-flip");
-      window.setTimeout(function () { val.textContent = STEPS[i]; score.classList.remove("is-flip"); }, 150);
-    };
-    window.addEventListener("scroll", function () { if (!sraf) sraf = window.requestAnimationFrame(setScore); }, { passive: true });
-    window.addEventListener("resize", function () { cur = -1; setScore(); });
-    score.hidden = false;
-    setScore();
   }
 
   /* ------------------------------------------------- I1. The court -- */

@@ -14,11 +14,7 @@ export default {
   js: {
     formWho: "연락할 수 있도록 이름과 이메일 또는 전화번호를 적어 주세요.",
     formFailed: "전송이 안 됐어요. 버튼을 다시 누르면 대신 이메일로 답변을 보낼 수 있어요.",
-    // October 19 (more.js): the motion switch, the score, the builder, the daylight bar, the lesson card, the tab, the racket
-    motionOff: "애니메이션 끄기",
-    motionOn: "애니메이션 켜기",
-    scoreLove: "러브",
-    scoreGame: "게임",
+    // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
     builderMonth: "한 달, 레슨 {n}회 기준",
     builderPack5: "5회 패키지면 회당 $75, 한 달 {total}입니다.",
     builderPack10: "10회 패키지면 회당 $70, 한 달 {total}입니다.",
@@ -100,9 +96,7 @@ export default {
     [`Got it.`, `잘 받았어요.`],
     [`I'll reply soon to set up payment in person, then give you the card.`, `곧 답장해서 현장 결제를 정한 뒤 카드를 드릴게요.`],
     [`>Done<`, `>확인<`],
-    // October 19 (more.js, more.css): the motion switch, the score, the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
-    [`Turn animations off`, `애니메이션 끄기`],
-    [`Love`, `러브`],
+    // October 19 (more.js, more.css): the package builder, the court, the numbers, before and after, the shortcuts, the racket spin
     [`Build a package`, `패키지 만들기`],
     [`Pick a lesson and how often, and see what a month comes to.`, `레슨과 주당 횟수를 고르면 한 달 비용이 보여요.`],
     [`Lesson`, `레슨`],
