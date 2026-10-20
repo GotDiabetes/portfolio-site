@@ -21,7 +21,7 @@
   <title>Admin — Lee Tennis Co.</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020" />
   <link rel="stylesheet" href="/admin.css?v=2" />
   <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -59,6 +59,16 @@
     <p class="eyebrow">For Isaac</p>
     <h1>Admin</h1>
     <p class="desk-sub">Your tools for the site, and the services it runs on. <button class="link-btn desk-lock" id="adminLock" type="button" hidden>Forget the key on this device</button></p>
+
+    <!-- The clinic list (admin-clinic.js): everyone who asked to join a
+         clinic, by level, from the Worker with the key the gate checked. -->
+    <section class="desk-clinic" id="clinic" hidden>
+      <h2>Clinic list</h2>
+      <p class="desk-sub" id="clinicNote">Loading the list…</p>
+      <div class="desk-table-wrap"><table class="desk-table" id="clinicTable"></table></div>
+      <h2>Gift requests</h2>
+      <ol class="desk-questions desk-signups" id="giftList"></ol>
+    </section>
 
     <h2>On the site</h2>
     <ul class="desk-links">
@@ -111,6 +121,7 @@
 
   <script src="/admin-explode.js?v=2" defer></script>
   <script src="/admin-ascend.js?v=2" defer></script>
-  <script src="/admin-gate.js?v=2" defer></script>
+  <script src="/admin-gate.js?v=3" defer></script>
+  <script src="/admin-clinic.js?v=1" defer></script>
 </body>
 </html>

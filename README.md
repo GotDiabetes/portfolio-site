@@ -73,7 +73,9 @@ pages named), and both stay off until filled in:
 
 **Sign-ups in your inbox.** The clinic list and gift request forms send
 their answers to the Worker, which keeps them on your numbers page
-(`/stats/`, under "Sign-ups"). To have each one emailed to you as well:
+(`/stats/`, under "Sign-ups") and, as a table by level with the gift
+requests under it, at the top of `/admin/`. To have each one emailed to
+you as well:
 make a free account at resend.com with your Gmail, create an API key,
 then from the `worker` folder run `npx wrangler secret put RESEND_KEY`
 and paste it. Resend's free tier mails your own address without any

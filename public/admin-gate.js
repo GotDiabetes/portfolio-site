@@ -218,6 +218,7 @@
   function right(key) {
     try { localStorage.setItem(KEY_STORE, key); } catch (e) { /* the numbers page will just ask */ }
     say("Unlocked.", true);
+    try { document.dispatchEvent(new CustomEvent("admin:unlocked")); } catch (e) { /* the clinic list reloads on its own timer */ }
     return play("ascend").then(function (s) {
       document.body.classList.remove("is-gated");
       document.documentElement.classList.remove("is-gated");
