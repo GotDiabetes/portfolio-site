@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
   <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=2" />
+  <link rel="stylesheet" href="/more.css?v=4" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
@@ -651,7 +651,7 @@
 
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">常见问题</h2>
-      <div class="faq fade" style="--d:.06s">
+      <div class="faq fade" style="--d:.06s" data-faq-show="4">
         <details>
           <summary>孩子需要打过网球吗？</summary>
           <p>不需要。青少年可以从零基础开始。年纪最小的孩子用更慢更软的球学习（先红球，再橙球，再绿球），准备好了再升级。</p>
@@ -696,6 +696,7 @@
           <button class="link-btn faq-ask" type="button" data-ask="我应该练什么？" hidden>在聊天里问问你的问题</button>
         </details>
       </div>
+      <button class="link-btn faq-more" type="button" data-faq-more hidden>显示全部问题</button>
     </section>
 
     <section class="contact" id="contact" data-band-sweep>
@@ -1014,6 +1015,6 @@
   <script src="/arrival.js?v=1" defer></script>
   <script src="/ballo.js?v=4" defer></script>
   <script src="/motion.js?v=5" defer></script>
-  <script src="/more.js?v=2" defer></script>
+  <script src="/more.js?v=6" defer></script>
 </body>
 </html>

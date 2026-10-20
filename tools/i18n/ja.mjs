@@ -81,6 +81,7 @@ export default {
   },
 
   pairs: [
+    [`Show all the questions`, `質問をすべて見る`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `お名前`],
     [`Email or phone`, `メールアドレスか電話番号`],

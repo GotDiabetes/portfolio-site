@@ -82,6 +82,7 @@ export default {
   },
 
   pairs: [
+    [`Show all the questions`, `显示全部问题`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `你的名字`],
     [`Email or phone`, `邮箱或电话`],

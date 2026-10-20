@@ -85,6 +85,7 @@ export default {
   },
 
   pairs: [
+    [`Show all the questions`, `نمایش همهٔ پرسش‌ها`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `نام تو`],
     [`Email or phone`, `ایمیل یا شماره تلفن`],

@@ -327,7 +327,9 @@ overwritten on the next build. One dictionary covers all four pages.
   after a booking (stored in `localStorage` as `leeLesson` with an .ics
   link; `?demo=lesson` on localhost fakes one), keyboard shortcuts (B, T,
   D, ?), and
-  the tab that asks the reader back. Its words are `js` keys in the
+  the tab that asks the reader back. Also the FAQ ladder: four questions
+  show (`data-faq-show` on the list), the rest drop in on request, and
+  each answer unfolds sentence by sentence. Its words are `js` keys in the
   dictionaries; its markup is translated like the rest.
 - **The rally game** (`public/rally.js`, on the 404 page): "Play a rally"
   swaps the scene for a top-down court; the pointer is the racket, the

@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
   <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=2" />
+  <link rel="stylesheet" href="/more.css?v=4" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
@@ -651,7 +651,7 @@
 
     <section class="wrap section faq-section" id="faq">
       <h2 class="fade">よくある質問</h2>
-      <div class="faq fade" style="--d:.06s">
+      <div class="faq fade" style="--d:.06s" data-faq-show="4">
         <details>
           <summary>子どもがテニス未経験でも大丈夫ですか？</summary>
           <p>大丈夫です。ジュニアはまったくの初心者から始められます。いちばん小さい子は、ゆっくりした柔らかいボール（レッド、オレンジ、グリーンの順）で学び、準備ができたら次の段階に進みます。</p>
@@ -696,6 +696,7 @@
           <button class="link-btn faq-ask" type="button" data-ask="何を練習すればいいですか？" hidden>自分の悩みをチャットで聞く</button>
         </details>
       </div>
+      <button class="link-btn faq-more" type="button" data-faq-more hidden>質問をすべて見る</button>
     </section>
 
     <section class="contact" id="contact" data-band-sweep>
@@ -1014,6 +1015,6 @@
   <script src="/arrival.js?v=1" defer></script>
   <script src="/ballo.js?v=4" defer></script>
   <script src="/motion.js?v=5" defer></script>
-  <script src="/more.js?v=2" defer></script>
+  <script src="/more.js?v=6" defer></script>
 </body>
 </html>

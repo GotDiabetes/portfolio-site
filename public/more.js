@@ -24,6 +24,8 @@
          ? lists them. Never while typing in a field.
      U5  The tab: its title asks the reader back while they are away, and
          the favicon ball bounces once when they return.
+     FAQ The questions: four show, the rest drop in like a ladder's rungs
+         on request, and each answer unfolds rung by rung.
      N1  Before and after: a drag handle between two photos or clips, once
          the figure's data-before and data-after name them.
      N3  The numbers: count-up figures, once each data-count has one.
@@ -396,6 +398,68 @@
     }
     render();
   })();
+
+  /* ---------------------------------------------- The FAQ ladder -- */
+  var faq = document.querySelector("[data-faq-show]");
+  if (faq) {
+    var faqItems = Array.prototype.slice.call(faq.children).filter(function (el) { return el.tagName === "DETAILS"; });
+    var faqShow = parseInt(faq.getAttribute("data-faq-show"), 10) || 4;
+    var faqMore = document.querySelector("[data-faq-more]");
+    /* The extra questions wait behind the line. */
+    if (faqMore && faqItems.length > faqShow) {
+      faqItems.slice(faqShow).forEach(function (d) { d.classList.add("faq-extra"); });
+      faqMore.hidden = false;
+      faqMore.addEventListener("click", function () {
+        faqMore.hidden = true;
+        faqItems.slice(faqShow).forEach(function (d, i) {
+          d.style.setProperty("--i", i);
+          d.classList.add("is-dropped");
+        });
+      });
+    }
+    /* Each answer becomes rungs: one per sentence, in a body whose height
+       opens and closes smoothly, so <details> keeps its semantics and its
+       no-JS behaviour but moves like a ladder. */
+    var SENTENCE = /(?<=[.!?\u3002\uff01\uff1f])\s*(?=\S)/;
+    faqItems.forEach(function (d) {
+      var body = document.createElement("div");
+      body.className = "faq-body";
+      var inner = document.createElement("div");
+      inner.className = "faq-inner";
+      body.appendChild(inner);
+      Array.prototype.slice.call(d.children).forEach(function (child) {
+        if (child.tagName === "SUMMARY") return;
+        if (child.tagName === "P" && !child.children.length) {
+          var parts;
+          try { parts = child.textContent.trim().split(SENTENCE); } catch (e) { parts = [child.textContent.trim()]; }
+          if (parts.length > 1) {
+            child.textContent = "";
+            parts.forEach(function (t, i) {
+              var s = document.createElement("span");
+              s.className = "rung";
+              s.style.setProperty("--i", i);
+              s.textContent = t;
+              child.appendChild(s);
+              if (i < parts.length - 1) child.appendChild(document.createTextNode(" "));
+            });
+          } else child.classList.add("rung");
+        } else child.classList.add("rung");
+        inner.appendChild(child);
+      });
+      d.appendChild(body);
+      var summary = d.querySelector("summary");
+      if (!summary || reduced) return;
+      summary.addEventListener("click", function (e) {
+        if (!d.open) return;                         // opening: the browser does it, the CSS plays
+        e.preventDefault();                          // closing: fold first, then close
+        if (d.classList.contains("is-closing")) return;
+        d.classList.add("is-closing");
+        var done = function () { d.classList.remove("is-closing"); d.open = false; };
+        body.addEventListener("transitionend", done, { once: true });
+        window.setTimeout(done, 500);
+      });
+    });
+  }
 
   /* ------------------------------------------- N1. Before and after -- */
   each(document.querySelectorAll(".compare[data-before]"), function (fig) {

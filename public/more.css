@@ -208,6 +208,36 @@
 .keys-hint { font-size: .8125rem; }
 @media (hover: none) { .keys-hint { display: none; } }
 
+/* --- The FAQ ladder. Four questions show; "Show all the questions"
+       drops the rest in one after another, each turning down from its top
+       edge like a rung. An answer opens the same way: its body's height
+       unrolls while the sentences turn down in turn. */
+.faq-more { margin-top: .9rem; }
+.faq-more[hidden] { display: none; }
+.js .faq > details.faq-extra:not(.is-dropped) { display: none; }
+.faq { perspective: 900px; }
+.js .faq > details.faq-extra.is-dropped {
+  opacity: 1; transform: none; transition: none;
+  animation: rungDrop .75s linear(0, .45 24%, .85 42%, 1.05 58%, .985 72%, 1.005 86%, 1) both;
+  animation-delay: calc(var(--i, 0) * 85ms);
+  transform-origin: 50% 0;
+}
+.faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+.faq details[open]:not(.is-closing) > .faq-body { grid-template-rows: 1fr; }
+.faq-inner { min-height: 0; overflow: hidden; perspective: 700px; }
+.faq p > .rung { display: inline-block; transform-origin: 50% 0; backface-visibility: hidden; }   /* sentences keep flowing; each turns down on its own */
+.faq .faq-inner > .rung { display: block; transform-origin: 50% 0; }
+.faq details > .faq-body p { margin-bottom: 1.1rem; }
+.faq details[open]:not(.is-closing) .rung {
+  animation: rungDrop .7s linear(0, .45 24%, .85 42%, 1.05 58%, .985 72%, 1.005 86%, 1) both;
+  animation-delay: calc(.08s + var(--i, 0) * 70ms);
+}
+@keyframes rungDrop { from { opacity: 0; transform: rotateX(-88deg); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .faq-body { transition: none; }
+  .faq details[open] .rung, .js .faq > details.faq-extra.is-dropped { animation: none; }
+}
+
 /* --- N1. Before and after. */
 .compare { margin: 1.75rem 0 0; }
 .compare-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius); background: #000; --split: 50%; }

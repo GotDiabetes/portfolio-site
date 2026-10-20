@@ -81,6 +81,7 @@ export default {
   },
 
   pairs: [
+    [`Show all the questions`, `Xem tất cả câu hỏi`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `Tên của bạn`],
     [`Email or phone`, `Email hoặc số điện thoại`],

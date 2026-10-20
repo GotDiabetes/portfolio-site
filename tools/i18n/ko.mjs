@@ -82,6 +82,7 @@ export default {
   },
 
   pairs: [
+    [`Show all the questions`, `질문 전부 보기`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `이름`],
     [`Email or phone`, `이메일 또는 전화번호`],
