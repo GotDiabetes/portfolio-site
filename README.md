@@ -82,14 +82,11 @@ opened a Gmail draft on the visitor's side, which stranded anyone not
 signed in to Gmail on that device; the draft is now only the fallback
 when the Worker can't be reached.)
 
-Three more built on October 19 wait the same way, in `public/index.html`:
+Two more built on October 19 wait the same way, in `public/index.html`:
 
 - **Before and after** (the `<figure class="compare">` in About): put two
   photos or short clips of a student's swing in `public/images/` and name
   them in `data-before` and `data-after`. A drag handle between them appears.
-- **The numbers** (the `<ul class="counts">` in About): fill in
-  `data-count` on any of the three (players coached, years coaching,
-  lessons taught) with a real figure; the ones left blank stay hidden.
 - **The hero loop** (`data-src` on the `<video class="hero-loop">`): a
   5–8 second silent clip of you hitting, and it plays behind the hero.
 
