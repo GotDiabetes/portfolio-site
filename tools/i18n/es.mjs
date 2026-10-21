@@ -90,6 +90,10 @@ export default {
   },
 
   pairs: [
+    // the 30-minute private lesson (Oct 21)
+    [`>30-minute lessons are $45.<`, `>Las clases de 30 minutos cuestan $45.<`],
+    [`>Book 30 minutes<`, `>Reservar 30 minutos<`],
+    [`>30 minutes, $45<`, `>30 minutos, $45<`],
     [`Show all the questions`, `Ver todas las preguntas`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `Tu nombre`],
@@ -511,8 +515,8 @@ export default {
         next: ["¿Cómo reservo?", "¿Cuál es tu correo?"],
       },
       prices: {
-        src: "1ku10s",
-        answer: "Las clases particulares cuestan $80 la hora, o 5 por $375 y 10 por $700. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean.",
+        src: "wdpfol",
+        answer: "Las clases particulares cuestan $80 la hora, o 5 por $375 y 10 por $700. Una clase particular de 30 minutos cuesta $45. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean.",
         next: ["¿Qué clase me conviene?", "¿Se paga por adelantado?", "¿Cómo reservo?"],
       },
       packages: {
@@ -526,8 +530,8 @@ export default {
         next: ["¿Cuánto cuestan las clases particulares?", "¿Dónde son las clases?", "¿Cómo reservo?"],
       },
       private: {
-        src: "g3rmkp",
-        answer: "Una clase particular es uno a uno, a $80 la hora, para juveniles y adultos, adaptada a tu nivel. Trabajamos la técnica de golpes y saque, el juego de pies y el desplazamiento, las pelotas más lentas y suaves con las que aprenden los más pequeños y la preparación para torneos, y te llevas un plan de práctica para entre sesiones.",
+        src: "1a7w1te",
+        answer: "Una clase particular es uno a uno, a $80 la hora, para juveniles y adultos, adaptada a tu nivel. También puedes reservar 30 minutos por $45. Trabajamos la técnica de golpes y saque, el juego de pies y el desplazamiento, las pelotas más lentas y suaves con las que aprenden los más pequeños y la preparación para torneos, y te llevas un plan de práctica para entre sesiones.",
         next: ["¿Cómo es la primera clase?", "¿Hay paquetes?", "¿Cómo reservo?"],
       },
       semi: {

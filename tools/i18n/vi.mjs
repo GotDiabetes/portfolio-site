@@ -83,6 +83,10 @@ export default {
   },
 
   pairs: [
+    // the 30-minute private lesson (Oct 21)
+    [`>30-minute lessons are $45.<`, `>Buổi 30 phút giá $45.<`],
+    [`>Book 30 minutes<`, `>Đặt 30 phút<`],
+    [`>30 minutes, $45<`, `>30 phút, $45<`],
     [`Show all the questions`, `Xem tất cả câu hỏi`],
     // the sign-up forms (October 20): a name and a way to reach the visitor, sent to the Worker
     [`Your name`, `Tên của bạn`],
@@ -503,8 +507,8 @@ export default {
         next: ["Đặt lịch thế nào?", "Email của bạn là gì?"],
       },
       prices: {
-        src: "1ku10s",
-        answer: "Lớp kèm riêng 1-1 là $80 một giờ, hoặc 5 buổi $375 và 10 buổi $700. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp.",
+        src: "wdpfol",
+        answer: "Lớp kèm riêng 1-1 là $80 một giờ, hoặc 5 buổi $375 và 10 buổi $700. Buổi kèm riêng 30 phút là $45. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp.",
         next: ["Lớp nào hợp với tôi?", "Có phải trả tiền trước không?", "Đặt lịch thế nào?"],
       },
       packages: {
@@ -518,8 +522,8 @@ export default {
         next: ["Học riêng 1-1 giá bao nhiêu?", "Học ở đâu?", "Đặt lịch thế nào?"],
       },
       private: {
-        src: "g3rmkp",
-        answer: "Lớp kèm riêng là học một kèm một, $80 một giờ, cho cả thiếu niên và người lớn, điều chỉnh theo trình độ của bạn. Chúng ta tập kỹ thuật đánh bóng và giao bóng, bộ chân và di chuyển trên sân, loại bóng chậm và mềm hơn mà các bé mới tập dùng, chuẩn bị thi đấu giải, và bạn sẽ có một kế hoạch luyện tập giữa các buổi học.",
+        src: "1a7w1te",
+        answer: "Lớp kèm riêng là học một kèm một, $80 một giờ, cho cả thiếu niên và người lớn, điều chỉnh theo trình độ của bạn. Bạn cũng có thể đặt 30 phút với giá $45. Chúng ta tập kỹ thuật đánh bóng và giao bóng, bộ chân và di chuyển trên sân, loại bóng chậm và mềm hơn mà các bé mới tập dùng, chuẩn bị thi đấu giải, và bạn sẽ có một kế hoạch luyện tập giữa các buổi học.",
         next: ["Buổi học đầu tiên thế nào?", "Có gói học không?", "Đặt lịch thế nào?"],
       },
       semi: {

@@ -158,7 +158,7 @@
   var builder = document.getElementById("builder");
   if (builder) {
     builder.hidden = false;
-    var RATE = { private: 80, semi: 110, hitting: 45 };   // the semi-private is $110 the hour, for the pair
+    var RATE = { private: 80, half: 45, semi: 110, hitting: 45 };   // half: the 30-minute private lesson; the semi-private is $110 the hour, for the pair
     var totalEl = builder.querySelector("[data-total]"), monthEl = builder.querySelector("[data-month]"), packEl = builder.querySelector("[data-pack]");
     var status = document.createElement("p");
     status.className = "builder-status";

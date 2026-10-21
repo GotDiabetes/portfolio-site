@@ -687,7 +687,7 @@
   }
   window.leeHit = hit;
 
-  var BOOKED = { "60-min-private-lesson": "book_private", "60-min-semi-private-lesson": "book_semi", "60-min-hitting-session": "book_hitting" };
+  var BOOKED = { "60-min-private-lesson": "book_private", "30-min-private-lesson": "book_private", "60-min-semi-private-lesson": "book_semi", "60-min-hitting-session": "book_hitting" };
   /* One count per press: a click the calendar loader holds and replays a
      moment later (section 7) is the same press. */
   var counted = window.WeakMap ? new WeakMap() : null;

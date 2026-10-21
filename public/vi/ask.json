@@ -25,7 +25,7 @@
     },
     {
       "id": "prices",
-      "answer": "Lớp kèm riêng 1-1 là $80 một giờ, hoặc 5 buổi $375 và 10 buổi $700. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp.",
+      "answer": "Lớp kèm riêng 1-1 là $80 một giờ, hoặc 5 buổi $375 và 10 buổi $700. Buổi kèm riêng 30 phút là $45. Lớp học đôi là $110 một giờ cho hai người, tức mỗi người $55. Buổi đánh tập là $45 một giờ. Lớp nhóm cho người lớn tính giá theo nhóm, nên càng đông người thì chi phí mỗi người càng thấp.",
       "actions": [
         {
           "type": "book",
@@ -71,7 +71,7 @@
     },
     {
       "id": "private",
-      "answer": "Lớp kèm riêng là học một kèm một, $80 một giờ, cho cả thiếu niên và người lớn, điều chỉnh theo trình độ của bạn. Chúng ta tập kỹ thuật đánh bóng và giao bóng, bộ chân và di chuyển trên sân, loại bóng chậm và mềm hơn mà các bé mới tập dùng, chuẩn bị thi đấu giải, và bạn sẽ có một kế hoạch luyện tập giữa các buổi học.",
+      "answer": "Lớp kèm riêng là học một kèm một, $80 một giờ, cho cả thiếu niên và người lớn, điều chỉnh theo trình độ của bạn. Bạn cũng có thể đặt 30 phút với giá $45. Chúng ta tập kỹ thuật đánh bóng và giao bóng, bộ chân và di chuyển trên sân, loại bóng chậm và mềm hơn mà các bé mới tập dùng, chuẩn bị thi đấu giải, và bạn sẽ có một kế hoạch luyện tập giữa các buổi học.",
       "actions": [
         {
           "type": "book",

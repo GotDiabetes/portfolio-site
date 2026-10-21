@@ -25,7 +25,7 @@
     },
     {
       "id": "prices",
-      "answer": "Las clases particulares cuestan $80 la hora, o 5 por $375 y 10 por $700. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean.",
+      "answer": "Las clases particulares cuestan $80 la hora, o 5 por $375 y 10 por $700. Una clase particular de 30 minutos cuesta $45. La semiprivada cuesta $110 la hora para dos jugadores, o sea $55 cada uno. Una sesión de peloteo cuesta $45 la hora. Las clínicas para adultos tienen precio por grupo, así que el costo por jugador baja cuantos más sean.",
       "actions": [
         {
           "type": "book",
@@ -71,7 +71,7 @@
     },
     {
       "id": "private",
-      "answer": "Una clase particular es uno a uno, a $80 la hora, para juveniles y adultos, adaptada a tu nivel. Trabajamos la técnica de golpes y saque, el juego de pies y el desplazamiento, las pelotas más lentas y suaves con las que aprenden los más pequeños y la preparación para torneos, y te llevas un plan de práctica para entre sesiones.",
+      "answer": "Una clase particular es uno a uno, a $80 la hora, para juveniles y adultos, adaptada a tu nivel. También puedes reservar 30 minutos por $45. Trabajamos la técnica de golpes y saque, el juego de pies y el desplazamiento, las pelotas más lentas y suaves con las que aprenden los más pequeños y la preparación para torneos, y te llevas un plan de práctica para entre sesiones.",
       "actions": [
         {
           "type": "book",
