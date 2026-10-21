@@ -10,7 +10,8 @@
        /ask.json (in the family's language if he picks one), his own
        line, the next lesson. He sends it from Gmail or copies it into a
        text message. Nothing is sent anywhere else and nothing is stored.
-       Not linked from the site and kept out of search. English only:
+       Linked only from /admin/ (the footer's Admin link) and kept out of
+       search. English only:
        it's his page; only the note it writes changes language.
        ============================================================ -->
   <title>Lesson recap — Lee Tennis Co.</title>
@@ -19,7 +20,7 @@
        is set, the recap can end with a request for a review. -->
   <meta name="review-link" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
 </head>
 
 <body class="desk">
@@ -29,7 +30,9 @@
     <h1>Lesson recap</h1>
     <p class="desk-sub">Tick what you worked on and it writes the note. Read it over, then send it from Gmail or copy it into a text.</p>
 
-    <form class="clinic-form desk-form" id="recapForm">
+    <!-- No native submit (action): Enter in a field before recap.js is
+         ready never puts the family's name and email in the address. -->
+    <form class="clinic-form desk-form" id="recapForm" action="javascript:void 0">
       <div class="desk-grid">
         <label class="field">
           <span class="field-label">Player's first name <span class="field-optional">Optional</span></span>
@@ -70,12 +73,13 @@
       <label class="choice" id="recapReviewRow" hidden><input type="checkbox" name="review"> Ask for a Google review at the end</label>
       <!-- The practice sheet (/sheet/): a printable page made from this
            form. The note carries its link; the button opens it. -->
-      <label class="choice"><input type="checkbox" name="sheet" checked> Add a link to the practice sheet (one page they can print or keep)</label>
+      <label class="choice"><input type="checkbox" name="sheet" checked> Add a link to the practice sheet (to print or keep)</label>
 
       <label class="field">
         <span class="field-label">The note</span>
         <textarea name="out" rows="14" class="desk-out" spellcheck="true"></textarea>
       </label>
+      <p class="form-error" id="recapErr" role="alert" hidden>The tips for that language didn't load. Check the connection and change any field to try again.</p>
       <p class="form-note">Change it here last: ticking a box or typing above writes it again. The buttons send what's in this box.</p>
       <div class="actions">
         <button class="btn btn-primary" type="button" id="recapGmail">Open in Gmail</button>
@@ -85,6 +89,6 @@
     </form>
   </main>
 
-  <script src="/recap.js?v=1" defer></script>
+  <script src="/recap.js?v=20261020c" defer></script>
 </body>
 </html>

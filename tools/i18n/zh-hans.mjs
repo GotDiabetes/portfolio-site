@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formSending: "发送中…",
+    builderPair: "两人一起上：每人每月 {each}。",
     formWho: "请填上名字和邮箱或电话，方便我联系你。",
     formFailed: "没发出去。再按一次按钮，改用邮件把回答发给我。",
     // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
@@ -102,8 +104,8 @@ export default {
     [`Pick a lesson and how often, and see what a month comes to.`, `选一种课和每周次数，看看一个月多少钱。`],
     [`Lesson`, `课程`],
     [`Private, $80`, `私教课，$80`],
-    [`Semi-private, $110`, `半私教课，$110`],
-    [`Hitting, $45`, `对打课，$45`],
+    [`Semi-private, $110`, `双人课，$110`],
+    [`Hitting, $45`, `陪练课，$45`],
     [`Per week`, `每周`],
     [`Once`, `一次`],
     [`Twice`, `两次`],
@@ -465,7 +467,7 @@ export default {
 
     // added with the tip of the week, bring-a-friend and the intro video
     [`>Tip of the week<`, `>本周小贴士<`],
-    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `带一位我还没教过的朋友来，你们俩的第一节半私教课各减 $10。`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `带一位我还没教过的朋友来，你们俩的第一节双人课各减 $10。`],
     [`One minute: who I am, where the court is, and what a first lesson is like.`, `一分钟：我是谁、球场在哪里、第一节课是什么样。`],
 
     // the court map
@@ -484,7 +486,6 @@ export default {
     fallback_next: ["课程多少钱？", "在哪里上课？", "怎么预约？"],
     labels: {
       "Email me": "发邮件给我",
-      "Email for a quote": "发邮件询价",
       "See the lessons": "查看课程",
       "More about me": "更多关于我",
       "Read the reviews": "查看评价",

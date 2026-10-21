@@ -4,15 +4,16 @@
      · A court draws itself behind the hero in the page's hairline grey: the
        baseline nearest the reader, the sidelines running away to the far
        baseline, the service boxes, and the net across the middle. Drawn
-       every load (CSS, stroke by stroke); after the first visit of a
-       session it is simply there.
+       on every load (CSS, stroke by stroke).
      · The first time in a session, on a wide screen: the Book FX player
        stands at the right of the hero's words, on the court's baseline,
        and serves. The ball leaves his racket on an arc toward the headline
        and arrives above the "o" of "lessons", where ballo.js's own drop
        takes over and lands it. The player fades once he has landed.
-     · Reduced motion, phones, the translated headlines (no "o"): no
-       player; the court is drawn and the ball drops as before.
+     · Reduced motion, phones: no player; the court is drawn and the ball
+       drops as before. The translated headlines have no "o", but their
+       ball sits in the full stop's slot (.ball-o.ball-stop), so there the
+       player serves to the full stop.
 
    ballo.js waits for the ball when <html> has the class "arrival-serve"
    (set here before ballo runs), and gives up waiting after four seconds.
@@ -165,9 +166,14 @@
   var head = slot.closest(".hero-drop");
   var done = false;
   function release() { if (done) return; done = true; window.dispatchEvent(new Event("lee:arrival-ball")); }
+  var deadline = performance.now() + 4000;
   window.setTimeout(release, 4000);               // never hold the page's ball hostage
 
   function play() {
+    /* Too late to land before the four-second fallback (a slow load): the
+       real ball drops now and there is no serve, rather than a second,
+       drawn ball served into one already sitting in the "o". */
+    if (done || performance.now() + CONTACT * SERVE_MS + FLIGHT_MS > deadline - 100) { release(); cv.remove(); return; }
     size();
     var s = stage();
     if (!s.target) { release(); cv.remove(); return; }

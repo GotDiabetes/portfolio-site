@@ -55,6 +55,8 @@
   var WORD_MS = 28;           // typing-out pace
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  /* A touch screen, where focusing the field raises the on-screen keyboard. */
+  var touch = !!(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
 
   var faq = null;          // ask.json, loaded on first open
   var faqLoading = null;
@@ -92,8 +94,16 @@
   /* ------------------------------------------------------ Open / close -- */
   launch.addEventListener("click", function () { panel.hidden ? open() : close(); });
   closeBtn.addEventListener("click", function () { close(); });
+  /* Escape closes the chat only when it is the chat's Escape: not one that
+     closes a popup (the clinic list the chat itself opened, the lightbox),
+     the language menu or the mobile menu, and not while focus is somewhere
+     else on the page. */
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !panel.hidden) { close(); }
+    if (e.key !== "Escape" || panel.hidden || e.defaultPrevented) return;
+    if (document.querySelector("dialog[open]")) return;
+    var a = document.activeElement;
+    if (a && a !== document.body && !root.contains(a)) return;
+    close();
   });
 
   var counted = false;
@@ -111,7 +121,10 @@
         addMessage("isaac", DOWN, [EMAIL], null, true);
       }
     });
-    input.focus();
+    /* On a touch screen, focusing the field would raise the keyboard over
+       the sheet and its suggestion chips: focus goes to the conversation
+       instead (it has tabindex -1), so a screen reader still lands in it. */
+    try { (touch ? log : input).focus({ preventScroll: true }); } catch (err) { (touch ? log : input).focus(); }
   }
 
   function close() {
@@ -149,6 +162,9 @@
   function askQuestion(raw) {
     var question = String(raw).replace(/\s+/g, " ").trim();
     if (!question || busy) return;
+    /* Typed in the field (rather than a chip tapped): only then does the
+       field get focus back after the answer on a touch screen. */
+    var typed = document.activeElement === input;
     input.value = "";
     removeChips();
     asked[question.toLowerCase()] = true;
@@ -192,7 +208,7 @@
         busy = false;
         send.disabled = false;
         previous = question;
-        if (!panel.hidden) input.focus();
+        if (!panel.hidden && (typed || !touch)) input.focus();
       });
   }
 
@@ -277,7 +293,7 @@
       if (row) { row.classList.add("ask-arrive"); msg.appendChild(row); }
       /* A visitor who asks while the greeting is still typing has moved
          on; its suggestions would land under their question. */
-      if (who === "isaac" && seq === latest) chipsFor(next);
+      if (who === "isaac" && seq === latest) chipsFor(next, next === SUGGESTIONS ? 4 : 3);
       scrollToAnswer(msg, who);
     });
   }
@@ -336,10 +352,12 @@
   }
 
   /* Follow-up questions, as chips under the conversation. Ones the visitor
-     has already asked are left out. */
-  function chipsFor(questions) {
+     has already asked are left out. Four suggestions on the greeting, up
+     to three follow-ups after an answer (a two-topic answer merges both
+     topics' lists, so it is cut back to three as well). */
+  function chipsFor(questions, max) {
     removeChips();
-    var list = (questions || []).filter(function (q) { return !asked[q.toLowerCase()]; }).slice(0, 4);
+    var list = (questions || []).filter(function (q) { return !asked[q.toLowerCase()]; }).slice(0, max || 3);
     if (!list.length) return;
     var chips = document.createElement("div");
     chips.className = "ask-chips ask-arrive";
@@ -401,7 +419,9 @@
       el.addEventListener("click", function () {
         /* On a phone the panel covers the page, so get out of the way. */
         if (window.matchMedia("(max-width: 560px)").matches) close();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        /* No behavior given: html's scroll-behavior decides, which is
+           smooth unless the visitor prefers reduced motion. */
+        target.scrollIntoView({ block: "start" });
       });
     } else {
       return null;

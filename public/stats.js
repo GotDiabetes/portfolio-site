@@ -14,6 +14,7 @@
   var list = document.getElementById("statsQuestions");
   var daysSel = document.getElementById("statsDays");
   var error = form.querySelector(".form-error");
+  var keyField = document.getElementById("statsKey");   // no name attribute, so a native submit can't send it
   if (!window.fetch) return;
 
   /* What each counted event means, in the order the table shows them. */
@@ -31,6 +32,8 @@
     ["ask_misuse", "Chat messages refused"],
     ["clinic_list", "Sent the clinic list form"],
     ["gift", "Sent a gift request"],
+    ["mail_failed", "Sign-ups Resend failed to email (still listed below)"],
+    ["mail_skipped", "Sign-ups not emailed: over the daily cap (still listed below)"],
     ["flyer_visit", "Came from the flyer's QR code"],
   ];
   var PAGES = { en: "English", es: "Spanish", ko: "Korean", "zh-hans": "Chinese (S)", "zh-hant": "Chinese (T)", ja: "Japanese", vi: "Vietnamese", fa: "Persian" };
@@ -39,12 +42,12 @@
   var data = null;
   try {
     var saved = localStorage.getItem(STORE);
-    if (saved) { form.elements.key.value = saved; fetchStats(saved); }
+    if (saved) { keyField.value = saved; fetchStats(saved); }
   } catch (err) { /* private window: just ask each time */ }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var key = form.elements.key.value.trim();
+    var key = keyField.value.trim();
     if (!key) return;
     try {
       if (form.elements.remember.checked) localStorage.setItem(STORE, key);
@@ -64,11 +67,13 @@
     error.hidden = true;
     fetch(base() + "/stats", { headers: { Authorization: "Bearer " + key } })
       .then(function (r) {
-        return r.json().then(function (body) { return { status: r.status, body: body }; });
+        return r.json().then(function (body) { return { status: r.status, body: body }; }, function () { return { status: r.status, body: null }; });
       })
       .then(function (res) {
         if (res.status === 401) return fail("That key isn't right.");
-        if (res.status === 503) return fail("The numbers aren't set up yet: the Worker needs its database and a STATS_KEY (see the README).");
+        /* 503 means "not set up" only when the Worker says so; it also
+           answers 503 when its database fails, and that only needs a retry. */
+        if (res.status === 503 && res.body && res.body.error === "not_set_up") return fail("The numbers aren't set up yet: the Worker needs its database and a STATS_KEY (see the README).");
         if (res.status !== 200) return fail("The Worker didn't answer (" + res.status + "). Try again in a minute.");
         data = res.body;
         outBox.hidden = false;
@@ -151,7 +156,7 @@
       body.textContent = s.body;
       var meta = document.createElement("span");
       meta.className = "desk-q-meta";
-      meta.textContent = new Date(s.at).toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " · " + (KINDS[s.kind] || s.kind) + " · " + (PAGES[s.page] || s.page);
+      meta.textContent = new Date(s.at).toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " · " + (Object.prototype.hasOwnProperty.call(KINDS, s.kind) ? KINDS[s.kind] : String(s.kind)) + " · " + (PAGES[s.page] || s.page);
       li.appendChild(who);
       li.appendChild(body);
       li.appendChild(meta);

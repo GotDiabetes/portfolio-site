@@ -9,14 +9,16 @@
        language) and the chat's unanswered questions. It asks the Worker
        with the key Isaac set himself (npx wrangler secret put STATS_KEY);
        without the key it shows nothing. Visits themselves are in
-       Cloudflare Web Analytics, linked below. Not linked from the site
-       and kept out of search.
+       Cloudflare Web Analytics, linked below. It also lists the clinic
+       list and gift sign-ups, with the names and contacts visitors gave.
+       Reached from /admin/ (the footer's Admin link), and kept out of
+       search.
        ============================================================ -->
   <title>Numbers — Lee Tennis Co.</title>
   <meta name="robots" content="noindex" />
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261020" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
 </head>
 
 <body class="desk">
@@ -24,12 +26,15 @@
     <a class="desk-back" href="/admin/">Admin</a>
     <p class="eyebrow">For Isaac</p>
     <h1>Your numbers</h1>
-    <p class="desk-sub">What people did on the site, by day and language, and the chat questions you have no answer for yet. Counts only: nothing here says who.</p>
+    <p class="desk-sub">What people did on the site, by day and language, the clinic list and gift sign-ups, and the chat questions you have no answer for yet. The counts say nothing about who; the sign-ups list the names and contacts people gave.</p>
 
-    <form class="clinic-form desk-form desk-key" id="statsForm">
+    <!-- No native submit (action), and the key field has no name: with no
+         script, or before stats.js arrives, the form never puts the key in
+         the address. -->
+    <form class="clinic-form desk-form desk-key" id="statsForm" action="javascript:void 0">
       <label class="field">
         <span class="field-label">Stats key</span>
-        <input type="password" name="key" autocomplete="current-password" required>
+        <input type="password" id="statsKey" autocomplete="current-password" required>
       </label>
       <label class="choice"><input type="checkbox" name="remember" checked> Remember it on this device</label>
       <div class="actions">
@@ -63,6 +68,6 @@
     </div>
   </main>
 
-  <script src="/stats.js?v=3" defer></script>
+  <script src="/stats.js?v=20261020c" defer></script>
 </body>
 </html>

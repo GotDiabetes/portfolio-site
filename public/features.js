@@ -69,7 +69,10 @@
       var jan4 = new Date(d.getFullYear(), 0, 4);
       var wk = 1 + Math.round(((d - jan4) / 864e5 - 3 + ((jan4.getDay() + 6) % 7)) / 7);
       var tip = tips[((wk % tips.length) + tips.length) % tips.length];
-      week.querySelector(".tip-week-title").textContent = tip.title;
+      /* Into the heading's inner line when motion.js has wrapped it (.rise),
+         so the tip's heading keeps the rise every section heading has. */
+      var weekTitle = week.querySelector(".tip-week-title");
+      (weekTitle.querySelector(".rise") || weekTitle).textContent = tip.title;
       week.querySelector(".tip-week-text").textContent = tip.answer;
       var link = week.querySelector(".tip-week-link");
       if (link) link.setAttribute("href", link.getAttribute("href").replace(/#.*$/, "") + "#" + tip.id.replace(/^tip_/, "").replace(/_/g, "-"));
@@ -81,6 +84,9 @@
   var nextEl = document.getElementById("nextOpen"), courtEl = document.getElementById("courtDay");
   if (base && window.fetch && (nextEl || courtEl)) {
     var locale = root.getAttribute("lang") || "en";
+    /* Counts and temperatures in the page's own digits (Persian writes ۳۵,
+       not 35), like the times beside them. */
+    var num = function (n) { try { return new Intl.NumberFormat(locale).format(n); } catch (e) { return String(n); } };
     var get = function (path) {
       return fetch(base + path, { headers: { "Accept": "application/json" } }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
     };
@@ -91,7 +97,7 @@
         when = new Intl.DateTimeFormat(locale, { weekday: "short", hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles" }).format(new Date(s.next));
       } catch (e) { return; }
       var text = fill(W.nextOpen, { when: when.replace(/:00(?=\s?[AP]M|\s?[ap]m)/, "") });
-      if (s.week > 1) text += " · " + fill(W.openHours, { n: s.week });
+      if (s.week > 1) text += " · " + fill(W.openHours, { n: num(s.week) });
       else if (s.week === 1) text += " · " + W.openHour;
       nextEl.textContent = text;
       nextEl.hidden = false;
@@ -111,7 +117,7 @@
             break;
           }
         }
-        if (!text && typeof today.hi === "number") text = fill(W.courtDry, { hi: today.hi });
+        if (!text && typeof today.hi === "number") text = fill(W.courtDry, { hi: num(today.hi) });
       }
       if (!text) return;
       courtEl.textContent = text;

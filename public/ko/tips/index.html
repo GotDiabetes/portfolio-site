@@ -33,17 +33,18 @@
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
   <link rel="stylesheet" href="/tips-demo.css?v=1" />
-  <link rel="stylesheet" href="/elbow.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/elbow.css?v=20261020c" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
-  <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/more.css?v=20261020c" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+  <script>(function () { var root = document.documentElement; var classic = /[?&]classic\b/.test(location.search); function langOf(u) { var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(u, location.href).pathname); return m ? m[1] : "en"; } window.addEventListener("pagereveal", function (e) { if (!e.viewTransition) return; if (classic) { e.viewTransition.skipTransition(); return; } var from = window.navigation && navigation.activation && navigation.activation.from; root.classList.toggle("vt-lang", !!(from && from.url && langOf(from.url) !== langOf(location.href))); }); })();</script>
 
   <script>
     (function () {
@@ -52,29 +53,43 @@
         if (started) return;
         started = true;
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "lesson", { origin: "https://cal.com" });
-        /* The theme is pinned. The page has one theme, and a dark calendar over
-           a white page is the one thing a dark-mode OS must not do here. */
+        Cal("init", "lesson", { origin: "https://app.cal.com" });
+        /* The calendar opens in the page's current theme (data-theme when it
+           loads). features.js keeps it in step afterwards: it rewrites each
+           Book link's data-cal-config theme and re-sends this ui call when
+           the dark-mode switch is used, so a dark page never opens a white
+           calendar. */
         Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
           tag.addEventListener("load", ready);
-          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+          /* A failure is recorded on <html>, not only announced: a later Book
+             press then goes straight to cal.com (tennis.js) instead of
+             waiting for a script that is never coming. */
+          tag.addEventListener("error", function () { window.__calFailed = true; document.documentElement.classList.add("cal-failed"); window.dispatchEvent(new Event("cal:error")); });
         }
       };
       var arm = function () { window.__loadCal(); };
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      /* A pointer over (or focus on) a particular Book control also starts
-         loading that event's calendar in the background, so by the time the
-         click's serve animation finishes the calendar is usually there. */
+      /* A mouse over (or keyboard focus on) a particular Book control also
+         starts loading that event's calendar in the background, from the
+         same host as the popup (app.cal.com, set in init above) so the popup
+         reuses what the preload fetched. Not on a touch screen: there the
+         pointer arrives with the tap itself, so a preload can't get ahead
+         and only competes with the popup's own load (a finger landing on a
+         Book button mid-scroll would start a full download too). */
       var preloaded = {};
       var intent = function (e) {
         var el = e.target.closest && e.target.closest("[data-cal-link]");
         if (!el) return;
         arm();
+        var mouse = e.type === "pointerover" && e.pointerType === "mouse";
+        var keys = false;
+        if (e.type === "focusin") { try { keys = el.matches(":focus-visible"); } catch (x) {} }
+        if (!mouse && !keys) return;
         var link = el.getAttribute("data-cal-link");
         if (preloaded[link]) return;
         preloaded[link] = true;
@@ -139,7 +154,7 @@
         <a href="#serve">서브</a>
         <a href="#groundstrokes">포핸드, 백핸드, 랠리</a>
         <a href="#movement">풋워크와 네트 플레이</a>
-        <a href="#matches">경기와 연습</a>
+        <a href="#match-play">경기와 연습</a>
         <a href="#elbow">테니스 엘보</a>
         <a href="#parents">부모님께</a>
       </nav>
@@ -196,7 +211,7 @@
           </article>
         </div>    </section>
 
-    <section class="wrap tips-group" id="matches">
+    <section class="wrap tips-group" id="match-play">
       <h2 class="fade">경기와 연습</h2>
       <div class="tips" data-tips="tip_matches tip_practice">
           <article class="tip fade" id="matches">
@@ -326,15 +341,15 @@
     </div>
   </footer>
 
-  <script>window.I18N = {"formWho":"연락할 수 있도록 이름과 이메일 또는 전화번호를 적어 주세요.","formFailed":"전송이 안 됐어요. 버튼을 다시 누르면 대신 이메일로 답변을 보낼 수 있어요.","builderMonth":"한 달, 레슨 {n}회 기준","builderPack5":"5회 패키지면 회당 $75, 한 달 {total}입니다.","builderPack10":"10회 패키지면 회당 $70, 한 달 {total}입니다.","daylightLeft":"코트에 해가 {t} 남았어요","lessonLine":"내 레슨: {when}, {rel}.","addCal":"캘린더에 추가","dismiss":"닫기","icsTitle":"Isaac Lee 테니스 레슨","titleAway":"돌아와서 레슨을 예약하세요","spinUp":"업","spinDown":"다운","themeDark":"다크 모드로 바꾸기","themeLight":"라이트 모드로 바꾸기","nextOpen":"다음 빈 시간: {when}","openHours":"이번 주 빈 시간 {n}시간","openHour":"이번 주 빈 시간 1시간","courtDry":"오늘 코트는 맑고 {hi}°F예요.","courtRain":"오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.","courtRainSoon":"{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.","copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
-  <script src="/tennis.js?v=20261020b" defer></script>
-  <script src="/bookfx.js?v=15" defer></script>
+  <script>window.I18N = {"formSending":"보내는 중…","builderPair":"두 명 기준: 1인당 한 달 {each}.","formWho":"연락할 수 있도록 이름과 이메일 또는 전화번호를 적어 주세요.","formFailed":"전송이 안 됐어요. 버튼을 다시 누르면 대신 이메일로 답변을 보낼 수 있어요.","builderMonth":"한 달, 레슨 {n}회 기준","builderPack5":"5회 패키지면 회당 $75, 한 달 {total}입니다.","builderPack10":"10회 패키지면 회당 $70, 한 달 {total}입니다.","daylightLeft":"코트에 해가 {t} 남았어요","lessonLine":"내 레슨: {when}, {rel}.","addCal":"캘린더에 추가","dismiss":"닫기","icsTitle":"Isaac Lee 테니스 레슨","titleAway":"돌아와서 레슨을 예약하세요","spinUp":"업","spinDown":"다운","themeDark":"다크 모드로 바꾸기","themeLight":"라이트 모드로 바꾸기","nextOpen":"다음 빈 시간: {when}","openHours":"이번 주 빈 시간 {n}시간","openHour":"이번 주 빈 시간 1시간","courtDry":"오늘 코트는 맑고 {hi}°F예요.","courtRain":"오늘은 비 올 가능성이 커요. 레슨을 옮겨야 하면 문자 드릴게요.","courtRainSoon":"{day}에 비 소식이 있어요. 레슨을 옮겨야 하면 문자 드릴게요.","copied":"복사됨","menuOpen":"메뉴 열기","menuClose":"메뉴 닫기","loadingCal":"달력 불러오는 중…","askSuggestions":["레슨 비용은 얼마예요?","레슨은 어디서 해요?","예약은 어떻게 해요?","무엇을 연습하면 좋을까요?"],"askDown":"지금은 채팅이 응답하지 않아요. 이메일을 보내 주시면 답장 드릴게요.","askBusy":"한꺼번에 질문이 많네요. 잠시 후 다시 해 보시거나 이메일을 보내 주세요.","emailMe":"이메일 보내기","askYou":"나: ","askIsaac":"Isaac: ","askSuggested":"추천 질문","askFinding":"답을 찾는 중","open":"열기","showMe":"보기","soundMute":"소리 끄기","soundOn":"소리 켜기","typeBy":"word","matchCopy":{"private":{"name":"개인 레슨","line":"고치고 싶은 부분에 맞춘 1:1 수업이에요."},"semi":{"name":"2인 레슨","line":"두 사람이 한 시간을 나눠요 — 1인당 $55."},"hitting":{"name":"히팅 파트너 세션","line":"지도 없이 랠리만, 시간당 $45."},"group":{"name":"성인 클리닉","line":"한 코트의 소규모 그룹이에요. 클리닉을 신청하시면 비슷한 실력의 그룹에 넣어 드릴게요."}},"matchAnswer":"{name}이 잘 맞을 것 같아요. {line}","matchTravel":"참고로, 레슨은 어바인 Toscana의 제 홈 코트에서만 해요. 출장은 어렵지만, 이곳으로 오시면 언제든 환영이에요.","matchUnsure":"그 문장으로는 판단하기 어려워요. 실력과 함께 칠 사람을 적어 보시거나, 위의 네 가지 중에서 골라 주세요.","matchDown":"지금은 매칭이 응답하지 않아요. 네 가지 레슨은 바로 위에 있어요. 이메일을 보내 주셔도 돼요.","matchBusy":"매칭 요청이 많네요. 잠시 후 다시 해 보시거나 위의 네 가지 중에서 골라 주세요.","matchSeeCard":"카드 보기 ↑","matchLabel":"추천 레슨","matchBusyButton":"찾는 중…","soundsOn":"테니스 효과음 켜짐","soundsTurnOff":"끄기","soundsOff":"효과음 꺼짐","matchLevels":["테니스 처음","초급","중급","상급","선수급"],"matchFocus":{"serve":"서브","groundstrokes":"포핸드와 백핸드","net":"네트 플레이","movement":"풋워크","match":"경기 운영","basics":"기본기"},"matchLevelLine":"실력: {level}.","matchFocusLine":"연습할 부분: {focus}.","matchNotesLine":"여기서 예약하면 이 내용이 예약 메모에 들어가서, 첫 수업을 계획할 수 있어요.","matchJunior":"자녀를 위해 예약하시나요? 보호자 이름으로 예약하고 메모에 아이 나이를 적어 주세요.","bookedToast":"예약됐어요. 코트에서 만나요.","tipDemoPlay":"고치는 법 보기","tipDemoReplay":"다시 보기","tipDemoLabel":"고치는 법 애니메이션","lang":"ko","pageName":"Korean","askUrl":"/ko/ask.json","mailSubject":"Tennis lessons (Korean page)","mailSubjectQuestion":"Question about lessons (Korean page)"};</script>
+  <script src="/tennis.js?v=20261020c" defer></script>
+  <script src="/bookfx.js?v=20261020c" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/tips-demo.js?v=1" defer></script>
-  <script src="/elbow.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=3" defer></script>
-  <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=3" defer></script>
-  <script src="/more.js?v=2" defer></script>
+  <script src="/elbow.js?v=20261020c" defer></script>
+  <script src="/motion-reveal.js?v=20261020c" defer></script>
+  <script src="/motion-transitions.js?v=20261020c" defer></script>
+  <script src="/features.js?v=20261020c" defer></script>
+  <script src="/more.js?v=20261020c" defer></script>
 </body>
 </html>

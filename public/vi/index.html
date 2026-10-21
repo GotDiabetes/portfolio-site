@@ -34,18 +34,19 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261020" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
-  <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=4" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/more.css?v=20261020c" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
+  <script>(function () { var root = document.documentElement; var classic = /[?&]classic\b/.test(location.search); function langOf(u) { var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(u, location.href).pathname); return m ? m[1] : "en"; } window.addEventListener("pagereveal", function (e) { if (!e.viewTransition) return; if (classic) { e.viewTransition.skipTransition(); return; } var from = window.navigation && navigation.activation && navigation.activation.from; root.classList.toggle("vt-lang", !!(from && from.url && langOf(from.url) !== langOf(location.href))); }); })();</script>
 
   <script>
     (function () {
@@ -54,29 +55,43 @@
         if (started) return;
         started = true;
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "lesson", { origin: "https://cal.com" });
-        /* The theme is pinned. The page has one theme, and a dark calendar over
-           a white page is the one thing a dark-mode OS must not do here. */
+        Cal("init", "lesson", { origin: "https://app.cal.com" });
+        /* The calendar opens in the page's current theme (data-theme when it
+           loads). features.js keeps it in step afterwards: it rewrites each
+           Book link's data-cal-config theme and re-sends this ui call when
+           the dark-mode switch is used, so a dark page never opens a white
+           calendar. */
         Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
           tag.addEventListener("load", ready);
-          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+          /* A failure is recorded on <html>, not only announced: a later Book
+             press then goes straight to cal.com (tennis.js) instead of
+             waiting for a script that is never coming. */
+          tag.addEventListener("error", function () { window.__calFailed = true; document.documentElement.classList.add("cal-failed"); window.dispatchEvent(new Event("cal:error")); });
         }
       };
       var arm = function () { window.__loadCal(); };
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      /* A pointer over (or focus on) a particular Book control also starts
-         loading that event's calendar in the background, so by the time the
-         click's serve animation finishes the calendar is usually there. */
+      /* A mouse over (or keyboard focus on) a particular Book control also
+         starts loading that event's calendar in the background, from the
+         same host as the popup (app.cal.com, set in init above) so the popup
+         reuses what the preload fetched. Not on a touch screen: there the
+         pointer arrives with the tap itself, so a preload can't get ahead
+         and only competes with the popup's own load (a finger landing on a
+         Book button mid-scroll would start a full download too). */
       var preloaded = {};
       var intent = function (e) {
         var el = e.target.closest && e.target.closest("[data-cal-link]");
         if (!el) return;
         arm();
+        var mouse = e.type === "pointerover" && e.pointerType === "mouse";
+        var keys = false;
+        if (e.type === "focusin") { try { keys = el.matches(":focus-visible"); } catch (x) {} }
+        if (!mouse && !keys) return;
         var link = el.getAttribute("data-cal-link");
         if (preloaded[link]) return;
         preloaded[link] = true;
@@ -292,7 +307,7 @@
           <p>
             Cùng một buổi học, chia cho hai người có trình độ tương đương. Mỗi người trả ít hơn học riêng, và học theo cặp cho bạn những pha đánh qua lại và tính điểm thật thay vì chỉ đỡ bóng một mình. Hãy rủ bạn bè, anh chị em hoặc bạn đánh đôi.
           </p>
-          <p class="offer">Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi bán riêng đầu tiên.</p>
+          <p class="offer">Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi học đôi đầu tiên.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>Đặt lịch học đôi</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="Nội dung lớp học đôi">Nội dung</button>
@@ -324,7 +339,7 @@
         </article>
       </div>
 
-      <form class="builder fade" id="builder" aria-labelledby="builderTitle">
+      <form class="builder fade" id="builder" aria-labelledby="builderTitle" hidden>
         <div class="builder-head">
           <h3 class="builder-title" id="builderTitle">Ghép gói học</h3>
           <p class="builder-sub">Chọn loại buổi học và số buổi mỗi tuần để xem chi phí một tháng.</p>
@@ -333,9 +348,9 @@
           <fieldset class="builder-set">
             <legend>Buổi học</legend>
             <div class="builder-chips">
-              <label class="chip"><input type="radio" name="type" value="private" checked><span>Riêng, $80</span></label>
-              <label class="chip"><input type="radio" name="type" value="semi"><span>Bán riêng, $110</span></label>
-              <label class="chip"><input type="radio" name="type" value="hitting"><span>Đánh bóng, $45</span></label>
+              <label class="chip"><input type="radio" name="type" value="private" checked><span>Kèm riêng, $80</span></label>
+              <label class="chip"><input type="radio" name="type" value="semi"><span>Lớp học đôi, $110</span></label>
+              <label class="chip"><input type="radio" name="type" value="hitting"><span>Đánh tập, $45</span></label>
             </div>
           </fieldset>
           <fieldset class="builder-set">
@@ -347,7 +362,7 @@
             </div>
           </fieldset>
         </div>
-        <div class="builder-out" aria-live="polite">
+        <div class="builder-out">
           <p class="builder-total"><b class="builder-num" data-total dir="ltr">$320</b><span class="builder-month" data-month></span></p>
           <p class="builder-pack" data-pack hidden></p>
           <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="private">Đặt buổi đầu tiên</a>
@@ -462,7 +477,7 @@
           </g>
         </svg>
         <div class="court-note">
-          <ul class="court-tabs" role="list">
+          <ul class="court-tabs" role="list" hidden>
             <li><button type="button" data-zone="baseline" aria-pressed="true">Đường cuối sân</button></li>
             <li><button type="button" data-zone="service" aria-pressed="false">Ô giao bóng</button></li>
             <li><button type="button" data-zone="net" aria-pressed="false">Lưới</button></li>
@@ -473,19 +488,19 @@
             <h3>Đường cuối sân</h3>
             <p>Phần lớn buổi học diễn ra ở đây. Cú đánh cuối sân, di chuyển và sức bền khi đánh qua lại: mười quả liên tiếp trước khi thử đánh mạnh.</p>
           </div>
-          <div data-note="service" hidden>
+          <div data-note="service">
             <h3>Ô giao bóng</h3>
             <p>Giao bóng và trả giao bóng. Tung bóng và nhịp trước, rồi mới đến xoáy, và bạn giao vào mục tiêu chứ không chỉ qua lưới.</p>
           </div>
-          <div data-note="net" hidden>
+          <div data-note="net">
             <h3>Lưới</h3>
             <p>Vô lê và đập bóng trên cao. Vung vợt ngắn, tiếp bóng sớm, và di chuyển để đến kịp.</p>
           </div>
-          <div data-note="mid" hidden>
+          <div data-note="mid">
             <h3>Giữa sân</h3>
             <p>Khu chuyển tiếp: cú đánh lên lưới và nửa vô lê, những cú đưa bạn từ cuối sân lên lưới.</p>
           </div>
-          <div data-note="alleys" hidden>
+          <div data-note="alleys">
             <h3>Hành lang đôi</h3>
             <p>Đánh đôi. Góc đánh, chặn lưới và vị trí đứng, cho ai chơi giải hoặc đánh đôi vui.</p>
           </div>
@@ -555,7 +570,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Brice Krizman</strong>
@@ -570,7 +585,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Albert Kim</strong>
@@ -1000,21 +1015,21 @@
     </button>
   </div>
 
-  <script>window.I18N = {"formWho":"Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.","formFailed":"Chưa gửi được. Bấm nút lần nữa để email câu trả lời cho tôi thay vào đó.","builderMonth":"một tháng, cho {n} buổi","builderPack5":"Với gói 5 buổi, mỗi buổi còn $75: {total} một tháng.","builderPack10":"Với gói 10 buổi, mỗi buổi còn $70: {total} một tháng.","daylightLeft":"Sân còn {t} ánh sáng ban ngày","lessonLine":"Buổi học của bạn: {when}, {rel}.","addCal":"Thêm vào lịch","dismiss":"Đóng","icsTitle":"Buổi học tennis với Isaac Lee","titleAway":"Quay lại và đặt một buổi học nhé","spinUp":"Lên","spinDown":"Xuống","themeDark":"Chuyển sang chế độ tối","themeLight":"Chuyển sang chế độ sáng","nextOpen":"Giờ trống gần nhất: {when}","openHours":"{n} giờ trống trong tuần này","openHour":"1 giờ trống trong tuần này","courtDry":"Hôm nay sân khô ráo, {hi}°F.","courtRain":"Hôm nay có thể mưa. Nếu phải dời buổi học, tôi sẽ nhắn tin.","courtRainSoon":"Dự báo mưa vào {day}; nếu phải dời buổi học, tôi sẽ nhắn tin.","copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","bookedToast":"Bạn đã đặt lịch xong. Hẹn gặp trên sân.","tipDemoPlay":"Xem cách sửa","tipDemoReplay":"Xem lại","tipDemoLabel":"Hoạt hình cách sửa","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
-  <script src="/tennis.js?v=20261020b" defer></script>
+  <script>window.I18N = {"formSending":"Đang gửi…","builderPair":"Cho hai người: mỗi người {each} một tháng.","formWho":"Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.","formFailed":"Chưa gửi được. Bấm nút lần nữa để email câu trả lời cho tôi thay vào đó.","builderMonth":"một tháng, cho {n} buổi","builderPack5":"Với gói 5 buổi, mỗi buổi còn $75: {total} một tháng.","builderPack10":"Với gói 10 buổi, mỗi buổi còn $70: {total} một tháng.","daylightLeft":"Sân còn {t} ánh sáng ban ngày","lessonLine":"Buổi học của bạn: {when}, {rel}.","addCal":"Thêm vào lịch","dismiss":"Đóng","icsTitle":"Buổi học tennis với Isaac Lee","titleAway":"Quay lại và đặt một buổi học nhé","spinUp":"Lên","spinDown":"Xuống","themeDark":"Chuyển sang chế độ tối","themeLight":"Chuyển sang chế độ sáng","nextOpen":"Giờ trống gần nhất: {when}","openHours":"{n} giờ trống trong tuần này","openHour":"1 giờ trống trong tuần này","courtDry":"Hôm nay sân khô ráo, {hi}°F.","courtRain":"Hôm nay có thể mưa. Nếu phải dời buổi học, tôi sẽ nhắn tin.","courtRainSoon":"Dự báo mưa vào {day}; nếu phải dời buổi học, tôi sẽ nhắn tin.","copied":"Đã sao chép","menuOpen":"Mở menu","menuClose":"Đóng menu","loadingCal":"Đang tải lịch…","askSuggestions":["Học phí bao nhiêu?","Học ở đâu?","Đặt lịch thế nào?","Tôi nên tập gì?"],"askDown":"Khung chat hiện không phản hồi. Hãy gửi email cho tôi, tôi sẽ trả lời bạn.","askBusy":"Có nhiều câu hỏi cùng lúc quá. Bạn đợi một phút hoặc gửi email cho tôi nhé.","emailMe":"Gửi email cho tôi","askYou":"Bạn: ","askIsaac":"Isaac: ","askSuggested":"Câu hỏi gợi ý","askFinding":"Đang tìm câu trả lời","open":"Mở","showMe":"Xem","soundMute":"Tắt âm thanh","soundOn":"Bật âm thanh","typeBy":"word","matchCopy":{"private":{"name":"lớp kèm riêng 1-1","line":"Một kèm một, xoay quanh điều bạn muốn sửa."},"semi":{"name":"lớp học đôi","line":"Hai người chia nhau một giờ — mỗi người $55."},"hitting":{"name":"buổi đánh tập","line":"Chỉ đánh qua lại, không hướng dẫn, $45 một giờ."},"group":{"name":"lớp nhóm cho người lớn","line":"Nhóm nhỏ trên một sân. Đăng ký và tôi sẽ xếp bạn vào nhóm cùng trình độ."}},"matchAnswer":"Hợp với bạn nhất có lẽ là {name}. {line}","matchTravel":"Lưu ý: các buổi học diễn ra tại sân nhà của tôi ở Toscana, Irvine. Tôi không thể đến chỗ bạn, nhưng rất hoan nghênh bạn đến đây.","matchUnsure":"Từ câu đó tôi chưa đoán được. Hãy thử ghi trình độ và ai sẽ chơi, hoặc chọn một trong bốn lựa chọn ở trên.","matchDown":"Công cụ chọn lớp hiện không phản hồi. Bốn lựa chọn ở ngay phía trên, hoặc gửi email cho tôi.","matchBusy":"Có nhiều yêu cầu cùng lúc quá. Bạn đợi một phút hoặc chọn một trong bốn lựa chọn ở trên.","matchSeeCard":"Xem thẻ ↑","matchLabel":"Hợp với bạn","matchBusyButton":"Đang tìm…","soundsOn":"Đã bật âm thanh tennis","soundsTurnOff":"Tắt","soundsOff":"Đã tắt âm thanh","matchLevels":["Mới chơi tennis","Mới bắt đầu","Trung bình","Khá","Thi đấu"],"matchFocus":{"serve":"giao bóng","groundstrokes":"thuận tay và trái tay","net":"lên lưới","movement":"bộ chân","match":"thi đấu","basics":"kỹ thuật cơ bản"},"matchLevelLine":"Trình độ: {level}.","matchFocusLine":"Cần tập: {focus}.","matchNotesLine":"Đặt lịch từ đây thì thông tin này sẽ vào ghi chú đặt lịch, để tôi chuẩn bị buổi đầu tiên.","matchJunior":"Đặt lịch cho con? Hãy đặt bằng tên của bạn và ghi tuổi của con trong phần ghi chú.","bookedToast":"Bạn đã đặt lịch xong. Hẹn gặp trên sân.","tipDemoPlay":"Xem cách sửa","tipDemoReplay":"Xem lại","tipDemoLabel":"Hoạt hình cách sửa","lang":"vi","pageName":"Vietnamese","askUrl":"/vi/ask.json","mailSubject":"Tennis lessons (Vietnamese page)","mailSubjectQuestion":"Question about lessons (Vietnamese page)"};</script>
+  <script src="/tennis.js?v=20261020c" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=6" defer></script>
-  <script src="/ask.js?v=9" defer></script>
+  <script src="/match.js?v=20261020c" defer></script>
+  <script src="/ask.js?v=20261020c" defer></script>
   <script src="/hero.js?v=1" defer></script>
-  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/bookfx.js?v=20261020c" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/motion-court.js?v=2" defer></script>
-  <script src="/motion-reveal.js?v=3" defer></script>
-  <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=3" defer></script>
-  <script src="/arrival.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=20261020c" defer></script>
+  <script src="/motion-transitions.js?v=20261020c" defer></script>
+  <script src="/features.js?v=20261020c" defer></script>
+  <script src="/arrival.js?v=20261020c" defer></script>
   <script src="/ballo.js?v=4" defer></script>
-  <script src="/motion.js?v=5" defer></script>
-  <script src="/more.js?v=6" defer></script>
+  <script src="/motion.js?v=20261020c" defer></script>
+  <script src="/more.js?v=20261020c" defer></script>
 </body>
 </html>

@@ -194,21 +194,28 @@ Isaac's machine.
   answers.
 - The questions Jev is asked are in `worker/src/index.js`. The page can send
   text, never questions, so the Worker is not an open proxy.
-- Only `leetennisco.com` and `localhost:5595` may call it; 6 requests a
-  minute per visitor and 60 across the site.
+- Only `leetennisco.com` and `localhost:5595` (or `127.0.0.1:5595`) may call
+  it. The Jev routes allow 6 requests a minute per visitor and 60 across the
+  site (`PER_VISITOR`, `SITE_WIDE`); page events and the two cached feeds
+  (`/slots`, `/court`) share `HITS` (30 a minute), sign-ups have `SIGNUPS`
+  (5 a minute, plus a daily cap in the Worker) and `/stats` has `STATS`
+  (20 a minute), so loading pages never uses up the chat.
 - Both stay hidden until `<meta name="jev-endpoint">` in `public/index.html`
   holds the Worker's address, so the page is unchanged until the Worker is up.
   On localhost they call a local Worker on `:8787` instead.
 
 - **Isaac's numbers** (`POST /hit`, `GET /stats`): the Worker also counts,
   per day (Irvine time) and page language, what the page reports (Book
-  pressed and for which lesson, the clinic list or a gift request sent, the
-  chat opened, a visit from the flyer's QR code: `tennis.js` sends these
-  with `sendBeacon`) and what it sees itself (matches, answered, unanswered
-  and refused chat questions). It keeps the chat's unanswered questions for
+  pressed and for which lesson, the chat opened, a finished booking, a
+  visit from the flyer's QR code: `tennis.js` sends these with
+  `sendBeacon`) and what it sees itself (matches, answered, unanswered and
+  refused chat questions, and the clinic list and gift sign-ups, counted by
+  `/signup`). It keeps the chat's unanswered questions for
   90 days, minus any Jev thinks hold personal details, with email- and
-  phone-shaped text blanked; the chat says so under its input. Counts
-  only: no IPs, no names. They live in a D1 database (`DB` in
+  phone-shaped text blanked; the chat says so under its input. The counts
+  carry no IPs and no names, but the `signups` table holds what visitors
+  type into the clinic list and gift forms, their name and email or phone
+  included; only `/stats`, with the key, gives it back. They live in a D1 database (`DB` in
   `wrangler.toml`); the Worker makes its tables on first use, and every
   counting call does nothing when the binding is missing. `/stats` needs
   the `STATS_KEY` secret and is what `public/stats/` reads. Page events

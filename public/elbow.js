@@ -50,8 +50,16 @@
   });
 
   Array.prototype.forEach.call(items, function (li) {
+    var lastType = "";
     li.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") setHot(li); });
     li.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") setHot(null); });
-    li.addEventListener("click", function () { setHot(li.classList.contains("is-hot") ? null : li); });
+    li.addEventListener("pointerdown", function (e) { lastType = e.pointerType; });
+    // A mouse or pen already lit the item on the way in, so its click keeps
+    // it lit; only a tap (or a click with no pointer) toggles it.
+    li.addEventListener("click", function () {
+      if (lastType && lastType !== "touch") setHot(li);
+      else setHot(li.classList.contains("is-hot") ? null : li);
+      lastType = "";
+    });
   });
 })();

@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    formSending: "Đang gửi…",
+    builderPair: "Cho hai người: mỗi người {each} một tháng.",
     formWho: "Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.",
     formFailed: "Chưa gửi được. Bấm nút lần nữa để email câu trả lời cho tôi thay vào đó.",
     // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
@@ -100,9 +102,9 @@ export default {
     [`Build a package`, `Ghép gói học`],
     [`Pick a lesson and how often, and see what a month comes to.`, `Chọn loại buổi học và số buổi mỗi tuần để xem chi phí một tháng.`],
     [`Lesson`, `Buổi học`],
-    [`Private, $80`, `Riêng, $80`],
-    [`Semi-private, $110`, `Bán riêng, $110`],
-    [`Hitting, $45`, `Đánh bóng, $45`],
+    [`Private, $80`, `Kèm riêng, $80`],
+    [`Semi-private, $110`, `Lớp học đôi, $110`],
+    [`Hitting, $45`, `Đánh tập, $45`],
     [`Per week`, `Mỗi tuần`],
     [`Once`, `Một buổi`],
     [`Twice`, `Hai buổi`],
@@ -461,7 +463,7 @@ export default {
 
     // added with the tip of the week, bring-a-friend and the intro video
     [`>Tip of the week<`, `>Mẹo của tuần<`],
-    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi bán riêng đầu tiên.`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi học đôi đầu tiên.`],
     [`One minute: who I am, where the court is, and what a first lesson is like.`, `Một phút: tôi là ai, sân ở đâu, và buổi học đầu tiên diễn ra thế nào.`],
 
     // the court map
@@ -480,7 +482,6 @@ export default {
     fallback_next: ["Học phí bao nhiêu?", "Học ở đâu?", "Đặt lịch thế nào?"],
     labels: {
       "Email me": "Gửi email cho tôi",
-      "Email for a quote": "Gửi email để báo giá",
       "See the lessons": "Xem các lớp học",
       "More about me": "Thêm về tôi",
       "Read the reviews": "Đọc nhận xét",

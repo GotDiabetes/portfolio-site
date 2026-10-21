@@ -8,8 +8,14 @@
        lock), and the gate lifts like a curtain onto the admin page;
      · wrong (401): the explode scene plays (the lock blows apart) and the
        visitor is sent back where they came from;
-     · too many tries (429), not set up (503) or no connection: a plain
-       line under the field, and nothing blows up.
+     · too many tries (429), not set up (503 "not_set_up"), the server
+       failing (any other 503 or error) or no connection: a plain line
+       under the field, and nothing blows up.
+
+   A right key's /stats answer is handed on with the "admin:unlocked"
+   event (detail: { key, data }), so the clinic list renders from it
+   without asking the Worker again (every call spends the visitor's
+   per-minute allowance).
 
    The two scenes are separate files (admin-explode.js, admin-ascend.js).
    Each registers on window.AdminFX and returns a promise that settles when
@@ -35,6 +41,10 @@
    key (and a wrong demo stays on the page), for working on the scenes.
    ========================================================================== */
 
+/* Read by the head script on load: if this file never ran, it takes the
+   gate away (removes .js) so the page isn't left behind a dead wall. */
+window.AdminGateReady = true;
+
 (function () {
   "use strict";
 
@@ -58,6 +68,7 @@
   var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   var NOTE = note.textContent;
   var busy = false;
+  var lastData = null;   // the right key's /stats answer, for the clinic list
 
   document.body.classList.add("is-gated");
   document.documentElement.classList.add("is-gated");
@@ -145,6 +156,7 @@
       go.removeAttribute("aria-disabled");
       if (result === "busy") say("Too many tries. Wait a minute, then try again.", true);
       else if (result === "unset") say("The key isn't set up yet. Run the STATS_KEY command from the README first.", true);
+      else if (result === "down") say("The site's server had a problem just now. Try again in a minute.", true);
       else say("Couldn't reach the site's server. Check the connection and try again.", true);
     });
   });
@@ -153,17 +165,27 @@
     if (demo) return new Promise(function (r) { setTimeout(function () { r(demo); }, 500); });
     return fetch(base() + "/stats", { headers: { Authorization: "Bearer " + key } })
       .then(function (r) {
-        if (r.status === 200) return "right";
+        if (r.status === 200) {
+          return r.json().then(function (d) { lastData = d; }, function () { lastData = null; }).then(function () { return "right"; });
+        }
         if (r.status === 401) return "wrong";
         if (r.status === 429) return "busy";
-        if (r.status === 503) return "unset";
+        /* 503 is "not set up" only when the Worker says so; it also answers
+           503 when its database fails, and that only needs a retry. */
+        if (r.status === 503) {
+          return r.json().then(function (d) { return d && d.error === "not_set_up" ? "unset" : "down"; }, function () { return "down"; });
+        }
         return "error";
       }, function () { return "error"; });
   }
 
+  /* The Worker's address from the page's jev-endpoint meta, like every
+     other page; the literal is only a fallback if the meta goes missing. */
   function base() {
     if (LOCAL) return "http://localhost:8787";
-    return "https://lee-tennis-jev.leetennis.workers.dev";
+    var meta = document.querySelector('meta[name="jev-endpoint"]');
+    var url = meta && /^https?:\/\//.test(meta.content) ? meta.content.replace(/\/+$/, "") : "";
+    return url || "https://lee-tennis-jev.leetennis.workers.dev";
   }
 
   function say(text, strong) {
@@ -218,7 +240,9 @@
   function right(key) {
     try { localStorage.setItem(KEY_STORE, key); } catch (e) { /* the numbers page will just ask */ }
     say("Unlocked.", true);
-    try { document.dispatchEvent(new CustomEvent("admin:unlocked")); } catch (e) { /* the clinic list reloads on its own timer */ }
+    /* The clinic list renders from this answer (or, without it, fetches
+       once with the key); it does not load on its own. */
+    try { document.dispatchEvent(new CustomEvent("admin:unlocked", { detail: { key: key, data: lastData } })); } catch (e) { /* no CustomEvent: the list stays as it is */ }
     return play("ascend").then(function (s) {
       document.body.classList.remove("is-gated");
       document.documentElement.classList.remove("is-gated");
@@ -292,12 +316,15 @@
 
   /* -------------------------------------------- Forget on this device --
      The numbers page remembers the key once the gate has seen it; this
-     clears that, so the next visit to the numbers page asks again. */
+     clears that, so the next visit to the numbers page asks again. The
+     button stays focusable afterwards (aria-disabled, not disabled), so a
+     keyboard user's place isn't thrown back to the top of the page. */
   if (forget) {
     forget.addEventListener("click", function () {
+      if (forget.getAttribute("aria-disabled") === "true") return;
       try { localStorage.removeItem(KEY_STORE); } catch (e) { /* fine */ }
       forget.textContent = "Forgotten on this device";
-      forget.disabled = true;
+      forget.setAttribute("aria-disabled", "true");
     });
   }
 

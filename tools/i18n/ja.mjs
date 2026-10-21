@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formSending: "送信中…",
+    builderPair: "お二人で受ける場合：お一人あたり月 {each}。",
     formWho: "連絡できるように、お名前とメールアドレスか電話番号を入れてください。",
     formFailed: "送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。",
     // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
@@ -100,8 +102,8 @@ export default {
     [`Build a package`, `パッケージを組む`],
     [`Pick a lesson and how often, and see what a month comes to.`, `レッスンと週の回数を選ぶと、1か月の目安が出ます。`],
     [`Lesson`, `レッスン`],
-    [`Private, $80`, `プライベート、$80`],
-    [`Semi-private, $110`, `セミプライベート、$110`],
+    [`Private, $80`, `個人レッスン、$80`],
+    [`Semi-private, $110`, `ペアレッスン、$110`],
     [`Hitting, $45`, `ヒッティング、$45`],
     [`Per week`, `週に`],
     [`Once`, `1回`],
@@ -464,7 +466,7 @@ export default {
 
     // added with the tip of the week, bring-a-friend and the intro video
     [`>Tip of the week<`, `>今週のヒント<`],
-    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `私のレッスンが初めてのお友達と一緒に来ると、初回のセミプライベートがお二人とも$10引きになります。`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `私のレッスンが初めてのお友達と一緒に来ると、初回のペアレッスンがお二人とも$10引きになります。`],
     [`One minute: who I am, where the court is, and what a first lesson is like.`, `1分でわかる、私のこと、コートの場所、初回レッスンの様子。`],
 
     // the court map
@@ -483,7 +485,6 @@ export default {
     fallback_next: ["レッスン料はいくらですか？", "レッスンの場所はどこですか？", "予約の方法は？"],
     labels: {
       "Email me": "メールする",
-      "Email for a quote": "メールで見積もりを依頼",
       "See the lessons": "レッスンを見る",
       "More about me": "プロフィールを見る",
       "Read the reviews": "推薦の声を読む",

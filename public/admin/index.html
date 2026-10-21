@@ -15,15 +15,24 @@
        rackets and unlocks it, and the gate lifts (admin-gate.js runs the
        flow; admin-explode.js and admin-ascend.js are the two scenes).
        It's a front door, not the security: the links below are public
-       pages, and the one with anything private (/stats/) checks the key
-       itself. With scripts off, the links simply show.
+       pages, and the private things are fetched from the Worker with the
+       key, which the Worker checks: the clinic list and gift requests on
+       this page (names, emails and phones, admin-clinic.js) and /stats/.
+       With scripts off, or if admin-gate.js never arrives, the gate is
+       taken away and the links simply show; the key form never sends the
+       key anywhere by itself.
        ============================================================ -->
   <title>Admin — Lee Tennis Co.</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261020" />
-  <link rel="stylesheet" href="/admin.css?v=2" />
-  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
+  <link rel="stylesheet" href="/admin.css?v=20261020c" />
+  <!-- The Worker's address, as on every other page (admin-gate.js and
+       admin-clinic.js read it). -->
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <!-- .js shows the gate. If admin-gate.js hasn't run by the time the page
+       has loaded, the gate goes again, so it can never be a dead wall. -->
+  <script>document.documentElement.classList.add("js"); window.addEventListener("load", function () { if (!window.AdminGateReady) document.documentElement.classList.remove("js"); });</script>
 </head>
 
 <body class="desk">
@@ -43,10 +52,13 @@
       </svg>
       <p class="gate-eyebrow">For Isaac</p>
       <h1 class="gate-title" id="gateTitle">What's the key?</h1>
-      <form class="gate-form" id="gateForm" novalidate>
+      <!-- No native submit (action), and the field has no name: Enter before
+           admin-gate.js is ready does nothing, rather than putting the key
+           in the address (and the history and the server's logs). -->
+      <form class="gate-form" id="gateForm" action="javascript:void 0" novalidate>
         <label class="gate-label" for="gateKey">Stats key</label>
         <div class="gate-row">
-          <input class="gate-input" id="gateKey" name="key" type="password" autocomplete="current-password" spellcheck="false" required>
+          <input class="gate-input" id="gateKey" type="password" autocomplete="current-password" spellcheck="false" required>
           <button class="gate-go" type="submit">Unlock</button>
         </div>
         <p class="gate-note" id="gateNote" aria-live="polite">Your stats password. Get it wrong and it sends you back.</p>
@@ -74,7 +86,7 @@
     <ul class="desk-links">
       <li>
         <a href="/stats/">Your numbers</a>
-        <p>What people did on the site, by day and language, and the chat questions it couldn't answer. Asks for your stats password.</p>
+        <p>What people did on the site, by day and language, the sign-ups, and the chat questions it couldn't answer. Uses the key you unlocked this page with (asks again if you've told this device to forget it).</p>
       </li>
       <li>
         <a href="/admin/drills/">Drill library</a>
@@ -119,9 +131,11 @@
     </ul>
   </main>
 
+  <!-- The gate first: it needs the scenes only once a key is checked, so
+       its form is live without waiting for ~100 KB of animation. -->
+  <script src="/admin-gate.js?v=20261020c" defer></script>
   <script src="/admin-explode.js?v=2" defer></script>
   <script src="/admin-ascend.js?v=2" defer></script>
-  <script src="/admin-gate.js?v=3" defer></script>
-  <script src="/admin-clinic.js?v=1" defer></script>
+  <script src="/admin-clinic.js?v=20261020c" defer></script>
 </body>
 </html>

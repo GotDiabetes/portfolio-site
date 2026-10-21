@@ -34,18 +34,19 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261020" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
-  <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=4" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/more.css?v=20261020c" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
+  <script>(function () { var root = document.documentElement; var classic = /[?&]classic\b/.test(location.search); function langOf(u) { var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(u, location.href).pathname); return m ? m[1] : "en"; } window.addEventListener("pagereveal", function (e) { if (!e.viewTransition) return; if (classic) { e.viewTransition.skipTransition(); return; } var from = window.navigation && navigation.activation && navigation.activation.from; root.classList.toggle("vt-lang", !!(from && from.url && langOf(from.url) !== langOf(location.href))); }); })();</script>
 
   <script>
     (function () {
@@ -54,29 +55,43 @@
         if (started) return;
         started = true;
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "lesson", { origin: "https://cal.com" });
-        /* The theme is pinned. The page has one theme, and a dark calendar over
-           a white page is the one thing a dark-mode OS must not do here. */
+        Cal("init", "lesson", { origin: "https://app.cal.com" });
+        /* The calendar opens in the page's current theme (data-theme when it
+           loads). features.js keeps it in step afterwards: it rewrites each
+           Book link's data-cal-config theme and re-sends this ui call when
+           the dark-mode switch is used, so a dark page never opens a white
+           calendar. */
         Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
           tag.addEventListener("load", ready);
-          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+          /* A failure is recorded on <html>, not only announced: a later Book
+             press then goes straight to cal.com (tennis.js) instead of
+             waiting for a script that is never coming. */
+          tag.addEventListener("error", function () { window.__calFailed = true; document.documentElement.classList.add("cal-failed"); window.dispatchEvent(new Event("cal:error")); });
         }
       };
       var arm = function () { window.__loadCal(); };
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      /* A pointer over (or focus on) a particular Book control also starts
-         loading that event's calendar in the background, so by the time the
-         click's serve animation finishes the calendar is usually there. */
+      /* A mouse over (or keyboard focus on) a particular Book control also
+         starts loading that event's calendar in the background, from the
+         same host as the popup (app.cal.com, set in init above) so the popup
+         reuses what the preload fetched. Not on a touch screen: there the
+         pointer arrives with the tap itself, so a preload can't get ahead
+         and only competes with the popup's own load (a finger landing on a
+         Book button mid-scroll would start a full download too). */
       var preloaded = {};
       var intent = function (e) {
         var el = e.target.closest && e.target.closest("[data-cal-link]");
         if (!el) return;
         arm();
+        var mouse = e.type === "pointerover" && e.pointerType === "mouse";
+        var keys = false;
+        if (e.type === "focusin") { try { keys = el.matches(":focus-visible"); } catch (x) {} }
+        if (!mouse && !keys) return;
         var link = el.getAttribute("data-cal-link");
         if (preloaded[link]) return;
         preloaded[link] = true;
@@ -292,7 +307,7 @@
           <p>
             同じレッスンを、近いレベルの2人で受けます。1人あたりの料金は個人レッスンより安く、1人で球出しを受ける代わりに、実際のラリーやポイント練習ができます。友達やきょうだい、ダブルスのパートナーと一緒にどうぞ。
           </p>
-          <p class="offer">私のレッスンが初めてのお友達と一緒に来ると、初回のセミプライベートがお二人とも$10引きになります。</p>
+          <p class="offer">私のレッスンが初めてのお友達と一緒に来ると、初回のペアレッスンがお二人とも$10引きになります。</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>ペアレッスンを予約</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="ペアレッスンの内容">レッスン内容</button>
@@ -324,7 +339,7 @@
         </article>
       </div>
 
-      <form class="builder fade" id="builder" aria-labelledby="builderTitle">
+      <form class="builder fade" id="builder" aria-labelledby="builderTitle" hidden>
         <div class="builder-head">
           <h3 class="builder-title" id="builderTitle">パッケージを組む</h3>
           <p class="builder-sub">レッスンと週の回数を選ぶと、1か月の目安が出ます。</p>
@@ -333,8 +348,8 @@
           <fieldset class="builder-set">
             <legend>レッスン</legend>
             <div class="builder-chips">
-              <label class="chip"><input type="radio" name="type" value="private" checked><span>プライベート、$80</span></label>
-              <label class="chip"><input type="radio" name="type" value="semi"><span>セミプライベート、$110</span></label>
+              <label class="chip"><input type="radio" name="type" value="private" checked><span>個人レッスン、$80</span></label>
+              <label class="chip"><input type="radio" name="type" value="semi"><span>ペアレッスン、$110</span></label>
               <label class="chip"><input type="radio" name="type" value="hitting"><span>ヒッティング、$45</span></label>
             </div>
           </fieldset>
@@ -347,7 +362,7 @@
             </div>
           </fieldset>
         </div>
-        <div class="builder-out" aria-live="polite">
+        <div class="builder-out">
           <p class="builder-total"><b class="builder-num" data-total dir="ltr">$320</b><span class="builder-month" data-month></span></p>
           <p class="builder-pack" data-pack hidden></p>
           <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="private">最初の1回を予約する</a>
@@ -462,7 +477,7 @@
           </g>
         </svg>
         <div class="court-note">
-          <ul class="court-tabs" role="list">
+          <ul class="court-tabs" role="list" hidden>
             <li><button type="button" data-zone="baseline" aria-pressed="true">ベースライン</button></li>
             <li><button type="button" data-zone="service" aria-pressed="false">サービスボックス</button></li>
             <li><button type="button" data-zone="net" aria-pressed="false">ネット</button></li>
@@ -473,19 +488,19 @@
             <h3>ベースライン</h3>
             <p>レッスンの大半はここ。グラウンドストローク、フットワーク、ラリーの持久力：強く打つ前に、まず10球続けて返します。</p>
           </div>
-          <div data-note="service" hidden>
+          <div data-note="service">
             <h3>サービスボックス</h3>
             <p>サーブとリターン。まずトスとリズム、次にスピン。ネットを越すだけでなく、的を狙って打ちます。</p>
           </div>
-          <div data-note="net" hidden>
+          <div data-note="net">
             <h3>ネット</h3>
             <p>ボレーとスマッシュ。小さなスイング、早い打点、そして間に合うためのフットワーク。</p>
           </div>
-          <div data-note="mid" hidden>
+          <div data-note="mid">
             <h3>ミッドコート</h3>
             <p>つなぎのゾーン：アプローチショットとハーフボレー。ベースラインからネットへ出るためのショットです。</p>
           </div>
-          <div data-note="alleys" hidden>
+          <div data-note="alleys">
             <h3>アレー（ダブルスの帯）</h3>
             <p>ダブルス。角度、ポーチ、立ち位置。リーグや仲間内でダブルスをする人向けです。</p>
           </div>
@@ -555,7 +570,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Brice Krizman</strong>
@@ -570,7 +585,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Albert Kim</strong>
@@ -1000,21 +1015,21 @@
     </button>
   </div>
 
-  <script>window.I18N = {"formWho":"連絡できるように、お名前とメールアドレスか電話番号を入れてください。","formFailed":"送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。","builderMonth":"1か月、レッスン {n} 回で","builderPack5":"5回パッケージなら1回 $75：月 {total}。","builderPack10":"10回パッケージなら1回 $70：月 {total}。","daylightLeft":"コートの日照はあと {t}","lessonLine":"あなたのレッスン：{when}、{rel}。","addCal":"カレンダーに追加","dismiss":"閉じる","icsTitle":"Isaac Lee のテニスレッスン","titleAway":"戻ってレッスンを予約しませんか","spinUp":"アップ","spinDown":"ダウン","themeDark":"ダークモードに切り替え","themeLight":"ライトモードに切り替え","nextOpen":"次の空き：{when}","openHours":"今週の空きは{n}時間","openHour":"今週の空きは1時間","courtDry":"今日のコートは晴れ、最高{hi}°Fです。","courtRain":"今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。","courtRainSoon":"{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。","copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
-  <script src="/tennis.js?v=20261020b" defer></script>
+  <script>window.I18N = {"formSending":"送信中…","builderPair":"お二人で受ける場合：お一人あたり月 {each}。","formWho":"連絡できるように、お名前とメールアドレスか電話番号を入れてください。","formFailed":"送信できませんでした。もう一度ボタンを押すと、代わりにメールで回答を送れます。","builderMonth":"1か月、レッスン {n} 回で","builderPack5":"5回パッケージなら1回 $75：月 {total}。","builderPack10":"10回パッケージなら1回 $70：月 {total}。","daylightLeft":"コートの日照はあと {t}","lessonLine":"あなたのレッスン：{when}、{rel}。","addCal":"カレンダーに追加","dismiss":"閉じる","icsTitle":"Isaac Lee のテニスレッスン","titleAway":"戻ってレッスンを予約しませんか","spinUp":"アップ","spinDown":"ダウン","themeDark":"ダークモードに切り替え","themeLight":"ライトモードに切り替え","nextOpen":"次の空き：{when}","openHours":"今週の空きは{n}時間","openHour":"今週の空きは1時間","courtDry":"今日のコートは晴れ、最高{hi}°Fです。","courtRain":"今日は雨の可能性が高いです。レッスンを動かす場合はメッセージでお知らせします。","courtRainSoon":"{day}は雨の予報です。レッスンを動かす場合はメッセージでお知らせします。","copied":"コピーしました","menuOpen":"メニューを開く","menuClose":"メニューを閉じる","loadingCal":"カレンダーを読み込み中…","askSuggestions":["レッスン料はいくらですか？","レッスンの場所はどこですか？","予約の方法は？","何を練習すればいいですか？"],"askDown":"現在チャットが応答していません。メールをいただければお返事します。","askBusy":"一度にたくさんの質問が届いています。少し待つか、メールでお問い合わせください。","emailMe":"メールする","askYou":"あなた：","askIsaac":"Isaac：","askSuggested":"おすすめの質問","askFinding":"回答を探しています","open":"開く","showMe":"見る","soundMute":"音を消す","soundOn":"音を出す","typeBy":"char","matchCopy":{"private":{"name":"個人レッスン","line":"直したいところに合わせたマンツーマンのレッスンです。"},"semi":{"name":"ペアレッスン","line":"2人で1時間を分け合います。1人 $55 です。"},"hitting":{"name":"ヒッティングセッション","line":"指導なしで打ち合うだけ、1時間 $45 です。"},"group":{"name":"大人向けクリニック","line":"1面での少人数グループです。お申し込みいただければ、近いレベルのグループにお入れします。"}},"matchAnswer":"おすすめは{name}です。{line}","matchTravel":"ひとつだけ：レッスンはアーバインの Toscana にある私のホームコートで行います。出張はできませんが、ぜひこちらへお越しください。","matchUnsure":"その文からは判断できませんでした。レベルや一緒にプレーする人を書いてみるか、上の4つから選んでください。","matchDown":"現在マッチングが応答していません。4つのレッスンはすぐ上にあります。メールでもどうぞ。","matchBusy":"マッチングの依頼が集中しています。少し待つか、上の4つから選んでください。","matchSeeCard":"カードを見る ↑","matchLabel":"おすすめ","matchBusyButton":"検索中…","soundsOn":"テニスの効果音がオンです","soundsTurnOff":"オフにする","soundsOff":"効果音をオフにしました","matchLevels":["テニス初めて","初級","中級","上級","競技レベル"],"matchFocus":{"serve":"サーブ","groundstrokes":"フォアとバック","net":"ネットプレー","movement":"フットワーク","match":"試合運び","basics":"基礎"},"matchLevelLine":"レベル：{level}。","matchFocusLine":"練習のテーマ：{focus}。","matchNotesLine":"ここから予約すると、この内容が予約メモに入り、初回レッスンの準備に使えます。","matchJunior":"お子さんの予約ですか？保護者のお名前で予約し、メモにお子さんの年齢をお書きください。","bookedToast":"予約できました。コートでお会いしましょう。","tipDemoPlay":"直し方を見る","tipDemoReplay":"もう一度見る","tipDemoLabel":"直し方のアニメーション","lang":"ja","pageName":"Japanese","askUrl":"/ja/ask.json","mailSubject":"Tennis lessons (Japanese page)","mailSubjectQuestion":"Question about lessons (Japanese page)"};</script>
+  <script src="/tennis.js?v=20261020c" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=6" defer></script>
-  <script src="/ask.js?v=9" defer></script>
+  <script src="/match.js?v=20261020c" defer></script>
+  <script src="/ask.js?v=20261020c" defer></script>
   <script src="/hero.js?v=1" defer></script>
-  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/bookfx.js?v=20261020c" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/motion-court.js?v=2" defer></script>
-  <script src="/motion-reveal.js?v=3" defer></script>
-  <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=3" defer></script>
-  <script src="/arrival.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=20261020c" defer></script>
+  <script src="/motion-transitions.js?v=20261020c" defer></script>
+  <script src="/features.js?v=20261020c" defer></script>
+  <script src="/arrival.js?v=20261020c" defer></script>
   <script src="/ballo.js?v=4" defer></script>
-  <script src="/motion.js?v=5" defer></script>
-  <script src="/more.js?v=6" defer></script>
+  <script src="/motion.js?v=20261020c" defer></script>
+  <script src="/more.js?v=20261020c" defer></script>
 </body>
 </html>

@@ -145,14 +145,21 @@
       see.className = "link-btn";
       see.textContent = T.matchSeeCard || "See the card ↑";
       see.addEventListener("click", function () {
-        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        /* No behavior given: html's scroll-behavior decides, which is
+           smooth unless the visitor prefers reduced motion. */
+        card.scrollIntoView({ block: "center" });
       });
       wrap.appendChild(see);
       result.appendChild(wrap);
     }
 
-    /* The card's label ("Your match") is drawn by CSS from this attribute. */
-    card.setAttribute("data-match", T.matchLabel || "Your match");
+    /* The card's label ("Your match") is drawn by CSS from this attribute,
+       on the title: attr() in h3::after reads the h3's own attributes, not
+       the card's, so the title carries it too. */
+    var label = T.matchLabel || "Your match";
+    card.setAttribute("data-match", label);
+    var title = card.querySelector("h3");
+    if (title) title.setAttribute("data-match", label);
     card.classList.add("is-match");
   }
 

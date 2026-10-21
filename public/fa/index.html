@@ -34,18 +34,19 @@
   <meta name="review-link" content="" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261020" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
-  <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=4" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/more.css?v=20261020c" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
   <script>if (/[?&]classic\b/.test(location.search)) document.documentElement.classList.add("classic");</script>
+  <script>(function () { var root = document.documentElement; var classic = /[?&]classic\b/.test(location.search); function langOf(u) { var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(u, location.href).pathname); return m ? m[1] : "en"; } window.addEventListener("pagereveal", function (e) { if (!e.viewTransition) return; if (classic) { e.viewTransition.skipTransition(); return; } var from = window.navigation && navigation.activation && navigation.activation.from; root.classList.toggle("vt-lang", !!(from && from.url && langOf(from.url) !== langOf(location.href))); }); })();</script>
 
   <script>
     (function () {
@@ -54,29 +55,43 @@
         if (started) return;
         started = true;
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "lesson", { origin: "https://cal.com" });
-        /* The theme is pinned. The page has one theme, and a dark calendar over
-           a white page is the one thing a dark-mode OS must not do here. */
+        Cal("init", "lesson", { origin: "https://app.cal.com" });
+        /* The calendar opens in the page's current theme (data-theme when it
+           loads). features.js keeps it in step afterwards: it rewrites each
+           Book link's data-cal-config theme and re-sends this ui call when
+           the dark-mode switch is used, so a dark page never opens a white
+           calendar. */
         Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
           tag.addEventListener("load", ready);
-          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+          /* A failure is recorded on <html>, not only announced: a later Book
+             press then goes straight to cal.com (tennis.js) instead of
+             waiting for a script that is never coming. */
+          tag.addEventListener("error", function () { window.__calFailed = true; document.documentElement.classList.add("cal-failed"); window.dispatchEvent(new Event("cal:error")); });
         }
       };
       var arm = function () { window.__loadCal(); };
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      /* A pointer over (or focus on) a particular Book control also starts
-         loading that event's calendar in the background, so by the time the
-         click's serve animation finishes the calendar is usually there. */
+      /* A mouse over (or keyboard focus on) a particular Book control also
+         starts loading that event's calendar in the background, from the
+         same host as the popup (app.cal.com, set in init above) so the popup
+         reuses what the preload fetched. Not on a touch screen: there the
+         pointer arrives with the tap itself, so a preload can't get ahead
+         and only competes with the popup's own load (a finger landing on a
+         Book button mid-scroll would start a full download too). */
       var preloaded = {};
       var intent = function (e) {
         var el = e.target.closest && e.target.closest("[data-cal-link]");
         if (!el) return;
         arm();
+        var mouse = e.type === "pointerover" && e.pointerType === "mouse";
+        var keys = false;
+        if (e.type === "focusin") { try { keys = el.matches(":focus-visible"); } catch (x) {} }
+        if (!mouse && !keys) return;
         var link = el.getAttribute("data-cal-link");
         if (preloaded[link]) return;
         preloaded[link] = true;
@@ -292,7 +307,7 @@
           <p>
             همان کلاس، بین دو بازیکن با سطح نزدیک به هم تقسیم می‌شود. هر کدام کمتر از کلاس خصوصی می‌پردازید و کار دونفره به شما رالی و امتیاز واقعی برای تمرین می‌دهد، به‌جای اینکه تنها توپ بگیرید. با یک دوست، خواهر یا برادر، یا یار دوبل‌تان بیایید.
           </p>
-          <p class="offer">دوستی را که تا حالا با من کلاس نداشته بیاورید تا هر دو در اولین کلاس نیمه‌خصوصی ⁦$10⁩ تخفیف بگیرید.</p>
+          <p class="offer">دوستی را که تا حالا با من کلاس نداشته بیاورید تا هر دو در اولین کلاس دونفره ⁦$10⁩ تخفیف بگیرید.</p>
           <div class="lesson-actions">
             <a class="btn btn-primary btn-sm" href="https://cal.com/isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-semi-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}'>رزرو کلاس دونفره</a>
             <button class="link-btn" type="button" data-open="modalSemi" aria-label="محتوای کلاس دونفره">شامل چه چیزهایی است</button>
@@ -324,18 +339,18 @@
         </article>
       </div>
 
-      <form class="builder fade" id="builder" aria-labelledby="builderTitle">
+      <form class="builder fade" id="builder" aria-labelledby="builderTitle" hidden>
         <div class="builder-head">
-          <h3 class="builder-title" id="builderTitle">بستهٔ خودت را بساز</h3>
-          <p class="builder-sub">یک نوع جلسه و تعداد هفتگی را انتخاب کن تا هزینهٔ یک ماه را ببینی.</p>
+          <h3 class="builder-title" id="builderTitle">بستهٔ خودتان را بسازید</h3>
+          <p class="builder-sub">یک نوع جلسه و تعداد هفتگی را انتخاب کنید تا هزینهٔ یک ماه را ببینید.</p>
         </div>
         <div class="builder-in">
           <fieldset class="builder-set">
             <legend>جلسه</legend>
             <div class="builder-chips">
               <label class="chip"><input type="radio" name="type" value="private" checked><span>خصوصی، ⁦$80⁩</span></label>
-              <label class="chip"><input type="radio" name="type" value="semi"><span>نیمه‌خصوصی، ⁦$110⁩</span></label>
-              <label class="chip"><input type="radio" name="type" value="hitting"><span>تمرین ضربه، ⁦$45⁩</span></label>
+              <label class="chip"><input type="radio" name="type" value="semi"><span>کلاس دونفره، ⁦$110⁩</span></label>
+              <label class="chip"><input type="radio" name="type" value="hitting"><span>رالی با هم‌تمرینی، ⁦$45⁩</span></label>
             </div>
           </fieldset>
           <fieldset class="builder-set">
@@ -347,7 +362,7 @@
             </div>
           </fieldset>
         </div>
-        <div class="builder-out" aria-live="polite">
+        <div class="builder-out">
           <p class="builder-total"><b class="builder-num" data-total dir="ltr">$320</b><span class="builder-month" data-month></span></p>
           <p class="builder-pack" data-pack hidden></p>
           <a class="btn btn-primary" href="https://cal.com/isaac-lee-hlkghj/60-min-private-lesson" data-cal-namespace="lesson" data-cal-link="isaac-lee-hlkghj/60-min-private-lesson" data-cal-config='{"layout":"month_view","theme":"light"}' data-book="private">رزرو اولین جلسه</a>
@@ -439,8 +454,8 @@
     <section class="wrap section court-section" id="court">
       <header class="section-head">
         <p class="eyebrow fade">زمین</p>
-        <h2 class="fade" style="--d:.06s">زمینی که در آن یاد می‌گیری</h2>
-        <p class="section-sub court-sub fade" style="--d:.12s">نشانگر را روی بخشی از زمین ببر یا روی آن بزن تا ببینی آنجا روی چه چیزی کار می‌کنیم.</p>
+        <h2 class="fade" style="--d:.06s">زمینی که در آن یاد می‌گیرید</h2>
+        <p class="section-sub court-sub fade" style="--d:.12s">نشانگر را روی بخشی از زمین ببرید یا روی آن بزنید تا ببینید آنجا روی چه چیزی کار می‌کنیم.</p>
       </header>
       <div class="court fade" data-court data-current="baseline">
         <svg class="court-art" viewBox="-20 -20 820 400" aria-hidden="true" focusable="false">
@@ -462,7 +477,7 @@
           </g>
         </svg>
         <div class="court-note">
-          <ul class="court-tabs" role="list">
+          <ul class="court-tabs" role="list" hidden>
             <li><button type="button" data-zone="baseline" aria-pressed="true">خط انتهایی</button></li>
             <li><button type="button" data-zone="service" aria-pressed="false">محوطه‌های سرویس</button></li>
             <li><button type="button" data-zone="net" aria-pressed="false">تور</button></li>
@@ -471,21 +486,21 @@
           </ul>
           <div data-note="baseline">
             <h3>خط انتهایی</h3>
-            <p>بیشتر جلسه اینجا می‌گذرد. ضربه‌های زمینی، کار پا و تحمل رالی: ده توپ پشت سر هم، پیش از آنکه بخواهی یکی را محکم بزنی.</p>
+            <p>بیشتر جلسه اینجا می‌گذرد. ضربه‌های زمینی، کار پا و تحمل رالی: ده توپ پشت سر هم، پیش از آنکه بخواهید یکی را محکم بزنید.</p>
           </div>
-          <div data-note="service" hidden>
+          <div data-note="service">
             <h3>محوطه‌های سرویس</h3>
-            <p>سرویس و برگشت سرویس. اول پرتاب توپ و ریتم، بعد پیچ؛ و سرویس را به سمت هدف می‌زنی، نه فقط از روی تور.</p>
+            <p>سرویس و برگشت سرویس. اول پرتاب توپ و ریتم، بعد پیچ؛ و سرویس را به سمت هدف می‌زنید، نه فقط از روی تور.</p>
           </div>
-          <div data-note="net" hidden>
+          <div data-note="net">
             <h3>تور</h3>
-            <p>والی و ضربهٔ بالای سر. سوینگ کوتاه، تماس زودهنگام و کار پایی که به‌موقع برساندت.</p>
+            <p>والی و ضربهٔ بالای سر. سوینگ کوتاه، تماس زودهنگام و کار پایی که شما را به‌موقع برساند.</p>
           </div>
-          <div data-note="mid" hidden>
+          <div data-note="mid">
             <h3>میانهٔ زمین</h3>
-            <p>منطقهٔ گذار: ضربه‌های نزدیک‌شدن و نیم‌والی؛ ضربه‌هایی که تو را از خط انتهایی به تور می‌رسانند.</p>
+            <p>منطقهٔ گذار: ضربه‌های نزدیک‌شدن و نیم‌والی؛ ضربه‌هایی که شما را از خط انتهایی به تور می‌رسانند.</p>
           </div>
-          <div data-note="alleys" hidden>
+          <div data-note="alleys">
             <h3>راهروهای دونفره</h3>
             <p>دونفره. زاویه‌ها، شکار توپ در تور و جای ایستادن؛ برای هر کسی که در لیگ یا دوستانه دونفره بازی می‌کند.</p>
           </div>
@@ -555,7 +570,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="Brice Krizman" />
+              <img src="/images/brice-krizman.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Brice Krizman</strong>
@@ -570,7 +585,7 @@
           </blockquote>
           <figcaption>
             <span class="avatar">
-              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="Albert Kim" />
+              <img src="/images/albert-kim.jpg" width="241" height="241" loading="lazy" alt="" />
             </span>
             <span>
               <strong>Albert Kim</strong>
@@ -678,7 +693,7 @@
         </details>
         <details>
           <summary>بسته‌های چندجلسه‌ای دارید؟</summary>
-          <p>بله، برای کلاس خصوصی: ۵ جلسه ⁦$375⁩ یا ۱۰ جلسه ⁦$700⁩، پرداخت حضوری. یعنی ساعتی ⁦$75⁩ و ⁦$70⁩ به‌جای ⁦$80.⁩</p>
+          <p>بله، برای کلاس خصوصی: ۵ جلسه ⁦$375⁩ یا ۱۰ جلسه ⁦$700⁩، پرداخت حضوری. یعنی ساعتی ⁦$75⁩ و ⁦$70⁩ به‌جای ⁦$80⁩.</p>
         </details>
         <details>
           <summary>می‌توانم کلاس را هدیه بدهم؟</summary>
@@ -872,12 +887,12 @@
           <label class="choice"><input type="checkbox" name="times" value="weekend-afternoon"> بعدازظهرهای آخر هفته</label>
         </fieldset>
         <label class="field">
-          <span class="field-label">نام تو</span>
+          <span class="field-label">نام شما</span>
           <input type="text" name="name" maxlength="80" autocomplete="name" required>
         </label>
         <label class="field">
           <span class="field-label">ایمیل یا شماره تلفن</span>
-          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="تا وقتی گروهی تشکیل شد خبرت کنم" required>
+          <input type="text" name="contact" maxlength="120" autocomplete="email" placeholder="تا وقتی گروهی تشکیل شد خبرتان کنم" required>
         </label>
         <label class="field">
           <span class="field-label">توضیح دیگر <span class="field-optional">اختیاری</span></span>
@@ -887,11 +902,11 @@
         <div class="actions">
           <button class="btn btn-primary" type="submit">ثبت در فهرست</button>
         </div>
-        <p class="form-note">پاسخ‌هایت فقط به من می‌رسد. وقتی گروهی تشکیل شود خبرت می‌کنم.</p>
+        <p class="form-note">پاسخ‌هایتان فقط به من می‌رسد. وقتی گروهی تشکیل شود خبرتان می‌کنم.</p>
       </form>
       <div class="form-done" tabindex="-1" hidden>
-        <p class="form-done-title">در فهرست هستی.</p>
-        <p>وقتی گروهی هم‌سطح تو تشکیل شود، ایمیل یا پیامک می‌زنم.</p>
+        <p class="form-done-title">در فهرست هستید.</p>
+        <p>وقتی گروهی هم‌سطح شما تشکیل شود، ایمیل یا پیامک می‌زنم.</p>
         <div class="actions"><button class="btn btn-primary" type="button" data-close>باشه</button></div>
       </div>
     </div>
@@ -923,7 +938,7 @@
           <textarea name="message" rows="2" maxlength="140" placeholder="مثلاً: تولدت مبارک! در زمین می‌بینمت."></textarea>
         </label>
         <label class="field">
-          <span class="field-label">نام تو</span>
+          <span class="field-label">نام شما</span>
           <input type="text" name="name" maxlength="80" autocomplete="name" required>
         </label>
         <label class="field">
@@ -1000,21 +1015,21 @@
     </button>
   </div>
 
-  <script>window.I18N = {"formWho":"نام و یک ایمیل یا شماره تلفن بنویس تا بتوانم با تو تماس بگیرم.","formFailed":"ارسال نشد. دوباره دکمه را بزن تا به‌جای آن پاسخ‌هایت را ایمیل کنی.","builderMonth":"در ماه، برای {n} جلسه","builderPack5":"با بستهٔ ۵ جلسه‌ای هر جلسه ⁦$75⁩ می‌شود: {total} در ماه.","builderPack10":"با بستهٔ ۱۰ جلسه‌ای هر جلسه ⁦$70⁩ می‌شود: {total} در ماه.","daylightLeft":"{t} از روشنایی روز در زمین مانده","lessonLine":"جلسهٔ تو: {when}، {rel}.","addCal":"افزودن به تقویم","dismiss":"بستن","icsTitle":"جلسهٔ تنیس با Isaac Lee","titleAway":"برگرد و یک جلسه رزرو کن","spinUp":"بالا","spinDown":"پایین","themeDark":"تغییر به حالت تاریک","themeLight":"تغییر به حالت روشن","nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به {hi}°F می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55.⁩"},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45.⁩"},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
-  <script src="/tennis.js?v=20261020b" defer></script>
+  <script>window.I18N = {"formSending":"در حال ارسال…","builderPair":"برای دو نفر: هر نفر ماهی ⁦{each}⁩.","formWho":"نام و یک ایمیل یا شماره تلفن بنویسید تا بتوانم با شما تماس بگیرم.","formFailed":"ارسال نشد. دوباره دکمه را بزنید تا به‌جای آن پاسخ‌هایتان را ایمیل کنید.","builderMonth":"در ماه، برای {n} جلسه","builderPack5":"با بستهٔ ۵ جلسه‌ای هر جلسه ⁦$75⁩ می‌شود: ⁦{total}⁩ در ماه.","builderPack10":"با بستهٔ ۱۰ جلسه‌ای هر جلسه ⁦$70⁩ می‌شود: ⁦{total}⁩ در ماه.","daylightLeft":"{t} از روشنایی روز در زمین مانده","lessonLine":"جلسهٔ شما: {when}، {rel}.","addCal":"افزودن به تقویم","dismiss":"بستن","icsTitle":"جلسهٔ تنیس با Isaac Lee","titleAway":"برگردید و یک جلسه رزرو کنید","spinUp":"بالا","spinDown":"پایین","themeDark":"تغییر به حالت تاریک","themeLight":"تغییر به حالت روشن","nextOpen":"نزدیک‌ترین وقت خالی: {when}","openHours":"{n} ساعت خالی در این هفته","openHour":"۱ ساعت خالی در این هفته","courtDry":"امروز زمین خشک است و دما به ⁦{hi}°F⁩ می‌رسد.","courtRain":"امروز احتمال باران زیاد است. اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","courtRainSoon":"{day} باران پیش‌بینی شده؛ اگر لازم شد کلاس را جابه‌جا کنیم، پیامک می‌زنم.","copied":"کپی شد","menuOpen":"باز کردن منو","menuClose":"بستن منو","loadingCal":"در حال بارگذاری تقویم…","askSuggestions":["هزینه کلاس‌ها چقدر است؟","کلاس‌ها کجا برگزار می‌شود؟","چطور وقت رزرو کنم؟","روی چه چیزی کار کنم؟"],"askDown":"چت در حال حاضر پاسخ نمی‌دهد. به من ایمیل بزنید تا جوابتان را بدهم.","askBusy":"سؤال‌ها یک‌دفعه زیاد شده. یک دقیقه صبر کنید یا به من ایمیل بزنید.","emailMe":"ایمیل به من","askYou":"شما: ","askIsaac":"Isaac: ","askSuggested":"سؤال‌های پیشنهادی","askFinding":"در حال پیدا کردن پاسخ","open":"باز کردن","showMe":"نمایش","soundMute":"قطع صدا","soundOn":"پخش صدا","typeBy":"word","matchCopy":{"private":{"name":"کلاس خصوصی","line":"یک‌به‌یک، بر اساس چیزی که می‌خواهید بهتر کنید."},"semi":{"name":"کلاس دونفره","line":"دو نفر یک ساعت را با هم تقسیم می‌کنند؛ هر نفر ⁦$55⁩."},"hitting":{"name":"جلسه رالی با هم‌تمرینی","line":"فقط رالی، بدون آموزش، ساعتی ⁦$45⁩."},"group":{"name":"کلاس گروهی بزرگسالان","line":"گروه کوچک در یک زمین. ثبت‌نام کنید تا شما را در گروهی هم‌سطح بگذارم."}},"matchAnswer":"به نظر می‌رسد {name} برایتان مناسب باشد. {line}","matchTravel":"یک نکته: کلاس‌ها در زمین خودم، Toscana در ارواین، برگزار می‌شود. نمی‌توانم به محل شما بیایم، ولی خوشحال می‌شوم شما به اینجا بیایید.","matchUnsure":"از این جمله نتوانستم تشخیص بدهم. سطحتان و اینکه چه کسی بازی می‌کند را بنویسید، یا یکی از چهار گزینه بالا را انتخاب کنید.","matchDown":"انتخابگر کلاس در حال حاضر پاسخ نمی‌دهد. چهار گزینه درست بالای همین‌جاست، یا به من ایمیل بزنید.","matchBusy":"درخواست‌ها زیاد شده. یک دقیقه صبر کنید یا یکی از چهار گزینه بالا را انتخاب کنید.","matchSeeCard":"دیدن کارت ↑","matchLabel":"مناسب شما","matchBusyButton":"در حال جستجو…","soundsOn":"صدای تنیس روشن است","soundsTurnOff":"خاموش کردن","soundsOff":"صدا خاموش شد","matchLevels":["تازه‌کار","مبتدی","متوسط","پیشرفته","رقابتی"],"matchFocus":{"serve":"سرویس","groundstrokes":"فورهند و بک‌هند","net":"بازی کنار تور","movement":"حرکت پا","match":"مسابقه","basics":"اصول پایه"},"matchLevelLine":"سطح: {level}.","matchFocusLine":"تمرکز: {focus}.","matchNotesLine":"اگر از همین‌جا رزرو کنید، این اطلاعات در یادداشت رزرو می‌آید تا جلسه اول را برنامه‌ریزی کنم.","matchJunior":"برای فرزندتان رزرو می‌کنید؟ با نام خودتان رزرو کنید و سن او را در یادداشت بنویسید.","bookedToast":"رزرو شد. در زمین می‌بینمتان.","tipDemoPlay":"دیدن راه‌حل","tipDemoReplay":"دوباره ببینید","tipDemoLabel":"پویانمایی راه‌حل","lang":"fa","pageName":"Persian","askUrl":"/fa/ask.json","mailSubject":"Tennis lessons (Persian page)","mailSubjectQuestion":"Question about lessons (Persian page)"};</script>
+  <script src="/tennis.js?v=20261020c" defer></script>
   <script src="/focus.js?v=3" defer></script>
-  <script src="/match.js?v=6" defer></script>
-  <script src="/ask.js?v=9" defer></script>
+  <script src="/match.js?v=20261020c" defer></script>
+  <script src="/ask.js?v=20261020c" defer></script>
   <script src="/hero.js?v=1" defer></script>
-  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/bookfx.js?v=20261020c" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/motion-court.js?v=2" defer></script>
-  <script src="/motion-reveal.js?v=3" defer></script>
-  <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=3" defer></script>
-  <script src="/arrival.js?v=1" defer></script>
+  <script src="/motion-reveal.js?v=20261020c" defer></script>
+  <script src="/motion-transitions.js?v=20261020c" defer></script>
+  <script src="/features.js?v=20261020c" defer></script>
+  <script src="/arrival.js?v=20261020c" defer></script>
   <script src="/ballo.js?v=4" defer></script>
-  <script src="/motion.js?v=5" defer></script>
-  <script src="/more.js?v=6" defer></script>
+  <script src="/motion.js?v=20261020c" defer></script>
+  <script src="/more.js?v=20261020c" defer></script>
 </body>
 </html>

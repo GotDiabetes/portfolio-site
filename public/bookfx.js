@@ -42,6 +42,7 @@
   var CONTACT = 0.36;      // fraction of DURATION where racket meets ball
   var layer = null;
   var ctx = null;
+  var idle = 0;            // timer that suspends ctx once the serve's sound is over
 
   /* --------------------------------------------------------- The serve --
      Joints in figure units: x forward (toward the serve), y up negative,
@@ -383,6 +384,13 @@
         var hit = ctx.currentTime + .02 + (DURATION * CONTACT) / 1000;
         swish(hit - .12);
         thwock(hit);
+        /* The sound is over in about 0.4s; suspend the context after that so
+           the audio hardware isn't held open for the rest of the visit. The
+           resume below wakes it again on the next press. */
+        window.clearTimeout(idle);
+        idle = window.setTimeout(function () {
+          if (ctx && ctx.state === "running") ctx.suspend().catch(function () {});
+        }, 1000);
       };
       if (ctx.state === "suspended") ctx.resume().then(go, function () {}); else go();
     } catch (e) { ctx = null; }

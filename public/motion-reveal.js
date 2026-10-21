@@ -1,15 +1,12 @@
 /* ============================================================================
-   Two reveals (styles in motion-reveal.css):
+   The net cord (styles in motion-reveal.css): on [data-band-sweep] (the
+   black bands) a white cover with a yellow cord is laid over the band and
+   slides off as the band comes into view, and again on every later
+   arrival once the band has left the screen entirely. Not under reduced
+   motion or ?classic.
 
-     1. [data-statement-reveal]: the sentence is split into words, each
-        with its own window of the scroll in which it brightens. Where the
-        browser has scroll-driven animations the windows are CSS
-        animation-ranges and nothing runs per frame; elsewhere a scroll
-        handler lights the words. Reduced motion, or ?classic: the words
-        stay bright and whole.
-     2. [data-band-sweep] (the black bands): a white cover with a yellow
-        cord is laid over the band and slides off once, the first time the
-        band comes into view. Not under reduced motion.
+   (The statement band once lit up word by word with the scroll here; it
+   uses the focus frame now, data-focus-reveal in focus.js.)
    ========================================================================== */
 
 (function () {
@@ -20,55 +17,6 @@
   var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   var hasIO = "IntersectionObserver" in window;
 
-  /* ------------------------------------------------ 1. The statement -- */
-  var statements = document.querySelectorAll("[data-statement-reveal]");
-  var timeline = !!(window.CSS && CSS.supports && CSS.supports("animation-timeline: view()"));
-
-  Array.prototype.forEach.call(statements, function (el) {
-    if (reduced) return;
-    var text = el.textContent.replace(/\s+/g, " ").trim();
-    if (!text) return;
-    var words = text.split(" ");
-    el.setAttribute("aria-label", text);          // read as one sentence
-    el.textContent = "";
-    var n = words.length;
-    /* The words light between 10% and 46% of the band's way across the
-       screen (0 = its top at the bottom edge, 100 = its bottom at the
-       top), each over a window one and a half words wide, so they overlap
-       into a sweep instead of ticking on one by one. */
-    var start = 10, span = 36, step = span / n, win = step * 1.6;
-    words.forEach(function (w, i) {
-      var s = document.createElement("span");
-      s.className = "sw";
-      s.textContent = w + (i < n - 1 ? " " : "");
-      s.setAttribute("aria-hidden", "true");
-      if (timeline) {
-        var a = start + i * step, b = Math.min(start + span + 6, a + win);
-        s.style.animationRange = "cover " + a.toFixed(2) + "% cover " + b.toFixed(2) + "%";
-      }
-      el.appendChild(s);
-    });
-    el.classList.add("is-split");
-    if (timeline) { el.classList.add("is-timeline"); return; }
-
-    /* Fallback: the same windows, measured by hand. */
-    var spans = el.querySelectorAll(".sw"), ticking = false;
-    function update() {
-      ticking = false;
-      var r = el.getBoundingClientRect(), vh = window.innerHeight || 1;
-      var p = ((vh - r.top) / (vh + r.height)) * 100;      // 0..100 as "cover"
-      for (var i = 0; i < spans.length; i++) {
-        var a = start + i * step, b = a + win;
-        spans[i].classList.toggle("is-lit", p >= (a + b) / 2);
-      }
-    }
-    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    update();
-  });
-
-  /* ------------------------------------------------ 2. The net cord -- */
   if (reduced || !hasIO) return;
   var bands = document.querySelectorAll("[data-band-sweep]");
   Array.prototype.forEach.call(bands, function (band) {
@@ -83,11 +31,13 @@
     band.appendChild(cover);
     /* Sweeps on every arrival: once the band has left the screen entirely
        the cover is laid back over it (and the band's own court, drawn by
-       motion.js, is cleared), so the next scroll down plays it again. */
-    var court = band.querySelector(".contact-court");
+       motion.js, is cleared), so the next scroll down plays it again. The
+       court is looked up each time rather than once here: motion.js runs
+       after this file and only then draws it. */
     var settle = 0;
     var swept = function () { band.classList.add("has-swept"); };
     var io = new IntersectionObserver(function (entries) {
+      var court = band.querySelector(".contact-court");
       entries.forEach(function (e) {
         if (e.intersectionRatio >= 0.22 && !band.classList.contains("is-sweeping")) {
           band.classList.add("is-sweeping");

@@ -1,10 +1,12 @@
 /* ============================================================================
    Transitions between states (styles in motion-transitions.css):
 
-     1. Cross-document view transitions. The CSS opts the page in; this
-        marks a language change (the incoming page compares its language
-        folder with the page it came from) so the words melt instead of
-        wiping, and skips the transition under ?classic.
+     1. Cross-document view transitions. The CSS opts the page in. The
+        incoming page's half (marking a language change, so the words melt
+        instead of wiping, and skipping under ?classic) is an inline
+        script in each page's <head>: pagereveal fires before a deferred
+        script like this one runs. This keeps the outgoing half: under
+        ?classic, the page being left skips its transition too.
      2. window.leeMorph: tennis.js hands over a popup's open and close.
         The popup grows out of the card or button that opened it, with the
         page's own easing, and shrinks back on close. Reduced motion, or
@@ -20,16 +22,6 @@
   var EASE = "cubic-bezier(.22, 1, .36, 1)";
 
   /* ------------------------------------------- 1. Between pages -- */
-  function langOf(url) {
-    var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(url, location.href).pathname);
-    return m ? m[1] : "en";
-  }
-  window.addEventListener("pagereveal", function (e) {
-    if (!e.viewTransition) return;
-    if (classic) { e.viewTransition.skipTransition(); return; }
-    var from = window.navigation && navigation.activation && navigation.activation.from;
-    if (from && from.url && langOf(from.url) !== langOf(location.href)) root.classList.add("vt-lang");
-  });
   window.addEventListener("pageswap", function (e) {
     if (e.viewTransition && classic) e.viewTransition.skipTransition();
   });

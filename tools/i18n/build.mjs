@@ -91,7 +91,7 @@ for (const file of readdirSync(HERE).filter((f) => /^[a-z-]+\.mjs$/.test(f) && f
   if (d.dir === "rtl") d = { ...d, pairs: d.pairs.map(([en, tr]) => [en, isolatePrices(tr)]), js: isolatePrices(d.js), ask: isolatePrices(d.ask) };
   if (only.length && !only.includes(d.lang.toLowerCase()) && !only.includes(file.replace(".mjs", ""))) continue;
 
-  const report = { missing: [], untranslated: [], used: new Map() };
+  const report = { missing: [], untranslated: [], warnings: [], used: new Map() };
   const keep = new Set([...KEEP, ...(d.keep || [])]);
   const words = (u) => /\p{L}{2}/u.test(u.replace(/&[a-z0-9#]+;/gi, ""));   // "&times;" is not English
   const base = join(PUBLIC, d.path.replace(/^\/|\/$/g, ""));
@@ -115,6 +115,8 @@ for (const file of readdirSync(HERE).filter((f) => /^[a-z-]+\.mjs$/.test(f) && f
   console.log(`${bad ? "✗" : "✓"} ${d.path}  (${d.pairs.length} strings, ${ask.topics.length} answers, ${PAGES.length} pages)`);
   for (const m of report.missing) console.log("    no longer on the English page: " + m.slice(0, 110));
   for (const u of report.untranslated) console.log("    still in English:              " + u.slice(0, 110));
+  // Leftovers worth deleting, which don't fail the build.
+  for (const w of report.warnings) console.log("    (can go) " + w.slice(0, 110));
   if (bad) failed = true;
 }
 if (failed) {
@@ -161,6 +163,11 @@ function page(d, file, report, pg) {
      on that page in the same language. */
   html = html.replace(/(\s(?:src|href|data-lightbox|data-src)=")(?![a-z][a-z0-9+.-]*:|\/|#|")([^"]*)/gi,
     (m, attr, path) => (SUBS.some((s) => path.startsWith(s)) ? m : attr + "/" + path));
+  /* The files the scripts load as they are written: the intro video and the
+     before-and-after pair. Only a value that looks like a path (a "/" or a
+     "."): the YouTube button's data-video is a bare video id. */
+  html = html.replace(/(\sdata-(?:video|before|after)=")(?![a-z][a-z0-9+.-]*:|\/|#|")([^"]*[/.][^"]*)/gi,
+    (m, attr, path) => attr + "/" + path);
   html = html.replace(/\ssrcset="([^"]*)"/g, (_, set) =>
     ' srcset="' + set.split(",").map((s) => s.trim()).map((s) => (/^(\/|[a-z]+:)/i.test(s) ? s : "/" + s)).join(", ") + '"');
   /* Root links to the built pages (/, /#lessons, /tips/) go to this
@@ -226,9 +233,16 @@ function escapeHtml(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "
 /* Right-to-left pages: a dollar price that follows Persian words is read
    by the bidi algorithm as an Arabic-context number, which moves the $ to
    the wrong side ("375$"). Each price is wrapped in an invisible isolate
-   (LRI … PDI) so it reads "$375" wherever it sits. */
+   (LRI … PDI) so it reads "$375" wherever it sits. Only separators followed
+   by a digit belong to the price: a sentence's full stop stays outside the
+   isolate, or it is drawn on the wrong side of it. The placeholders the
+   scripts fill with a price or a temperature ({total}, {each}, {hi}°F) get
+   the same isolate, since their value only arrives after this build. */
 function isolatePrices(v) {
-  if (typeof v === "string") return v.replace(/\$\d[\d,.]*/g, (m) => "⁦" + m + "⁩");
+  if (typeof v === "string") {
+    return v.replace(/\$\d+(?:[.,]\d+)*/g, (m) => "⁦" + m + "⁩")
+      .replace(/\{(?:total|each)\}|\{hi\}°F?/g, (m) => "⁦" + m + "⁩");
+  }
   if (Array.isArray(v)) return v.map(isolatePrices);
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, isolatePrices(x)]));
   return v;
@@ -312,6 +326,11 @@ function answers(d, file, report) {
   });
   for (const id of Object.keys(a.topics)) {
     if (!askEn.topics.some((t) => t.id === id)) report.missing.push("chat answer for a topic the English no longer has: " + id);
+  }
+  /* A translated button label no English action uses any more is a
+     leftover; said, but not counted as a failure. */
+  for (const l of Object.keys(a.labels || {})) {
+    if (!askEn.topics.some((t) => (t.actions || []).some((x) => x.label === l))) report.warnings.push("chat button label no longer used: " + l);
   }
   return {
     _readme: `Built by tools/i18n/build.mjs from ask.json and tools/i18n/${file}; edit those, not this. The Worker still picks topics from the English file.`,

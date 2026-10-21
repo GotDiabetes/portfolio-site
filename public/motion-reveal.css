@@ -1,32 +1,14 @@
 /* ============================================================================
-   Two reveals, both answers to the scroll (motion-reveal.js):
+   The net cord (motion-reveal.js): the black bands (the contact block, the
+   tips page's close) arrive behind it. A yellow line sweeps across and the
+   black follows it, on every arrival once the band has left the screen.
+   The words don't move; only the ground changes.
 
-     · The statement band's one sentence lights up word by word as it
-       climbs the screen: each word starts dim and brightens at its own
-       point of the scroll, so the line is read at the pace of the reader.
-       Scroll-driven in CSS where the browser can; a scroll handler
-       elsewhere; plain bright text with reduced motion or no script.
-     · The black bands (the contact block, the tips page's close) arrive
-       behind a net cord: a yellow line sweeps across once and the black
-       follows it. The words don't move; only the ground changes.
+   ?classic in the address turns it off, to compare.
 
-   ?classic in the address turns both off, to compare.
+   (The statement band's word-by-word reveal that lived here is gone: the
+   statement uses the focus frame, focus.css and focus.js.)
    ========================================================================== */
-
-/* --- The statement, word by word. */
-.js:not(.classic) [data-statement-reveal].is-split .sw { color: rgba(255, 255, 255, .3); transition: color .25s linear; }
-.js:not(.classic) [data-statement-reveal].is-split .sw.is-lit { color: #fff; }
-@supports (animation-timeline: view()) {
-  .js:not(.classic) [data-statement-reveal].is-split.is-timeline .sw {
-    transition: none;
-    animation: swLit linear both; animation-timeline: view();
-    /* each word's own window is set inline by the script (animation-range) */
-  }
-  @keyframes swLit { from { color: rgba(255, 255, 255, .3); } to { color: #fff; } }
-}
-@media (prefers-reduced-motion: reduce) {
-  .js [data-statement-reveal].is-split .sw { color: #fff; animation: none; transition: none; }
-}
 
 /* --- The net cord. The cover is the page's white laid over the band; its
        edge, slanted like a net post seen at an angle, slides off to the

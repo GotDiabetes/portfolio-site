@@ -1,5 +1,6 @@
 /* ============================================================================
-   The printed pieces: the flyer (/flyer/) and the gift card (/gift-card/).
+   The printed pieces: the flyer (/flyer/), the gift card (/gift-card/)
+   and the practice sheet (/sheet/).
 
    The same world as the site: the system face, black on white, emphasis
    by weight and size, never colour; the eyebrow's short black dash; prices
@@ -71,7 +72,7 @@ a { color: inherit; }
   width: 8.5in; height: 11in; margin: 0 auto;
   background: #fff; border: 1px solid var(--line);
   overflow: hidden;
-  zoom: var(--fit, 1);   /* print.js shrinks the preview to a narrow screen */
+  zoom: var(--fit, 1);   /* print.js (the flyer and gift card only) shrinks the preview to a narrow screen */
 }
 
 /* Shared marks */
@@ -187,11 +188,13 @@ a { color: inherit; }
 :root:is(:lang(ko), :lang(ja), :lang(zh)) .gc-gift { letter-spacing: -0.01em; line-height: 1.2; }
 
 /* ------------------------------------------------------- Practice sheet --
-   One Letter page a family keeps after a lesson (/sheet/, sheet.js): the
+   The sheet a family keeps after a lesson (/sheet/, sheet.js): the
    wordmark and the date, a title with the player's name, each tip the
    lesson covered as a heading and its fix, Isaac's own line, the next
-   lesson, and a quiet foot. */
-.practice-sheet { padding: .6in .7in .55in; display: flex; flex-direction: column; }
+   lesson, and a quiet foot. A Letter page at least; with many tips it
+   grows onto a second page instead of cutting them off (the flyer and the
+   card are fixed pages; this one is not). */
+.practice-sheet { padding: .6in .7in .55in; display: flex; flex-direction: column; height: auto; min-height: 11in; overflow: visible; }
 .ps-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .4in; padding-bottom: .22in; border-bottom: 1px solid var(--text); }
 .ps-logo { width: 1.55in; height: auto; }
 .ps-meta { text-align: end; }
@@ -204,12 +207,20 @@ a { color: inherit; }
 .ps-tips p { font-size: .95rem; line-height: 1.5; max-width: 66ch; }
 .ps-note { margin-top: .22in; padding: .16in .2in; background: var(--soft); border-radius: var(--radius); }
 .ps-label { font-size: .75rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin-bottom: .2rem; }
-.ps-note-text { font-size: .95rem; }
+.ps-note-text { font-size: .95rem; white-space: pre-line; }   /* Isaac's line breaks stay */
 .ps-next { margin-top: .18in; font-weight: 600; }
 .ps-empty { margin-top: .4in; color: var(--muted); }
 .ps-foot { margin-top: auto; padding-top: .2in; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: .3in; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
 :lang(fa) .ps-title { letter-spacing: 0; line-height: 1.3; }
 :lang(fa) .ps-label { letter-spacing: 0; }
+/* On a phone the sheet reflows to the screen instead of running 8.5in wide
+   (print.js, which fits the flyer and card by zooming, doesn't run here,
+   and zoomed to a phone the text would be unreadably small). Print keeps
+   the Letter rules. */
+@media screen and (max-width: 8.75in) {
+  .practice-sheet { width: auto; height: auto; min-height: 0; padding: 1.5rem 1.25rem 2rem; }
+  .ps-head { gap: 1rem; }
+}
 .print-btn-quiet { background: #fff; color: var(--text); border: 1px solid var(--line); }
 .print-btn-quiet:hover { background: #fff; border-color: var(--text); }
 
@@ -220,4 +231,7 @@ a { color: inherit; }
   .print-bar { display: none; }
   .sheet-scroll { padding: 0; overflow: visible; }
   .sheet { border: 0; margin: 0; zoom: 1; }
+  /* A second page repeats the sheet's own margins. */
+  .practice-sheet { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .ps-tips li, .ps-note, .ps-next, .ps-foot { break-inside: avoid; }
 }

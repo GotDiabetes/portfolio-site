@@ -20,8 +20,15 @@
   -webkit-tap-highlight-color: transparent;
   overflow: hidden;              /* the ball leaves the screen, not the page */
 }
-/* Hidden without script; shown from the first paint when it runs. */
-.nf-js .nf-scene[hidden] { display: block; }
+/* Hidden without script. When the script runs, its space is held from the
+   first paint, but it stays invisible (and out of the tab order) until
+   notfound.js can draw and un-hides it, so a failed script never leaves a
+   dead "Try again" button. */
+.nf-js .nf-scene[hidden] { display: block; visibility: hidden; }
+/* The display rules above (and .link-btn's in tennis.css) would beat the
+   hidden attribute: with no script the scene stays out, and the rally's
+   "Play a rally" / "End the rally" really go when rally.js hides them. */
+:root:not(.nf-js) .nf-scene[hidden], .nf-links .link-btn[hidden] { display: none; }
 .nf-js .nf-scene.nf-off { display: none; }     /* the rally game has taken its place */
 .nf-scene canvas {
   position: absolute; inset: 0;
@@ -51,7 +58,17 @@
   touch-action: none; cursor: none; user-select: none; -webkit-user-select: none;
 }
 .nf-rally canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* Played from the keyboard too (rally.js): the ring sits just inside. */
+.nf-rally:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 @media (max-width: 680px) { .nf-rally { height: clamp(240px, 36vh, 320px); } }
+
+/* Dark mode: the drawings are ink on a cleared canvas, so they keep a white
+   plate, like the tips page's figures, and the label on it stays ink. */
+:root[data-theme="dark"] .nf-scene, :root[data-theme="dark"] .nf-rally { background: #fff; }
+:root[data-theme="dark"] .nf-retry { color: #111; }
+:root[data-theme="dark"] .nf-scene:hover .nf-retry { color: #5e5e5e; }
+:root[data-theme="dark"] .nf-scene:focus-visible .nf-retry { outline-color: #111; }
+:root[data-theme="dark"] .nf-rally:focus-visible { outline-color: #111; }
 
 /* What a replay did, for screen readers only. */
 .nf-live {

@@ -40,17 +40,22 @@
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
-  <link rel="stylesheet" href="/tennis.css?v=20261009" />
+  <link rel="stylesheet" href="/tennis.css?v=20261020c" />
   <link rel="stylesheet" href="/tips-demo.css?v=1" />
-  <link rel="stylesheet" href="/elbow.css?v=1" />
-  <link rel="stylesheet" href="/motion-reveal.css?v=2" />
+  <link rel="stylesheet" href="/elbow.css?v=20261020c" />
+  <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
   <link rel="stylesheet" href="/features.css?v=4" />
-  <link rel="stylesheet" href="/dark.css?v=1" />
-  <link rel="stylesheet" href="/more.css?v=2" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/more.css?v=20261020c" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+  <!-- A change of language melts the words instead of wiping them
+       (motion-transitions.css, :root.vt-lang). This listener has to be
+       inline: pagereveal fires before any deferred script has run.
+       ?classic skips the transition. -->
+  <script>(function () { var root = document.documentElement; var classic = /[?&]classic\b/.test(location.search); function langOf(u) { var m = /^\/(es|ko|zh-hans|zh-hant|ja|vi|fa)(\/|$)/.exec(new URL(u, location.href).pathname); return m ? m[1] : "en"; } window.addEventListener("pagereveal", function (e) { if (!e.viewTransition) return; if (classic) { e.viewTransition.skipTransition(); return; } var from = window.navigation && navigation.activation && navigation.activation.from; root.classList.toggle("vt-lang", !!(from && from.url && langOf(from.url) !== langOf(location.href))); }); })();</script>
 
   <!-- Cal.com booking. Elements with data-cal-link open the calendar as a
        popup; every one of them is also a real link to the same event on
@@ -68,29 +73,43 @@
         if (started) return;
         started = true;
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "lesson", { origin: "https://cal.com" });
-        /* The theme is pinned. The page has one theme, and a dark calendar over
-           a white page is the one thing a dark-mode OS must not do here. */
+        Cal("init", "lesson", { origin: "https://app.cal.com" });
+        /* The calendar opens in the page's current theme (data-theme when it
+           loads). features.js keeps it in step afterwards: it rewrites each
+           Book link's data-cal-config theme and re-sends this ui call when
+           the dark-mode switch is used, so a dark page never opens a white
+           calendar. */
         Cal.ns.lesson("ui", { theme: document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light", styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false, layout: "month_view" });
         var tag = document.querySelector('script[src="https://app.cal.com/embed/embed.js"]');
         var ready = function () { document.documentElement.classList.add("cal-ready"); window.dispatchEvent(new Event("cal:ready")); };
         if (tag) {
           tag.addEventListener("load", ready);
-          tag.addEventListener("error", function () { window.dispatchEvent(new Event("cal:error")); });
+          /* A failure is recorded on <html>, not only announced: a later Book
+             press then goes straight to cal.com (tennis.js) instead of
+             waiting for a script that is never coming. */
+          tag.addEventListener("error", function () { window.__calFailed = true; document.documentElement.classList.add("cal-failed"); window.dispatchEvent(new Event("cal:error")); });
         }
       };
       var arm = function () { window.__loadCal(); };
       ["pointerdown", "touchstart", "keydown", "scroll"].forEach(function (ev) {
         window.addEventListener(ev, arm, { once: true, passive: true });
       });
-      /* A pointer over (or focus on) a particular Book control also starts
-         loading that event's calendar in the background, so by the time the
-         click's serve animation finishes the calendar is usually there. */
+      /* A mouse over (or keyboard focus on) a particular Book control also
+         starts loading that event's calendar in the background, from the
+         same host as the popup (app.cal.com, set in init above) so the popup
+         reuses what the preload fetched. Not on a touch screen: there the
+         pointer arrives with the tap itself, so a preload can't get ahead
+         and only competes with the popup's own load (a finger landing on a
+         Book button mid-scroll would start a full download too). */
       var preloaded = {};
       var intent = function (e) {
         var el = e.target.closest && e.target.closest("[data-cal-link]");
         if (!el) return;
         arm();
+        var mouse = e.type === "pointerover" && e.pointerType === "mouse";
+        var keys = false;
+        if (e.type === "focusin") { try { keys = el.matches(":focus-visible"); } catch (x) {} }
+        if (!mouse && !keys) return;
         var link = el.getAttribute("data-cal-link");
         if (preloaded[link]) return;
         preloaded[link] = true;
@@ -158,7 +177,7 @@
         <a href="#serve">Serve</a>
         <a href="#groundstrokes">Forehands, backhands and rallies</a>
         <a href="#movement">Footwork and the net</a>
-        <a href="#matches">Matches and practice</a>
+        <a href="#match-play">Matches and practice</a>
         <a href="#elbow">Tennis elbow</a>
         <a href="#parents">For parents</a>
       </nav>
@@ -218,7 +237,9 @@
         </div><!-- /tips -->
     </section>
 
-    <section class="wrap tips-group" id="matches">
+    <!-- match-play, not matches: the tip_matches article inside gets the id
+         "matches" from the build (features.js links the tip of the week there). -->
+    <section class="wrap tips-group" id="match-play">
       <h2 class="fade">Matches and practice</h2>
       <div class="tips" data-tips="tip_matches tip_practice">
           <article class="tip fade" id="matches">
@@ -361,14 +382,14 @@
     </div>
   </footer>
 
-  <script src="/tennis.js?v=20261020b" defer></script>
-  <script src="/bookfx.js?v=15" defer></script>
+  <script src="/tennis.js?v=20261020c" defer></script>
+  <script src="/bookfx.js?v=20261020c" defer></script>
   <script src="/booked.js?v=1" defer></script>
   <script src="/tips-demo.js?v=1" defer></script>
-  <script src="/elbow.js?v=1" defer></script>
-  <script src="/motion-reveal.js?v=3" defer></script>
-  <script src="/motion-transitions.js?v=2" defer></script>
-  <script src="/features.js?v=3" defer></script>
-  <script src="/more.js?v=2" defer></script>
+  <script src="/elbow.js?v=20261020c" defer></script>
+  <script src="/motion-reveal.js?v=20261020c" defer></script>
+  <script src="/motion-transitions.js?v=20261020c" defer></script>
+  <script src="/features.js?v=20261020c" defer></script>
+  <script src="/more.js?v=20261020c" defer></script>
 </body>
 </html>

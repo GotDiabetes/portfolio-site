@@ -12,6 +12,8 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    formSending: "보내는 중…",
+    builderPair: "두 명 기준: 1인당 한 달 {each}.",
     formWho: "연락할 수 있도록 이름과 이메일 또는 전화번호를 적어 주세요.",
     formFailed: "전송이 안 됐어요. 버튼을 다시 누르면 대신 이메일로 답변을 보낼 수 있어요.",
     // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
@@ -102,8 +104,8 @@ export default {
     [`Pick a lesson and how often, and see what a month comes to.`, `레슨과 주당 횟수를 고르면 한 달 비용이 보여요.`],
     [`Lesson`, `레슨`],
     [`Private, $80`, `개인 레슨, $80`],
-    [`Semi-private, $110`, `세미 프라이빗, $110`],
-    [`Hitting, $45`, `히팅, $45`],
+    [`Semi-private, $110`, `2인 레슨, $110`],
+    [`Hitting, $45`, `히팅 파트너, $45`],
     [`Per week`, `주당`],
     [`Once`, `1회`],
     [`Twice`, `2회`],
@@ -465,7 +467,7 @@ export default {
 
     // added with the tip of the week, bring-a-friend and the intro video
     [`>Tip of the week<`, `>이번 주의 팁<`],
-    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `저를 처음 만나는 친구와 함께 오시면 두 분 모두 첫 세미프라이빗 레슨에서 $10 할인이에요.`],
+    [`Bring a friend who's new to me and you both get $10 off your first semi-private lesson.`, `저를 처음 만나는 친구와 함께 오시면 두 분 모두 첫 2인 레슨에서 $10 할인이에요.`],
     [`One minute: who I am, where the court is, and what a first lesson is like.`, `1분: 제가 누구인지, 코트는 어디인지, 첫 레슨은 어떤지.`],
 
     // the court map
@@ -484,7 +486,6 @@ export default {
     fallback_next: ["레슨 비용은 얼마예요?", "레슨은 어디서 해요?", "예약은 어떻게 해요?"],
     labels: {
       "Email me": "이메일 보내기",
-      "Email for a quote": "이메일로 견적 받기",
       "See the lessons": "레슨 보기",
       "More about me": "더 알아보기",
       "Read the reviews": "후기 읽기",

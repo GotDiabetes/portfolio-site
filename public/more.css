@@ -6,8 +6,15 @@
    ========================================================================== */
 
 /* --- M1. Magnetic buttons: the pull follows at once, the snap back
-       takes the half second the buttons already have. */
-.btn-primary.is-near, .btn-invert.is-near, .nav-book.is-near {
+       takes the half second the buttons already have. The Book buttons
+       get their transition list from features.css; the big Email buttons
+       beside them get the same one here. */
+.btn-quiet.btn-lg, .btn-outline.btn-lg {
+  transition-property: background-color, border-color, color, transform, translate, box-shadow;
+  transition-duration: var(--dur-ui), var(--dur-ui), var(--dur-ui), var(--dur-ui), .5s, .4s;
+  transition-timing-function: var(--ease);
+}
+.btn-primary.is-near, .btn-invert.is-near, .nav-book.is-near, .btn-quiet.btn-lg.is-near, .btn-outline.btn-lg.is-near {
   transition-duration: var(--dur-ui), var(--dur-ui), var(--dur-ui), var(--dur-ui), .12s, .4s;
 }
 
@@ -52,6 +59,10 @@
   .js .lesson-list .lesson:nth-child(3) { --i: 2; }
   .js .lesson-list .lesson:nth-child(4) { --i: 3; }
 }
+/* A card taller than the screen below its stuck top would never show its
+   lower part (its Book button) before the next one covered it: more.js
+   marks it, and it scrolls by normally. */
+.js .lesson-list .lesson.is-tall { position: relative; top: auto; }
 
 /* --- I5. The floodlight: a soft white light where the pointer is, on
        the black bands always and on the hero only in the dark. */
@@ -64,7 +75,6 @@
 .spot.is-lit::after { opacity: 1; }
 .hero.spot::after { opacity: 0; }
 :root[data-theme="dark"] .hero.spot.is-lit::after { opacity: 1; }
-.contact.spot > .wrap { position: relative; z-index: 1; }
 
 /* --- I1. The court you'll learn on. */
 .court-section { padding-block: clamp(3rem, 6vw, 5rem); }
@@ -79,8 +89,10 @@
 .court-art .court-net { stroke: var(--text); stroke-width: 5; stroke-dasharray: 4 5; }
 .court-art .zone { fill: #d9ef3f; fill-opacity: 0; stroke: none; cursor: pointer; transition: fill-opacity .3s var(--ease); outline: none; }
 .court-art .zone:hover, .court-art .zone.is-on { fill-opacity: .45; }
-.court-art .zone:focus-visible { fill-opacity: .45; stroke: var(--text); stroke-width: 3; stroke-dasharray: 6 4; }
 .court-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+.court-tabs[hidden] { display: none; }
+/* With no script (the tabs still hidden) all five notes read as a list. */
+.court-tabs[hidden] ~ [data-note] + [data-note] { margin-top: 1.1rem; }
 .court-tabs button {
   font: inherit; font-size: .875rem; font-weight: 600; padding: .42rem .8rem; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer;
@@ -99,6 +111,12 @@
   margin-top: clamp(1.5rem, 3vw, 2.5rem); padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--card);
   display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem clamp(1.5rem, 4vw, 3rem); align-items: center;
+}
+.builder[hidden] { display: none; }   /* until more.js wires it */
+/* The final figure, once per change, for screen readers only. */
+.builder-status {
+  position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 .builder-title { font-size: 1.25rem; letter-spacing: -0.02em; margin: 0 0 .3rem; }
 .builder-sub { margin: 0 0 1rem; color: var(--muted); max-width: 48ch; }
@@ -163,8 +181,19 @@
   box-shadow: 0 18px 44px rgba(0, 0, 0, .22); cursor: grab;
   transition: box-shadow .35s var(--ease), scale .35s var(--ease);
 }
-.photo-strip.is-pile .photo.is-drag { cursor: grabbing; scale: 1.04; box-shadow: 0 30px 70px rgba(0, 0, 0, .32); z-index: 99; }
-.photo-strip.is-pile .photo img { aspect-ratio: 4 / 5; }
+.photo-strip.is-pile .photo.is-drag { cursor: grabbing; scale: 1.04; box-shadow: 0 30px 70px rgba(0, 0, 0, .32); }   /* more.js raises it with an inline z-index */
+/* The picture sits still in its frame: no scroll drift and no hover zoom,
+   either of which would push it into the caption band. */
+.photo-strip.is-pile .photo img { aspect-ratio: 4 / 5; animation: none; translate: none; scale: none; }
+.photo-strip.is-pile .photo:hover img { transform: none; }
+/* The polaroids arrive by fading, not through the strip's shutter: a
+   clip-path would cut off their shadow, and its transition would replace
+   the lift's. */
+.js .photo-strip.fade.is-pile .photo {
+  clip-path: none; opacity: 0;
+  transition: opacity .6s var(--ease) var(--d, 0s), box-shadow .35s var(--ease), scale .35s var(--ease);
+}
+.js .photo-strip.fade.is-pile.is-in .photo { opacity: 1; }
 .photo-strip.is-pile .photo .photo-tag {
   opacity: 1; transform: none; inset: auto 0 .5rem 0; text-align: center;
   background: none; color: var(--ink); font-weight: 600;
@@ -180,7 +209,8 @@
 
 /* --- U2. The lesson card: bottom left, out of the chat's way. */
 .lesson-card {
-  position: fixed; left: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 60;
+  /* Under the chat (z-index 60), so an open chat's field is never covered. */
+  position: fixed; left: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 55;
   max-width: min(22rem, calc(100vw - 6.5rem)); padding: .9rem 1rem; border-radius: 10px;
   background: var(--ink); color: #fff; box-shadow: 0 14px 40px rgba(0, 0, 0, .3);
   opacity: 0; transform: translateY(12px); transition: opacity .45s var(--ease), transform .55s var(--ease);
@@ -194,7 +224,11 @@
   background: none; color: rgba(255, 255, 255, .7); font-size: 1.2rem; line-height: 1; cursor: pointer;
 }
 .lesson-card-x:hover { color: #fff; background: rgba(255, 255, 255, .12); }
+.lesson-card :focus-visible { outline-color: #fff; }   /* the page's ink ring would vanish on the ink card */
 :root[dir="rtl"] .lesson-card { left: auto; right: 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  .lesson-card { transform: none; transition: opacity .45s var(--ease); }
+}
 
 /* --- U3. The shortcuts list. */
 .keys { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1rem; align-items: center; margin: 1.25rem 0 0; }
@@ -225,8 +259,15 @@
 .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
 .faq details[open]:not(.is-closing) > .faq-body { grid-template-rows: 1fr; }
 .faq-inner { min-height: 0; overflow: hidden; perspective: 700px; }
-.faq p > .rung { display: inline-block; transform-origin: 50% 0; backface-visibility: hidden; }   /* sentences keep flowing; each turns down on its own */
-.faq .faq-inner > .rung { display: block; transform-origin: 50% 0; }
+/* Sentences stay inline so they flow as prose and wrap mid-sentence (an
+   inline-block can't break, so each would start a new line); an inline
+   box can't turn, so they arrive by their staggered fade alone. */
+.faq p > .rung { display: inline; }
+/* A one-sentence answer turns down as a block; a link button keeps its
+   own inline-flex box (it turns too) and its hidden state. */
+.faq .faq-inner > p.rung { display: block; transform-origin: 50% 0; }
+.faq .faq-inner > .link-btn.rung { transform-origin: 50% 0; }
+.faq .faq-inner > [hidden] { display: none; }
 .faq details > .faq-body p { margin-bottom: 1.1rem; }
 .faq details[open]:not(.is-closing) .rung {
   animation: rungDrop .7s linear(0, .45 24%, .85 42%, 1.05 58%, .985 72%, 1.005 86%, 1) both;
@@ -240,7 +281,9 @@
 
 /* --- N1. Before and after. */
 .compare { margin: 1.75rem 0 0; }
-.compare-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius); background: #000; --split: 50%; }
+/* Left to right in every language: the split, the handle and the labels
+   are placed on physical sides, so the slider must run that way too. */
+.compare-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius); background: #000; --split: 50%; direction: ltr; }
 .compare-stage img, .compare-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .compare-after { clip-path: inset(0 0 0 var(--split, 50%)); }
 .compare-label {
@@ -260,5 +303,6 @@
 /* --- N3. The numbers. */
 .counts { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
 .counts li { display: grid; gap: .15rem; }
+.counts li[hidden] { display: none; }   /* a figure Isaac left blank */
 .counts b { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .counts span { font-size: .875rem; color: var(--muted); }

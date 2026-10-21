@@ -3,14 +3,15 @@
    under SECTION SIGNATURES). No libraries.
 
      1. Prices roll in like a scoreboard
-     2. A light follows the pointer over the lesson cards and the contact band
-     3. Big Book and Email buttons lean toward the pointer
+     2. A light follows the pointer over the lesson cards (the contact
+        band's light is more.js's floodlight)
+     3. (The magnetic buttons moved to more.js M1, the page's only magnet.)
      4. The contact band's court draws its lines when the band arrives
      5. The lightbox zooms out of the photograph that was pressed
 
    Everything here is an enhancement over a page that already reads: with
-   no script nothing is hidden, and reduced motion keeps the prices still,
-   the buttons still and the court already drawn.
+   no script nothing is hidden, and reduced motion keeps the prices still
+   and the court already drawn.
    ========================================================================== */
 
 (function () {
@@ -138,35 +139,6 @@
       follow(card, function (x, y) {
         card.style.setProperty("--mx", x + "px");
         card.style.setProperty("--my", y + "px");
-      });
-    });
-
-    var band = document.querySelector(".contact");
-    if (band) {
-      follow(band, function (x, y) {
-        band.style.setProperty("--mx", x + "px");
-        band.style.setProperty("--my", y + "px");
-        band.classList.add("is-lit");
-      }, function () { band.classList.remove("is-lit"); });
-    }
-  }
-
-  /* --------------------------------------------- 3. Magnetic buttons -- */
-  // The large buttons drift a few pixels toward the pointer while it's over
-  // them and spring back when it leaves. Translate only, so the Book FX
-  // squash and the hover lift (both transforms) still apply on top.
-  if (finePointer && !reduced) {
-    document.querySelectorAll(".btn-lg").forEach(function (btn) {
-      follow(btn, function (x, y, r) {
-        var dx = (x - r.width / 2) / (r.width / 2);
-        var dy = (y - r.height / 2) / (r.height / 2);
-        btn.classList.add("is-magnet");
-        btn.style.setProperty("--tx", (dx * 7).toFixed(2) + "px");
-        btn.style.setProperty("--ty", (dy * 5).toFixed(2) + "px");
-      }, function () {
-        btn.classList.remove("is-magnet");
-        btn.style.setProperty("--tx", "0px");
-        btn.style.setProperty("--ty", "0px");
       });
     });
   }

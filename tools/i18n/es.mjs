@@ -11,6 +11,8 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    formSending: "Enviando…",
+    builderPair: "Para dos jugadores: {each} al mes cada uno.",
     formWho: "Añade tu nombre y un correo o teléfono para poder contactarte.",
     formFailed: "No se pudo enviar. Pulsa el botón otra vez para mandarme tus respuestas por correo.",
     // October 19 (more.js): the builder, the daylight bar, the lesson card, the tab, the racket
@@ -488,7 +490,6 @@ export default {
     fallback_next: ["¿Cuánto cuestan las clases?", "¿Dónde son las clases?", "¿Cómo reservo?"],
     labels: {
       "Email me": "Escríbeme",
-      "Email for a quote": "Pedir precio por correo",
       "See the lessons": "Ver las clases",
       "More about me": "Más sobre mí",
       "Read the reviews": "Leer las opiniones",

@@ -1,7 +1,13 @@
 /* ============================================================================
-   The server half of the tennis page's two Jev features: the lesson matcher
-   ("Not sure which fits?", POST /match) and the Ask Isaac chat (POST /ask,
-   further down).
+   The server half of the tennis page. Eight routes (ROUTES, below):
+     POST /match            the lesson matcher ("Not sure which fits?"), Jev
+     POST /ask              the Ask Isaac chat (further down), Jev
+     POST /drills/describe  Isaac's drill library places a student, Jev
+     GET  /slots            the next open lesson on Cal.com (the hero's line)
+     GET  /court            the court's weather and daylight today
+     POST /hit              page events for Isaac's numbers
+     POST /signup           the clinic list and gift requests
+     GET  /stats            Isaac's numbers and the sign-ups, with his key
 
    The page is static, so the TypeSafe key cannot live in it. This Worker
    holds the key as a secret, takes the visitor's text, asks Jev fixed
@@ -22,7 +28,10 @@
 
    It also keeps Isaac's numbers (POST /hit, GET /stats, at the end): how
    often each thing on the page gets used, by language, and the questions
-   the chat had no answer for. Counts only — never who.
+   the chat had no answer for. The counts never say who. The same database
+   also holds the sign-ups (POST /signup): the names, emails and phone
+   numbers visitors type into the clinic list and gift forms, which only
+   /stats, with Isaac's key, gives back.
 
    And one route for Isaac's drill library (POST /drills/describe, after
    /ask): he describes a student in a sentence and Jev places them. It
@@ -35,6 +44,9 @@ const ALLOWED_ORIGINS = [
   "https://leetennisco.com",
   "https://www.leetennisco.com",
   "http://localhost:5595",
+  /* The page scripts treat 127.0.0.1 as local too and call this Worker
+     from it. ([::1] is left out until they also send it here.) */
+  "http://127.0.0.1:5595",
 ];
 
 const MAX_CHARS = 400;
@@ -150,18 +162,24 @@ const QUESTIONS = {
 
 /* Each route's method, the per-visitor limit it counts against, and
    whether it spends Jev calls (those also count against the site-wide
-   limit and need the key). Page events (/hit) get their own, looser limit,
-   so a visitor who has used the chat a few times still gets counted
-   pressing Book. */
+   limit and need the key). PER_VISITOR (6 a minute) is the Jev routes'
+   budget and nothing else's. Page events (/hit) and the two cached feeds
+   every front-page view asks for (/slots, /court) share the looser HITS,
+   so reloading the page or switching language never uses up the chat.
+   Sign-ups (SIGNUPS) and Isaac's /stats (STATS) have limits of their own,
+   so neither spends nor depends on anyone else's budget. A route whose
+   binding is missing from wrangler.toml runs with no limit at all.
+   cache: seconds a browser may keep the answer (the Worker caches these
+   itself too); everything else is no-store. */
 const ROUTES = {
   "/match": { method: "POST", limit: "PER_VISITOR", jev: true, run: match },
   "/ask": { method: "POST", limit: "PER_VISITOR", jev: true, run: ask },
   "/hit": { method: "POST", limit: "HITS", run: hit },
-  "/stats": { method: "GET", limit: "PER_VISITOR", run: stats },
+  "/stats": { method: "GET", limit: "STATS", run: stats },
   "/drills/describe": { method: "POST", limit: "PER_VISITOR", jev: true, run: describeStudent },
-  "/slots": { method: "GET", limit: "PER_VISITOR", run: slots },
-  "/court": { method: "GET", limit: "PER_VISITOR", run: court },
-  "/signup": { method: "POST", limit: "PER_VISITOR", run: signup },
+  "/slots": { method: "GET", limit: "HITS", cache: 300, run: slots },
+  "/court": { method: "GET", limit: "HITS", cache: 1800, run: court },
+  "/signup": { method: "POST", limit: "SIGNUPS", run: signup },
 };
 
 export default {
@@ -205,7 +223,8 @@ export default {
     try {
       const out = await route.run(body, env, later, request);
       if (out && out.status) return json({ error: out.error }, out.status, cors);
-      return out ? json(out, 200, cors) : json({ error: "bad_request" }, 400, cors);
+      if (!out) return json({ error: "bad_request" }, 400, cors);
+      return json(out, 200, route.cache ? { ...cors, "Cache-Control": "public, max-age=" + route.cache } : cors);
     } catch {
       return json({ error: "unavailable" }, 503, cors);
     }
@@ -645,10 +664,12 @@ async function describeStudent(body, env, later, request) {
   return out;
 }
 
-/* An age written as a number: "9", "9yo", "age 9", "a 9-year-old",
-   "9 years old". Anything else is left to Jev. */
+/* An age written as a number: "9yo", "age 9", "a 9-year-old", "9 years
+   old", "9 yrs old". Anything else is left to Jev. A bare "yr"/"yrs" with
+   no "old" ("played 5 yrs", "for 3 yrs") is years played in a coach's note,
+   so it is deliberately not read as an age. */
 function ageIn(text) {
-  const m = text.match(/\b(?:age[ds]?\s*)?(\d{1,2})\s*(?:-|\s)?(?:years?[\s-]*old|year[\s-]*old|yrs?\b|yo\b|y\/o\b)/i)
+  const m = text.match(/\b(?:age[ds]?\s*)?(\d{1,2})\s*(?:-|\s)?(?:(?:years?|yrs?)[\s-]*old|yo\b|y\/o\b)/i)
     || text.match(/\bage[ds]?\s*(\d{1,2})\b/i);
   const n = m ? Number(m[1]) : 0;
   return n >= 2 && n <= 99 ? n : null;
@@ -672,22 +693,27 @@ function stageForAge(age) {
 
    POST /hit    { "event": "book_private", "page": "ko" }   → { "ok": true }
    GET  /stats  Authorization: Bearer <STATS_KEY>
-                → { "counts": [{ day, event, page, n }], "questions": [{ at, page, question }] }
+                → { "counts": [{ day, event, page, n }], "questions": [{ at, page, question }],
+                    "signups": [{ id, at, kind, page, name, contact, body }] }
 
    counts is one row per day (Irvine time), event and page language, with
    a number: nothing about who. The page reports what only it can see
-   (Book pressed, a form sent, the chat opened, a visit from the flyer's QR
-   code); the Worker counts its own matches and questions. questions holds
-   the chat's unanswered ones for 90 days, with anything shaped like an
-   email or a phone number blanked first.
+   (Book pressed, the chat opened, a finished booking, a visit from the
+   flyer's QR code); the Worker counts its own matches and questions, and
+   /signup counts the clinic list and gift sign-ups itself. questions
+   holds the chat's unanswered ones for 90 days, with anything shaped like
+   an email or a phone number blanked first. signups hold what visitors
+   typed into the forms, their name and contact included.
 
    /stats is read by public/stats/, Isaac's page, with a key he sets
    himself (npx wrangler secret put STATS_KEY). With no key set, it stays
    shut. Everything here does nothing, quietly, until the DB binding
    exists. */
+/* Only what the page itself sees. clinic_list and gift are counted by
+   /signup when a sign-up is really stored, so they can't come in here. */
 const HIT_EVENTS = [
   "book_private", "book_semi", "book_hitting", "book_other", "booked",
-  "clinic_list", "gift", "chat_open", "flyer_visit",
+  "chat_open", "flyer_visit",
 ];
 const PAGES = ["en", ...LANGS];
 const KEEP_DAYS = 90;
@@ -707,9 +733,22 @@ const KEEP_DAYS = 90;
    ---------------------------------------------------------------------- */
 const SIGNUP_KINDS = { clinic: "Clinic list", gift: "Gift lesson" };
 const MAIL_TO = "21euisungisaac@gmail.com";
+/* Spam guards, besides the SIGNUPS per-visitor limit (wrangler.toml). In
+   any 24 hours, past SIGNUP_MAIL_CAP sign-ups are still kept (and listed on
+   /stats/) but no longer mailed, so a flood can't use up Resend's daily
+   quota before the real ones arrive; past SIGNUP_HARD_CAP they are refused
+   (429), and the page hands the visitor its email fallback instead. */
+const SIGNUP_MAIL_CAP = 30;
+const SIGNUP_HARD_CAP = 100;
+/* One well-formed address, from characters that can't add headers or
+   recipients; used as the notification's reply-to, so Isaac's Reply goes
+   to the visitor rather than to Resend's sandbox sender. */
+const EMAIL_IN_TEXT = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/;
 
 async function signup(body, env, later) {
-  const kind = SIGNUP_KINDS[body.kind] ? body.kind : null;
+  /* A strict check: a lookup on SIGNUP_KINDS would let inherited names
+     ("constructor", "toString") and non-strings through. */
+  const kind = body.kind === "clinic" || body.kind === "gift" ? body.kind : null;
   const name = clean(body.name).slice(0, 80);
   const contact = clean(body.contact).slice(0, 120);
   const text = (typeof body.body === "string" ? body.body : "").replace(/\r/g, "").replace(/[^\S\n]+/g, " ").trim().slice(0, 1500);
@@ -719,25 +758,49 @@ async function signup(body, env, later) {
   await schema(env.DB);
   const page = pageOf(body.lang);
   const at = new Date().toISOString();
+  const recent = await env.DB.prepare("SELECT COUNT(*) AS n FROM signups WHERE at >= ?")
+    .bind(new Date(Date.now() - 864e5).toISOString()).first();
+  const today = (recent && recent.n) || 0;
+  if (today >= SIGNUP_HARD_CAP) return { status: 429, error: "rate_limited" };
   await env.DB.prepare("INSERT INTO signups (at, kind, page, name, contact, body) VALUES (?, ?, ?, ?, ?, ?)")
     .bind(at, kind, page, name, contact, text).run();
   later(count(env, kind === "clinic" ? "clinic_list" : "gift", page));
   if (env.RESEND_KEY) {
-    later(notify(env, SIGNUP_KINDS[kind] + ": " + name,
-      [SIGNUP_KINDS[kind] + " from the site (" + page + " page)", "", "Name: " + name, "Contact: " + contact, "", text, "", "Every sign-up is also on https://leetennisco.com/stats/"].join("\n")));
+    if (today >= SIGNUP_MAIL_CAP) {
+      later(count(env, "mail_skipped", page));
+    } else {
+      const m = EMAIL_IN_TEXT.exec(contact);
+      /* A failed send is logged and counted (mail_failed, on /stats/), so
+         a revoked key or a spent quota doesn't go unnoticed. */
+      later(notify(env, SIGNUP_KINDS[kind] + ": " + name,
+        [SIGNUP_KINDS[kind] + " from the site (" + page + " page)", "", "Name: " + name, "Contact: " + contact, "", text, "", "Every sign-up is also on https://leetennisco.com/stats/"].join("\n"),
+        m ? m[0] : null)
+        .catch((err) => { console.error(String(err && err.message || err)); return count(env, "mail_failed", page); }));
+    }
   }
   return { ok: true };
 }
 
 /* One email to Isaac through Resend's API. Their free tier sends to the
    account's own address from onboarding@resend.dev without a domain, which
-   is all this needs. */
-async function notify(env, subject, text) {
-  await fetch("https://api.resend.com/emails", {
+   is all this needs. Throws when Resend refuses it (a revoked key, a spent
+   quota), so the caller can record that. A reply-to Resend won't accept
+   (422) is dropped and the message sent again without it. */
+async function notify(env, subject, text, replyTo) {
+  const send = (withReply) => fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Authorization": "Bearer " + env.RESEND_KEY, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: "Lee Tennis Co. <onboarding@resend.dev>", to: [MAIL_TO], subject, text }),
+    body: JSON.stringify({
+      from: "Lee Tennis Co. <onboarding@resend.dev>", to: [MAIL_TO], subject, text,
+      ...(withReply && replyTo ? { reply_to: replyTo } : {}),
+    }),
   });
+  let r = await send(true);
+  if (r.status === 422 && replyTo) r = await send(false);
+  if (!r.ok) {
+    const detail = await r.text().catch(() => "");
+    throw new Error("resend " + r.status + " " + detail.slice(0, 200));
+  }
 }
 
 function hit(body, env, later) {
@@ -753,9 +816,13 @@ async function stats(body, env, later, request) {
   if (!(await sameSecret(given, env.STATS_KEY))) return { status: 401, error: "wrong_key" };
   await schema(env.DB);
   const since = irvineDay(-KEEP_DAYS);
+  /* The 90 days hold here too, not only when a new question is saved: the
+     list never shows older ones, and opening it prunes the table. */
+  const cutoff = new Date(Date.now() - KEEP_DAYS * 864e5).toISOString();
+  later(env.DB.prepare("DELETE FROM questions WHERE at < ?").bind(cutoff).run());
   const [counts, questions, signups] = await Promise.all([
     env.DB.prepare("SELECT day, event, page, n FROM counts WHERE day >= ? ORDER BY day DESC, event, page").bind(since).all(),
-    env.DB.prepare("SELECT at, page, question FROM questions ORDER BY at DESC LIMIT 300").all(),
+    env.DB.prepare("SELECT at, page, question FROM questions WHERE at >= ? ORDER BY at DESC LIMIT 300").bind(cutoff).all(),
     env.DB.prepare("SELECT id, at, kind, page, name, contact, body FROM signups ORDER BY at DESC LIMIT 200").all(),
   ]);
   return { counts: counts.results, questions: questions.results, signups: signups.results };
@@ -860,10 +927,11 @@ function corsHeaders(origin) {
   return h;
 }
 
+/* no-store unless the caller passes its own Cache-Control (the cached feeds). */
 function json(data, status, headers) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...headers, "Content-Type": "application/json", "Cache-Control": "no-store" },
+    headers: { "Cache-Control": "no-store", ...headers, "Content-Type": "application/json" },
   });
 }
 

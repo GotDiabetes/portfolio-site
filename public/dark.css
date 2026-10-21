@@ -18,6 +18,7 @@
   --text: #f2f2f0;
   --muted: #a6a6a2;
   --line: #2b2b29;
+  --field-line: #3b3b39;
   color-scheme: dark;
 }
 
@@ -31,11 +32,13 @@
 :root[data-theme="dark"] .ask-msg--visitor { color: var(--bg); }
 :root[data-theme="dark"] .ask-send { color: var(--bg); }
 :root[data-theme="dark"] .ask-send:hover, :root[data-theme="dark"] .ask-send:disabled { background: #cfcfcc; }
-:root[data-theme="dark"] .matcher-row .btn:disabled { background: #cfcfcc; }
+:root[data-theme="dark"] .matcher-row .btn:disabled, :root[data-theme="dark"] .btn-primary:disabled { background: #cfcfcc; }
 :root[data-theme="dark"] .header { background: rgba(20, 20, 19, .97); }
 :root[data-theme="dark"] .lesson:hover { border-color: #3b3b39; }
 :root[data-theme="dark"] .avatar { background: #2a2a28; }
-:root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] textarea { border-color: #3b3b39; }
+/* The chat panel is the page colour, and a black shadow doesn't show on a
+   dark page: a hairline in the hover-border grey gives it its edge. */
+:root[data-theme="dark"] .ask-panel { box-shadow: 0 0 0 1px #3b3b39, 0 16px 40px rgba(0, 0, 0, .5); }
 :root[data-theme="dark"] ::selection { background: var(--text); color: var(--bg); }
 
 /* --- The logo is black ink on a transparent ground; in the dark it is
@@ -67,3 +70,15 @@
 :root[data-theme="dark"] .theme-toggle .theme-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .theme-moon { display: none; }
 @media (max-width: 760px) { .theme-toggle { display: none; } }   /* the phone's own setting decides */
+html:not(.js) .theme-toggle { display: none; }   /* features.js runs it; with no script it would do nothing */
+
+/* --- Paper is white: printing in dark mode uses the light tokens again,
+       so the text doesn't print pale grey on white. */
+@media print {
+  :root[data-theme="dark"] {
+    --bg: #ffffff; --bg-soft: #f4f4f2; --card: #fafafa; --accent: #111111;
+    --text: #111111; --muted: #5e5e5e; --line: #e5e5e3; --field-line: #c9c9c6;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] .brand-logo { filter: none; }
+}

@@ -126,6 +126,10 @@ html.is-gated { background: #0d0d0d; }
 .js #adminContent.is-arriving { animation: adminArrive .8s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @keyframes adminArrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 .desk-lock { display: flex; width: fit-content; margin-top: .1rem; font-size: .875rem; color: var(--muted); }
+/* Shown only after a right key: the display above would otherwise beat the
+   hidden attribute and show a dead button. Once used it stays focusable. */
+.desk-lock[hidden] { display: none; }
+.desk-lock[aria-disabled="true"] { cursor: default; text-decoration: none; }
 
 @media (max-width: 480px) {
   .gate-row { flex-direction: column; }

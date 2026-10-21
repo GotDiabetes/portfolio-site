@@ -3,13 +3,20 @@
 
    "Play a rally" under the words swaps the scene for a court seen from
    above, drawn on a canvas: a ball in the page's optic yellow, a racket
-   you move with the pointer (or a finger) along the near baseline, and
-   the far wall it comes back from. Keep it in play and the count goes up;
-   each return is a touch quicker. Miss and it's out: the best streak is
-   kept on this device. Words come from the page's own table (window.NF.t:
-   play, rally, best, out, serve). Sound is the site's ball "pok",
-   synthesized, obeying the one mute (askIsaacSound = "off"). The Persian
-   page mirrors nothing here: a court is the same both ways.
+   you move with the pointer (or a finger, or the arrow keys) along the
+   near baseline, and the far wall it comes back from. Keep it in play and
+   the count goes up; each return is a touch quicker. Miss and it's out:
+   the best streak is kept on this device. Space or Enter serves; Escape,
+   or "End the rally" beside the other links, puts the scene back. Words
+   come from the page's own table (window.NF.t: play, rally, best, out,
+   serve, rallyLabel, stop). Sound is the site's ball "pok", synthesized,
+   obeying the one mute (askIsaacSound = "off"). The Persian page mirrors
+   nothing here: a court is the same both ways.
+
+   The ball moves by the time that has passed, not by frames, so a 120 Hz
+   screen plays at the same speed as a 60 Hz one, and a fast ball can't
+   step over the racket between two frames. A dead ball stops the loop; a
+   move or a serve starts it again.
    ========================================================================== */
 
 (function () {
@@ -18,23 +25,31 @@
   var NF = window.NF, t = NF && NF.t;
   var link = document.querySelector("[data-rally]");
   var scene = document.querySelector(".nf-scene");
+  var live = document.querySelector(".nf-live");
   if (!t || !link || !scene || !window.requestAnimationFrame) return;
   link.hidden = false;
 
   var INK = "#111111", BALL = "#d9ef3f", LINE = "#cfcfcf";
-  var stage, cv, ctx, running = false, raf = 0;
+  var stage, cv, ctx, stop, running = false, raf = 0, last = 0, font = "";
   var G = null;
   var best = 0;
   try { best = parseInt(localStorage.getItem("leeRallyBest") || "0", 10) || 0; } catch (e) {}
 
-  /* ---------------------------------------------------------- Sound -- */
+  /* ---------------------------------------------------------- Sound --
+     The context is made (or woken) inside a gesture: iOS Safari only lets
+     one start there, and the first bounce happens in a later frame. */
   var ac = null;
   function muted() { try { return localStorage.getItem("askIsaacSound") === "off"; } catch (e) { return false; } }
-  function pok(hi) {
+  function unlock() {
     if (muted()) return;
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-      if (ac.state === "suspended") ac.resume();
+      if (ac.state !== "running") ac.resume();
+    } catch (e) {}
+  }
+  function pok(hi) {
+    if (muted() || !ac) return;
+    try {
       var o = ac.createOscillator(), g = ac.createGain(), now = ac.currentTime;
       o.type = "sine"; o.frequency.setValueAtTime(hi ? 520 : 300, now); o.frequency.exponentialRampToValueAtTime(hi ? 240 : 120, now + .09);
       g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.35, now + .006); g.gain.exponentialRampToValueAtTime(.0001, now + .12);
@@ -46,15 +61,19 @@
   function reset() {
     G = { x: .5, y: .35, vx: .0035 * (Math.random() < .5 ? -1 : 1), vy: .006, px: .5, streak: 0, live: false, msg: t.serve };
   }
-  function serve() { reset(); G.live = true; G.msg = ""; }
-  function step() {
+  function serve() { var px = G ? G.px : .5; reset(); G.px = px; G.live = true; G.msg = ""; kick(); }
+  /* k: how many 60 fps frames' worth of time this step covers. */
+  function step(k) {
     if (!G.live) return;
-    G.x += G.vx; G.y += G.vy;
+    var prevY = G.y;
+    G.x += G.vx * k; G.y += G.vy * k;
     if (G.x < .05) { G.x = .05; G.vx = Math.abs(G.vx); pok(false); }
     if (G.x > .95) { G.x = .95; G.vx = -Math.abs(G.vx); pok(false); }
     if (G.y < .08) { G.y = .08; G.vy = Math.abs(G.vy); pok(false); }
     var padY = .86, half = .09;
-    if (G.vy > 0 && G.y >= padY - .02 && G.y <= padY + .02 && Math.abs(G.x - G.px) <= half) {
+    /* Swept: a ball that crossed the racket's line during this step counts,
+       however far it moved. */
+    if (G.vy > 0 && prevY <= padY + .02 && G.y >= padY - .02 && Math.abs(G.x - G.px) <= half) {
       G.vy = -Math.abs(G.vy) * 1.035;
       G.vx += (G.x - G.px) * .05;
       G.vx = Math.max(-.012, Math.min(.012, G.vx));
@@ -63,7 +82,10 @@
       if (G.streak > best) { best = G.streak; try { localStorage.setItem("leeRallyBest", String(best)); } catch (e) {} }
       pok(true);
     }
-    if (G.y > 1.04) { G.live = false; G.msg = t.out; pok(false); }
+    if (G.y > 1.04) {
+      G.live = false; G.msg = t.out; pok(false);
+      if (live) live.textContent = t.rally + " " + G.streak + ". " + t.out;
+    }
   }
 
   function draw() {
@@ -87,38 +109,98 @@
     ctx.beginPath(); ctx.arc(G.x * W - 3 * s, G.y * H, 5 * s, -1.1, 1.1); ctx.stroke();
     ctx.beginPath(); ctx.arc(G.x * W + 3 * s, G.y * H, 5 * s, Math.PI - 1.1, Math.PI + 1.1); ctx.stroke();
     /* the count */
-    ctx.fillStyle = INK; ctx.font = "600 " + (15 * s) + "px " + getComputedStyle(document.body).fontFamily; ctx.textBaseline = "top";
+    ctx.fillStyle = INK; ctx.font = "600 " + (15 * s) + "px " + font; ctx.textBaseline = "top";
     var rtl = document.documentElement.dir === "rtl";
     ctx.textAlign = rtl ? "right" : "left";
     var x0 = rtl ? .95 * W - 10 * s : .05 * W + 10 * s;
     ctx.fillText(t.rally + " " + G.streak + "   " + t.best + " " + best, x0, .08 * H + 10 * s);
-    if (G.msg) { ctx.textAlign = "center"; ctx.fillStyle = "#5e5e5e"; ctx.font = (14 * s) + "px " + getComputedStyle(document.body).fontFamily; ctx.fillText(G.msg, .5 * W, .5 * H + 14 * s); }
+    if (G.msg) { ctx.textAlign = "center"; ctx.fillStyle = "#5e5e5e"; ctx.font = (14 * s) + "px " + font; ctx.fillText(G.msg, .5 * W, .5 * H + 14 * s); }
   }
-  function loop() { if (!running) return; step(); draw(); raf = window.requestAnimationFrame(loop); }
+  function loop(ts) {
+    raf = 0;
+    if (!running) return;
+    var dt = last && ts ? Math.min((ts - last) / 1000, 1 / 30) : 1 / 60;
+    last = ts || 0;
+    step(dt * 60);
+    draw();
+    if (G.live) raf = window.requestAnimationFrame(loop);
+  }
+  /* Draws the next frame, starting the loop again if it had stopped. */
+  function kick() {
+    if (!running || raf) return;
+    last = 0;
+    raf = window.requestAnimationFrame(loop);
+  }
 
   function size() {
     var r = stage.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
     cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    font = getComputedStyle(document.body).fontFamily;
+  }
+
+  function end() {
+    if (!running) return;
+    running = false;
+    if (raf) { window.cancelAnimationFrame(raf); raf = 0; }
+    stage.hidden = true;
+    stop.hidden = true;
+    scene.classList.remove("nf-off");
+    link.hidden = false;
+    link.focus();
   }
 
   function start() {
+    unlock();
     if (!stage) {
       stage = document.createElement("div");
       stage.className = "nf-rally";
+      /* Focusable and named, so a keyboard or screen-reader user can play:
+         the arrows move the racket, Space or Enter serves, Escape ends. */
+      stage.tabIndex = 0;
+      stage.setAttribute("role", "application");
+      stage.setAttribute("aria-label", t.rallyLabel || t.play);
       cv = document.createElement("canvas");
       cv.setAttribute("aria-hidden", "true");
       stage.appendChild(cv);
       scene.parentNode.insertBefore(stage, scene.nextSibling);
       ctx = cv.getContext("2d");
-      var move = function (e) { var r = stage.getBoundingClientRect(); G.px = Math.max(.14, Math.min(.86, (e.clientX - r.left) / r.width)); };
+      var move = function (e) { var r = stage.getBoundingClientRect(); G.px = Math.max(.14, Math.min(.86, (e.clientX - r.left) / r.width)); kick(); };
       stage.addEventListener("pointermove", move, { passive: true });
       stage.addEventListener("pointerdown", function (e) { move(e); if (!G.live) serve(); });
-      window.addEventListener("resize", function () { if (running) { size(); draw(); } });
+      /* A tap that serves is a gesture too: wake the sound there as well. */
+      stage.addEventListener("pointerup", unlock);
+      stage.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+          e.preventDefault();
+          G.px = Math.max(.14, Math.min(.86, G.px + (e.key === "ArrowLeft" ? -.04 : .04)));
+          kick();
+        } else if (e.key === " " || e.key === "Spacebar" || e.key === "Enter") {
+          e.preventDefault();
+          unlock();
+          if (!G.live) serve();
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          end();
+        }
+      });
+      window.addEventListener("resize", function () { if (running) { size(); kick(); } });
+
+      /* The visible way back, beside the other links. */
+      stop = document.createElement("button");
+      stop.type = "button";
+      stop.className = "link-btn";
+      stop.textContent = t.stop || "End the rally";
+      stop.hidden = true;
+      stop.addEventListener("click", end);
+      link.parentNode.insertBefore(stop, link.nextSibling);
     }
     scene.classList.add("nf-off");      // (the scene's [hidden] is overridden by its own css)
     stage.hidden = false;
     link.hidden = true;
-    reset(); size(); running = true; loop();
+    stop.hidden = false;
+    reset(); size(); running = true;
+    draw();
+    stage.focus();
   }
   link.addEventListener("click", start);
 })();

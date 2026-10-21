@@ -29,9 +29,9 @@
 .elbow-tab:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
 
 /* The plate: two drawings of the same player (one per view) stacked in one
-   box, with a transparent SVG over them carrying the numbered badges, the
-   sore spot's glow and the guide line. The box keeps the drawings' shape so
-   nothing jumps while they load. */
+   box, with a transparent SVG over them carrying the numbered badges and the
+   sore spot's glow. The box keeps the drawings' shape so nothing jumps while
+   they load. */
 .elbow-art {
   grid-column: 1; grid-row: 2; position: relative; aspect-ratio: 1200 / 896;
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); overflow: hidden;
@@ -57,7 +57,6 @@
 .elbow[data-hot="4"] .mk[data-n="4"], .elbow[data-hot="5"] .mk[data-n="5"], .elbow[data-hot="6"] .mk[data-n="6"] { opacity: 1; }
 .elbow[data-hot="1"] .mk[data-n="1"] .mk-badge, .elbow[data-hot="2"] .mk[data-n="2"] .mk-badge, .elbow[data-hot="3"] .mk[data-n="3"] .mk-badge,
 .elbow[data-hot="4"] .mk[data-n="4"] .mk-badge, .elbow[data-hot="5"] .mk[data-n="5"] .mk-badge, .elbow[data-hot="6"] .mk[data-n="6"] .mk-badge { transform: scale(1.3); }
-.elbow[data-hot="5"] .guide { stroke: var(--text); }
 .elbow[data-hot="1"] .hot-in, .elbow[data-hot="1"] .hot { filter: drop-shadow(0 0 4px rgba(217, 239, 63, .9)); }
 
 /* The legend: two short numbered lists and one quiet line. */
@@ -95,6 +94,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .elbow-svg .st, .elbow-svg .mk, .elbow-svg .mk-badge, .elbow-svg .hot-in, .elbow-svg .tears { transition: none; }
+  .elbow-art .st, .elbow-svg .mk, .elbow-svg .mk-badge { transition: none; }
   .elbow.is-jolting .jolt { animation: none; }
 }

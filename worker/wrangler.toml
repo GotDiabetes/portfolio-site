@@ -1,5 +1,7 @@
-# Cloudflare Worker behind the tennis page's lesson matcher and Ask Isaac
-# chat. Deploy steps are in the repo README ("Jev features").
+# Cloudflare Worker behind the tennis page: the lesson matcher and the Ask
+# Isaac chat (Jev), the live lines (/slots, /court), the page counts (/hit),
+# the clinic list and gift sign-ups (/signup) and Isaac's numbers (/stats).
+# Deploy steps are in the repo README ("Jev features").
 name = "lee-tennis-jev"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
@@ -7,7 +9,8 @@ workers_dev = true
 # Only the one workers.dev address; no extra per-version preview URLs.
 preview_urls = false
 
-# 6 matches a minute per visitor.
+# The Jev routes (/match, /ask, /drills/describe): 6 requests a minute per
+# visitor. Nothing else spends this budget.
 [[ratelimits]]
 name = "PER_VISITOR"
 namespace_id = "2001"
@@ -16,7 +19,7 @@ namespace_id = "2001"
   limit = 6
   period = 60
 
-# 60 a minute across the whole site.
+# The Jev routes: 60 a minute across the whole site.
 [[ratelimits]]
 name = "SITE_WIDE"
 namespace_id = "2002"
@@ -25,7 +28,8 @@ namespace_id = "2002"
   limit = 60
   period = 60
 
-# Page events (a Book press, a form sent): 30 a minute per visitor.
+# Page events (a Book press, the chat opened) and the two cached feeds every
+# front-page view asks for (/slots, /court): 30 a minute per visitor.
 [[ratelimits]]
 name = "HITS"
 namespace_id = "2003"
@@ -34,9 +38,31 @@ namespace_id = "2003"
   limit = 30
   period = 60
 
-# Isaac's numbers: daily counts and the chat's unanswered questions (see
-# README). Wrangler creates the database on the first deploy that has this
-# block; the Worker makes its own tables on first use.
+# Clinic list and gift sign-ups: 5 a minute per visitor (the Worker also
+# caps them per day; see signup() in src/index.js).
+[[ratelimits]]
+name = "SIGNUPS"
+namespace_id = "2004"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60
+
+# Isaac's /stats (the numbers and admin pages): 20 a minute per visitor, still
+# a tight guard on guessing the key, without the admin page's calls eating
+# the chat's budget.
+[[ratelimits]]
+name = "STATS"
+namespace_id = "2005"
+
+  [ratelimits.simple]
+  limit = 20
+  period = 60
+
+# Isaac's numbers: daily counts, the chat's unanswered questions and the
+# sign-ups, with the names and contacts visitors gave (see README).
+# Wrangler creates the database on the first deploy that has this block;
+# the Worker makes its own tables on first use.
 [[d1_databases]]
 binding = "DB"
 database_name = "lee-tennis-stats"

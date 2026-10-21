@@ -2,7 +2,8 @@
    Lee Tennis Co.
    ----------------------------------------------------------------------------
    Presence comes from scale, colour and photography — not from decoration.
-   One motion idea (fade + lift), applied consistently with a stagger.
+   Each section arrives in its own way, from one shared vocabulary (see
+   SECTION SIGNATURES); plain blocks fade and lift with a stagger.
 
    Everything adjustable is in :root below.
    ========================================================================== */
@@ -18,6 +19,7 @@
   --text:    #111111;
   --muted:   #5e5e5e;
   --line:    #e5e5e3;
+  --field-line: #c9c9c6;   /* the resting border of a text field */
 
   /* System UI font — native-looking, instant, zero network requests. */
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -147,12 +149,17 @@ dl, dd { margin: 0; }
 .nav-toggle {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
-  width: 44px; height: 44px;
+  width: 44px; height: 44px; flex-shrink: 0;
   border: 1px solid var(--line); border-radius: var(--radius);
 }
 .nav-toggle span {
   display: block; width: 16px; height: 1.5px; margin-inline: auto;
   background: var(--text); transition: transform var(--dur-ui) var(--ease);
+}
+/* Windows high contrast replaces background colours, which would leave the
+   button an empty square: the bars keep the button's text colour. */
+@media (forced-colors: active) {
+  .nav-toggle span { forced-color-adjust: none; background: ButtonText; }
 }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(3.25px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-3.25px) rotate(-45deg); }
@@ -179,6 +186,10 @@ dl, dd { margin: 0; }
   border: 1px solid var(--line); border-radius: var(--radius);
   box-shadow: 0 12px 30px rgba(0, 0, 0, .1);
   animation: langIn .22s var(--ease);
+  /* It hangs from a header that never scrolls: on a short screen (a phone
+     on its side) the list scrolls inside itself instead. */
+  max-height: calc(100vh - 5rem); max-height: calc(100dvh - 5rem);
+  overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
 }
 @keyframes langIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 .lang-list a {
@@ -211,6 +222,8 @@ dl, dd { margin: 0; }
 
 .btn-primary { background: var(--text); color: #fff; }
 .btn-primary:hover { background: #383838; }   /* accent is black now, so lift the hover instead */
+/* Disabled while it works (the matcher asking, a sign-up sending). */
+.matcher-row .btn:disabled, .btn-primary:disabled { cursor: progress; background: #383838; transform: none; }
 
 .btn-quiet { border-color: var(--line); color: var(--text); background: var(--bg); }
 .btn-quiet:hover { border-color: var(--text); }
@@ -225,6 +238,10 @@ dl, dd { margin: 0; }
 .btn-sm { padding: .55rem 1.1rem; font-size: .875rem; }
 .header-cta { white-space: nowrap; flex: 0 0 auto; }
 .header-cta .cta-short { display: none; }
+/* Waiting for the calendar script (tennis.js): the long label says
+   "Loading calendar…"; the phone's short "Book" gets an ellipsis. */
+[data-cal-link][aria-busy="true"] { cursor: progress; }
+.header-cta[aria-busy="true"] .cta-short::after { content: "…"; }
 
 .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
 
@@ -299,6 +316,10 @@ dl, dd { margin: 0; }
    reassurance, said where the decision is made. */
 .book-note { margin: .8rem 0 0; font-size: .875rem; color: var(--muted); }
 .contact .book-note { color: rgba(255, 255, 255, .72); }
+/* The "Keyboard shortcuts" button sits among the footer's links and takes
+   their colour, not the page's ink (which vanished on the black footer). */
+.footer .link-btn { color: inherit; font-weight: inherit; text-decoration: none; }
+.footer .link-btn:hover { color: #fff; }
 .book-note .link-btn { display: flex; width: fit-content; margin-top: .15rem; font-size: .875rem; }
 .contact .link-btn { color: #fff; }
 .contact .link-btn:hover { color: rgba(255, 255, 255, .72); }
@@ -306,7 +327,6 @@ dl, dd { margin: 0; }
 .hero-facts dd { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
 .hero-facts dd span { font-size: .875rem; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 
-/* No rounded corner on the bleeding side — it has to meet the edge cleanly. */
 .hero-photo { margin: 0; overflow: hidden; position: relative; }
 .hero-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
 
@@ -329,7 +349,7 @@ dl, dd { margin: 0; }
 }
 .statement blockquote {
   margin: 0;
-  max-width: 36ch;                /* three lines, breaking at the full stop */
+  max-width: 36ch;                /* "Tennis is for everyone." fits on one line */
   text-wrap: pretty;
   font-size: clamp(1.85rem, 5.2vw, 3.75rem);
   font-weight: 600;
@@ -416,7 +436,7 @@ dl, dd { margin: 0; }
   padding: .8rem 1rem;
   font: inherit; font-size: 1rem; color: var(--text);
   background: var(--bg);
-  border: 1px solid #c9c9c6;
+  border: 1px solid var(--field-line);
   border-radius: var(--radius);
   transition: border-color var(--dur-ui) var(--ease);
 }
@@ -424,7 +444,6 @@ dl, dd { margin: 0; }
 .matcher-input:hover { border-color: var(--muted); }
 .matcher-input:focus { border-color: var(--text); }
 .matcher-row .btn { flex: 0 0 auto; }
-.matcher-row .btn:disabled { cursor: progress; background: #383838; transform: none; }
 .matcher-result:not(:empty) { margin-top: 1.1rem; }
 .matcher-result p { margin-bottom: .5rem; }
 .matcher-result p + p { color: var(--muted); }
@@ -517,6 +536,7 @@ dl, dd { margin: 0; }
 /* Over the black bands it inverts, like the page's own buttons do there. */
 .ask.on-dark .ask-launch { background: #fff; color: var(--ink); box-shadow: 0 8px 24px rgba(0, 0, 0, .45); }
 .ask.on-dark .ask-launch:hover { background: #f0efe9; }
+.ask.on-dark .ask-launch:focus-visible { outline-color: #fff; }   /* the ink ring is lost on the band */
 
 .ask-panel {
   display: flex; flex-direction: column;
@@ -618,10 +638,14 @@ dl, dd { margin: 0; }
   padding: .7rem .85rem;
   font: inherit; font-size: 1rem; color: var(--text);
   background: var(--bg);
-  border: 1px solid #c9c9c6; border-radius: var(--radius);
+  border: 1px solid var(--field-line); border-radius: var(--radius);
   transition: border-color var(--dur-ui) var(--ease);
 }
 .ask-input::placeholder { color: var(--muted); opacity: 1; }
+/* What the visitor types takes its direction from its own first letter:
+   a question in English on the Persian page keeps its "?" at the end,
+   while the empty field's placeholder keeps the page's direction. */
+.ask-input, .matcher-input, .ask-msg--visitor p { unicode-bidi: plaintext; }
 /* The chat puts focus back in the field after every answer, so the page's
    2px outline would sit round it permanently; a black border doubled with
    an inset ring marks focus as clearly and quieter. */
@@ -650,9 +674,6 @@ dl, dd { margin: 0; }
     margin-block-end: max(1rem, env(safe-area-inset-bottom));
   }
   .ask.is-open .ask-launch { display: none; }
-  /* Room at the very bottom of the page, so the last line of the footer can
-     scroll clear of the launcher instead of ending underneath it. */
-  .footer { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
   /* A compact square, so it covers as little as possible of the full-width
      buttons it floats over; the label stays for screen readers. While the
      hero's own Book button is on screen the launcher steps out entirely. */
@@ -673,12 +694,17 @@ dl, dd { margin: 0; }
   }
 }
 
+/* Room at the very bottom of the page, at every width, so the footer's last
+   links (Admin among them) can scroll clear of the launcher instead of
+   ending underneath it. Only where the chat is shown. */
+body:has(> .ask:not([hidden])) .footer { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
+
 @media print { .ask { display: none; } }
 
 .lesson.is-match { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
 .lesson.is-match h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .75rem; }
 .lesson.is-match h3::after {
-  content: attr(data-match);   /* set by match.js, in the page's language */
+  content: attr(data-match);   /* set on the h3 itself by match.js (attr() reads only its own element), in the page's language */
   font-size: .8125rem; font-weight: 500; letter-spacing: 0;
   color: var(--muted);
 }
@@ -704,8 +730,8 @@ dl, dd { margin: 0; }
 .photos { padding-block: var(--section-y); }
 .photos .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
 
-/* Edge to edge, hairline gaps. No container, no rounded corners — the run of
-   images reads as one band rather than three cards. */
+/* Hairline gaps inside the wrap, no rounded corners — the run of images
+   reads as one band rather than three cards. */
 .photo-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -717,10 +743,7 @@ dl, dd { margin: 0; }
   overflow: hidden;
   background: var(--ink);
 }
-.photo img {
-  width: 100%; aspect-ratio: 4/5; object-fit: cover;
-  transition: transform .6s var(--ease), filter .5s var(--ease), opacity .5s var(--ease);
-}
+.photo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }   /* its transition: .photo-strip .photo img, under SECTION SIGNATURES */
 .photo:hover img { transform: scale(1.04); }
 
 /* ---------------------------------------------------- Page transitions --
@@ -746,16 +769,10 @@ dl, dd { margin: 0; }
   opacity: 0; transform: translateY(6px);
   transition: opacity var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease);
 }
-.photo:hover .photo-tag, .photo:focus-visible .photo-tag { opacity: 1; transform: none; }
-
-/* -------------------------------------------------------------- Photos --
-   Photographs run in their own colour. The zoom and fade transitions stay,
-   so the hover and reveal motion is unchanged. */
-.hero-photo img,
-.about-photo img,
-.photo img {
-  transition: transform .6s var(--ease), opacity .5s var(--ease);
-}
+.photo:hover .photo-tag, .photo:focus-visible .photo-tag,
+.video-play:hover .photo-tag, .video-play:focus-visible .photo-tag { opacity: 1; transform: none; }
+/* A touch screen has no hover to bring the tags out (tablets included). */
+@media (hover: none) { .photo-tag { opacity: 1; transform: none; } }
 
 /* ------------------------------------------------------- Before you book -- */
 .notes-section { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line); }
@@ -791,9 +808,11 @@ dl, dd { margin: 0; }
   background: linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat;
 }
 .faq summary:hover { color: var(--muted); }
-.faq details > p { margin: 0 0 1.1rem; max-width: 62ch; color: var(--muted); }
-.faq details > .link-btn { margin: -.6rem 0 .6rem; }
-.faq details > .link-btn + .link-btn { margin-inline-start: 1.5rem; }
+/* Each answer as written (no script), and as more.js rebuilds it inside
+   .faq-body > .faq-inner for the ladder. */
+.faq details > p, .faq .faq-inner > p { margin: 0 0 1.1rem; max-width: 62ch; color: var(--muted); }
+.faq details > .link-btn, .faq .faq-inner > .link-btn { margin: -.6rem 0 .6rem; }
+.faq details > .link-btn + .link-btn, .faq .faq-inner > .link-btn + .link-btn { margin-inline-start: 1.5rem; }
 .faq .link-btn[hidden] { display: none; }
 
 /* ---------------------------------------------------------- Clinic list --
@@ -809,7 +828,7 @@ dl, dd { margin: 0; }
   width: 100%; padding: .7rem .85rem;
   font: inherit; font-size: 1rem; color: var(--text);
   background: var(--bg);
-  border: 1px solid #c9c9c6; border-radius: var(--radius);
+  border: 1px solid var(--field-line); border-radius: var(--radius);
   transition: border-color var(--dur-ui) var(--ease);
 }
 .clinic-form textarea { resize: vertical; min-height: 5rem; }
@@ -856,7 +875,6 @@ dl, dd { margin: 0; }
 }
 .tips-jump a:hover { color: var(--text); text-decoration-color: currentColor; }
 .tips-group { padding-block: clamp(1.5rem, 3vw, 2.25rem); scroll-margin-top: 66px; }
-.tips-group:last-of-type { padding-bottom: var(--section-y); }
 .tips-group h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; margin-bottom: .9rem; }
 .tips { border-top: 1px solid var(--line); }
 .tip {
@@ -909,6 +927,13 @@ dl, dd { margin: 0; }
 .desk-clinic .desk-table th, .desk-clinic .desk-table td { vertical-align: top; }
 .desk-clinic .desk-group th { padding-top: 1.1rem; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 0; }
 .desk-clinic .desk-table a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* Text, not figures: the numbers table's right alignment, no-wrap and bold
+   second column don't fit it. The notes and times wrap into readable lines;
+   the name, contact and date stay on one. */
+.desk-clinic .desk-table th, .desk-clinic .desk-table td { text-align: start; }
+.desk-clinic .desk-table td:nth-child(2) { font-weight: inherit; }
+.desk-clinic tbody th[scope="row"] { font-weight: 600; }
+.desk-clinic .desk-table td:nth-child(4), .desk-clinic .desk-table td:nth-child(5) { white-space: normal; min-width: 14rem; }
 /* The thank-you that takes a form's place once the Worker has the answers. */
 .form-done { margin-top: 1.25rem; outline: none; }
 .form-done-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 .4rem; }
@@ -959,7 +984,6 @@ dl, dd { margin: 0; }
   overflow: hidden; background: #ebe9e3;
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
-.avatar-initials { font-size: .8125rem; font-weight: 600; color: var(--muted); }
 
 /* -------------------------------------------------------------- Contact -- */
 .contact { background: var(--ink); color: #fff; }
@@ -1008,9 +1032,22 @@ dl, dd { margin: 0; }
 
 /* ==========================================================================
    MOTION
-   Two variants of one idea. --d staggers siblings; everything is scoped to
-   .js so the page is never blank if the script fails to load.
+   Two variants of one idea. --d staggers siblings. Every hidden state is
+   scoped to .js, which an inline line in <head> adds before tennis.js has
+   even loaded, so that scoping alone doesn't keep the page from going
+   blank: the failsafe below does. tennis.js puts reveal-on on <html> the
+   moment it runs; if that never happens, everything fades in on its own
+   2.5 seconds in.
    ========================================================================== */
+html.js:not(.reveal-on) :is(.fade, .fade-img img, .hero-drop .drop-word, main h2.fade > .rise,
+  .notes.fade > div, .faq.fade > details, .photo-strip.fade .photo, .statement blockquote.fade,
+  .review.fade .avatar, .everyone.fade .ev-fig, .hero-photo.fade-img picture, .about-photo.fade-img picture),
+html.js:not(.reveal-on) .eyebrow.fade::before,
+html.js:not(.reveal-on) .hero-facts.fade::before,
+html.js:not(.reveal-on) .facts.fade::before {
+  animation: revealFailsafe .4s 2.5s forwards;
+}
+@keyframes revealFailsafe { to { opacity: 1; transform: none; clip-path: none; filter: none; } }
 .js .fade {
   opacity: 0;
   transform: translateY(20px);
@@ -1070,8 +1107,8 @@ dl, dd { margin: 0; }
 .fade-img { border-radius: var(--radius); overflow: hidden; }
 
 /* ---------------------------------------------------------- The clip --
-   Styled as another frame in the strip rather than as an embed: flush with
-   the two photographs above, same 2px seam, same hover zoom and same tag.
+   Styled as another frame of the photographs rather than as an embed: the
+   same hover zoom and the same tag.
    The 16/9 box holds its height from first paint, so the caption below it
    never jumps when the poster or the player arrives. */
 .video-frame { margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; }
@@ -1111,11 +1148,18 @@ dl, dd { margin: 0; }
 .video-play:hover .video-cue,
 .video-play:focus-visible .video-cue { transform: scale(1.08); background: #fff; }
 
-/* Once pressed, the iframe takes the same box the poster held. */
+/* The scroll animation below leaves a clip-path on the button, which would
+   cut off a ring drawn outside it, so its ring is drawn inside, in white
+   on the poster. */
+.video-play:focus-visible { outline-color: #fff; outline-offset: -6px; }
+
+/* Once pressed, the iframe takes the same box the poster held (tennis.js
+   swaps the button for a plain holder with the same classes). */
 .video-play.is-playing { cursor: default; }
 .video-play iframe {
   display: block; width: 100%; aspect-ratio: 16/9; border: 0;
 }
+.video-play iframe:focus-visible { outline-offset: -3px; }   /* inside the holder's overflow: hidden */
 
 .video-frame figcaption {
   margin-top: .9rem;
@@ -1146,7 +1190,9 @@ dl, dd { margin: 0; }
 .modal, .lightbox {
   width: 100%; height: 100%; max-width: none; max-height: none;
   padding: 0; border: none; background: transparent;
-  display: grid; place-items: center;
+  /* safe: a card taller than the dialog starts at its top (and scrolls)
+     instead of being split above and below where it can't be reached. */
+  display: grid; place-items: center; place-items: safe center;
   opacity: 0;
   transition: opacity var(--dur-ui) var(--ease),
               display var(--dur-ui) var(--ease) allow-discrete,
@@ -1174,7 +1220,10 @@ dl, dd { margin: 0; }
 .modal-card {
   position: relative;
   width: min(470px, calc(100vw - 2rem));
+  /* The visible viewport (dvh), which is shorter than 100vh while a phone's
+     toolbars show; vh stays as the fallback. */
   max-height: calc(100vh - 2.5rem);
+  max-height: calc(100dvh - 2.5rem);
   overflow-y: auto;
   background: var(--bg);
   border-radius: 10px;
@@ -1209,14 +1258,19 @@ dl, dd { margin: 0; }
 .modal-close:hover { color: var(--text); background: var(--bg-soft); }
 
 .lightbox figure { margin: 0; display: grid; justify-items: center; gap: .75rem; padding: 1.5rem; }
-.lightbox img { max-width: min(92vw, 640px); max-height: 82vh; width: auto; border-radius: var(--radius); }
+.lightbox img { max-width: min(92vw, 640px); max-height: 82vh; max-height: 82dvh; width: auto; border-radius: var(--radius); }
 /* On a plate: the backdrop is 50% over whatever the page has behind it,
    which over the white photo section put white text at 3.5:1. */
 .lightbox figcaption {
   font-size: .875rem; color: #fff;
   background: rgba(13, 13, 13, .88); padding: .45rem .9rem; border-radius: var(--radius);
 }
-.lightbox-close { position: fixed; top: 1rem; inset-inline-end: 1rem; color: #fff; }
+.lightbox-close {
+  position: fixed; color: #fff;
+  /* Clear of the notch and the rounded corners (viewport-fit=cover). */
+  top: max(1rem, env(safe-area-inset-top));
+  inset-inline-end: max(1rem, env(safe-area-inset-left), env(safe-area-inset-right));
+}
 .lightbox-close:hover { color: #fff; background: rgba(255, 255, 255, .16); }
 
 body.modal-open { overflow: hidden; }
@@ -1300,11 +1354,12 @@ body.modal-open { overflow: hidden; }
 }
 
 /* The header folds its links into the menu earlier than the page stacks:
-   wordmark, five links, the language menu and the Book button need about
-   1,050px in the longer languages (Spanish, Japanese, Persian), and below
-   that the labels wrapped. The wordmark needs room to stay legible beside
-   the booking action. */
-@media (max-width: 1100px) {
+   wordmark, five links, the language menu, the dark-mode switch and the
+   Book button need about 1,140px in the longer languages (Spanish,
+   Japanese, Persian), and below that the labels wrapped or the row ran
+   past its padding. The wordmark needs room to stay legible beside the
+   booking action. */
+@media (max-width: 1160px) {
   .nav-toggle { display: flex; }
   .header-row { gap: .75rem; }
   .header-cta { min-height: 44px; }
@@ -1314,16 +1369,35 @@ body.modal-open { overflow: hidden; }
     flex-direction: column; gap: 0;
     background: var(--bg); border-bottom: 1px solid var(--line);
     padding: 0 var(--pad) .75rem;
+    /* It hangs from the sticky header, which never scrolls: on a short
+       screen (a phone on its side) the menu scrolls inside itself. The
+       100% is the header's height, its containing block. */
+    max-height: calc(100vh - 100%); max-height: calc(100dvh - 100%);
+    overflow-y: auto; overscroll-behavior: contain;
   }
   .nav.is-open { display: flex; animation: navIn .28s var(--ease); }
   @keyframes navIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
   .nav a { padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: 1rem; }
   .nav a:last-child { border-bottom: none; }
-  .nav-book { display: block; font-weight: 600; color: var(--text); }
+  .nav .nav-book { display: block; font-weight: 600; color: var(--text); }
   .nav-portfolio { gap: .55rem; }
   .np-arrow path { stroke-dashoffset: 0; }
   /* The desktop divider would read as a stray indent in the stacked menu. */
   .nav-portfolio { padding-inline-start: 0; border-inline-start: none; }
+
+  /* With no script the menu button could never open the menu, so it goes,
+     and the links sit as a wrapped row under the wordmark instead (the
+     header's own Book button stands in for the menu's). */
+  html:not(.js) .nav-toggle { display: none; }
+  html:not(.js) .header { position: static; }
+  html:not(.js) .header-row { flex-wrap: wrap; }
+  html:not(.js) .nav {
+    display: flex; position: static; order: 1; flex-basis: 100%;
+    flex-direction: row; flex-wrap: wrap; gap: .25rem 1.25rem;
+    padding: 0 0 .6rem; border: 0; background: none; max-height: none;
+  }
+  html:not(.js) .nav a { padding: .35rem 0; border: 0; }
+  html:not(.js) .nav .nav-book { display: none; }
 }
 
 @media (max-width: 680px) {
@@ -1344,27 +1418,42 @@ body.modal-open { overflow: hidden; }
   .matcher-row .btn, .matcher-actions .btn { width: 100%; min-height: 44px; }
 }
 
-@media (max-width: 480px) {
-  /* The wordmark, the button and the toggle have to share ~335px. */
-  .brand-logo { width: 126px; height: 42px; }
-  .header-row { gap: .6rem; }
+/* The short "Book" and the bare globe from 540px down: the longer languages'
+   full label ("Reservar una clase") squeezed the menu button below that. */
+@media (max-width: 540px) {
   .header-cta .cta-full { display: none; }
   .header-cta .cta-short { display: inline; }
   /* The globe alone; its name is still read out. */
   .lang-code { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+}
+
+@media (max-width: 480px) {
+  /* The wordmark, the button and the toggle have to share ~335px. */
+  .brand-logo { width: 126px; height: 42px; }
+  .header-row { gap: .6rem; }
   .notes { grid-template-columns: 1fr; }
+}
+
+/* The narrowest phones (320px): a smaller wordmark and tighter gaps, so the
+   menu button keeps its full 44px and nothing runs past the edge. */
+@media (max-width: 360px) {
+  .brand-logo { width: 96px; height: 32px; }
+  .header-row { gap: .4rem; }
+  /* The longest short labels (Spanish "Reservar", Vietnamese) still fit. */
+  .header-cta { padding-inline: .75rem; }
 }
 
 /* ==========================================================================
    SECTION SIGNATURES
-   Each block of the page arrives in its own way, all in black and white,
-   all once (except the scroll-linked pieces, which follow the scroll both
-   ways because they are the scroll). The vocabulary stays the page's own:
-   masks that reveal (the hero's drop-line), lines that get drawn (the
-   eyebrow's dash, a court's lines), and photographs as the only colour.
-   motion.js adds the pieces that need a script (prices, pointer light,
-   magnetic Book buttons, the contact band's court, the lightbox zoom).
-   Every piece starts from content that is already readable without it.
+   Each block of the page arrives in its own way, in black and white with
+   the ball yellow (#d9ef3f) as the one accent. Reveals replay: a block
+   that has left the screen arrives again on the way back (tennis.js). The
+   vocabulary stays the page's own: masks that reveal (the hero's
+   drop-line), lines that get drawn (the eyebrow's dash, a court's lines).
+   motion.js adds the pieces that need a script (prices, the lesson cards'
+   pointer light, the contact band's court, the lightbox zoom); more.js
+   adds the magnetic buttons and the floodlight. Every piece starts from
+   content that is already readable without it.
    ========================================================================== */
 
 /* --- Lines that draw themselves: the eyebrow's dash, and the hairline
@@ -1378,9 +1467,10 @@ body.modal-open { overflow: hidden; }
   transition: transform 1.1s var(--ease) calc(var(--d, 0s) + .1s), background-color 1.2s var(--ease) 1.1s;
 }
 .js .hero-facts.fade.is-in::before, .js .facts.fade.is-in::before { transform: scaleX(1); background-color: var(--line); }
-:root[dir="rtl"] .js .eyebrow.fade::before,
-:root[dir="rtl"] .js .hero-facts.fade::before,
-:root[dir="rtl"] .js .facts.fade::before { transform-origin: 100% 50%; }
+/* .js and dir both sit on <html>, so the two are joined, not nested. */
+:root[dir="rtl"].js .eyebrow.fade::before,
+:root[dir="rtl"].js .hero-facts.fade::before,
+:root[dir="rtl"].js .facts.fade::before { transform-origin: 100% 50%; }
 
 /* --- Headings rise from behind their own baseline, the hero's drop-line
        move at section scale: a mask on the heading, the text climbing up
@@ -1487,7 +1577,7 @@ body.modal-open { overflow: hidden; }
 /* --- About. The photograph is uncovered from its leading edge, the way a
        curtain is drawn; inside the frame it keeps drifting with the scroll. */
 .js .about-photo.fade-img picture { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s cubic-bezier(.77, 0, .18, 1); }
-:root[dir="rtl"] .js .about-photo.fade-img picture { clip-path: inset(0 0 0 100%); }
+:root[dir="rtl"].js .about-photo.fade-img:not(.is-in) picture { clip-path: inset(0 0 0 100%); }
 .js .about-photo.fade-img.is-in picture { clip-path: inset(0); }
 @supports (animation-timeline: view()) {
   .about-photo picture { display: block; overflow: hidden; }
@@ -1495,32 +1585,32 @@ body.modal-open { overflow: hidden; }
   @keyframes innerDrift { from { translate: 0 -5%; scale: 1.12; } to { translate: 0 5%; scale: 1.12; } }
 }
 
-/* --- In action. Three shutters lift one after another; on scroll the
-       frames drift at different speeds; and hovering one photograph
+/* --- In action. Three shutters lift one after another (the drift inside
+       each frame on scroll is more.css's M2); and hovering one photograph
        leaves only it in colour, the other two drained to grey. */
 .js .photo-strip.fade { opacity: 1; transform: none; }
 .js .photo-strip.fade .photo { clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.77, 0, .18, 1) var(--d, 0s); }
-.js .photo-strip.fade.is-in .photo { clip-path: inset(0); }
+/* Opened past the frame's edges, not to them: an inset(0) clip would also
+   cut off the frame's own focus ring (and, in the pile, its shadow). The
+   frame's overflow: hidden still keeps the picture inside. */
+.js .photo-strip.fade.is-in .photo { clip-path: inset(-4rem); }
+.photo-strip:not(.is-pile) .photo:focus-visible { z-index: 1; }   /* the ring over its neighbour, across the 2px seam */
 .photo-strip .photo img { transition: transform .6s var(--ease), filter .5s var(--ease), opacity .5s var(--ease); }
 @media (hover: hover) and (pointer: fine) {
   .photo-strip:has(.photo:hover) .photo:not(:hover) img { filter: grayscale(1) contrast(1.05); opacity: .62; }
 }
-@supports (animation-timeline: view()) {
-  .photo-strip .photo picture { display: block; }
-  .photo-strip .photo img { animation: innerDrift linear both; animation-timeline: view(); }
-  .photo-strip .photo:nth-child(2) img { animation-name: innerDriftUp; }
-  @keyframes innerDriftUp { from { translate: 0 6%; scale: 1.14; } to { translate: 0 -6%; scale: 1.14; } }
-}
 
 /* --- Reviews come in from either side and meet in the middle, like the
-       two ends of a rally. One column on phones: they simply rise. */
+       two ends of a rally. In one column on phones they slide in from
+       behind the column's edges just the same. */
 .js .review-list .review.fade:nth-child(odd):not(.is-in) { transform: translateX(-56px); }
 .js .review-list .review.fade:nth-child(even):not(.is-in) { transform: translateX(56px); }
-:root[dir="rtl"] .js .review-list .review.fade:nth-child(odd):not(.is-in) { transform: translateX(56px); }
-:root[dir="rtl"] .js .review-list .review.fade:nth-child(even):not(.is-in) { transform: translateX(-56px); }
-/* The cards slide in from behind the column's own edges, so neither one
-   pokes past the screen and adds a sideways scroll on the way in. */
-.review-list { overflow-x: clip; }
+:root[dir="rtl"].js .review-list .review.fade:nth-child(odd):not(.is-in) { transform: translateX(56px); }
+:root[dir="rtl"].js .review-list .review.fade:nth-child(even):not(.is-in) { transform: translateX(-56px); }
+/* The clip is on the section, whose side padding leaves room: the cards
+   slide in without poking past the screen (no sideways scroll), and a
+   card's hover shadow and yellow ring aren't cut off at the list's edge. */
+#reviews { overflow-x: clip; }
 .review figcaption { position: relative; border-top-color: transparent; }
 .review figcaption::before {
   content: ""; position: absolute; top: -1px; inset-inline: 0; height: 1px; background: var(--line);
@@ -1547,7 +1637,7 @@ body.modal-open { overflow: hidden; }
 .js .notes.fade { opacity: 1; transform: none; }
 .js .notes.fade > div { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
 .js .notes.fade > div::before { transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s var(--ease) calc(var(--i, 0) * 70ms + .15s); }
-:root[dir="rtl"] .js .notes.fade > div::before { transform-origin: 100% 50%; }
+:root[dir="rtl"].js .notes.fade > div::before { transform-origin: 100% 50%; }
 .js .notes.fade.is-in > div { opacity: 1; transform: none; }
 .js .notes.fade.is-in > div::before { transform: scaleX(1); }
 .notes > div:nth-child(2) { --i: 1; } .notes > div:nth-child(3) { --i: 2; } .notes > div:nth-child(4) { --i: 3; }
@@ -1590,7 +1680,7 @@ body.modal-open { overflow: hidden; }
 
 /* --- Contact. The band's court (drawn by motion.js) paints its lines when
        the band arrives; a soft light follows the pointer across it, like
-       the court lights coming on. */
+       the court lights coming on (more.js and more.css: the floodlight). */
 .contact { position: relative; overflow: hidden; isolation: isolate; }
 .contact > .wrap { position: relative; z-index: 1; }
 .contact-court {
@@ -1603,16 +1693,6 @@ body.modal-open { overflow: hidden; }
 .contact-court line { fill: none; stroke: currentColor; stroke-linecap: round; }
 .js .contact-court line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s cubic-bezier(.65, 0, .35, 1) var(--cd, 0s); }
 .contact-court.is-in line { stroke-dashoffset: 0; }
-.contact::before {
-  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(36rem circle at var(--mx, 70%) var(--my, 40%), rgba(255, 255, 255, .085), rgba(255, 255, 255, 0) 62%);
-  opacity: 0; transition: opacity .6s var(--ease);
-}
-.contact.is-lit::before { opacity: 1; }
-
-/* --- Book buttons lean toward the pointer (motion.js sets --tx/--ty). */
-.btn-lg { translate: var(--tx, 0) var(--ty, 0); transition: background-color var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), translate .5s cubic-bezier(.16, 1, .3, 1); }
-.btn-lg.is-magnet { transition: background-color var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease), translate .12s linear; }
 
 /* --- A thin ink line under the header measures how far down the page you
        are (scroll-linked; nothing shows where the browser can't). */
@@ -1629,19 +1709,22 @@ body.modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .js main h2.fade > .rise { clip-path: none; transform: none; opacity: 0; transition: opacity .55s var(--ease); }
   .js main h2.fade.is-in > .rise { opacity: 1; }
-  .js .hero-photo.fade-img picture, .js .about-photo.fade-img picture, .js .photo-strip.fade .photo { clip-path: none; }
+  .js .hero-photo.fade-img picture, .js .about-photo.fade-img picture, .js .photo-strip.fade .photo,
+  :root[dir="rtl"].js .about-photo.fade-img:not(.is-in) picture { clip-path: none; }
   .js .hero-photo.fade-img img { transform: none; }
   .hero-photo picture, .about-photo picture img, .photo-strip .photo img, .statement,
   .video-play:not(.is-playing), .video-play:not(.is-playing) img, .header::after { animation: none; }
   .header::after { display: none; }
   .js .statement blockquote.fade { transform: none; filter: none; }
   .js .lesson.fade:not(.is-in), .js .lesson.fade.is-in:hover { transform: none; }
-  .js .review-list .review.fade:not(.is-in) { transform: none; }
+  /* As specific as the slide rules above, so it wins over them. */
+  .js .review-list .review.fade:nth-child(odd):not(.is-in), .js .review-list .review.fade:nth-child(even):not(.is-in),
+  :root[dir="rtl"].js .review-list .review.fade:nth-child(odd):not(.is-in),
+  :root[dir="rtl"].js .review-list .review.fade:nth-child(even):not(.is-in) { transform: none; }
   .js .review.fade:not(.is-in) .avatar { transform: none; }
   .js .notes.fade > div, .js .faq.fade > details { transform: none; }
   .js .notes.fade > div::before, .js .eyebrow.fade::before, .js .hero-facts.fade::before, .js .facts.fade::before, .review figcaption::before { transform: none; transition: none; }
   .js .contact-court line { transition: none; stroke-dashoffset: 0; }
-  .btn-lg { translate: none; }
   .faq details[open] > :not(summary) { animation: none; }
   .photo-strip:has(.photo:hover) .photo:not(:hover) img { filter: none; opacity: 1; }
 }
@@ -1686,5 +1769,17 @@ body.modal-open { overflow: hidden; }
   .header, .nav-toggle, .actions { display: none; }
   .fade, .fade-img img { opacity: 1 !important; transform: none !important; }
   .hero-drop .drop-word { opacity: 1 !important; transform: none !important; }
+  /* Every other hidden state too: reveals reset off screen, so anything not
+     in view when printing would print blank, clipped or blurred.
+     !important beats the more specific .js rules and the scroll-driven
+     clip on the statement. */
+  :is(main h2.fade > .rise, .notes.fade > div, .faq.fade > details, .hero-photo picture,
+    .about-photo picture, .photo-strip .photo, .statement, .statement blockquote, .review .avatar,
+    .everyone .ev-fig, .fr-word) {
+    clip-path: none !important; opacity: 1 !important; transform: none !important; filter: none !important;
+  }
   .contact, .footer { background: #fff; color: #000; }
+  /* White text on the black bands would vanish on paper. */
+  .statement, .statement * { color: #000 !important; background: #fff; }
+  .contact-text p, .contact .book-note, .contact-details dt, .contact a { color: #000 !important; }
 }
