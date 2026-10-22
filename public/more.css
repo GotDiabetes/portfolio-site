@@ -239,7 +239,6 @@
   border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; background: var(--card);
 }
 .keys dd { color: var(--muted); }
-.keys-hint { font-size: .8125rem; }
 @media (hover: none) { .keys-hint { display: none; } }
 
 /* --- The FAQ ladder. Four questions show; "Show all the questions"
@@ -301,7 +300,10 @@
 .compare figcaption { margin-top: .6rem; font-size: .875rem; color: var(--muted); }
 
 /* --- N3. The numbers. */
-.counts { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+/* Three across, always: a label may wrap to two lines on a narrow screen,
+   but the third figure never drops to a row of its own. */
+.counts { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 1rem 2.25rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+@media (max-width: 420px) { .counts { gap: 1rem 1.25rem; } .counts b { font-size: 1.85rem; } }
 .counts li { display: grid; gap: .15rem; }
 .counts li[hidden] { display: none; }   /* a figure Isaac left blank */
 .counts b { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }

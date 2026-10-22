@@ -63,6 +63,10 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
 p { margin: 0 0 1rem; }
+/* No one-word last lines, and two-line headings split evenly (browsers
+   without these simply wrap as before). */
+p, li, dd, figcaption { text-wrap: pretty; }
+h2, h3 { text-wrap: balance; }
 p:last-child { margin-bottom: 0; }
 ul { margin: 0; padding: 0; list-style: none; }
 a { color: inherit; }
@@ -318,7 +322,7 @@ dl, dd { margin: 0; }
 .contact .book-note { color: rgba(255, 255, 255, .72); }
 /* The "Keyboard shortcuts" button sits among the footer's links and takes
    their colour, not the page's ink (which vanished on the black footer). */
-.footer .link-btn { color: inherit; font-weight: inherit; text-decoration: none; }
+.footer .link-btn { color: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; min-height: 0; text-decoration: none; }
 .footer .link-btn:hover { color: #fff; }
 .book-note .link-btn { display: flex; width: fit-content; margin-top: .15rem; font-size: .875rem; }
 .contact .link-btn { color: #fff; }
@@ -375,6 +379,8 @@ dl, dd { margin: 0; }
 .section-sub { color: var(--muted); margin-top: 1rem; }
 
 /* ---------------------------------------------------------------- About -- */
+#about .two-col { align-items: start; }
+.about-side { min-width: 0; }
 .about-photo { margin: 0; border-radius: var(--radius); overflow: hidden; }
 .about-photo img { width: 100%; aspect-ratio: 3/2; object-fit: cover; }
 /* The clinic frame is wider than 3/2, so a fifth of it is cropped. The crop
@@ -386,10 +392,11 @@ dl, dd { margin: 0; }
 .about-text p { color: var(--muted); max-width: 60ch; }
 
 .facts {
-  display: flex; flex-wrap: wrap; gap: 2.5rem;
-  margin-top: 2.25rem; padding-top: 1.6rem;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem 2rem;
+  margin: 1.75rem 0 0; padding-top: 1.6rem;
   border-top: 1px solid var(--line);
 }
+.facts > div { min-width: 0; }
 .facts dt { font-size: .8125rem; color: var(--muted); margin-bottom: .25rem; }
 .facts dd { font-weight: 600; font-size: 1.125rem; }
 
@@ -412,11 +419,16 @@ dl, dd { margin: 0; }
   border-color: #d6d3cb;
   box-shadow: 0 12px 30px rgba(0, 0, 0, .06);
 }
+/* A column, so the Book row sits at the bottom of every card in a row
+   whatever is above it (the private card is the tallest, with its
+   half-hour card under its actions). */
+.lesson { display: flex; flex-direction: column; }
 .lesson h3 { font-size: 1.125rem; }
+.lesson > p:has(+ .lesson-actions) { margin-bottom: 0; }
 .lesson p { color: var(--muted); font-size: 1rem; }
 .lesson-actions {
   display: flex; flex-wrap: wrap; align-items: center;
-  gap: .5rem 1.25rem; margin-top: 1.25rem;
+  gap: .5rem 1.25rem; margin-top: auto; padding-top: 1.25rem;
 }
 /* A smaller offer inside a card (the 30-minute private lesson): a card
    within the card, on the page's own ground with a hairline, its title
@@ -1343,7 +1355,10 @@ body.modal-open { overflow: hidden; }
   @media (orientation: landscape) and (max-height: 520px) {
     .hero-photo img { aspect-ratio: auto; height: 62vh; object-position: 50% 30%; }
   }
+  .about-side { display: contents; }
   .about-photo { order: -1; }
+  .facts { order: 1; margin-top: 0; }
+  .counts { order: 2; margin-top: 0; }
   .lesson-list, .review-list { grid-template-columns: 1fr; }
   .contact-details { margin-top: 1rem; }
 }
