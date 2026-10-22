@@ -84,6 +84,9 @@ export default {
 
   pairs: [
     // the 30-minute private lesson (Oct 21)
+    [`>30-minute lessons<`, `>Buổi 30 phút<`],
+    [`>/30 minutes<`, `>/30 phút<`],
+    [`>One-on-one, focused on one part of your game.<`, `>Kèm riêng 1-1, tập trung vào một phần trong lối chơi của bạn.<`],
     [`>30-minute lessons are $45.<`, `>Buổi 30 phút giá $45.<`],
     [`>Book 30 minutes<`, `>Đặt 30 phút<`],
     [`>30 minutes, $45<`, `>30 phút, $45<`],

@@ -418,6 +418,22 @@ dl, dd { margin: 0; }
   display: flex; flex-wrap: wrap; align-items: center;
   gap: .5rem 1.25rem; margin-top: 1.25rem;
 }
+/* A smaller offer inside a card (the 30-minute private lesson): a card
+   within the card, on the page's own ground with a hairline, its title
+   and price on the left and its Book button on the right; stacked when
+   the card is narrow. Its price follows the figure treatment one step
+   down, so it reads as part of the card above it. */
+.lesson-sub {
+  position: relative; z-index: 1;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .9rem 1.25rem; margin-top: 1.5rem; padding: 1rem 1.15rem;
+  background: var(--bg); border: 1px solid var(--line); border-radius: calc(var(--radius) - 2px);
+}
+.lesson-sub-text { min-width: 0; flex: 1 1 13rem; }
+.lesson-sub h4 { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--text); }
+.lesson .lesson-sub .price { font-size: 1.3rem; margin: .2rem 0 .3rem; }
+.lesson .lesson-sub p:not(.price) { margin: 0; font-size: .875rem; }
+.lesson-sub .btn { flex: 0 0 auto; }
 
 /* Lesson matcher (match.js), under the cards. One plain field and the
    page's own button; the answer is a sentence and the matched card's real
@@ -1406,7 +1422,7 @@ body.modal-open { overflow: hidden; }
   .photo-tag { opacity: 1; transform: none; }   /* no hover on touch */
   .actions .btn { width: 100%; }
   .hero-facts, .facts { gap: 1.5rem 2.25rem; }
-  .lesson-actions .btn { width: 100%; }
+  .lesson-actions .btn, .lesson-sub .btn { width: 100%; }
   /* Price and Book in the first screen on a phone: the photo follows the
      text instead of leading it (cropped from the top so the head stays
      in), and the prices sit just above the buttons. */

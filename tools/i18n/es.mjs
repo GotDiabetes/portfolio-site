@@ -91,6 +91,9 @@ export default {
 
   pairs: [
     // the 30-minute private lesson (Oct 21)
+    [`>30-minute lessons<`, `>Clases de 30 minutos<`],
+    [`>/30 minutes<`, `>/30 minutos<`],
+    [`>One-on-one, focused on one part of your game.<`, `>Uno a uno, centrada en una parte de tu juego.<`],
     [`>30-minute lessons are $45.<`, `>Las clases de 30 minutos cuestan $45.<`],
     [`>Book 30 minutes<`, `>Reservar 30 minutos<`],
     [`>30 minutes, $45<`, `>30 minutos, $45<`],

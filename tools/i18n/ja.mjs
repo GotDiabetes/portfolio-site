@@ -84,6 +84,9 @@ export default {
 
   pairs: [
     // the 30-minute private lesson (Oct 21)
+    [`>30-minute lessons<`, `>30分レッスン<`],
+    [`>/30 minutes<`, `>/30分<`],
+    [`>One-on-one, focused on one part of your game.<`, `>マンツーマンで、プレーの一つのポイントに絞って行います。<`],
     [`>30-minute lessons are $45.<`, `>30分レッスンは$45です。<`],
     [`>Book 30 minutes<`, `>30分を予約する<`],
     [`>30 minutes, $45<`, `>30分、$45<`],
