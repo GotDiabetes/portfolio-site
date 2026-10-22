@@ -427,12 +427,14 @@ dl, dd { margin: 0; }
   position: relative; z-index: 1;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: .9rem 1.25rem; margin-top: 1.5rem; padding: 1rem 1.15rem;
-  background: var(--bg); border: 1px solid var(--line); border-radius: calc(var(--radius) - 2px);
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
 }
 .lesson-sub-text { min-width: 0; flex: 1 1 13rem; }
-.lesson-sub h4 { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--text); }
+/* A label, not a heading: it sits below the body size on purpose, and a
+   heading smaller than the text around it would flatten the page outline. */
+.lesson .lesson-sub .lesson-sub-title { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--text); }
 .lesson .lesson-sub .price { font-size: 1.3rem; margin: .2rem 0 .3rem; }
-.lesson .lesson-sub p:not(.price) { margin: 0; font-size: .875rem; }
+.lesson .lesson-sub p:not(.price):not(.lesson-sub-title) { margin: 0; font-size: .875rem; }
 .lesson-sub .btn { flex: 0 0 auto; }
 
 /* Lesson matcher (match.js), under the cards. One plain field and the
