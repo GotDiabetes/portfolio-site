@@ -196,6 +196,10 @@ function page(d, file, report, pg) {
   html = html.replace(/(\?subject=)([^"]+)"/g, `$1$2${tag}"`);
   html = html.replace(/data-mail="([^"]+)"/g, `data-mail="$1${tag}"`);
 
+  /* The typeface preload is for the pages that use it (the Latin
+     scripts); the others would fetch a file they never show. */
+  if (!["es", "vi"].includes(d.lang)) html = html.replace(/\n[^\n]*<link rel="preload" as="font"[^>]*data-latin-font[^>]*>/g, "");
+
   const i18n = {
     ...d.js,
     lang: d.path.replace(/\//g, ""),

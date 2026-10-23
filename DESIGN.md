@@ -11,49 +11,51 @@ colors:
   rule: "#e5e5e3"
 typography:
   display:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "clamp(3rem, min(7.5vw, 9.5vh), 5.5rem)"
     fontWeight: 600
     lineHeight: 0.92
     letterSpacing: "-0.055em"
   statement:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "clamp(1.85rem, 5.2vw, 3.75rem)"
     fontWeight: 600
     lineHeight: 1.06
     letterSpacing: "-0.045em"
   headline:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "clamp(1.75rem, 3.4vw, 2.5rem)"
     fontWeight: 600
     lineHeight: 1.15
     letterSpacing: "-0.03em"
   figure:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "1.6rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "-0.03em"
   title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 600
     lineHeight: 1.15
     letterSpacing: "-0.03em"
   body:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.65
     letterSpacing: "normal"
   label:
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    fontFamily: "'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
     fontSize: "0.8125rem"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
-  # The translated pages: the same system face, named per script so each
-  # language gets its regional glyphs. Sizes follow the roles above.
+  # The Korean, Japanese, Chinese and Persian pages keep the system face,
+  # named per script so each language gets its regional glyphs (Spanish and
+  # Vietnamese use Familjen Grotesk with its Latin-extended and Vietnamese
+  # blocks). Sizes follow the roles above.
   script-korean:
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', 'Malgun Gothic', 'Noto Sans KR', Roboto, sans-serif"
   script-japanese:
@@ -160,10 +162,10 @@ A monochrome system: white paper, near-black ink, and three greys chosen for the
 
 ## Typography
 
-**Display Font:** system UI stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial`)
-**Body Font:** the same stack
+**Display Font:** Familjen Grotesk (since Oct 23), self-hosted from `/fonts/`, variable 400–700; the system UI stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial`) is the fallback while it loads and the face of the Korean, Japanese, Chinese and Persian pages.
+**Body Font:** the same face.
 
-**Character:** one family at every size, carried by scale and tracking rather than by a second face. The display sizes are set tighter than the platform default would ever go, which is what makes the native face read as designed rather than as default.
+**Character:** one family at every size, carried by scale and tracking rather than by a second face. Familjen Grotesk was drawn for a Stockholm sports club: a compact, athletic grotesque whose counters stay open at text sizes, so it sets as densely as the system face did and nothing reflowed when it arrived. Until Oct 23 the site set in the platform face, which read as designed on a Mac and as default on Windows, where most of Isaac's visitors are; that is what the typeface fixes. The display sizes stay tighter than the platform default would ever go.
 
 ### Hierarchy
 - **Display** (600, `clamp(3rem, min(7.5vw, 9.5vh), 5.5rem)`, line-height .92, tracking -0.055em): the hero headline only. Three words, three lines, each line a separate mask so the words drop in one at a time. Sized by the shorter of width and height, so a short laptop screen still shows the prices and the Book button without scrolling.
@@ -175,7 +177,7 @@ A monochrome system: white paper, near-black ink, and three greys chosen for the
 - **Label** (400, .8125rem, muted): eyebrows, fact labels, contact labels. Sentence case, never tracked out, never uppercase.
 
 ### Named Rules
-**The One Voice Rule.** There is no second typeface. Emphasis is weight 600 or size; never italic, never a display face, never colour.
+**The One Voice Rule.** There is no second typeface: Familjen Grotesk at every size, the system face only as its fallback and for the scripts it does not carry. Emphasis is weight 600 or size; never italic, never a display face, never colour.
 
 **The Figure Rule.** Every price on the page renders in text-black at figure size. A price is never muted and never body-sized; the selector that sets it always carries a class ahead of `.price` so a paragraph rule cannot outrank it.
 
@@ -360,7 +362,7 @@ The statement sentence on the black band carries the focus reveal: white bracket
 
 ### Don't:
 - **Don't** introduce a hue. Not for a CTA, not for a link, not for a chart.
-- **Don't** add a second typeface or an icon set; the page has one dash and one monogram, and that is the graphic vocabulary. (The per-language font stacks are still the system face, picked per script.)
+- **Don't** add a second typeface or an icon set; the page has one face (Familjen Grotesk), one dash and one monogram, and that is the graphic vocabulary. (The Korean, Japanese, Chinese and Persian pages keep the system face, picked per script.)
 - **Don't** hand-edit a translated page. Change the English page or the dictionary and run `node tools/i18n/build.mjs`.
 - **Don't** style dark mode anywhere but dark.css (the `:root[data-theme="dark"]` tokens and overrides); the black bands stay black in both themes, placed on purpose.
 - **Don't** put a shadow on anything at rest.

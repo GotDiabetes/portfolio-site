@@ -327,6 +327,13 @@ overwritten on the next build. One dictionary covers all four pages.
   and puts it in the note; the sheet reads the link and the language's
   `ask.json`, so nothing is stored anywhere. English only in the source;
   its words are in `sheet.js` per language, like the recap's.
+- **The typeface** is Familjen Grotesk (SIL Open Font License, the licence
+  text is in `public/fonts/`), self-hosted as three small variable files:
+  Latin, Latin extended (Spanish) and Vietnamese. `tennis.css` declares
+  them at the top and sets the face on the English, Spanish and Vietnamese
+  pages only; the other languages keep their system faces. The two main
+  pages preload the Latin file; the build drops that preload from the
+  pages that don't use it.
 - **The October 19 set** (`public/more.js`, `more.css`; the list is at
   the top of the script): magnetic Book buttons, the
   court diagram with its five notes, the package builder (the cards' own
