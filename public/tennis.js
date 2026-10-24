@@ -208,7 +208,11 @@
         if (inner && /\.webp(\?|$)/.test(inner.currentSrc || "")) full = full.replace(/\.jpe?g$/, ".webp");
         lightboxImg.setAttribute("src", full);
         lightboxImg.setAttribute("alt", inner ? inner.alt : "");
-        if (lightboxCap) lightboxCap.textContent = btn.getAttribute("data-caption") || "";
+        if (lightboxCap) {
+          var credit = btn.getAttribute("data-credit");
+          lightboxCap.textContent = (btn.getAttribute("data-caption") || "") +
+            (credit ? " \u00b7 " + (T.photoBy || "Photo: {name}").replace("{name}", credit) : "");
+        }
         openDialog("lightbox");
       });
     });

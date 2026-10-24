@@ -195,9 +195,12 @@
 }
 .js .photo-strip.fade.is-pile.is-in .photo { opacity: 1; }
 .photo-strip.is-pile .photo .photo-tag {
-  opacity: 1; transform: none; inset: auto 0 .5rem 0; text-align: center;
+  opacity: 1; transform: none; inset: auto 0 .55rem 0; padding: 0 .5rem; text-align: center; line-height: 1.25;
   background: none; color: var(--ink); font-weight: 600;
 }
+.photo-strip.is-pile .photo .photo-credit { display: block; font-size: .72rem; opacity: .7; margin-top: .05rem; }
+.photo-strip.is-pile .photo .photo-credit::before { content: none; }
+.photo-strip.is-pile .photo:has(.photo-credit) { padding-bottom: 3.2rem; }   /* room for the label and the credit under it */
 :root[dir="rtl"] .photo-strip.is-pile .photo { left: auto; right: var(--pl); }
 
 /* --- U1. The daylight bar under the weather line. */

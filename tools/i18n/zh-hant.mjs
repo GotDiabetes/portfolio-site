@@ -12,6 +12,7 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    photoBy: "攝影：{name}",
     formSending: "傳送中…",
     builderPair: "兩人一起上：每人每月 {each}。",
     formWho: "請填上名字和電子郵件或電話，方便我聯絡你。",
@@ -84,6 +85,7 @@ export default {
   },
 
   pairs: [
+    [`Forehand and serve photographs by Nico Denson.`, `正手和發球兩張照片由 Nico Denson 拍攝。`],
     [`>Good to know<`, `>須知<`],
     [`>FAQ<`, `>常見問題<`],
     // the 30-minute private lesson (Oct 21)

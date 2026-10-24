@@ -11,6 +11,7 @@ export default {
   keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
 
   js: {
+    photoBy: "Ảnh: {name}",
     formSending: "Đang gửi…",
     builderPair: "Cho hai người: mỗi người {each} một tháng.",
     formWho: "Hãy ghi tên và email hoặc số điện thoại để tôi liên hệ được.",
@@ -83,6 +84,7 @@ export default {
   },
 
   pairs: [
+    [`Forehand and serve photographs by Nico Denson.`, `Ảnh thuận tay và giao bóng do Nico Denson chụp.`],
     [`>Good to know<`, `>Nên biết<`],
     [`>FAQ<`, `>Câu hỏi thường gặp<`],
     // the 30-minute private lesson (Oct 21)

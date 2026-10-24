@@ -35,14 +35,14 @@
   <meta name="cf-analytics" content="" />
   <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/familjen-grotesk-latin.woff2" data-latin-font />
-  <link rel="stylesheet" href="/tennis.css?v=20261023b" />
+  <link rel="stylesheet" href="/tennis.css?v=20261023d" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="/motion-court.css?v=2" />
   <link rel="stylesheet" href="/motion-reveal.css?v=20261020c" />
   <link rel="stylesheet" href="/motion-transitions.css?v=2" />
-  <link rel="stylesheet" href="/features.css?v=20261023b" />
+  <link rel="stylesheet" href="/features.css?v=20261023d" />
   <link rel="stylesheet" href="/dark.css?v=20261020c" />
-  <link rel="stylesheet" href="/more.css?v=20261022b" />
+  <link rel="stylesheet" href="/more.css?v=20261023d" />
 
   <script>document.documentElement.classList.add("js");</script>
   <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
@@ -542,7 +542,7 @@
 
       <div class="photo-strip fade">
         <button class="photo" type="button"
-                data-lightbox="/images/forehand.jpg" data-caption="Derecha, práctica bajo techo">
+                data-lightbox="/images/forehand.jpg" data-caption="Derecha, práctica bajo techo" data-credit="Nico Denson">
           <picture>
             <source type="image/webp" srcset="/images/forehand-600.webp 600w, /images/forehand.webp 1200w"
                     sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
@@ -551,11 +551,11 @@
                  width="1200" height="1800" loading="lazy"
                  alt="Isaac Lee pegando una derecha" />
           </picture>
-          <span class="photo-tag">Derecha</span>
+          <span class="photo-tag">Derecha<small class="photo-credit">Nico Denson</small></span>
         </button>
 
         <button class="photo" type="button"
-                data-lightbox="/images/serve.jpg" data-caption="Sacando durante un partido">
+                data-lightbox="/images/serve.jpg" data-caption="Sacando durante un partido" data-credit="Nico Denson">
           <picture>
             <source type="image/webp" srcset="/images/serve-600.webp 600w, /images/serve.webp 1200w"
                     sizes="(max-width: 680px) 100vw, (max-width: 940px) 50vw, 380px" />
@@ -564,7 +564,7 @@
                  width="1200" height="1800" loading="lazy"
                  alt="Isaac Lee sacando durante un partido" />
           </picture>
-          <span class="photo-tag">Saque</span>
+          <span class="photo-tag">Saque<small class="photo-credit">Nico Denson</small></span>
         </button>
 
         <button class="photo" type="button"
@@ -580,6 +580,7 @@
           <span class="photo-tag">Posición de espera</span>
         </button>
       </div>
+      <p class="photo-credits fade">Las fotos del derechazo y del saque son de Nico Denson.</p>
     </section>
 
     <section class="wrap section" id="reviews">
@@ -1045,8 +1046,8 @@
     </button>
   </div>
 
-  <script>window.I18N = {"formSending":"Enviando…","builderPair":"Para dos jugadores: {each} al mes cada uno.","formWho":"Añade tu nombre y un correo o teléfono para poder contactarte.","formFailed":"No se pudo enviar. Pulsa el botón otra vez para mandarme tus respuestas por correo.","builderMonth":"al mes, por {n} clases","builderPack5":"Con el paquete de 5 clases sale a $75 por clase: {total} al mes.","builderPack10":"Con el paquete de 10 clases sale a $70 por clase: {total} al mes.","daylightLeft":"Quedan {t} de luz en la cancha","lessonLine":"Tu clase: {when}, {rel}.","addCal":"Añadir al calendario","dismiss":"Cerrar","icsTitle":"Clase de tenis con Isaac Lee","titleAway":"Vuelve y reserva una clase","spinUp":"Arriba","spinDown":"Abajo","themeDark":"Cambiar a modo oscuro","themeLight":"Cambiar a modo claro","nextOpen":"Próxima hora libre: {when}","openHours":"{n} horas libres esta semana","openHour":"1 hora libre esta semana","courtDry":"Hoy la cancha está seca y a {hi}°F.","courtRain":"Hoy es probable que llueva. Si hay que mover una clase, te escribo.","courtRainSoon":"Se espera lluvia el {day}; si hay que mover una clase, te escribo.","copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
-  <script src="/tennis.js?v=20261021" defer></script>
+  <script>window.I18N = {"photoBy":"Foto: {name}","formSending":"Enviando…","builderPair":"Para dos jugadores: {each} al mes cada uno.","formWho":"Añade tu nombre y un correo o teléfono para poder contactarte.","formFailed":"No se pudo enviar. Pulsa el botón otra vez para mandarme tus respuestas por correo.","builderMonth":"al mes, por {n} clases","builderPack5":"Con el paquete de 5 clases sale a $75 por clase: {total} al mes.","builderPack10":"Con el paquete de 10 clases sale a $70 por clase: {total} al mes.","daylightLeft":"Quedan {t} de luz en la cancha","lessonLine":"Tu clase: {when}, {rel}.","addCal":"Añadir al calendario","dismiss":"Cerrar","icsTitle":"Clase de tenis con Isaac Lee","titleAway":"Vuelve y reserva una clase","spinUp":"Arriba","spinDown":"Abajo","themeDark":"Cambiar a modo oscuro","themeLight":"Cambiar a modo claro","nextOpen":"Próxima hora libre: {when}","openHours":"{n} horas libres esta semana","openHour":"1 hora libre esta semana","courtDry":"Hoy la cancha está seca y a {hi}°F.","courtRain":"Hoy es probable que llueva. Si hay que mover una clase, te escribo.","courtRainSoon":"Se espera lluvia el {day}; si hay que mover una clase, te escribo.","copied":"Copiado","menuOpen":"Abrir menú","menuClose":"Cerrar menú","loadingCal":"Cargando el calendario…","askSuggestions":["¿Cuánto cuestan las clases?","¿Dónde son las clases?","¿Cómo reservo?","¿En qué debería trabajar?"],"askDown":"El chat no está respondiendo ahora mismo. Escríbeme por correo y te contesto.","askBusy":"Son muchas preguntas a la vez. Espera un minuto o escríbeme por correo.","emailMe":"Escríbeme","askYou":"Tú: ","askIsaac":"Isaac: ","askSuggested":"Preguntas sugeridas","askFinding":"Buscando una respuesta","open":"Abrir","showMe":"Ver","soundMute":"Silenciar sonidos","soundOn":"Activar sonidos","typeBy":"word","matchCopy":{"private":{"name":"una clase particular","line":"Uno a uno, centrada en lo que quieres mejorar."},"semi":{"name":"una clase semiprivada","line":"Dos personas comparten la hora: $55 cada una."},"hitting":{"name":"una sesión de peloteo","line":"Solo pelotear, sin instrucción, a $45 la hora."},"group":{"name":"una clínica para adultos","line":"Grupo pequeño en una cancha. Apúntate y te pondré en un grupo de tu nivel."}},"matchAnswer":"Te conviene {name}. {line}","matchTravel":"Un detalle: las clases son en mi cancha, en Toscana, Irvine. No puedo ir hasta ti, pero puedes venir cuando quieras.","matchUnsure":"Con eso no pude saberlo. Prueba con tu nivel y quién va a jugar, o elige una de las cuatro opciones de arriba.","matchDown":"El buscador no está respondiendo ahora mismo. Las cuatro opciones están justo arriba, o escríbeme.","matchBusy":"Son muchas búsquedas. Espera un minuto o elige una de las cuatro opciones de arriba.","matchSeeCard":"Ver la tarjeta ↑","matchLabel":"Tu opción","matchBusyButton":"Buscando…","soundsOn":"Sonidos de tenis activados","soundsTurnOff":"Desactivar","soundsOff":"Sonidos desactivados","matchLevels":["Nuevo en el tenis","Principiante","Intermedio","Avanzado","Competitivo"],"matchFocus":{"serve":"el saque","groundstrokes":"derecha y revés","net":"el juego en la red","movement":"el juego de pies","match":"el juego de partido","basics":"lo básico"},"matchLevelLine":"Nivel: {level}.","matchFocusLine":"Para trabajar: {focus}.","matchNotesLine":"Reserva aquí y esto se añade a las notas de tu reserva, para que pueda planear la primera clase.","matchJunior":"¿Reservas para tu hijo? Reserva a tu nombre y pon su edad en las notas.","bookedToast":"¡Reservado! Nos vemos en la cancha.","tipDemoPlay":"Ver la corrección","tipDemoReplay":"Ver otra vez","tipDemoLabel":"Animación de la corrección","lang":"es","pageName":"Spanish","askUrl":"/es/ask.json","mailSubject":"Tennis lessons (Spanish page)","mailSubjectQuestion":"Question about lessons (Spanish page)"};</script>
+  <script src="/tennis.js?v=20261023d" defer></script>
   <script src="/focus.js?v=3" defer></script>
   <script src="/match.js?v=20261020c" defer></script>
   <script src="/ask.js?v=20261020c" defer></script>
@@ -1060,6 +1061,6 @@
   <script src="/arrival.js?v=20261020c" defer></script>
   <script src="/ballo.js?v=4" defer></script>
   <script src="/motion.js?v=20261020c" defer></script>
-  <script src="/more.js?v=20261023b" defer></script>
+  <script src="/more.js?v=20261023d" defer></script>
 </body>
 </html>

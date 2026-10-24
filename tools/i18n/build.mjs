@@ -60,6 +60,7 @@ const KEEP = [
   "21euisungisaac@gmail.com", "Grip N Rip", "LifeSport Libertyville", "RSPA",
   "leetennisco.com", "Admin",   // the footer link to Isaac's own pages stays English
   "Esc",                         // the key, in the shortcuts list
+  "Nico Denson",                 // the photographer, on the photographs
   // the language menu names every language in itself
   "English", "Español", "한국어", "简体中文", "繁體中文", "日本語", "Tiếng Việt", "فارسی", "EN",
 ];

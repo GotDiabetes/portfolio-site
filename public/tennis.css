@@ -824,6 +824,11 @@ body:has(> .ask:not([hidden])) .footer { padding-bottom: calc(4.5rem + env(safe-
 }
 
 /* Caption sits on the image and slides up on hover. */
+/* The photographer, after the label (hover) or under it (the pile), and
+   as one muted line under the strip for everyone. */
+.photo-credit { display: inline; font-weight: 400; opacity: .8; }
+.photo-credit::before { content: " · "; }
+.photo-credits { margin: 1rem 0 0; font-size: .8125rem; color: var(--muted); }
 .photo-tag {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 2.5rem 1rem .9rem;
