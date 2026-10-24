@@ -84,6 +84,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>須知<`],
+    [`>FAQ<`, `>常見問題<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>30 分鐘課<`],
     [`>/30 minutes<`, `>/30 分鐘<`],

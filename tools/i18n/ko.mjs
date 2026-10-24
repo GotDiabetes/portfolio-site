@@ -84,6 +84,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>알아 두면 좋아요<`],
+    [`>FAQ<`, `>자주 묻는 질문<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>30분 레슨<`],
     [`>/30 minutes<`, `>/30분<`],

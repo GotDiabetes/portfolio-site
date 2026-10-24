@@ -83,6 +83,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>知っておきたいこと<`],
+    [`>FAQ<`, `>よくある質問<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>30分レッスン<`],
     [`>/30 minutes<`, `>/30分<`],

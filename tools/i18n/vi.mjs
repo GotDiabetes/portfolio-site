@@ -83,6 +83,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>Nên biết<`],
+    [`>FAQ<`, `>Câu hỏi thường gặp<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>Buổi 30 phút<`],
     [`>/30 minutes<`, `>/30 phút<`],

@@ -87,6 +87,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>خوب است بدانید<`],
+    [`>FAQ<`, `>پرسش‌های پرتکرار<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>کلاس ۳۰ دقیقه‌ای<`],
     [`>/30 minutes<`, `> برای ۳۰ دقیقه<`],

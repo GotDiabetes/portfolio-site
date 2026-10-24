@@ -18,6 +18,24 @@
   position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none;
   color: var(--line);
 }
+/* hero-court mask: the court stays whole beside the words and under the
+   photograph, and goes to a quarter behind the text block, so no line
+   cuts through a sentence; on phones, where the words fill the width, it
+   fades out below the photograph. */
+.hero-court {
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, .28) 0 46%, #000 66%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, .28) 0 46%, #000 66%);
+}
+:root[dir="rtl"] .hero-court {
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, .28) 0 46%, #000 66%);
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, .28) 0 46%, #000 66%);
+}
+@media (max-width: 940px) {
+  .hero-court, :root[dir="rtl"] .hero-court {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 32%, rgba(0, 0, 0, .18) 52%);
+    mask-image: linear-gradient(to bottom, #000 0 32%, rgba(0, 0, 0, .18) 52%);
+  }
+}
 .hero-court path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 .hero-court .hero-net { stroke-width: 3.5; }
 .js .hero-court path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s cubic-bezier(.65, 0, .35, 1) var(--cd, 0s); }

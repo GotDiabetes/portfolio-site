@@ -84,6 +84,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>须知<`],
+    [`>FAQ<`, `>常见问题<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>30 分钟课<`],
     [`>/30 minutes<`, `>/30 分钟<`],

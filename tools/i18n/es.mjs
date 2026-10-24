@@ -90,6 +90,8 @@ export default {
   },
 
   pairs: [
+    [`>Good to know<`, `>Conviene saber<`],
+    [`>FAQ<`, `>Preguntas frecuentes<`],
     // the 30-minute private lesson (Oct 21)
     [`>30-minute lessons<`, `>Clases de 30 minutos<`],
     [`>/30 minutes<`, `>/30 minutos<`],

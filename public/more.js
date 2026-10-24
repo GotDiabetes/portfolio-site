@@ -297,7 +297,7 @@
   var wideMQ = window.matchMedia && window.matchMedia("(min-width: 900px)");
   if (strip && fine && wideMQ && wideMQ.matches && strip.querySelectorAll(".photo").length >= 3) {
     var photos = strip.querySelectorAll(".photo");
-    var LAY = [[2, 10, -6], [33, 0, 3.5], [63, 7, -2.5]];
+    var LAY = [[3, 6, -4], [34, 0, 2], [65, 4, -2]];   // left %, top %, tilt: a calm fan, not a spill
     strip.classList.add("is-pile");
     each(photos, function (p, i) {
       var l = LAY[i % LAY.length];

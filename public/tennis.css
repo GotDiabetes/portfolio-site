@@ -1758,6 +1758,13 @@ body.modal-open { overflow: hidden; }
   inset-block: 8% 8%; inset-inline-end: -6%; width: min(62rem, 78%);
   color: rgba(255, 255, 255, .13);
 }
+/* contact-court mask: a third behind the heading and the details, whole
+   below them, so the lines read as the band's floor rather than as marks
+   across the words. */
+.contact-court {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .34) 0 42%, #000 68%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .34) 0 42%, #000 68%);
+}
 :root[dir="rtl"] .contact-court { transform: scaleX(-1); }
 .contact-court svg { width: 100%; height: 100%; overflow: visible; }
 .contact-court line { fill: none; stroke: currentColor; stroke-linecap: round; }
