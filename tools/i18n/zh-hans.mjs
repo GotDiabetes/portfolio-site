@@ -85,7 +85,7 @@ export default {
   },
 
   pairs: [
-    [`Forehand and serve photographs by Nico Denson.`, `正手和发球两张照片由 Nico Denson 拍摄。`],
+    [`Photographs by Nico Denson (forehand, serve) and Edward Guarneros (ready position).`, `摄影：Nico Denson（正手、发球），Edward Guarneros（准备姿势）。`],
     [`>Good to know<`, `>须知<`],
     [`>FAQ<`, `>常见问题<`],
     // the 30-minute private lesson (Oct 21)

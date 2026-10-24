@@ -84,7 +84,7 @@ export default {
   },
 
   pairs: [
-    [`Forehand and serve photographs by Nico Denson.`, `Ảnh thuận tay và giao bóng do Nico Denson chụp.`],
+    [`Photographs by Nico Denson (forehand, serve) and Edward Guarneros (ready position).`, `Ảnh: Nico Denson (thuận tay, giao bóng) và Edward Guarneros (tư thế sẵn sàng).`],
     [`>Good to know<`, `>Nên biết<`],
     [`>FAQ<`, `>Câu hỏi thường gặp<`],
     // the 30-minute private lesson (Oct 21)

@@ -88,7 +88,7 @@ export default {
   },
 
   pairs: [
-    [`Forehand and serve photographs by Nico Denson.`, `عکس‌های فورهند و سرویس را Nico Denson گرفته است.`],
+    [`Photographs by Nico Denson (forehand, serve) and Edward Guarneros (ready position).`, `عکس‌ها: Nico Denson (فورهند، سرویس) و Edward Guarneros (حالت آماده).`],
     [`>Good to know<`, `>خوب است بدانید<`],
     [`>FAQ<`, `>پرسش‌های پرتکرار<`],
     // the 30-minute private lesson (Oct 21)

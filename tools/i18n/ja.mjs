@@ -84,7 +84,7 @@ export default {
   },
 
   pairs: [
-    [`Forehand and serve photographs by Nico Denson.`, `フォアハンドとサーブの写真は Nico Denson の撮影です。`],
+    [`Photographs by Nico Denson (forehand, serve) and Edward Guarneros (ready position).`, `撮影：Nico Denson（フォアハンド、サーブ）、Edward Guarneros（レディポジション）。`],
     [`>Good to know<`, `>知っておきたいこと<`],
     [`>FAQ<`, `>よくある質問<`],
     // the 30-minute private lesson (Oct 21)

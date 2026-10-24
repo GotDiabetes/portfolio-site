@@ -91,7 +91,7 @@ export default {
   },
 
   pairs: [
-    [`Forehand and serve photographs by Nico Denson.`, `Las fotos del derechazo y del saque son de Nico Denson.`],
+    [`Photographs by Nico Denson (forehand, serve) and Edward Guarneros (ready position).`, `Fotos de Nico Denson (derechazo, saque) y Edward Guarneros (posición de espera).`],
     [`>Good to know<`, `>Conviene saber<`],
     [`>FAQ<`, `>Preguntas frecuentes<`],
     // the 30-minute private lesson (Oct 21)
