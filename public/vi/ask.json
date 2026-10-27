@@ -362,6 +362,126 @@
       ]
     },
     {
+      "id": "deals",
+      "answer": "Có hai cách để tiết kiệm. Rủ một người bạn chưa từng học với tôi, cả hai được giảm $10 cho buổi học đôi đầu tiên. Ngoài ra, buổi kèm riêng có gói: 5 buổi $375 hoặc 10 buổi $700, tức $75 và $70 một giờ thay vì $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Hai người học chung được không?",
+        "Học phí bao nhiêu?",
+        "Có phải trả tiền trước không?"
+      ]
+    },
+    {
+      "id": "monthly",
+      "answer": "Công cụ ghép gói học bên dưới các thẻ lớp học sẽ tính giúp bạn: chọn loại buổi học và số buổi mỗi tuần, nó sẽ cho thấy chi phí một tháng. Ví dụ, mỗi tuần một buổi kèm riêng là $320 cho 4 buổi. Học thường xuyên đến đâu là do bạn: các buổi học được sắp xếp theo trình độ và số lần bạn có thể ra sân. Trả theo từng buổi, trực tiếp tại sân, không cần trả trước.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#builder",
+          "label": "Ghép gói học"
+        }
+      ],
+      "next": [
+        "Có gói học không?",
+        "Lớp nào hợp với tôi?",
+        "Khi nào bạn rảnh?"
+      ]
+    },
+    {
+      "id": "doubles",
+      "answer": "Có. Tập đánh đôi là tập góc đánh, chặn lưới và vị trí đứng, cho ai chơi giải hoặc đánh đôi vui. Một buổi học đôi cùng bạn đánh cặp rất phù hợp: đánh điểm thật với nhau và tập vị trí đánh đôi, mỗi người $55.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        }
+      ],
+      "next": [
+        "Bạn có thể tìm bạn tập cho tôi không?",
+        "Học phí bao nhiêu?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "trial",
+      "answer": "Có. Hãy học thử một buổi rồi tự đánh giá: không cần đăng ký hay trả trước. Đặt lịch trực tuyến chỉ giữ giờ, không cần thẻ hay tiền cọc, và bạn trả trực tiếp tại sân. Buổi 30 phút ($45) là cách ngắn nhất để thử.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Buổi học đầu tiên thế nào?",
+        "Tôi có cần vợt riêng không?",
+        "Học ở đâu?"
+      ]
+    },
+    {
+      "id": "young_coach",
+      "answer": "Câu hỏi chính đáng: hãy đánh giá tôi qua những gì tôi đã làm, không phải qua tuổi. Tôi làm huấn luyện viên từ năm 2023, đầu tiên là Junior Pro tại LifeSport Libertyville, sau đó trong Pro Staff của Grip N Rip tại Newport Beach Tennis Club. Tôi có chứng chỉ RSPA, được Safe Play chấp thuận, và đã chơi bốn năm trong đội tuyển varsity của trường trung học. Hãy học thử một buổi rồi tự đánh giá.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "Thêm về tôi"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mọi người nói gì về bạn?",
+        "Con tôi học với bạn có an toàn không?",
+        "Phong cách dạy của bạn thế nào?"
+      ]
+    },
+    {
+      "id": "balls",
+      "answer": "Đó là những quả bóng chậm và mềm hơn dành cho các bé: bóng đỏ chậm nhất, rồi đến cam, rồi xanh lá, trước khi chuyển sang bóng vàng thông thường. Bóng nảy thấp và bay chậm hơn nên các bé đánh qua lại được sớm hơn, và mỗi em lên cấp khi đã sẵn sàng.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Bạn có dạy người mới không?",
+        "Con tôi học với bạn có an toàn không?",
+        "Học phí bao nhiêu?"
+      ]
+    },
+    {
+      "id": "about_chat",
+      "answer": "Đây không phải là trò chuyện trực tiếp. Những câu trả lời này do chính tôi viết: một AI đọc câu hỏi của bạn và chọn câu trả lời phù hợp, nên nó chỉ nói những gì tôi đã viết. Câu hỏi của bạn được lưu lại để tôi biết mọi người hỏi gì, sau khi đã xóa email và số điện thoại. Với những điều khác, hãy gửi email và tôi sẽ trả lời bạn trực tiếp.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "A question (Vietnamese page)",
+          "label": "Gửi email cho tôi"
+        }
+      ],
+      "next": [
+        "Học phí bao nhiêu?",
+        "Học ở đâu?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
       "id": "tips",
       "answer": "Hãy cho tôi biết điều gì đang không ổn, ví dụ \"giao bóng của tôi hay vào lưới\" hay \"tôi không giữ được nhịp đánh qua lại\", tôi sẽ gợi ý một điều để thử. Đây chỉ là cách sửa nhanh; trong buổi học chúng ta sẽ tìm ra nguyên nhân thật.",
       "actions": [
@@ -579,6 +699,38 @@
       "next": [
         "Bạn có dạy người mới không?",
         "Con tôi học với bạn có an toàn không?",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_power",
+      "title": "Tôi muốn đánh mạnh hơn",
+      "answer": "Sức mạnh đến từ chân và sự xoay người, không phải từ cánh tay. Dồn trọng lượng lên chân sau, xoay vai, và để vợt tăng tốc xuyên qua bóng với tay cầm thả lỏng, đánh bóng ở phía trước người. Siết chặt cán vợt và vung mạnh hơn lại làm vợt chậm đi. Hãy đánh chuẩn trước, rồi tăng tốc từng chút một.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Cú thuận tay của tôi hay bay dài",
+        "Tôi không giữ được nhịp đánh qua lại",
+        "Đặt lịch thế nào?"
+      ]
+    },
+    {
+      "id": "tip_return",
+      "title": "Cú trả giao bóng của tôi yếu",
+      "answer": "Trước một cú giao bóng nhanh, không có thời gian để vung trọn vợt. Bật chân tách (split-step) đúng lúc người giao bóng đánh, xoay vai, và kéo vợt ngắn gọn, giữ cổ tay chắc và đánh bóng ở phía trước người. Nhắm sâu vào giữa sân: một cú trả bóng vào sân hơn một cú ăn điểm hỏng. Hãy tập với một người giao bóng từ một bước bên trong đường cuối sân.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Tôi đánh trận kém hơn lúc tập",
+        "Tôi luôn đến bóng muộn",
         "Đặt lịch thế nào?"
       ]
     }

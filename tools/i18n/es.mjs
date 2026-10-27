@@ -500,6 +500,7 @@ export default {
     personal: "Por favor, no escribas aquí teléfonos, direcciones, escuelas ni nombres completos. Para algo personal, escríbeme por correo.",
     fallback_next: ["¿Cuánto cuestan las clases?", "¿Dónde son las clases?", "¿Cómo reservo?"],
     labels: {
+      "Build a package": "Arma tu paquete",
       "Email me": "Escríbeme",
       "See the lessons": "Ver las clases",
       "More about me": "Más sobre mí",
@@ -726,6 +727,53 @@ export default {
         title: "¿Cómo puede practicar mi hijo en casa?",
         answer: "Que sea corto y divertido: lanzar y atrapar, botar la pelota sobre la raqueta, pelotear por encima de una línea en la entrada de casa con una pelota blanda. Unos minutos varias veces por semana construyen más que una sesión larga. En las clases, los principiantes pequeños usan pelotas más lentas y suaves, así que pelotean antes.",
         next: ["¿Enseñas a principiantes?", "¿Mi hijo está seguro contigo?", "¿Cómo reservo?"],
+      },
+      deals: {
+        src: "s060en",
+        answer: "Hay dos formas de pagar menos. Trae a un amigo que no me conozca y los dos tienen $10 de descuento en su primera clase semiprivada. Y las clases particulares vienen en paquetes: 5 por $375 o 10 por $700, o sea $75 y $70 la hora en vez de $80.",
+        next: ["¿Podemos compartir una clase entre dos?", "¿Cuánto cuestan las clases?", "¿Se paga por adelantado?"],
+      },
+      monthly: {
+        src: "1l8zqz8",
+        answer: "El armador de paquetes, debajo de las tarjetas de clases, lo calcula: elige una clase y cuántas veces por semana, y te muestra cuánto sale al mes. Por ejemplo, una clase particular a la semana son $320 por 4 clases. La frecuencia la decides tú: las sesiones se adaptan a tu nivel y a cuántas veces puedes jugar. Se paga clase por clase, en persona, sin nada por adelantado.",
+        next: ["¿Hay paquetes?", "¿Qué clase me conviene?", "¿Cuándo tienes disponibilidad?"],
+      },
+      doubles: {
+        src: "2p2ae6",
+        answer: "Sí. En dobles trabajamos ángulos, cruces en la red y dónde pararte, para quien juega dobles en liga o con amigos. Una clase semiprivada con tu pareja funciona muy bien: puntos en vivo entre ustedes y posiciones de dobles, a $55 cada uno.",
+        next: ["¿Me puedes buscar un compañero?", "¿Cuánto cuestan las clases?", "¿Cómo reservo?"],
+      },
+      trial: {
+        src: "1f6qur6",
+        answer: "Sí. Reserva una clase y juzga tú mismo: no hay que inscribirse ni pagar por adelantado. Reservar solo aparta la hora, sin tarjeta ni depósito, y pagas en persona. Una clase de 30 minutos ($45) es la forma más corta de probar.",
+        next: ["¿Cómo es la primera clase?", "¿Necesito mi propia raqueta?", "¿Dónde son las clases?"],
+      },
+      young_coach: {
+        src: "o8djas",
+        answer: "Buena pregunta: júzgame por lo que he hecho, no por mi edad. Entreno desde 2023, primero como Junior Pro en LifeSport Libertyville y después en el Pro Staff de Grip N Rip, en el Newport Beach Tennis Club. Estoy certificado por la RSPA y aprobado por Safe Play, y jugué cuatro años en el equipo varsity de mi preparatoria. Reserva una clase y juzga tú mismo.",
+        next: ["¿Qué dice la gente de ti?", "¿Mi hijo está seguro contigo?", "¿Cómo es tu estilo de enseñanza?"],
+      },
+      balls: {
+        src: "xj6ij7",
+        answer: "Son pelotas más lentas y suaves para los más pequeños: la roja es la más lenta, luego la naranja, luego la verde, antes de la pelota amarilla normal. Botan más bajo y van más despacio, así que los niños pelotean antes, y cada uno sube cuando está listo.",
+        next: ["¿Enseñas a principiantes?", "¿Mi hijo está seguro contigo?", "¿Cuánto cuestan las clases?"],
+      },
+      about_chat: {
+        src: "xa5l08",
+        answer: "No es un chat en vivo. Estas respuestas las escribí yo: una IA lee tu pregunta y elige la que corresponde, así que solo dice lo que yo escribí. Tus preguntas se guardan para que yo vea lo que pregunta la gente, quitando antes correos y números de teléfono. Para cualquier otra cosa, escríbeme y te respondo yo directamente.",
+        next: ["¿Cuánto cuestan las clases?", "¿Dónde son las clases?", "¿Cómo reservo?"],
+      },
+      tip_power: {
+        src: "yfajk3",
+        title: "Quiero pegarle más fuerte",
+        answer: "La potencia sale de las piernas y del giro del cuerpo, no del brazo. Carga el peso en la pierna de atrás, gira los hombros y deja que la raqueta acelere a través de la pelota con el agarre suelto, golpeando por delante del cuerpo. Apretar el agarre y hacer el swing con más fuerza frena la raqueta. Primero pega limpio, después añade velocidad poco a poco.",
+        next: ["Mi derecha se va larga", "No consigo mantener un peloteo", "¿Cómo reservo?"],
+      },
+      tip_return: {
+        src: "1lqo0xs",
+        title: "Mis restos son débiles",
+        answer: "Contra un saque rápido no hay tiempo para un swing completo. Haz el split-step justo cuando el sacador golpea, gira los hombros y usa un backswing corto y compacto, golpeando por delante con la muñeca firme. Apunta profundo al centro: un resto dentro vale más que un winner fallado. Practica con alguien que saque desde un paso dentro de la línea de fondo.",
+        next: ["Juego peor en los partidos", "Siempre llego tarde a la pelota", "¿Cómo reservo?"],
       },
     },
   },

@@ -362,6 +362,126 @@
       ]
     },
     {
+      "id": "deals",
+      "answer": "Hay dos formas de pagar menos. Trae a un amigo que no me conozca y los dos tienen $10 de descuento en su primera clase semiprivada. Y las clases particulares vienen en paquetes: 5 por $375 o 10 por $700, o sea $75 y $70 la hora en vez de $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Podemos compartir una clase entre dos?",
+        "¿Cuánto cuestan las clases?",
+        "¿Se paga por adelantado?"
+      ]
+    },
+    {
+      "id": "monthly",
+      "answer": "El armador de paquetes, debajo de las tarjetas de clases, lo calcula: elige una clase y cuántas veces por semana, y te muestra cuánto sale al mes. Por ejemplo, una clase particular a la semana son $320 por 4 clases. La frecuencia la decides tú: las sesiones se adaptan a tu nivel y a cuántas veces puedes jugar. Se paga clase por clase, en persona, sin nada por adelantado.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#builder",
+          "label": "Arma tu paquete"
+        }
+      ],
+      "next": [
+        "¿Hay paquetes?",
+        "¿Qué clase me conviene?",
+        "¿Cuándo tienes disponibilidad?"
+      ]
+    },
+    {
+      "id": "doubles",
+      "answer": "Sí. En dobles trabajamos ángulos, cruces en la red y dónde pararte, para quien juega dobles en liga o con amigos. Una clase semiprivada con tu pareja funciona muy bien: puntos en vivo entre ustedes y posiciones de dobles, a $55 cada uno.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        }
+      ],
+      "next": [
+        "¿Me puedes buscar un compañero?",
+        "¿Cuánto cuestan las clases?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "trial",
+      "answer": "Sí. Reserva una clase y juzga tú mismo: no hay que inscribirse ni pagar por adelantado. Reservar solo aparta la hora, sin tarjeta ni depósito, y pagas en persona. Una clase de 30 minutos ($45) es la forma más corta de probar.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Cómo es la primera clase?",
+        "¿Necesito mi propia raqueta?",
+        "¿Dónde son las clases?"
+      ]
+    },
+    {
+      "id": "young_coach",
+      "answer": "Buena pregunta: júzgame por lo que he hecho, no por mi edad. Entreno desde 2023, primero como Junior Pro en LifeSport Libertyville y después en el Pro Staff de Grip N Rip, en el Newport Beach Tennis Club. Estoy certificado por la RSPA y aprobado por Safe Play, y jugué cuatro años en el equipo varsity de mi preparatoria. Reserva una clase y juzga tú mismo.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "Más sobre mí"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Qué dice la gente de ti?",
+        "¿Mi hijo está seguro contigo?",
+        "¿Cómo es tu estilo de enseñanza?"
+      ]
+    },
+    {
+      "id": "balls",
+      "answer": "Son pelotas más lentas y suaves para los más pequeños: la roja es la más lenta, luego la naranja, luego la verde, antes de la pelota amarilla normal. Botan más bajo y van más despacio, así que los niños pelotean antes, y cada uno sube cuando está listo.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "¿Enseñas a principiantes?",
+        "¿Mi hijo está seguro contigo?",
+        "¿Cuánto cuestan las clases?"
+      ]
+    },
+    {
+      "id": "about_chat",
+      "answer": "No es un chat en vivo. Estas respuestas las escribí yo: una IA lee tu pregunta y elige la que corresponde, así que solo dice lo que yo escribí. Tus preguntas se guardan para que yo vea lo que pregunta la gente, quitando antes correos y números de teléfono. Para cualquier otra cosa, escríbeme y te respondo yo directamente.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "A question (Spanish page)",
+          "label": "Escríbeme"
+        }
+      ],
+      "next": [
+        "¿Cuánto cuestan las clases?",
+        "¿Dónde son las clases?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
       "id": "tips",
       "answer": "Cuéntame qué te sale mal, como \"mi saque se va a la red\" o \"no consigo mantener un peloteo\", y te daré una cosa para probar. Son arreglos rápidos; en una clase encontraríamos la causa de verdad.",
       "actions": [
@@ -579,6 +699,38 @@
       "next": [
         "¿Enseñas a principiantes?",
         "¿Mi hijo está seguro contigo?",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_power",
+      "title": "Quiero pegarle más fuerte",
+      "answer": "La potencia sale de las piernas y del giro del cuerpo, no del brazo. Carga el peso en la pierna de atrás, gira los hombros y deja que la raqueta acelere a través de la pelota con el agarre suelto, golpeando por delante del cuerpo. Apretar el agarre y hacer el swing con más fuerza frena la raqueta. Primero pega limpio, después añade velocidad poco a poco.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Mi derecha se va larga",
+        "No consigo mantener un peloteo",
+        "¿Cómo reservo?"
+      ]
+    },
+    {
+      "id": "tip_return",
+      "title": "Mis restos son débiles",
+      "answer": "Contra un saque rápido no hay tiempo para un swing completo. Haz el split-step justo cuando el sacador golpea, gira los hombros y usa un backswing corto y compacto, golpeando por delante con la muñeca firme. Apunta profundo al centro: un resto dentro vale más que un winner fallado. Practica con alguien que saque desde un paso dentro de la línea de fondo.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Juego peor en los partidos",
+        "Siempre llego tarde a la pelota",
         "¿Cómo reservo?"
       ]
     }

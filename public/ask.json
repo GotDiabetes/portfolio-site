@@ -43,7 +43,7 @@
     },
     {
       "id": "packages",
-      "covers": "Lesson packages, buying several lessons at once, bulk prices, discounts or deals.",
+      "covers": "Lesson packages, buying several lessons at once, or bulk prices.",
       "answer": "For private lessons: 5 for $375 or 10 for $700, paid in person. That's $75 and $70 an hour instead of $80.",
       "actions": [
         {
@@ -388,6 +388,133 @@
       ]
     },
     {
+      "id": "deals",
+      "covers": "Discounts, deals, special offers, referral or bring-a-friend savings, or the cheapest way to take lessons.",
+      "answer": "Two ways to pay less. Bring a friend who's new to me and you both get $10 off your first semi-private lesson. And private lessons come in packages: 5 for $375 or 10 for $700, which works out to $75 and $70 an hour instead of $80.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Can two of us share a lesson?",
+        "How much are lessons?",
+        "Do I pay upfront?"
+      ]
+    },
+    {
+      "id": "monthly",
+      "covers": "What lessons cost per month or for weekly lessons, budgeting, or how often to take lessons.",
+      "answer": "The package builder under the lesson cards works it out: pick a lesson and how many times a week, and it shows what a month comes to. Private lessons once a week, for example, are $320 for 4 lessons. How often is up to you: sessions are shaped around your level and how often you can get on court. You pay per lesson, in person, with nothing to prepay.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#builder",
+          "label": "Build a package"
+        }
+      ],
+      "next": [
+        "Are there packages?",
+        "Which lesson fits me?",
+        "When are you free?"
+      ]
+    },
+    {
+      "id": "doubles",
+      "covers": "Doubles: learning or improving doubles, league or social doubles, poaching, or where to stand.",
+      "answer": "Yes. Doubles work is angles, poaching and where to stand, for anyone playing league or social doubles. A semi-private lesson with your partner fits well: live points against each other plus doubles positioning, at $55 each.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "semi"
+        }
+      ],
+      "next": [
+        "Can you find me a partner?",
+        "How much are lessons?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "trial",
+      "covers": "Trying one lesson first, a trial or intro lesson, or whether the visitor has to commit to several lessons or sign up for a program.",
+      "answer": "Yes. Book one lesson and judge for yourself: there's nothing to sign up for or prepay. Booking just holds the time, with no card or deposit, and you pay in person. A 30-minute lesson ($45) is the shortest way to try it.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "What's the first lesson like?",
+        "Do I need my own racket?",
+        "Where are lessons?"
+      ]
+    },
+    {
+      "id": "young_coach",
+      "covers": "Whether Isaac is too young or experienced enough to coach, his age, or why choose a younger coach.",
+      "answer": "Fair question: judge me by my record, not my age. I've coached since 2023, first as a Junior Pro at LifeSport Libertyville and then on the Pro Staff of Grip N Rip at Newport Beach Tennis Club. I'm RSPA-certified and Safe Play approved, and I played four years of high school varsity. Book one lesson and judge for yourself.",
+      "actions": [
+        {
+          "type": "scroll",
+          "target": "#about",
+          "label": "More about me"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "What do people say about you?",
+        "Is my child safe with you?",
+        "What's your coaching style?"
+      ]
+    },
+    {
+      "id": "balls",
+      "covers": "Red, orange or green tennis balls, or the slower, softer balls young players learn on.",
+      "answer": "They're slower, softer balls for young players: red is the slowest, then orange, then green, before the regular yellow ball. They bounce lower and travel slower, so kids can rally sooner, and each player moves up when they're ready.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "Do you teach beginners?",
+        "Is my child safe with you?",
+        "How much are lessons?"
+      ]
+    },
+    {
+      "id": "about_chat",
+      "covers": "Whether the visitor is talking to a bot, an AI or a real person, how this chat works, or whether their questions are saved.",
+      "answer": "It's not a live chat. These are answers I wrote myself: an AI reads your question and picks the one that fits, so it only ever says what I've written. Your questions are saved so I can see what people ask, with emails and phone numbers taken out first. For anything else, email me and you'll get me directly.",
+      "actions": [
+        {
+          "type": "email",
+          "subject": "A question",
+          "label": "Email me"
+        }
+      ],
+      "next": [
+        "How much are lessons?",
+        "Where are lessons?",
+        "How do I book?"
+      ]
+    },
+    {
       "id": "tips",
       "covers": "The visitor wants a tip or advice on improving their tennis, or asks what they should work on, without describing a specific problem yet.",
       "answer": "Tell me what's going wrong, like \"my serve goes into the net\" or \"I can't keep a rally going\", and I'll give you one thing to try. These are quick fixes; in a lesson we'd find the real cause.",
@@ -619,6 +746,40 @@
       "next": [
         "Do you teach beginners?",
         "Is my child safe with you?",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_power",
+      "title": "I want to hit harder",
+      "covers": "The visitor wants more power, to hit harder or faster, or says their shots have no pace.",
+      "answer": "Power comes from the legs and the turn of your body, not the arm. Load your weight on the back leg, turn your shoulders, and let the racket accelerate through the ball with a relaxed grip, meeting it out in front. Squeezing the grip and swinging harder slows the racket down. Hit clean first, then add speed a little at a time.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "My forehand flies long",
+        "I can't keep a rally going",
+        "How do I book?"
+      ]
+    },
+    {
+      "id": "tip_return",
+      "title": "My returns are weak",
+      "covers": "Return of serve: the visitor misses returns, can't handle fast or spinning serves, or wants a better return.",
+      "answer": "Against a fast serve there's no time for a full swing. Split-step just as the server hits, turn your shoulders, and use a short, compact backswing, meeting the ball out in front with a firm wrist. Aim deep to the middle: a return in play beats a missed winner. Practise with a partner serving from a step inside the baseline.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
+      "next": [
+        "I play worse in matches",
+        "I'm always late to the ball",
         "How do I book?"
       ]
     }
