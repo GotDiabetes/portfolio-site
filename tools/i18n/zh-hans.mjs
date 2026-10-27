@@ -548,8 +548,8 @@ export default {
         next: ["一次陪练多长时间？", "可以打整盘吗？", "怎么预约？"],
       },
       clinics: {
-        src: "1kkoed3",
-        answer: "成人小组课是一块场地上的小组：专项训练和实战对抗，轮换充足，没有人干站着，练对拉的耐心和压力下的稳定性。按小组计价。报名时写上你的水平和方便的时间，我会把你安排进水平相近的小组；也可以自带小组。",
+        src: "cptlrt",
+        answer: "想参加小班课，请点下面的按钮填写简短的报名表：你的水平和方便的时间。我会把你分到水平相近的组里，你也可以自己组队来。小班课是在一片场地上的小组训练：练习和实战对打轮流进行，谁都不会闲着，重点练习在压力下保持稳定的相持。价格按组计算。",
         next: ["私教课多少钱？", "在哪里上课？", "你的邮箱是什么？"],
       },
       which_lesson: {
@@ -569,8 +569,8 @@ export default {
         next: ["你的教学风格是什么？", "哪种课适合我？", "课程多少钱？"],
       },
       credentials: {
-        src: "iier94",
-        answer: "我是 RSPA（Racket Sports Professionals Association，原 USPTA）认证教练，并通过了 USTA Safe Play 审核：已完成背景调查和 SafeSport 培训。我从 2023 年开始执教。",
+        src: "n2o6fo",
+        answer: "我通过了 USTA Safe Play 认证：做过背景调查，也接受过 SafeSport 培训。我还持有 RSPA（Racket Sports Professionals Association，前身为 USPTA）认证，从 2023 年开始执教。",
         next: ["你执教多久了？", "你教哪些人？", "怎么预约？"],
       },
       booking: {
@@ -606,8 +606,8 @@ export default {
         next: ["我需要自己带球拍吗？", "一节课多长时间？", "怎么预约？"],
       },
       length: {
-        src: "yof722",
-        answer: "每节课 60 分钟。陪练课 60 分钟或更长。",
+        src: "faepfx",
+        answer: "私教课 60 分钟；想短一点的话，也有 30 分钟的（$45）。双人课 60 分钟，陪练课 60 分钟或更长。",
         next: ["课程多少钱？", "你什么时候有空？", "怎么预约？"],
       },
       experience: {

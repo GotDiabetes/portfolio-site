@@ -390,7 +390,10 @@
   function actionEl(a) {
     var el;
     if (a.type === "book") {
-      var src = document.querySelector('.lesson[data-lesson="' + a.lesson + '"] .lesson-actions .btn');
+      /* "half": the 30-minute lesson's button, in the private card's small card. */
+      var src = a.lesson === "half"
+        ? document.querySelector('.lesson[data-lesson="private"] .lesson-sub .btn')
+        : document.querySelector('.lesson[data-lesson="' + a.lesson + '"] .lesson-actions .btn');
       if (!src) return null;
       el = src.cloneNode(true);
     } else if (a.type === "email") {

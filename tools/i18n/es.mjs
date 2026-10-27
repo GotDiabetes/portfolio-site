@@ -552,8 +552,8 @@ export default {
         next: ["¿Cuánto dura una sesión?", "¿Podemos jugar sets?", "¿Cómo reservo?"],
       },
       clinics: {
-        src: "1kkoed3",
-        answer: "Las clínicas para adultos son grupos pequeños en una sola cancha: ejercicios y juegos con bola viva con suficiente rotación para que nadie se quede parado, trabajando el aguante en el peloteo y la consistencia bajo presión. El precio es por grupo. Apúntate con tu nivel y los horarios que te vienen bien, y te pondré en un grupo con jugadores como tú, o trae tu propio grupo.",
+        src: "cptlrt",
+        answer: "Para unirte a una clínica, llena el breve formulario de la lista con el botón de abajo: tu nivel y los horarios que te convienen. Te pondré en un grupo con jugadores como tú, o puedes traer tu propio grupo. Las clínicas son grupos pequeños en una sola cancha: ejercicios y juegos con pelota en vivo, con suficiente rotación para que nadie se quede parado, trabajando la constancia en el peloteo bajo presión. El precio es por grupo.",
         next: ["¿Cuánto cuestan las clases particulares?", "¿Dónde son las clases?", "¿Cuál es tu correo?"],
       },
       which_lesson: {
@@ -573,8 +573,8 @@ export default {
         next: ["¿Cómo es tu estilo de enseñanza?", "¿Qué clase me conviene?", "¿Cuánto cuestan las clases?"],
       },
       credentials: {
-        src: "iier94",
-        answer: "Estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport. Entreno desde 2023.",
+        src: "n2o6fo",
+        answer: "Estoy aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport. También estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y entreno desde 2023.",
         next: ["¿Cuánto tiempo llevas entrenando?", "¿A quién enseñas?", "¿Cómo reservo?"],
       },
       booking: {
@@ -610,8 +610,8 @@ export default {
         next: ["¿Necesito mi propia raqueta?", "¿Cuánto dura una clase?", "¿Cómo reservo?"],
       },
       length: {
-        src: "yof722",
-        answer: "Las clases duran 60 minutos. Las sesiones de peloteo duran 60 minutos o más.",
+        src: "faepfx",
+        answer: "Las clases particulares duran 60 minutos, o 30 minutos si prefieres algo más corto ($45). Las semiprivadas duran 60 minutos, y las sesiones de peloteo, 60 minutos o más.",
         next: ["¿Cuánto cuestan las clases?", "¿Cuándo tienes disponibilidad?", "¿Cómo reservo?"],
       },
       experience: {

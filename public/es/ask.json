@@ -116,7 +116,7 @@
     },
     {
       "id": "clinics",
-      "answer": "Las clínicas para adultos son grupos pequeños en una sola cancha: ejercicios y juegos con bola viva con suficiente rotación para que nadie se quede parado, trabajando el aguante en el peloteo y la consistencia bajo presión. El precio es por grupo. Apúntate con tu nivel y los horarios que te vienen bien, y te pondré en un grupo con jugadores como tú, o trae tu propio grupo.",
+      "answer": "Para unirte a una clínica, llena el breve formulario de la lista con el botón de abajo: tu nivel y los horarios que te convienen. Te pondré en un grupo con jugadores como tú, o puedes traer tu propio grupo. Las clínicas son grupos pequeños en una sola cancha: ejercicios y juegos con pelota en vivo, con suficiente rotación para que nadie se quede parado, trabajando la constancia en el peloteo bajo presión. El precio es por grupo.",
       "actions": [
         {
           "type": "open",
@@ -167,7 +167,7 @@
     },
     {
       "id": "credentials",
-      "answer": "Estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport. Entreno desde 2023.",
+      "answer": "Estoy aprobado por USTA Safe Play: con verificación de antecedentes y formación de SafeSport. También estoy certificado por la RSPA, la Racket Sports Professionals Association (antes USPTA), y entreno desde 2023.",
       "actions": [
         {
           "type": "scroll",
@@ -254,7 +254,17 @@
     },
     {
       "id": "length",
-      "answer": "Las clases duran 60 minutos. Las sesiones de peloteo duran 60 minutos o más.",
+      "answer": "Las clases particulares duran 60 minutos, o 30 minutos si prefieres algo más corto ($45). Las semiprivadas duran 60 minutos, y las sesiones de peloteo, 60 minutos o más.",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
       "next": [
         "¿Cuánto cuestan las clases?",
         "¿Cuándo tienes disponibilidad?",

@@ -1,5 +1,5 @@
 {
-  "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'answer_parent' (optional) is shown instead when the visitor is asking for their child. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | semi | hitting), email (subject), link (href), scroll (#section), open (a popup's id, e.g. clinicList or giftForm). A tip topic's 'title' is its heading on the practice tips page (/tips/), which the build makes from these answers. 'misuse' is what the chat says to abuse or attempts to give it instructions; 'personal' is prefixed when someone types contact details. Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'. After editing, run node tools/i18n/build.mjs and update the translated answers it lists.",
+  "_readme": "Answers for the Ask Isaac chat on the tennis page. Each topic has an id, 'covers' (what questions it answers — this is what Jev reads to pick it), the answer shown to the visitor, and optional buttons. 'answer_parent' (optional) is shown instead when the visitor is asking for their child. 'next' is up to three follow-up questions shown as tappable chips after the answer; phrase them as a visitor would. Button types: book (private | half | semi | hitting; half is the 30-minute private lesson), email (subject), link (href), scroll (#section), open (a popup's id, e.g. clinicList or giftForm). A tip topic's 'title' is its heading on the practice tips page (/tips/), which the build makes from these answers. 'misuse' is what the chat says to abuse or attempts to give it instructions; 'personal' is prefixed when someone types contact details. Edit freely; keep every fact true to the page. If nothing fits a question, the chat shows 'fallback'. After editing, run node tools/i18n/build.mjs and update the translated answers it lists.",
   "greeting": "Hi! These are my answers to what people ask most. Try prices, where I coach, who I teach, booking, or something in your game you want to fix.",
   "fallback": "I don't have that written down here. Email me and I'll answer you directly.",
   "unavailable": "The chat isn't answering right now. Email me and I'll get back to you.",
@@ -124,8 +124,8 @@
     },
     {
       "id": "clinics",
-      "covers": "Adult clinics, group lessons, joining a group, or lessons for three or more people together.",
-      "answer": "Adult clinics are small groups on a single court: drills and live-ball games with enough rotation that nobody stands around, working on rally tolerance and consistency under pressure. They're priced per group. Join the clinic list with your level and the times that suit you, and I'll put you in a group with players like you, or bring your own group.",
+      "covers": "Adult clinics, group lessons, joining or signing up for a group or the clinic list, or lessons for three or more people together.",
+      "answer": "To join a clinic, fill in the short clinic list form with the button below: your level and the times that suit you. I'll put you in a group with players like you, or you can bring your own group. Clinics are small groups on a single court: drills and live-ball games with enough rotation that nobody stands around, working on rally tolerance and consistency under pressure. They're priced per group.",
       "actions": [
         {
           "type": "open",
@@ -180,7 +180,7 @@
     {
       "id": "credentials",
       "covers": "Isaac's certifications or qualifications (RSPA, USPTA, PTR), whether he is certified, background checks, SafeSport, or whether he is safe to coach children.",
-      "answer": "I'm certified by the RSPA, the Racket Sports Professionals Association (formerly the USPTA), and approved under USTA Safe Play: background-checked and SafeSport-trained. I've coached since 2023.",
+      "answer": "I'm approved under USTA Safe Play: background-checked and SafeSport-trained. I'm also certified by the RSPA, the Racket Sports Professionals Association (formerly the USPTA), and I've coached since 2023.",
       "actions": [
         {
           "type": "scroll",
@@ -273,12 +273,22 @@
     },
     {
       "id": "length",
-      "covers": "How long lessons or sessions last.",
-      "answer": "Lessons are 60 minutes. Hitting sessions run 60 minutes or longer.",
+      "covers": "How long lessons or sessions last, including shorter 30-minute lessons or booking half an hour.",
+      "answer": "Private lessons are 60 minutes, or 30 minutes if you'd like a shorter one ($45). Semi-private lessons are 60 minutes, and hitting sessions run 60 minutes or longer.",
       "next": [
         "How much are lessons?",
         "When are you free?",
         "How do I book?"
+      ],
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
       ]
     },
     {

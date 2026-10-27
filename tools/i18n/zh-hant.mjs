@@ -548,8 +548,8 @@ export default {
         next: ["一次陪打多久？", "可以打整盤嗎？", "怎麼預約？"],
       },
       clinics: {
-        src: "1kkoed3",
-        answer: "成人團體班是一個場地的小團體：專項訓練和實戰對打，輪替充足，沒有人在旁邊乾等，練對打的耐心和壓力下的穩定度。以團體計價。報名時寫上你的程度和方便的時間，我會把你安排進程度相近的團體；也可以自己組團。",
+        src: "cptlrt",
+        answer: "想參加小班課，請點下面的按鈕填寫簡短的報名表：你的程度和方便的時間。我會把你分到程度相近的組裡，你也可以自己組隊來。小班課是在一片場地上的小組訓練：練習和實戰對打輪流進行，誰都不會閒著，重點練習在壓力下保持穩定的相持。價格按組計算。",
         next: ["私人課多少錢？", "在哪裡上課？", "你的電子郵件是什麼？"],
       },
       which_lesson: {
@@ -569,8 +569,8 @@ export default {
         next: ["你的教學風格是什麼？", "哪種課適合我？", "課程多少錢？"],
       },
       credentials: {
-        src: "iier94",
-        answer: "我是 RSPA（Racket Sports Professionals Association，前身為 USPTA）認證教練，並通過 USTA Safe Play 審核：已完成背景查核與 SafeSport 訓練。我從 2023 年開始教球。",
+        src: "n2o6fo",
+        answer: "我通過了 USTA Safe Play 認證：做過背景調查，也接受過 SafeSport 培訓。我還持有 RSPA（Racket Sports Professionals Association，前身為 USPTA）認證，從 2023 年開始執教。",
         next: ["你教球多久了？", "你教哪些人？", "怎麼預約？"],
       },
       booking: {
@@ -606,8 +606,8 @@ export default {
         next: ["我需要自己帶球拍嗎？", "一堂課多久？", "怎麼預約？"],
       },
       length: {
-        src: "yof722",
-        answer: "每堂課 60 分鐘。陪打課 60 分鐘或更久。",
+        src: "faepfx",
+        answer: "私人課 60 分鐘；想短一點的話，也有 30 分鐘的（$45）。雙人課 60 分鐘，陪打課 60 分鐘或更長。",
         next: ["課程多少錢？", "你什麼時候有空？", "怎麼預約？"],
       },
       experience: {

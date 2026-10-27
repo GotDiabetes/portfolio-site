@@ -544,8 +544,8 @@ export default {
         next: ["Một buổi đánh tập bao lâu?", "Chúng ta có thể đánh set không?", "Đặt lịch thế nào?"],
       },
       clinics: {
-        src: "1kkoed3",
-        answer: "Lớp nhóm cho người lớn là nhóm nhỏ trên một sân: bài tập và trò chơi bóng sống, luân phiên đủ để không ai phải đứng chờ, rèn sức bền khi đánh qua lại và sự ổn định khi bị áp lực. Giá tính theo nhóm. Hãy đăng ký với trình độ và thời gian bạn rảnh, tôi sẽ xếp bạn vào nhóm cùng những người chơi giống bạn, hoặc bạn tự lập nhóm.",
+        src: "cptlrt",
+        answer: "Để tham gia lớp nhóm, hãy điền mẫu đăng ký ngắn bằng nút bên dưới: trình độ của bạn và những giờ phù hợp. Tôi sẽ xếp bạn vào nhóm có trình độ tương đương, hoặc bạn có thể tự rủ nhóm của mình. Lớp nhóm là nhóm nhỏ trên một sân: bài tập và trò chơi đánh bóng thật, luân phiên đủ để không ai phải đứng chờ, tập trung vào sự bền bỉ và ổn định khi chịu áp lực. Giá tính theo nhóm.",
         next: ["Học riêng 1-1 giá bao nhiêu?", "Học ở đâu?", "Email của bạn là gì?"],
       },
       which_lesson: {
@@ -565,8 +565,8 @@ export default {
         next: ["Phong cách dạy của bạn thế nào?", "Lớp nào hợp với tôi?", "Học phí bao nhiêu?"],
       },
       credentials: {
-        src: "iier94",
-        answer: "Tôi có chứng chỉ của RSPA (Racket Sports Professionals Association, trước đây là USPTA) và được USTA Safe Play chấp thuận: đã kiểm tra lý lịch và hoàn thành đào tạo SafeSport. Tôi làm huấn luyện viên từ năm 2023.",
+        src: "n2o6fo",
+        answer: "Tôi được USTA Safe Play chấp thuận: đã kiểm tra lý lịch và được đào tạo SafeSport. Tôi cũng có chứng chỉ RSPA (Racket Sports Professionals Association, trước đây là USPTA) và huấn luyện từ năm 2023.",
         next: ["Bạn dạy được bao lâu rồi?", "Bạn dạy những ai?", "Đặt lịch thế nào?"],
       },
       booking: {
@@ -602,8 +602,8 @@ export default {
         next: ["Tôi có cần vợt riêng không?", "Một buổi học bao lâu?", "Đặt lịch thế nào?"],
       },
       length: {
-        src: "yof722",
-        answer: "Mỗi buổi học 60 phút. Buổi đánh tập từ 60 phút trở lên.",
+        src: "faepfx",
+        answer: "Buổi kèm riêng dài 60 phút, hoặc 30 phút nếu bạn muốn ngắn hơn ($45). Lớp học đôi dài 60 phút, còn buổi đánh tập từ 60 phút trở lên.",
         next: ["Học phí bao nhiêu?", "Khi nào bạn rảnh?", "Đặt lịch thế nào?"],
       },
       experience: {

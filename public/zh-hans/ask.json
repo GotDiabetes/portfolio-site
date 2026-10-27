@@ -116,7 +116,7 @@
     },
     {
       "id": "clinics",
-      "answer": "成人小组课是一块场地上的小组：专项训练和实战对抗，轮换充足，没有人干站着，练对拉的耐心和压力下的稳定性。按小组计价。报名时写上你的水平和方便的时间，我会把你安排进水平相近的小组；也可以自带小组。",
+      "answer": "想参加小班课，请点下面的按钮填写简短的报名表：你的水平和方便的时间。我会把你分到水平相近的组里，你也可以自己组队来。小班课是在一片场地上的小组训练：练习和实战对打轮流进行，谁都不会闲着，重点练习在压力下保持稳定的相持。价格按组计算。",
       "actions": [
         {
           "type": "open",
@@ -167,7 +167,7 @@
     },
     {
       "id": "credentials",
-      "answer": "我是 RSPA（Racket Sports Professionals Association，原 USPTA）认证教练，并通过了 USTA Safe Play 审核：已完成背景调查和 SafeSport 培训。我从 2023 年开始执教。",
+      "answer": "我通过了 USTA Safe Play 认证：做过背景调查，也接受过 SafeSport 培训。我还持有 RSPA（Racket Sports Professionals Association，前身为 USPTA）认证，从 2023 年开始执教。",
       "actions": [
         {
           "type": "scroll",
@@ -254,7 +254,17 @@
     },
     {
       "id": "length",
-      "answer": "每节课 60 分钟。陪练课 60 分钟或更长。",
+      "answer": "私教课 60 分钟；想短一点的话，也有 30 分钟的（$45）。双人课 60 分钟，陪练课 60 分钟或更长。",
+      "actions": [
+        {
+          "type": "book",
+          "lesson": "half"
+        },
+        {
+          "type": "book",
+          "lesson": "private"
+        }
+      ],
       "next": [
         "课程多少钱？",
         "你什么时候有空？",
