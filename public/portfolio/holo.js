@@ -146,25 +146,45 @@
     return width;
   }
 
-  function wrap(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
-    var words = String(text).split(" "), line = "", lines = 0;
+  /* Breaks text into lines for the current ctx.font; past maxLines the
+     rest is cut with an ellipsis. */
+  function wrapLines(ctx, text, maxWidth, maxLines) {
+    var words = String(text).split(" "), lines = [], line = "", cut = false;
     for (var i = 0; i < words.length; i++) {
       var test = line ? line + " " + words[i] : words[i];
       if (ctx.measureText(test).width > maxWidth && line) {
-        ctx.fillText(line, x, y);
-        y += lineHeight; lines++;
-        if (lines >= maxLines - 1) { line = words.slice(i).join(" "); break; }
+        lines.push(line);
+        if (lines.length >= maxLines - 1) { line = words.slice(i).join(" "); break; }
         line = words[i];
       } else {
         line = test;
       }
     }
     if (line) {
-      while (ctx.measureText(line).width > maxWidth && line.length > 1) line = line.replace(/\s*\S+$/, "") + "…";
-      ctx.fillText(line, x, y);
-      lines++;
+      while (ctx.measureText(line).width > maxWidth && line.length > 1) { line = line.replace(/\s*…?\S+$/, "") + "…"; cut = true; }
+      lines.push(line);
     }
-    return y + lineHeight;
+    lines.cut = cut;                     // true when words were lost to the ellipsis
+    return lines;
+  }
+
+  /* The moves' sentences are measured before anything is drawn, since the
+     font differs from machine to machine (Gill Sans is narrower than its
+     stand-ins): the sentence size steps down from 26px until both moves fit
+     the room the panel has. Returns the size, the line height, each move's
+     lines and the panel height they need. */
+  function fitMoves(ctx, moves, textW, maxH) {
+    var best = null;
+    for (var size = 26; size >= 20; size -= 2) {
+      ctx.font = "400 " + size + "px " + SANS;
+      var lh = Math.round(size * 1.27);
+      var blocks = moves.map(function (m) { return wrapLines(ctx, m.text || "", textW, 3); });
+      var h = 52 + 12;
+      blocks.forEach(function (lines, i) { h += (i ? 56 : 0) + 40 + (lines.length - 1) * lh + Math.round(size * 0.3); });
+      best = { size: size, lh: lh, blocks: blocks, height: h };
+      if (h <= maxH && !blocks.some(function (b) { return b.cut; })) break;
+    }
+    return best;
   }
 
   /* The photograph, cover-fitted into a window, with a focus point (0..1)
@@ -246,9 +266,19 @@
       spaced(ctx, String(spec.stat.label).toUpperCase(), right - 76 - vw - 14, y - 2, 1, "right");
     }
 
-    /* Art window: the photograph, with its own double rule. */
+    /* The moves panel is measured first, so the art window takes whatever
+       height is left above it: up to 790, less if the sentences need more
+       lines in this machine's font. The facts row sits at a fixed height. */
     var art = { x: M + 18, y: y + 26, w: W - 2 * (M + 18) };
-    art.h = spec.strip ? 760 : 790;     // leaves the panel room for two moves of two lines each
+    var panel = { x: M + 18, w: W - 2 * (M + 18) };
+    var footTop = H - M - 92;             // where the facts row begins
+    var stripH = spec.strip ? 56 : 26;    // from the art's bottom edge to the panel
+    var moves = (spec.moves || []).slice(0, 2);
+    var layout = fitMoves(ctx, moves, panel.w - 68, footTop - 16 - stripH - (art.y + 560));
+    panel.h = layout.height;
+    art.h = Math.min(spec.strip ? 760 : 790, footTop - 16 - panel.h - stripH - art.y);
+
+    /* Art window: the photograph, with its own double rule. */
     ctx.save();
     ctx.fillStyle = colors.frameDeep;
     ctx.fillRect(art.x - 5, art.y - 5, art.w + 10, art.h + 10);
@@ -271,21 +301,18 @@
       y += 26;
     }
 
-    /* Moves: a pale panel, each move a name, a number and a sentence. */
-    var panel = { x: M + 18, y: y, w: W - 2 * (M + 18) };
-    var footTop = H - M - 92;             // where the facts row begins
-    panel.h = footTop - panel.y - 16;
+    /* Moves: a pale panel, each move a name, a number and a sentence, each
+       placed under the measured end of the one before. */
+    panel.y = y;
     roundRect(ctx, panel.x, panel.y, panel.w, panel.h, 10);
     ctx.fillStyle = colors.panel; ctx.fill();
     ctx.strokeStyle = colors.line; ctx.lineWidth = 1.5; ctx.stroke();
-    var moves = (spec.moves || []).slice(0, 2);
-    var my = panel.y + 56;
-    var moveGap = moves.length > 1 ? Math.floor((panel.h - 70) / moves.length) : panel.h;
+    var top = panel.y + 52;               // the first move's title baseline
     moves.forEach(function (m, i) {
-      var top = my + i * moveGap;
+      var lines = layout.blocks[i];
       if (i) {
         ctx.strokeStyle = colors.line; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(panel.x + 28, top - 40); ctx.lineTo(panel.x + panel.w - 28, top - 40); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(panel.x + 28, top - 38); ctx.lineTo(panel.x + panel.w - 28, top - 38); ctx.stroke();
       }
       ctx.fillStyle = colors.accent;
       ctx.beginPath(); ctx.arc(panel.x + 46, top - 12, 11, 0, Math.PI * 2); ctx.fill();
@@ -294,9 +321,9 @@
       ctx.fillText(m.name || "", panel.x + 76, top);
       ctx.font = "700 48px " + SANS; ctx.textAlign = "right";
       ctx.fillText(m.number || "", panel.x + panel.w - 34, top);
-      ctx.font = "400 26px " + SANS; ctx.textAlign = "left";
-      ctx.fillStyle = colors.ink;
-      wrap(ctx, m.text || "", panel.x + 34, top + 42, panel.w - 68, 33, 3);
+      ctx.font = "400 " + layout.size + "px " + SANS; ctx.textAlign = "left";
+      lines.forEach(function (line, k) { ctx.fillText(line, panel.x + 34, top + 40 + k * layout.lh); });
+      top += 40 + (lines.length - 1) * layout.lh + Math.round(layout.size * 0.3) + 56;
     });
 
     /* Facts row: three labelled values on a pale band, like the bottom row
