@@ -160,14 +160,14 @@ At **60rem** the lead stacks: reading order becomes name, what, want, pill, port
 
 ## Elevation & Depth
 
-None. The page is flat, and depth is conveyed by the mat: two hairlines with a margin of paper between them read as a mounted print. The one motion of depth is a plate rising 2px on hover with its frame warming to sienna. No shadow anywhere, at rest or on hover.
+None, with one exception. The page is flat, and depth is conveyed by the mat: two hairlines with a margin of paper between them read as a mounted print. The one motion of depth is a plate rising 2px on hover with its frame warming to sienna. No shadow anywhere, at rest or on hover, except under the holo card in the lead, which is a physical object held in the air and casts the one soft shadow on the page.
 
 ### Named Rules
 **The Mat Rule.** A photograph is never pasted in. It gets a frame, a mat, a second frame, and a caption inside the mat — the same for a screenshot, a team photo, and a video.
 
 ## Shapes
 
-Square. Hairlines are 1px in `{colors.rule}`. The only rounded objects are the two pills (fully round, `{rounded.pill}`) and the tiny copy button (`{rounded.copy}`); they are the entire exception list, confined to the lead's call to action and the closing. The photo ring and its lightbox are square too: the page sets the component's `--ring-radius` to 0 and squares its lightbox buttons. The bullet is a sienna middle dot with a hanging indent, not a glyph.
+Square. Hairlines are 1px in `{colors.rule}`. The only rounded objects are the two pills (fully round, `{rounded.pill}`), the tiny copy button (`{rounded.copy}`) and the holo card's 14px corners, which are a trading card's corners rather than the page's; they are the entire exception list. The photo ring and its lightbox are square too: the page sets the component's `--ring-radius` to 0 and squares its lightbox buttons. The bullet is a sienna middle dot with a hanging indent, not a glyph.
 
 ## Components
 
@@ -210,6 +210,15 @@ It drifts at about 6° a second, follows a drag, and coasts after a flick, never
 - **Cost:** thumbnails are not requested until the ring is within about 800px of the viewport; full images and the video only when opened.
 - **Access:** reduced motion stops the drift and the coast and hides Pause; without JavaScript the same list is a captioned grid of mounted plates on the 46rem column.
 
+### Holo card (the lead portrait)
+The portrait in the lead is a collectible trading card of Isaac, built by `holo.js` from the photograph and a JSON block in the figure: a small mono tag, the name across the top, one number with the Lee Tennis LT monogram in a disc beside it (the GPA), the photograph in a double-ruled art window, two "moves" that are the two things the page says about the ZEP summer (Outbound, 4,000; Follow-up, 50), a facts row, a credit and a set line. A holographic foil (React Bits' HoloCard shader, ported to plain JavaScript and WebGL2) sparkles over the whole card as it tilts toward the pointer; left alone it drifts slowly.
+
+- **Colour comes from the photograph.** The image's pixels are sampled once; the strongest hue becomes the frame (the sky of the Newport picture) and the second one the panel and ink (the sand). The card's palette is therefore not the page's, and it does not change with the theme: a card looks the same on a light desk and a dark one. Only the shadow follows the theme.
+- **It is the page's one card and one shadow.** The figure drops its mat when the card is up (`portrait--live`); the caption stays, mono, below.
+- **Type:** not the page's. A trading card is set in a humanist sans, so the card uses the one the Pokémon cards use, Gill Sans, from whatever the machine has (Gill Sans on Apple devices, Gill Sans MT on Windows with Office, then Trebuchet or Segoe): bold for the name, the number, the move names and the labels, regular for the sentences. No webfont is shipped for it; the card is drawn once, so each visitor's card is set in their own Gill Sans or its nearest neighbour.
+- **Access:** `role="img"` with an `aria-label` that reads the card out; the mounted `<picture>` remains the no-JS, no-WebGL2 and pre-load state; reduced motion stops the drift and the tilt and leaves the foil still.
+- **Editing:** the words live in `index.html`; the crop's focus point too. Swap the photograph and the card recolours itself.
+
 ### Focus reveal (the closing promise)
 "I reply to everything." sits on its own line in Get in touch at standfirst size, the page's last impression, with the focus reveal in sienna brackets (1.5px — the One Warm Thing Rule: sienna on strokes only). It never goes on the lead: blurring the standfirst would hide the ask from the reader with thirty seconds.
 
@@ -231,6 +240,6 @@ It drifts at about 6° a second, follows a drag, and coasts after a flick, never
 - **Don't** link an org name unless the page has a reason to send the reader there; ZEP is the one, and it carries ↗.
 - **Don't** repeat the résumé's bullets here. The résumé is at `/resume/`; this page says what those bullets mean.
 - **Don't** give a hobby a larger photograph than the work.
-- **Don't** add a display-size name, a stat row, a card, or a shadow.
+- **Don't** add a display-size name, a stat row, a second card, or a shadow on anything but the holo card.
 - **Don't** make the masthead sticky.
 - **Don't** link MilkCow Cafe.

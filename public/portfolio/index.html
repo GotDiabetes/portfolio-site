@@ -35,7 +35,8 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/ring.css?v=5" />
   <link rel="stylesheet" href="/focus.css?v=1" />
-  <link rel="stylesheet" href="styles.css?v=20261005" />
+  <link rel="stylesheet" href="styles.css?v=20261028" />
+  <link rel="stylesheet" href="holo.css?v=20261028" />
 
   <!-- Applies the saved theme before first paint so there's no flash. -->
   <script>
@@ -124,8 +125,34 @@
       </div>
 
       <!-- One photograph, in the margin beside the opening paragraphs. It
-           earns its place by being of me rather than of a concept. -->
-      <figure class="portrait fade">
+           earns its place by being of me rather than of a concept.
+
+           holo.js turns it into a holographic trading card: the photograph
+           in the art window, the facts below from this JSON block, the
+           frame coloured from the photograph itself, and a foil that
+           sparkles as the card tilts under the pointer. Edit the card's
+           words here. "focus" is the point of the photograph (0 to 1 across
+           and down) that the crop keeps. The <picture> is what shows
+           without JavaScript or WebGL2. -->
+      <figure class="portrait portrait--holo fade" data-holo data-holo-image="images/isaac-newport-1600.jpg">
+        <script type="application/json">
+        {
+          "tag": "Economics student · Irvine Valley College",
+          "name": "Isaac Lee",
+          "stat": { "label": "GPA", "value": "4.0" },
+          "moves": [
+            { "name": "Outbound", "number": "4,000",
+              "text": "Finds the schools that might want the product, works out who decides, writes the first email and runs the demo. Four countries, about 50 meetings." },
+            { "name": "Follow-up", "number": "50",
+              "text": "Almost none of those meetings came from a first email. They came from the second or third, so every follow-up went out on time." }
+          ],
+          "facts": [["Based", "Irvine, CA"], ["Speaks", "EN · KO · ES"], ["Also", "Tennis coach"]],
+          "credit": "Photo · Inspiration Point, Newport Beach",
+          "set": "Open for summer 2027",
+          "focus": [0.5, 0.6],
+          "alt": "A holographic trading card of Isaac Lee, photographed on the sand below Inspiration Point, Newport Beach. Economics student at Irvine Valley College, GPA 4.0. Moves: Outbound, 4,000 messages; Follow-up, 50 meetings. Based in Irvine, speaks English, Korean and Spanish, also a tennis coach. Open for summer 2027."
+        }
+        </script>
         <picture>
           <source type="image/webp"
                   srcset="images/isaac-newport-800.webp 800w, images/isaac-newport-1600.webp 1600w"
@@ -473,6 +500,7 @@
   </footer>
 
   <script src="main.js?v=20260921d" defer></script>
+  <script src="holo.js?v=20261028f" defer></script>
   <script src="/ring.js?v=6" defer></script>
   <script src="/focus.js?v=1" defer></script>
 </body>

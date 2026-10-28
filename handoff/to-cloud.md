@@ -42,16 +42,18 @@ in this session's final report; if either failed, it says so there and the
 step is still to do: `cd worker && npx wrangler deploy --config
 wrangler.toml` (local only, wrangler is signed in on the desktop).
 
-## In progress, local, not committed: the portfolio holo card
+## Also pushed: the portfolio holo card
 
-Isaac asked for the career portfolio's lead portrait to become a
-holographic trading card like React Bits' Holo Card, with the card's
-colours taken from the photograph. Files: `public/portfolio/holo.js`
-(foil shader ported to plain WebGL2, the card drawn on a 2D canvas, the
-palette sampled from the photo), `public/portfolio/holo.css`, the figure
-and JSON block in `public/portfolio/index.html`, and a new section in
-`public/portfolio/DESIGN.md`. It renders; the last fix was the art window
-height so the two moves fit. Not pushed: wait for Isaac to approve the look.
+The career portfolio's lead portrait (`/portfolio/`) is now a holographic
+trading card, as Isaac asked, modelled on React Bits' Holo Card with the
+card's colours sampled from the photograph. Files: `public/portfolio/holo.js`
+(the foil shader ported to plain WebGL2, the card drawn on a 2D canvas),
+`public/portfolio/holo.css`, the figure and its JSON block in
+`public/portfolio/index.html` (the card's words live there), and a "Holo
+card" section in `public/portfolio/DESIGN.md`. Isaac approved the look on
+the 28th: Gill Sans like a real card, his LT monogram as the type mark, no
+ZEP strip ("this is a general card"). The portfolio has no translations, so
+the i18n build is not involved.
 
 ## How to edit the chat
 
