@@ -64,8 +64,10 @@
   border-radius: var(--hc-radius);
 }
 
-/* The drawn card underneath, the foil on top. Without WebGL2 the foil
-   canvas never gets data-foil and stays out of the way. */
+/* The drawn card underneath, the foil on top. The foil only shows while
+   the pointer is on the card (data-hover, set by holo.js) and fades out
+   when it leaves, so at rest the card is the plain print. Without WebGL2
+   the foil canvas never gets data-foil and stays out of the way. */
 .holo-card__face canvas {
   position: absolute;
   inset: 0;
@@ -73,8 +75,8 @@
   width: 100%;
   height: 100%;
 }
-.holo-card__face canvas + canvas { opacity: 0; transition: opacity .3s ease; }
-.holo-card[data-foil] .holo-card__face canvas + canvas { opacity: 1; }
+.holo-card__face canvas + canvas { opacity: 0; transition: opacity .5s ease; }
+.holo-card[data-foil][data-hover] .holo-card__face canvas + canvas { opacity: 1; }
 
 /* Stacked under the ask on a narrow screen, the card gets a little more
    room than the print had: a card at 16rem is a sticker. */

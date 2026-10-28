@@ -3,8 +3,9 @@
 
    The lead's portrait is a collectible trading card: the photograph in an
    art window, the name across the top, two "moves" that are the two things
-   the page says about the ZEP summer, and a holographic foil that sparkles
-   as the card tilts under the pointer. The foil is a WebGL2 shader ported
+   the page says about the ZEP summer, and a holographic foil that fades in
+   under the pointer and sparkles as the card tilts; at rest the card is the
+   plain print. The foil is a WebGL2 shader ported
    from React Bits' HoloCard (MIT, github.com/DavidHDev/react-bits); the
    card itself is drawn here, on a 2D canvas, from the JSON block inside the
    figure, so its text is edited in index.html, never in this file.
@@ -654,9 +655,14 @@
       pointer.x = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
       pointer.y = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
       pointer.inside = true;
+      root.setAttribute("data-hover", "");   // the foil fades in (holo.css)
       wake();
     }
-    function leave() { pointer.inside = false; wake(); }
+    function leave() {
+      pointer.inside = false;
+      root.removeAttribute("data-hover");
+      wake();
+    }
 
     root.addEventListener("pointerenter", track);
     root.addEventListener("pointermove", track);
