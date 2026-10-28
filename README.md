@@ -172,6 +172,14 @@ Isaac's machine.
   a parent asking for a child (the chat then shows a topic's `answer_parent`),
   abuse or attempts to instruct the bot (one refusal line), and phone numbers
   or addresses typed in (a one-line "leave those out").
+- **General tennis answers:** about 330 more topics in `ask.json` answer
+  questions about tennis itself (rules, gear, technique, strategy, fitness,
+  the mental game, improving, tennis terms). Each one names an `area`, listed
+  under `areas`. Jev first chooses among Isaac's own topics plus one option
+  per area; only when an area wins does a second call pick and check among
+  that area's answers. So lesson questions still take one call, and a Choice
+  never goes over its 255-option limit. A topic without an `area` is one of
+  Isaac's own.
 - **Describe a student** (`public/admin/drills/app.js`, `POST /drills/describe`):
   in the drill library, Isaac writes a sentence about a student and Jev
   places them: ball stage, level, up to four things to work on and up to five

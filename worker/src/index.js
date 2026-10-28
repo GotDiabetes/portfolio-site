@@ -332,6 +332,10 @@ async function court() {
    one), and two guards. Misuse — abuse, or an attempt to instruct the bot
    — gets Isaac's one-line refusal instead of an answer; personal details
    typed into the chat get a one-line note before the answer.
+
+   General tennis questions (rules, gear, technique...) take one more
+   request: the first offers each area as a single option, and when one
+   wins, the second picks and checks among that area's answers.
    ---------------------------------------------------------------------- */
 const FAQ_URL = "https://leetennisco.com/ask.json";
 const FAQ_TTL_MS = 5 * 60 * 1000;
@@ -344,6 +348,9 @@ const TOPIC_FLOOR = 0.35;
 /* A second topic joins the first when the question plainly asks two
    things ("how much, and where?") and the probability splits between them. */
 const SECOND_FLOOR = 0.2;
+/* An area is searched when nothing of Isaac's own answered and it has any
+   real share of the probability: the second request does the choosing. */
+const AREA_FLOOR = 0.01;
 /* The verify step has to be fairly sure the answer really answers: showing
    the wrong answer confidently is worse than "email me". */
 const VERIFY_FLOOR = 0.6;
@@ -372,14 +379,64 @@ async function loadFaq(env, lang) {
   return data;
 }
 
+/* Isaac's own topics (lessons, prices, booking) have no "area". The general
+   tennis answers, hundreds of them, each name one of ask.json's "areas"
+   (rules, gear, strategy...): a Choice takes at most 255 options, and
+   checking every reply on every question would cost far more than it
+   helps. So the first request offers his own topics plus one option per
+   area, and only when an area wins does a second request pick among that
+   area's answers. → { core: [topic], areas: [{ id, covers, topics }] } */
+const AREA_KEY = "area_";
 async function loadTopics(env) {
   const data = await loadFaq(env, "");
-  const topics = (Array.isArray(data.topics) ? data.topics : [])
-    .filter((t) => t && /^[a-z_]{1,40}$/.test(t.id) && typeof t.covers === "string" && t.id !== "none")
-    .slice(0, 100)
-    .map((t) => ({ id: t.id, covers: t.covers.slice(0, 400), answer: String(t.answer || "").slice(0, 1500) }));
-  if (!topics.length) throw new Error("faq empty");
-  return topics;
+  const all = (Array.isArray(data.topics) ? data.topics : [])
+    .filter((t) => t && /^[a-z_]{1,40}$/.test(t.id) && typeof t.covers === "string" && t.id !== "none" && !t.id.startsWith(AREA_KEY))
+    .map((t) => ({ id: t.id, area: t.area, covers: t.covers.slice(0, 400), answer: String(t.answer || "").slice(0, 1500) }));
+  const areas = (Array.isArray(data.areas) ? data.areas : [])
+    .filter((a) => a && /^[a-z_]{1,30}$/.test(a.id) && typeof a.covers === "string")
+    .slice(0, 20)
+    .map((a) => ({ id: a.id, covers: a.covers.slice(0, 600), topics: all.filter((t) => t.area === a.id).slice(0, 120) }))
+    .filter((a) => a.topics.length);
+  const core = all.filter((t) => !t.area).slice(0, 100);
+  if (!core.length) throw new Error("faq empty");
+  return { core, areas };
+}
+
+/* One Noul per topic: does its reply, as the visitor would read it,
+   really answer the question? */
+function verifyQuestions(topics, replies) {
+  const out = {};
+  for (const t of topics) {
+    out["v_" + t.id] = {
+      type: "noul",
+      instructions: {
+        task: "The visitor wrote `question`. Is the reply below a good response to it? If they ask several things, a reply that handles one of them counts.",
+        reply: (replies && replies[t.id]) || t.answer,
+      },
+      criteria: {
+        true: "The reply gives what the visitor asked for or is looking for, or tells them exactly where to find it; for a greeting, thanks or a statement about themselves, it responds sensibly; for a request too general to answer directly, it asks for the detail it needs.",
+        false: "The reply is on a related subject but never gives what was asked or where to find it, so the visitor would have to ask again.",
+      },
+    };
+  }
+  return out;
+}
+
+const TOPIC_INSTRUCTIONS = {
+  question: "A visitor on Isaac Lee's tennis coaching website asked the question in `question`. Which topic answers it?",
+  follow_ups: "If `previous_question` is present, it is what the visitor asked just before. Use it to resolve short follow-ups such as 'how much is that?' or 'and for two people?'.",
+};
+
+/* The top pick if it clears the floor, and the runner-up if the question
+   may be asking two things. */
+function shortlistOf(probabilities) {
+  const ranked = Object.entries(probabilities).sort((a, b) => b[1] - a[1]);
+  const list = [];
+  if (ranked[0] && ranked[0][0] !== "none" && ranked[0][1] >= TOPIC_FLOOR) {
+    list.push(ranked[0][0]);
+    if (ranked[1] && ranked[1][0] !== "none" && ranked[1][1] >= SECOND_FLOOR) list.push(ranked[1][0]);
+  }
+  return { ranked, list };
 }
 
 /* The replies as the visitor will read them. A missing or broken language
@@ -403,23 +460,17 @@ async function ask(body, env, later) {
   const lang = LANGS.includes(body.lang) ? body.lang : "";
   if (question.length < 1 || question.length > MAX_QUESTION) return null;
 
-  const [topics, replies] = await Promise.all([loadTopics(env), loadReplies(env, lang)]);
+  const [{ core, areas }, replies] = await Promise.all([loadTopics(env), loadReplies(env, lang)]);
   const criteria = {};
-  for (const t of topics) criteria[t.id] = t.covers;
-  criteria.none = "No topic answers the question: it asks about something not listed here, or it is not about Isaac, his coaching or this website.";
+  for (const t of core) criteria[t.id] = t.covers;
+  for (const a of areas) criteria[AREA_KEY + a.id] = a.covers;
+  criteria.none = "No topic answers the question: it asks about something not listed here, or it is not about tennis, Isaac, his coaching or this website.";
 
   const state = { coach: OFFERS.coach, question };
   if (previous) state.previous_question = previous;
 
   const questions = {
-    topic: {
-      type: "choice",
-      instructions: {
-        question: "A visitor on Isaac Lee's tennis coaching website asked the question in `question`. Which topic answers it?",
-        follow_ups: "If `previous_question` is present, it is what the visitor asked just before. Use it to resolve short follow-ups such as 'how much is that?' or 'and for two people?'.",
-      },
-      criteria,
-    },
+    topic: { type: "choice", instructions: TOPIC_INSTRUCTIONS, criteria },
     parent: {
       type: "noul",
       instructions: "Is the visitor who wrote `question` asking on behalf of their child, as a parent or guardian?",
@@ -453,19 +504,7 @@ async function ask(body, env, later) {
      doesn't give them what they asked is dropped, and the chat says to
      email. All of them are checked in the same request (they run in
      parallel), and only the shortlist's results are used. */
-  for (const t of topics) {
-    questions["v_" + t.id] = {
-      type: "noul",
-      instructions: {
-        task: "The visitor wrote `question`. Is the reply below a good response to it? If they ask several things, a reply that handles one of them counts.",
-        reply: (replies && replies[t.id]) || t.answer,
-      },
-      criteria: {
-        true: "The reply gives what the visitor asked for or is looking for, or tells them exactly where to find it; for a greeting, thanks or a statement about themselves, it responds sensibly; for a request too general to answer directly, it asks for the detail it needs.",
-        false: "The reply is on a related subject but never gives what was asked or where to find it, so the visitor would have to ask again.",
-      },
-    };
-  }
+  Object.assign(questions, verifyQuestions(core, replies));
 
   const answers = await askJev(env.TYPESAFE_API_KEY, state, questions);
   const page = lang || "en";
@@ -474,19 +513,40 @@ async function ask(body, env, later) {
     return { topics: [], notice: "misuse" };
   }
 
-  /* Shortlist: the top topic if it clears the floor, and the runner-up if
-     the question may be asking two things. */
-  const ranked = Object.entries(answers.topic.probabilities).sort((a, b) => b[1] - a[1]);
-  const shortlist = [];
-  if (ranked[0] && ranked[0][0] !== "none" && ranked[0][1] >= TOPIC_FLOOR) {
-    shortlist.push(ranked[0][0]);
-    if (ranked[1] && ranked[1][0] !== "none" && ranked[1][1] >= SECOND_FLOOR) shortlist.push(ranked[1][0]);
-  }
+  const first = shortlistOf(answers.topic.probabilities);
+  const verified = (a, id) => a["v_" + id] && a["v_" + id].noul >= VERIFY_FLOOR;
   const out = {
-    topics: shortlist.filter((id) => answers["v_" + id] && answers["v_" + id].noul >= VERIFY_FLOOR),
+    topics: first.list.filter((id) => !id.startsWith(AREA_KEY) && verified(answers, id)),
     parent: answers.parent.noul >= PARENT_FLOOR,
   };
   if (answers.personal.noul >= PERSONAL_FLOOR) out.notice = "personal";
+
+  /* A general tennis question: when none of Isaac's own topics answered,
+     a second request picks among the answers of the two likeliest areas
+     and checks them the same way. Two, because many questions sit between
+     areas ("is an underhand serve legal?" is rules and serve), and even when
+     one of his topics won but didn't answer ("am I too old to play?" lands
+     on who he teaches), since the right area may then have little
+     probability left. */
+  let second = null;
+  const picked = first.ranked
+    .filter(([id, p]) => id.startsWith(AREA_KEY) && p >= AREA_FLOOR)
+    .slice(0, 2)
+    .map(([id]) => areas.find((a) => AREA_KEY + a.id === id))
+    .filter(Boolean);
+  if (!out.topics.length && picked.length) {
+    const pool = picked.flatMap((a) => a.topics);
+    const inner = {};
+    for (const t of pool) inner[t.id] = t.covers;
+    inner.none = "None of these answers the question.";
+    const more = await askJev(env.TYPESAFE_API_KEY, state, {
+      topic: { type: "choice", instructions: TOPIC_INSTRUCTIONS, criteria: inner },
+      ...verifyQuestions(pool, replies),
+    });
+    second = shortlistOf(more.topic.probabilities);
+    second.answers = more;
+    out.topics = second.list.filter((id) => verified(more, id));
+  }
 
   /* The questions the chat couldn't answer are what Isaac should write
      next, so those are kept (90 days), and only those. One that looks like
@@ -500,8 +560,12 @@ async function ask(body, env, later) {
   }
   if (env.DEBUG) {
     out.debug = {
-      ranked: ranked.slice(0, 3).map(([id, p]) => id + " " + round(p)),
-      verified: shortlist.map((id) => id + " " + round(answers["v_" + id].noul)),
+      ranked: first.ranked.slice(0, 3).map(([id, p]) => id + " " + round(p)),
+      verified: first.list.filter((id) => answers["v_" + id]).map((id) => id + " " + round(answers["v_" + id].noul)),
+      ...(second ? {
+        area_ranked: second.ranked.slice(0, 3).map(([id, p]) => id + " " + round(p)),
+        area_verified: second.list.map((id) => id + " " + round(second.answers["v_" + id].noul)),
+      } : {}),
       parent: round(answers.parent.noul),
       misuse: round(answers.misuse.noul),
       personal: round(answers.personal.noul),
