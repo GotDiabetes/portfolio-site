@@ -170,6 +170,7 @@ export default {
     [`>Reviews<`, `>후기<`],
     [`>Contact<`, `>문의<`],
     [`Career portfolio`, `커리어 포트폴리오`],
+    [`Like this if you like my site`, `제 사이트가 마음에 드셨다면 하트를 눌러 주세요`],
     [`Language: English`, `언어 (Language): 한국어`],
     [`>Book</span>`, `>예약</span>`],
     [`aria-label="Open menu"`, `aria-label="메뉴 열기"`],

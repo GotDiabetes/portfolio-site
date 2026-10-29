@@ -170,6 +170,7 @@ export default {
     [`>Reviews<`, `>評價<`],
     [`>Contact<`, `>聯絡<`],
     [`Career portfolio`, `職涯作品集`],
+    [`Like this if you like my site`, `喜歡我的網站就按個讚吧`],
     [`Language: English`, `語言 (Language)：繁體中文`],
     [`>Book</span>`, `>預約</span>`],
     [`aria-label="Open menu"`, `aria-label="開啟選單"`],

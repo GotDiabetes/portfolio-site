@@ -173,6 +173,7 @@ export default {
     [`>Reviews<`, `>نظرها<`],
     [`>Contact<`, `>تماس<`],
     [`Career portfolio`, `نمونه‌کار حرفه‌ای`],
+    [`Like this if you like my site`, `اگر سایتم را دوست دارید، قلب را بزنید`],
     [`Language: English`, `زبان (Language): فارسی`],
     [`>Book</span>`, `>رزرو</span>`],
     [`aria-label="Open menu"`, `aria-label="باز کردن منو"`],

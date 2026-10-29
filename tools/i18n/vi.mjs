@@ -169,6 +169,7 @@ export default {
     [`>Reviews<`, `>Nhận xét<`],
     [`>Contact<`, `>Liên hệ<`],
     [`Career portfolio`, `Hồ sơ nghề nghiệp`],
+    [`Like this if you like my site`, `Nếu bạn thích trang của tôi, hãy thả tim nhé`],
     [`Language: English`, `Ngôn ngữ (Language): Tiếng Việt`],
     [`>Book</span>`, `>Đặt lịch</span>`],
     [`aria-label="Open menu"`, `aria-label="Mở menu"`],

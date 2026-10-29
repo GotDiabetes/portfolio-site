@@ -169,6 +169,7 @@ export default {
     [`>Reviews<`, `>推薦の声<`],
     [`>Contact<`, `>お問い合わせ<`],
     [`Career portfolio`, `キャリアポートフォリオ`],
+    [`Like this if you like my site`, `サイトを気に入ったら、ハートを押してください`],
     [`Language: English`, `言語 (Language)：日本語`],
     [`>Book</span>`, `>予約</span>`],
     [`aria-label="Open menu"`, `aria-label="メニューを開く"`],

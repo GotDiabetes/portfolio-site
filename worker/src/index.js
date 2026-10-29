@@ -1,5 +1,5 @@
 /* ============================================================================
-   The server half of the tennis page. Eight routes (ROUTES, below):
+   The server half of the tennis page. Ten routes (ROUTES, below):
      POST /match            the lesson matcher ("Not sure which fits?"), Jev
      POST /ask              the Ask Isaac chat (further down), Jev
      POST /drills/describe  Isaac's drill library places a student, Jev
@@ -8,6 +8,8 @@
      POST /hit              page events for Isaac's numbers
      POST /signup           the clinic list and gift requests
      GET  /stats            Isaac's numbers and the sign-ups, with his key
+     GET  /likes            the heart's count, for the tennis site or the portfolio
+     POST /likes            a heart pressed or taken back
 
    The page is static, so the TypeSafe key cannot live in it. This Worker
    holds the key as a secret, takes the visitor's text, asks Jev fixed
@@ -180,6 +182,7 @@ const ROUTES = {
   "/slots": { method: "GET", limit: "HITS", cache: 300, run: slots },
   "/court": { method: "GET", limit: "HITS", cache: 1800, run: court },
   "/signup": { method: "POST", limit: "SIGNUPS", run: signup },
+  "/likes": { method: ["GET", "POST"], limit: "HITS", run: likes },
 };
 
 export default {
@@ -191,7 +194,7 @@ export default {
 
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (!route) return json({ error: "not_found" }, 404, cors);
-    if (request.method !== route.method) return json({ error: "method_not_allowed" }, 405, cors);
+    if (![].concat(route.method).includes(request.method)) return json({ error: "method_not_allowed" }, 405, cors);
     if (!ALLOWED_ORIGINS.includes(origin)) return json({ error: "forbidden" }, 403, cors);
 
     /* Two limits: one per visitor, one for the whole site, so a single
@@ -867,6 +870,36 @@ async function notify(env, subject, text, replyTo) {
   }
 }
 
+/* ------------------------------------------------------- /likes -------
+   The heart at the foot of the tennis page and of the portfolio ("Like
+   this if you like my site"): one running total per site, nothing about
+   who. The page remembers on its own device whether this visitor has
+   liked, and sends the change both ways, so taking a like back takes it
+   off the total. It is a vanity number, guarded only by the HITS limit
+   per visitor; the like and unlike events also land in /stats by day.
+
+   GET  /likes?site=tennis                           → { "site": "tennis", "count": 12 }
+   POST /likes { "site": "tennis", "on": true, "page": "ko" } → { "site": "tennis", "count": 13 }
+   ---------------------------------------------------------------------- */
+const LIKE_SITES = ["tennis", "portfolio"];
+
+async function likes(body, env, later, request) {
+  const post = request.method === "POST";
+  const site = post ? body.site : new URL(request.url).searchParams.get("site");
+  if (!LIKE_SITES.includes(site)) return { status: 400, error: "bad_request" };
+  if (post && typeof body.on !== "boolean") return { status: 400, error: "bad_request" };
+  if (!env.DB) return { status: 503, error: "not_set_up" };
+  await schema(env.DB);
+  if (post) {
+    const delta = body.on ? 1 : -1;
+    await env.DB.prepare("INSERT INTO likes (site, n) VALUES (?, ?) ON CONFLICT (site) DO UPDATE SET n = MAX(0, n + ?)")
+      .bind(site, Math.max(0, delta), delta).run();
+    later(count(env, (body.on ? "like_" : "unlike_") + site, pageOf(body.page)));
+  }
+  const row = await env.DB.prepare("SELECT n FROM likes WHERE site = ?").bind(site).first();
+  return { site, count: (row && row.n) || 0 };
+}
+
 function hit(body, env, later) {
   const event = HIT_EVENTS.includes(body.event) ? body.event : null;
   if (!event) return null;
@@ -924,6 +957,7 @@ function schema(db) {
       db.prepare("CREATE TABLE IF NOT EXISTS counts (day TEXT NOT NULL, event TEXT NOT NULL, page TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, event, page))"),
       db.prepare("CREATE TABLE IF NOT EXISTS questions (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, page TEXT NOT NULL, question TEXT NOT NULL)"),
       db.prepare("CREATE TABLE IF NOT EXISTS signups (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, kind TEXT NOT NULL, page TEXT NOT NULL, name TEXT NOT NULL, contact TEXT NOT NULL, body TEXT NOT NULL)"),
+      db.prepare("CREATE TABLE IF NOT EXISTS likes (site TEXT PRIMARY KEY, n INTEGER NOT NULL DEFAULT 0)"),
     ]).catch((err) => { schemaReady = null; throw err; });
   }
   return schemaReady;

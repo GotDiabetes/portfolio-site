@@ -189,6 +189,13 @@ Isaac's machine.
   It needs the `STATS_KEY` (the drill page sends the one the admin gate saved
   on that device), so it is his alone. The problem list the Worker asks about,
   `worker/src/drill-faults.js`, is written by `tools/drills/build.mjs`.
+- **The heart** (`public/heart.js`, `public/heart.css`, `GET/POST /likes`):
+  "Like this if you like my site" with a like button, in the tennis
+  footer and at the end of the portfolio. Each site has one running total
+  in the Worker's database (table `likes`); the like and unlike events
+  also show on /stats/ by day. The count appears from five likes up
+  (`data-like-min` on the `.like` block). A visitor's own like is kept on
+  their device, so taking it back takes it off the total.
 - **Practice tips:** the `tip_*` topics in `ask.json` are short fixes for
   common problems ("my serve goes into the net"). They were drafted for Isaac
   to read and edit like any other answer. The tennis elbow one

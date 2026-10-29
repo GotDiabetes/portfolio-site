@@ -176,6 +176,7 @@ export default {
     [`>Reviews<`, `>Opiniones<`],
     [`>Contact<`, `>Contacto<`],
     [`Career portfolio`, `Portafolio profesional`],
+    [`Like this if you like my site`, `Dale un corazón si te gusta mi sitio`],
     [`Language: English`, `Idioma (Language): Español`],
     [`>Book</span>`, `>Reservar</span>`],
     [`aria-label="Open menu"`, `aria-label="Abrir menú"`],

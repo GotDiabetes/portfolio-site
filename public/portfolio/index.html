@@ -37,6 +37,9 @@
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="styles.css?v=20261028" />
   <link rel="stylesheet" href="holo.css?v=20261028b" />
+  <link rel="stylesheet" href="/heart.css?v=20261028" />
+  <!-- The tennis site's Worker, for the heart's count (heart.js). -->
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
 
   <!-- Applies the saved theme before first paint so there's no flash. -->
   <script>
@@ -482,6 +485,13 @@
           </span>
         </a>
       </div>
+
+      <!-- The heart (/heart.js, /heart.css), shared with the tennis site:
+           a like for the page, its count from the Worker once it reaches
+           five. Hidden until the script builds the button. -->
+      <div class="like" data-like="portfolio" hidden>
+        <span class="like-text">Like this if you like my site</span>
+      </div>
     </section>
   </main>
 
@@ -501,6 +511,7 @@
 
   <script src="main.js?v=20260921d" defer></script>
   <script src="holo.js?v=20261028i" defer></script>
+  <script src="/heart.js?v=20261028" defer></script>
   <script src="/ring.js?v=6" defer></script>
   <script src="/focus.js?v=1" defer></script>
 </body>

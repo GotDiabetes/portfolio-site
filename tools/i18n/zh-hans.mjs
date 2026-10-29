@@ -170,6 +170,7 @@ export default {
     [`>Reviews<`, `>评价<`],
     [`>Contact<`, `>联系<`],
     [`Career portfolio`, `职业作品集`],
+    [`Like this if you like my site`, `喜欢我的网站就点个赞吧`],
     [`Language: English`, `语言 (Language)：简体中文`],
     [`>Book</span>`, `>预约</span>`],
     [`aria-label="Open menu"`, `aria-label="打开菜单"`],

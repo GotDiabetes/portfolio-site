@@ -219,6 +219,9 @@ The portrait in the lead is a collectible trading card of Isaac, built by `holo.
 - **Access:** `role="img"` with an `aria-label` that reads the card out; the mounted `<picture>` remains the no-JS, no-WebGL2 and pre-load state; reduced motion stops the drift and the tilt and leaves the foil still.
 - **Editing:** the words live in `index.html`; the crop's focus point too. Swap the photograph and the card recolours itself.
 
+### The heart (Get in touch)
+Under the closing pills, "Like this if you like my site" in the cta note's mono and muted, with React Bits' Pulse Heart beside it (`/heart.js`, `/heart.css`, shared with the tennis site). It is a quiet pill: transparent with a muted edge, a muted outline heart that fills sienna when pressed, so the One Warm Thing stays a mark. The count (the Worker's `/likes`, the portfolio's own total) shows only from five up. It is the page's third rounded object, a pill like the two above it.
+
 ### Focus reveal (the closing promise)
 "I reply to everything." sits on its own line in Get in touch at standfirst size, the page's last impression, with the focus reveal in sienna brackets (1.5px — the One Warm Thing Rule: sienna on strokes only). It never goes on the lead: blurring the standfirst would hide the ask from the reader with thirty seconds.
 
