@@ -13,9 +13,10 @@
    without JavaScript nothing shows. data-like names the site's total on the
    Worker (GET/POST /likes). The visitor's own like is kept on this device
    (localStorage) so the heart stays filled on their next visit. The count
-   shows only once it reaches data-like-min (default 5): a heart that says
-   "1" reads worse than one that says nothing. If the Worker can't be
-   reached the heart still works, it just shows no number.
+   is the site's running total, shown from the first like (Isaac asked for
+   the hearts to add up where everyone can see them); data-like-min can
+   hide it below a number. If the Worker can't be reached the heart still
+   works, it just shows no number, never a made-up one.
 
    Shared by both sites (/heart.js, /heart.css); each page colours it with
    the --ph-* properties in heart.css.
@@ -60,7 +61,7 @@
 
   Array.prototype.forEach.call(boxes, function (box, index) {
     var site = box.getAttribute("data-like");
-    var min = parseInt(box.getAttribute("data-like-min") || "5", 10);
+    var min = parseInt(box.getAttribute("data-like-min") || "0", 10);
     var key = "leeLike:" + site;
     var text = box.querySelector(".like-text");
     if (text && !text.id) text.id = "likeText" + index;
@@ -186,10 +187,16 @@
       api(site).then(function (n) { count = n; paintCount(null, n); }).catch(function () {});
     }
     if ("IntersectionObserver" in window) {
+      var heard = false;
       var io = new IntersectionObserver(function (entries) {
+        heard = true;
         if (entries.some(function (en) { return en.isIntersecting; })) { io.disconnect(); load(); }
       }, { rootMargin: "400px 0px" });
       io.observe(box);
+      /* A browser always reports once right after observe(); one that has
+         said nothing after two seconds never will (some embedded browsers),
+         so the total is fetched anyway. Like main.js's reveal fallback. */
+      setTimeout(function () { if (!heard) { io.disconnect(); load(); } }, 2000);
     } else {
       load();
     }
