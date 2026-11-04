@@ -36,6 +36,9 @@
   filter: grayscale(1) brightness(.75);
 }
 :root[data-theme="dark"] .creds-logo { filter: grayscale(1) brightness(.75) invert(1); }
+/* RSPA's one-colour logo is its white one: black on the page, white in the dark. */
+.creds-logo--white { filter: brightness(0); }
+:root[data-theme="dark"] .creds-logo--white { filter: none; }
 
 /* --- The loop. */
 .creds.is-loop {
