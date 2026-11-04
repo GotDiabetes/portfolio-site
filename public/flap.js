@@ -137,6 +137,7 @@
 
   /* At rest: both halves show the glyph and the leaves are hidden. */
   function rest(t, ch) {
+    t.el.classList.remove("is-flipping");
     t.top.setAttribute("data-c", ch);
     t.bottom.setAttribute("data-c", ch);
     t.front.style.visibility = "hidden";
@@ -148,6 +149,7 @@
      leaf (the current one); the bottom half still shows the current one,
      about to be covered by the back leaf (the next). */
   function stage(t, cur, next) {
+    t.el.classList.add("is-flipping");
     t.top.setAttribute("data-c", next);
     t.bottom.setAttribute("data-c", cur);
     t.frontChar.setAttribute("data-c", cur);

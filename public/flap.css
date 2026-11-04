@@ -4,9 +4,10 @@
    Tiles are --ink with white type, a step of the page's black like the
    bands; in the dark they turn over to light tiles with dark type, so the
    board still reads as the brightest thing in the line. Each tile is 1.2em
-   of the line's own font tall, with a 1px hinge seam across the middle,
-   and the rows sit on the sentence's own line pitch (1.65em), so a board
-   row is exactly as tall as a line of the text it replaced. The yellow dot
+   of the line's own font tall, with a hinge seam across the middle while it
+   flips and just two edge notches once it settles, and the rows sit on the
+   sentence's own line pitch (1.65em), so a board row is exactly as tall as a
+   line of the text it replaced. The yellow dot
    (features.css) stays at the start, centred on the first row.
 
    No script, Persian, ?classic: none of this applies and the line is the
@@ -29,7 +30,6 @@
   --flap-seam: #3a3a3a;
   flex: 0 1 auto; min-width: 0;
   display: flex; flex-wrap: wrap; align-items: center;
-  row-gap: .45em; padding-block: .225em;
   font-weight: 600; line-height: 1; letter-spacing: 0; font-variant-numeric: tabular-nums;
   user-select: none; -webkit-user-select: none;
 }
@@ -41,9 +41,11 @@
 
 /* A word (or, in Chinese and Japanese, a character): its tiles never part.
    One wider than the line may still wrap inside rather than overflow. */
-.flap-unit { display: flex; flex-wrap: wrap; row-gap: .45em; max-width: 100%; }
+.flap-unit { display: flex; flex-wrap: wrap; row-gap: .45em; margin-block: .225em; max-width: 100%; }
 .flap-unit.is-spaced { margin-inline-end: .34em; }
 .flap-gap { flex: none; width: .26em; }
+/* A forced row: a flex line of no height. The spacing between rows lives on
+   the units rather than in row-gap, so this adds none. */
 .flap-break { flex: 0 0 100%; height: 0; }
 
 .flap-tile {
@@ -54,10 +56,15 @@
   perspective: 6em;
 }
 .flap-tile--wide { width: 1em; }
+/* The hinge. A line across the whole tile only while it flips: at rest, at
+   this size, it would strike through every letter. A settled tile keeps two
+   small notches at its edges, which is all a flap board needs to read as one. */
 .flap-tile::after {
   content: ""; position: absolute; z-index: 3; left: 0; right: 0; top: calc(50% - .5px); height: 1px;
-  background: var(--flap-seam); pointer-events: none;
+  background: linear-gradient(90deg, var(--flap-seam) 0 14%, transparent 14% 86%, var(--flap-seam) 86%);
+  pointer-events: none;
 }
+.flap-tile.is-flipping::after { background: var(--flap-seam); }
 
 .flap-half, .flap-leaf {
   position: absolute; left: 0; width: 100%; height: 50%;
@@ -83,6 +90,12 @@
 .flap-half--top .flap-char, .flap-leaf--front .flap-char { top: 0; }
 .flap-half--bottom .flap-char, .flap-leaf--back .flap-char { bottom: 0; }
 .flap-char::before { content: attr(data-c); }
+
+/* At rest the letter is whole: the top half takes the full tile and the
+   bottom half steps aside, so no join runs through the glyph. */
+.flap-tile:not(.is-flipping) .flap-half--top { height: 100%; }
+.flap-tile:not(.is-flipping) .flap-half--top .flap-char { height: 100%; }
+.flap-tile:not(.is-flipping) .flap-half--bottom { display: none; }
 
 @media print, (forced-colors: active) {
   .flap-board { display: none; }
