@@ -55,6 +55,22 @@ the 28th: Gill Sans like a real card, his LT monogram as the type mark, no
 ZEP strip ("this is a general card"). The portfolio has no translations, so
 the i18n build is not involved.
 
+## Pushed 2026-11-04: ten ideas from React Bits, and two logos
+
+Isaac picked these from working mock-ups (`public/lab/ideas/`, local only).
+Tennis: split-flap live lines, flip cards, the credentials loop, the gift
+voucher, pen-drawn headings. Portfolio: the counting lead, the holo card's
+back, the projects folder, stickers, the ZEP badge. Each is its own file pair;
+both `DESIGN.md` files and the README describe them.
+
+The credentials loop also carries the RSPA and USTA logos. USTA's terms
+require written consent for this kind of use, and Isaac was told; he chose to
+publish. If USTA or RSPA objects, take the logo out of `.creds-list` in
+`public/index.html` and rebuild; the words stay.
+
+Still not tested by hand: dragging and throwing the stickers, dragging the
+badge, the folder's flap, Safari and Firefox.
+
 ## How to edit the chat
 
 - Answers live in `public/ask.json`. Jev only picks which answer fits. The
