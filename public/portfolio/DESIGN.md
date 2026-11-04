@@ -160,14 +160,14 @@ At **60rem** the lead stacks: reading order becomes name, what, want, pill, port
 
 ## Elevation & Depth
 
-None, with one exception. The page is flat, and depth is conveyed by the mat: two hairlines with a margin of paper between them read as a mounted print. The one motion of depth is a plate rising 2px on hover with its frame warming to sienna. No shadow anywhere, at rest or on hover, except under the holo card in the lead, which is a physical object held in the air and casts the one soft shadow on the page.
+None, with one exception. The page is flat, and depth is conveyed by the mat: two hairlines with a margin of paper between them read as a mounted print. The one motion of depth is a plate rising 2px on hover with its frame warming to sienna. No shadow anywhere, at rest or on hover, except under the holo card in the lead, which is a physical object held in the air and casts the one soft shadow on the page. The folder, the stickers and the ZEP badge are objects too, but they lie on the paper or hang flat, so they cast none.
 
 ### Named Rules
 **The Mat Rule.** A photograph is never pasted in. It gets a frame, a mat, a second frame, and a caption inside the mat — the same for a screenshot, a team photo, and a video.
 
 ## Shapes
 
-Square. Hairlines are 1px in `{colors.rule}`. The only rounded objects are the two pills (fully round, `{rounded.pill}`), the tiny copy button (`{rounded.copy}`) and the holo card's 14px corners, which are a trading card's corners rather than the page's; they are the entire exception list. The photo ring and its lightbox are square too: the page sets the component's `--ring-radius` to 0 and squares its lightbox buttons. The bullet is a sienna middle dot with a hanging indent, not a glyph.
+Square. Hairlines are 1px in `{colors.rule}`. The only rounded objects are the two pills (fully round, `{rounded.pill}`), the tiny copy button (`{rounded.copy}`) the holo card's 14px corners, which are a trading card's corners rather than the page's, the heart's pill, and the slot in the ZEP badge and the sienna peg and dot marks; they are the entire exception list. The photo ring and its lightbox are square too: the page sets the component's `--ring-radius` to 0 and squares its lightbox buttons. The bullet is a sienna middle dot with a hanging indent, not a glyph.
 
 ## Components
 
@@ -216,8 +216,21 @@ The portrait in the lead is a collectible trading card of Isaac, built by `holo.
 - **Colour comes from the photograph.** The image's pixels are sampled once; the strongest hue becomes the frame (the sky of the Newport picture) and the second one the panel and ink (the sand). The card's palette is therefore not the page's, and it does not change with the theme: a card looks the same on a light desk and a dark one. Only the shadow follows the theme.
 - **It is the page's one card and one shadow.** The figure drops its mat when the card is up (`portrait--live`); the caption stays, mono, below.
 - **Type:** not the page's. A trading card is set in a humanist sans, so the card uses the one the Pokémon cards use, Gill Sans, from whatever the machine has (Gill Sans on Apple devices, Gill Sans MT on Windows with Office, then Trebuchet or Segoe): bold for the name, the number, the move names and the labels, regular for the sentences. No webfont is shipped for it; the card is drawn once, so each visitor's card is set in their own Gill Sans or its nearest neighbour.
-- **Access:** `role="img"` with an `aria-label` that reads the card out; the mounted `<picture>` remains the no-JS, no-WebGL2 and pre-load state; reduced motion stops the drift and the tilt and leaves the foil still.
+- **The back:** a click, a sideways flick, or Enter or Space turns the card over on a spring. The back is drawn in the same sampled palette: the LT monogram in a disc, the name, email, LinkedIn and city, from the `back` key of the JSON block. It is a picture, so the addresses are not links; the real ones are in the lead's contact row.
+- **Access:** `role="button"` with `aria-pressed` and an `aria-label` that reads both sides of the card out; the mounted `<picture>` remains the no-JS, no-WebGL2 and pre-load state; reduced motion stops the drift and the tilt and leaves the foil still.
 - **Editing:** the words live in `index.html`; the crop's focus point too. Swap the photograph and the card recolours itself.
+
+### The counting lead
+In the lead's first paragraph, 4,000, 50 and "Three" count up in place as it appears, about 1.8 s with a small stagger (`count.js`). They stay inside the sentence, which never reflows; "Three" counts in figures and cross-fades to the word. Screen readers get the words only. Reduced motion leaves the plain text.
+
+### The projects folder
+A manila folder at the top of Projects and leadership (`folder.js`, `folder.css`, tokens `--manila*` in all three palette blocks): an index of the four entries below it, built from the entries themselves, so it never says anything they don't. It opens by itself once when it scrolls into view and stays open; the flap toggles it, and a sheet jumps to its entry. **Phones get the plain list:** at 40rem and under the folder is hidden, because four sheets can only overlap and cut each other's words off.
+
+### Stickers (Outside work)
+The run, the climb and the snowboard as matte die-cut stickers in the margin column of their entries, where the organizations' marks sit in the sections above (`stickers.js`, `stickers.css`). A corner peels under the pointer; a sticker can be dragged and thrown, lands where it stops inside the section, and never blocks text or a link while it lies there. At 40rem and under they float beside the entry at 72px. **These are the one exception to One Home per Photograph:** the three pictures are also on the ring, as small marks here and as the full photographs there.
+
+### The ZEP badge (Experience)
+A paper badge on an ink strap in the ZEP entry's margin column, in place of the logo (`badge.js`, `badge.css`): the logo, the name and the role, with the LT monogram on the back. The date and place stay above it as the column's own text, and the strap hangs from a small sienna peg under them. It swings once, gently, when it scrolls into view; it can be dragged, and a click turns it over. At 40rem and under, and on paper, it is the plain date, place and logo.
 
 ### The heart (Get in touch)
 Under the closing pills, "Like this if you like my site" in the cta note's mono and muted, with React Bits' Pulse Heart beside it (`/heart.js`, `/heart.css`, shared with the tennis site). It is a quiet pill: transparent with a muted edge, a muted outline heart that fills sienna when pressed, so the One Warm Thing stays a mark. The count (the Worker's `/likes`, the portfolio's own total) is shown from the first like and adds up with every visitor. It is the page's third rounded object, a pill like the two above it.
@@ -244,5 +257,6 @@ Under the closing pills, "Like this if you like my site" in the cta note's mono 
 - **Don't** repeat the résumé's bullets here. The résumé is at `/resume/`; this page says what those bullets mean.
 - **Don't** give a hobby a larger photograph than the work.
 - **Don't** add a display-size name, a stat row, a second card, or a shadow on anything but the holo card.
+- **Don't** hide a date, a place or a role behind an object: the folder, stickers and badge add to the record, they never replace it.
 - **Don't** make the masthead sticky.
 - **Don't** link MilkCow Cafe.

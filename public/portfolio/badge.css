@@ -1,0 +1,155 @@
+/* ============================================================================
+   Isaac Lee — the ZEP badge in Experience (badge.js builds it).
+
+   Everything here is the paper and ink tokens, so both themes resolve without
+   a second rule: a paper badge with a hairline edge on an ink strap, cream on
+   dark. One sienna rule on the front, one sienna frame on the back, both
+   strokes. Square corners; the slot the strap passes through is the only
+   round thing.
+
+   The badge exists only above the 40rem breakpoint and only on screen. Below
+   it, and on paper, the margin column is the plain date, place and logo. The
+   date and place are always the column's own text, above the badge.
+   ========================================================================== */
+
+.badge-rig, .badge-space { display: none; }
+
+@media screen and (min-width: 40.0625rem) {
+  /* The anchor for the rig. */
+  .has-badge > .entry-when { position: relative; }
+
+  /* The badge carries the logo; the date and place stay in the column,
+     and the strap hangs from a peg just under them (badge.js places it). */
+  .has-badge > .entry-when > .entry-logo { display: none; }
+
+  /* Holds the column open to the foot of the badge, so the ZEP QUIZ plate
+     under the entry starts below it. badge.js sets the height. */
+  .badge-space { display: block; flex-shrink: 0; }
+
+  /* A point, not a box: nothing here takes the pointer but the badge. */
+  .badge-rig {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+}
+
+/* The peg the strap hangs from: a sienna mark, like the bullet. */
+.badge-peg {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.badge-strap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: visible;
+}
+.badge-strap path { fill: none; stroke-linecap: butt; }
+.badge-strap__band { stroke: var(--ink); stroke-width: var(--badge-strap); }
+.badge-strap__weave {
+  stroke: var(--paper);
+  stroke-opacity: .09;
+  stroke-width: var(--badge-strap);
+  stroke-dasharray: 1 3;
+}
+.badge-strap__edge { stroke: var(--paper); stroke-opacity: .18; stroke-width: 1; }
+
+/* The badge hangs from its slot, so the slot's centre is its origin. */
+.badge {
+  position: absolute;
+  left: -4rem;
+  top: calc(var(--badge-slot) * -1);
+  display: block;
+  width: 8rem;
+  transform-origin: 50% var(--badge-slot);
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.badge[data-held] { cursor: grabbing; }
+
+/* Both faces share one grid cell, so the badge is as tall as its front. */
+.badge__rotor {
+  display: grid;
+  transform-style: preserve-3d;
+}
+.badge__face {
+  position: relative;
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.35rem .5rem .65rem;
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.badge__face--back {
+  justify-content: center;
+  transform: rotateY(180deg);
+}
+
+/* Filled with ink: it is the strap, seen through the slot. */
+.badge__slot {
+  position: absolute;
+  top: calc(var(--badge-slot) - 3.5px);
+  left: 50%;
+  width: 1.9rem;
+  height: 7px;
+  margin-left: -.95rem;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+.badge__logo { width: 4.5rem; margin-bottom: .45rem; }
+
+/* Two classes deep, to beat .entry-when span and the margin column's mono. */
+.entry-when .badge__name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+.entry-when .badge__rule {
+  display: block;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1px;
+  margin: .35rem 0 .4rem;
+  background: var(--accent);
+}
+.entry-when .badge__role {
+  font-family: var(--serif);
+  font-size: .75rem;
+  font-style: italic;
+  line-height: 1.28;
+  letter-spacing: normal;
+  color: var(--muted);
+}
+.badge__mark {
+  display: grid;
+  place-items: center;
+  width: 4.75rem;
+  height: 4.75rem;
+  border: 1px solid var(--accent);
+}
+.badge__mark svg { display: block; width: 3.25rem; height: auto; color: var(--ink); }

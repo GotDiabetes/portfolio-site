@@ -1,0 +1,40 @@
+/* ============================================================================
+   Pen-drawn section headings (the script is stroke.js). A heading the pen
+   draws carries data-stroke on the h2: "wait" before it arrives, "draw"
+   while the pen is over it, "done" once the real text is back. stroke.js
+   sets them, and <html class="stroke-on">, only where it runs: not on the
+   Persian page, not under reduced motion or ?classic, and not if tennis.js
+   never started the reveal. Everywhere else the heading rises as before
+   (SECTION SIGNATURES in tennis.css).
+
+   No colour of its own: the pen and its ink are currentColor, the heading's
+   own, so the black heading on white, the white one on the contact band
+   and dark mode all draw in the colour they already have.
+   ========================================================================== */
+
+/* The pen is the heading's arrival now, so the rise's mask and lift are
+   off for it. Only while motion is allowed: if reduced motion is switched
+   on mid-visit, tennis.css's own fade takes the heading back. */
+@media (prefers-reduced-motion: no-preference) {
+  .js.stroke-on main h2.fade[data-stroke] > .rise { clip-path: none; transform: none; transition: none; }
+}
+
+/* Before it arrives, and under the drawing, the real words keep their
+   exact place, only transparent. */
+.js.stroke-on main h2.fade:is([data-stroke="wait"], [data-stroke="draw"]) > .rise,
+.js.stroke-on main h2.fade:is([data-stroke="wait"], [data-stroke="draw"]) > .rise * { color: transparent; }
+
+/* The drawing is laid over the heading's padding box. */
+.js.stroke-on main h2.fade[data-stroke="draw"] { position: relative; }
+.stroke-svg {
+  position: absolute; left: 0; top: 0;
+  overflow: visible; pointer-events: none;
+  -webkit-user-select: none; user-select: none;
+}
+
+/* On paper every heading prints, wherever the reveal had left it. */
+@media print {
+  .js.stroke-on main h2.fade[data-stroke] > .rise,
+  .js.stroke-on main h2.fade[data-stroke] > .rise * { color: inherit !important; }
+  .stroke-svg { display: none !important; }
+}

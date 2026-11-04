@@ -4,7 +4,8 @@
    The one object on the page with a shadow and rounded corners, because it
    is a card, and a card without them is a sticker. The page's mat rules stop
    at the figure's edge: the figure loses its hairline and paper margin when
-   the card is up, and keeps its mono caption.
+   the card is up, and keeps its mono caption. It has two faces, and turning
+   it over is driven from holo.js on the rotor.
    ========================================================================== */
 
 .portrait--holo { --hc-shadow: rgba(26, 26, 23, .3); }
@@ -40,6 +41,10 @@
 }
 .holo-card[data-ready] { opacity: 1; }
 
+/* Once it has a back it is a control: holo.js makes it a button. */
+.holo-card[role="button"] { cursor: pointer; }
+.holo-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+
 .holo-card__shadow {
   position: absolute;
   inset: 10% 7% -4%;
@@ -57,12 +62,22 @@
   will-change: transform;
 }
 
+/* Two faces back to back in the rotor's 3D space; each hides when it turns
+   away, so only one is ever seen. */
 .holo-card__face {
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: var(--hc-radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
+.holo-card__face--back { transform: rotateY(180deg); }
+/* The foil is its own GPU layer, and a browser that lets it through the
+   backface rule would show it on the back of the card. data-turned changes
+   at the moment the card is edge-on, so this is never seen as a cut. */
+.holo-card[data-turned] .holo-card__face:not(.holo-card__face--back),
+.holo-card:not([data-turned]) .holo-card__face--back { visibility: hidden; }
 
 /* The drawn card underneath, the foil on top. The foil only shows while
    the pointer is on the card (data-hover, set by holo.js) and fades out

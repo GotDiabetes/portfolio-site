@@ -36,8 +36,14 @@
   <link rel="stylesheet" href="/ring.css?v=5" />
   <link rel="stylesheet" href="/focus.css?v=1" />
   <link rel="stylesheet" href="styles.css?v=20261028" />
-  <link rel="stylesheet" href="holo.css?v=20261028b" />
+  <link rel="stylesheet" href="holo.css?v=20261030" />
   <link rel="stylesheet" href="/heart.css?v=20261028" />
+  <!-- The October 30 set (ideas from reactbits.dev, rebuilt in plain JS):
+       the counting lead, the projects folder, the stickers, the ZEP badge.
+       The card's back face lives in holo.js. -->
+  <link rel="stylesheet" href="folder.css?v=20261104" />
+  <link rel="stylesheet" href="stickers.css?v=20261030" />
+  <link rel="stylesheet" href="badge.css?v=20261104" />
   <!-- The tennis site's Worker, for the heart's count (heart.js). -->
   <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
 
@@ -153,6 +159,7 @@
           "credit": "Photo · Inspiration Point, Newport Beach",
           "set": "Open for summer 2027",
           "focus": [0.5, 0.6],
+          "back": { "name": "Isaac Lee", "lines": ["21euisungisaac@gmail.com", "linkedin.com/in/isaac-lee-2a5755293", "Irvine, California"] },
           "alt": "A holographic trading card of Isaac Lee, photographed on the sand below Inspiration Point, Newport Beach. Economics student at Irvine Valley College, GPA 4.0. Moves: Outbound, 4,000 messages; Follow-up, 50 meetings. Based in Irvine, speaks English, Korean and Spanish, also a tennis coach. Open for summer 2027."
         }
         </script>
@@ -174,8 +181,8 @@
           Most of the job was outbound. I found schools and organizations that
           might actually want the product, worked out who made the decision,
           wrote the first email, and ran the demo if they replied. That came to
-          about 4,000 messages across South Korea, Estonia, Finland and the
-          United States, and roughly 50 meetings. Three Estonian schools are
+          about <span class="count-up" data-count="4000">4,000</span> messages across South Korea, Estonia, Finland and the
+          United States, and roughly <span class="count-up" data-count="50">50</span> meetings. <span class="count-up" data-count="3" data-word="Three">Three</span> Estonian schools are
           running pilots, and we signed partnerships with EdTech organizations
           in Estonia and Finland.
         </p>
@@ -204,7 +211,7 @@
     <section class="wrap" id="experience">
       <h2 class="section-title fade">Experience</h2>
 
-      <article class="entry fade">
+      <article class="entry fade" data-badge>
         <p class="entry-when">Jun &ndash; Aug 2026<span>Seoul, South Korea</span>
           <img class="entry-logo" src="images/logo-zep.png" width="84" height="30" alt="" />
         </p>
@@ -289,7 +296,13 @@
     <section class="wrap" id="projects">
       <h2 class="section-title fade">Projects and leadership</h2>
 
-      <article class="entry fade">
+      <!-- The folder (folder.js, folder.css): an index of the four entries
+           below as sheets in a manila folder, which opens when it scrolls
+           into view; a sheet jumps to its entry. Built from the entries
+           themselves, so it never says anything they don't. -->
+      <div class="folder fade" data-folder hidden></div>
+
+      <article class="entry fade" id="project-tennis">
         <p class="entry-when">2026</p>
         <div class="entry-body">
           <h3><a href="/">Lee Tennis Co.</a></h3>
@@ -300,7 +313,7 @@
         </div>
       </article>
 
-      <article class="entry fade">
+      <article class="entry fade" id="project-research">
         <p class="entry-when">Sep &ndash; Nov 2025<span>Irvine, CA</span></p>
         <div class="entry-body">
           <h3>AI's economic impact on entry-level jobs in the U.S.</h3>
@@ -311,7 +324,7 @@
         </div>
       </article>
 
-      <article class="entry fade">
+      <article class="entry fade" id="project-pingpong">
         <p class="entry-when">Sep 2024 &ndash; Apr 2025<span>Vernon Hills, IL</span>
           <img class="entry-logo" src="images/logo-vhhs.png" width="62" height="96" alt="" />
         </p>
@@ -324,7 +337,7 @@
         </div>
       </article>
 
-      <article class="entry fade">
+      <article class="entry fade" id="project-youth">
         <p class="entry-when">Aug 2024 &ndash; Jun 2025<span>Des Plaines, IL</span>
           <img class="entry-logo entry-logo--invert" src="images/logo-stpaulch.png" width="258" height="42" alt="" />
         </p>
@@ -397,7 +410,7 @@
           same problem in a running club and in a sales pipeline.
         </p>
 
-        <article class="entry fade">
+        <article class="entry fade" data-sticker="/portfolio/images/run-camino.webp" data-sticker-alt="The first Camino Fidei night run">
           <p class="entry-when">Aug 2026 &ndash; present<span>Camino Fidei</span></p>
           <div class="entry-body">
             <h3>Running</h3>
@@ -409,7 +422,7 @@
           </div>
         </article>
 
-        <article class="entry fade">
+        <article class="entry fade" data-sticker="/portfolio/images/climb-poster.jpg" data-sticker-alt="Climbing Sneaky, a V5, in Aliso Viejo">
           <p class="entry-when">Bouldering<span>Aliso Viejo</span></p>
           <div class="entry-body">
             <h3>Rock climbing</h3>
@@ -420,7 +433,7 @@
           </div>
         </article>
 
-        <article class="entry fade">
+        <article class="entry fade" data-sticker="/portfolio/images/snowboard.webp" data-sticker-alt="Helmet on, about to drop in">
           <p class="entry-when">Winters<span>Southern California</span></p>
           <div class="entry-body">
             <h3>Snowboarding</h3>
@@ -510,8 +523,12 @@
   </footer>
 
   <script src="main.js?v=20260921d" defer></script>
-  <script src="holo.js?v=20261028i" defer></script>
+  <script src="holo.js?v=20261030" defer></script>
   <script src="/heart.js?v=20261028c" defer></script>
+  <script src="count.js?v=20261030" defer></script>
+  <script src="folder.js?v=20261030" defer></script>
+  <script src="stickers.js?v=20261030" defer></script>
+  <script src="badge.js?v=20261104" defer></script>
   <script src="/ring.js?v=6" defer></script>
   <script src="/focus.js?v=1" defer></script>
 </body>

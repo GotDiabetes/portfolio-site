@@ -12,6 +12,7 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    flipBack: "돌아가기",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "사진: {name}",
     formSending: "보내는 중…",
     builderPair: "두 명 기준: 1인당 한 달 {each}.",
@@ -170,6 +171,12 @@ export default {
     [`>Reviews<`, `>후기<`],
     [`>Contact<`, `>문의<`],
     [`Career portfolio`, `커리어 포트폴리오`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">RSPA 공인 코치</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">USTA Safe Play 승인</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Grip N Rip 프로 스태프</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · 주니어 프로</span>`],
+    [`aria-label="Credentials"`, `aria-label="자격"`],
     [`Like this if you like my site`, `제 사이트가 마음에 드셨다면 하트를 눌러 주세요`],
     [`Language: English`, `언어 (Language): 한국어`],
     [`>Book</span>`, `>예약</span>`],

@@ -189,6 +189,7 @@ Isaac's machine.
   It needs the `STATS_KEY` (the drill page sends the one the admin gate saved
   on that device), so it is his alone. The problem list the Worker asks about,
   `worker/src/drill-faults.js`, is written by `tools/drills/build.mjs`.
+- **The October 30 set**, ideas from reactbits.dev rebuilt in plain JavaScript, one pair of files each. Tennis: the split-flap live lines (`flap.js`), flip cards for "What's covered" (`flip.js`), the credentials loop (`creds.js`), the gift voucher (`voucher.js`) and pen-drawn headings (`stroke.js`). Portfolio: the counting lead (`portfolio/count.js`), the holo card's back (in `portfolio/holo.js`, its words in the page's JSON block), the projects folder (`portfolio/folder.js`), the stickers (`portfolio/stickers.js`) and the ZEP badge (`portfolio/badge.js`). Each `DESIGN.md` says how they behave. The working mock-ups they came from are in `public/lab/ideas/`, which is not in the repository.
 - **The heart** (`public/heart.js`, `public/heart.css`, `GET/POST /likes`):
   "Like this if you like my site" with a like button, in the tennis
   footer and at the end of the portfolio. Each site has one running total

@@ -8,9 +8,10 @@ export default {
   path: "/es/",
   code: "ES",
   name: "Spanish",
-  keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
+  keep: ["Newport Beach TC", "Toscana, Irvine", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California", "LifeSport Libertyville · Junior Pro"],
 
   js: {
+    flipBack: "Volver",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "Foto: {name}",
     formSending: "Enviando…",
     builderPair: "Para dos jugadores: {each} al mes cada uno.",
@@ -176,6 +177,12 @@ export default {
     [`>Reviews<`, `>Opiniones<`],
     [`>Contact<`, `>Contacto<`],
     [`Career portfolio`, `Portafolio profesional`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">Certificado RSPA</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">Aprobado por USTA Safe Play</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Pro Staff de Grip N Rip</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`],
+    [`aria-label="Credentials"`, `aria-label="Credenciales"`],
     [`Like this if you like my site`, `Dale un corazón si te gusta mi sitio`],
     [`Language: English`, `Idioma (Language): Español`],
     [`>Book</span>`, `>Reservar</span>`],

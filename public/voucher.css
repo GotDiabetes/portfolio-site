@@ -1,0 +1,90 @@
+/* ============================================================================
+   The gift voucher (voucher.js): a small paper voucher under the gift line,
+   its stub behind a perforation. After React Bits' TearTicket (reactbits.dev,
+   MIT). All of it is built by the script, so with no script the line keeps
+   its "Give a lesson" link.
+
+   Black and white: paper is --card, its edge the --line hairline. The holes
+   take --field-line, one step darker, because on --card over white they
+   have no other way to show. Every colour here is a token, so dark mode
+   follows; only the LT mark needs a rule of its own.
+
+   The stage is a fixed 360 x 140 in px, because the clip paths and the tear
+   are measured in it; voucher.js scales it down in a narrower column.
+   ========================================================================== */
+
+.vc {
+  display: block; position: relative;
+  width: min(360px, 100%); height: 140px;
+  margin-top: .9rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  user-select: none; -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The original button: still in the page, and still what opens the popup. */
+.gift-line .link-btn.vc-src {
+  position: absolute; width: 1px; height: 1px; min-height: 0;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.vc-stage { display: block; position: absolute; top: 0; left: 0; width: 360px; height: 140px; transform-origin: 0 0; }
+.vc-piece { display: block; position: absolute; inset: 0; pointer-events: none; }
+.vc-stub { will-change: transform; }
+.vc-paper { display: block; position: absolute; inset: 0; background: var(--card); pointer-events: auto; }
+/* The stub is dragged sideways; a finger going up or down still scrolls. */
+.vc-paper--stub { cursor: grab; touch-action: pan-y; }
+.vc[data-grabbing] .vc-paper--stub { cursor: grabbing; }
+
+.vc-edge, .vc-fibres { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.vc-defs { position: absolute; }
+.vc-edge path { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.vc-outline { stroke: var(--line); transition: stroke var(--dur-ui) var(--ease); }
+.vc-perf { stroke: var(--field-line); }
+.vc:hover .vc-outline { stroke: var(--field-line); }
+.vc-fibres path { fill: none; stroke: var(--muted); stroke-linecap: round; opacity: 0; }
+
+/* --- The body: the mark and the name at the top, the title at the foot. */
+.vc-content {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 268px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 16px 20px;
+}
+.vc-brand {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .875rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1;
+  color: var(--text);
+}
+.vc-title {
+  display: block;
+  font-size: 1.5rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--text);
+}
+.vc img { display: block; flex: 0 0 auto; width: 26px; height: auto; pointer-events: none; }
+:root[data-theme="dark"] .vc img { filter: invert(1); }
+
+/* --- The stub: the mark and the address, one line up its middle, turned
+       like a spine. 314 and 70 are the centre of the stub on the stage. */
+.vc-label {
+  position: absolute; left: 314px; top: 70px;
+  display: flex; align-items: center; gap: .4rem;
+  font-size: .75rem; line-height: 1; white-space: nowrap;
+  color: var(--muted);
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.vc-label img { width: 20px; }
+
+/* --- Right to left: voucher.js mirrors the stage, so the stub lands on the
+       left and the tear runs the other way. The words turn back to read. */
+:root[dir="rtl"] .vc-content { transform: scaleX(-1); }
+:root[dir="rtl"] .vc-label { transform: translate(-50%, -50%) scaleX(-1) rotate(-90deg); }
+
+/* --- Back after the popup. Opacity only, so reduced motion can keep it. */
+.vc-stub--back { animation: vcBack .45s var(--ease); }
+@keyframes vcBack { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .vc-outline { transition: none; }
+}

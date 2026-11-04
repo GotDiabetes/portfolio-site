@@ -11,6 +11,7 @@ export default {
   keep: ["Newport Beach TC"],
 
   js: {
+    flipBack: "戻る",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "撮影：{name}",
     formSending: "送信中…",
     builderPair: "お二人で受ける場合：お一人あたり月 {each}。",
@@ -169,6 +170,12 @@ export default {
     [`>Reviews<`, `>推薦の声<`],
     [`>Contact<`, `>お問い合わせ<`],
     [`Career portfolio`, `キャリアポートフォリオ`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">RSPA 認定コーチ</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">USTA Safe Play 承認</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Grip N Rip プロスタッフ</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · ジュニアプロ</span>`],
+    [`aria-label="Credentials"`, `aria-label="資格"`],
     [`Like this if you like my site`, `サイトを気に入ったら、ハートを押してください`],
     [`Language: English`, `言語 (Language)：日本語`],
     [`>Book</span>`, `>予約</span>`],

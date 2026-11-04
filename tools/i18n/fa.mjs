@@ -12,9 +12,10 @@ export default {
   path: "/fa/",
   code: "FA",
   name: "Persian",
-  keep: ["Newport Beach TC"],
+  keep: ["Newport Beach TC", "LifeSport Libertyville · Junior Pro"],
 
   js: {
+    flipBack: "بازگشت",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "عکس: {name}",
     formSending: "در حال ارسال…",
     builderPair: "برای دو نفر: هر نفر ماهی {each}.",
@@ -173,6 +174,12 @@ export default {
     [`>Reviews<`, `>نظرها<`],
     [`>Contact<`, `>تماس<`],
     [`Career portfolio`, `نمونه‌کار حرفه‌ای`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">دارای گواهی RSPA</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">تأییدیه USTA Safe Play</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Pro Staff برنامه Grip N Rip</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`],
+    [`aria-label="Credentials"`, `aria-label="مدارک"`],
     [`Like this if you like my site`, `اگر سایتم را دوست دارید، قلب را بزنید`],
     [`Language: English`, `زبان (Language): فارسی`],
     [`>Book</span>`, `>رزرو</span>`],

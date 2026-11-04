@@ -67,6 +67,14 @@
   <link rel="stylesheet" href="features.css?v=20261023d" />
   <link rel="stylesheet" href="dark.css?v=20261020c" />
   <link rel="stylesheet" href="heart.css?v=20261028" />
+  <!-- The October 30 set, ideas from reactbits.dev rebuilt in plain JS:
+       the split-flap live lines, the flip cards, the credentials loop, the
+       gift voucher and the pen-drawn headings. -->
+  <link rel="stylesheet" href="flap.css?v=20261104" />
+  <link rel="stylesheet" href="flip.css?v=20261104" />
+  <link rel="stylesheet" href="creds.css?v=20261030" />
+  <link rel="stylesheet" href="voucher.css?v=20261030" />
+  <link rel="stylesheet" href="stroke.css?v=20261030" />
   <link rel="stylesheet" href="more.css?v=20261023d" />
 
   <!-- Arms the fade-ins only when JS can actually run. If tennis.js then
@@ -604,6 +612,17 @@
               <figcaption>Before and after: the same swing a few lessons apart.</figcaption>
             </figure>
           </div>
+        </div>
+
+        <!-- Credentials, as a slow loop of marks between two hairlines
+             (creds.js, creds.css). Without the script it is a still row. -->
+        <div class="creds fade" style="--d:.1s">
+          <ul class="creds-list" aria-label="Credentials">
+            <li class="creds-item"><span class="creds-word">RSPA-certified</span></li>
+            <li class="creds-item"><span class="creds-word">USTA Safe Play approved</span></li>
+            <li class="creds-item"><img class="creds-logo" src="/portfolio/images/logo-nbtc.png" width="182" height="96" alt="" /><span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span></li>
+            <li class="creds-item"><img class="creds-logo" src="/portfolio/images/logo-lifesport.png" width="210" height="96" alt="" /><span class="creds-word">LifeSport Libertyville · Junior Pro</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -1274,5 +1293,10 @@
   <script src="ballo.js?v=4" defer></script>
   <script src="motion.js?v=20261020c" defer></script>
   <script src="more.js?v=20261023d" defer></script>
+  <script src="flap.js?v=20261104" defer></script>
+  <script src="flip.js?v=20261104" defer></script>
+  <script src="creds.js?v=20261030" defer></script>
+  <script src="voucher.js?v=20261104" defer></script>
+  <script src="stroke.js?v=20261030" defer></script>
 </body>
 </html>

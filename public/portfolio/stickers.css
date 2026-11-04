@@ -1,0 +1,94 @@
+/* ============================================================================
+   Isaac Lee — the stickers in Outside work (stickers.js builds them).
+
+   A sticker is a photograph on canvas, so its colours are read from the
+   --st-* properties below and repainted when the theme changes. They are
+   declared in all three palette blocks (the Twin Palette Rule), on the
+   sticker rather than on :root because nothing else uses them.
+
+   Matte and flat: no shadow at rest or in the hand. The only tone is the
+   crease beside a peeled corner, which is the paper bending, not a shadow
+   cast on the page. Square corners, like everything else here.
+   ========================================================================== */
+
+.sticker {
+  --st-paper: #fffdf8;
+  --st-rule: var(--rule);
+  --st-back: #ece6d9;
+  --st-back-deep: #d6cebd;
+  --st-crease-rgb: 26, 26, 23;
+  --st-crease-a: .16;
+}
+:root[data-theme="dark"] .sticker {
+  --st-paper: #201e17;
+  --st-rule: #3d392f;
+  --st-back: #36332b;
+  --st-back-deep: #27251e;
+  --st-crease-rgb: 0, 0, 0;
+  --st-crease-a: .4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sticker {
+    --st-paper: #201e17;
+    --st-rule: #3d392f;
+    --st-back: #36332b;
+    --st-back-deep: #27251e;
+    --st-crease-rgb: 0, 0, 0;
+    --st-crease-a: .4;
+  }
+}
+
+/* A lifted sticker is placed against the section. */
+#outside.stickers-on { position: relative; }
+
+/* The sticker's place in the margin column, under the date and the place.
+   stickers.js sizes it, so the entry keeps its height when the sticker is
+   carried away and the page below never jumps. */
+.sticker-home {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  margin-top: .9rem;
+}
+
+/* stickers.js writes the position, tilt and scale as one transform. The
+   canvas is exactly the sticker's own box, so it has no invisible margin
+   to catch a click meant for something else. */
+.sticker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.sticker.is-free { z-index: 2; }
+
+/* Landed on text or a link: the pointer goes straight through, so what is
+   underneath can still be selected and followed. */
+.sticker[data-over] { pointer-events: none; }
+
+#outside[data-sticker-drag],
+#outside[data-sticker-drag] * {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* On a phone the margin column is a meta line, so the sticker floats beside
+   the heading instead. Once it has been carried off the space closes up:
+   an empty float would leave a hole in the text. */
+@media (max-width: 40rem) {
+  .sticker-home {
+    float: right;
+    margin: .2rem 0 .5rem 1rem;
+  }
+  .sticker-home[data-empty] { display: none; }
+}
+
+@media print {
+  .sticker, .sticker-home { display: none; }
+}

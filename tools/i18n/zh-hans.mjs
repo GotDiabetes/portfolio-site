@@ -9,9 +9,10 @@ export default {
   path: "/zh-hans/",
   code: "简",
   name: "Simplified Chinese",
-  keep: ["Newport Beach TC"],
+  keep: ["Newport Beach TC", "LifeSport Libertyville · Junior Pro"],
 
   js: {
+    flipBack: "返回",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "摄影：{name}",
     formSending: "发送中…",
     builderPair: "两人一起上：每人每月 {each}。",
@@ -170,6 +171,12 @@ export default {
     [`>Reviews<`, `>评价<`],
     [`>Contact<`, `>联系<`],
     [`Career portfolio`, `职业作品集`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">RSPA 认证教练</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">通过 USTA Safe Play 审核</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Grip N Rip 教练团队</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`],
+    [`aria-label="Credentials"`, `aria-label="资质"`],
     [`Like this if you like my site`, `喜欢我的网站就点个赞吧`],
     [`Language: English`, `语言 (Language)：简体中文`],
     [`>Book</span>`, `>预约</span>`],

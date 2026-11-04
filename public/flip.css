@@ -1,0 +1,138 @@
+/* ============================================================================
+   Flip cards (flip.js): "What's covered" turns a lesson card over. After
+   React Bits' FlipCard (reactbits.dev, MIT).
+
+   .flip-card is added by the script, so with no script every .lesson rule
+   in tennis.css stands as it was. With it, the article keeps what moves the
+   card as a whole (the deal, the hover lift, the tilt, the sticky stack) and
+   hands what you see of the card to its two faces: ground, hairline,
+   corners, padding, shadow, the matched ring and the pointer light. A frame
+   left on the article would stand still around a turning card.
+
+   The dark rules live here rather than in dark.css because they belong to
+   these faces; they repeat dark.css's values for .lesson.
+   ========================================================================== */
+
+/* --- The article gives up its surface. Border and padding move to the
+       faces at the same size, so the card keeps its box. */
+.lesson.flip-card { padding: 0; border: 0; background: none; perspective: 1800px; }
+.lesson.flip-card,
+.lesson.flip-card:hover,
+.lesson.flip-card.is-match,
+.js .lesson-list .lesson.flip-card,
+.js .lesson.flip-card.fade.is-in.is-tilt { box-shadow: none; }
+.lesson.flip-card::before, .lesson.flip-card::after { content: none; }
+
+/* --- The rotor and its faces. Both faces sit in one grid cell, so the card
+       is as tall as the taller of them and nothing jumps on the turn. */
+.flip-rotor {
+  flex: 1 1 auto;
+  display: grid; grid-template: 1fr / minmax(0, 1fr);
+  transform-style: preserve-3d;
+  transition: transform .8s var(--ease);
+}
+.lesson.is-flipped .flip-rotor { transform: rotateY(180deg); }
+:root[dir="rtl"] .lesson.is-flipped .flip-rotor { transform: rotateY(-180deg); }
+
+.flip-face {
+  grid-area: 1 / 1;
+  position: relative; isolation: isolate; min-width: 0;
+  display: flex; flex-direction: column;
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  transition: border-color var(--dur-ui) var(--ease), box-shadow var(--dur-ui) var(--ease);
+}
+.flip-front { transform: rotateY(0deg); }
+.flip-back { transform: rotateY(180deg); }
+.flip-face[inert] { pointer-events: none; }
+
+/* tennis.css's ".lesson > p" no longer reaches this paragraph. */
+.flip-front > p:has(+ .lesson-actions) { margin-bottom: 0; }
+
+/* --- The back: the popup's content at card scale. The list is the popup's,
+       a little tighter; the actions sit at the foot, as the front's do. */
+.flip-back ul { margin: 0; }
+.flip-back li {
+  position: relative; padding-block: .45rem; padding-inline-start: 1.1rem;
+  font-size: .9375rem; line-height: 1.5;
+  color: var(--muted); border-bottom: 1px solid var(--line);
+}
+.flip-back li::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: calc(.45rem + .75em - 2.5px);
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+.flip-back .actions {
+  align-items: center; gap: .5rem 1.25rem;
+  margin-top: auto; padding-top: 1.25rem;
+}
+
+/* --- The pointer light, moved from .lesson::before and ::after: the faces
+       are opaque and would cover it. --mx and --my inherit from the article,
+       and the turned face reads left to right again once it is facing you,
+       so the same numbers work on both sides. */
+.flip-face::before, .flip-face::after {
+  content: ""; position: absolute; border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity .35s var(--ease);
+}
+.flip-face::before {
+  inset: 0; z-index: -1;
+  background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 0%), #fff, rgba(255, 255, 255, 0) 55%);
+}
+.flip-face::after {
+  inset: -1px; padding: 1px;
+  background: radial-gradient(16rem circle at var(--mx, 50%) var(--my, 0%), rgba(17, 17, 17, .7), rgba(17, 17, 17, 0) 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lesson.flip-card:hover .flip-face::before, .lesson.flip-card:hover .flip-face::after { opacity: 1; }
+}
+.lesson.flip-card.is-match .flip-face::after { opacity: 0; }
+:root[data-theme="dark"] .flip-face::before { background: radial-gradient(28rem circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, .07), rgba(255, 255, 255, 0) 55%); }
+:root[data-theme="dark"] .flip-face::after { background: radial-gradient(16rem circle at var(--mx, 50%) var(--my, 0%), rgba(242, 242, 240, .55), rgba(242, 242, 240, 0) 70%); }
+
+/* --- Hover, the match and the tilt, in that order of strength, as they
+       are on a plain .lesson. */
+.lesson.flip-card:hover .flip-face { border-color: #d6d3cb; box-shadow: 0 12px 30px rgba(0, 0, 0, .06); }
+:root[data-theme="dark"] .lesson.flip-card:not(.is-match):not(.is-tilt):hover .flip-face { border-color: #3b3b39; }
+.lesson.flip-card.is-match .flip-face { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
+
+/* The stacked cards on a phone (more.css M4) carry a shadow at rest. */
+@media (max-width: 940px) {
+  .js .lesson-list .lesson.flip-card .flip-face { box-shadow: 0 -8px 28px rgba(0, 0, 0, .1); }
+  .js .lesson-list .lesson.flip-card.is-match .flip-face { box-shadow: 0 0 0 1px var(--text), 0 -8px 28px rgba(0, 0, 0, .1); }
+  .flip-back .actions .btn { min-height: 44px; }
+}
+
+.js .lesson.flip-card.fade.is-in.is-tilt .flip-face {
+  border-color: transparent;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .12), 0 0 0 1px rgba(217, 239, 63, .5);
+}
+.lesson.flip-card.is-tilt .flip-face > .tilt-light { opacity: 1; }
+
+/* --- Reduced motion: no turn. The faces stay flat in their shared cell and
+       cross-fade, which also keeps the card's height. */
+@media (prefers-reduced-motion: reduce) {
+  .flip-rotor { transition: none; }
+  .lesson.is-flipped .flip-rotor, :root[dir="rtl"] .lesson.is-flipped .flip-rotor { transform: none; }
+  .flip-face.flip-front, .flip-face.flip-back {
+    transform: none;
+    -webkit-backface-visibility: visible; backface-visibility: visible;
+    transition: opacity .3s var(--ease), visibility .3s,
+                border-color var(--dur-ui) var(--ease), box-shadow var(--dur-ui) var(--ease);
+  }
+  .flip-face.flip-back, .lesson.is-flipped .flip-face.flip-front { opacity: 0; visibility: hidden; }
+  .lesson.is-flipped .flip-face.flip-back { opacity: 1; visibility: visible; }
+}
+
+/* --- Paper shows the front, whichever way up the card was left. */
+@media print {
+  .flip-rotor, .lesson.is-flipped .flip-rotor { transform: none !important; }
+  .flip-face.flip-front { transform: none !important; opacity: 1 !important; visibility: visible !important; }
+  .flip-face.flip-back { display: none !important; }
+}

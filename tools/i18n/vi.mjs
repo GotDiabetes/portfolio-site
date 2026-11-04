@@ -8,9 +8,10 @@ export default {
   path: "/vi/",
   code: "VI",
   name: "Vietnamese",
-  keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California"],
+  keep: ["Newport Beach TC", "Toscana, Irvine", "Email", "tennis", "Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California", "LifeSport Libertyville · Junior Pro"],
 
   js: {
+    flipBack: "Quay lại",          // October 30: the flip cards' Back button (flip.js)
     photoBy: "Ảnh: {name}",
     formSending: "Đang gửi…",
     builderPair: "Cho hai người: mỗi người {each} một tháng.",
@@ -169,6 +170,12 @@ export default {
     [`>Reviews<`, `>Nhận xét<`],
     [`>Contact<`, `>Liên hệ<`],
     [`Career portfolio`, `Hồ sơ nghề nghiệp`],
+    // October 30: the credentials loop (creds.js)
+    [`<span class="creds-word">RSPA-certified</span>`, `<span class="creds-word">Chứng chỉ RSPA</span>`],
+    [`<span class="creds-word">USTA Safe Play approved</span>`, `<span class="creds-word">Được USTA Safe Play chấp thuận</span>`],
+    [`<span class="creds-word">Newport Beach Tennis Club · Grip N Rip Pro Staff</span>`, `<span class="creds-word">Newport Beach Tennis Club · Pro Staff của Grip N Rip</span>`],
+    [`<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`, `<span class="creds-word">LifeSport Libertyville · Junior Pro</span>`],
+    [`aria-label="Credentials"`, `aria-label="Chứng chỉ và kinh nghiệm"`],
     [`Like this if you like my site`, `Nếu bạn thích trang của tôi, hãy thả tim nhé`],
     [`Language: English`, `Ngôn ngữ (Language): Tiếng Việt`],
     [`>Book</span>`, `>Đặt lịch</span>`],

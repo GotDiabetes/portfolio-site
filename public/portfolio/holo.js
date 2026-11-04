@@ -5,19 +5,27 @@
    art window, the name across the top, two "moves" that are the two things
    the page says about the ZEP summer, and a holographic foil that fades in
    under the pointer and sparkles as the card tilts; at rest the card is the
-   plain print. The foil is a WebGL2 shader ported
-   from React Bits' HoloCard (MIT, github.com/DavidHDev/react-bits); the
-   card itself is drawn here, on a 2D canvas, from the JSON block inside the
-   figure, so its text is edited in index.html, never in this file.
+   plain print. The foil is a WebGL2 shader ported from React Bits' HoloCard;
+   the card itself is drawn here, on a 2D canvas, from the JSON block inside
+   the figure, so its text is edited in index.html, never in this file.
 
    The card's colours come from the photograph: its pixels are sampled once,
    the strongest hue becomes the frame (the sky, for the Newport picture) and
    the second one the panel and ink (the sand). Swap the photograph and the
    card recolours itself.
 
+   The card turns over. Its back is drawn the same way, in the same colours
+   and the same hand: the frame, one sand panel, the LT monogram large in a
+   disc, then the name and contact lines from the JSON's "back". A click, a
+   sideways flick, or Enter or Space turns it, on the original's turn spring.
+   The foil is drawn only while the front faces the reader. Without a "back"
+   in the JSON the card stays a picture (role="img") and does not turn.
+
    Without JavaScript, without WebGL2, or before the photograph has loaded,
    the mounted <picture> underneath is what shows. With reduced motion the
-   card neither drifts nor tilts, and the foil sits still.
+   card neither drifts nor tilts, the foil sits still, and a turn is instant.
+
+   After React Bits' HoloCard (reactbits.dev, MIT), rebuilt in plain JS.
    ========================================================================== */
 
 (function () {
@@ -213,20 +221,11 @@
     ctx.restore();
   }
 
-  function compose(img, colors) {
-    var W = TEX_W, H = TEX_H;
-    var c = document.createElement("canvas");
-    c.width = W; c.height = H;
-    var ctx = c.getContext("2d");
-    var R = 40;                         // corner radius, matches --hc-radius at display size
-    var M = 42;                         // the frame's width
-    var inner = { x: M, y: M, w: W - 2 * M };
-
-    roundRect(ctx, 0, 0, W, H, R);
-    ctx.clip();
-
-    /* Frame: a vertical sweep of the frame colour, lighter at the top, with
-       fine diagonal hatching so the foil has a texture to catch. */
+  /* The frame both faces share: a vertical sweep of the frame colour, lighter
+     at the top, with fine diagonal hatching so the foil has a texture to
+     catch, and a light line just inside the edge, the way a printed card has
+     one. */
+  function paintFrame(ctx, W, H, R, colors) {
     var g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, colors.frameLight);
     g.addColorStop(0.5, colors.frame);
@@ -241,10 +240,23 @@
       ctx.beginPath(); ctx.moveTo(d, 0); ctx.lineTo(d + H, H); ctx.stroke();
     }
     ctx.restore();
-    /* A light line just inside the edge, the way a printed card has one. */
     roundRect(ctx, 10, 10, W - 20, H - 20, R - 10);
     ctx.lineWidth = 2; ctx.strokeStyle = colors.frameEdge; ctx.globalAlpha = 0.7; ctx.stroke();
     ctx.globalAlpha = 1;
+  }
+
+  function compose(img, colors) {
+    var W = TEX_W, H = TEX_H;
+    var c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    var ctx = c.getContext("2d");
+    var R = 40;                         // corner radius, matches --hc-radius at display size
+    var M = 42;                         // the frame's width
+    var inner = { x: M, y: M, w: W - 2 * M };
+
+    roundRect(ctx, 0, 0, W, H, R);
+    ctx.clip();
+    paintFrame(ctx, W, H, R, colors);
 
     /* Header: a small tag, the name, and the one number with its mark. */
     var y = 66;
@@ -352,6 +364,76 @@
     spaced(ctx, String(spec.set || "").toUpperCase(), W - M - 32, H - 22, 1.2, "right");
     ctx.font = "400 20px " + SANS; ctx.textAlign = "left";
     ctx.fillText("★", W - M - 24, H - 21);
+    return c;
+  }
+
+  /* Sets ctx.font to the largest size, stepping down from `size`, at which
+     the text fits maxWidth; a machine's stand-in for Gill Sans may run wider
+     than Gill Sans. */
+  function fitText(ctx, text, weight, size, min, maxWidth) {
+    for (; size >= min; size -= 2) {
+      ctx.font = weight + " " + size + "px " + SANS;
+      if (ctx.measureText(text).width <= maxWidth) return;
+    }
+    ctx.font = weight + " " + min + "px " + SANS;
+  }
+
+  /* The back: the same frame, then one panel in the sampled sand with a
+     second rule inside it. In the panel, centred as one block, the monogram
+     large in a disc swept like the frame, the name, a short rule and the
+     contact lines. Nothing here is a link: the same address and profile are
+     real links in the list under the lead. */
+  function composeBack(colors) {
+    var W = TEX_W, H = TEX_H;
+    var c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    var ctx = c.getContext("2d");
+    var R = 40, M = 42;
+    var name = spec.back.name || "";
+    var lines = (spec.back.lines || []).slice(0, 4);
+
+    roundRect(ctx, 0, 0, W, H, R);
+    ctx.clip();
+    paintFrame(ctx, W, H, R, colors);
+
+    var p = { x: M, y: M, w: W - 2 * M, h: H - 2 * M };
+    roundRect(ctx, p.x, p.y, p.w, p.h, 16);
+    ctx.fillStyle = colors.panel; ctx.fill();
+    ctx.strokeStyle = colors.line; ctx.lineWidth = 2; ctx.stroke();
+    roundRect(ctx, p.x + 20, p.y + 20, p.w - 40, p.h - 40, 8);
+    ctx.lineWidth = 1.5; ctx.stroke();
+
+    /* The block's height is added up first, so it sits in the middle of the
+       panel however many lines the JSON gives it. */
+    var r = p.w * 0.25, halo = r + 30;
+    var nameGap = 118, ruleGap = 50, lineGap = 78, lh = 60;
+    var blockH = 2 * halo + nameGap + ruleGap + lineGap + Math.max(0, lines.length - 1) * lh + 12;
+    var cx = W / 2, cy = p.y + (p.h - blockH) / 2 + halo;
+
+    ctx.beginPath(); ctx.arc(cx, cy, halo, 0, Math.PI * 2);
+    ctx.strokeStyle = colors.line; ctx.lineWidth = 2; ctx.stroke();
+    var sweep = ctx.createLinearGradient(0, cy - r, 0, cy + r);
+    sweep.addColorStop(0, colors.frameLight);
+    sweep.addColorStop(1, colors.frameDeep);
+    monogram(ctx, cx, cy, r, sweep, colors.ink);
+
+    var y = cy + halo + nameGap;
+    ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "center";
+    ctx.fillStyle = colors.ink;
+    fitText(ctx, name, 700, 96, 56, p.w - 140);
+    ctx.fillText(name, cx, y);
+
+    y += ruleGap;
+    ctx.fillStyle = colors.accent;
+    ctx.fillRect(cx - 40, y - 2, 80, 4);
+
+    y += lineGap;
+    ctx.fillStyle = colors.ink;
+    lines.forEach(function (line, i) {
+      fitText(ctx, line, 400, 38, 24, p.w - 160);
+      ctx.fillText(line, cx, y + i * lh);
+    });
     return c;
   }
 
@@ -485,28 +567,44 @@
 
   /* ---------------------------------------------------------- 4. Build --
      The card's DOM, built once the photograph is in: a shadow, a rotor
-     that tilts, and a face holding the drawn card with the foil canvas on
-     top. The <picture> stays in the markup and hides when the card is up. */
+     that tilts and turns, a face holding the drawn card with the foil canvas
+     on top, and a back face turned away behind it. The <picture> stays in
+     the markup and hides when the card is up. */
   var img = new Image();
   img.decoding = "async";
   img.onload = function () {
     if (!img.naturalWidth) return;
     var colors = cardColors(samplePalette(img));
     var art = compose(img, colors);
+    var said = spec.back ? [spec.back.name].concat(spec.back.lines || []).filter(Boolean) : [];
+    var turns = said.length > 0;
 
     var root = document.createElement("div");
     root.className = "holo-card";
-    root.setAttribute("role", "img");
-    root.setAttribute("aria-label", spec.alt || (spec.name + ", a holographic trading card"));
+    var label = spec.alt || (spec.name + ", a holographic trading card");
+    if (turns) {
+      /* A control, not a picture, once it turns. The back is pixels, so the
+         name carries what it says as well as that it turns over. */
+      root.setAttribute("role", "button");
+      root.setAttribute("tabindex", "0");
+      root.setAttribute("aria-pressed", "false");
+      label += " Turns over to show the back: " + said.join(", ") + ".";
+    } else {
+      root.setAttribute("role", "img");
+    }
+    root.setAttribute("aria-label", label);
     root.innerHTML =
       '<span class="holo-card__shadow" aria-hidden="true"></span>' +
-      '<div class="holo-card__rotor"><div class="holo-card__face"></div></div>';
+      '<div class="holo-card__rotor"><div class="holo-card__face"></div>' +
+      (turns ? '<div class="holo-card__face holo-card__face--back" inert></div>' : "") + "</div>";
     var shadow = root.firstChild;
     var rotor = root.querySelector(".holo-card__rotor");
     var face = root.querySelector(".holo-card__face");
+    var backFace = root.querySelector(".holo-card__face--back");
     face.appendChild(art);               // the card itself, visible even without WebGL2
     var canvas = document.createElement("canvas");
     face.appendChild(canvas);
+    if (backFace) backFace.appendChild(composeBack(colors));
 
     var picture = fig.querySelector("picture");
     fig.insertBefore(root, picture);
@@ -553,12 +651,20 @@
       tiltX: 0, tiltY: 0, tiltVX: 0, tiltVY: 0,
       lightX: 0.36, lightY: 0.26, lightVX: 0, lightVY: 0,
       lift: 1, liftV: 0, clock: Math.random() * 40,
+      turn: 0, turnV: 0,                 // degrees; a multiple of 360 shows the front
     };
     var pointer = { x: 0.5, y: 0.5, inside: false };
     var raf = 0, last = 0, visible = true, calm = 0;
+    var turnTarget = 0, backShowing = false;
+
+    /* The card's whole turn about its upright: the tilt and the turn. */
+    function yaw() { return state.tiltY + state.turn; }
+    function facing() { return Math.cos(yaw() * Math.PI / 180); }
 
     function draw() {
-      if (!program) return;
+      /* Nothing to paint once the front has swung away; the small margin
+         past edge-on means the foil is fresh when it swings back. */
+      if (!program || facing() <= -0.05) return;
       var w = canvas.width, h = canvas.height;
       if (!w || !h) return;
       var s = SETTINGS;
@@ -571,7 +677,11 @@
       gl.uniform1i(uniforms.uArt, 0);
       gl.uniform2f(uniforms.uSize, w, h);
       gl.uniform1f(uniforms.uAspect, h / w);
-      gl.uniform2f(uniforms.uTilt, state.tiltX * Math.PI / 180, state.tiltY * Math.PI / 180);
+      /* The shader is lit by the card's real angle, so the light sweeps
+         across the foil as the card turns. Wrapped to ±180°, it equals the
+         plain tilt whenever the front is at rest. */
+      var turned = ((yaw() + 180) % 360 + 360) % 360 - 180;
+      gl.uniform2f(uniforms.uTilt, state.tiltX * Math.PI / 180, turned * Math.PI / 180);
       gl.uniform2f(uniforms.uLight, state.lightX, state.lightY);
       gl.uniform1f(uniforms.uDistance, PERSPECTIVE / Math.max(1, canvas.clientWidth));
       gl.uniform1i(uniforms.uPreset, s.preset);
@@ -621,23 +731,54 @@
         r = spring(state.lightX, state.lightVX, lightX, 220, 30, h); state.lightX = r[0]; state.lightVX = r[1];
         r = spring(state.lightY, state.lightVY, lightY, 220, 30, h); state.lightY = r[0]; state.lightVY = r[1];
         r = spring(state.lift, state.liftV, lift, 320, 30, h); state.lift = r[0]; state.liftV = r[1];
+        if (!reduce) { r = spring(state.turn, state.turnV, turnTarget, 170, 20, h); state.turn = r[0]; state.turnV = r[1]; }
       }
-      rotor.style.transform = "perspective(" + PERSPECTIVE + "px) scale(" + state.lift + ") rotateX(" + state.tiltX + "deg) rotateY(" + state.tiltY + "deg)";
-      shadow.style.transform = "translate(" + (-state.tiltY * 0.7) + "px, " + (state.tiltX * 0.7) + "px) scale(" + (0.9 + (state.lift - 1) * 1.5) + ")";
+      /* Landed (or, with reduced motion, there at once): the turn comes back
+         into one revolution, so a run of same-way flicks can't grow it. */
+      if (reduce || (Math.abs(turnTarget - state.turn) < 0.02 && Math.abs(state.turnV) < 0.02)) {
+        turnTarget = (turnTarget % 360 + 360) % 360;
+        state.turn = turnTarget;
+        state.turnV = 0;
+      }
+      rotor.style.transform = "perspective(" + PERSPECTIVE + "px) scale(" + state.lift + ") rotateX(" + state.tiltX + "deg) rotateY(" + yaw() + "deg)";
+      /* The shadow narrows as the card goes edge-on to the light. */
+      var edge = Math.abs(Math.cos(state.turn * Math.PI / 180));
+      var cast = 0.9 + (state.lift - 1) * 1.5;
+      shadow.style.transform = "translate(" + (-state.tiltY * 0.7) + "px, " + (state.tiltX * 0.7) + "px) scale(" + cast * (0.35 + 0.65 * edge) + ", " + cast + ")";
+      showSide(facing() < 0);
       draw();
       var motion = Math.abs(state.tiltVX) + Math.abs(state.tiltVY) + Math.abs(state.liftV) * 40 +
         (Math.abs(state.lightVX) + Math.abs(state.lightVY)) * 60 +
-        Math.abs(state.tiltX - targetX) + Math.abs(state.tiltY - targetY);
+        Math.abs(state.tiltX - targetX) + Math.abs(state.tiltY - targetY) +
+        Math.abs(state.turnV) + Math.abs(turnTarget - state.turn);
       calm = motion > 0.02 ? 0 : calm + dt;
       if (!visible || (!drifting && !pointer.inside && calm > 0.3)) return;
       raf = requestAnimationFrame(tick);
     }
 
     function wake() {
+      calm = 0;                          // a new turn holds the loop open, even mid-settle
       if (raf) return;
-      calm = 0;
       last = performance.now();
       raf = requestAnimationFrame(tick);
+    }
+
+    /* The face turned away is inert, and data-turned marks the side showing. */
+    function showSide(back) {
+      if (!backFace || back === backShowing) return;
+      backShowing = back;
+      root.toggleAttribute("data-turned", back);
+      face.toggleAttribute("inert", back);
+      backFace.toggleAttribute("inert", !back);
+    }
+
+    /* dir +1 turns the way a rightward flick throws it, -1 the other. A
+       flick keeps turning the way it was thrown, so two the same way bring
+       the front round again. */
+    function turnBy(dir) {
+      turnTarget += 180 * dir;
+      root.setAttribute("aria-pressed", Math.round(turnTarget / 180) % 2 !== 0 ? "true" : "false");
+      wake();
     }
 
     function resize() {
@@ -669,6 +810,36 @@
     root.addEventListener("pointerdown", track);
     root.addEventListener("pointerleave", leave);
     root.addEventListener("pointercancel", leave);
+
+    /* Turning it over. A press is judged when it lifts: a quick sideways
+       throw is a flick, and a press that barely moved is a click. Anything
+       slower or further was the pointer tilting the card, not a turn. The
+       lift is heard on the window, since a flick often ends off the card. */
+    if (turns) {
+      var press = null;
+      root.addEventListener("pointerdown", function (e) {
+        if (e.button !== 0) return;
+        press = { id: e.pointerId, x: e.clientX, y: e.clientY, t: performance.now() };
+      });
+      window.addEventListener("pointerup", function (e) {
+        if (!press || e.pointerId !== press.id) return;
+        var dx = e.clientX - press.x, dy = e.clientY - press.y, held = performance.now() - press.t;
+        press = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5 && held < 500) turnBy(dx < 0 ? -1 : 1);
+        else if (Math.sqrt(dx * dx + dy * dy) < 8 && held < 600) turnBy(1);
+      });
+      window.addEventListener("pointercancel", function (e) {
+        if (press && e.pointerId === press.id) press = null;
+      });
+      root.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        e.preventDefault();              // Space would scroll the page
+        if (!e.repeat) turnBy(e.shiftKey ? -1 : 1);
+      });
+      /* A screen reader's "activate" arrives as a bare click with no pointer
+         behind it (detail 0); a real click has already been judged above. */
+      root.addEventListener("click", function (e) { if (e.detail === 0) turnBy(1); });
+    }
 
     new ResizeObserver(resize).observe(canvas);
     if ("IntersectionObserver" in window) {
