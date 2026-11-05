@@ -60,6 +60,79 @@
   function rad(d) { return d * Math.PI / 180; }
   function wrap(a) { return Math.atan2(Math.sin(a), Math.cos(a)); }
   function f(n) { return n.toFixed(2); }
+
+  /* The sound of the tear. Made here, like the site's other sounds, so there
+     is no file to load, and silent when the visitor has turned sounds off
+     (the "askIsaacSound" setting bookfx.js and the chat share). Paper tearing
+     is a run of tiny noise grains, so each bridge that snaps is a grain or
+     two: a slow pull crackles and a quick one rips. A click plays one short
+     whole tear. The context starts on the first press, because browsers
+     won't play before one, and is suspended again soon after, as in bookfx.js. */
+  var actx = null, grit = null, hush = 0;
+  function muted() {
+    try { return localStorage.getItem("askIsaacSound") === "off"; } catch (e) { return false; }
+  }
+  function wake() {
+    if (muted()) return false;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    try {
+      if (!actx) {
+        actx = new AC();
+        grit = actx.createBuffer(1, actx.sampleRate, actx.sampleRate);
+        var d = grit.getChannelData(0);
+        for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      }
+      if (actx.state === "suspended") actx.resume().catch(function () {});
+      window.clearTimeout(hush);
+      hush = window.setTimeout(function () {
+        if (actx && actx.state === "running") actx.suspend().catch(function () {});
+      }, 1500);
+      return true;
+    } catch (e) {
+      actx = null;
+      return false;
+    }
+  }
+  function grain(ac, noise, t, len, hz, level) {
+    var n = ac.createBufferSource(), band = ac.createBiquadFilter(), g = ac.createGain();
+    n.buffer = noise;
+    band.type = "bandpass";
+    band.frequency.value = hz;
+    band.Q.value = 1.1;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(level, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    n.connect(band);
+    band.connect(g);
+    g.connect(ac.destination);
+    n.start(t, Math.random() * 0.9, len + 0.01);
+  }
+  /* One bridge: a bright tick with a little body under it. The last one to
+     go is the fuller sound of the stub coming free. */
+  function snapAt(ac, noise, t, last) {
+    var level = last ? 0.62 : 0.36 + Math.random() * 0.14;
+    grain(ac, noise, t, last ? 0.07 : 0.04 + Math.random() * 0.02, 2600 + Math.random() * 1800, level);
+    grain(ac, noise, t + 0.012, 0.03, 3800 + Math.random() * 1400, level * 0.55);
+    grain(ac, noise, t, 0.05, 950, level * 0.5);
+  }
+  /* The whole perforation at once: grains running together and thinning out,
+     climbing in pitch as the tear runs along the paper. */
+  function ripAt(ac, noise, t) {
+    var at = 0, end = 0.26;
+    while (at < end) {
+      var k = at / end;
+      grain(ac, noise, t + at, 0.03 + Math.random() * 0.025, 2200 + 2400 * k + Math.random() * 900, (0.9 - 0.55 * k) * (0.7 + Math.random() * 0.3));
+      if (Math.random() < 0.5) grain(ac, noise, t + at, 0.05, 1000 + Math.random() * 400, 0.34 * (1 - k));
+      at += 0.006 + Math.random() * 0.013 + k * 0.012;
+    }
+  }
+  function snapSound(index, last) {
+    if (wake()) snapAt(actx, grit, actx.currentTime + 0.004 + index * 0.011, last);
+  }
+  function ripSound() {
+    if (wake()) ripAt(actx, grit, actx.currentTime + 0.004);
+  }
   function noise(seed) {
     var s = seed | 0;
     return function () {
@@ -247,7 +320,7 @@
            diagonal pull barely turns the stub, so distance outward counts
            too, the far end giving way first as it does on the angle. Pushing
            the stub into the body is never a tear. */
-        var slack = Math.sqrt(s.sx * s.sx + s.sy * s.sy), pulled = s.point.x - s.start.x, left = 0;
+        var slack = Math.sqrt(s.sx * s.sx + s.sy * s.sy), pulled = s.point.x - s.start.x, left = 0, gone = 0;
         geo.bridges.forEach(function (b, j) {
           if (s.snapped[j]) return;
           var d = Math.abs(b.mid - s.hinge.y);
@@ -255,9 +328,10 @@
             s.snapped[j] = true;
             s.snapAt[j] = now;
             s.bv -= JOLT / count;
+            snapSound(gone++, false);
           } else left++;
         });
-        if (left === 0) { s.phase = "free"; s.bv -= JOLT / 4; }
+        if (left === 0) { s.phase = "free"; s.bv -= JOLT / 4; snapSound(gone, true); }
       } else if (s.phase === "free") {
         var cos = Math.cos(s.theta * s.sign), sin = Math.sin(s.theta * s.sign);
         var gx = s.grab.x - s.hinge.x, gy = s.grab.y - s.hinge.y;
@@ -329,6 +403,7 @@
       s.vx = 340; s.vy = -260; s.spin = 2.4; s.age = 0; s.fade = 1;
       s.bv -= JOLT;
       s.phase = "drop";
+      ripSound();
       run();
       openSoon();
     }
@@ -415,7 +490,7 @@
       travelled = 0;
       var p = local(e);
       s.start = p;
-      if (!reduced()) begin(p);
+      if (!reduced()) { wake(); begin(p); }
       vc.setAttribute("data-grabbing", "");
     });
     stubPaper.addEventListener("pointermove", function (e) {
