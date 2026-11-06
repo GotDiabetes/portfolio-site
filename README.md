@@ -26,6 +26,9 @@ and the numbers page checks the key itself.)
   tear-off strips, in every language (/ko/flyer/ …).
 - **/gift-card/** — makes a printable gift card when someone buys lessons as
   a gift (the "Give a lesson" popup emails you the request).
+- **/coach/** — the application for other coaches, a link you send yourself
+  (it is also on the admin page, and stays out of search). Their answers land
+  under "Coach applications" on `/admin/`, with a button to copy one.
 - **/admin/drills/** — the drill library, opened from the admin page: about 200 drills and games by age stage
   and skill, with court diagrams, the faults they fix, an age guide, a
   students list and a lesson-plan builder (students and plans stay in your

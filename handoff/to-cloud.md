@@ -92,7 +92,9 @@ badge, the folder's flap, Safari and Firefox.
 
 ## Waiting on Isaac, not on us
 
-- Set `RESEND_KEY` so clinic sign-ups arrive by email.
+- Set `RESEND_KEY` so clinic sign-ups and coach applications arrive by email.
+- Redeploy the Worker before sending anyone `/coach/`: the live Worker refuses
+  the "coach" sign-up kind until then, and the form falls back to email.
 - Accept Cal.com's updated Terms of Service himself.
 - Send the before-and-after clips, the hero loop clip and the About video.
 - Send his Google review link and a Cloudflare analytics token.

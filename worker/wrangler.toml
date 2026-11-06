@@ -1,6 +1,6 @@
 # Cloudflare Worker behind the tennis page: the lesson matcher and the Ask
 # Isaac chat (Jev), the live lines (/slots, /court), the page counts (/hit),
-# the clinic list and gift sign-ups (/signup) and Isaac's numbers (/stats).
+# the clinic list, gift and coach sign-ups (/signup) and Isaac's numbers (/stats).
 # Deploy steps are in the repo README ("Jev features").
 name = "lee-tennis-jev"
 main = "src/index.js"
@@ -38,7 +38,7 @@ namespace_id = "2003"
   limit = 30
   period = 60
 
-# Clinic list and gift sign-ups: 5 a minute per visitor (the Worker also
+# Clinic list, gift and coach sign-ups: 5 a minute per visitor (the Worker also
 # caps them per day; see signup() in src/index.js).
 [[ratelimits]]
 name = "SIGNUPS"

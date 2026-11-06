@@ -1,0 +1,155 @@
+/* ============================================================================
+   The coach application (/coach/). It sits on tennis.css: the same type,
+   greys and form fields as the clinic and gift popups (the form carries
+   .clinic-form), laid out as a page. Black band, white page, soft band.
+
+   The ball's yellow means one thing here: the 10%. It is the headline's full
+   stop and the end of the split bar, and appears nowhere else.
+   ========================================================================== */
+
+.coach-back {
+  font-size: .9375rem; font-weight: 600; color: var(--text);
+  text-underline-offset: 3px;
+}
+:root[data-theme="dark"] .header { background: rgba(20, 20, 19, .97); }
+
+/* --- The band ------------------------------------------------------------ */
+.coach-hero { background: var(--ink); color: #fff; padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.coach-hero ::selection { background: #fff; color: var(--ink); }
+.coach-hero h1 {
+  font-size: clamp(3rem, min(9vw, 13vh), 6rem); line-height: .96; letter-spacing: -.055em;
+}
+.coach-ball {
+  display: inline-block; width: .17em; height: .17em; margin-inline-start: .07em;
+  border-radius: 50%; background: #d9ef3f;
+}
+.coach-hero p {
+  max-width: 38rem; margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  font-size: 1.125rem; line-height: 1.6; color: rgba(255, 255, 255, .78);
+}
+
+/* --- How it works -------------------------------------------------------- */
+.coach-how { padding-block: var(--section-y); }
+.coach-how h2, .coach-apply-head h2 {
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+}
+.coach-terms { margin: clamp(1.75rem, 3vw, 2.5rem) 0 0; border-top: 1px solid var(--line); }
+.coach-terms > div {
+  display: grid; grid-template-columns: 11rem minmax(0, 42rem); gap: .25rem 2rem;
+  padding-block: 1.05rem; border-bottom: 1px solid var(--line);
+}
+.coach-terms dt { font-weight: 600; }
+.coach-terms dd { margin: 0; color: var(--muted); }
+.coach-city { max-width: 42rem; margin: 1.75rem 0 0; margin-inline-start: 13rem; color: var(--text); }
+.coach-city a { color: inherit; text-underline-offset: 3px; }
+
+/* --- The form ------------------------------------------------------------ */
+.coach-apply { background: var(--bg-soft); padding-block: var(--section-y); }
+.coach-apply-head { max-width: 38rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.coach-apply-head p { margin: .75rem 0 0; color: var(--muted); }
+
+.coach-form {
+  margin-top: 0; gap: 0 clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) 20rem;
+}
+/* .field sets its own display, which would otherwise beat [hidden]. */
+.coach-form [hidden] { display: none; }
+.coach-parts { grid-column: 1; min-width: 0; }
+.coach-finish { grid-column: 1; display: grid; gap: 1.1rem; min-width: 0; padding-top: 2rem; }
+.coach-part { display: grid; gap: 1.1rem; padding-block: 2rem; border-top: 1px solid var(--field-line); }
+.coach-part:first-child { padding-top: 1.5rem; }
+.coach-part h3 { font-size: 1.25rem; }
+.coach-other { display: grid; gap: 1.1rem; }
+.coach-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+.coach-inline { display: flex; flex-wrap: wrap; gap: 0 1.75rem; }
+
+/* The popups' fields, for the two input types they don't use. */
+.coach-form input:is([type="email"], [type="tel"]) {
+  width: 100%; padding: .7rem .85rem;
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--field-line); border-radius: var(--radius);
+  transition: border-color var(--dur-ui) var(--ease);
+}
+.coach-form input:is([type="email"], [type="tel"]):hover { border-color: var(--muted); }
+.coach-form input:is([type="email"], [type="tel"]):focus { border-color: var(--text); }
+/* The sticky header would otherwise cover a field that takes focus. */
+.coach-form :is(input, select, textarea) { scroll-margin-block: 7rem; }
+.coach-form :is(input:not([type="checkbox"]), select, textarea)[aria-invalid="true"] { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
+.field-error { margin: 0; font-size: .875rem; font-weight: 600; color: var(--text); }
+.coach-count { display: flex; justify-content: space-between; gap: 1rem; }
+.coach-count span:last-child { flex: none; font-variant-numeric: tabular-nums; }
+.coach-agree .choice { align-items: flex-start; padding-block: .55rem; line-height: 1.45; min-height: 0; }
+.coach-agree .choice input { margin-top: .15rem; }
+
+/* --- The rate ------------------------------------------------------------ */
+.rates { display: grid; gap: .6rem; }
+.rate-row { grid-template-columns: minmax(0, 1fr) 6.5rem 6.75rem; align-items: center; gap: .35rem .9rem; }
+.rate-row .field-error { grid-column: 1 / -1; }
+.rate-box { position: relative; display: block; }
+.rate-box > span {
+  position: absolute; inset-block: 0; inset-inline-start: .85rem;
+  display: flex; align-items: center; color: var(--muted); pointer-events: none;
+}
+.coach-form .rate-box input { padding-inline-start: 1.6rem; font-variant-numeric: tabular-nums; }
+.rate-keep { font-size: .875rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* 90 to 10, always: the bar never moves, only the words under it do. */
+.split { display: grid; gap: .7rem; padding-top: .35rem; }
+.split-bar { display: flex; gap: 2px; height: .75rem; }
+.split-bar i { flex: 9; background: var(--text); border-radius: 2px 0 0 2px; }
+.split-bar b { flex: 1; background: #d9ef3f; border-radius: 0 2px 2px 0; }
+.split-words {
+  margin: 0; font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 600; line-height: 1.25;
+  letter-spacing: -.03em; font-variant-numeric: tabular-nums; text-wrap: balance;
+}
+
+/* --- The listing preview ------------------------------------------------- */
+.listing-rail {
+  grid-column: 2; grid-row: 1 / span 2; align-self: start;
+  position: sticky; top: 6rem; display: grid; gap: .7rem; padding-top: 1.5rem;
+}
+.listing-cap { margin: 0; font-size: .875rem; font-weight: 600; }
+.listing {
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+}
+.listing-photo {
+  display: grid; place-items: center; aspect-ratio: 16 / 10;
+  background: var(--ink); color: #fff;
+  font-size: 3rem; font-weight: 600; letter-spacing: -.05em;
+}
+.listing-body { display: grid; gap: .4rem; padding: 1.1rem 1.15rem 1.25rem; justify-items: start; }
+.listing p { margin: 0; overflow-wrap: anywhere; }
+.listing-name { font-size: 1.25rem; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; }
+.listing-court { font-size: .9375rem; color: var(--muted); }
+.listing-rate { margin-top: .35rem !important; font-size: 1.6rem; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.listing-rate small { font-size: .875rem; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+.listing-more { font-size: .875rem; color: var(--muted); }
+.listing-bio { margin-top: .35rem !important; font-size: .9375rem; line-height: 1.5; }
+.listing-facts { font-size: .8125rem; color: var(--muted); }
+.listing .btn { margin-top: .6rem; pointer-events: none; }
+.listing .is-blank { color: var(--muted); }
+
+/* --- Sent ---------------------------------------------------------------- */
+.coach-done { max-width: 34rem; padding-block: 1rem; outline: none; }
+.coach-done h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); }
+.coach-done > p:not(.form-done-title) { margin: .85rem 0 1.5rem; }
+
+/* --- Narrower ------------------------------------------------------------ */
+@media (max-width: 60rem) {
+  .coach-form { grid-template-columns: minmax(0, 1fr); }
+  .listing-rail { grid-column: 1; grid-row: auto; position: static; max-width: 24rem; padding-top: 0; }
+  .coach-finish { grid-column: 1; }
+  .coach-city { margin-inline-start: 0; }
+}
+@media (max-width: 40rem) {
+  .coach-terms > div { grid-template-columns: minmax(0, 1fr); }
+  .coach-pair { grid-template-columns: minmax(0, 1fr); }
+  .rate-row { grid-template-columns: minmax(0, 1fr) 6.75rem; }
+  .rate-keep { grid-column: 2; min-height: 0; }
+  .rate-keep:empty { display: none; }
+}
+
+@media print {
+  .listing-rail, .header, .footer { display: none; }
+}

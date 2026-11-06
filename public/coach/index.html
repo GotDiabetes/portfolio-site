@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- ============================================================
+       The application for other coaches: leetennisco.com/coach/. Isaac
+       sends the link himself (it is also on /admin/). Nothing on the
+       public pages points here and it stays out of search, so it is in
+       English only and not in the i18n build.
+
+       coach.js works out the rate split and draws the listing preview as
+       the coach types, then sends the answers to the Worker (POST /signup,
+       kind "coach"). They land on /admin/, never in this public repository:
+       only what a coach agreed to publish goes on the site, once Isaac has
+       said yes. The terms are in the "How it works" list and the three
+       "Before you send" boxes; change them in both.
+       ============================================================ -->
+  <title>Coach with Lee Tennis Co.</title>
+  <meta name="description"
+        content="Teach under Lee Tennis Co. in Irvine: choose your court, set your rate and keep 90% of every lesson booked through the site." />
+  <meta name="robots" content="noindex" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Coach with Lee Tennis Co." />
+  <meta property="og:description" content="Your court. Your rate. Keep 90% of every lesson booked through the site." />
+  <meta property="og:url" content="https://leetennisco.com/coach/" />
+  <meta property="og:image" content="https://leetennisco.com/images/serve.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="jev-endpoint" content="https://lee-tennis-jev.leetennis.workers.dev" />
+  <link rel="icon" href="/tennis-favicon.svg?v=lt-restored-1" type="image/svg+xml" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/familjen-grotesk-latin.woff2" />
+  <link rel="stylesheet" href="/tennis.css?v=20261023d" />
+  <link rel="stylesheet" href="/dark.css?v=20261020c" />
+  <link rel="stylesheet" href="/coach.css?v=20261106b" />
+
+  <script>document.documentElement.classList.add("js");</script>
+  <script>(function () { try { var t = localStorage.getItem("leeTheme"); if (t === "dark" || (t !== "light" && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute("data-theme", "dark"); } catch (e) {} })();</script>
+</head>
+
+<body>
+  <a class="skip-link" href="#apply">Skip to the application</a>
+
+  <header class="header">
+    <div class="wrap header-row">
+      <a class="brand" href="/" aria-label="Lee Tennis Co. — home">
+        <img class="brand-logo" src="/images/lee-tennis-logo.svg?v=lt-restored-1" width="336" height="112" alt="Lee Tennis Co. — LT monogram" />
+      </a>
+      <a class="coach-back" href="/">Back to the site</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- The page's one colour is the ball, and it only ever marks the 10%:
+         here as the headline's full stop, and in the split under the rate. -->
+    <section class="coach-hero">
+      <div class="wrap">
+        <h1>Your court.<br />Your rate.<br />I take 10%<span class="coach-ball" aria-hidden="true"></span></h1>
+        <p>I'm Isaac Lee, and I run Lee Tennis Co. in Irvine. I'm adding other coaches to the site. You choose where you teach and what you charge, students book you from your own listing, and you keep 90% of every lesson that comes from the site.</p>
+      </div>
+    </section>
+
+    <section class="wrap coach-how" aria-labelledby="howTitle">
+      <h2 id="howTitle">How it works</h2>
+      <dl class="coach-terms">
+        <div><dt>Your court</dt><dd>Teach at Toscana, my home court in Irvine, or choose your own. Your own court has to be one where you're allowed to give paid lessons.</dd></div>
+        <div><dt>Your rate</dt><dd>You set what you charge.</dd></div>
+        <div><dt>The 10%</dt><dd>You collect from your students. At the end of each month, you pay me 10% of what you earned from lessons booked through the site, by Zelle or in cash. Students you already have don't count.</dd></div>
+        <div><dt>Your listing</dt><dd>Your photo, bio, court and rates go on leetennisco.com, with your own booking link.</dd></div>
+      </dl>
+      <p class="coach-city"><strong>Irvine's city courts are a special case.</strong> The City only lets <a href="https://www.cityofirvine.gov/racket-sports/tennis-professionals" rel="noopener">its listed instructors</a> teach on them, and it treats unauthorized paid lessons as a misdemeanor. If you aren't on that list, choose Toscana or a private, club or school court.</p>
+    </section>
+
+    <section class="coach-apply" id="apply" aria-labelledby="applyTitle">
+      <div class="wrap">
+        <div class="coach-apply-head">
+          <h2 id="applyTitle">Apply</h2>
+          <p>It takes about five minutes. I read every application myself, and we talk before anything goes on the site.</p>
+        </div>
+
+        <form class="clinic-form coach-form" id="coachForm" novalidate>
+          <div class="coach-parts">
+            <section class="coach-part" aria-labelledby="partYou">
+              <h3 id="partYou">You</h3>
+              <label class="field">
+                <span class="field-label">Full name</span>
+                <input type="text" name="name" maxlength="80" autocomplete="name" data-need="Add your name." />
+              </label>
+              <div class="coach-pair">
+                <label class="field">
+                  <span class="field-label">Email</span>
+                  <input type="email" name="email" maxlength="80" autocomplete="email" data-need="Add your email." />
+                </label>
+                <label class="field">
+                  <span class="field-label">Phone</span>
+                  <input type="tel" name="phone" maxlength="30" autocomplete="tel" data-need="Add your phone number." />
+                </label>
+              </div>
+            </section>
+
+            <section class="coach-part" aria-labelledby="partCourt">
+              <h3 id="partCourt">Your court</h3>
+              <fieldset class="field" data-need="Choose where you'd teach.">
+                <legend class="field-label">Where do you want to teach?</legend>
+                <label class="choice"><input type="radio" name="where" value="Toscana" /><span>Toscana, Irvine, my home court</span></label>
+                <label class="choice"><input type="radio" name="where" value="Other" /><span>A court of my own</span></label>
+                <p class="form-note" data-when="toscana" hidden>We'll go over court times when we talk.</p>
+              </fieldset>
+              <div class="coach-other" data-when="other" hidden>
+                <div class="coach-pair">
+                  <label class="field">
+                    <span class="field-label">Court or club</span>
+                    <input type="text" name="court" maxlength="80" autocomplete="off" data-need="Name the court you'd teach on." />
+                  </label>
+                  <label class="field">
+                    <span class="field-label">City</span>
+                    <input type="text" name="city" maxlength="60" autocomplete="off" data-need="Add the court's city." />
+                  </label>
+                </div>
+                <fieldset class="field" data-need="Choose how you're allowed to teach there.">
+                  <legend class="field-label">Who has said you can teach there?</legend>
+                  <label class="choice"><input type="radio" name="permission" value="The owner, club, HOA or school said yes" /><span>The owner, club, HOA or school</span></label>
+                  <label class="choice"><input type="radio" name="permission" value="The city authorized them" /><span>The city, as a listed instructor or with a permit</span></label>
+                  <label class="choice"><input type="radio" name="permission" value="Not sure yet" /><span>Nobody yet, or I'm not sure</span></label>
+                  <p class="form-note" data-when="unsure" hidden>That's fine. We'll work out a court together before you're listed.</p>
+                </fieldset>
+              </div>
+            </section>
+
+            <section class="coach-part" aria-labelledby="partRate">
+              <h3 id="partRate">Your rate</h3>
+              <div class="rates">
+                <div class="rate-row field">
+                  <label class="field-label" for="ratePrivate">Private lesson</label>
+                  <span class="rate-box"><span aria-hidden="true">$</span><input type="text" id="ratePrivate" name="ratePrivate" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="rateUnit" data-need="Add what you'd charge for a private lesson." /></span>
+                  <output class="rate-keep" for="ratePrivate"></output>
+                </div>
+                <div class="rate-row field">
+                  <label class="field-label" for="rateSemi">Semi-private <span class="field-optional">Optional</span></label>
+                  <span class="rate-box"><span aria-hidden="true">$</span><input type="text" id="rateSemi" name="rateSemi" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="rateUnit" /></span>
+                  <output class="rate-keep" for="rateSemi"></output>
+                </div>
+                <div class="rate-row field">
+                  <label class="field-label" for="rateHitting">Hitting session <span class="field-optional">Optional</span></label>
+                  <span class="rate-box"><span aria-hidden="true">$</span><input type="text" id="rateHitting" name="rateHitting" inputmode="numeric" maxlength="3" autocomplete="off" aria-describedby="rateUnit" /></span>
+                  <output class="rate-keep" for="rateHitting"></output>
+                </div>
+              </div>
+              <p class="form-note" id="rateUnit">Per hour, in whole dollars.</p>
+              <div class="split">
+                <div class="split-bar" aria-hidden="true"><i></i><b></b></div>
+                <p class="split-words" id="splitWords" aria-live="polite">Of every dollar you charge, 90 cents is yours.</p>
+              </div>
+            </section>
+
+            <section class="coach-part" aria-labelledby="partCoaching">
+              <h3 id="partCoaching">Your coaching</h3>
+              <label class="field">
+                <span class="field-label">How long have you coached?</span>
+                <select name="years" data-need="Choose how long you've coached.">
+                  <option value="">Choose one</option>
+                  <option>Less than a year</option>
+                  <option>1 to 2 years</option>
+                  <option>3 to 5 years</option>
+                  <option>6 to 10 years</option>
+                  <option>More than 10 years</option>
+                </select>
+              </label>
+              <fieldset class="field" data-need="Choose who you coach.">
+                <legend class="field-label">Who do you coach?</legend>
+                <div class="coach-inline">
+                  <label class="choice"><input type="checkbox" name="who" value="Juniors" /><span>Juniors</span></label>
+                  <label class="choice"><input type="checkbox" name="who" value="Adults" /><span>Adults</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="field" data-when="juniors" hidden>
+                <legend class="field-label">USTA Safe Play <span class="field-optional">Optional</span></legend>
+                <div class="coach-inline">
+                  <label class="choice"><input type="radio" name="safeplay" value="Approved" /><span>Approved</span></label>
+                  <label class="choice"><input type="radio" name="safeplay" value="In progress" /><span>In progress</span></label>
+                  <label class="choice"><input type="radio" name="safeplay" value="Not yet" /><span>Not yet</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="field">
+                <legend class="field-label">Certifications <span class="field-optional">Optional</span></legend>
+                <div class="coach-inline">
+                  <label class="choice"><input type="checkbox" name="cert" value="RSPA" /><span>RSPA</span></label>
+                  <label class="choice"><input type="checkbox" name="cert" value="PTR" /><span>PTR</span></label>
+                  <label class="choice"><input type="checkbox" name="cert" value="USPTA" /><span>USPTA</span></label>
+                </div>
+                <input type="text" name="certOther" maxlength="80" autocomplete="off" aria-label="Any other certification" placeholder="Anything else" />
+              </fieldset>
+              <fieldset class="field" data-need="Tell me whether you carry insurance.">
+                <legend class="field-label">Do you carry coaching liability insurance?</legend>
+                <div class="coach-inline">
+                  <label class="choice"><input type="radio" name="insurance" value="Yes" /><span>Yes</span></label>
+                  <label class="choice"><input type="radio" name="insurance" value="No" /><span>No</span></label>
+                  <label class="choice"><input type="radio" name="insurance" value="Not sure" /><span>Not sure</span></label>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="coach-part" aria-labelledby="partListing">
+              <h3 id="partListing">Your listing</h3>
+              <label class="field">
+                <span class="field-label">About you</span>
+                <textarea name="bio" rows="4" maxlength="400" aria-describedby="bioCount" data-need="Write a few sentences about you."></textarea>
+                <span class="form-note coach-count"><span>A few sentences in your own words, for students to read.</span><span id="bioCount">0 of 400</span></span>
+              </label>
+              <label class="field">
+                <span class="field-label">When you usually teach <span class="field-optional">Optional</span></span>
+                <input type="text" name="times" maxlength="100" autocomplete="off" placeholder="Weekday evenings, Saturday mornings" />
+              </label>
+              <label class="field">
+                <span class="field-label">Booking link <span class="field-optional">Optional</span></span>
+                <input type="text" name="booking" inputmode="url" maxlength="200" autocomplete="off" aria-describedby="bookingNote" />
+                <span class="form-note" id="bookingNote">Cal.com or wherever students book you. No link yet? Leave it blank.</span>
+              </label>
+            </section>
+          </div>
+
+          <!-- What the coach's listing will look like. It repeats the form,
+               so screen readers skip it. -->
+          <aside class="listing-rail" aria-label="Preview of your listing">
+            <p class="listing-cap">Your listing, as students will see it</p>
+            <div class="listing" aria-hidden="true">
+              <div class="listing-photo" data-l="initials">You</div>
+              <div class="listing-body">
+                <p class="listing-name is-blank" data-l="name">Your name</p>
+                <p class="listing-court is-blank" data-l="court">Your court</p>
+                <p class="listing-rate is-blank"><span data-l="rate">$—</span><small>/hour</small></p>
+                <p class="listing-more" data-l="more" hidden></p>
+                <p class="listing-bio is-blank" data-l="bio">A few sentences about you go here.</p>
+                <p class="listing-facts" data-l="facts" hidden></p>
+                <span class="btn btn-primary btn-sm" data-l="book">Book a lesson</span>
+              </div>
+            </div>
+            <p class="form-note">Your photo goes in once we've talked.</p>
+          </aside>
+
+          <div class="coach-finish">
+            <label class="field">
+              <span class="field-label">Anything else I should know? <span class="field-optional">Optional, and just for me</span></span>
+              <textarea name="notes" rows="3" maxlength="600"></textarea>
+            </label>
+            <fieldset class="field coach-agree">
+              <legend class="field-label">Before you send</legend>
+              <label class="choice"><input type="checkbox" name="agreeCourt" data-need="Please confirm this one." /><span>I'll only give paid lessons on courts where I'm allowed to.</span></label>
+              <label class="choice"><input type="checkbox" name="agreeFee" data-need="Please confirm this one." /><span>Each month, I'll pay Lee Tennis Co. 10% of what I earn from lessons booked through the site, by Zelle or in cash.</span></label>
+              <label class="choice"><input type="checkbox" name="agreeList" data-need="Please confirm this one." /><span>Once we've agreed, you can put my name, photo, bio, court and rates on the site.</span></label>
+            </fieldset>
+            <p class="form-note">Applying doesn't commit either of us. We'll agree the details before you're listed.</p>
+            <p class="form-error" id="coachError" role="alert" hidden></p>
+            <div class="actions"><button class="btn btn-primary btn-lg" type="submit">Send my application</button></div>
+          </div>
+        </form>
+
+        <div class="form-done coach-done" id="coachDone" tabindex="-1" hidden>
+          <h2>Got it, thank you.</h2>
+          <p>I'll read your application and reply to <span id="coachDoneTo">you</span>. Your listing will need a photo of you on court, so have one ready.</p>
+          <a class="btn btn-quiet" href="/">Back to the site</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p>&copy; 2026 Lee Tennis Co. &middot; Isaac Lee &middot; Irvine, California</p>
+      <p class="footer-links">
+        <a href="/">Private tennis lessons</a>
+        <a href="mailto:21euisungisaac@gmail.com">21euisungisaac@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="/coach.js?v=20261106b" defer></script>
+</body>
+</html>

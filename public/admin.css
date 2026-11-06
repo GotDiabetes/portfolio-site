@@ -144,3 +144,6 @@ html.is-gated { background: #0d0d0d; }
   .gate.is-checking .gate-shackle { animation: none; }
   .js #adminContent.is-arriving { animation: none; }
 }
+
+/* A long link in a coach application wraps rather than widening the page. */
+.desk-signup-body { overflow-wrap: anywhere; }

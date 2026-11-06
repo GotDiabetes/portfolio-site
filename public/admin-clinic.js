@@ -1,6 +1,7 @@
 /* ============================================================================
    The clinic list on the admin page (/admin/): everyone who asked to join
-   a clinic, by level, newest first, and under it the gift requests.
+   a clinic, by level, newest first, and under it the gift requests and the
+   coach applications (/coach/), each with a button to copy it whole.
 
    The sign-ups come from the Worker's /stats answer that the gate got for
    the right key: admin-gate.js hands it over with its "admin:unlocked"
@@ -24,6 +25,7 @@
   var table = document.getElementById("clinicTable");
   var note = document.getElementById("clinicNote");
   var gifts = document.getElementById("giftList");
+  var coaches = document.getElementById("coachList");
 
   var LEVELS = ["New to tennis", "Beginner", "Intermediate", "Advanced", "Competitive"];
   /* The page a sign-up came from, as the numbers page names it (stats.js). */
@@ -89,30 +91,58 @@
 
   /* Gift requests, as a plain list. Drawn first and on its own, so it is
      never left blank when the clinic list is empty. */
+  function signupRow(r) {
+    var li = document.createElement("li");
+    var who = document.createElement("strong");
+    who.appendChild(document.createTextNode(r.name + " · "));
+    who.appendChild(contactLinks(r.contact));
+    li.appendChild(who);
+    li.appendChild(text("span", r.body, "desk-signup-body"));
+    li.appendChild(text("span", when(r.at) + pageName(r.page), "desk-q-meta"));
+    return li;
+  }
   function renderGifts(rows) {
     if (!gifts) return;
     gifts.innerHTML = "";
     var g = rows.filter(function (r) { return r.kind === "gift"; });
     if (!g.length) gifts.appendChild(text("li", "None yet.", "is-empty"));
-    g.forEach(function (r) {
-      var li = document.createElement("li");
-      var who = document.createElement("strong");
-      who.appendChild(document.createTextNode(r.name + " · "));
-      who.appendChild(contactLinks(r.contact));
-      li.appendChild(who);
-      li.appendChild(text("span", r.body, "desk-signup-body"));
-      li.appendChild(text("span", when(r.at) + pageName(r.page), "desk-q-meta"));
-      gifts.appendChild(li);
+    g.forEach(function (r) { gifts.appendChild(signupRow(r)); });
+  }
+  /* Coach applications, the same way, and each can be copied whole: that
+     text is what Isaac hands on when he says yes to a coach. */
+  function copyButton(r) {
+    var b = text("button", "Copy application", "link-btn");
+    b.type = "button";
+    b.addEventListener("click", function () {
+      var all = ["Coach application from " + r.name, "Contact: " + r.contact, "Sent: " + when(r.at), "", r.body].join("\n");
+      var done = function (label) { b.textContent = label; window.setTimeout(function () { b.textContent = "Copy application"; }, 2000); };
+      if (!navigator.clipboard) { done("Couldn't copy. Select the text instead."); return; }
+      navigator.clipboard.writeText(all).then(function () { done("Copied"); }, function () { done("Couldn't copy. Select the text instead."); });
+    });
+    return b;
+  }
+  function renderCoaches(rows) {
+    if (!coaches) return;
+    coaches.innerHTML = "";
+    var c = rows.filter(function (r) { return r.kind === "coach"; });
+    if (!c.length) coaches.appendChild(text("li", "None yet.", "is-empty"));
+    c.forEach(function (r) {
+      var li = signupRow(r);
+      li.appendChild(copyButton(r));
+      coaches.appendChild(li);
     });
   }
-  /* Both lists say so when there is nothing to show yet. */
+  /* Every list says so when there is nothing to show yet. */
   function status(msg) {
     note.textContent = msg;
-    if (gifts) { gifts.innerHTML = ""; gifts.appendChild(text("li", msg, "is-empty")); }
+    [gifts, coaches].forEach(function (list) {
+      if (list) { list.innerHTML = ""; list.appendChild(text("li", msg, "is-empty")); }
+    });
   }
 
   function render(rows) {
     renderGifts(rows);
+    renderCoaches(rows);
     var clinic = rows.filter(function (r) { return r.kind === "clinic"; }).map(function (r) {
       var a = parse(r.body);
       return { at: r.at, name: r.name, contact: r.contact, page: r.page, level: a.level, who: a.who, times: a.times, notes: a.notes, li: levelIndex(a.level) };

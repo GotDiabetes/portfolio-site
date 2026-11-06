@@ -32,6 +32,7 @@
     ["ask_misuse", "Chat messages refused"],
     ["clinic_list", "Sent the clinic list form"],
     ["gift", "Sent a gift request"],
+    ["coach_apply", "Sent a coach application"],
     ["mail_failed", "Sign-ups Resend failed to email (still listed below)"],
     ["mail_skipped", "Sign-ups not emailed: over the daily cap (still listed below)"],
     ["flyer_visit", "Came from the flyer's QR code"],
@@ -135,7 +136,7 @@
   }
 
   /* The sign-ups: who, how to reach them, and their answers, as text. */
-  var KINDS = { clinic: "Clinic list", gift: "Gift lesson" };
+  var KINDS = { clinic: "Clinic list", gift: "Gift lesson", coach: "Coach application" };
   function renderSignups(rows) {
     var out = document.getElementById("statsSignups");
     if (!out) return;

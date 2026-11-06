@@ -6,7 +6,7 @@
      GET  /slots            the next open lesson on Cal.com (the hero's line)
      GET  /court            the court's weather and daylight today
      POST /hit              page events for Isaac's numbers
-     POST /signup           the clinic list and gift requests
+     POST /signup           the clinic list, gift requests and coach applications
      GET  /stats            Isaac's numbers and the sign-ups, with his key
      GET  /likes            the heart's count, for the tennis site or the portfolio
      POST /likes            a heart pressed or taken back
@@ -795,10 +795,14 @@ const KEEP_DAYS = 90;
    README says how) each one is mailed to Isaac at once. The page keeps the
    email hand-off only as a fallback for when this cannot be reached.
 
-   POST /signup  { "kind": "clinic" | "gift", "name": "…", "contact": "…", "body": "…", "lang": "ko" }
+   The application for other coaches (/coach/) comes through here too, as
+   kind "coach": it is /admin/ that lists those, with a button to copy one.
+
+   POST /signup  { "kind": "clinic" | "gift" | "coach", "name": "…", "contact": "…", "body": "…", "lang": "ko" }
    →             { "ok": true }
    ---------------------------------------------------------------------- */
-const SIGNUP_KINDS = { clinic: "Clinic list", gift: "Gift lesson" };
+const SIGNUP_KINDS = { clinic: "Clinic list", gift: "Gift lesson", coach: "Coach application" };
+const SIGNUP_EVENTS = { clinic: "clinic_list", gift: "gift", coach: "coach_apply" };
 const MAIL_TO = "21euisungisaac@gmail.com";
 /* Spam guards, besides the SIGNUPS per-visitor limit (wrangler.toml). In
    any 24 hours, past SIGNUP_MAIL_CAP sign-ups are still kept (and listed on
@@ -815,10 +819,11 @@ const EMAIL_IN_TEXT = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Z
 async function signup(body, env, later) {
   /* A strict check: a lookup on SIGNUP_KINDS would let inherited names
      ("constructor", "toString") and non-strings through. */
-  const kind = body.kind === "clinic" || body.kind === "gift" ? body.kind : null;
+  const kind = body.kind === "clinic" || body.kind === "gift" || body.kind === "coach" ? body.kind : null;
   const name = clean(body.name).slice(0, 80);
   const contact = clean(body.contact).slice(0, 120);
-  const text = (typeof body.body === "string" ? body.body : "").replace(/\r/g, "").replace(/[^\S\n]+/g, " ").trim().slice(0, 1500);
+  /* An application runs longer than the other two: a bio, a court, rates. */
+  const text = (typeof body.body === "string" ? body.body : "").replace(/\r/g, "").replace(/[^\S\n]+/g, " ").trim().slice(0, kind === "coach" ? 4000 : 1500);
   if (!kind || !name || !contact || !text) return { status: 400, error: "bad_request" };
   if (!(/@/.test(contact) || (contact.match(/\d/g) || []).length >= 7)) return { status: 400, error: "bad_contact" };
   if (!env.DB) return { status: 503, error: "not_set_up" };
@@ -831,7 +836,7 @@ async function signup(body, env, later) {
   if (today >= SIGNUP_HARD_CAP) return { status: 429, error: "rate_limited" };
   await env.DB.prepare("INSERT INTO signups (at, kind, page, name, contact, body) VALUES (?, ?, ?, ?, ?, ?)")
     .bind(at, kind, page, name, contact, text).run();
-  later(count(env, kind === "clinic" ? "clinic_list" : "gift", page));
+  later(count(env, SIGNUP_EVENTS[kind], page));
   if (env.RESEND_KEY) {
     if (today >= SIGNUP_MAIL_CAP) {
       later(count(env, "mail_skipped", page));
